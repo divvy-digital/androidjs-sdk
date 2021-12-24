@@ -821,9 +821,13 @@
 
     invoke-direct {p1, v0}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;)V
 
+    goto :goto_6
+
+    :goto_5
     throw p1
 
-    return-void
+    :goto_6
+    goto :goto_5
 .end method
 
 .method private createNodeForHost()Landroid/support/v4/view/accessibility/AccessibilityNodeInfoCompat;

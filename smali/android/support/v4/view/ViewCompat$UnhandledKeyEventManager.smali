@@ -430,9 +430,13 @@
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
+    goto :goto_4
+
+    :goto_3
     throw v1
 
-    return-void
+    :goto_4
+    goto :goto_3
 .end method
 
 .method static registerListeningView(Landroid/view/View;)V
@@ -498,9 +502,13 @@
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
+    goto :goto_1
+
+    :goto_0
     throw p0
 
-    return-void
+    :goto_1
+    goto :goto_0
 .end method
 
 .method static unregisterListeningView(Landroid/view/View;)V
@@ -567,9 +575,13 @@
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
+    goto :goto_2
+
+    :goto_1
     throw p0
 
-    return-void
+    :goto_2
+    goto :goto_1
 .end method
 
 

@@ -380,9 +380,13 @@
 
     invoke-static {}, Landroid/support/v4/os/TraceCompat;->endSection()V
 
+    goto :goto_5
+
+    :goto_4
     throw p0
 
-    return-void
+    :goto_5
+    goto :goto_4
 .end method
 
 .method private findParaIndex(I)I
@@ -449,9 +453,13 @@
 
     invoke-direct {v0, p1}, Ljava/lang/IndexOutOfBoundsException;-><init>(Ljava/lang/String;)V
 
+    goto :goto_2
+
+    :goto_1
     throw v0
 
-    return-void
+    :goto_2
+    goto :goto_1
 .end method
 
 .method public static getTextFuture(Ljava/lang/CharSequence;Landroid/support/v4/text/PrecomputedTextCompat$Params;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/Future;

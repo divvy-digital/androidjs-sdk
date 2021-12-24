@@ -941,9 +941,13 @@
 
     invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 
+    goto :goto_6
+
+    :goto_5
     throw v0
 
-    return-void
+    :goto_6
+    goto :goto_5
 .end method
 
 .method private ensureAutoNightModeManager()V

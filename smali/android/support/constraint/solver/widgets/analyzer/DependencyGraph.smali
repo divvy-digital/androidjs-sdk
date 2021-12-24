@@ -483,9 +483,13 @@
     :catch_0
     move-exception p1
 
+    goto :goto_8
+
+    :goto_7
     throw p1
 
-    return-void
+    :goto_8
+    goto :goto_7
 .end method
 
 .method private basicMeasureWidgets(Landroid/support/constraint/solver/widgets/ConstraintWidgetContainer;)Z

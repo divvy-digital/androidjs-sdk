@@ -1143,9 +1143,13 @@
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
+    goto :goto_2
+
+    :goto_1
     throw p1
 
-    return-void
+    :goto_2
+    goto :goto_1
 .end method
 
 .method public getDefaultActivity()Landroid/content/pm/ResolveInfo;

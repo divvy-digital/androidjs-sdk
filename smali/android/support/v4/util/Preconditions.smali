@@ -769,9 +769,13 @@
 
     invoke-direct {p0, p1}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
 
+    goto :goto_2
+
+    :goto_1
     throw p0
 
-    return-void
+    :goto_2
+    goto :goto_1
 .end method
 
 .method public static checkCollectionElementsNotNull(Ljava/util/Collection;Ljava/lang/String;)Ljava/util/Collection;
@@ -875,9 +879,13 @@
 
     invoke-direct {p0, p1}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
 
+    goto :goto_2
+
+    :goto_1
     throw p0
 
-    return-void
+    :goto_2
+    goto :goto_1
 .end method
 
 .method public static checkCollectionNotEmpty(Ljava/util/Collection;Ljava/lang/String;)Ljava/util/Collection;

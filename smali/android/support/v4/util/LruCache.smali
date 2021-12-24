@@ -1039,7 +1039,11 @@
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
+    goto :goto_3
+
+    :goto_2
     throw p1
 
-    return-void
+    :goto_3
+    goto :goto_2
 .end method

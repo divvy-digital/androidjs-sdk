@@ -284,9 +284,13 @@
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
+    goto :goto_3
+
+    :goto_2
     throw v1
 
-    return-void
+    :goto_3
+    goto :goto_2
 .end method
 
 .method public registerReceiver(Landroid/content/BroadcastReceiver;Landroid/content/IntentFilter;)V
@@ -395,9 +399,13 @@
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
+    goto :goto_2
+
+    :goto_1
     throw p1
 
-    return-void
+    :goto_2
+    goto :goto_1
 .end method
 
 .method public sendBroadcast(Landroid/content/Intent;)Z
@@ -854,9 +862,13 @@
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
+    goto :goto_8
+
+    :goto_7
     throw v0
 
-    return-void
+    :goto_8
+    goto :goto_7
 .end method
 
 .method public sendBroadcastSync(Landroid/content/Intent;)V
@@ -1031,7 +1043,11 @@
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
+    goto :goto_4
+
+    :goto_3
     throw p1
 
-    return-void
+    :goto_4
+    goto :goto_3
 .end method

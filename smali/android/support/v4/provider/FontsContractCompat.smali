@@ -763,9 +763,13 @@
     invoke-interface {v3}, Landroid/database/Cursor;->close()V
 
     :cond_9
+    goto :goto_8
+
+    :goto_7
     throw v0
 
-    return-void
+    :goto_8
+    goto :goto_7
 .end method
 
 .method static getFontInternal(Landroid/content/Context;Landroid/support/v4/provider/FontRequest;I)Landroid/support/v4/provider/FontsContractCompat$TypefaceResult;
@@ -1241,9 +1245,13 @@
 
     invoke-direct {p0, p1}, Landroid/content/pm/PackageManager$NameNotFoundException;-><init>(Ljava/lang/String;)V
 
+    goto :goto_2
+
+    :goto_1
     throw p0
 
-    return-void
+    :goto_2
+    goto :goto_1
 .end method
 
 .method public static prepareFontData(Landroid/content/Context;[Landroid/support/v4/provider/FontsContractCompat$FontInfo;Landroid/os/CancellationSignal;)Ljava/util/Map;

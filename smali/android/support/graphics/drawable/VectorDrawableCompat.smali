@@ -618,9 +618,13 @@
 
     invoke-direct {p1, p2}, Lorg/xmlpull/v1/XmlPullParserException;-><init>(Ljava/lang/String;)V
 
+    goto :goto_3
+
+    :goto_2
     throw p1
 
-    return-void
+    :goto_3
+    goto :goto_2
 .end method
 
 .method private needMirroring()Z

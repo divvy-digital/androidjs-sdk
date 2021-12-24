@@ -88,9 +88,13 @@
 
     invoke-direct {p0, p1}, Lorg/xmlpull/v1/XmlPullParserException;-><init>(Ljava/lang/String;)V
 
+    goto :goto_2
+
+    :goto_1
     throw p0
 
-    return-void
+    :goto_2
+    goto :goto_1
 .end method
 
 .method public static createFromXmlInner(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)Landroid/content/res/ColorStateList;

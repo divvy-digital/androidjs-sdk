@@ -1368,9 +1368,13 @@
 
     invoke-direct {p1, p2}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 
+    goto :goto_9
+
+    :goto_8
     throw p1
 
-    return-void
+    :goto_9
+    goto :goto_8
 .end method
 
 .method public bridge synthetic onTouchEvent(Landroid/view/MotionEvent;)Z

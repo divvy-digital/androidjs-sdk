@@ -322,9 +322,13 @@
     .line 206
     invoke-virtual {v0}, Ljava/io/FileInputStream;->close()V
 
+    goto :goto_2
+
+    :goto_1
     throw v1
 
-    return-void
+    :goto_2
+    goto :goto_1
 .end method
 
 .method public startWrite()Ljava/io/FileOutputStream;

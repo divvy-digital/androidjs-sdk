@@ -47,6 +47,8 @@
 
     check-cast p1, Landroid/app/NotificationManager;
 
+    check-cast p1, Landroid/app/NotificationManager;
+
     iput-object p1, p0, Lcom/android/js/api/Notification;->notification_manager:Landroid/app/NotificationManager;
 
     .line 28

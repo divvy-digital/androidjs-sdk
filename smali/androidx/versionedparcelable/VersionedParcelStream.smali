@@ -1247,9 +1247,13 @@
 
     invoke-direct {v0, p1}, Landroidx/versionedparcelable/VersionedParcel$ParcelException;-><init>(Ljava/lang/Throwable;)V
 
+    goto :goto_2
+
+    :goto_1
     throw v0
 
-    return-void
+    :goto_2
+    goto :goto_1
 .end method
 
 .method public writeByteArray([B)V

@@ -1538,9 +1538,13 @@
 
     invoke-direct {v0, v1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
 
+    goto :goto_3
+
+    :goto_2
     throw v0
 
-    return-void
+    :goto_3
+    goto :goto_2
 .end method
 
 .method private fillFromAttributeList(Landroid/content/Context;Landroid/util/AttributeSet;)Landroid/support/constraint/ConstraintSet$Constraint;
@@ -7419,9 +7423,13 @@
 
     invoke-direct {v0, v1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
 
+    goto :goto_3
+
+    :goto_2
     throw v0
 
-    return-void
+    :goto_3
+    goto :goto_2
 .end method
 
 .method public varargs dump(Landroid/support/constraint/motion/MotionScene;[I)V

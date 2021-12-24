@@ -512,9 +512,13 @@
     :goto_4
     invoke-static {v8}, Landroid/support/v4/provider/TreeDocumentFile;->closeQuietly(Ljava/lang/AutoCloseable;)V
 
+    goto :goto_6
+
+    :goto_5
     throw v0
 
-    return-void
+    :goto_6
+    goto :goto_5
 .end method
 
 .method public renameTo(Ljava/lang/String;)Z

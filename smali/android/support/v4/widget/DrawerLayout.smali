@@ -4475,9 +4475,13 @@
 
     invoke-direct {v1, v2}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
 
+    goto :goto_d
+
+    :goto_c
     throw v1
 
-    return-void
+    :goto_d
+    goto :goto_c
 .end method
 
 .method protected onRestoreInstanceState(Landroid/os/Parcelable;)V

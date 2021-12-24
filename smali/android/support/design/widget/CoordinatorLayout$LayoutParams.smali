@@ -526,9 +526,13 @@
 
     invoke-direct {v0, p1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 
+    goto :goto_2
+
+    :goto_1
     throw v0
 
-    return-void
+    :goto_2
+    goto :goto_1
 .end method
 
 .method private shouldDodge(Landroid/view/View;I)Z

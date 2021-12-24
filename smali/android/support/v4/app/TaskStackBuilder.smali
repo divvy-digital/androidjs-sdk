@@ -277,9 +277,13 @@
 
     invoke-direct {v0, p1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/Throwable;)V
 
+    goto :goto_2
+
+    :goto_1
     throw v0
 
-    return-void
+    :goto_2
+    goto :goto_1
 .end method
 
 .method public addParentStack(Ljava/lang/Class;)Landroid/support/v4/app/TaskStackBuilder;

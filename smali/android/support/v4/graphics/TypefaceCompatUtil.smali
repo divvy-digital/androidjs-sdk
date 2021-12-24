@@ -261,9 +261,13 @@
     .line 152
     invoke-static {v0}, Landroid/os/StrictMode;->setThreadPolicy(Landroid/os/StrictMode$ThreadPolicy;)V
 
+    goto :goto_4
+
+    :goto_3
     throw p0
 
-    return-void
+    :goto_4
+    goto :goto_3
 .end method
 
 .method public static getTempFile(Landroid/content/Context;)Ljava/io/File;

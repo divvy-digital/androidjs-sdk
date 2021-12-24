@@ -8237,9 +8237,13 @@
 
     invoke-direct {v2, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 
+    goto :goto_13
+
+    :goto_12
     throw v2
 
-    return-void
+    :goto_13
+    goto :goto_12
 .end method
 
 .method public removeOnAdapterChangeListener(Landroid/support/v4/view/ViewPager$OnAdapterChangeListener;)V

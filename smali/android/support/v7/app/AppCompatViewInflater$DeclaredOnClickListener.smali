@@ -221,9 +221,13 @@
 
     invoke-direct {p2, p1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 
+    goto :goto_3
+
+    :goto_2
     throw p2
 
-    return-void
+    :goto_3
+    goto :goto_2
 .end method
 
 

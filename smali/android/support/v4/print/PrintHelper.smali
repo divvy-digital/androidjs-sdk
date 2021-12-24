@@ -763,9 +763,13 @@
 
     invoke-direct {p1, v0}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
 
+    goto :goto_3
+
+    :goto_2
     throw p1
 
-    return-void
+    :goto_3
+    goto :goto_2
 .end method
 
 .method public printBitmap(Ljava/lang/String;Landroid/graphics/Bitmap;)V

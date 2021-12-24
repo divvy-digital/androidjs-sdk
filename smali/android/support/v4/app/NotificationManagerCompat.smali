@@ -273,9 +273,13 @@
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
+    goto :goto_2
+
+    :goto_1
     throw p0
 
-    return-void
+    :goto_2
+    goto :goto_1
 .end method
 
 .method private pushSideChannelQueue(Landroid/support/v4/app/NotificationManagerCompat$Task;)V

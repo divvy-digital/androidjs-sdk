@@ -3712,9 +3712,13 @@
     :catch_0
     move-exception p1
 
+    goto :goto_6
+
+    :goto_5
     throw p1
 
-    return-void
+    :goto_6
+    goto :goto_5
 .end method
 
 .method addFirst()Z

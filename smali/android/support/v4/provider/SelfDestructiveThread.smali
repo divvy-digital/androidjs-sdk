@@ -537,7 +537,11 @@
     .line 209
     invoke-virtual {v7}, Ljava/util/concurrent/locks/ReentrantLock;->unlock()V
 
+    goto :goto_2
+
+    :goto_1
     throw p1
 
-    return-void
+    :goto_2
+    goto :goto_1
 .end method

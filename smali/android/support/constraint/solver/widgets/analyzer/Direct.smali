@@ -3472,7 +3472,11 @@
     :catch_0
     move-exception p0
 
+    goto :goto_8
+
+    :goto_7
     throw p0
 
-    return-void
+    :goto_8
+    goto :goto_7
 .end method

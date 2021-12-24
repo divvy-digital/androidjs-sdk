@@ -1616,9 +1616,13 @@
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
+    goto :goto_3
+
+    :goto_2
     throw p1
 
-    return-void
+    :goto_3
+    goto :goto_2
 .end method
 
 .method private static getAnimationListener(Landroid/view/animation/Animation;)Landroid/view/animation/Animation$AnimationListener;
@@ -5966,9 +5970,13 @@
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
+    goto :goto_7
+
+    :goto_6
     throw p1
 
-    return-void
+    :goto_7
+    goto :goto_6
 .end method
 
 .method public enqueueAction(Landroid/support/v4/app/FragmentManagerImpl$OpGenerator;Z)V
@@ -12136,9 +12144,13 @@
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
+    goto :goto_3
+
+    :goto_2
     throw p1
 
-    return-void
+    :goto_3
+    goto :goto_2
 .end method
 
 .method public setPrimaryNavigationFragment(Landroid/support/v4/app/Fragment;)V
@@ -12421,7 +12433,11 @@
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
+    goto :goto_3
+
+    :goto_2
     throw p1
 
-    return-void
+    :goto_3
+    goto :goto_2
 .end method

@@ -624,9 +624,13 @@
 
     invoke-direct {p1, p2}, Lorg/xmlpull/v1/XmlPullParserException;-><init>(Ljava/lang/String;)V
 
+    goto :goto_4
+
+    :goto_3
     throw p1
 
-    return-void
+    :goto_4
+    goto :goto_3
 .end method
 
 .method private parseTransition(Landroid/content/Context;Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)I
@@ -869,9 +873,13 @@
 
     invoke-direct {p1, p2}, Lorg/xmlpull/v1/XmlPullParserException;-><init>(Ljava/lang/String;)V
 
+    goto :goto_4
+
+    :goto_3
     throw p1
 
-    return-void
+    :goto_4
+    goto :goto_3
 .end method
 
 .method private selectTransition(I)Z

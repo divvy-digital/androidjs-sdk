@@ -27,7 +27,7 @@
 .method constructor <init>(Lcom/android/js/webview/AndroidJSActivity;Landroid/app/Activity;)V
     .locals 0
 
-    .line 42
+    .line 47
     iput-object p1, p0, Lcom/android/js/webview/AndroidJSActivity$1;->this$0:Lcom/android/js/webview/AndroidJSActivity;
 
     iput-object p2, p0, Lcom/android/js/webview/AndroidJSActivity$1;->val$activity:Landroid/app/Activity;
@@ -42,7 +42,7 @@
 .method public run()V
     .locals 5
 
-    .line 46
+    .line 51
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -71,7 +71,7 @@
 
     move-result-object v0
 
-    .line 47
+    .line 52
     iget-object v1, p0, Lcom/android/js/webview/AndroidJSActivity$1;->val$activity:Landroid/app/Activity;
 
     invoke-virtual {v1}, Landroid/app/Activity;->getApplicationContext()Landroid/content/Context;
@@ -84,26 +84,26 @@
 
     if-eqz v1, :cond_1
 
-    .line 49
+    .line 54
     new-instance v1, Ljava/io/File;
 
     invoke-direct {v1, v0}, Ljava/io/File;-><init>(Ljava/lang/String;)V
 
-    .line 50
+    .line 55
     invoke-virtual {v1}, Ljava/io/File;->exists()Z
 
     move-result v1
 
     if-eqz v1, :cond_0
 
-    .line 51
+    .line 56
     new-instance v1, Ljava/io/File;
 
     invoke-direct {v1, v0}, Ljava/io/File;-><init>(Ljava/lang/String;)V
 
     invoke-static {v1}, Lcom/android/js/other/Utils;->deleteFolderRecursively(Ljava/io/File;)Z
 
-    .line 54
+    .line 59
     :cond_0
     iget-object v1, p0, Lcom/android/js/webview/AndroidJSActivity$1;->val$activity:Landroid/app/Activity;
 
@@ -119,7 +119,7 @@
 
     invoke-static {v1, v2, v0}, Lcom/android/js/other/Utils;->copyAssetFolder(Landroid/content/res/AssetManager;Ljava/lang/String;Ljava/lang/String;)Z
 
-    .line 56
+    .line 61
     iget-object v1, p0, Lcom/android/js/webview/AndroidJSActivity$1;->val$activity:Landroid/app/Activity;
 
     invoke-virtual {v1}, Landroid/app/Activity;->getApplicationContext()Landroid/content/Context;
@@ -128,7 +128,7 @@
 
     invoke-static {v1}, Lcom/android/js/other/Utils;->saveLastUpdateTime(Landroid/content/Context;)V
 
-    .line 58
+    .line 63
     :cond_1
     iget-object v1, p0, Lcom/android/js/webview/AndroidJSActivity$1;->this$0:Lcom/android/js/webview/AndroidJSActivity;
 

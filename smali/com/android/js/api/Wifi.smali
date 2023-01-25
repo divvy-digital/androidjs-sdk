@@ -34,8 +34,6 @@
 
     check-cast p1, Landroid/net/wifi/WifiManager;
 
-    check-cast p1, Landroid/net/wifi/WifiManager;
-
     iput-object p1, p0, Lcom/android/js/api/Wifi;->main_wifi:Landroid/net/wifi/WifiManager;
 
     return-void

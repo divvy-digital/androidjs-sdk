@@ -22,7 +22,7 @@
 .method constructor <init>(Lcom/android/js/webview/AndroidJSActivity;)V
     .locals 0
 
-    .line 85
+    .line 92
     iput-object p1, p0, Lcom/android/js/webview/AndroidJSActivity$2;->this$0:Lcom/android/js/webview/AndroidJSActivity;
 
     invoke-direct {p0}, Landroid/webkit/WebChromeClient;-><init>()V
@@ -32,32 +32,40 @@
 
 
 # virtual methods
+.method public onConsoleMessage(Landroid/webkit/ConsoleMessage;)Z
+    .locals 0
+
+    const/4 p1, 0x0
+
+    return p1
+.end method
+
 .method public onCreateWindow(Landroid/webkit/WebView;ZZLandroid/os/Message;)Z
     .locals 1
 
-    .line 96
+    .line 103
     invoke-virtual {p1}, Landroid/webkit/WebView;->getHitTestResult()Landroid/webkit/WebView$HitTestResult;
 
     move-result-object p2
 
-    .line 97
+    .line 104
     invoke-virtual {p2}, Landroid/webkit/WebView$HitTestResult;->getExtra()Ljava/lang/String;
 
     move-result-object p3
 
-    .line 98
+    .line 105
     invoke-virtual {p1}, Landroid/webkit/WebView;->getContext()Landroid/content/Context;
 
     move-result-object p1
 
-    .line 99
+    .line 106
     sget-object p4, Ljava/lang/System;->out:Ljava/io/PrintStream;
 
     const-string v0, "req:"
 
     invoke-virtual {p4, v0}, Ljava/io/PrintStream;->println(Ljava/lang/String;)V
 
-    .line 100
+    .line 107
     sget-object p4, Ljava/lang/System;->out:Ljava/io/PrintStream;
 
     invoke-virtual {p2}, Ljava/lang/Object;->toString()Ljava/lang/String;
@@ -66,7 +74,7 @@
 
     invoke-virtual {p4, p2}, Ljava/io/PrintStream;->println(Ljava/lang/String;)V
 
-    .line 101
+    .line 108
     sget-object p2, Ljava/lang/System;->out:Ljava/io/PrintStream;
 
     invoke-virtual {p3}, Ljava/lang/String;->toString()Ljava/lang/String;
@@ -75,7 +83,7 @@
 
     invoke-virtual {p2, p4}, Ljava/io/PrintStream;->println(Ljava/lang/String;)V
 
-    .line 102
+    .line 109
     new-instance p2, Landroid/content/Intent;
 
     invoke-static {p3}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
@@ -86,7 +94,7 @@
 
     invoke-direct {p2, p4, p3}, Landroid/content/Intent;-><init>(Ljava/lang/String;Landroid/net/Uri;)V
 
-    .line 103
+    .line 110
     invoke-virtual {p1, p2}, Landroid/content/Context;->startActivity(Landroid/content/Intent;)V
 
     const/4 p1, 0x0
@@ -100,7 +108,7 @@
         value = 0x15
     .end annotation
 
-    .line 90
+    .line 97
     invoke-virtual {p1}, Landroid/webkit/PermissionRequest;->getResources()[Ljava/lang/String;
 
     move-result-object v0

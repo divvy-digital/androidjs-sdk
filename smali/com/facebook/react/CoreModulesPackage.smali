@@ -19,10 +19,14 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/ReactInstanceManager;Lcom/facebook/react/modules/core/DefaultHardwareBackBtnHandler;Lcom/facebook/react/uimanager/UIImplementationProvider;ZI)V
     .locals 0
-    .param p3    # Lcom/facebook/react/uimanager/UIImplementationProvider;
+    .param p1, "reactInstanceManager"    # Lcom/facebook/react/ReactInstanceManager;
+    .param p2, "hardwareBackBtnHandler"    # Lcom/facebook/react/modules/core/DefaultHardwareBackBtnHandler;
+    .param p3, "uiImplementationProvider"    # Lcom/facebook/react/uimanager/UIImplementationProvider;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
+    .param p4, "lazyViewManagersEnabled"    # Z
+    .param p5, "minTimeLeftInFrameForNonBatchedOperationMs"    # I
 
     .line 70
     invoke-direct {p0}, Lcom/facebook/react/TurboReactPackage;-><init>()V
@@ -39,67 +43,73 @@
     .line 74
     iput p5, p0, Lcom/facebook/react/CoreModulesPackage;->mMinTimeLeftInFrameForNonBatchedOperationMs:I
 
+    .line 75
     return-void
 .end method
 
 .method static synthetic access$000(Lcom/facebook/react/CoreModulesPackage;)Lcom/facebook/react/ReactInstanceManager;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/CoreModulesPackage;
 
     .line 58
-    iget-object p0, p0, Lcom/facebook/react/CoreModulesPackage;->mReactInstanceManager:Lcom/facebook/react/ReactInstanceManager;
+    iget-object v0, p0, Lcom/facebook/react/CoreModulesPackage;->mReactInstanceManager:Lcom/facebook/react/ReactInstanceManager;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method private createUIManager(Lcom/facebook/react/bridge/ReactApplicationContext;)Lcom/facebook/react/uimanager/UIManagerModule;
     .locals 5
+    .param p1, "reactContext"    # Lcom/facebook/react/bridge/ReactApplicationContext;
 
     .line 160
     sget-object v0, Lcom/facebook/react/bridge/ReactMarkerConstants;->CREATE_UI_MANAGER_MODULE_START:Lcom/facebook/react/bridge/ReactMarkerConstants;
 
     invoke-static {v0}, Lcom/facebook/react/bridge/ReactMarker;->logMarker(Lcom/facebook/react/bridge/ReactMarkerConstants;)V
 
-    const-wide/16 v0, 0x0
-
-    const-string v2, "createUIManagerModule"
-
     .line 161
-    invoke-static {v0, v1, v2}, Lcom/facebook/systrace/Systrace;->beginSection(JLjava/lang/String;)V
+    const-string v0, "createUIManagerModule"
+
+    const-wide/16 v1, 0x0
+
+    invoke-static {v1, v2, v0}, Lcom/facebook/systrace/Systrace;->beginSection(JLjava/lang/String;)V
 
     .line 163
     :try_start_0
-    iget-boolean v2, p0, Lcom/facebook/react/CoreModulesPackage;->mLazyViewManagersEnabled:Z
+    iget-boolean v0, p0, Lcom/facebook/react/CoreModulesPackage;->mLazyViewManagersEnabled:Z
 
-    if-eqz v2, :cond_0
+    if-eqz v0, :cond_0
 
     .line 164
-    new-instance v2, Lcom/facebook/react/CoreModulesPackage$2;
+    new-instance v0, Lcom/facebook/react/CoreModulesPackage$2;
 
-    invoke-direct {v2, p0}, Lcom/facebook/react/CoreModulesPackage$2;-><init>(Lcom/facebook/react/CoreModulesPackage;)V
+    invoke-direct {v0, p0}, Lcom/facebook/react/CoreModulesPackage$2;-><init>(Lcom/facebook/react/CoreModulesPackage;)V
 
     .line 177
+    .local v0, "resolver":Lcom/facebook/react/uimanager/UIManagerModule$ViewManagerResolver;
     new-instance v3, Lcom/facebook/react/uimanager/UIManagerModule;
 
     iget v4, p0, Lcom/facebook/react/CoreModulesPackage;->mMinTimeLeftInFrameForNonBatchedOperationMs:I
 
-    invoke-direct {v3, p1, v2, v4}, Lcom/facebook/react/uimanager/UIManagerModule;-><init>(Lcom/facebook/react/bridge/ReactApplicationContext;Lcom/facebook/react/uimanager/UIManagerModule$ViewManagerResolver;I)V
+    invoke-direct {v3, p1, v0, v4}, Lcom/facebook/react/uimanager/UIManagerModule;-><init>(Lcom/facebook/react/bridge/ReactApplicationContext;Lcom/facebook/react/uimanager/UIManagerModule$ViewManagerResolver;I)V
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
     .line 186
-    invoke-static {v0, v1}, Lcom/facebook/systrace/Systrace;->endSection(J)V
+    invoke-static {v1, v2}, Lcom/facebook/systrace/Systrace;->endSection(J)V
 
     .line 187
-    sget-object p1, Lcom/facebook/react/bridge/ReactMarkerConstants;->CREATE_UI_MANAGER_MODULE_END:Lcom/facebook/react/bridge/ReactMarkerConstants;
+    sget-object v1, Lcom/facebook/react/bridge/ReactMarkerConstants;->CREATE_UI_MANAGER_MODULE_END:Lcom/facebook/react/bridge/ReactMarkerConstants;
 
-    invoke-static {p1}, Lcom/facebook/react/bridge/ReactMarker;->logMarker(Lcom/facebook/react/bridge/ReactMarkerConstants;)V
+    invoke-static {v1}, Lcom/facebook/react/bridge/ReactMarker;->logMarker(Lcom/facebook/react/bridge/ReactMarkerConstants;)V
 
+    .line 177
     return-object v3
 
     .line 180
+    .end local v0    # "resolver":Lcom/facebook/react/uimanager/UIManagerModule$ViewManagerResolver;
     :cond_0
     :try_start_1
-    new-instance v2, Lcom/facebook/react/uimanager/UIManagerModule;
+    new-instance v0, Lcom/facebook/react/uimanager/UIManagerModule;
 
     iget-object v3, p0, Lcom/facebook/react/CoreModulesPackage;->mReactInstanceManager:Lcom/facebook/react/ReactInstanceManager;
 
@@ -110,33 +120,34 @@
 
     iget v4, p0, Lcom/facebook/react/CoreModulesPackage;->mMinTimeLeftInFrameForNonBatchedOperationMs:I
 
-    invoke-direct {v2, p1, v3, v4}, Lcom/facebook/react/uimanager/UIManagerModule;-><init>(Lcom/facebook/react/bridge/ReactApplicationContext;Ljava/util/List;I)V
+    invoke-direct {v0, p1, v3, v4}, Lcom/facebook/react/uimanager/UIManagerModule;-><init>(Lcom/facebook/react/bridge/ReactApplicationContext;Ljava/util/List;I)V
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
     .line 186
-    invoke-static {v0, v1}, Lcom/facebook/systrace/Systrace;->endSection(J)V
+    invoke-static {v1, v2}, Lcom/facebook/systrace/Systrace;->endSection(J)V
 
     .line 187
-    sget-object p1, Lcom/facebook/react/bridge/ReactMarkerConstants;->CREATE_UI_MANAGER_MODULE_END:Lcom/facebook/react/bridge/ReactMarkerConstants;
+    sget-object v1, Lcom/facebook/react/bridge/ReactMarkerConstants;->CREATE_UI_MANAGER_MODULE_END:Lcom/facebook/react/bridge/ReactMarkerConstants;
 
-    invoke-static {p1}, Lcom/facebook/react/bridge/ReactMarker;->logMarker(Lcom/facebook/react/bridge/ReactMarkerConstants;)V
+    invoke-static {v1}, Lcom/facebook/react/bridge/ReactMarker;->logMarker(Lcom/facebook/react/bridge/ReactMarkerConstants;)V
 
-    return-object v2
-
-    :catchall_0
-    move-exception p1
+    .line 180
+    return-object v0
 
     .line 186
-    invoke-static {v0, v1}, Lcom/facebook/systrace/Systrace;->endSection(J)V
+    :catchall_0
+    move-exception v0
+
+    invoke-static {v1, v2}, Lcom/facebook/systrace/Systrace;->endSection(J)V
 
     .line 187
-    sget-object v0, Lcom/facebook/react/bridge/ReactMarkerConstants;->CREATE_UI_MANAGER_MODULE_END:Lcom/facebook/react/bridge/ReactMarkerConstants;
+    sget-object v1, Lcom/facebook/react/bridge/ReactMarkerConstants;->CREATE_UI_MANAGER_MODULE_END:Lcom/facebook/react/bridge/ReactMarkerConstants;
 
-    invoke-static {v0}, Lcom/facebook/react/bridge/ReactMarker;->logMarker(Lcom/facebook/react/bridge/ReactMarkerConstants;)V
+    invoke-static {v1}, Lcom/facebook/react/bridge/ReactMarker;->logMarker(Lcom/facebook/react/bridge/ReactMarkerConstants;)V
 
     .line 188
-    throw p1
+    throw v0
 .end method
 
 
@@ -149,11 +160,14 @@
 
     invoke-static {v0}, Lcom/facebook/react/bridge/ReactMarker;->logMarker(Lcom/facebook/react/bridge/ReactMarkerConstants;)V
 
+    .line 199
     return-void
 .end method
 
 .method public getModule(Ljava/lang/String;Lcom/facebook/react/bridge/ReactApplicationContext;)Lcom/facebook/react/bridge/NativeModule;
-    .locals 2
+    .locals 3
+    .param p1, "name"    # Ljava/lang/String;
+    .param p2, "reactContext"    # Lcom/facebook/react/bridge/ReactApplicationContext;
 
     .line 136
     invoke-virtual {p1}, Ljava/lang/String;->hashCode()I
@@ -162,6 +176,7 @@
 
     sparse-switch v0, :sswitch_data_0
 
+    :cond_0
     goto :goto_0
 
     :sswitch_0
@@ -268,7 +283,6 @@
 
     goto :goto_1
 
-    :cond_0
     :goto_0
     const/4 v0, -0x1
 
@@ -276,103 +290,107 @@
     packed-switch v0, :pswitch_data_0
 
     .line 154
-    new-instance p2, Ljava/lang/IllegalArgumentException;
+    new-instance v0, Ljava/lang/IllegalArgumentException;
 
-    new-instance v0, Ljava/lang/StringBuilder;
+    new-instance v1, Ljava/lang/StringBuilder;
 
-    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v1, "In CoreModulesPackage, could not find Native module for "
+    const-string v2, "In CoreModulesPackage, could not find Native module for "
 
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v1
 
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object p1
+    move-result-object v1
 
-    invoke-direct {p2, p1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    throw p2
+    move-result-object v1
+
+    invoke-direct {v0, v1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+
+    throw v0
 
     .line 152
     :pswitch_0
-    new-instance p1, Lcom/facebook/react/modules/deviceinfo/DeviceInfoModule;
+    new-instance v0, Lcom/facebook/react/modules/deviceinfo/DeviceInfoModule;
 
-    invoke-direct {p1, p2}, Lcom/facebook/react/modules/deviceinfo/DeviceInfoModule;-><init>(Lcom/facebook/react/bridge/ReactApplicationContext;)V
+    invoke-direct {v0, p2}, Lcom/facebook/react/modules/deviceinfo/DeviceInfoModule;-><init>(Lcom/facebook/react/bridge/ReactApplicationContext;)V
 
-    return-object p1
+    return-object v0
 
     .line 150
     :pswitch_1
     invoke-direct {p0, p2}, Lcom/facebook/react/CoreModulesPackage;->createUIManager(Lcom/facebook/react/bridge/ReactApplicationContext;)Lcom/facebook/react/uimanager/UIManagerModule;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 
     .line 148
     :pswitch_2
-    new-instance p1, Lcom/facebook/react/modules/core/Timing;
+    new-instance v0, Lcom/facebook/react/modules/core/Timing;
 
-    iget-object v0, p0, Lcom/facebook/react/CoreModulesPackage;->mReactInstanceManager:Lcom/facebook/react/ReactInstanceManager;
+    iget-object v1, p0, Lcom/facebook/react/CoreModulesPackage;->mReactInstanceManager:Lcom/facebook/react/ReactInstanceManager;
 
-    invoke-virtual {v0}, Lcom/facebook/react/ReactInstanceManager;->getDevSupportManager()Lcom/facebook/react/devsupport/interfaces/DevSupportManager;
+    invoke-virtual {v1}, Lcom/facebook/react/ReactInstanceManager;->getDevSupportManager()Lcom/facebook/react/devsupport/interfaces/DevSupportManager;
 
-    move-result-object v0
+    move-result-object v1
 
-    invoke-direct {p1, p2, v0}, Lcom/facebook/react/modules/core/Timing;-><init>(Lcom/facebook/react/bridge/ReactApplicationContext;Lcom/facebook/react/devsupport/interfaces/DevSupportManager;)V
+    invoke-direct {v0, p2, v1}, Lcom/facebook/react/modules/core/Timing;-><init>(Lcom/facebook/react/bridge/ReactApplicationContext;Lcom/facebook/react/devsupport/interfaces/DevSupportManager;)V
 
-    return-object p1
+    return-object v0
 
     .line 146
     :pswitch_3
-    new-instance p1, Lcom/facebook/react/modules/debug/SourceCodeModule;
+    new-instance v0, Lcom/facebook/react/modules/debug/SourceCodeModule;
 
-    invoke-direct {p1, p2}, Lcom/facebook/react/modules/debug/SourceCodeModule;-><init>(Lcom/facebook/react/bridge/ReactContext;)V
+    invoke-direct {v0, p2}, Lcom/facebook/react/modules/debug/SourceCodeModule;-><init>(Lcom/facebook/react/bridge/ReactContext;)V
 
-    return-object p1
+    return-object v0
 
     .line 144
     :pswitch_4
-    new-instance p1, Lcom/facebook/react/modules/core/HeadlessJsTaskSupportModule;
+    new-instance v0, Lcom/facebook/react/modules/core/HeadlessJsTaskSupportModule;
 
-    invoke-direct {p1, p2}, Lcom/facebook/react/modules/core/HeadlessJsTaskSupportModule;-><init>(Lcom/facebook/react/bridge/ReactApplicationContext;)V
+    invoke-direct {v0, p2}, Lcom/facebook/react/modules/core/HeadlessJsTaskSupportModule;-><init>(Lcom/facebook/react/bridge/ReactApplicationContext;)V
 
-    return-object p1
+    return-object v0
 
     .line 142
     :pswitch_5
-    new-instance p1, Lcom/facebook/react/modules/core/ExceptionsManagerModule;
+    new-instance v0, Lcom/facebook/react/modules/core/ExceptionsManagerModule;
 
-    iget-object p2, p0, Lcom/facebook/react/CoreModulesPackage;->mReactInstanceManager:Lcom/facebook/react/ReactInstanceManager;
+    iget-object v1, p0, Lcom/facebook/react/CoreModulesPackage;->mReactInstanceManager:Lcom/facebook/react/ReactInstanceManager;
 
-    invoke-virtual {p2}, Lcom/facebook/react/ReactInstanceManager;->getDevSupportManager()Lcom/facebook/react/devsupport/interfaces/DevSupportManager;
+    invoke-virtual {v1}, Lcom/facebook/react/ReactInstanceManager;->getDevSupportManager()Lcom/facebook/react/devsupport/interfaces/DevSupportManager;
 
-    move-result-object p2
+    move-result-object v1
 
-    invoke-direct {p1, p2}, Lcom/facebook/react/modules/core/ExceptionsManagerModule;-><init>(Lcom/facebook/react/devsupport/interfaces/DevSupportManager;)V
+    invoke-direct {v0, v1}, Lcom/facebook/react/modules/core/ExceptionsManagerModule;-><init>(Lcom/facebook/react/devsupport/interfaces/DevSupportManager;)V
 
-    return-object p1
+    return-object v0
 
     .line 140
     :pswitch_6
-    new-instance p1, Lcom/facebook/react/modules/core/DeviceEventManagerModule;
+    new-instance v0, Lcom/facebook/react/modules/core/DeviceEventManagerModule;
 
-    iget-object v0, p0, Lcom/facebook/react/CoreModulesPackage;->mHardwareBackBtnHandler:Lcom/facebook/react/modules/core/DefaultHardwareBackBtnHandler;
+    iget-object v1, p0, Lcom/facebook/react/CoreModulesPackage;->mHardwareBackBtnHandler:Lcom/facebook/react/modules/core/DefaultHardwareBackBtnHandler;
 
-    invoke-direct {p1, p2, v0}, Lcom/facebook/react/modules/core/DeviceEventManagerModule;-><init>(Lcom/facebook/react/bridge/ReactApplicationContext;Lcom/facebook/react/modules/core/DefaultHardwareBackBtnHandler;)V
+    invoke-direct {v0, p2, v1}, Lcom/facebook/react/modules/core/DeviceEventManagerModule;-><init>(Lcom/facebook/react/bridge/ReactApplicationContext;Lcom/facebook/react/modules/core/DefaultHardwareBackBtnHandler;)V
 
-    return-object p1
+    return-object v0
 
     .line 138
     :pswitch_7
-    new-instance p1, Lcom/facebook/react/modules/systeminfo/AndroidInfoModule;
+    new-instance v0, Lcom/facebook/react/modules/systeminfo/AndroidInfoModule;
 
-    invoke-direct {p1, p2}, Lcom/facebook/react/modules/systeminfo/AndroidInfoModule;-><init>(Lcom/facebook/react/bridge/ReactApplicationContext;)V
+    invoke-direct {v0, p2}, Lcom/facebook/react/modules/systeminfo/AndroidInfoModule;-><init>(Lcom/facebook/react/bridge/ReactApplicationContext;)V
 
-    return-object p1
+    return-object v0
 
     :sswitch_data_0
     .sparse-switch
@@ -400,8 +418,9 @@
 .end method
 
 .method public getReactModuleInfoProvider()Lcom/facebook/react/module/model/ReactModuleInfoProvider;
-    .locals 16
+    .locals 18
 
+    .line 86
     const-string v1, "No ReactModuleInfoProvider for CoreModulesPackage$$ReactModuleInfoProvider"
 
     :try_start_0
@@ -413,171 +432,209 @@
     move-result-object v0
 
     .line 88
+    .local v0, "reactModuleInfoProviderClass":Ljava/lang/Class;, "Ljava/lang/Class<*>;"
     invoke-virtual {v0}, Ljava/lang/Class;->newInstance()Ljava/lang/Object;
 
-    move-result-object v0
+    move-result-object v2
 
-    check-cast v0, Lcom/facebook/react/module/model/ReactModuleInfoProvider;
+    check-cast v2, Lcom/facebook/react/module/model/ReactModuleInfoProvider;
     :try_end_0
     .catch Ljava/lang/ClassNotFoundException; {:try_start_0 .. :try_end_0} :catch_2
     .catch Ljava/lang/InstantiationException; {:try_start_0 .. :try_end_0} :catch_1
     .catch Ljava/lang/IllegalAccessException; {:try_start_0 .. :try_end_0} :catch_0
 
-    return-object v0
+    return-object v2
 
+    .line 128
+    .end local v0    # "reactModuleInfoProviderClass":Ljava/lang/Class;, "Ljava/lang/Class<*>;"
     :catch_0
     move-exception v0
 
     .line 129
+    .local v0, "e":Ljava/lang/IllegalAccessException;
     new-instance v2, Ljava/lang/RuntimeException;
 
     invoke-direct {v2, v1, v0}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V
 
     throw v2
 
+    .line 125
+    .end local v0    # "e":Ljava/lang/IllegalAccessException;
     :catch_1
     move-exception v0
 
     .line 126
+    .local v0, "e":Ljava/lang/InstantiationException;
     new-instance v2, Ljava/lang/RuntimeException;
 
     invoke-direct {v2, v1, v0}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V
 
     throw v2
 
+    .line 89
+    .end local v0    # "e":Ljava/lang/InstantiationException;
     :catch_2
-    const/16 v0, 0x8
+    move-exception v0
 
     .line 91
-    new-array v0, v0, [Ljava/lang/Class;
+    .local v0, "e":Ljava/lang/ClassNotFoundException;
+    const/16 v1, 0x8
 
-    const-class v1, Lcom/facebook/react/modules/systeminfo/AndroidInfoModule;
+    new-array v1, v1, [Ljava/lang/Class;
 
-    const/4 v2, 0x0
+    const-class v2, Lcom/facebook/react/modules/systeminfo/AndroidInfoModule;
 
-    aput-object v1, v0, v2
+    const/4 v3, 0x0
 
-    const-class v1, Lcom/facebook/react/modules/core/DeviceEventManagerModule;
+    aput-object v2, v1, v3
 
-    const/4 v3, 0x1
+    const-class v2, Lcom/facebook/react/modules/core/DeviceEventManagerModule;
 
-    aput-object v1, v0, v3
+    const/4 v4, 0x1
 
-    const/4 v1, 0x2
+    aput-object v2, v1, v4
 
-    const-class v3, Lcom/facebook/react/modules/deviceinfo/DeviceInfoModule;
+    const/4 v2, 0x2
 
-    aput-object v3, v0, v1
+    const-class v4, Lcom/facebook/react/modules/deviceinfo/DeviceInfoModule;
 
-    const/4 v1, 0x3
+    aput-object v4, v1, v2
 
-    const-class v3, Lcom/facebook/react/modules/core/ExceptionsManagerModule;
+    const/4 v2, 0x3
 
-    aput-object v3, v0, v1
+    const-class v4, Lcom/facebook/react/modules/core/ExceptionsManagerModule;
 
-    const/4 v1, 0x4
+    aput-object v4, v1, v2
 
-    const-class v3, Lcom/facebook/react/modules/core/HeadlessJsTaskSupportModule;
+    const/4 v2, 0x4
 
-    aput-object v3, v0, v1
+    const-class v4, Lcom/facebook/react/modules/core/HeadlessJsTaskSupportModule;
 
-    const/4 v1, 0x5
+    aput-object v4, v1, v2
 
-    const-class v3, Lcom/facebook/react/modules/debug/SourceCodeModule;
+    const/4 v2, 0x5
 
-    aput-object v3, v0, v1
+    const-class v4, Lcom/facebook/react/modules/debug/SourceCodeModule;
 
-    const/4 v1, 0x6
+    aput-object v4, v1, v2
 
-    const-class v3, Lcom/facebook/react/modules/core/Timing;
+    const/4 v2, 0x6
 
-    aput-object v3, v0, v1
+    const-class v4, Lcom/facebook/react/modules/core/Timing;
 
-    const/4 v1, 0x7
+    aput-object v4, v1, v2
 
-    const-class v3, Lcom/facebook/react/uimanager/UIManagerModule;
+    const/4 v2, 0x7
 
-    aput-object v3, v0, v1
+    const-class v4, Lcom/facebook/react/uimanager/UIManagerModule;
+
+    aput-object v4, v1, v2
 
     .line 103
-    new-instance v1, Ljava/util/HashMap;
+    .local v1, "moduleList":[Ljava/lang/Class;, "[Ljava/lang/Class<+Lcom/facebook/react/bridge/NativeModule;>;"
+    new-instance v2, Ljava/util/HashMap;
 
-    invoke-direct {v1}, Ljava/util/HashMap;-><init>()V
+    invoke-direct {v2}, Ljava/util/HashMap;-><init>()V
 
     .line 104
-    array-length v3, v0
+    .local v2, "reactModuleInfoMap":Ljava/util/Map;, "Ljava/util/Map<Ljava/lang/String;Lcom/facebook/react/module/model/ReactModuleInfo;>;"
+    array-length v4, v1
 
     :goto_0
-    if-ge v2, v3, :cond_0
+    if-ge v3, v4, :cond_0
 
-    aget-object v4, v0, v2
+    aget-object v5, v1, v3
 
     .line 105
-    const-class v5, Lcom/facebook/react/module/annotations/ReactModule;
+    .local v5, "moduleClass":Ljava/lang/Class;, "Ljava/lang/Class<+Lcom/facebook/react/bridge/NativeModule;>;"
+    const-class v6, Lcom/facebook/react/module/annotations/ReactModule;
 
-    invoke-virtual {v4, v5}, Ljava/lang/Class;->getAnnotation(Ljava/lang/Class;)Ljava/lang/annotation/Annotation;
-
-    move-result-object v5
-
-    check-cast v5, Lcom/facebook/react/module/annotations/ReactModule;
-
-    .line 108
-    invoke-interface {v5}, Lcom/facebook/react/module/annotations/ReactModule;->name()Ljava/lang/String;
+    invoke-virtual {v5, v6}, Ljava/lang/Class;->getAnnotation(Ljava/lang/Class;)Ljava/lang/annotation/Annotation;
 
     move-result-object v6
+
+    check-cast v6, Lcom/facebook/react/module/annotations/ReactModule;
+
+    .line 107
+    .local v6, "reactModule":Lcom/facebook/react/module/annotations/ReactModule;
+    nop
+
+    .line 108
+    invoke-interface {v6}, Lcom/facebook/react/module/annotations/ReactModule;->name()Ljava/lang/String;
+
+    move-result-object v7
 
     new-instance v15, Lcom/facebook/react/module/model/ReactModuleInfo;
 
     .line 110
-    invoke-interface {v5}, Lcom/facebook/react/module/annotations/ReactModule;->name()Ljava/lang/String;
-
-    move-result-object v8
-
-    .line 111
-    invoke-virtual {v4}, Ljava/lang/Class;->getName()Ljava/lang/String;
+    invoke-interface {v6}, Lcom/facebook/react/module/annotations/ReactModule;->name()Ljava/lang/String;
 
     move-result-object v9
 
+    .line 111
+    invoke-virtual {v5}, Ljava/lang/Class;->getName()Ljava/lang/String;
+
+    move-result-object v10
+
     .line 112
-    invoke-interface {v5}, Lcom/facebook/react/module/annotations/ReactModule;->canOverrideExistingModule()Z
-
-    move-result v10
-
-    .line 113
-    invoke-interface {v5}, Lcom/facebook/react/module/annotations/ReactModule;->needsEagerInit()Z
+    invoke-interface {v6}, Lcom/facebook/react/module/annotations/ReactModule;->canOverrideExistingModule()Z
 
     move-result v11
 
-    .line 114
-    invoke-interface {v5}, Lcom/facebook/react/module/annotations/ReactModule;->hasConstants()Z
+    .line 113
+    invoke-interface {v6}, Lcom/facebook/react/module/annotations/ReactModule;->needsEagerInit()Z
 
     move-result v12
 
-    .line 115
-    invoke-interface {v5}, Lcom/facebook/react/module/annotations/ReactModule;->isCxxModule()Z
+    .line 114
+    invoke-interface {v6}, Lcom/facebook/react/module/annotations/ReactModule;->hasConstants()Z
 
     move-result v13
 
-    const/4 v14, 0x0
+    .line 115
+    invoke-interface {v6}, Lcom/facebook/react/module/annotations/ReactModule;->isCxxModule()Z
 
-    move-object v7, v15
+    move-result v14
 
-    invoke-direct/range {v7 .. v14}, Lcom/facebook/react/module/model/ReactModuleInfo;-><init>(Ljava/lang/String;Ljava/lang/String;ZZZZZ)V
+    const/16 v16, 0x0
+
+    move-object v8, v15
+
+    move-object/from16 v17, v0
+
+    move-object v0, v15
+
+    .end local v0    # "e":Ljava/lang/ClassNotFoundException;
+    .local v17, "e":Ljava/lang/ClassNotFoundException;
+    move/from16 v15, v16
+
+    invoke-direct/range {v8 .. v15}, Lcom/facebook/react/module/model/ReactModuleInfo;-><init>(Ljava/lang/String;Ljava/lang/String;ZZZZZ)V
 
     .line 107
-    invoke-interface {v1, v6, v15}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-interface {v2, v7, v0}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    add-int/lit8 v2, v2, 0x1
+    .line 104
+    .end local v5    # "moduleClass":Ljava/lang/Class;, "Ljava/lang/Class<+Lcom/facebook/react/bridge/NativeModule;>;"
+    .end local v6    # "reactModule":Lcom/facebook/react/module/annotations/ReactModule;
+    add-int/lit8 v3, v3, 0x1
+
+    move-object/from16 v0, v17
 
     goto :goto_0
 
     .line 119
+    .end local v17    # "e":Ljava/lang/ClassNotFoundException;
+    .restart local v0    # "e":Ljava/lang/ClassNotFoundException;
     :cond_0
+    move-object/from16 v17, v0
+
+    .end local v0    # "e":Ljava/lang/ClassNotFoundException;
+    .restart local v17    # "e":Ljava/lang/ClassNotFoundException;
     new-instance v0, Lcom/facebook/react/CoreModulesPackage$1;
 
-    move-object/from16 v2, p0
+    move-object/from16 v3, p0
 
-    invoke-direct {v0, v2, v1}, Lcom/facebook/react/CoreModulesPackage$1;-><init>(Lcom/facebook/react/CoreModulesPackage;Ljava/util/Map;)V
+    invoke-direct {v0, v3, v2}, Lcom/facebook/react/CoreModulesPackage$1;-><init>(Lcom/facebook/react/CoreModulesPackage;Ljava/util/Map;)V
 
     return-object v0
 .end method
@@ -590,5 +647,6 @@
 
     invoke-static {v0}, Lcom/facebook/react/bridge/ReactMarker;->logMarker(Lcom/facebook/react/bridge/ReactMarkerConstants;)V
 
+    .line 194
     return-void
 .end method

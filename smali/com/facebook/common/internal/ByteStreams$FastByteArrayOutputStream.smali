@@ -26,6 +26,7 @@
 
 .method synthetic constructor <init>(Lcom/facebook/common/internal/ByteStreams$1;)V
     .locals 0
+    .param p1, "x0"    # Lcom/facebook/common/internal/ByteStreams$1;
 
     .line 169
     invoke-direct {p0}, Lcom/facebook/common/internal/ByteStreams$FastByteArrayOutputStream;-><init>()V
@@ -37,15 +38,18 @@
 # virtual methods
 .method writeTo([BI)V
     .locals 3
+    .param p1, "b"    # [B
+    .param p2, "off"    # I
 
     .line 176
     iget-object v0, p0, Lcom/facebook/common/internal/ByteStreams$FastByteArrayOutputStream;->buf:[B
 
-    iget v1, p0, Lcom/facebook/common/internal/ByteStreams$FastByteArrayOutputStream;->count:I
+    const/4 v1, 0x0
 
-    const/4 v2, 0x0
+    iget v2, p0, Lcom/facebook/common/internal/ByteStreams$FastByteArrayOutputStream;->count:I
 
-    invoke-static {v0, v2, p1, p2, v1}, Ljava/lang/System;->arraycopy(Ljava/lang/Object;ILjava/lang/Object;II)V
+    invoke-static {v0, v1, p1, p2, v2}, Ljava/lang/System;->arraycopy(Ljava/lang/Object;ILjava/lang/Object;II)V
 
+    .line 177
     return-void
 .end method

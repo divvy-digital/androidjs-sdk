@@ -23,6 +23,8 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView;Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView;
+    .param p2, "c"    # Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView;
 
     .line 269
     iput-object p1, p0, Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView$ReactWebViewBridge;->this$0:Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView;
@@ -32,6 +34,7 @@
     .line 270
     iput-object p2, p0, Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView$ReactWebViewBridge;->mContext:Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView;
 
+    .line 271
     return-void
 .end method
 
@@ -39,6 +42,7 @@
 # virtual methods
 .method public postMessage(Ljava/lang/String;)V
     .locals 1
+    .param p1, "message"    # Ljava/lang/String;
     .annotation runtime Landroid/webkit/JavascriptInterface;
     .end annotation
 
@@ -47,5 +51,6 @@
 
     invoke-virtual {v0, p1}, Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView;->onMessage(Ljava/lang/String;)V
 
+    .line 276
     return-void
 .end method

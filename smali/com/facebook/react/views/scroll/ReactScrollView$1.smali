@@ -25,17 +25,18 @@
 
 # direct methods
 .method constructor <init>(Lcom/facebook/react/views/scroll/ReactScrollView;)V
-    .locals 0
+    .locals 1
+    .param p1, "this$0"    # Lcom/facebook/react/views/scroll/ReactScrollView;
 
     .line 427
     iput-object p1, p0, Lcom/facebook/react/views/scroll/ReactScrollView$1;->this$0:Lcom/facebook/react/views/scroll/ReactScrollView;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    const/4 p1, 0x0
-
     .line 429
-    iput-boolean p1, p0, Lcom/facebook/react/views/scroll/ReactScrollView$1;->mSnappingToPage:Z
+    const/4 v0, 0x0
+
+    iput-boolean v0, p0, Lcom/facebook/react/views/scroll/ReactScrollView$1;->mSnappingToPage:Z
 
     return-void
 .end method
@@ -66,7 +67,7 @@
     .line 436
     iget-object v0, p0, Lcom/facebook/react/views/scroll/ReactScrollView$1;->this$0:Lcom/facebook/react/views/scroll/ReactScrollView;
 
-    invoke-static {v0, p0, v1, v2}, Landroid/support/v4/view/ViewCompat;->postOnAnimationDelayed(Landroid/view/View;Ljava/lang/Runnable;J)V
+    invoke-static {v0, p0, v1, v2}, Landroidx/core/view/ViewCompat;->postOnAnimationDelayed(Landroid/view/View;Ljava/lang/Runnable;J)V
 
     goto :goto_0
 
@@ -84,9 +85,9 @@
 
     if-nez v0, :cond_1
 
+    .line 443
     const/4 v0, 0x1
 
-    .line 443
     iput-boolean v0, p0, Lcom/facebook/react/views/scroll/ReactScrollView$1;->mSnappingToPage:Z
 
     .line 444
@@ -97,7 +98,7 @@
     .line 445
     iget-object v0, p0, Lcom/facebook/react/views/scroll/ReactScrollView$1;->this$0:Lcom/facebook/react/views/scroll/ReactScrollView;
 
-    invoke-static {v0, p0, v1, v2}, Landroid/support/v4/view/ViewCompat;->postOnAnimationDelayed(Landroid/view/View;Ljava/lang/Runnable;J)V
+    invoke-static {v0, p0, v1, v2}, Landroidx/core/view/ViewCompat;->postOnAnimationDelayed(Landroid/view/View;Ljava/lang/Runnable;J)V
 
     goto :goto_0
 
@@ -129,6 +130,7 @@
 
     invoke-static {v0}, Lcom/facebook/react/views/scroll/ReactScrollView;->access$500(Lcom/facebook/react/views/scroll/ReactScrollView;)V
 
+    .line 456
     :goto_0
     return-void
 .end method

@@ -12,7 +12,12 @@
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 0
+    .locals 1
+
+    .line 14
+    const/4 v0, 0x0
+
+    sput-object v0, Lcom/facebook/common/memory/NoOpMemoryTrimmableRegistry;->sInstance:Lcom/facebook/common/memory/NoOpMemoryTrimmableRegistry;
 
     return-void
 .end method
@@ -23,6 +28,7 @@
     .line 16
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
+    .line 17
     return-void
 .end method
 
@@ -56,6 +62,7 @@
 
     return-object v1
 
+    .line 19
     :catchall_0
     move-exception v1
 
@@ -68,12 +75,16 @@
 # virtual methods
 .method public registerMemoryTrimmable(Lcom/facebook/common/memory/MemoryTrimmable;)V
     .locals 0
+    .param p1, "trimmable"    # Lcom/facebook/common/memory/MemoryTrimmable;
 
+    .line 28
     return-void
 .end method
 
 .method public unregisterMemoryTrimmable(Lcom/facebook/common/memory/MemoryTrimmable;)V
     .locals 0
+    .param p1, "trimmable"    # Lcom/facebook/common/memory/MemoryTrimmable;
 
+    .line 32
     return-void
 .end method

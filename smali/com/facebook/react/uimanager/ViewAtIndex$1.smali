@@ -39,16 +39,18 @@
 
 # virtual methods
 .method public compare(Lcom/facebook/react/uimanager/ViewAtIndex;Lcom/facebook/react/uimanager/ViewAtIndex;)I
-    .locals 0
+    .locals 2
+    .param p1, "lhs"    # Lcom/facebook/react/uimanager/ViewAtIndex;
+    .param p2, "rhs"    # Lcom/facebook/react/uimanager/ViewAtIndex;
 
     .line 20
-    iget p1, p1, Lcom/facebook/react/uimanager/ViewAtIndex;->mIndex:I
+    iget v0, p1, Lcom/facebook/react/uimanager/ViewAtIndex;->mIndex:I
 
-    iget p2, p2, Lcom/facebook/react/uimanager/ViewAtIndex;->mIndex:I
+    iget v1, p2, Lcom/facebook/react/uimanager/ViewAtIndex;->mIndex:I
 
-    sub-int/2addr p1, p2
+    sub-int/2addr v0, v1
 
-    return p1
+    return v0
 .end method
 
 .method public bridge synthetic compare(Ljava/lang/Object;Ljava/lang/Object;)I

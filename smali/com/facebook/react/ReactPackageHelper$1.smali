@@ -46,9 +46,6 @@
 # virtual methods
 .method public iterator()Ljava/util/Iterator;
     .locals 1
-    .annotation build Landroid/support/annotation/NonNull;
-    .end annotation
-
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "()",

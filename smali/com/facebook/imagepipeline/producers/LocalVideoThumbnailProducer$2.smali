@@ -23,6 +23,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/imagepipeline/producers/LocalVideoThumbnailProducer;Lcom/facebook/imagepipeline/producers/StatefulProducerRunnable;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/imagepipeline/producers/LocalVideoThumbnailProducer;
 
     .line 110
     iput-object p1, p0, Lcom/facebook/imagepipeline/producers/LocalVideoThumbnailProducer$2;->this$0:Lcom/facebook/imagepipeline/producers/LocalVideoThumbnailProducer;
@@ -44,5 +45,6 @@
 
     invoke-virtual {v0}, Lcom/facebook/imagepipeline/producers/StatefulProducerRunnable;->cancel()V
 
+    .line 114
     return-void
 .end method

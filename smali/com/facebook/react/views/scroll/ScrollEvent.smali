@@ -14,10 +14,10 @@
 
 
 # static fields
-.field private static final EVENTS_POOL:Landroid/support/v4/util/Pools$SynchronizedPool;
+.field private static final EVENTS_POOL:Landroidx/core/util/Pools$SynchronizedPool;
     .annotation system Ldalvik/annotation/Signature;
         value = {
-            "Landroid/support/v4/util/Pools$SynchronizedPool<",
+            "Landroidx/core/util/Pools$SynchronizedPool<",
             "Lcom/facebook/react/views/scroll/ScrollEvent;",
             ">;"
         }
@@ -53,13 +53,13 @@
     .locals 2
 
     .line 28
-    new-instance v0, Landroid/support/v4/util/Pools$SynchronizedPool;
+    new-instance v0, Landroidx/core/util/Pools$SynchronizedPool;
 
     const/4 v1, 0x3
 
-    invoke-direct {v0, v1}, Landroid/support/v4/util/Pools$SynchronizedPool;-><init>(I)V
+    invoke-direct {v0, v1}, Landroidx/core/util/Pools$SynchronizedPool;-><init>(I)V
 
-    sput-object v0, Lcom/facebook/react/views/scroll/ScrollEvent;->EVENTS_POOL:Landroid/support/v4/util/Pools$SynchronizedPool;
+    sput-object v0, Lcom/facebook/react/views/scroll/ScrollEvent;->EVENTS_POOL:Landroidx/core/util/Pools$SynchronizedPool;
 
     return-void
 .end method
@@ -70,11 +70,22 @@
     .line 75
     invoke-direct {p0}, Lcom/facebook/react/uimanager/events/Event;-><init>()V
 
+    .line 76
     return-void
 .end method
 
 .method private init(ILcom/facebook/react/views/scroll/ScrollEventType;IIFFIIII)V
-    .locals 0
+    .locals 2
+    .param p1, "viewTag"    # I
+    .param p2, "scrollEventType"    # Lcom/facebook/react/views/scroll/ScrollEventType;
+    .param p3, "scrollX"    # I
+    .param p4, "scrollY"    # I
+    .param p5, "xVelocity"    # F
+    .param p6, "yVelocity"    # F
+    .param p7, "contentWidth"    # I
+    .param p8, "contentHeight"    # I
+    .param p9, "scrollViewWidth"    # I
+    .param p10, "scrollViewHeight"    # I
 
     .line 89
     invoke-super {p0, p1}, Lcom/facebook/react/uimanager/events/Event;->init(I)V
@@ -88,15 +99,15 @@
     .line 92
     iput p4, p0, Lcom/facebook/react/views/scroll/ScrollEvent;->mScrollY:I
 
-    float-to-double p1, p5
-
     .line 93
-    iput-wide p1, p0, Lcom/facebook/react/views/scroll/ScrollEvent;->mXVelocity:D
+    float-to-double v0, p5
 
-    float-to-double p1, p6
+    iput-wide v0, p0, Lcom/facebook/react/views/scroll/ScrollEvent;->mXVelocity:D
 
     .line 94
-    iput-wide p1, p0, Lcom/facebook/react/views/scroll/ScrollEvent;->mYVelocity:D
+    float-to-double v0, p6
+
+    iput-wide v0, p0, Lcom/facebook/react/views/scroll/ScrollEvent;->mYVelocity:D
 
     .line 95
     iput p7, p0, Lcom/facebook/react/views/scroll/ScrollEvent;->mContentWidth:I
@@ -110,28 +121,44 @@
     .line 98
     iput p10, p0, Lcom/facebook/react/views/scroll/ScrollEvent;->mScrollViewHeight:I
 
+    .line 99
     return-void
 .end method
 
 .method public static obtain(ILcom/facebook/react/views/scroll/ScrollEventType;IIFFIIII)Lcom/facebook/react/views/scroll/ScrollEvent;
     .locals 12
+    .param p0, "viewTag"    # I
+    .param p1, "scrollEventType"    # Lcom/facebook/react/views/scroll/ScrollEventType;
+    .param p2, "scrollX"    # I
+    .param p3, "scrollY"    # I
+    .param p4, "xVelocity"    # F
+    .param p5, "yVelocity"    # F
+    .param p6, "contentWidth"    # I
+    .param p7, "contentHeight"    # I
+    .param p8, "scrollViewWidth"    # I
+    .param p9, "scrollViewHeight"    # I
 
     .line 52
-    sget-object v0, Lcom/facebook/react/views/scroll/ScrollEvent;->EVENTS_POOL:Landroid/support/v4/util/Pools$SynchronizedPool;
+    sget-object v0, Lcom/facebook/react/views/scroll/ScrollEvent;->EVENTS_POOL:Landroidx/core/util/Pools$SynchronizedPool;
 
-    invoke-virtual {v0}, Landroid/support/v4/util/Pools$SynchronizedPool;->acquire()Ljava/lang/Object;
+    invoke-virtual {v0}, Landroidx/core/util/Pools$SynchronizedPool;->acquire()Ljava/lang/Object;
 
     move-result-object v0
 
     check-cast v0, Lcom/facebook/react/views/scroll/ScrollEvent;
 
+    .line 53
+    .local v0, "event":Lcom/facebook/react/views/scroll/ScrollEvent;
     if-nez v0, :cond_0
 
     .line 54
-    new-instance v0, Lcom/facebook/react/views/scroll/ScrollEvent;
+    new-instance v1, Lcom/facebook/react/views/scroll/ScrollEvent;
 
-    invoke-direct {v0}, Lcom/facebook/react/views/scroll/ScrollEvent;-><init>()V
+    invoke-direct {v1}, Lcom/facebook/react/views/scroll/ScrollEvent;-><init>()V
 
+    move-object v0, v1
+
+    .line 56
     :cond_0
     move-object v1, v0
 
@@ -155,9 +182,9 @@
 
     move/from16 v11, p9
 
-    .line 56
     invoke-direct/range {v1 .. v11}, Lcom/facebook/react/views/scroll/ScrollEvent;->init(ILcom/facebook/react/views/scroll/ScrollEventType;IIFFIIII)V
 
+    .line 67
     return-object v0
 .end method
 
@@ -169,27 +196,28 @@
 
     move-result-object v0
 
-    const-wide/16 v1, 0x0
-
-    const-string v3, "top"
-
     .line 128
-    invoke-interface {v0, v3, v1, v2}, Lcom/facebook/react/bridge/WritableMap;->putDouble(Ljava/lang/String;D)V
+    .local v0, "contentInset":Lcom/facebook/react/bridge/WritableMap;
+    const-string v1, "top"
 
-    const-string v3, "bottom"
+    const-wide/16 v2, 0x0
+
+    invoke-interface {v0, v1, v2, v3}, Lcom/facebook/react/bridge/WritableMap;->putDouble(Ljava/lang/String;D)V
 
     .line 129
-    invoke-interface {v0, v3, v1, v2}, Lcom/facebook/react/bridge/WritableMap;->putDouble(Ljava/lang/String;D)V
+    const-string v1, "bottom"
 
-    const-string v3, "left"
+    invoke-interface {v0, v1, v2, v3}, Lcom/facebook/react/bridge/WritableMap;->putDouble(Ljava/lang/String;D)V
 
     .line 130
-    invoke-interface {v0, v3, v1, v2}, Lcom/facebook/react/bridge/WritableMap;->putDouble(Ljava/lang/String;D)V
+    const-string v1, "left"
 
-    const-string v3, "right"
+    invoke-interface {v0, v1, v2, v3}, Lcom/facebook/react/bridge/WritableMap;->putDouble(Ljava/lang/String;D)V
 
     .line 131
-    invoke-interface {v0, v3, v1, v2}, Lcom/facebook/react/bridge/WritableMap;->putDouble(Ljava/lang/String;D)V
+    const-string v1, "right"
+
+    invoke-interface {v0, v1, v2, v3}, Lcom/facebook/react/bridge/WritableMap;->putDouble(Ljava/lang/String;D)V
 
     .line 133
     invoke-static {}, Lcom/facebook/react/bridge/Arguments;->createMap()Lcom/facebook/react/bridge/WritableMap;
@@ -197,6 +225,7 @@
     move-result-object v1
 
     .line 134
+    .local v1, "contentOffset":Lcom/facebook/react/bridge/WritableMap;
     iget v2, p0, Lcom/facebook/react/views/scroll/ScrollEvent;->mScrollX:I
 
     int-to-float v2, v2
@@ -232,6 +261,7 @@
     move-result-object v2
 
     .line 138
+    .local v2, "contentSize":Lcom/facebook/react/bridge/WritableMap;
     iget v3, p0, Lcom/facebook/react/views/scroll/ScrollEvent;->mContentWidth:I
 
     int-to-float v3, v3
@@ -267,6 +297,7 @@
     move-result-object v6
 
     .line 142
+    .local v6, "layoutMeasurement":Lcom/facebook/react/bridge/WritableMap;
     iget v7, p0, Lcom/facebook/react/views/scroll/ScrollEvent;->mScrollViewWidth:I
 
     int-to-float v7, v7
@@ -298,6 +329,7 @@
     move-result-object v3
 
     .line 146
+    .local v3, "velocity":Lcom/facebook/react/bridge/WritableMap;
     iget-wide v7, p0, Lcom/facebook/react/views/scroll/ScrollEvent;->mXVelocity:D
 
     invoke-interface {v3, v4, v7, v8}, Lcom/facebook/react/bridge/WritableMap;->putDouble(Ljava/lang/String;D)V
@@ -312,47 +344,49 @@
 
     move-result-object v4
 
+    .line 150
+    .local v4, "event":Lcom/facebook/react/bridge/WritableMap;
     const-string v5, "contentInset"
 
-    .line 150
     invoke-interface {v4, v5, v0}, Lcom/facebook/react/bridge/WritableMap;->putMap(Ljava/lang/String;Lcom/facebook/react/bridge/WritableMap;)V
 
-    const-string v0, "contentOffset"
-
     .line 151
-    invoke-interface {v4, v0, v1}, Lcom/facebook/react/bridge/WritableMap;->putMap(Ljava/lang/String;Lcom/facebook/react/bridge/WritableMap;)V
+    const-string v5, "contentOffset"
 
-    const-string v0, "contentSize"
+    invoke-interface {v4, v5, v1}, Lcom/facebook/react/bridge/WritableMap;->putMap(Ljava/lang/String;Lcom/facebook/react/bridge/WritableMap;)V
 
     .line 152
-    invoke-interface {v4, v0, v2}, Lcom/facebook/react/bridge/WritableMap;->putMap(Ljava/lang/String;Lcom/facebook/react/bridge/WritableMap;)V
+    const-string v5, "contentSize"
 
-    const-string v0, "layoutMeasurement"
+    invoke-interface {v4, v5, v2}, Lcom/facebook/react/bridge/WritableMap;->putMap(Ljava/lang/String;Lcom/facebook/react/bridge/WritableMap;)V
 
     .line 153
-    invoke-interface {v4, v0, v6}, Lcom/facebook/react/bridge/WritableMap;->putMap(Ljava/lang/String;Lcom/facebook/react/bridge/WritableMap;)V
+    const-string v5, "layoutMeasurement"
 
-    const-string v0, "velocity"
+    invoke-interface {v4, v5, v6}, Lcom/facebook/react/bridge/WritableMap;->putMap(Ljava/lang/String;Lcom/facebook/react/bridge/WritableMap;)V
 
     .line 154
-    invoke-interface {v4, v0, v3}, Lcom/facebook/react/bridge/WritableMap;->putMap(Ljava/lang/String;Lcom/facebook/react/bridge/WritableMap;)V
+    const-string v5, "velocity"
+
+    invoke-interface {v4, v5, v3}, Lcom/facebook/react/bridge/WritableMap;->putMap(Ljava/lang/String;Lcom/facebook/react/bridge/WritableMap;)V
 
     .line 156
+    const-string v5, "target"
+
     invoke-virtual {p0}, Lcom/facebook/react/views/scroll/ScrollEvent;->getViewTag()I
 
-    move-result v0
+    move-result v7
 
-    const-string v1, "target"
-
-    invoke-interface {v4, v1, v0}, Lcom/facebook/react/bridge/WritableMap;->putInt(Ljava/lang/String;I)V
-
-    const-string v0, "responderIgnoreScroll"
-
-    const/4 v1, 0x1
+    invoke-interface {v4, v5, v7}, Lcom/facebook/react/bridge/WritableMap;->putInt(Ljava/lang/String;I)V
 
     .line 157
-    invoke-interface {v4, v0, v1}, Lcom/facebook/react/bridge/WritableMap;->putBoolean(Ljava/lang/String;Z)V
+    const-string v5, "responderIgnoreScroll"
 
+    const/4 v7, 0x1
+
+    invoke-interface {v4, v5, v7}, Lcom/facebook/react/bridge/WritableMap;->putBoolean(Ljava/lang/String;Z)V
+
+    .line 158
     return-object v4
 .end method
 
@@ -368,10 +402,12 @@
 
     if-ne v0, v1, :cond_0
 
+    .line 116
     const/4 v0, 0x1
 
     return v0
 
+    .line 118
     :cond_0
     const/4 v0, 0x0
 
@@ -380,6 +416,7 @@
 
 .method public dispatch(Lcom/facebook/react/uimanager/events/RCTEventEmitter;)V
     .locals 3
+    .param p1, "rctEventEmitter"    # Lcom/facebook/react/uimanager/events/RCTEventEmitter;
 
     .line 123
     invoke-virtual {p0}, Lcom/facebook/react/views/scroll/ScrollEvent;->getViewTag()I
@@ -396,12 +433,14 @@
 
     invoke-interface {p1, v0, v1, v2}, Lcom/facebook/react/uimanager/events/RCTEventEmitter;->receiveEvent(ILjava/lang/String;Lcom/facebook/react/bridge/WritableMap;)V
 
+    .line 124
     return-void
 .end method
 
 .method public getCoalescingKey()S
     .locals 1
 
+    .line 109
     const/4 v0, 0x0
 
     return v0
@@ -430,9 +469,10 @@
     .locals 1
 
     .line 72
-    sget-object v0, Lcom/facebook/react/views/scroll/ScrollEvent;->EVENTS_POOL:Landroid/support/v4/util/Pools$SynchronizedPool;
+    sget-object v0, Lcom/facebook/react/views/scroll/ScrollEvent;->EVENTS_POOL:Landroidx/core/util/Pools$SynchronizedPool;
 
-    invoke-virtual {v0, p0}, Landroid/support/v4/util/Pools$SynchronizedPool;->release(Ljava/lang/Object;)Z
+    invoke-virtual {v0, p0}, Landroidx/core/util/Pools$SynchronizedPool;->release(Ljava/lang/Object;)Z
 
+    .line 73
     return-void
 .end method

@@ -44,11 +44,11 @@
     .line 63
     new-instance v0, Lcom/facebook/imagepipeline/common/RotationOptions;
 
-    const/4 v1, 0x0
+    const/4 v1, -0x1
 
-    const/4 v2, -0x1
+    const/4 v2, 0x0
 
-    invoke-direct {v0, v2, v1}, Lcom/facebook/imagepipeline/common/RotationOptions;-><init>(IZ)V
+    invoke-direct {v0, v1, v2}, Lcom/facebook/imagepipeline/common/RotationOptions;-><init>(IZ)V
 
     sput-object v0, Lcom/facebook/imagepipeline/common/RotationOptions;->ROTATION_OPTIONS_AUTO_ROTATE:Lcom/facebook/imagepipeline/common/RotationOptions;
 
@@ -57,16 +57,16 @@
 
     const/4 v3, -0x2
 
-    invoke-direct {v0, v3, v1}, Lcom/facebook/imagepipeline/common/RotationOptions;-><init>(IZ)V
+    invoke-direct {v0, v3, v2}, Lcom/facebook/imagepipeline/common/RotationOptions;-><init>(IZ)V
 
     sput-object v0, Lcom/facebook/imagepipeline/common/RotationOptions;->ROTATION_OPTIONS_DISABLE_ROTATION:Lcom/facebook/imagepipeline/common/RotationOptions;
 
     .line 69
     new-instance v0, Lcom/facebook/imagepipeline/common/RotationOptions;
 
-    const/4 v1, 0x1
+    const/4 v2, 0x1
 
-    invoke-direct {v0, v2, v1}, Lcom/facebook/imagepipeline/common/RotationOptions;-><init>(IZ)V
+    invoke-direct {v0, v1, v2}, Lcom/facebook/imagepipeline/common/RotationOptions;-><init>(IZ)V
 
     sput-object v0, Lcom/facebook/imagepipeline/common/RotationOptions;->ROTATION_OPTIONS_ROTATE_AT_RENDER_TIME:Lcom/facebook/imagepipeline/common/RotationOptions;
 
@@ -75,6 +75,8 @@
 
 .method private constructor <init>(IZ)V
     .locals 0
+    .param p1, "rotation"    # I
+    .param p2, "canDeferUntilRendered"    # Z
 
     .line 114
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -85,6 +87,7 @@
     .line 116
     iput-boolean p2, p0, Lcom/facebook/imagepipeline/common/RotationOptions;->mDeferUntilRendered:Z
 
+    .line 117
     return-void
 .end method
 
@@ -117,6 +120,7 @@
 
 .method public static forceRotation(I)Lcom/facebook/imagepipeline/common/RotationOptions;
     .locals 2
+    .param p0, "angle"    # I
 
     .line 111
     new-instance v0, Lcom/facebook/imagepipeline/common/RotationOptions;
@@ -140,12 +144,15 @@
 .end method
 
 .method public equals(Ljava/lang/Object;)Z
-    .locals 4
+    .locals 5
+    .param p1, "other"    # Ljava/lang/Object;
 
+    .line 151
     const/4 v0, 0x1
 
     if-ne p1, p0, :cond_0
 
+    .line 152
     return v0
 
     .line 154
@@ -156,24 +163,28 @@
 
     if-nez v1, :cond_1
 
+    .line 155
     return v2
 
     .line 157
     :cond_1
-    check-cast p1, Lcom/facebook/imagepipeline/common/RotationOptions;
+    move-object v1, p1
+
+    check-cast v1, Lcom/facebook/imagepipeline/common/RotationOptions;
 
     .line 158
-    iget v1, p0, Lcom/facebook/imagepipeline/common/RotationOptions;->mRotation:I
+    .local v1, "that":Lcom/facebook/imagepipeline/common/RotationOptions;
+    iget v3, p0, Lcom/facebook/imagepipeline/common/RotationOptions;->mRotation:I
 
-    iget v3, p1, Lcom/facebook/imagepipeline/common/RotationOptions;->mRotation:I
+    iget v4, v1, Lcom/facebook/imagepipeline/common/RotationOptions;->mRotation:I
 
-    if-ne v1, v3, :cond_2
+    if-ne v3, v4, :cond_2
 
-    iget-boolean v1, p0, Lcom/facebook/imagepipeline/common/RotationOptions;->mDeferUntilRendered:Z
+    iget-boolean v3, p0, Lcom/facebook/imagepipeline/common/RotationOptions;->mDeferUntilRendered:Z
 
-    iget-boolean p1, p1, Lcom/facebook/imagepipeline/common/RotationOptions;->mDeferUntilRendered:Z
+    iget-boolean v4, v1, Lcom/facebook/imagepipeline/common/RotationOptions;->mDeferUntilRendered:Z
 
-    if-ne v1, p1, :cond_2
+    if-ne v3, v4, :cond_2
 
     goto :goto_0
 
@@ -257,10 +268,12 @@
 .method public toString()Ljava/lang/String;
     .locals 4
 
+    .line 164
     const/4 v0, 0x0
 
-    .line 164
-    check-cast v0, Ljava/util/Locale;
+    move-object v1, v0
+
+    check-cast v1, Ljava/util/Locale;
 
     const/4 v1, 0x2
 

@@ -48,6 +48,9 @@
 # direct methods
 .method public constructor <init>(Lcom/facebook/imagepipeline/producers/Consumer;Lcom/facebook/cache/common/CacheKey;ZLcom/facebook/imagepipeline/cache/MemoryCache;Z)V
     .locals 0
+    .param p2, "cacheKey"    # Lcom/facebook/cache/common/CacheKey;
+    .param p3, "isRepeatedProcessor"    # Z
+    .param p5, "isMemoryCachedEnabled"    # Z
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -65,6 +68,8 @@
     .end annotation
 
     .line 102
+    .local p1, "consumer":Lcom/facebook/imagepipeline/producers/Consumer;, "Lcom/facebook/imagepipeline/producers/Consumer<Lcom/facebook/common/references/CloseableReference<Lcom/facebook/imagepipeline/image/CloseableImage;>;>;"
+    .local p4, "memoryCache":Lcom/facebook/imagepipeline/cache/MemoryCache;, "Lcom/facebook/imagepipeline/cache/MemoryCache<Lcom/facebook/cache/common/CacheKey;Lcom/facebook/imagepipeline/image/CloseableImage;>;"
     invoke-direct {p0, p1}, Lcom/facebook/imagepipeline/producers/DelegatingConsumer;-><init>(Lcom/facebook/imagepipeline/producers/Consumer;)V
 
     .line 103
@@ -79,6 +84,7 @@
     .line 106
     iput-boolean p5, p0, Lcom/facebook/imagepipeline/producers/PostprocessedBitmapMemoryCacheProducer$CachedPostprocessorConsumer;->mIsMemoryCachedEnabled:Z
 
+    .line 107
     return-void
 .end method
 
@@ -86,6 +92,7 @@
 # virtual methods
 .method protected onNewResultImpl(Lcom/facebook/common/references/CloseableReference;I)V
     .locals 3
+    .param p2, "status"    # I
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -95,24 +102,27 @@
         }
     .end annotation
 
-    const/4 v0, 0x0
-
+    .line 114
+    .local p1, "newResult":Lcom/facebook/common/references/CloseableReference;, "Lcom/facebook/common/references/CloseableReference<Lcom/facebook/imagepipeline/image/CloseableImage;>;"
     if-nez p1, :cond_1
 
     .line 115
     invoke-static {p2}, Lcom/facebook/imagepipeline/producers/PostprocessedBitmapMemoryCacheProducer$CachedPostprocessorConsumer;->isLast(I)Z
 
-    move-result p1
+    move-result v0
 
-    if-eqz p1, :cond_0
+    if-eqz v0, :cond_0
 
     .line 116
     invoke-virtual {p0}, Lcom/facebook/imagepipeline/producers/PostprocessedBitmapMemoryCacheProducer$CachedPostprocessorConsumer;->getConsumer()Lcom/facebook/imagepipeline/producers/Consumer;
 
-    move-result-object p1
+    move-result-object v0
 
-    invoke-interface {p1, v0, p2}, Lcom/facebook/imagepipeline/producers/Consumer;->onNewResult(Ljava/lang/Object;I)V
+    const/4 v1, 0x0
 
+    invoke-interface {v0, v1, p2}, Lcom/facebook/imagepipeline/producers/Consumer;->onNewResult(Ljava/lang/Object;I)V
+
+    .line 118
     :cond_0
     return-void
 
@@ -120,28 +130,33 @@
     :cond_1
     invoke-static {p2}, Lcom/facebook/imagepipeline/producers/PostprocessedBitmapMemoryCacheProducer$CachedPostprocessorConsumer;->isNotLast(I)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
-    iget-boolean v1, p0, Lcom/facebook/imagepipeline/producers/PostprocessedBitmapMemoryCacheProducer$CachedPostprocessorConsumer;->mIsRepeatedProcessor:Z
+    iget-boolean v0, p0, Lcom/facebook/imagepipeline/producers/PostprocessedBitmapMemoryCacheProducer$CachedPostprocessorConsumer;->mIsRepeatedProcessor:Z
 
-    if-nez v1, :cond_2
+    if-nez v0, :cond_2
 
+    .line 122
     return-void
 
-    .line 126
+    .line 125
     :cond_2
+    const/4 v0, 0x0
+
+    .line 126
+    .local v0, "newCachedResult":Lcom/facebook/common/references/CloseableReference;, "Lcom/facebook/common/references/CloseableReference<Lcom/facebook/imagepipeline/image/CloseableImage;>;"
     iget-boolean v1, p0, Lcom/facebook/imagepipeline/producers/PostprocessedBitmapMemoryCacheProducer$CachedPostprocessorConsumer;->mIsMemoryCachedEnabled:Z
 
     if-eqz v1, :cond_3
 
     .line 127
-    iget-object v0, p0, Lcom/facebook/imagepipeline/producers/PostprocessedBitmapMemoryCacheProducer$CachedPostprocessorConsumer;->mMemoryCache:Lcom/facebook/imagepipeline/cache/MemoryCache;
+    iget-object v1, p0, Lcom/facebook/imagepipeline/producers/PostprocessedBitmapMemoryCacheProducer$CachedPostprocessorConsumer;->mMemoryCache:Lcom/facebook/imagepipeline/cache/MemoryCache;
 
-    iget-object v1, p0, Lcom/facebook/imagepipeline/producers/PostprocessedBitmapMemoryCacheProducer$CachedPostprocessorConsumer;->mCacheKey:Lcom/facebook/cache/common/CacheKey;
+    iget-object v2, p0, Lcom/facebook/imagepipeline/producers/PostprocessedBitmapMemoryCacheProducer$CachedPostprocessorConsumer;->mCacheKey:Lcom/facebook/cache/common/CacheKey;
 
-    invoke-interface {v0, v1, p1}, Lcom/facebook/imagepipeline/cache/MemoryCache;->cache(Ljava/lang/Object;Lcom/facebook/common/references/CloseableReference;)Lcom/facebook/common/references/CloseableReference;
+    invoke-interface {v1, v2, p1}, Lcom/facebook/imagepipeline/cache/MemoryCache;->cache(Ljava/lang/Object;Lcom/facebook/common/references/CloseableReference;)Lcom/facebook/common/references/CloseableReference;
 
     move-result-object v0
 
@@ -163,25 +178,35 @@
 
     if-eqz v0, :cond_4
 
-    move-object p1, v0
+    move-object v2, v0
+
+    goto :goto_0
 
     :cond_4
-    invoke-interface {v1, p1, p2}, Lcom/facebook/imagepipeline/producers/Consumer;->onNewResult(Ljava/lang/Object;I)V
+    move-object v2, p1
+
+    :goto_0
+    invoke-interface {v1, v2, p2}, Lcom/facebook/imagepipeline/producers/Consumer;->onNewResult(Ljava/lang/Object;I)V
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
     .line 134
     invoke-static {v0}, Lcom/facebook/common/references/CloseableReference;->closeSafely(Lcom/facebook/common/references/CloseableReference;)V
 
+    .line 135
+    nop
+
+    .line 136
     return-void
 
+    .line 134
     :catchall_0
-    move-exception p1
+    move-exception v1
 
     invoke-static {v0}, Lcom/facebook/common/references/CloseableReference;->closeSafely(Lcom/facebook/common/references/CloseableReference;)V
 
     .line 135
-    throw p1
+    throw v1
 .end method
 
 .method protected bridge synthetic onNewResultImpl(Ljava/lang/Object;I)V

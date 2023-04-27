@@ -31,333 +31,326 @@
 .end method
 
 .method public static createDrawableFromJSDescription(Landroid/content/Context;Lcom/facebook/react/bridge/ReadableMap;)Landroid/graphics/drawable/Drawable;
-    .locals 6
-    .annotation build Landroid/annotation/TargetApi;
-        value = 0x15
-    .end annotation
-
-    const-string v0, "type"
+    .locals 8
+    .param p0, "context"    # Landroid/content/Context;
+    .param p1, "drawableDescriptionDict"    # Lcom/facebook/react/bridge/ReadableMap;
 
     .line 37
+    const-string v0, "type"
+
     invoke-interface {p1, v0}, Lcom/facebook/react/bridge/ReadableMap;->getString(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v0
 
+    .line 38
+    .local v0, "type":Ljava/lang/String;
     const-string v1, "ThemeAttrAndroid"
 
-    .line 38
     invoke-virtual {v1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
     move-result v1
 
-    const/16 v2, 0x15
+    const/4 v2, 0x1
 
-    const/4 v3, 0x1
-
-    if-eqz v1, :cond_3
-
-    const-string v0, "attribute"
+    if-eqz v1, :cond_2
 
     .line 39
-    invoke-interface {p1, v0}, Lcom/facebook/react/bridge/ReadableMap;->getString(Ljava/lang/String;)Ljava/lang/String;
+    const-string v1, "attribute"
 
-    move-result-object p1
+    invoke-interface {p1, v1}, Lcom/facebook/react/bridge/ReadableMap;->getString(Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v1
 
     .line 40
-    invoke-static {p1}, Lcom/facebook/react/bridge/SoftAssertions;->assertNotNull(Ljava/lang/Object;)Ljava/lang/Object;
+    .local v1, "attr":Ljava/lang/String;
+    invoke-static {v1}, Lcom/facebook/react/bridge/SoftAssertions;->assertNotNull(Ljava/lang/Object;)Ljava/lang/Object;
 
     .line 41
     invoke-virtual {p0}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
 
-    move-result-object v0
+    move-result-object v3
 
-    const-string v1, "attr"
+    const-string v4, "attr"
 
-    const-string v4, "android"
+    const-string v5, "android"
 
-    invoke-virtual {v0, p1, v1, v4}, Landroid/content/res/Resources;->getIdentifier(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I
+    invoke-virtual {v3, v1, v4, v5}, Landroid/content/res/Resources;->getIdentifier(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I
 
-    move-result v0
+    move-result v3
 
-    const-string v1, "Attribute "
+    .line 42
+    .local v3, "attrID":I
+    const-string v4, "Attribute "
 
-    if-eqz v0, :cond_2
+    if-eqz v3, :cond_1
 
     .line 46
     invoke-virtual {p0}, Landroid/content/Context;->getTheme()Landroid/content/res/Resources$Theme;
 
-    move-result-object v4
+    move-result-object v5
 
-    sget-object v5, Lcom/facebook/react/views/view/ReactDrawableHelper;->sResolveOutValue:Landroid/util/TypedValue;
+    sget-object v6, Lcom/facebook/react/views/view/ReactDrawableHelper;->sResolveOutValue:Landroid/util/TypedValue;
 
-    invoke-virtual {v4, v0, v5, v3}, Landroid/content/res/Resources$Theme;->resolveAttribute(ILandroid/util/TypedValue;Z)Z
+    invoke-virtual {v5, v3, v6, v2}, Landroid/content/res/Resources$Theme;->resolveAttribute(ILandroid/util/TypedValue;Z)Z
 
-    move-result v0
+    move-result v2
 
-    if-eqz v0, :cond_1
+    if-eqz v2, :cond_0
 
     .line 47
-    sget p1, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    if-lt p1, v2, :cond_0
+    nop
 
     .line 48
     invoke-virtual {p0}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
 
-    move-result-object p1
+    move-result-object v2
 
-    sget-object v0, Lcom/facebook/react/views/view/ReactDrawableHelper;->sResolveOutValue:Landroid/util/TypedValue;
-
-    iget v0, v0, Landroid/util/TypedValue;->resourceId:I
+    iget v4, v6, Landroid/util/TypedValue;->resourceId:I
 
     .line 49
     invoke-virtual {p0}, Landroid/content/Context;->getTheme()Landroid/content/res/Resources$Theme;
 
-    move-result-object p0
+    move-result-object v5
 
-    invoke-virtual {p1, v0, p0}, Landroid/content/res/Resources;->getDrawable(ILandroid/content/res/Resources$Theme;)Landroid/graphics/drawable/Drawable;
+    invoke-virtual {v2, v4, v5}, Landroid/content/res/Resources;->getDrawable(ILandroid/content/res/Resources$Theme;)Landroid/graphics/drawable/Drawable;
 
-    move-result-object p0
+    move-result-object v2
 
-    return-object p0
-
-    .line 51
-    :cond_0
-    invoke-virtual {p0}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
-
-    move-result-object p0
-
-    sget-object p1, Lcom/facebook/react/views/view/ReactDrawableHelper;->sResolveOutValue:Landroid/util/TypedValue;
-
-    iget p1, p1, Landroid/util/TypedValue;->resourceId:I
-
-    invoke-virtual {p0, p1}, Landroid/content/res/Resources;->getDrawable(I)Landroid/graphics/drawable/Drawable;
-
-    move-result-object p0
-
-    return-object p0
+    .line 48
+    return-object v2
 
     .line 54
-    :cond_1
-    new-instance p0, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
+    :cond_0
+    new-instance v2, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
 
-    new-instance v0, Ljava/lang/StringBuilder;
+    new-instance v5, Ljava/lang/StringBuilder;
 
-    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
 
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v5, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v4
 
-    const-string p1, " couldn\'t be resolved into a drawable"
+    invoke-virtual {v4, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v4
 
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    const-string v5, " couldn\'t be resolved into a drawable"
 
-    move-result-object p1
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-direct {p0, p1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+    move-result-object v4
 
-    throw p0
+    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v4
+
+    invoke-direct {v2, v4}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+
+    throw v2
 
     .line 43
-    :cond_2
-    new-instance p0, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
+    :cond_1
+    new-instance v2, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
 
-    new-instance v0, Ljava/lang/StringBuilder;
+    new-instance v5, Ljava/lang/StringBuilder;
 
-    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
 
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v5, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v4
 
-    const-string p1, " couldn\'t be found in the resource list"
+    invoke-virtual {v4, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v4
 
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    const-string v5, " couldn\'t be found in the resource list"
 
-    move-result-object p1
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-direct {p0, p1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+    move-result-object v4
 
-    throw p0
+    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    :cond_3
-    const-string v1, "RippleAndroid"
+    move-result-object v4
+
+    invoke-direct {v2, v4}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+
+    throw v2
 
     .line 57
+    .end local v1    # "attr":Ljava/lang/String;
+    .end local v3    # "attrID":I
+    :cond_2
+    const-string v1, "RippleAndroid"
+
     invoke-virtual {v1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
     move-result v1
 
-    if-eqz v1, :cond_9
+    if-eqz v1, :cond_7
 
     .line 58
-    sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    if-lt v0, v2, :cond_8
-
-    const-string v0, "color"
+    nop
 
     .line 63
-    invoke-interface {p1, v0}, Lcom/facebook/react/bridge/ReadableMap;->hasKey(Ljava/lang/String;)Z
+    const-string v1, "color"
 
-    move-result v1
+    invoke-interface {p1, v1}, Lcom/facebook/react/bridge/ReadableMap;->hasKey(Ljava/lang/String;)Z
 
-    if-eqz v1, :cond_4
+    move-result v3
+
+    if-eqz v3, :cond_3
 
     .line 64
-    invoke-interface {p1, v0}, Lcom/facebook/react/bridge/ReadableMap;->isNull(Ljava/lang/String;)Z
+    invoke-interface {p1, v1}, Lcom/facebook/react/bridge/ReadableMap;->isNull(Ljava/lang/String;)Z
+
+    move-result v3
+
+    if-nez v3, :cond_3
+
+    .line 65
+    invoke-interface {p1, v1}, Lcom/facebook/react/bridge/ReadableMap;->getInt(Ljava/lang/String;)I
 
     move-result v1
 
-    if-nez v1, :cond_4
-
-    .line 65
-    invoke-interface {p1, v0}, Lcom/facebook/react/bridge/ReadableMap;->getInt(Ljava/lang/String;)I
-
-    move-result p0
-
+    .local v1, "color":I
     goto :goto_0
 
     .line 67
-    :cond_4
+    .end local v1    # "color":I
+    :cond_3
     invoke-virtual {p0}, Landroid/content/Context;->getTheme()Landroid/content/res/Resources$Theme;
 
-    move-result-object v0
+    move-result-object v1
 
-    const v1, 0x101042c
+    sget-object v3, Lcom/facebook/react/views/view/ReactDrawableHelper;->sResolveOutValue:Landroid/util/TypedValue;
 
-    sget-object v2, Lcom/facebook/react/views/view/ReactDrawableHelper;->sResolveOutValue:Landroid/util/TypedValue;
+    const v4, 0x101042c
 
-    invoke-virtual {v0, v1, v2, v3}, Landroid/content/res/Resources$Theme;->resolveAttribute(ILandroid/util/TypedValue;Z)Z
+    invoke-virtual {v1, v4, v3, v2}, Landroid/content/res/Resources$Theme;->resolveAttribute(ILandroid/util/TypedValue;Z)Z
 
-    move-result v0
+    move-result v1
 
-    if-eqz v0, :cond_7
+    if-eqz v1, :cond_6
 
     .line 71
     invoke-virtual {p0}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
 
-    move-result-object p0
+    move-result-object v1
 
-    sget-object v0, Lcom/facebook/react/views/view/ReactDrawableHelper;->sResolveOutValue:Landroid/util/TypedValue;
+    iget v3, v3, Landroid/util/TypedValue;->resourceId:I
 
-    iget v0, v0, Landroid/util/TypedValue;->resourceId:I
+    invoke-virtual {v1, v3}, Landroid/content/res/Resources;->getColor(I)I
 
-    invoke-virtual {p0, v0}, Landroid/content/res/Resources;->getColor(I)I
+    move-result v1
 
-    move-result p0
-
+    .line 77
+    .restart local v1    # "color":I
     :goto_0
-    const-string v0, "borderless"
+    const/4 v3, 0x0
 
     .line 78
-    invoke-interface {p1, v0}, Lcom/facebook/react/bridge/ReadableMap;->hasKey(Ljava/lang/String;)Z
+    .local v3, "mask":Landroid/graphics/drawable/Drawable;
+    const-string v4, "borderless"
 
-    move-result v1
+    invoke-interface {p1, v4}, Lcom/facebook/react/bridge/ReadableMap;->hasKey(Ljava/lang/String;)Z
 
-    const/4 v2, 0x0
+    move-result v5
 
-    if-eqz v1, :cond_6
+    if-eqz v5, :cond_4
 
     .line 79
-    invoke-interface {p1, v0}, Lcom/facebook/react/bridge/ReadableMap;->isNull(Ljava/lang/String;)Z
+    invoke-interface {p1, v4}, Lcom/facebook/react/bridge/ReadableMap;->isNull(Ljava/lang/String;)Z
 
-    move-result v1
+    move-result v5
 
-    if-nez v1, :cond_6
+    if-nez v5, :cond_4
 
     .line 80
-    invoke-interface {p1, v0}, Lcom/facebook/react/bridge/ReadableMap;->getBoolean(Ljava/lang/String;)Z
+    invoke-interface {p1, v4}, Lcom/facebook/react/bridge/ReadableMap;->getBoolean(Ljava/lang/String;)Z
 
-    move-result p1
+    move-result v4
 
-    if-nez p1, :cond_5
-
-    goto :goto_1
-
-    :cond_5
-    move-object p1, v2
-
-    goto :goto_2
+    if-nez v4, :cond_5
 
     .line 81
-    :cond_6
-    :goto_1
-    new-instance p1, Landroid/graphics/drawable/ColorDrawable;
+    :cond_4
+    new-instance v4, Landroid/graphics/drawable/ColorDrawable;
 
-    const/4 v0, -0x1
+    const/4 v5, -0x1
 
-    invoke-direct {p1, v0}, Landroid/graphics/drawable/ColorDrawable;-><init>(I)V
+    invoke-direct {v4, v5}, Landroid/graphics/drawable/ColorDrawable;-><init>(I)V
+
+    move-object v3, v4
 
     .line 83
-    :goto_2
-    new-instance v0, Landroid/content/res/ColorStateList;
+    :cond_5
+    new-instance v4, Landroid/content/res/ColorStateList;
 
-    new-array v1, v3, [[I
+    new-array v5, v2, [[I
 
-    const/4 v4, 0x0
+    const/4 v6, 0x0
 
-    new-array v5, v4, [I
+    new-array v7, v6, [I
 
-    aput-object v5, v1, v4
+    aput-object v7, v5, v6
 
-    new-array v3, v3, [I
+    new-array v2, v2, [I
 
-    aput p0, v3, v4
+    aput v1, v2, v6
 
-    invoke-direct {v0, v1, v3}, Landroid/content/res/ColorStateList;-><init>([[I[I)V
+    invoke-direct {v4, v5, v2}, Landroid/content/res/ColorStateList;-><init>([[I[I)V
+
+    move-object v2, v4
 
     .line 86
-    new-instance p0, Landroid/graphics/drawable/RippleDrawable;
+    .local v2, "colorStateList":Landroid/content/res/ColorStateList;
+    new-instance v4, Landroid/graphics/drawable/RippleDrawable;
 
-    invoke-direct {p0, v0, v2, p1}, Landroid/graphics/drawable/RippleDrawable;-><init>(Landroid/content/res/ColorStateList;Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;)V
+    const/4 v5, 0x0
 
-    return-object p0
+    invoke-direct {v4, v2, v5, v3}, Landroid/graphics/drawable/RippleDrawable;-><init>(Landroid/content/res/ColorStateList;Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;)V
+
+    return-object v4
 
     .line 73
-    :cond_7
-    new-instance p0, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
+    .end local v1    # "color":I
+    .end local v2    # "colorStateList":Landroid/content/res/ColorStateList;
+    .end local v3    # "mask":Landroid/graphics/drawable/Drawable;
+    :cond_6
+    new-instance v1, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
 
-    const-string p1, "Attribute colorControlHighlight couldn\'t be resolved into a drawable"
+    const-string v2, "Attribute colorControlHighlight couldn\'t be resolved into a drawable"
 
-    invoke-direct {p0, p1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v1, v2}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
 
-    throw p0
-
-    .line 59
-    :cond_8
-    new-instance p0, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
-
-    const-string p1, "Ripple drawable is not available on android API <21"
-
-    invoke-direct {p0, p1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
-
-    throw p0
+    throw v1
 
     .line 88
-    :cond_9
-    new-instance p0, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
+    :cond_7
+    new-instance v1, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
 
-    new-instance p1, Ljava/lang/StringBuilder;
+    new-instance v2, Ljava/lang/StringBuilder;
 
-    invoke-direct {p1}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v1, "Invalid type for android drawable: "
+    const-string v3, "Invalid type for android drawable: "
 
-    invoke-virtual {p1, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {p1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v2
 
-    invoke-virtual {p1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object p1
+    move-result-object v2
 
-    invoke-direct {p0, p1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    throw p0
+    move-result-object v2
+
+    invoke-direct {v1, v2}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+
+    throw v1
 .end method

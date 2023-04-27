@@ -26,6 +26,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/devsupport/DevSupportManagerImpl$24;Lcom/facebook/react/bridge/NativeDeltaClient;)V
     .locals 0
+    .param p1, "this$1"    # Lcom/facebook/react/devsupport/DevSupportManagerImpl$24;
 
     .line 974
     iput-object p1, p0, Lcom/facebook/react/devsupport/DevSupportManagerImpl$24$1;->this$1:Lcom/facebook/react/devsupport/DevSupportManagerImpl$24;
@@ -68,5 +69,6 @@
 
     invoke-interface {v0, v1}, Lcom/facebook/react/devsupport/ReactInstanceManagerDevHelper;->onJSBundleLoadedFromServer(Lcom/facebook/react/bridge/NativeDeltaClient;)V
 
+    .line 979
     return-void
 .end method

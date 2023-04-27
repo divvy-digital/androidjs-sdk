@@ -3,11 +3,6 @@
 .source "ComponentRegistry.java"
 
 
-# annotations
-.annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-.end annotation
-
-
 # instance fields
 .field private final mHybridData:Lcom/facebook/jni/HybridData;
 
@@ -19,6 +14,7 @@
     .line 13
     invoke-static {}, Lcom/facebook/react/fabric/jsi/FabricSoLoader;->staticInit()V
 
+    .line 14
     return-void
 .end method
 
@@ -35,10 +31,9 @@
 
     iput-object v0, p0, Lcom/facebook/react/fabric/jsi/ComponentRegistry;->mHybridData:Lcom/facebook/jni/HybridData;
 
+    .line 23
     return-void
 .end method
 
 .method private static native initHybrid()Lcom/facebook/jni/HybridData;
-    .annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-    .end annotation
 .end method

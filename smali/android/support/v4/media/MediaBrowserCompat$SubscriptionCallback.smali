@@ -74,11 +74,7 @@
 
     .line 703
     :cond_0
-    sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    const/16 v1, 0x15
-
-    if-lt v0, v1, :cond_1
+    nop
 
     .line 704
     new-instance v0, Landroid/support/v4/media/MediaBrowserCompat$SubscriptionCallback$StubApi21;
@@ -92,14 +88,7 @@
 
     iput-object v0, p0, Landroid/support/v4/media/MediaBrowserCompat$SubscriptionCallback;->mSubscriptionCallbackObj:Ljava/lang/Object;
 
-    goto :goto_0
-
-    :cond_1
-    const/4 v0, 0x0
-
-    .line 707
-    iput-object v0, p0, Landroid/support/v4/media/MediaBrowserCompat$SubscriptionCallback;->mSubscriptionCallbackObj:Ljava/lang/Object;
-
+    .line 709
     :goto_0
     return-void
 .end method
@@ -108,14 +97,7 @@
 # virtual methods
 .method public onChildrenLoaded(Ljava/lang/String;Ljava/util/List;)V
     .locals 0
-    .param p1    # Ljava/lang/String;
-        .annotation build Landroid/support/annotation/NonNull;
-        .end annotation
-    .end param
-    .param p2    # Ljava/util/List;
-        .annotation build Landroid/support/annotation/NonNull;
-        .end annotation
-    .end param
+    .param p1, "parentId"    # Ljava/lang/String;
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -126,23 +108,15 @@
         }
     .end annotation
 
+    .line 718
+    .local p2, "children":Ljava/util/List;, "Ljava/util/List<Landroid/support/v4/media/MediaBrowserCompat$MediaItem;>;"
     return-void
 .end method
 
 .method public onChildrenLoaded(Ljava/lang/String;Ljava/util/List;Landroid/os/Bundle;)V
     .locals 0
-    .param p1    # Ljava/lang/String;
-        .annotation build Landroid/support/annotation/NonNull;
-        .end annotation
-    .end param
-    .param p2    # Ljava/util/List;
-        .annotation build Landroid/support/annotation/NonNull;
-        .end annotation
-    .end param
-    .param p3    # Landroid/os/Bundle;
-        .annotation build Landroid/support/annotation/NonNull;
-        .end annotation
-    .end param
+    .param p1, "parentId"    # Ljava/lang/String;
+    .param p3, "options"    # Landroid/os/Bundle;
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -155,35 +129,31 @@
         }
     .end annotation
 
+    .line 731
+    .local p2, "children":Ljava/util/List;, "Ljava/util/List<Landroid/support/v4/media/MediaBrowserCompat$MediaItem;>;"
     return-void
 .end method
 
 .method public onError(Ljava/lang/String;)V
     .locals 0
-    .param p1    # Ljava/lang/String;
-        .annotation build Landroid/support/annotation/NonNull;
-        .end annotation
-    .end param
+    .param p1, "parentId"    # Ljava/lang/String;
 
+    .line 743
     return-void
 .end method
 
 .method public onError(Ljava/lang/String;Landroid/os/Bundle;)V
     .locals 0
-    .param p1    # Ljava/lang/String;
-        .annotation build Landroid/support/annotation/NonNull;
-        .end annotation
-    .end param
-    .param p2    # Landroid/os/Bundle;
-        .annotation build Landroid/support/annotation/NonNull;
-        .end annotation
-    .end param
+    .param p1, "parentId"    # Ljava/lang/String;
+    .param p2, "options"    # Landroid/os/Bundle;
 
+    .line 758
     return-void
 .end method
 
 .method setSubscription(Landroid/support/v4/media/MediaBrowserCompat$Subscription;)V
     .locals 1
+    .param p1, "subscription"    # Landroid/support/v4/media/MediaBrowserCompat$Subscription;
 
     .line 761
     new-instance v0, Ljava/lang/ref/WeakReference;
@@ -192,5 +162,6 @@
 
     iput-object v0, p0, Landroid/support/v4/media/MediaBrowserCompat$SubscriptionCallback;->mSubscriptionRef:Ljava/lang/ref/WeakReference;
 
+    .line 762
     return-void
 .end method

@@ -61,6 +61,8 @@
     .end annotation
 
     .line 25
+    .local p1, "inputProducer1":Lcom/facebook/imagepipeline/producers/Producer;, "Lcom/facebook/imagepipeline/producers/Producer<Lcom/facebook/imagepipeline/image/EncodedImage;>;"
+    .local p2, "inputProducer2":Lcom/facebook/imagepipeline/producers/Producer;, "Lcom/facebook/imagepipeline/producers/Producer<Lcom/facebook/imagepipeline/image/EncodedImage;>;"
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     .line 26
@@ -69,22 +71,25 @@
     .line 27
     iput-object p2, p0, Lcom/facebook/imagepipeline/producers/BranchOnSeparateImagesProducer;->mInputProducer2:Lcom/facebook/imagepipeline/producers/Producer;
 
+    .line 28
     return-void
 .end method
 
 .method static synthetic access$100(Lcom/facebook/imagepipeline/producers/BranchOnSeparateImagesProducer;)Lcom/facebook/imagepipeline/producers/Producer;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/imagepipeline/producers/BranchOnSeparateImagesProducer;
 
     .line 19
-    iget-object p0, p0, Lcom/facebook/imagepipeline/producers/BranchOnSeparateImagesProducer;->mInputProducer2:Lcom/facebook/imagepipeline/producers/Producer;
+    iget-object v0, p0, Lcom/facebook/imagepipeline/producers/BranchOnSeparateImagesProducer;->mInputProducer2:Lcom/facebook/imagepipeline/producers/Producer;
 
-    return-object p0
+    return-object v0
 .end method
 
 
 # virtual methods
 .method public produceResults(Lcom/facebook/imagepipeline/producers/Consumer;Lcom/facebook/imagepipeline/producers/ProducerContext;)V
     .locals 2
+    .param p2, "context"    # Lcom/facebook/imagepipeline/producers/ProducerContext;
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -97,6 +102,7 @@
     .end annotation
 
     .line 34
+    .local p1, "consumer":Lcom/facebook/imagepipeline/producers/Consumer;, "Lcom/facebook/imagepipeline/producers/Consumer<Lcom/facebook/imagepipeline/image/EncodedImage;>;"
     new-instance v0, Lcom/facebook/imagepipeline/producers/BranchOnSeparateImagesProducer$OnFirstImageConsumer;
 
     const/4 v1, 0x0
@@ -104,9 +110,11 @@
     invoke-direct {v0, p0, p1, p2, v1}, Lcom/facebook/imagepipeline/producers/BranchOnSeparateImagesProducer$OnFirstImageConsumer;-><init>(Lcom/facebook/imagepipeline/producers/BranchOnSeparateImagesProducer;Lcom/facebook/imagepipeline/producers/Consumer;Lcom/facebook/imagepipeline/producers/ProducerContext;Lcom/facebook/imagepipeline/producers/BranchOnSeparateImagesProducer$1;)V
 
     .line 35
-    iget-object p1, p0, Lcom/facebook/imagepipeline/producers/BranchOnSeparateImagesProducer;->mInputProducer1:Lcom/facebook/imagepipeline/producers/Producer;
+    .local v0, "onFirstImageConsumer":Lcom/facebook/imagepipeline/producers/BranchOnSeparateImagesProducer$OnFirstImageConsumer;
+    iget-object v1, p0, Lcom/facebook/imagepipeline/producers/BranchOnSeparateImagesProducer;->mInputProducer1:Lcom/facebook/imagepipeline/producers/Producer;
 
-    invoke-interface {p1, v0, p2}, Lcom/facebook/imagepipeline/producers/Producer;->produceResults(Lcom/facebook/imagepipeline/producers/Consumer;Lcom/facebook/imagepipeline/producers/ProducerContext;)V
+    invoke-interface {v1, v0, p2}, Lcom/facebook/imagepipeline/producers/Producer;->produceResults(Lcom/facebook/imagepipeline/producers/Consumer;Lcom/facebook/imagepipeline/producers/ProducerContext;)V
 
+    .line 36
     return-void
 .end method

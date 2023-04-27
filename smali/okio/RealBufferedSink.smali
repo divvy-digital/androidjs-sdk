@@ -16,7 +16,8 @@
 
 # direct methods
 .method constructor <init>(Lokio/Sink;)V
-    .locals 1
+    .locals 2
+    .param p1, "sink"    # Lokio/Sink;
 
     .line 29
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -28,22 +29,24 @@
 
     iput-object v0, p0, Lokio/RealBufferedSink;->buffer:Lokio/Buffer;
 
+    .line 30
     if-eqz p1, :cond_0
 
     .line 31
     iput-object p1, p0, Lokio/RealBufferedSink;->sink:Lokio/Sink;
 
+    .line 32
     return-void
 
     .line 30
     :cond_0
-    new-instance p1, Ljava/lang/NullPointerException;
+    new-instance v0, Ljava/lang/NullPointerException;
 
-    const-string v0, "sink == null"
+    const-string v1, "sink == null"
 
-    invoke-direct {p1, v0}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 
@@ -72,10 +75,12 @@
 
     return-void
 
+    .line 238
     :cond_0
     const/4 v0, 0x0
 
     .line 240
+    .local v0, "thrown":Ljava/lang/Throwable;
     :try_start_0
     iget-object v1, p0, Lokio/RealBufferedSink;->buffer:Lokio/Buffer;
 
@@ -92,50 +97,61 @@
 
     iget-object v2, p0, Lokio/RealBufferedSink;->buffer:Lokio/Buffer;
 
-    iget-object v3, p0, Lokio/RealBufferedSink;->buffer:Lokio/Buffer;
-
-    iget-wide v3, v3, Lokio/Buffer;->size:J
+    iget-wide v3, v2, Lokio/Buffer;->size:J
 
     invoke-interface {v1, v2, v3, v4}, Lokio/Sink;->write(Lokio/Buffer;J)V
     :try_end_0
-    .catch Ljava/lang/Throwable; {:try_start_0 .. :try_end_0} :catch_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
+    .line 245
+    :cond_1
     goto :goto_0
 
-    :catch_0
-    move-exception v0
+    .line 243
+    :catchall_0
+    move-exception v1
+
+    .line 244
+    .local v1, "e":Ljava/lang/Throwable;
+    move-object v0, v1
 
     .line 248
-    :cond_1
+    .end local v1    # "e":Ljava/lang/Throwable;
     :goto_0
     :try_start_1
     iget-object v1, p0, Lokio/RealBufferedSink;->sink:Lokio/Sink;
 
     invoke-interface {v1}, Lokio/Sink;->close()V
     :try_end_1
-    .catch Ljava/lang/Throwable; {:try_start_1 .. :try_end_1} :catch_1
+    .catchall {:try_start_1 .. :try_end_1} :catchall_1
 
+    .line 251
     goto :goto_1
 
-    :catch_1
+    .line 249
+    :catchall_1
     move-exception v1
 
+    .line 250
+    .restart local v1    # "e":Ljava/lang/Throwable;
     if-nez v0, :cond_2
 
     move-object v0, v1
 
+    .line 252
+    .end local v1    # "e":Ljava/lang/Throwable;
     :cond_2
     :goto_1
     const/4 v1, 0x1
 
-    .line 252
     iput-boolean v1, p0, Lokio/RealBufferedSink;->closed:Z
 
+    .line 254
     if-eqz v0, :cond_3
 
-    .line 254
     invoke-static {v0}, Lokio/Util;->sneakyRethrow(Ljava/lang/Throwable;)V
 
+    .line 255
     :cond_3
     return-void
 .end method
@@ -160,23 +176,26 @@
 
     move-result-wide v0
 
+    .line 186
+    .local v0, "byteCount":J
     const-wide/16 v2, 0x0
 
     cmp-long v4, v0, v2
 
     if-lez v4, :cond_0
 
-    .line 186
     iget-object v2, p0, Lokio/RealBufferedSink;->sink:Lokio/Sink;
 
     iget-object v3, p0, Lokio/RealBufferedSink;->buffer:Lokio/Buffer;
 
     invoke-interface {v2, v3, v0, v1}, Lokio/Sink;->write(Lokio/Buffer;J)V
 
+    .line 187
     :cond_0
     return-object p0
 
     .line 184
+    .end local v0    # "byteCount":J
     :cond_1
     new-instance v0, Ljava/lang/IllegalStateException;
 
@@ -207,23 +226,26 @@
 
     move-result-wide v0
 
+    .line 179
+    .local v0, "byteCount":J
     const-wide/16 v2, 0x0
 
     cmp-long v4, v0, v2
 
     if-lez v4, :cond_0
 
-    .line 179
     iget-object v2, p0, Lokio/RealBufferedSink;->sink:Lokio/Sink;
 
     iget-object v3, p0, Lokio/RealBufferedSink;->buffer:Lokio/Buffer;
 
     invoke-interface {v2, v3, v0, v1}, Lokio/Sink;->write(Lokio/Buffer;J)V
 
+    .line 180
     :cond_0
     return-object p0
 
     .line 177
+    .end local v0    # "byteCount":J
     :cond_1
     new-instance v0, Ljava/lang/IllegalStateException;
 
@@ -273,6 +295,7 @@
 
     invoke-interface {v0}, Lokio/Sink;->flush()V
 
+    .line 227
     return-void
 
     .line 222
@@ -333,13 +356,19 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     iget-object v1, p0, Lokio/RealBufferedSink;->sink:Lokio/Sink;
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     const-string v1, ")"
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -349,7 +378,8 @@
 .end method
 
 .method public write(Ljava/nio/ByteBuffer;)I
-    .locals 1
+    .locals 2
+    .param p1, "source"    # Ljava/nio/ByteBuffer;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -366,26 +396,30 @@
 
     invoke-virtual {v0, p1}, Lokio/Buffer;->write(Ljava/nio/ByteBuffer;)I
 
-    move-result p1
+    move-result v0
 
     .line 98
+    .local v0, "result":I
     invoke-virtual {p0}, Lokio/RealBufferedSink;->emitCompleteSegments()Lokio/BufferedSink;
 
-    return p1
+    .line 99
+    return v0
 
     .line 96
+    .end local v0    # "result":I
     :cond_0
-    new-instance p1, Ljava/lang/IllegalStateException;
+    new-instance v0, Ljava/lang/IllegalStateException;
 
-    const-string v0, "closed"
+    const-string v1, "closed"
 
-    invoke-direct {p1, v0}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 .method public write(Lokio/ByteString;)Lokio/BufferedSink;
-    .locals 1
+    .locals 2
+    .param p1, "byteString"    # Lokio/ByteString;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -405,28 +439,33 @@
     .line 48
     invoke-virtual {p0}, Lokio/RealBufferedSink;->emitCompleteSegments()Lokio/BufferedSink;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 
     .line 46
     :cond_0
-    new-instance p1, Ljava/lang/IllegalStateException;
+    new-instance v0, Ljava/lang/IllegalStateException;
 
-    const-string v0, "closed"
+    const-string v1, "closed"
 
-    invoke-direct {p1, v0}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 .method public write(Lokio/Source;J)Lokio/BufferedSink;
     .locals 5
+    .param p1, "source"    # Lokio/Source;
+    .param p2, "byteCount"    # J
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
         }
     .end annotation
+
+    .line 113
+    nop
 
     :goto_0
     const-wide/16 v0, 0x0
@@ -442,33 +481,42 @@
 
     move-result-wide v0
 
+    .line 115
+    .local v0, "read":J
     const-wide/16 v2, -0x1
 
     cmp-long v4, v0, v2
 
     if-eqz v4, :cond_0
 
+    .line 116
     sub-long/2addr p2, v0
 
     .line 117
     invoke-virtual {p0}, Lokio/RealBufferedSink;->emitCompleteSegments()Lokio/BufferedSink;
 
+    .line 118
+    .end local v0    # "read":J
     goto :goto_0
 
     .line 115
+    .restart local v0    # "read":J
     :cond_0
-    new-instance p1, Ljava/io/EOFException;
+    new-instance v2, Ljava/io/EOFException;
 
-    invoke-direct {p1}, Ljava/io/EOFException;-><init>()V
+    invoke-direct {v2}, Ljava/io/EOFException;-><init>()V
 
-    throw p1
+    throw v2
 
+    .line 119
+    .end local v0    # "read":J
     :cond_1
     return-object p0
 .end method
 
 .method public write([B)Lokio/BufferedSink;
-    .locals 1
+    .locals 2
+    .param p1, "source"    # [B
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -488,23 +536,26 @@
     .line 86
     invoke-virtual {p0}, Lokio/RealBufferedSink;->emitCompleteSegments()Lokio/BufferedSink;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 
     .line 84
     :cond_0
-    new-instance p1, Ljava/lang/IllegalStateException;
+    new-instance v0, Ljava/lang/IllegalStateException;
 
-    const-string v0, "closed"
+    const-string v1, "closed"
 
-    invoke-direct {p1, v0}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 .method public write([BII)Lokio/BufferedSink;
-    .locals 1
+    .locals 2
+    .param p1, "source"    # [B
+    .param p2, "offset"    # I
+    .param p3, "byteCount"    # I
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -524,23 +575,25 @@
     .line 92
     invoke-virtual {p0}, Lokio/RealBufferedSink;->emitCompleteSegments()Lokio/BufferedSink;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 
     .line 90
     :cond_0
-    new-instance p1, Ljava/lang/IllegalStateException;
+    new-instance v0, Ljava/lang/IllegalStateException;
 
-    const-string p2, "closed"
+    const-string v1, "closed"
 
-    invoke-direct {p1, p2}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 .method public write(Lokio/Buffer;J)V
-    .locals 1
+    .locals 2
+    .param p1, "source"    # Lokio/Buffer;
+    .param p2, "byteCount"    # J
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -560,32 +613,37 @@
     .line 42
     invoke-virtual {p0}, Lokio/RealBufferedSink;->emitCompleteSegments()Lokio/BufferedSink;
 
+    .line 43
     return-void
 
     .line 40
     :cond_0
-    new-instance p1, Ljava/lang/IllegalStateException;
+    new-instance v0, Ljava/lang/IllegalStateException;
 
-    const-string p2, "closed"
+    const-string v1, "closed"
 
-    invoke-direct {p1, p2}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 .method public writeAll(Lokio/Source;)J
-    .locals 7
+    .locals 9
+    .param p1, "source"    # Lokio/Source;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
         }
     .end annotation
 
+    .line 103
     if-eqz p1, :cond_1
 
+    .line 104
     const-wide/16 v0, 0x0
 
     .line 105
+    .local v0, "totalBytesRead":J
     :goto_0
     iget-object v2, p0, Lokio/RealBufferedSink;->buffer:Lokio/Buffer;
 
@@ -595,41 +653,43 @@
 
     move-result-wide v2
 
-    const-wide/16 v4, -0x1
+    move-wide v4, v2
 
-    cmp-long v6, v2, v4
+    .local v4, "readCount":J
+    const-wide/16 v6, -0x1
 
-    if-eqz v6, :cond_0
+    cmp-long v8, v2, v6
 
-    add-long/2addr v0, v2
+    if-eqz v8, :cond_0
+
+    .line 106
+    add-long/2addr v0, v4
 
     .line 107
     invoke-virtual {p0}, Lokio/RealBufferedSink;->emitCompleteSegments()Lokio/BufferedSink;
 
     goto :goto_0
 
+    .line 109
+    .end local v4    # "readCount":J
     :cond_0
     return-wide v0
 
     .line 103
+    .end local v0    # "totalBytesRead":J
     :cond_1
-    new-instance p1, Ljava/lang/IllegalArgumentException;
+    new-instance v0, Ljava/lang/IllegalArgumentException;
 
-    const-string v0, "source == null"
+    const-string v1, "source == null"
 
-    invoke-direct {p1, v0}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
 
-    goto :goto_2
-
-    :goto_1
-    throw p1
-
-    :goto_2
-    goto :goto_1
+    throw v0
 .end method
 
 .method public writeByte(I)Lokio/BufferedSink;
-    .locals 1
+    .locals 2
+    .param p1, "b"    # I
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -649,23 +709,24 @@
     .line 125
     invoke-virtual {p0}, Lokio/RealBufferedSink;->emitCompleteSegments()Lokio/BufferedSink;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 
     .line 123
     :cond_0
-    new-instance p1, Ljava/lang/IllegalStateException;
+    new-instance v0, Ljava/lang/IllegalStateException;
 
-    const-string v0, "closed"
+    const-string v1, "closed"
 
-    invoke-direct {p1, v0}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 .method public writeDecimalLong(J)Lokio/BufferedSink;
-    .locals 1
+    .locals 2
+    .param p1, "v"    # J
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -685,23 +746,24 @@
     .line 167
     invoke-virtual {p0}, Lokio/RealBufferedSink;->emitCompleteSegments()Lokio/BufferedSink;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 
     .line 165
     :cond_0
-    new-instance p1, Ljava/lang/IllegalStateException;
+    new-instance v0, Ljava/lang/IllegalStateException;
 
-    const-string p2, "closed"
+    const-string v1, "closed"
 
-    invoke-direct {p1, p2}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 .method public writeHexadecimalUnsignedLong(J)Lokio/BufferedSink;
-    .locals 1
+    .locals 2
+    .param p1, "v"    # J
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -721,23 +783,24 @@
     .line 173
     invoke-virtual {p0}, Lokio/RealBufferedSink;->emitCompleteSegments()Lokio/BufferedSink;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 
     .line 171
     :cond_0
-    new-instance p1, Ljava/lang/IllegalStateException;
+    new-instance v0, Ljava/lang/IllegalStateException;
 
-    const-string p2, "closed"
+    const-string v1, "closed"
 
-    invoke-direct {p1, p2}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 .method public writeInt(I)Lokio/BufferedSink;
-    .locals 1
+    .locals 2
+    .param p1, "i"    # I
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -757,23 +820,24 @@
     .line 143
     invoke-virtual {p0}, Lokio/RealBufferedSink;->emitCompleteSegments()Lokio/BufferedSink;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 
     .line 141
     :cond_0
-    new-instance p1, Ljava/lang/IllegalStateException;
+    new-instance v0, Ljava/lang/IllegalStateException;
 
-    const-string v0, "closed"
+    const-string v1, "closed"
 
-    invoke-direct {p1, v0}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 .method public writeIntLe(I)Lokio/BufferedSink;
-    .locals 1
+    .locals 2
+    .param p1, "i"    # I
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -793,23 +857,24 @@
     .line 149
     invoke-virtual {p0}, Lokio/RealBufferedSink;->emitCompleteSegments()Lokio/BufferedSink;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 
     .line 147
     :cond_0
-    new-instance p1, Ljava/lang/IllegalStateException;
+    new-instance v0, Ljava/lang/IllegalStateException;
 
-    const-string v0, "closed"
+    const-string v1, "closed"
 
-    invoke-direct {p1, v0}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 .method public writeLong(J)Lokio/BufferedSink;
-    .locals 1
+    .locals 2
+    .param p1, "v"    # J
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -829,23 +894,24 @@
     .line 155
     invoke-virtual {p0}, Lokio/RealBufferedSink;->emitCompleteSegments()Lokio/BufferedSink;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 
     .line 153
     :cond_0
-    new-instance p1, Ljava/lang/IllegalStateException;
+    new-instance v0, Ljava/lang/IllegalStateException;
 
-    const-string p2, "closed"
+    const-string v1, "closed"
 
-    invoke-direct {p1, p2}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 .method public writeLongLe(J)Lokio/BufferedSink;
-    .locals 1
+    .locals 2
+    .param p1, "v"    # J
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -865,23 +931,24 @@
     .line 161
     invoke-virtual {p0}, Lokio/RealBufferedSink;->emitCompleteSegments()Lokio/BufferedSink;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 
     .line 159
     :cond_0
-    new-instance p1, Ljava/lang/IllegalStateException;
+    new-instance v0, Ljava/lang/IllegalStateException;
 
-    const-string p2, "closed"
+    const-string v1, "closed"
 
-    invoke-direct {p1, p2}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 .method public writeShort(I)Lokio/BufferedSink;
-    .locals 1
+    .locals 2
+    .param p1, "s"    # I
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -901,23 +968,24 @@
     .line 131
     invoke-virtual {p0}, Lokio/RealBufferedSink;->emitCompleteSegments()Lokio/BufferedSink;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 
     .line 129
     :cond_0
-    new-instance p1, Ljava/lang/IllegalStateException;
+    new-instance v0, Ljava/lang/IllegalStateException;
 
-    const-string v0, "closed"
+    const-string v1, "closed"
 
-    invoke-direct {p1, v0}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 .method public writeShortLe(I)Lokio/BufferedSink;
-    .locals 1
+    .locals 2
+    .param p1, "s"    # I
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -937,23 +1005,27 @@
     .line 137
     invoke-virtual {p0}, Lokio/RealBufferedSink;->emitCompleteSegments()Lokio/BufferedSink;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 
     .line 135
     :cond_0
-    new-instance p1, Ljava/lang/IllegalStateException;
+    new-instance v0, Ljava/lang/IllegalStateException;
 
-    const-string v0, "closed"
+    const-string v1, "closed"
 
-    invoke-direct {p1, v0}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 .method public writeString(Ljava/lang/String;IILjava/nio/charset/Charset;)Lokio/BufferedSink;
-    .locals 1
+    .locals 2
+    .param p1, "string"    # Ljava/lang/String;
+    .param p2, "beginIndex"    # I
+    .param p3, "endIndex"    # I
+    .param p4, "charset"    # Ljava/nio/charset/Charset;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -973,23 +1045,25 @@
     .line 80
     invoke-virtual {p0}, Lokio/RealBufferedSink;->emitCompleteSegments()Lokio/BufferedSink;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 
     .line 78
     :cond_0
-    new-instance p1, Ljava/lang/IllegalStateException;
+    new-instance v0, Ljava/lang/IllegalStateException;
 
-    const-string p2, "closed"
+    const-string v1, "closed"
 
-    invoke-direct {p1, p2}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 .method public writeString(Ljava/lang/String;Ljava/nio/charset/Charset;)Lokio/BufferedSink;
-    .locals 1
+    .locals 2
+    .param p1, "string"    # Ljava/lang/String;
+    .param p2, "charset"    # Ljava/nio/charset/Charset;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -1009,23 +1083,24 @@
     .line 73
     invoke-virtual {p0}, Lokio/RealBufferedSink;->emitCompleteSegments()Lokio/BufferedSink;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 
     .line 71
     :cond_0
-    new-instance p1, Ljava/lang/IllegalStateException;
+    new-instance v0, Ljava/lang/IllegalStateException;
 
-    const-string p2, "closed"
+    const-string v1, "closed"
 
-    invoke-direct {p1, p2}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 .method public writeUtf8(Ljava/lang/String;)Lokio/BufferedSink;
-    .locals 1
+    .locals 2
+    .param p1, "string"    # Ljava/lang/String;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -1045,23 +1120,26 @@
     .line 54
     invoke-virtual {p0}, Lokio/RealBufferedSink;->emitCompleteSegments()Lokio/BufferedSink;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 
     .line 52
     :cond_0
-    new-instance p1, Ljava/lang/IllegalStateException;
+    new-instance v0, Ljava/lang/IllegalStateException;
 
-    const-string v0, "closed"
+    const-string v1, "closed"
 
-    invoke-direct {p1, v0}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 .method public writeUtf8(Ljava/lang/String;II)Lokio/BufferedSink;
-    .locals 1
+    .locals 2
+    .param p1, "string"    # Ljava/lang/String;
+    .param p2, "beginIndex"    # I
+    .param p3, "endIndex"    # I
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -1081,23 +1159,24 @@
     .line 61
     invoke-virtual {p0}, Lokio/RealBufferedSink;->emitCompleteSegments()Lokio/BufferedSink;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 
     .line 59
     :cond_0
-    new-instance p1, Ljava/lang/IllegalStateException;
+    new-instance v0, Ljava/lang/IllegalStateException;
 
-    const-string p2, "closed"
+    const-string v1, "closed"
 
-    invoke-direct {p1, p2}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 .method public writeUtf8CodePoint(I)Lokio/BufferedSink;
-    .locals 1
+    .locals 2
+    .param p1, "codePoint"    # I
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -1117,17 +1196,17 @@
     .line 67
     invoke-virtual {p0}, Lokio/RealBufferedSink;->emitCompleteSegments()Lokio/BufferedSink;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 
     .line 65
     :cond_0
-    new-instance p1, Ljava/lang/IllegalStateException;
+    new-instance v0, Ljava/lang/IllegalStateException;
 
-    const-string v0, "closed"
+    const-string v1, "closed"
 
-    invoke-direct {p1, v0}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method

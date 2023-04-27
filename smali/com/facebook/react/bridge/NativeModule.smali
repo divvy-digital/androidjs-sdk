@@ -4,9 +4,6 @@
 
 
 # annotations
-.annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-.end annotation
-
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
         Lcom/facebook/react/bridge/NativeModule$NativeMethod;

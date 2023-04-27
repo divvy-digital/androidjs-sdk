@@ -39,14 +39,15 @@
 
 # virtual methods
 .method public getSizeInBytes(Lcom/facebook/imagepipeline/image/CloseableImage;)I
-    .locals 0
+    .locals 1
+    .param p1, "value"    # Lcom/facebook/imagepipeline/image/CloseableImage;
 
     .line 35
     invoke-virtual {p1}, Lcom/facebook/imagepipeline/image/CloseableImage;->getSizeInBytes()I
 
-    move-result p1
+    move-result v0
 
-    return p1
+    return v0
 .end method
 
 .method public bridge synthetic getSizeInBytes(Ljava/lang/Object;)I

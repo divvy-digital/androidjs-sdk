@@ -24,6 +24,7 @@
     .locals 0
 
     .line 16
+    .local p0, "this":Lcom/facebook/imagepipeline/producers/NullProducer;, "Lcom/facebook/imagepipeline/producers/NullProducer<TT;>;"
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     return-void
@@ -32,7 +33,8 @@
 
 # virtual methods
 .method public produceResults(Lcom/facebook/imagepipeline/producers/Consumer;Lcom/facebook/imagepipeline/producers/ProducerContext;)V
-    .locals 1
+    .locals 2
+    .param p2, "context"    # Lcom/facebook/imagepipeline/producers/ProducerContext;
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -43,12 +45,15 @@
         }
     .end annotation
 
-    const/4 p2, 0x0
-
-    const/4 v0, 0x1
-
     .line 25
-    invoke-interface {p1, p2, v0}, Lcom/facebook/imagepipeline/producers/Consumer;->onNewResult(Ljava/lang/Object;I)V
+    .local p0, "this":Lcom/facebook/imagepipeline/producers/NullProducer;, "Lcom/facebook/imagepipeline/producers/NullProducer<TT;>;"
+    .local p1, "consumer":Lcom/facebook/imagepipeline/producers/Consumer;, "Lcom/facebook/imagepipeline/producers/Consumer<TT;>;"
+    const/4 v0, 0x0
 
+    const/4 v1, 0x1
+
+    invoke-interface {p1, v0, v1}, Lcom/facebook/imagepipeline/producers/Consumer;->onNewResult(Ljava/lang/Object;I)V
+
+    .line 26
     return-void
 .end method

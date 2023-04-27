@@ -20,9 +20,6 @@
 
 # static fields
 .field public static final REACT_CLASS:Ljava/lang/String; = "RCTVirtualText"
-    .annotation build Lcom/facebook/react/common/annotations/VisibleForTesting;
-    .end annotation
-.end field
 
 
 # direct methods
@@ -60,21 +57,23 @@
 .end method
 
 .method public createViewInstance(Lcom/facebook/react/uimanager/ThemedReactContext;)Landroid/view/View;
-    .locals 1
+    .locals 2
+    .param p1, "context"    # Lcom/facebook/react/uimanager/ThemedReactContext;
 
     .line 33
-    new-instance p1, Ljava/lang/IllegalStateException;
+    new-instance v0, Ljava/lang/IllegalStateException;
 
-    const-string v0, "Attempt to create a native view for RCTVirtualText"
+    const-string v1, "Attempt to create a native view for RCTVirtualText"
 
-    invoke-direct {p1, v0}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 .method public getName()Ljava/lang/String;
     .locals 1
 
+    .line 28
     const-string v0, "RCTVirtualText"
 
     return-object v0
@@ -99,6 +98,9 @@
 
 .method public updateExtraData(Landroid/view/View;Ljava/lang/Object;)V
     .locals 0
+    .param p1, "view"    # Landroid/view/View;
+    .param p2, "extraData"    # Ljava/lang/Object;
 
+    .line 37
     return-void
 .end method

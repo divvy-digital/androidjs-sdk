@@ -18,6 +18,8 @@
 # direct methods
 .method public constructor <init>(Ljava/io/File;I)V
     .locals 0
+    .param p1, "soDirectory"    # Ljava/io/File;
+    .param p2, "flags"    # I
 
     .line 44
     invoke-direct {p0}, Lcom/facebook/soloader/SoSource;-><init>()V
@@ -28,11 +30,13 @@
     .line 46
     iput p2, p0, Lcom/facebook/soloader/DirectorySoSource;->flags:I
 
+    .line 47
     return-void
 .end method
 
 .method private static getDependencies(Ljava/io/File;)[Ljava/lang/String;
     .locals 2
+    .param p0, "soFile"    # Ljava/io/File;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -53,15 +57,21 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     invoke-virtual {p0}, Ljava/io/File;->getName()Ljava/lang/String;
 
     move-result-object v1
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     const-string v1, "]"
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -74,39 +84,43 @@
     :try_start_0
     invoke-static {p0}, Lcom/facebook/soloader/MinElf;->extract_DT_NEEDED(Ljava/io/File;)[Ljava/lang/String;
 
-    move-result-object p0
+    move-result-object v0
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
     .line 117
-    sget-boolean v0, Lcom/facebook/soloader/SoLoader;->SYSTRACE_LIBRARY_LOADING:Z
+    sget-boolean v1, Lcom/facebook/soloader/SoLoader;->SYSTRACE_LIBRARY_LOADING:Z
 
-    if-eqz v0, :cond_1
+    if-eqz v1, :cond_1
 
     .line 118
     invoke-static {}, Lcom/facebook/soloader/Api18TraceUtils;->endSection()V
 
+    .line 115
     :cond_1
-    return-object p0
-
-    :catchall_0
-    move-exception p0
+    return-object v0
 
     .line 117
-    sget-boolean v0, Lcom/facebook/soloader/SoLoader;->SYSTRACE_LIBRARY_LOADING:Z
+    :catchall_0
+    move-exception v0
 
-    if-eqz v0, :cond_2
+    sget-boolean v1, Lcom/facebook/soloader/SoLoader;->SYSTRACE_LIBRARY_LOADING:Z
+
+    if-eqz v1, :cond_2
 
     .line 118
     invoke-static {}, Lcom/facebook/soloader/Api18TraceUtils;->endSection()V
 
     .line 120
     :cond_2
-    throw p0
+    throw v0
 .end method
 
 .method private loadDependencies(Ljava/io/File;ILandroid/os/StrictMode$ThreadPolicy;)V
-    .locals 3
+    .locals 4
+    .param p1, "soFile"    # Ljava/io/File;
+    .param p2, "loadFlags"    # I
+    .param p3, "threadPolicy"    # Landroid/os/StrictMode$ThreadPolicy;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -116,64 +130,76 @@
     .line 95
     invoke-static {p1}, Lcom/facebook/soloader/DirectorySoSource;->getDependencies(Ljava/io/File;)[Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v0
 
     .line 96
-    new-instance v0, Ljava/lang/StringBuilder;
+    .local v0, "dependencies":[Ljava/lang/String;
+    new-instance v1, Ljava/lang/StringBuilder;
 
-    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v1, "Loading lib dependencies: "
+    const-string v2, "Loading lib dependencies: "
 
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-static {p1}, Ljava/util/Arrays;->toString([Ljava/lang/Object;)Ljava/lang/String;
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     move-result-object v1
 
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-static {v0}, Ljava/util/Arrays;->toString([Ljava/lang/Object;)Ljava/lang/String;
 
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    move-result-object v2
 
-    move-result-object v0
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    const-string v1, "SoLoader"
+    move-result-object v1
 
-    invoke-static {v1, v0}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    const/4 v0, 0x0
+    move-result-object v1
+
+    const-string v2, "SoLoader"
+
+    invoke-static {v2, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
     .line 97
-    :goto_0
-    array-length v1, p1
+    const/4 v1, 0x0
 
-    if-ge v0, v1, :cond_1
+    .local v1, "i":I
+    :goto_0
+    array-length v2, v0
+
+    if-ge v1, v2, :cond_1
 
     .line 98
-    aget-object v1, p1, v0
-
-    const-string v2, "/"
+    aget-object v2, v0, v1
 
     .line 99
-    invoke-virtual {v1, v2}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+    .local v2, "dependency":Ljava/lang/String;
+    const-string v3, "/"
 
-    move-result v2
+    invoke-virtual {v2, v3}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
 
-    if-eqz v2, :cond_0
+    move-result v3
 
+    if-eqz v3, :cond_0
+
+    .line 100
     goto :goto_1
 
-    :cond_0
-    or-int/lit8 v2, p2, 0x1
-
     .line 103
-    invoke-static {v1, v2, p3}, Lcom/facebook/soloader/SoLoader;->loadLibraryBySoName(Ljava/lang/String;ILandroid/os/StrictMode$ThreadPolicy;)V
+    :cond_0
+    or-int/lit8 v3, p2, 0x1
 
+    invoke-static {v2, v3, p3}, Lcom/facebook/soloader/SoLoader;->loadLibraryBySoName(Ljava/lang/String;ILandroid/os/StrictMode$ThreadPolicy;)V
+
+    .line 97
+    .end local v2    # "dependency":Ljava/lang/String;
     :goto_1
-    add-int/lit8 v0, v0, 0x1
+    add-int/lit8 v1, v1, 0x1
 
     goto :goto_0
 
+    .line 108
+    .end local v1    # "i":I
     :cond_1
     return-void
 .end method
@@ -192,6 +218,7 @@
     .end annotation
 
     .line 136
+    .local p1, "paths":Ljava/util/Collection;, "Ljava/util/Collection<Ljava/lang/String;>;"
     iget-object v0, p0, Lcom/facebook/soloader/DirectorySoSource;->soDirectory:Ljava/io/File;
 
     invoke-virtual {v0}, Ljava/io/File;->getAbsolutePath()Ljava/lang/String;
@@ -200,11 +227,15 @@
 
     invoke-interface {p1, v0}, Ljava/util/Collection;->add(Ljava/lang/Object;)Z
 
+    .line 137
     return-void
 .end method
 
 .method public loadLibrary(Ljava/lang/String;ILandroid/os/StrictMode$ThreadPolicy;)I
     .locals 1
+    .param p1, "soName"    # Ljava/lang/String;
+    .param p2, "loadFlags"    # I
+    .param p3, "threadPolicy"    # Landroid/os/StrictMode$ThreadPolicy;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -216,13 +247,17 @@
 
     invoke-virtual {p0, p1, p2, v0, p3}, Lcom/facebook/soloader/DirectorySoSource;->loadLibraryFrom(Ljava/lang/String;ILjava/io/File;Landroid/os/StrictMode$ThreadPolicy;)I
 
-    move-result p1
+    move-result v0
 
-    return p1
+    return v0
 .end method
 
 .method protected loadLibraryFrom(Ljava/lang/String;ILjava/io/File;Landroid/os/StrictMode$ThreadPolicy;)I
-    .locals 4
+    .locals 5
+    .param p1, "soName"    # Ljava/lang/String;
+    .param p2, "loadFlags"    # I
+    .param p3, "libDir"    # Ljava/io/File;
+    .param p4, "threadPolicy"    # Landroid/os/StrictMode$ThreadPolicy;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -235,6 +270,7 @@
     invoke-direct {v0, p3, p1}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
 
     .line 60
+    .local v0, "soFile":Ljava/io/File;
     invoke-virtual {v0}, Ljava/io/File;->exists()Z
 
     move-result v1
@@ -244,31 +280,38 @@
     if-nez v1, :cond_0
 
     .line 61
-    new-instance p2, Ljava/lang/StringBuilder;
+    new-instance v1, Ljava/lang/StringBuilder;
 
-    invoke-direct {p2}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
 
-    invoke-virtual {p2, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    const-string p1, " not found on "
+    move-result-object v1
 
-    invoke-virtual {p2, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    const-string v3, " not found on "
+
+    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {p3}, Ljava/io/File;->getCanonicalPath()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v3
 
-    invoke-virtual {p2, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {p2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    move-result-object v1
 
-    move-result-object p1
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    invoke-static {v2, p1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+    move-result-object v1
 
-    const/4 p1, 0x0
+    invoke-static {v2, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    return p1
+    .line 62
+    const/4 v1, 0x0
+
+    return v1
 
     .line 64
     :cond_0
@@ -278,63 +321,74 @@
 
     invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     const-string v3, " found on "
 
     invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     invoke-virtual {p3}, Ljava/io/File;->getCanonicalPath()Ljava/lang/String;
 
-    move-result-object p3
+    move-result-object v3
 
-    invoke-virtual {v1, p3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object p3
+    move-result-object v1
 
-    invoke-static {v2, p3}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
-
-    and-int/lit8 p3, p2, 0x1
-
-    if-eqz p3, :cond_1
+    invoke-static {v2, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
     .line 66
-    iget p3, p0, Lcom/facebook/soloader/DirectorySoSource;->flags:I
+    and-int/lit8 v1, p2, 0x1
 
-    const/4 v1, 0x2
+    if-eqz v1, :cond_1
 
-    and-int/2addr p3, v1
+    iget v1, p0, Lcom/facebook/soloader/DirectorySoSource;->flags:I
 
-    if-eqz p3, :cond_1
+    const/4 v3, 0x2
+
+    and-int/2addr v1, v3
+
+    if-eqz v1, :cond_1
 
     .line 68
-    new-instance p2, Ljava/lang/StringBuilder;
+    new-instance v1, Ljava/lang/StringBuilder;
 
-    invoke-direct {p2}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
 
-    invoke-virtual {p2, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    const-string p1, " loaded implicitly"
+    move-result-object v1
 
-    invoke-virtual {p2, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    const-string v4, " loaded implicitly"
 
-    invoke-virtual {p2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual {v1, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object p1
+    move-result-object v1
 
-    invoke-static {v2, p1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    return v1
+    move-result-object v1
+
+    invoke-static {v2, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+
+    .line 69
+    return v3
 
     .line 72
     :cond_1
-    iget p3, p0, Lcom/facebook/soloader/DirectorySoSource;->flags:I
+    iget v1, p0, Lcom/facebook/soloader/DirectorySoSource;->flags:I
 
-    const/4 v1, 0x1
+    const/4 v3, 0x1
 
-    and-int/2addr p3, v1
+    and-int/2addr v1, v3
 
-    if-eqz p3, :cond_2
+    if-eqz v1, :cond_2
 
     .line 73
     invoke-direct {p0, v0, p2, p4}, Lcom/facebook/soloader/DirectorySoSource;->loadDependencies(Ljava/io/File;ILandroid/os/StrictMode$ThreadPolicy;)V
@@ -343,65 +397,76 @@
 
     .line 75
     :cond_2
-    new-instance p3, Ljava/lang/StringBuilder;
+    new-instance v1, Ljava/lang/StringBuilder;
 
-    invoke-direct {p3}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string p4, "Not resolving dependencies for "
+    const-string v4, "Not resolving dependencies for "
 
-    invoke-virtual {p3, p4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v1, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {p3, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v1
 
-    invoke-virtual {p3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object p1
+    move-result-object v1
 
-    invoke-static {v2, p1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {v2, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
     .line 79
     :goto_0
     :try_start_0
-    sget-object p1, Lcom/facebook/soloader/SoLoader;->sSoFileLoader:Lcom/facebook/soloader/SoFileLoader;
+    sget-object v1, Lcom/facebook/soloader/SoLoader;->sSoFileLoader:Lcom/facebook/soloader/SoFileLoader;
 
     invoke-virtual {v0}, Ljava/io/File;->getAbsolutePath()Ljava/lang/String;
 
-    move-result-object p3
+    move-result-object v4
 
-    invoke-interface {p1, p3, p2}, Lcom/facebook/soloader/SoFileLoader;->load(Ljava/lang/String;I)V
+    invoke-interface {v1, v4, p2}, Lcom/facebook/soloader/SoFileLoader;->load(Ljava/lang/String;I)V
     :try_end_0
     .catch Ljava/lang/UnsatisfiedLinkError; {:try_start_0 .. :try_end_0} :catch_0
 
-    return v1
+    .line 88
+    nop
 
+    .line 90
+    return v3
+
+    .line 80
     :catch_0
-    move-exception p1
+    move-exception v1
 
     .line 81
-    invoke-virtual {p1}, Ljava/lang/UnsatisfiedLinkError;->getMessage()Ljava/lang/String;
+    .local v1, "e":Ljava/lang/UnsatisfiedLinkError;
+    invoke-virtual {v1}, Ljava/lang/UnsatisfiedLinkError;->getMessage()Ljava/lang/String;
 
-    move-result-object p2
+    move-result-object v3
 
-    const-string p3, "bad ELF magic"
+    const-string v4, "bad ELF magic"
 
-    invoke-virtual {p2, p3}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
+    invoke-virtual {v3, v4}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
 
-    move-result p2
+    move-result v3
 
-    if-eqz p2, :cond_3
-
-    const-string p1, "Corrupted lib file detected"
+    if-eqz v3, :cond_3
 
     .line 82
-    invoke-static {v2, p1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+    const-string v3, "Corrupted lib file detected"
 
-    const/4 p1, 0x3
+    invoke-static {v2, v3}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    return p1
+    .line 84
+    const/4 v2, 0x3
+
+    return v2
 
     .line 86
     :cond_3
-    throw p1
+    throw v1
 .end method
 
 .method public toString()Ljava/lang/String;
@@ -421,17 +486,27 @@
     :try_end_0
     .catch Ljava/io/IOException; {:try_start_0 .. :try_end_0} :catch_0
 
+    .line 146
+    .local v0, "path":Ljava/lang/String;
     goto :goto_0
 
-    .line 145
+    .line 144
+    .end local v0    # "path":Ljava/lang/String;
     :catch_0
-    iget-object v0, p0, Lcom/facebook/soloader/DirectorySoSource;->soDirectory:Ljava/io/File;
+    move-exception v0
 
-    invoke-virtual {v0}, Ljava/io/File;->getName()Ljava/lang/String;
+    .line 145
+    .local v0, "e":Ljava/io/IOException;
+    iget-object v1, p0, Lcom/facebook/soloader/DirectorySoSource;->soDirectory:Ljava/io/File;
 
-    move-result-object v0
+    invoke-virtual {v1}, Ljava/io/File;->getName()Ljava/lang/String;
+
+    move-result-object v1
+
+    move-object v0, v1
 
     .line 147
+    .local v0, "path":Ljava/lang/String;
     :goto_0
     new-instance v1, Ljava/lang/StringBuilder;
 
@@ -448,39 +523,53 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    const-string v2, "[root = "
+    move-result-object v1
 
     .line 149
+    const-string v2, "[root = "
+
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     .line 150
     invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    const-string v0, " flags = "
+    move-result-object v1
 
     .line 151
-    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    const-string v2, " flags = "
 
-    iget v0, p0, Lcom/facebook/soloader/DirectorySoSource;->flags:I
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    iget v2, p0, Lcom/facebook/soloader/DirectorySoSource;->flags:I
 
     .line 152
-    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    const/16 v0, 0x5d
+    move-result-object v1
 
     .line 153
-    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+    const/16 v2, 0x5d
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     .line 154
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object v0
+    move-result-object v1
 
-    return-object v0
+    .line 147
+    return-object v1
 .end method
 
 .method public unpackLibrary(Ljava/lang/String;)Ljava/io/File;
     .locals 2
+    .param p1, "soName"    # Ljava/lang/String;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -498,16 +587,19 @@
     invoke-direct {v0, v1, p1}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
 
     .line 127
+    .local v0, "soFile":Ljava/io/File;
     invoke-virtual {v0}, Ljava/io/File;->exists()Z
 
-    move-result p1
+    move-result v1
 
-    if-eqz p1, :cond_0
+    if-eqz v1, :cond_0
 
+    .line 128
     return-object v0
 
+    .line 131
     :cond_0
-    const/4 p1, 0x0
+    const/4 v1, 0x0
 
-    return-object p1
+    return-object v1
 .end method

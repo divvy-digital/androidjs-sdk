@@ -3,11 +3,6 @@
 .source "ReadableMapKeySetIterator.java"
 
 
-# annotations
-.annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-.end annotation
-
-
 # virtual methods
 .method public abstract hasNextKey()Z
 .end method

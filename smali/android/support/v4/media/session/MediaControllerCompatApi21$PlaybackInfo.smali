@@ -29,92 +29,111 @@
     .line 265
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
+    .line 266
     return-void
 .end method
 
 .method public static getAudioAttributes(Ljava/lang/Object;)Landroid/media/AudioAttributes;
-    .locals 0
+    .locals 1
+    .param p0, "volumeInfoObj"    # Ljava/lang/Object;
 
     .line 200
-    check-cast p0, Landroid/media/session/MediaController$PlaybackInfo;
+    move-object v0, p0
 
-    invoke-virtual {p0}, Landroid/media/session/MediaController$PlaybackInfo;->getAudioAttributes()Landroid/media/AudioAttributes;
+    check-cast v0, Landroid/media/session/MediaController$PlaybackInfo;
 
-    move-result-object p0
+    invoke-virtual {v0}, Landroid/media/session/MediaController$PlaybackInfo;->getAudioAttributes()Landroid/media/AudioAttributes;
 
-    return-object p0
+    move-result-object v0
+
+    return-object v0
 .end method
 
 .method public static getCurrentVolume(Ljava/lang/Object;)I
-    .locals 0
+    .locals 1
+    .param p0, "volumeInfoObj"    # Ljava/lang/Object;
 
     .line 217
-    check-cast p0, Landroid/media/session/MediaController$PlaybackInfo;
+    move-object v0, p0
 
-    invoke-virtual {p0}, Landroid/media/session/MediaController$PlaybackInfo;->getCurrentVolume()I
+    check-cast v0, Landroid/media/session/MediaController$PlaybackInfo;
 
-    move-result p0
+    invoke-virtual {v0}, Landroid/media/session/MediaController$PlaybackInfo;->getCurrentVolume()I
 
-    return p0
+    move-result v0
+
+    return v0
 .end method
 
 .method public static getLegacyAudioStream(Ljava/lang/Object;)I
-    .locals 0
+    .locals 2
+    .param p0, "volumeInfoObj"    # Ljava/lang/Object;
 
     .line 204
     invoke-static {p0}, Landroid/support/v4/media/session/MediaControllerCompatApi21$PlaybackInfo;->getAudioAttributes(Ljava/lang/Object;)Landroid/media/AudioAttributes;
 
-    move-result-object p0
+    move-result-object v0
 
     .line 205
-    invoke-static {p0}, Landroid/support/v4/media/session/MediaControllerCompatApi21$PlaybackInfo;->toLegacyStreamType(Landroid/media/AudioAttributes;)I
+    .local v0, "attrs":Landroid/media/AudioAttributes;
+    invoke-static {v0}, Landroid/support/v4/media/session/MediaControllerCompatApi21$PlaybackInfo;->toLegacyStreamType(Landroid/media/AudioAttributes;)I
 
-    move-result p0
+    move-result v1
 
-    return p0
+    return v1
 .end method
 
 .method public static getMaxVolume(Ljava/lang/Object;)I
-    .locals 0
+    .locals 1
+    .param p0, "volumeInfoObj"    # Ljava/lang/Object;
 
     .line 213
-    check-cast p0, Landroid/media/session/MediaController$PlaybackInfo;
+    move-object v0, p0
 
-    invoke-virtual {p0}, Landroid/media/session/MediaController$PlaybackInfo;->getMaxVolume()I
+    check-cast v0, Landroid/media/session/MediaController$PlaybackInfo;
 
-    move-result p0
+    invoke-virtual {v0}, Landroid/media/session/MediaController$PlaybackInfo;->getMaxVolume()I
 
-    return p0
+    move-result v0
+
+    return v0
 .end method
 
 .method public static getPlaybackType(Ljava/lang/Object;)I
-    .locals 0
+    .locals 1
+    .param p0, "volumeInfoObj"    # Ljava/lang/Object;
 
     .line 196
-    check-cast p0, Landroid/media/session/MediaController$PlaybackInfo;
+    move-object v0, p0
 
-    invoke-virtual {p0}, Landroid/media/session/MediaController$PlaybackInfo;->getPlaybackType()I
+    check-cast v0, Landroid/media/session/MediaController$PlaybackInfo;
 
-    move-result p0
+    invoke-virtual {v0}, Landroid/media/session/MediaController$PlaybackInfo;->getPlaybackType()I
 
-    return p0
+    move-result v0
+
+    return v0
 .end method
 
 .method public static getVolumeControl(Ljava/lang/Object;)I
-    .locals 0
+    .locals 1
+    .param p0, "volumeInfoObj"    # Ljava/lang/Object;
 
     .line 209
-    check-cast p0, Landroid/media/session/MediaController$PlaybackInfo;
+    move-object v0, p0
 
-    invoke-virtual {p0}, Landroid/media/session/MediaController$PlaybackInfo;->getVolumeControl()I
+    check-cast v0, Landroid/media/session/MediaController$PlaybackInfo;
 
-    move-result p0
+    invoke-virtual {v0}, Landroid/media/session/MediaController$PlaybackInfo;->getVolumeControl()I
 
-    return p0
+    move-result v0
+
+    return v0
 .end method
 
 .method private static toLegacyStreamType(Landroid/media/AudioAttributes;)I
-    .locals 3
+    .locals 4
+    .param p0, "aa"    # Landroid/media/AudioAttributes;
 
     .line 228
     invoke-virtual {p0}, Landroid/media/AudioAttributes;->getFlags()I
@@ -127,9 +146,10 @@
 
     if-ne v0, v1, :cond_0
 
-    const/4 p0, 0x7
+    .line 230
+    const/4 v0, 0x7
 
-    return p0
+    return v0
 
     .line 232
     :cond_0
@@ -143,50 +163,59 @@
 
     if-ne v0, v2, :cond_1
 
-    const/4 p0, 0x6
+    .line 233
+    const/4 v0, 0x6
 
-    return p0
+    return v0
 
     .line 237
     :cond_1
     invoke-virtual {p0}, Landroid/media/AudioAttributes;->getUsage()I
 
-    move-result p0
+    move-result v0
 
-    const/4 v0, 0x3
+    const/4 v3, 0x3
 
-    packed-switch p0, :pswitch_data_0
+    packed-switch v0, :pswitch_data_0
 
-    return v0
+    .line 261
+    return v3
 
+    .line 244
     :pswitch_0
     return v1
 
+    .line 252
     :pswitch_1
-    const/4 p0, 0x2
+    const/4 v0, 0x2
 
-    return p0
+    return v0
 
+    .line 258
     :pswitch_2
-    const/4 p0, 0x5
+    const/4 v0, 0x5
 
-    return p0
+    return v0
 
+    .line 250
     :pswitch_3
     return v2
 
+    .line 248
     :pswitch_4
-    const/16 p0, 0x8
+    const/16 v0, 0x8
 
-    return p0
-
-    :pswitch_5
-    const/4 p0, 0x0
-
-    return p0
-
-    :pswitch_6
     return v0
+
+    .line 246
+    :pswitch_5
+    const/4 v0, 0x0
+
+    return v0
+
+    .line 242
+    :pswitch_6
+    return v3
 
     nop
 

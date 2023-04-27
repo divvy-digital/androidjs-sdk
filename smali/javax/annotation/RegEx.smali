@@ -30,9 +30,6 @@
     value = "RegEx"
 .end annotation
 
-.annotation build Ljavax/annotation/meta/TypeQualifierNickname;
-.end annotation
-
 
 # virtual methods
 .method public abstract when()Ljavax/annotation/meta/When;

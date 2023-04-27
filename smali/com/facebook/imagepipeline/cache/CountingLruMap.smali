@@ -15,9 +15,6 @@
     }
 .end annotation
 
-.annotation build Ljavax/annotation/concurrent/ThreadSafe;
-.end annotation
-
 
 # instance fields
 .field private final mMap:Ljava/util/LinkedHashMap;
@@ -27,17 +24,9 @@
             "TK;TV;>;"
         }
     .end annotation
-
-    .annotation build Ljavax/annotation/concurrent/GuardedBy;
-        value = "this"
-    .end annotation
 .end field
 
 .field private mSizeInBytes:I
-    .annotation build Ljavax/annotation/concurrent/GuardedBy;
-        value = "this"
-    .end annotation
-.end field
 
 .field private final mValueDescriptor:Lcom/facebook/imagepipeline/cache/ValueDescriptor;
     .annotation system Ldalvik/annotation/Signature;
@@ -61,6 +50,8 @@
     .end annotation
 
     .line 31
+    .local p0, "this":Lcom/facebook/imagepipeline/cache/CountingLruMap;, "Lcom/facebook/imagepipeline/cache/CountingLruMap<TK;TV;>;"
+    .local p1, "valueDescriptor":Lcom/facebook/imagepipeline/cache/ValueDescriptor;, "Lcom/facebook/imagepipeline/cache/ValueDescriptor<TV;>;"
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     .line 26
@@ -70,14 +61,15 @@
 
     iput-object v0, p0, Lcom/facebook/imagepipeline/cache/CountingLruMap;->mMap:Ljava/util/LinkedHashMap;
 
+    .line 28
     const/4 v0, 0x0
 
-    .line 28
     iput v0, p0, Lcom/facebook/imagepipeline/cache/CountingLruMap;->mSizeInBytes:I
 
     .line 32
     iput-object p1, p0, Lcom/facebook/imagepipeline/cache/CountingLruMap;->mValueDescriptor:Lcom/facebook/imagepipeline/cache/ValueDescriptor;
 
+    .line 33
     return-void
 .end method
 
@@ -89,22 +81,24 @@
         }
     .end annotation
 
+    .line 128
+    .local p0, "this":Lcom/facebook/imagepipeline/cache/CountingLruMap;, "Lcom/facebook/imagepipeline/cache/CountingLruMap<TK;TV;>;"
+    .local p1, "value":Ljava/lang/Object;, "TV;"
     if-nez p1, :cond_0
 
-    const/4 p1, 0x0
+    const/4 v0, 0x0
 
     goto :goto_0
 
-    .line 128
     :cond_0
     iget-object v0, p0, Lcom/facebook/imagepipeline/cache/CountingLruMap;->mValueDescriptor:Lcom/facebook/imagepipeline/cache/ValueDescriptor;
 
     invoke-interface {v0, p1}, Lcom/facebook/imagepipeline/cache/ValueDescriptor;->getSizeInBytes(Ljava/lang/Object;)I
 
-    move-result p1
+    move-result v0
 
     :goto_0
-    return p1
+    return v0
 .end method
 
 
@@ -119,6 +113,7 @@
         }
     .end annotation
 
+    .local p0, "this":Lcom/facebook/imagepipeline/cache/CountingLruMap;, "Lcom/facebook/imagepipeline/cache/CountingLruMap<TK;TV;>;"
     monitor-enter p0
 
     .line 121
@@ -134,13 +129,14 @@
     invoke-direct {v0, v1}, Ljava/util/ArrayList;-><init>(Ljava/util/Collection;)V
 
     .line 122
+    .local v0, "oldValues":Ljava/util/ArrayList;, "Ljava/util/ArrayList<TV;>;"
     iget-object v1, p0, Lcom/facebook/imagepipeline/cache/CountingLruMap;->mMap:Ljava/util/LinkedHashMap;
 
     invoke-virtual {v1}, Ljava/util/LinkedHashMap;->clear()V
 
+    .line 123
     const/4 v1, 0x0
 
-    .line 123
     iput v1, p0, Lcom/facebook/imagepipeline/cache/CountingLruMap;->mSizeInBytes:I
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
@@ -150,6 +146,9 @@
 
     return-object v0
 
+    .line 120
+    .end local v0    # "oldValues":Ljava/util/ArrayList;, "Ljava/util/ArrayList<TV;>;"
+    .end local p0    # "this":Lcom/facebook/imagepipeline/cache/CountingLruMap;, "Lcom/facebook/imagepipeline/cache/CountingLruMap<TK;TV;>;"
     :catchall_0
     move-exception v0
 
@@ -166,6 +165,8 @@
         }
     .end annotation
 
+    .local p0, "this":Lcom/facebook/imagepipeline/cache/CountingLruMap;, "Lcom/facebook/imagepipeline/cache/CountingLruMap<TK;TV;>;"
+    .local p1, "key":Ljava/lang/Object;, "TK;"
     monitor-enter p0
 
     .line 75
@@ -174,14 +175,17 @@
 
     invoke-virtual {v0, p1}, Ljava/util/LinkedHashMap;->containsKey(Ljava/lang/Object;)Z
 
-    move-result p1
+    move-result v0
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
     monitor-exit p0
 
-    return p1
+    return v0
 
+    .line 75
+    .end local p0    # "this":Lcom/facebook/imagepipeline/cache/CountingLruMap;, "Lcom/facebook/imagepipeline/cache/CountingLruMap<TK;TV;>;"
+    .end local p1    # "key":Ljava/lang/Object;, "TK;"
     :catchall_0
     move-exception p1
 
@@ -201,6 +205,8 @@
     .annotation runtime Ljavax/annotation/Nullable;
     .end annotation
 
+    .local p0, "this":Lcom/facebook/imagepipeline/cache/CountingLruMap;, "Lcom/facebook/imagepipeline/cache/CountingLruMap<TK;TV;>;"
+    .local p1, "key":Ljava/lang/Object;, "TK;"
     monitor-enter p0
 
     .line 81
@@ -209,14 +215,17 @@
 
     invoke-virtual {v0, p1}, Ljava/util/LinkedHashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
 
-    move-result-object p1
+    move-result-object v0
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
     monitor-exit p0
 
-    return-object p1
+    return-object v0
 
+    .line 81
+    .end local p0    # "this":Lcom/facebook/imagepipeline/cache/CountingLruMap;, "Lcom/facebook/imagepipeline/cache/CountingLruMap<TK;TV;>;"
+    .end local p1    # "key":Ljava/lang/Object;, "TK;"
     :catchall_0
     move-exception p1
 
@@ -228,6 +237,7 @@
 .method public declared-synchronized getCount()I
     .locals 1
 
+    .local p0, "this":Lcom/facebook/imagepipeline/cache/CountingLruMap;, "Lcom/facebook/imagepipeline/cache/CountingLruMap<TK;TV;>;"
     monitor-enter p0
 
     .line 47
@@ -244,6 +254,8 @@
 
     return v0
 
+    .line 47
+    .end local p0    # "this":Lcom/facebook/imagepipeline/cache/CountingLruMap;, "Lcom/facebook/imagepipeline/cache/CountingLruMap<TK;TV;>;"
     :catchall_0
     move-exception v0
 
@@ -263,6 +275,7 @@
     .annotation runtime Ljavax/annotation/Nullable;
     .end annotation
 
+    .local p0, "this":Lcom/facebook/imagepipeline/cache/CountingLruMap;, "Lcom/facebook/imagepipeline/cache/CountingLruMap<TK;TV;>;"
     monitor-enter p0
 
     .line 58
@@ -301,6 +314,8 @@
 
     return-object v0
 
+    .line 58
+    .end local p0    # "this":Lcom/facebook/imagepipeline/cache/CountingLruMap;, "Lcom/facebook/imagepipeline/cache/CountingLruMap<TK;TV;>;"
     :catchall_0
     move-exception v0
 
@@ -311,9 +326,6 @@
 
 .method declared-synchronized getKeys()Ljava/util/ArrayList;
     .locals 2
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
-
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "()",
@@ -322,6 +334,7 @@
         }
     .end annotation
 
+    .local p0, "this":Lcom/facebook/imagepipeline/cache/CountingLruMap;, "Lcom/facebook/imagepipeline/cache/CountingLruMap<TK;TV;>;"
     monitor-enter p0
 
     .line 37
@@ -342,6 +355,8 @@
 
     return-object v0
 
+    .line 37
+    .end local p0    # "this":Lcom/facebook/imagepipeline/cache/CountingLruMap;, "Lcom/facebook/imagepipeline/cache/CountingLruMap<TK;TV;>;"
     :catchall_0
     move-exception v0
 
@@ -367,6 +382,8 @@
         }
     .end annotation
 
+    .local p0, "this":Lcom/facebook/imagepipeline/cache/CountingLruMap;, "Lcom/facebook/imagepipeline/cache/CountingLruMap<TK;TV;>;"
+    .local p1, "predicate":Lcom/facebook/common/internal/Predicate;, "Lcom/facebook/common/internal/Predicate<TK;>;"
     monitor-enter p0
 
     .line 64
@@ -386,6 +403,7 @@
     invoke-direct {v0, v1}, Ljava/util/ArrayList;-><init>(I)V
 
     .line 65
+    .local v0, "matchingEntries":Ljava/util/ArrayList;, "Ljava/util/ArrayList<Ljava/util/Map$Entry<TK;TV;>;>;"
     iget-object v1, p0, Lcom/facebook/imagepipeline/cache/CountingLruMap;->mMap:Ljava/util/LinkedHashMap;
 
     invoke-virtual {v1}, Ljava/util/LinkedHashMap;->entrySet()Ljava/util/Set;
@@ -396,7 +414,6 @@
 
     move-result-object v1
 
-    :cond_0
     :goto_0
     invoke-interface {v1}, Ljava/util/Iterator;->hasNext()Z
 
@@ -410,9 +427,10 @@
 
     check-cast v2, Ljava/util/Map$Entry;
 
-    if-eqz p1, :cond_1
-
     .line 66
+    .local v2, "entry":Ljava/util/Map$Entry;, "Ljava/util/Map$Entry<TK;TV;>;"
+    if-eqz p1, :cond_0
+
     invoke-interface {v2}, Ljava/util/Map$Entry;->getKey()Ljava/lang/Object;
 
     move-result-object v3
@@ -421,14 +439,18 @@
 
     move-result v3
 
-    if-eqz v3, :cond_0
+    if-eqz v3, :cond_1
 
     .line 67
-    :cond_1
+    .end local p0    # "this":Lcom/facebook/imagepipeline/cache/CountingLruMap;, "Lcom/facebook/imagepipeline/cache/CountingLruMap<TK;TV;>;"
+    :cond_0
     invoke-virtual {v0, v2}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
+    .line 69
+    .end local v2    # "entry":Ljava/util/Map$Entry;, "Ljava/util/Map$Entry<TK;TV;>;"
+    :cond_1
     goto :goto_0
 
     .line 70
@@ -437,23 +459,21 @@
 
     return-object v0
 
+    .line 63
+    .end local v0    # "matchingEntries":Ljava/util/ArrayList;, "Ljava/util/ArrayList<Ljava/util/Map$Entry<TK;TV;>;>;"
+    .end local p1    # "predicate":Lcom/facebook/common/internal/Predicate;, "Lcom/facebook/common/internal/Predicate<TK;>;"
     :catchall_0
     move-exception p1
 
     monitor-exit p0
 
-    goto :goto_2
-
-    :goto_1
     throw p1
-
-    :goto_2
-    goto :goto_1
 .end method
 
 .method public declared-synchronized getSizeInBytes()I
     .locals 1
 
+    .local p0, "this":Lcom/facebook/imagepipeline/cache/CountingLruMap;, "Lcom/facebook/imagepipeline/cache/CountingLruMap<TK;TV;>;"
     monitor-enter p0
 
     .line 52
@@ -466,6 +486,8 @@
 
     return v0
 
+    .line 52
+    .end local p0    # "this":Lcom/facebook/imagepipeline/cache/CountingLruMap;, "Lcom/facebook/imagepipeline/cache/CountingLruMap<TK;TV;>;"
     :catchall_0
     move-exception v0
 
@@ -476,9 +498,6 @@
 
 .method declared-synchronized getValues()Ljava/util/ArrayList;
     .locals 2
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
-
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "()",
@@ -487,6 +506,7 @@
         }
     .end annotation
 
+    .local p0, "this":Lcom/facebook/imagepipeline/cache/CountingLruMap;, "Lcom/facebook/imagepipeline/cache/CountingLruMap<TK;TV;>;"
     monitor-enter p0
 
     .line 42
@@ -507,6 +527,8 @@
 
     return-object v0
 
+    .line 42
+    .end local p0    # "this":Lcom/facebook/imagepipeline/cache/CountingLruMap;, "Lcom/facebook/imagepipeline/cache/CountingLruMap<TK;TV;>;"
     :catchall_0
     move-exception v0
 
@@ -526,6 +548,9 @@
     .annotation runtime Ljavax/annotation/Nullable;
     .end annotation
 
+    .local p0, "this":Lcom/facebook/imagepipeline/cache/CountingLruMap;, "Lcom/facebook/imagepipeline/cache/CountingLruMap<TK;TV;>;"
+    .local p1, "key":Ljava/lang/Object;, "TK;"
+    .local p2, "value":Ljava/lang/Object;, "TV;"
     monitor-enter p0
 
     .line 89
@@ -537,6 +562,7 @@
     move-result-object v0
 
     .line 90
+    .local v0, "oldValue":Ljava/lang/Object;, "TV;"
     iget v1, p0, Lcom/facebook/imagepipeline/cache/CountingLruMap;->mSizeInBytes:I
 
     invoke-direct {p0, v0}, Lcom/facebook/imagepipeline/cache/CountingLruMap;->getValueSizeInBytes(Ljava/lang/Object;)I
@@ -553,15 +579,15 @@
     invoke-virtual {v1, p1, p2}, Ljava/util/LinkedHashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
     .line 92
-    iget p1, p0, Lcom/facebook/imagepipeline/cache/CountingLruMap;->mSizeInBytes:I
+    iget v1, p0, Lcom/facebook/imagepipeline/cache/CountingLruMap;->mSizeInBytes:I
 
     invoke-direct {p0, p2}, Lcom/facebook/imagepipeline/cache/CountingLruMap;->getValueSizeInBytes(Ljava/lang/Object;)I
 
-    move-result p2
+    move-result v2
 
-    add-int/2addr p1, p2
+    add-int/2addr v1, v2
 
-    iput p1, p0, Lcom/facebook/imagepipeline/cache/CountingLruMap;->mSizeInBytes:I
+    iput v1, p0, Lcom/facebook/imagepipeline/cache/CountingLruMap;->mSizeInBytes:I
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
@@ -570,6 +596,11 @@
 
     return-object v0
 
+    .line 88
+    .end local v0    # "oldValue":Ljava/lang/Object;, "TV;"
+    .end local p0    # "this":Lcom/facebook/imagepipeline/cache/CountingLruMap;, "Lcom/facebook/imagepipeline/cache/CountingLruMap<TK;TV;>;"
+    .end local p1    # "key":Ljava/lang/Object;, "TK;"
+    .end local p2    # "value":Ljava/lang/Object;, "TV;"
     :catchall_0
     move-exception p1
 
@@ -579,7 +610,7 @@
 .end method
 
 .method public declared-synchronized remove(Ljava/lang/Object;)Ljava/lang/Object;
-    .locals 2
+    .locals 3
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(TK;)TV;"
@@ -589,6 +620,8 @@
     .annotation runtime Ljavax/annotation/Nullable;
     .end annotation
 
+    .local p0, "this":Lcom/facebook/imagepipeline/cache/CountingLruMap;, "Lcom/facebook/imagepipeline/cache/CountingLruMap<TK;TV;>;"
+    .local p1, "key":Ljava/lang/Object;, "TK;"
     monitor-enter p0
 
     .line 99
@@ -597,26 +630,31 @@
 
     invoke-virtual {v0, p1}, Ljava/util/LinkedHashMap;->remove(Ljava/lang/Object;)Ljava/lang/Object;
 
-    move-result-object p1
+    move-result-object v0
 
     .line 100
-    iget v0, p0, Lcom/facebook/imagepipeline/cache/CountingLruMap;->mSizeInBytes:I
+    .local v0, "oldValue":Ljava/lang/Object;, "TV;"
+    iget v1, p0, Lcom/facebook/imagepipeline/cache/CountingLruMap;->mSizeInBytes:I
 
-    invoke-direct {p0, p1}, Lcom/facebook/imagepipeline/cache/CountingLruMap;->getValueSizeInBytes(Ljava/lang/Object;)I
+    invoke-direct {p0, v0}, Lcom/facebook/imagepipeline/cache/CountingLruMap;->getValueSizeInBytes(Ljava/lang/Object;)I
 
-    move-result v1
+    move-result v2
 
-    sub-int/2addr v0, v1
+    sub-int/2addr v1, v2
 
-    iput v0, p0, Lcom/facebook/imagepipeline/cache/CountingLruMap;->mSizeInBytes:I
+    iput v1, p0, Lcom/facebook/imagepipeline/cache/CountingLruMap;->mSizeInBytes:I
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
     .line 101
     monitor-exit p0
 
-    return-object p1
+    return-object v0
 
+    .line 98
+    .end local v0    # "oldValue":Ljava/lang/Object;, "TV;"
+    .end local p0    # "this":Lcom/facebook/imagepipeline/cache/CountingLruMap;, "Lcom/facebook/imagepipeline/cache/CountingLruMap<TK;TV;>;"
+    .end local p1    # "key":Ljava/lang/Object;, "TK;"
     :catchall_0
     move-exception p1
 
@@ -626,7 +664,7 @@
 .end method
 
 .method public declared-synchronized removeAll(Lcom/facebook/common/internal/Predicate;)Ljava/util/ArrayList;
-    .locals 4
+    .locals 5
     .param p1    # Lcom/facebook/common/internal/Predicate;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
@@ -641,6 +679,8 @@
         }
     .end annotation
 
+    .local p0, "this":Lcom/facebook/imagepipeline/cache/CountingLruMap;, "Lcom/facebook/imagepipeline/cache/CountingLruMap<TK;TV;>;"
+    .local p1, "predicate":Lcom/facebook/common/internal/Predicate;, "Lcom/facebook/common/internal/Predicate<TK;>;"
     monitor-enter p0
 
     .line 106
@@ -650,6 +690,7 @@
     invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V
 
     .line 107
+    .local v0, "oldValues":Ljava/util/ArrayList;, "Ljava/util/ArrayList<TV;>;"
     iget-object v1, p0, Lcom/facebook/imagepipeline/cache/CountingLruMap;->mMap:Ljava/util/LinkedHashMap;
 
     invoke-virtual {v1}, Ljava/util/LinkedHashMap;->entrySet()Ljava/util/Set;
@@ -661,7 +702,7 @@
     move-result-object v1
 
     .line 108
-    :cond_0
+    .local v1, "iterator":Ljava/util/Iterator;, "Ljava/util/Iterator<Ljava/util/Map$Entry<TK;TV;>;>;"
     :goto_0
     invoke-interface {v1}, Ljava/util/Iterator;->hasNext()Z
 
@@ -676,9 +717,10 @@
 
     check-cast v2, Ljava/util/Map$Entry;
 
-    if-eqz p1, :cond_1
-
     .line 110
+    .local v2, "entry":Ljava/util/Map$Entry;, "Ljava/util/Map$Entry<TK;TV;>;"
+    if-eqz p1, :cond_0
+
     invoke-interface {v2}, Ljava/util/Map$Entry;->getKey()Ljava/lang/Object;
 
     move-result-object v3
@@ -687,10 +729,11 @@
 
     move-result v3
 
-    if-eqz v3, :cond_0
+    if-eqz v3, :cond_1
 
     .line 111
-    :cond_1
+    .end local p0    # "this":Lcom/facebook/imagepipeline/cache/CountingLruMap;, "Lcom/facebook/imagepipeline/cache/CountingLruMap<TK;TV;>;"
+    :cond_0
     invoke-interface {v2}, Ljava/util/Map$Entry;->getValue()Ljava/lang/Object;
 
     move-result-object v3
@@ -702,13 +745,13 @@
 
     invoke-interface {v2}, Ljava/util/Map$Entry;->getValue()Ljava/lang/Object;
 
-    move-result-object v2
+    move-result-object v4
 
-    invoke-direct {p0, v2}, Lcom/facebook/imagepipeline/cache/CountingLruMap;->getValueSizeInBytes(Ljava/lang/Object;)I
+    invoke-direct {p0, v4}, Lcom/facebook/imagepipeline/cache/CountingLruMap;->getValueSizeInBytes(Ljava/lang/Object;)I
 
-    move-result v2
+    move-result v4
 
-    sub-int/2addr v3, v2
+    sub-int/2addr v3, v4
 
     iput v3, p0, Lcom/facebook/imagepipeline/cache/CountingLruMap;->mSizeInBytes:I
 
@@ -717,6 +760,9 @@
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
+    .line 115
+    .end local v2    # "entry":Ljava/util/Map$Entry;, "Ljava/util/Map$Entry<TK;TV;>;"
+    :cond_1
     goto :goto_0
 
     .line 116
@@ -725,16 +771,14 @@
 
     return-object v0
 
+    .line 105
+    .end local v0    # "oldValues":Ljava/util/ArrayList;, "Ljava/util/ArrayList<TV;>;"
+    .end local v1    # "iterator":Ljava/util/Iterator;, "Ljava/util/Iterator<Ljava/util/Map$Entry<TK;TV;>;>;"
+    .end local p1    # "predicate":Lcom/facebook/common/internal/Predicate;, "Lcom/facebook/common/internal/Predicate<TK;>;"
     :catchall_0
     move-exception p1
 
     monitor-exit p0
 
-    goto :goto_2
-
-    :goto_1
     throw p1
-
-    :goto_2
-    goto :goto_1
 .end method

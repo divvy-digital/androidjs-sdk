@@ -30,6 +30,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/modules/network/NetworkingModule;Ljava/lang/String;Lcom/facebook/react/modules/core/DeviceEventManagerModule$RCTDeviceEventEmitter;I)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/modules/network/NetworkingModule;
 
     .line 311
     iput-object p1, p0, Lcom/facebook/react/modules/network/NetworkingModule$1;->this$0:Lcom/facebook/react/modules/network/NetworkingModule;
@@ -48,7 +49,8 @@
 
 # virtual methods
 .method public intercept(Lokhttp3/Interceptor$Chain;)Lokhttp3/Response;
-    .locals 3
+    .locals 4
+    .param p1, "chain"    # Lokhttp3/Interceptor$Chain;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -62,34 +64,36 @@
 
     invoke-interface {p1, v0}, Lokhttp3/Interceptor$Chain;->proceed(Lokhttp3/Request;)Lokhttp3/Response;
 
-    move-result-object p1
+    move-result-object v0
 
     .line 315
-    new-instance v0, Lcom/facebook/react/modules/network/ProgressResponseBody;
+    .local v0, "originalResponse":Lokhttp3/Response;
+    new-instance v1, Lcom/facebook/react/modules/network/ProgressResponseBody;
 
     .line 316
-    invoke-virtual {p1}, Lokhttp3/Response;->body()Lokhttp3/ResponseBody;
+    invoke-virtual {v0}, Lokhttp3/Response;->body()Lokhttp3/ResponseBody;
 
-    move-result-object v1
+    move-result-object v2
 
-    new-instance v2, Lcom/facebook/react/modules/network/NetworkingModule$1$1;
+    new-instance v3, Lcom/facebook/react/modules/network/NetworkingModule$1$1;
 
-    invoke-direct {v2, p0}, Lcom/facebook/react/modules/network/NetworkingModule$1$1;-><init>(Lcom/facebook/react/modules/network/NetworkingModule$1;)V
+    invoke-direct {v3, p0}, Lcom/facebook/react/modules/network/NetworkingModule$1$1;-><init>(Lcom/facebook/react/modules/network/NetworkingModule$1;)V
 
-    invoke-direct {v0, v1, v2}, Lcom/facebook/react/modules/network/ProgressResponseBody;-><init>(Lokhttp3/ResponseBody;Lcom/facebook/react/modules/network/ProgressListener;)V
+    invoke-direct {v1, v2, v3}, Lcom/facebook/react/modules/network/ProgressResponseBody;-><init>(Lokhttp3/ResponseBody;Lcom/facebook/react/modules/network/ProgressListener;)V
 
     .line 339
-    invoke-virtual {p1}, Lokhttp3/Response;->newBuilder()Lokhttp3/Response$Builder;
+    .local v1, "responseBody":Lcom/facebook/react/modules/network/ProgressResponseBody;
+    invoke-virtual {v0}, Lokhttp3/Response;->newBuilder()Lokhttp3/Response$Builder;
 
-    move-result-object p1
+    move-result-object v2
 
-    invoke-virtual {p1, v0}, Lokhttp3/Response$Builder;->body(Lokhttp3/ResponseBody;)Lokhttp3/Response$Builder;
+    invoke-virtual {v2, v1}, Lokhttp3/Response$Builder;->body(Lokhttp3/ResponseBody;)Lokhttp3/Response$Builder;
 
-    move-result-object p1
+    move-result-object v2
 
-    invoke-virtual {p1}, Lokhttp3/Response$Builder;->build()Lokhttp3/Response;
+    invoke-virtual {v2}, Lokhttp3/Response$Builder;->build()Lokhttp3/Response;
 
-    move-result-object p1
+    move-result-object v2
 
-    return-object p1
+    return-object v2
 .end method

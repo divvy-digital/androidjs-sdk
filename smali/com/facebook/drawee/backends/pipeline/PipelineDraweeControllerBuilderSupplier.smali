@@ -38,18 +38,21 @@
 # direct methods
 .method public constructor <init>(Landroid/content/Context;)V
     .locals 1
-
-    const/4 v0, 0x0
+    .param p1, "context"    # Landroid/content/Context;
 
     .line 29
+    const/4 v0, 0x0
+
     invoke-direct {p0, p1, v0}, Lcom/facebook/drawee/backends/pipeline/PipelineDraweeControllerBuilderSupplier;-><init>(Landroid/content/Context;Lcom/facebook/drawee/backends/pipeline/DraweeConfig;)V
 
+    .line 30
     return-void
 .end method
 
 .method public constructor <init>(Landroid/content/Context;Lcom/facebook/drawee/backends/pipeline/DraweeConfig;)V
     .locals 1
-    .param p2    # Lcom/facebook/drawee/backends/pipeline/DraweeConfig;
+    .param p1, "context"    # Landroid/content/Context;
+    .param p2, "draweeConfig"    # Lcom/facebook/drawee/backends/pipeline/DraweeConfig;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -61,27 +64,33 @@
 
     invoke-direct {p0, p1, v0, p2}, Lcom/facebook/drawee/backends/pipeline/PipelineDraweeControllerBuilderSupplier;-><init>(Landroid/content/Context;Lcom/facebook/imagepipeline/core/ImagePipelineFactory;Lcom/facebook/drawee/backends/pipeline/DraweeConfig;)V
 
+    .line 36
     return-void
 .end method
 
 .method public constructor <init>(Landroid/content/Context;Lcom/facebook/imagepipeline/core/ImagePipelineFactory;Lcom/facebook/drawee/backends/pipeline/DraweeConfig;)V
     .locals 1
-    .param p3    # Lcom/facebook/drawee/backends/pipeline/DraweeConfig;
+    .param p1, "context"    # Landroid/content/Context;
+    .param p2, "imagePipelineFactory"    # Lcom/facebook/imagepipeline/core/ImagePipelineFactory;
+    .param p3, "draweeConfig"    # Lcom/facebook/drawee/backends/pipeline/DraweeConfig;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
 
+    .line 42
     const/4 v0, 0x0
 
-    .line 42
     invoke-direct {p0, p1, p2, v0, p3}, Lcom/facebook/drawee/backends/pipeline/PipelineDraweeControllerBuilderSupplier;-><init>(Landroid/content/Context;Lcom/facebook/imagepipeline/core/ImagePipelineFactory;Ljava/util/Set;Lcom/facebook/drawee/backends/pipeline/DraweeConfig;)V
 
+    .line 43
     return-void
 .end method
 
 .method public constructor <init>(Landroid/content/Context;Lcom/facebook/imagepipeline/core/ImagePipelineFactory;Ljava/util/Set;Lcom/facebook/drawee/backends/pipeline/DraweeConfig;)V
-    .locals 9
-    .param p4    # Lcom/facebook/drawee/backends/pipeline/DraweeConfig;
+    .locals 10
+    .param p1, "context"    # Landroid/content/Context;
+    .param p2, "imagePipelineFactory"    # Lcom/facebook/imagepipeline/core/ImagePipelineFactory;
+    .param p4, "draweeConfig"    # Lcom/facebook/drawee/backends/pipeline/DraweeConfig;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -99,6 +108,7 @@
     .end annotation
 
     .line 49
+    .local p3, "boundControllerListeners":Ljava/util/Set;, "Ljava/util/Set<Lcom/facebook/drawee/controller/ControllerListener;>;"
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     .line 50
@@ -111,78 +121,76 @@
 
     iput-object v0, p0, Lcom/facebook/drawee/backends/pipeline/PipelineDraweeControllerBuilderSupplier;->mImagePipeline:Lcom/facebook/imagepipeline/core/ImagePipeline;
 
+    .line 53
     if-eqz p4, :cond_0
 
-    .line 53
     invoke-virtual {p4}, Lcom/facebook/drawee/backends/pipeline/DraweeConfig;->getPipelineDraweeControllerFactory()Lcom/facebook/drawee/backends/pipeline/PipelineDraweeControllerFactory;
 
-    move-result-object v0
+    move-result-object v1
 
-    if-eqz v0, :cond_0
+    if-eqz v1, :cond_0
 
     .line 54
     invoke-virtual {p4}, Lcom/facebook/drawee/backends/pipeline/DraweeConfig;->getPipelineDraweeControllerFactory()Lcom/facebook/drawee/backends/pipeline/PipelineDraweeControllerFactory;
 
-    move-result-object v0
+    move-result-object v1
 
-    iput-object v0, p0, Lcom/facebook/drawee/backends/pipeline/PipelineDraweeControllerBuilderSupplier;->mPipelineDraweeControllerFactory:Lcom/facebook/drawee/backends/pipeline/PipelineDraweeControllerFactory;
+    iput-object v1, p0, Lcom/facebook/drawee/backends/pipeline/PipelineDraweeControllerBuilderSupplier;->mPipelineDraweeControllerFactory:Lcom/facebook/drawee/backends/pipeline/PipelineDraweeControllerFactory;
 
     goto :goto_0
 
     .line 56
     :cond_0
-    new-instance v0, Lcom/facebook/drawee/backends/pipeline/PipelineDraweeControllerFactory;
+    new-instance v1, Lcom/facebook/drawee/backends/pipeline/PipelineDraweeControllerFactory;
 
-    invoke-direct {v0}, Lcom/facebook/drawee/backends/pipeline/PipelineDraweeControllerFactory;-><init>()V
+    invoke-direct {v1}, Lcom/facebook/drawee/backends/pipeline/PipelineDraweeControllerFactory;-><init>()V
 
-    iput-object v0, p0, Lcom/facebook/drawee/backends/pipeline/PipelineDraweeControllerBuilderSupplier;->mPipelineDraweeControllerFactory:Lcom/facebook/drawee/backends/pipeline/PipelineDraweeControllerFactory;
+    iput-object v1, p0, Lcom/facebook/drawee/backends/pipeline/PipelineDraweeControllerBuilderSupplier;->mPipelineDraweeControllerFactory:Lcom/facebook/drawee/backends/pipeline/PipelineDraweeControllerFactory;
 
     .line 58
     :goto_0
-    iget-object v1, p0, Lcom/facebook/drawee/backends/pipeline/PipelineDraweeControllerBuilderSupplier;->mPipelineDraweeControllerFactory:Lcom/facebook/drawee/backends/pipeline/PipelineDraweeControllerFactory;
+    iget-object v2, p0, Lcom/facebook/drawee/backends/pipeline/PipelineDraweeControllerBuilderSupplier;->mPipelineDraweeControllerFactory:Lcom/facebook/drawee/backends/pipeline/PipelineDraweeControllerFactory;
 
     .line 59
     invoke-virtual {p1}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
 
-    move-result-object v2
+    move-result-object v3
 
     .line 60
     invoke-static {}, Lcom/facebook/drawee/components/DeferredReleaser;->getInstance()Lcom/facebook/drawee/components/DeferredReleaser;
 
-    move-result-object v3
+    move-result-object v4
 
     .line 61
     invoke-virtual {p2, p1}, Lcom/facebook/imagepipeline/core/ImagePipelineFactory;->getAnimatedDrawableFactory(Landroid/content/Context;)Lcom/facebook/imagepipeline/drawable/DrawableFactory;
 
-    move-result-object v4
+    move-result-object v5
 
     .line 62
     invoke-static {}, Lcom/facebook/common/executors/UiThreadImmediateExecutorService;->getInstance()Lcom/facebook/common/executors/UiThreadImmediateExecutorService;
 
-    move-result-object v5
-
-    iget-object p1, p0, Lcom/facebook/drawee/backends/pipeline/PipelineDraweeControllerBuilderSupplier;->mImagePipeline:Lcom/facebook/imagepipeline/core/ImagePipeline;
-
-    .line 63
-    invoke-virtual {p1}, Lcom/facebook/imagepipeline/core/ImagePipeline;->getBitmapMemoryCache()Lcom/facebook/imagepipeline/cache/MemoryCache;
-
     move-result-object v6
 
-    const/4 p1, 0x0
+    .line 63
+    invoke-virtual {v0}, Lcom/facebook/imagepipeline/core/ImagePipeline;->getBitmapMemoryCache()Lcom/facebook/imagepipeline/cache/MemoryCache;
+
+    move-result-object v7
+
+    const/4 v0, 0x0
 
     if-eqz p4, :cond_1
 
     .line 65
     invoke-virtual {p4}, Lcom/facebook/drawee/backends/pipeline/DraweeConfig;->getCustomDrawableFactories()Lcom/facebook/common/internal/ImmutableList;
 
-    move-result-object p2
+    move-result-object v1
 
-    move-object v7, p2
+    move-object v8, v1
 
     goto :goto_1
 
     :cond_1
-    move-object v7, p1
+    move-object v8, v0
 
     :goto_1
     if-eqz p4, :cond_2
@@ -190,17 +198,23 @@
     .line 68
     invoke-virtual {p4}, Lcom/facebook/drawee/backends/pipeline/DraweeConfig;->getDebugOverlayEnabledSupplier()Lcom/facebook/common/internal/Supplier;
 
-    move-result-object p1
+    move-result-object v0
+
+    goto :goto_2
 
     :cond_2
-    move-object v8, p1
+    nop
+
+    :goto_2
+    move-object v9, v0
 
     .line 58
-    invoke-virtual/range {v1 .. v8}, Lcom/facebook/drawee/backends/pipeline/PipelineDraweeControllerFactory;->init(Landroid/content/res/Resources;Lcom/facebook/drawee/components/DeferredReleaser;Lcom/facebook/imagepipeline/drawable/DrawableFactory;Ljava/util/concurrent/Executor;Lcom/facebook/imagepipeline/cache/MemoryCache;Lcom/facebook/common/internal/ImmutableList;Lcom/facebook/common/internal/Supplier;)V
+    invoke-virtual/range {v2 .. v9}, Lcom/facebook/drawee/backends/pipeline/PipelineDraweeControllerFactory;->init(Landroid/content/res/Resources;Lcom/facebook/drawee/components/DeferredReleaser;Lcom/facebook/imagepipeline/drawable/DrawableFactory;Ljava/util/concurrent/Executor;Lcom/facebook/imagepipeline/cache/MemoryCache;Lcom/facebook/common/internal/ImmutableList;Lcom/facebook/common/internal/Supplier;)V
 
     .line 70
     iput-object p3, p0, Lcom/facebook/drawee/backends/pipeline/PipelineDraweeControllerBuilderSupplier;->mBoundControllerListeners:Ljava/util/Set;
 
+    .line 71
     return-void
 .end method
 

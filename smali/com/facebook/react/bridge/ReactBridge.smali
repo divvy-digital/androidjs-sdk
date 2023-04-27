@@ -4,7 +4,7 @@
 
 
 # static fields
-.field private static sDidInit:Z = false
+.field private static sDidInit:Z
 
 .field private static volatile sLoadEndTime:J
 
@@ -13,7 +13,20 @@
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 0
+    .locals 2
+
+    .line 17
+    const-wide/16 v0, 0x0
+
+    sput-wide v0, Lcom/facebook/react/bridge/ReactBridge;->sLoadStartTime:J
+
+    .line 18
+    sput-wide v0, Lcom/facebook/react/bridge/ReactBridge;->sLoadEndTime:J
+
+    .line 20
+    const/4 v0, 0x0
+
+    sput-boolean v0, Lcom/facebook/react/bridge/ReactBridge;->sDidInit:Z
 
     return-void
 .end method
@@ -65,10 +78,10 @@
 
     return-void
 
+    .line 26
     :cond_0
     const/4 v1, 0x1
 
-    .line 26
     :try_start_1
     sput-boolean v1, Lcom/facebook/react/bridge/ReactBridge;->sDidInit:Z
 
@@ -79,11 +92,11 @@
 
     sput-wide v1, Lcom/facebook/react/bridge/ReactBridge;->sLoadStartTime:J
 
+    .line 29
     const-string v1, "ReactBridge.staticInit::load:reactnativejni"
 
     const-wide/16 v2, 0x0
 
-    .line 29
     invoke-static {v2, v3, v1}, Lcom/facebook/systrace/Systrace;->beginSection(JLjava/lang/String;)V
 
     .line 30
@@ -91,9 +104,9 @@
 
     invoke-static {v1}, Lcom/facebook/react/bridge/ReactMarker;->logMarker(Lcom/facebook/react/bridge/ReactMarkerConstants;)V
 
+    .line 31
     const-string v1, "reactnativejni"
 
-    .line 31
     invoke-static {v1}, Lcom/facebook/soloader/SoLoader;->loadLibrary(Ljava/lang/String;)Z
 
     .line 32
@@ -118,6 +131,7 @@
 
     return-void
 
+    .line 22
     :catchall_0
     move-exception v1
 

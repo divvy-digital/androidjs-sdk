@@ -7,9 +7,6 @@
 
 
 # annotations
-.annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-.end annotation
-
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
         Lcom/facebook/react/bridge/CatalystInstanceImpl$Builder;,
@@ -106,9 +103,18 @@
 .end method
 
 .method private constructor <init>(Lcom/facebook/react/bridge/queue/ReactQueueConfigurationSpec;Lcom/facebook/react/bridge/JavaScriptExecutor;Lcom/facebook/react/bridge/NativeModuleRegistry;Lcom/facebook/react/bridge/JSBundleLoader;Lcom/facebook/react/bridge/NativeModuleCallExceptionHandler;)V
-    .locals 10
+    .locals 15
+    .param p1, "reactQueueConfigurationSpec"    # Lcom/facebook/react/bridge/queue/ReactQueueConfigurationSpec;
+    .param p2, "jsExecutor"    # Lcom/facebook/react/bridge/JavaScriptExecutor;
+    .param p3, "nativeModuleRegistry"    # Lcom/facebook/react/bridge/NativeModuleRegistry;
+    .param p4, "jsBundleLoader"    # Lcom/facebook/react/bridge/JSBundleLoader;
+    .param p5, "nativeModuleCallExceptionHandler"    # Lcom/facebook/react/bridge/NativeModuleCallExceptionHandler;
 
     .line 108
+    move-object v7, p0
+
+    move-object/from16 v8, p3
+
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     .line 77
@@ -118,7 +124,7 @@
 
     invoke-direct {v0, v1}, Ljava/util/concurrent/atomic/AtomicInteger;-><init>(I)V
 
-    iput-object v0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mPendingJSCalls:Ljava/util/concurrent/atomic/AtomicInteger;
+    iput-object v0, v7, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mPendingJSCalls:Ljava/util/concurrent/atomic/AtomicInteger;
 
     .line 78
     new-instance v0, Ljava/lang/StringBuilder;
@@ -129,6 +135,8 @@
 
     invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     sget-object v2, Lcom/facebook/react/bridge/CatalystInstanceImpl;->sNextInstanceIdForTrace:Ljava/util/concurrent/atomic/AtomicInteger;
 
     .line 79
@@ -138,187 +146,192 @@
 
     invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
     move-result-object v0
 
-    iput-object v0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mJsPendingCallsTitleForTrace:Ljava/lang/String;
+    iput-object v0, v7, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mJsPendingCallsTitleForTrace:Ljava/lang/String;
 
     .line 80
-    iput-boolean v1, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mDestroyed:Z
+    iput-boolean v1, v7, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mDestroyed:Z
 
     .line 84
     new-instance v0, Ljava/util/ArrayList;
 
     invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V
 
-    iput-object v0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mJSCallsPendingInit:Ljava/util/ArrayList;
+    iput-object v0, v7, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mJSCallsPendingInit:Ljava/util/ArrayList;
 
     .line 85
     new-instance v0, Ljava/lang/Object;
 
     invoke-direct {v0}, Ljava/lang/Object;-><init>()V
 
-    iput-object v0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mJSCallsPendingInitLock:Ljava/lang/Object;
+    iput-object v0, v7, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mJSCallsPendingInitLock:Ljava/lang/Object;
 
     .line 88
     new-instance v0, Lcom/facebook/react/bridge/JSIModuleRegistry;
 
     invoke-direct {v0}, Lcom/facebook/react/bridge/JSIModuleRegistry;-><init>()V
 
-    iput-object v0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mJSIModuleRegistry:Lcom/facebook/react/bridge/JSIModuleRegistry;
+    iput-object v0, v7, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mJSIModuleRegistry:Lcom/facebook/react/bridge/JSIModuleRegistry;
 
     .line 91
-    iput-boolean v1, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mInitialized:Z
+    iput-boolean v1, v7, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mInitialized:Z
 
     .line 92
-    iput-boolean v1, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mAcceptCalls:Z
-
-    const-string v0, "ReactNative"
-
-    const-string v1, "Initializing React Xplat Bridge."
+    iput-boolean v1, v7, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mAcceptCalls:Z
 
     .line 109
-    invoke-static {v0, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+    const-string v0, "Initializing React Xplat Bridge."
 
-    const-wide/16 v1, 0x0
+    const-string v9, "ReactNative"
 
-    const-string v3, "createCatalystInstanceImpl"
+    invoke-static {v9, v0}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
     .line 110
-    invoke-static {v1, v2, v3}, Lcom/facebook/systrace/Systrace;->beginSection(JLjava/lang/String;)V
+    const-string v0, "createCatalystInstanceImpl"
+
+    const-wide/16 v10, 0x0
+
+    invoke-static {v10, v11, v0}, Lcom/facebook/systrace/Systrace;->beginSection(JLjava/lang/String;)V
 
     .line 112
     invoke-static {}, Lcom/facebook/react/bridge/CatalystInstanceImpl;->initHybrid()Lcom/facebook/jni/HybridData;
 
-    move-result-object v3
+    move-result-object v0
 
-    iput-object v3, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mHybridData:Lcom/facebook/jni/HybridData;
+    iput-object v0, v7, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mHybridData:Lcom/facebook/jni/HybridData;
 
     .line 114
-    new-instance v3, Lcom/facebook/react/bridge/CatalystInstanceImpl$NativeExceptionHandler;
+    new-instance v0, Lcom/facebook/react/bridge/CatalystInstanceImpl$NativeExceptionHandler;
 
-    const/4 v4, 0x0
+    const/4 v1, 0x0
 
-    invoke-direct {v3, p0, v4}, Lcom/facebook/react/bridge/CatalystInstanceImpl$NativeExceptionHandler;-><init>(Lcom/facebook/react/bridge/CatalystInstanceImpl;Lcom/facebook/react/bridge/CatalystInstanceImpl$1;)V
+    invoke-direct {v0, p0, v1}, Lcom/facebook/react/bridge/CatalystInstanceImpl$NativeExceptionHandler;-><init>(Lcom/facebook/react/bridge/CatalystInstanceImpl;Lcom/facebook/react/bridge/CatalystInstanceImpl$1;)V
 
-    invoke-static {p1, v3}, Lcom/facebook/react/bridge/queue/ReactQueueConfigurationImpl;->create(Lcom/facebook/react/bridge/queue/ReactQueueConfigurationSpec;Lcom/facebook/react/bridge/queue/QueueThreadExceptionHandler;)Lcom/facebook/react/bridge/queue/ReactQueueConfigurationImpl;
+    move-object/from16 v12, p1
 
-    move-result-object p1
+    invoke-static {v12, v0}, Lcom/facebook/react/bridge/queue/ReactQueueConfigurationImpl;->create(Lcom/facebook/react/bridge/queue/ReactQueueConfigurationSpec;Lcom/facebook/react/bridge/queue/QueueThreadExceptionHandler;)Lcom/facebook/react/bridge/queue/ReactQueueConfigurationImpl;
 
-    iput-object p1, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mReactQueueConfiguration:Lcom/facebook/react/bridge/queue/ReactQueueConfigurationImpl;
+    move-result-object v0
+
+    iput-object v0, v7, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mReactQueueConfiguration:Lcom/facebook/react/bridge/queue/ReactQueueConfigurationImpl;
 
     .line 117
-    new-instance p1, Ljava/util/concurrent/CopyOnWriteArrayList;
+    new-instance v1, Ljava/util/concurrent/CopyOnWriteArrayList;
 
-    invoke-direct {p1}, Ljava/util/concurrent/CopyOnWriteArrayList;-><init>()V
+    invoke-direct {v1}, Ljava/util/concurrent/CopyOnWriteArrayList;-><init>()V
 
-    iput-object p1, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mBridgeIdleListeners:Ljava/util/concurrent/CopyOnWriteArrayList;
+    iput-object v1, v7, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mBridgeIdleListeners:Ljava/util/concurrent/CopyOnWriteArrayList;
 
     .line 118
-    iput-object p3, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mNativeModuleRegistry:Lcom/facebook/react/bridge/NativeModuleRegistry;
+    iput-object v8, v7, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mNativeModuleRegistry:Lcom/facebook/react/bridge/NativeModuleRegistry;
 
     .line 119
-    new-instance p1, Lcom/facebook/react/bridge/JavaScriptModuleRegistry;
+    new-instance v1, Lcom/facebook/react/bridge/JavaScriptModuleRegistry;
 
-    invoke-direct {p1}, Lcom/facebook/react/bridge/JavaScriptModuleRegistry;-><init>()V
+    invoke-direct {v1}, Lcom/facebook/react/bridge/JavaScriptModuleRegistry;-><init>()V
 
-    iput-object p1, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mJSModuleRegistry:Lcom/facebook/react/bridge/JavaScriptModuleRegistry;
+    iput-object v1, v7, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mJSModuleRegistry:Lcom/facebook/react/bridge/JavaScriptModuleRegistry;
 
     .line 120
-    iput-object p4, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mJSBundleLoader:Lcom/facebook/react/bridge/JSBundleLoader;
+    move-object/from16 v13, p4
+
+    iput-object v13, v7, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mJSBundleLoader:Lcom/facebook/react/bridge/JSBundleLoader;
 
     .line 121
-    iput-object p5, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mNativeModuleCallExceptionHandler:Lcom/facebook/react/bridge/NativeModuleCallExceptionHandler;
+    move-object/from16 v14, p5
+
+    iput-object v14, v7, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mNativeModuleCallExceptionHandler:Lcom/facebook/react/bridge/NativeModuleCallExceptionHandler;
 
     .line 122
-    iget-object p1, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mReactQueueConfiguration:Lcom/facebook/react/bridge/queue/ReactQueueConfigurationImpl;
+    invoke-virtual {v0}, Lcom/facebook/react/bridge/queue/ReactQueueConfigurationImpl;->getNativeModulesQueueThread()Lcom/facebook/react/bridge/queue/MessageQueueThread;
 
-    invoke-virtual {p1}, Lcom/facebook/react/bridge/queue/ReactQueueConfigurationImpl;->getNativeModulesQueueThread()Lcom/facebook/react/bridge/queue/MessageQueueThread;
+    move-result-object v4
 
-    move-result-object p1
-
-    iput-object p1, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mNativeModulesQueueThread:Lcom/facebook/react/bridge/queue/MessageQueueThread;
+    iput-object v4, v7, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mNativeModulesQueueThread:Lcom/facebook/react/bridge/queue/MessageQueueThread;
 
     .line 123
-    new-instance p1, Lcom/facebook/react/bridge/CatalystInstanceImpl$JSProfilerTraceListener;
+    new-instance v1, Lcom/facebook/react/bridge/CatalystInstanceImpl$JSProfilerTraceListener;
 
-    invoke-direct {p1, p0}, Lcom/facebook/react/bridge/CatalystInstanceImpl$JSProfilerTraceListener;-><init>(Lcom/facebook/react/bridge/CatalystInstanceImpl;)V
+    invoke-direct {v1, p0}, Lcom/facebook/react/bridge/CatalystInstanceImpl$JSProfilerTraceListener;-><init>(Lcom/facebook/react/bridge/CatalystInstanceImpl;)V
 
-    iput-object p1, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mTraceListener:Lcom/facebook/systrace/TraceListener;
+    iput-object v1, v7, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mTraceListener:Lcom/facebook/systrace/TraceListener;
 
     .line 124
-    invoke-static {v1, v2}, Lcom/facebook/systrace/Systrace;->endSection(J)V
-
-    const-string p1, "Initializing React Xplat Bridge before initializeBridge"
+    invoke-static {v10, v11}, Lcom/facebook/systrace/Systrace;->endSection(J)V
 
     .line 126
-    invoke-static {v0, p1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+    const-string v1, "Initializing React Xplat Bridge before initializeBridge"
 
-    const-string p1, "initializeCxxBridge"
+    invoke-static {v9, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
     .line 127
-    invoke-static {v1, v2, p1}, Lcom/facebook/systrace/Systrace;->beginSection(JLjava/lang/String;)V
+    const-string v1, "initializeCxxBridge"
+
+    invoke-static {v10, v11, v1}, Lcom/facebook/systrace/Systrace;->beginSection(JLjava/lang/String;)V
 
     .line 128
-    new-instance v4, Lcom/facebook/react/bridge/CatalystInstanceImpl$BridgeCallback;
+    new-instance v1, Lcom/facebook/react/bridge/CatalystInstanceImpl$BridgeCallback;
 
-    invoke-direct {v4, p0}, Lcom/facebook/react/bridge/CatalystInstanceImpl$BridgeCallback;-><init>(Lcom/facebook/react/bridge/CatalystInstanceImpl;)V
-
-    iget-object p1, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mReactQueueConfiguration:Lcom/facebook/react/bridge/queue/ReactQueueConfigurationImpl;
+    invoke-direct {v1, p0}, Lcom/facebook/react/bridge/CatalystInstanceImpl$BridgeCallback;-><init>(Lcom/facebook/react/bridge/CatalystInstanceImpl;)V
 
     .line 131
-    invoke-virtual {p1}, Lcom/facebook/react/bridge/queue/ReactQueueConfigurationImpl;->getJSQueueThread()Lcom/facebook/react/bridge/queue/MessageQueueThread;
+    invoke-virtual {v0}, Lcom/facebook/react/bridge/queue/ReactQueueConfigurationImpl;->getJSQueueThread()Lcom/facebook/react/bridge/queue/MessageQueueThread;
+
+    move-result-object v3
+
+    .line 133
+    invoke-virtual {v8, p0}, Lcom/facebook/react/bridge/NativeModuleRegistry;->getJavaModules(Lcom/facebook/react/bridge/JSInstance;)Ljava/util/Collection;
+
+    move-result-object v5
+
+    .line 134
+    invoke-virtual/range {p3 .. p3}, Lcom/facebook/react/bridge/NativeModuleRegistry;->getCxxModules()Ljava/util/Collection;
 
     move-result-object v6
 
-    iget-object v7, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mNativeModulesQueueThread:Lcom/facebook/react/bridge/queue/MessageQueueThread;
-
-    iget-object p1, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mNativeModuleRegistry:Lcom/facebook/react/bridge/NativeModuleRegistry;
-
-    .line 133
-    invoke-virtual {p1, p0}, Lcom/facebook/react/bridge/NativeModuleRegistry;->getJavaModules(Lcom/facebook/react/bridge/JSInstance;)Ljava/util/Collection;
-
-    move-result-object v8
-
-    iget-object p1, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mNativeModuleRegistry:Lcom/facebook/react/bridge/NativeModuleRegistry;
-
-    .line 134
-    invoke-virtual {p1}, Lcom/facebook/react/bridge/NativeModuleRegistry;->getCxxModules()Ljava/util/Collection;
-
-    move-result-object v9
-
-    move-object v3, p0
-
-    move-object v5, p2
-
     .line 128
-    invoke-direct/range {v3 .. v9}, Lcom/facebook/react/bridge/CatalystInstanceImpl;->initializeBridge(Lcom/facebook/react/bridge/ReactCallback;Lcom/facebook/react/bridge/JavaScriptExecutor;Lcom/facebook/react/bridge/queue/MessageQueueThread;Lcom/facebook/react/bridge/queue/MessageQueueThread;Ljava/util/Collection;Ljava/util/Collection;)V
+    move-object v0, p0
 
-    const-string p1, "Initializing React Xplat Bridge after initializeBridge"
+    move-object/from16 v2, p2
+
+    invoke-direct/range {v0 .. v6}, Lcom/facebook/react/bridge/CatalystInstanceImpl;->initializeBridge(Lcom/facebook/react/bridge/ReactCallback;Lcom/facebook/react/bridge/JavaScriptExecutor;Lcom/facebook/react/bridge/queue/MessageQueueThread;Lcom/facebook/react/bridge/queue/MessageQueueThread;Ljava/util/Collection;Ljava/util/Collection;)V
 
     .line 135
-    invoke-static {v0, p1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+    const-string v0, "Initializing React Xplat Bridge after initializeBridge"
+
+    invoke-static {v9, v0}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
     .line 136
-    invoke-static {v1, v2}, Lcom/facebook/systrace/Systrace;->endSection(J)V
+    invoke-static {v10, v11}, Lcom/facebook/systrace/Systrace;->endSection(J)V
 
     .line 138
-    new-instance p1, Lcom/facebook/react/bridge/JavaScriptContextHolder;
+    new-instance v0, Lcom/facebook/react/bridge/JavaScriptContextHolder;
 
     invoke-direct {p0}, Lcom/facebook/react/bridge/CatalystInstanceImpl;->getJavaScriptContext()J
 
-    move-result-wide p2
+    move-result-wide v1
 
-    invoke-direct {p1, p2, p3}, Lcom/facebook/react/bridge/JavaScriptContextHolder;-><init>(J)V
+    invoke-direct {v0, v1, v2}, Lcom/facebook/react/bridge/JavaScriptContextHolder;-><init>(J)V
 
-    iput-object p1, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mJavaScriptContextHolder:Lcom/facebook/react/bridge/JavaScriptContextHolder;
+    iput-object v0, v7, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mJavaScriptContextHolder:Lcom/facebook/react/bridge/JavaScriptContextHolder;
 
+    .line 139
     return-void
 .end method
 
 .method synthetic constructor <init>(Lcom/facebook/react/bridge/queue/ReactQueueConfigurationSpec;Lcom/facebook/react/bridge/JavaScriptExecutor;Lcom/facebook/react/bridge/NativeModuleRegistry;Lcom/facebook/react/bridge/JSBundleLoader;Lcom/facebook/react/bridge/NativeModuleCallExceptionHandler;Lcom/facebook/react/bridge/CatalystInstanceImpl$1;)V
     .locals 0
+    .param p1, "x0"    # Lcom/facebook/react/bridge/queue/ReactQueueConfigurationSpec;
+    .param p2, "x1"    # Lcom/facebook/react/bridge/JavaScriptExecutor;
+    .param p3, "x2"    # Lcom/facebook/react/bridge/NativeModuleRegistry;
+    .param p4, "x3"    # Lcom/facebook/react/bridge/JSBundleLoader;
+    .param p5, "x4"    # Lcom/facebook/react/bridge/NativeModuleCallExceptionHandler;
+    .param p6, "x5"    # Lcom/facebook/react/bridge/CatalystInstanceImpl$1;
 
     .line 44
     invoke-direct/range {p0 .. p5}, Lcom/facebook/react/bridge/CatalystInstanceImpl;-><init>(Lcom/facebook/react/bridge/queue/ReactQueueConfigurationSpec;Lcom/facebook/react/bridge/JavaScriptExecutor;Lcom/facebook/react/bridge/NativeModuleRegistry;Lcom/facebook/react/bridge/JSBundleLoader;Lcom/facebook/react/bridge/NativeModuleCallExceptionHandler;)V
@@ -328,6 +341,10 @@
 
 .method static synthetic access$000(Lcom/facebook/react/bridge/CatalystInstanceImpl;Ljava/lang/String;Ljava/lang/String;Lcom/facebook/react/bridge/NativeArray;)V
     .locals 0
+    .param p0, "x0"    # Lcom/facebook/react/bridge/CatalystInstanceImpl;
+    .param p1, "x1"    # Ljava/lang/String;
+    .param p2, "x2"    # Ljava/lang/String;
+    .param p3, "x3"    # Lcom/facebook/react/bridge/NativeArray;
 
     .line 44
     invoke-direct {p0, p1, p2, p3}, Lcom/facebook/react/bridge/CatalystInstanceImpl;->jniCallJSFunction(Ljava/lang/String;Ljava/lang/String;Lcom/facebook/react/bridge/NativeArray;)V
@@ -337,6 +354,8 @@
 
 .method static synthetic access$1000(Lcom/facebook/react/bridge/CatalystInstanceImpl;Ljava/lang/Exception;)V
     .locals 0
+    .param p0, "x0"    # Lcom/facebook/react/bridge/CatalystInstanceImpl;
+    .param p1, "x1"    # Ljava/lang/Exception;
 
     .line 44
     invoke-direct {p0, p1}, Lcom/facebook/react/bridge/CatalystInstanceImpl;->onNativeException(Ljava/lang/Exception;)V
@@ -345,16 +364,18 @@
 .end method
 
 .method static synthetic access$200(Lcom/facebook/react/bridge/CatalystInstanceImpl;)Lcom/facebook/react/bridge/NativeModuleRegistry;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/bridge/CatalystInstanceImpl;
 
     .line 44
-    iget-object p0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mNativeModuleRegistry:Lcom/facebook/react/bridge/NativeModuleRegistry;
+    iget-object v0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mNativeModuleRegistry:Lcom/facebook/react/bridge/NativeModuleRegistry;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$300(Lcom/facebook/react/bridge/CatalystInstanceImpl;)V
     .locals 0
+    .param p0, "x0"    # Lcom/facebook/react/bridge/CatalystInstanceImpl;
 
     .line 44
     invoke-direct {p0}, Lcom/facebook/react/bridge/CatalystInstanceImpl;->incrementPendingJSCalls()V
@@ -364,6 +385,7 @@
 
 .method static synthetic access$400(Lcom/facebook/react/bridge/CatalystInstanceImpl;)V
     .locals 0
+    .param p0, "x0"    # Lcom/facebook/react/bridge/CatalystInstanceImpl;
 
     .line 44
     invoke-direct {p0}, Lcom/facebook/react/bridge/CatalystInstanceImpl;->decrementPendingJSCalls()V
@@ -372,48 +394,53 @@
 .end method
 
 .method static synthetic access$500(Lcom/facebook/react/bridge/CatalystInstanceImpl;)Lcom/facebook/react/bridge/JSIModuleRegistry;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/bridge/CatalystInstanceImpl;
 
     .line 44
-    iget-object p0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mJSIModuleRegistry:Lcom/facebook/react/bridge/JSIModuleRegistry;
+    iget-object v0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mJSIModuleRegistry:Lcom/facebook/react/bridge/JSIModuleRegistry;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$600(Lcom/facebook/react/bridge/CatalystInstanceImpl;)Ljava/util/concurrent/atomic/AtomicInteger;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/bridge/CatalystInstanceImpl;
 
     .line 44
-    iget-object p0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mPendingJSCalls:Ljava/util/concurrent/atomic/AtomicInteger;
+    iget-object v0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mPendingJSCalls:Ljava/util/concurrent/atomic/AtomicInteger;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$700(Lcom/facebook/react/bridge/CatalystInstanceImpl;)Ljava/util/concurrent/CopyOnWriteArrayList;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/bridge/CatalystInstanceImpl;
 
     .line 44
-    iget-object p0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mBridgeIdleListeners:Ljava/util/concurrent/CopyOnWriteArrayList;
+    iget-object v0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mBridgeIdleListeners:Ljava/util/concurrent/CopyOnWriteArrayList;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$800(Lcom/facebook/react/bridge/CatalystInstanceImpl;)Lcom/facebook/react/bridge/JavaScriptContextHolder;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/bridge/CatalystInstanceImpl;
 
     .line 44
-    iget-object p0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mJavaScriptContextHolder:Lcom/facebook/react/bridge/JavaScriptContextHolder;
+    iget-object v0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mJavaScriptContextHolder:Lcom/facebook/react/bridge/JavaScriptContextHolder;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$900(Lcom/facebook/react/bridge/CatalystInstanceImpl;)Lcom/facebook/jni/HybridData;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/bridge/CatalystInstanceImpl;
 
     .line 44
-    iget-object p0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mHybridData:Lcom/facebook/jni/HybridData;
+    iget-object v0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mHybridData:Lcom/facebook/jni/HybridData;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method private decrementPendingJSCalls()V
@@ -426,6 +453,8 @@
 
     move-result v0
 
+    .line 522
+    .local v0, "newPendingCalls":I
     if-nez v0, :cond_0
 
     const/4 v1, 0x1
@@ -435,34 +464,36 @@
     :cond_0
     const/4 v1, 0x0
 
+    .line 523
+    .local v1, "isNowIdle":Z
     :goto_0
     const-wide/16 v2, 0x0
 
-    .line 523
     iget-object v4, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mJsPendingCallsTitleForTrace:Ljava/lang/String;
 
     invoke-static {v2, v3, v4, v0}, Lcom/facebook/systrace/Systrace;->traceCounter(JLjava/lang/String;I)V
 
+    .line 528
     if-eqz v1, :cond_1
 
-    .line 528
-    iget-object v0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mBridgeIdleListeners:Ljava/util/concurrent/CopyOnWriteArrayList;
+    iget-object v2, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mBridgeIdleListeners:Ljava/util/concurrent/CopyOnWriteArrayList;
 
-    invoke-virtual {v0}, Ljava/util/concurrent/CopyOnWriteArrayList;->isEmpty()Z
+    invoke-virtual {v2}, Ljava/util/concurrent/CopyOnWriteArrayList;->isEmpty()Z
 
-    move-result v0
+    move-result v2
 
-    if-nez v0, :cond_1
+    if-nez v2, :cond_1
 
     .line 529
-    iget-object v0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mNativeModulesQueueThread:Lcom/facebook/react/bridge/queue/MessageQueueThread;
+    iget-object v2, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mNativeModulesQueueThread:Lcom/facebook/react/bridge/queue/MessageQueueThread;
 
-    new-instance v1, Lcom/facebook/react/bridge/CatalystInstanceImpl$4;
+    new-instance v3, Lcom/facebook/react/bridge/CatalystInstanceImpl$4;
 
-    invoke-direct {v1, p0}, Lcom/facebook/react/bridge/CatalystInstanceImpl$4;-><init>(Lcom/facebook/react/bridge/CatalystInstanceImpl;)V
+    invoke-direct {v3, p0}, Lcom/facebook/react/bridge/CatalystInstanceImpl$4;-><init>(Lcom/facebook/react/bridge/CatalystInstanceImpl;)V
 
-    invoke-interface {v0, v1}, Lcom/facebook/react/bridge/queue/MessageQueueThread;->runOnQueue(Ljava/lang/Runnable;)V
+    invoke-interface {v2, v3}, Lcom/facebook/react/bridge/queue/MessageQueueThread;->runOnQueue(Ljava/lang/Runnable;)V
 
+    .line 538
     :cond_1
     return-void
 .end method
@@ -471,7 +502,7 @@
 .end method
 
 .method private getNameFromAnnotation(Ljava/lang/Class;)Ljava/lang/String;
-    .locals 3
+    .locals 4
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "<T::",
@@ -484,6 +515,7 @@
     .end annotation
 
     .line 436
+    .local p1, "nativeModuleInterface":Ljava/lang/Class;, "Ljava/lang/Class<TT;>;"
     const-class v0, Lcom/facebook/react/module/annotations/ReactModule;
 
     invoke-virtual {p1, v0}, Ljava/lang/Class;->getAnnotation(Ljava/lang/Class;)Ljava/lang/annotation/Annotation;
@@ -492,40 +524,46 @@
 
     check-cast v0, Lcom/facebook/react/module/annotations/ReactModule;
 
+    .line 437
+    .local v0, "annotation":Lcom/facebook/react/module/annotations/ReactModule;
     if-eqz v0, :cond_0
 
     .line 440
     invoke-interface {v0}, Lcom/facebook/react/module/annotations/ReactModule;->name()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v1
 
-    return-object p1
+    return-object v1
 
     .line 438
     :cond_0
-    new-instance v0, Ljava/lang/IllegalArgumentException;
+    new-instance v1, Ljava/lang/IllegalArgumentException;
 
-    new-instance v1, Ljava/lang/StringBuilder;
+    new-instance v2, Ljava/lang/StringBuilder;
 
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v2, "Could not find @ReactModule annotation in "
+    const-string v3, "Could not find @ReactModule annotation in "
 
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v2
 
     invoke-virtual {p1}, Ljava/lang/Class;->getCanonicalName()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v3
 
-    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    move-result-object v2
 
-    move-result-object p1
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    invoke-direct {v0, p1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+    move-result-object v2
 
-    throw v0
+    invoke-direct {v1, v2}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+
+    throw v1
 .end method
 
 .method private incrementPendingJSCalls()V
@@ -538,47 +576,49 @@
 
     move-result v0
 
-    const/4 v1, 0x1
-
+    .line 501
+    .local v0, "oldPendingCalls":I
     if-nez v0, :cond_0
 
-    const/4 v2, 0x1
+    const/4 v1, 0x1
 
     goto :goto_0
 
     :cond_0
-    const/4 v2, 0x0
-
-    :goto_0
-    const-wide/16 v3, 0x0
+    const/4 v1, 0x0
 
     .line 502
-    iget-object v5, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mJsPendingCallsTitleForTrace:Ljava/lang/String;
+    .local v1, "wasIdle":Z
+    :goto_0
+    iget-object v2, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mJsPendingCallsTitleForTrace:Ljava/lang/String;
 
-    add-int/2addr v0, v1
+    add-int/lit8 v3, v0, 0x1
 
-    invoke-static {v3, v4, v5, v0}, Lcom/facebook/systrace/Systrace;->traceCounter(JLjava/lang/String;I)V
+    const-wide/16 v4, 0x0
 
-    if-eqz v2, :cond_1
+    invoke-static {v4, v5, v2, v3}, Lcom/facebook/systrace/Systrace;->traceCounter(JLjava/lang/String;I)V
 
     .line 506
-    iget-object v0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mBridgeIdleListeners:Ljava/util/concurrent/CopyOnWriteArrayList;
+    if-eqz v1, :cond_1
 
-    invoke-virtual {v0}, Ljava/util/concurrent/CopyOnWriteArrayList;->isEmpty()Z
+    iget-object v2, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mBridgeIdleListeners:Ljava/util/concurrent/CopyOnWriteArrayList;
 
-    move-result v0
+    invoke-virtual {v2}, Ljava/util/concurrent/CopyOnWriteArrayList;->isEmpty()Z
 
-    if-nez v0, :cond_1
+    move-result v2
+
+    if-nez v2, :cond_1
 
     .line 507
-    iget-object v0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mNativeModulesQueueThread:Lcom/facebook/react/bridge/queue/MessageQueueThread;
+    iget-object v2, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mNativeModulesQueueThread:Lcom/facebook/react/bridge/queue/MessageQueueThread;
 
-    new-instance v1, Lcom/facebook/react/bridge/CatalystInstanceImpl$3;
+    new-instance v3, Lcom/facebook/react/bridge/CatalystInstanceImpl$3;
 
-    invoke-direct {v1, p0}, Lcom/facebook/react/bridge/CatalystInstanceImpl$3;-><init>(Lcom/facebook/react/bridge/CatalystInstanceImpl;)V
+    invoke-direct {v3, p0}, Lcom/facebook/react/bridge/CatalystInstanceImpl$3;-><init>(Lcom/facebook/react/bridge/CatalystInstanceImpl;)V
 
-    invoke-interface {v0, v1}, Lcom/facebook/react/bridge/queue/MessageQueueThread;->runOnQueue(Ljava/lang/Runnable;)V
+    invoke-interface {v2, v3}, Lcom/facebook/react/bridge/queue/MessageQueueThread;->runOnQueue(Ljava/lang/Runnable;)V
 
+    .line 516
     :cond_1
     return-void
 .end method
@@ -643,7 +683,8 @@
 .end method
 
 .method private onNativeException(Ljava/lang/Exception;)V
-    .locals 1
+    .locals 2
+    .param p1, "e"    # Ljava/lang/Exception;
 
     .line 541
     iget-object v0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mNativeModuleCallExceptionHandler:Lcom/facebook/react/bridge/NativeModuleCallExceptionHandler;
@@ -651,18 +692,19 @@
     invoke-interface {v0, p1}, Lcom/facebook/react/bridge/NativeModuleCallExceptionHandler;->handleException(Ljava/lang/Exception;)V
 
     .line 542
-    iget-object p1, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mReactQueueConfiguration:Lcom/facebook/react/bridge/queue/ReactQueueConfigurationImpl;
+    iget-object v0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mReactQueueConfiguration:Lcom/facebook/react/bridge/queue/ReactQueueConfigurationImpl;
 
-    invoke-virtual {p1}, Lcom/facebook/react/bridge/queue/ReactQueueConfigurationImpl;->getUIQueueThread()Lcom/facebook/react/bridge/queue/MessageQueueThread;
+    invoke-virtual {v0}, Lcom/facebook/react/bridge/queue/ReactQueueConfigurationImpl;->getUIQueueThread()Lcom/facebook/react/bridge/queue/MessageQueueThread;
 
-    move-result-object p1
+    move-result-object v0
 
-    new-instance v0, Lcom/facebook/react/bridge/CatalystInstanceImpl$5;
+    new-instance v1, Lcom/facebook/react/bridge/CatalystInstanceImpl$5;
 
-    invoke-direct {v0, p0}, Lcom/facebook/react/bridge/CatalystInstanceImpl$5;-><init>(Lcom/facebook/react/bridge/CatalystInstanceImpl;)V
+    invoke-direct {v1, p0}, Lcom/facebook/react/bridge/CatalystInstanceImpl$5;-><init>(Lcom/facebook/react/bridge/CatalystInstanceImpl;)V
 
-    invoke-interface {p1, v0}, Lcom/facebook/react/bridge/queue/MessageQueueThread;->runOnQueue(Ljava/lang/Runnable;)V
+    invoke-interface {v0, v1}, Lcom/facebook/react/bridge/queue/MessageQueueThread;->runOnQueue(Ljava/lang/Runnable;)V
 
+    .line 549
     return-void
 .end method
 
@@ -670,12 +712,14 @@
 # virtual methods
 .method public addBridgeIdleDebugListener(Lcom/facebook/react/bridge/NotThreadSafeBridgeIdleDebugListener;)V
     .locals 1
+    .param p1, "listener"    # Lcom/facebook/react/bridge/NotThreadSafeBridgeIdleDebugListener;
 
     .line 467
     iget-object v0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mBridgeIdleListeners:Ljava/util/concurrent/CopyOnWriteArrayList;
 
     invoke-virtual {v0, p1}, Ljava/util/concurrent/CopyOnWriteArrayList;->add(Ljava/lang/Object;)Z
 
+    .line 468
     return-void
 .end method
 
@@ -691,15 +735,18 @@
     .end annotation
 
     .line 489
+    .local p1, "jsiModules":Ljava/util/List;, "Ljava/util/List<Lcom/facebook/react/bridge/JSIModuleSpec;>;"
     iget-object v0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mJSIModuleRegistry:Lcom/facebook/react/bridge/JSIModuleRegistry;
 
     invoke-virtual {v0, p1}, Lcom/facebook/react/bridge/JSIModuleRegistry;->registerModules(Ljava/util/List;)V
 
+    .line 490
     return-void
 .end method
 
 .method public callFunction(Lcom/facebook/react/bridge/CatalystInstanceImpl$PendingJSCall;)V
-    .locals 2
+    .locals 4
+    .param p1, "function"    # Lcom/facebook/react/bridge/CatalystInstanceImpl$PendingJSCall;
 
     .line 293
     iget-boolean v0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mDestroyed:Z
@@ -709,30 +756,37 @@
     .line 294
     invoke-virtual {p1}, Lcom/facebook/react/bridge/CatalystInstanceImpl$PendingJSCall;->toString()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v0
 
     .line 295
-    new-instance v0, Ljava/lang/StringBuilder;
+    .local v0, "call":Ljava/lang/String;
+    const-string v1, "ReactNative"
 
-    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+    new-instance v2, Ljava/lang/StringBuilder;
 
-    const-string v1, "Calling JS function after bridge has been destroyed: "
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
 
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    const-string v3, "Calling JS function after bridge has been destroyed: "
 
-    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    move-result-object v2
 
-    move-result-object p1
+    invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    const-string v0, "ReactNative"
+    move-result-object v2
 
-    invoke-static {v0, p1}, Lcom/facebook/common/logging/FLog;->w(Ljava/lang/String;Ljava/lang/String;)V
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
+    move-result-object v2
+
+    invoke-static {v1, v2}, Lcom/facebook/common/logging/FLog;->w(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 296
     return-void
 
     .line 298
+    .end local v0    # "call":Ljava/lang/String;
     :cond_0
     iget-boolean v0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mAcceptCalls:Z
 
@@ -766,24 +820,28 @@
     goto :goto_0
 
     :catchall_0
-    move-exception p1
+    move-exception v1
 
     monitor-exit v0
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    throw p1
+    throw v1
 
     .line 307
     :cond_2
     :goto_0
     invoke-virtual {p1, p0}, Lcom/facebook/react/bridge/CatalystInstanceImpl$PendingJSCall;->call(Lcom/facebook/react/bridge/CatalystInstanceImpl;)V
 
+    .line 308
     return-void
 .end method
 
 .method public callFunction(Ljava/lang/String;Ljava/lang/String;Lcom/facebook/react/bridge/NativeArray;)V
     .locals 1
+    .param p1, "module"    # Ljava/lang/String;
+    .param p2, "method"    # Ljava/lang/String;
+    .param p3, "arguments"    # Lcom/facebook/react/bridge/NativeArray;
 
     .line 289
     new-instance v0, Lcom/facebook/react/bridge/CatalystInstanceImpl$PendingJSCall;
@@ -792,17 +850,18 @@
 
     invoke-virtual {p0, v0}, Lcom/facebook/react/bridge/CatalystInstanceImpl;->callFunction(Lcom/facebook/react/bridge/CatalystInstanceImpl$PendingJSCall;)V
 
+    .line 290
     return-void
 .end method
 
 .method public destroy()V
     .locals 2
 
+    .line 329
     const-string v0, "ReactNative"
 
     const-string v1, "CatalystInstanceImpl.destroy() start"
 
-    .line 329
     invoke-static {v0, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
     .line 330
@@ -813,6 +872,7 @@
 
     if-eqz v0, :cond_0
 
+    .line 333
     return-void
 
     .line 337
@@ -821,9 +881,9 @@
 
     invoke-static {v0}, Lcom/facebook/react/bridge/ReactMarker;->logMarker(Lcom/facebook/react/bridge/ReactMarkerConstants;)V
 
+    .line 338
     const/4 v0, 0x1
 
-    .line 338
     iput-boolean v0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mDestroyed:Z
 
     .line 340
@@ -840,11 +900,13 @@
 
     invoke-static {v0}, Lcom/facebook/systrace/Systrace;->unregisterListener(Lcom/facebook/systrace/TraceListener;)V
 
+    .line 378
     return-void
 .end method
 
 .method public extendNativeModules(Lcom/facebook/react/bridge/NativeModuleRegistry;)V
-    .locals 1
+    .locals 2
+    .param p1, "modules"    # Lcom/facebook/react/bridge/NativeModuleRegistry;
 
     .line 185
     iget-object v0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mNativeModuleRegistry:Lcom/facebook/react/bridge/NativeModuleRegistry;
@@ -857,13 +919,16 @@
     move-result-object v0
 
     .line 187
+    .local v0, "javaModules":Ljava/util/Collection;, "Ljava/util/Collection<Lcom/facebook/react/bridge/JavaModuleWrapper;>;"
     invoke-virtual {p1}, Lcom/facebook/react/bridge/NativeModuleRegistry;->getCxxModules()Ljava/util/Collection;
 
-    move-result-object p1
+    move-result-object v1
 
     .line 189
-    invoke-direct {p0, v0, p1}, Lcom/facebook/react/bridge/CatalystInstanceImpl;->jniExtendNativeModules(Ljava/util/Collection;Ljava/util/Collection;)V
+    .local v1, "cxxModules":Ljava/util/Collection;, "Ljava/util/Collection<Lcom/facebook/react/bridge/ModuleHolder;>;"
+    invoke-direct {p0, v0, v1}, Lcom/facebook/react/bridge/CatalystInstanceImpl;->jniExtendNativeModules(Ljava/util/Collection;Ljava/util/Collection;)V
 
+    .line 190
     return-void
 .end method
 
@@ -880,13 +945,14 @@
     .end annotation
 
     .line 494
+    .local p1, "jsiModuleInterface":Ljava/lang/Class;, "Ljava/lang/Class<TT;>;"
     iget-object v0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mJSIModuleRegistry:Lcom/facebook/react/bridge/JSIModuleRegistry;
 
     invoke-virtual {v0, p1}, Lcom/facebook/react/bridge/JSIModuleRegistry;->getModule(Ljava/lang/Class;)Lcom/facebook/react/bridge/JSIModule;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public getJSModule(Ljava/lang/Class;)Lcom/facebook/react/bridge/JavaScriptModule;
@@ -902,13 +968,14 @@
     .end annotation
 
     .line 417
+    .local p1, "jsInterface":Ljava/lang/Class;, "Ljava/lang/Class<TT;>;"
     iget-object v0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mJSModuleRegistry:Lcom/facebook/react/bridge/JavaScriptModuleRegistry;
 
     invoke-virtual {v0, p0, p1}, Lcom/facebook/react/bridge/JavaScriptModuleRegistry;->getJavaScriptModule(Lcom/facebook/react/bridge/CatalystInstance;Ljava/lang/Class;)Lcom/facebook/react/bridge/JavaScriptModule;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public getJavaScriptContextHolder()Lcom/facebook/react/bridge/JavaScriptContextHolder;
@@ -921,7 +988,7 @@
 .end method
 
 .method public getNativeModule(Ljava/lang/Class;)Lcom/facebook/react/bridge/NativeModule;
-    .locals 1
+    .locals 2
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "<T::",
@@ -933,30 +1000,32 @@
     .end annotation
 
     .line 427
+    .local p1, "nativeModuleInterface":Ljava/lang/Class;, "Ljava/lang/Class<TT;>;"
     iget-object v0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mNativeModuleRegistry:Lcom/facebook/react/bridge/NativeModuleRegistry;
 
     invoke-direct {p0, p1}, Lcom/facebook/react/bridge/CatalystInstanceImpl;->getNameFromAnnotation(Ljava/lang/Class;)Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v1
 
-    invoke-virtual {v0, p1}, Lcom/facebook/react/bridge/NativeModuleRegistry;->getModule(Ljava/lang/String;)Lcom/facebook/react/bridge/NativeModule;
+    invoke-virtual {v0, v1}, Lcom/facebook/react/bridge/NativeModuleRegistry;->getModule(Ljava/lang/String;)Lcom/facebook/react/bridge/NativeModule;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public getNativeModule(Ljava/lang/String;)Lcom/facebook/react/bridge/NativeModule;
     .locals 1
+    .param p1, "moduleName"    # Ljava/lang/String;
 
     .line 432
     iget-object v0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mNativeModuleRegistry:Lcom/facebook/react/bridge/NativeModuleRegistry;
 
     invoke-virtual {v0, p1}, Lcom/facebook/react/bridge/NativeModuleRegistry;->getModule(Ljava/lang/String;)Lcom/facebook/react/bridge/NativeModule;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public getNativeModules()Ljava/util/Collection;
@@ -1002,23 +1071,26 @@
 
 .method public handleMemoryPressure(I)V
     .locals 1
+    .param p1, "level"    # I
 
     .line 453
     iget-boolean v0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mDestroyed:Z
 
     if-eqz v0, :cond_0
 
+    .line 454
     return-void
 
     .line 456
     :cond_0
     invoke-direct {p0, p1}, Lcom/facebook/react/bridge/CatalystInstanceImpl;->jniHandleMemoryPressure(I)V
 
+    .line 457
     return-void
 .end method
 
 .method public hasNativeModule(Ljava/lang/Class;)Z
-    .locals 1
+    .locals 2
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "<T::",
@@ -1030,17 +1102,18 @@
     .end annotation
 
     .line 422
+    .local p1, "nativeModuleInterface":Ljava/lang/Class;, "Ljava/lang/Class<TT;>;"
     iget-object v0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mNativeModuleRegistry:Lcom/facebook/react/bridge/NativeModuleRegistry;
 
     invoke-direct {p0, p1}, Lcom/facebook/react/bridge/CatalystInstanceImpl;->getNameFromAnnotation(Ljava/lang/Class;)Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v1
 
-    invoke-virtual {v0, p1}, Lcom/facebook/react/bridge/NativeModuleRegistry;->hasModule(Ljava/lang/String;)Z
+    invoke-virtual {v0, v1}, Lcom/facebook/react/bridge/NativeModuleRegistry;->hasModule(Ljava/lang/String;)Z
 
-    move-result p1
+    move-result v0
 
-    return p1
+    return v0
 .end method
 
 .method public hasRunJSBundle()Z
@@ -1073,10 +1146,10 @@
 
     return v1
 
+    .line 271
     :catchall_0
     move-exception v1
 
-    .line 271
     monitor-exit v0
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
@@ -1086,14 +1159,12 @@
 
 .method public initialize()V
     .locals 3
-    .annotation build Lcom/facebook/react/common/annotations/VisibleForTesting;
-    .end annotation
 
+    .line 391
     const-string v0, "ReactNative"
 
     const-string v1, "CatalystInstanceImpl.initialize()"
 
-    .line 391
     invoke-static {v0, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
     .line 392
@@ -1126,32 +1197,39 @@
 
     invoke-interface {v0, v1}, Lcom/facebook/react/bridge/queue/MessageQueueThread;->runOnQueue(Ljava/lang/Runnable;)V
 
+    .line 408
     return-void
 .end method
 
 .method public invokeCallback(ILcom/facebook/react/bridge/NativeArrayInterface;)V
-    .locals 1
+    .locals 2
+    .param p1, "callbackID"    # I
+    .param p2, "arguments"    # Lcom/facebook/react/bridge/NativeArrayInterface;
 
     .line 314
     iget-boolean v0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mDestroyed:Z
 
     if-eqz v0, :cond_0
 
-    const-string p1, "ReactNative"
-
-    const-string p2, "Invoking JS callback after bridge has been destroyed."
-
     .line 315
-    invoke-static {p1, p2}, Lcom/facebook/common/logging/FLog;->w(Ljava/lang/String;Ljava/lang/String;)V
+    const-string v0, "ReactNative"
 
+    const-string v1, "Invoking JS callback after bridge has been destroyed."
+
+    invoke-static {v0, v1}, Lcom/facebook/common/logging/FLog;->w(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 316
     return-void
 
     .line 319
     :cond_0
-    check-cast p2, Lcom/facebook/react/bridge/NativeArray;
+    move-object v0, p2
 
-    invoke-direct {p0, p1, p2}, Lcom/facebook/react/bridge/CatalystInstanceImpl;->jniCallJSCallback(ILcom/facebook/react/bridge/NativeArray;)V
+    check-cast v0, Lcom/facebook/react/bridge/NativeArray;
 
+    invoke-direct {p0, p1, v0}, Lcom/facebook/react/bridge/CatalystInstanceImpl;->jniCallJSCallback(ILcom/facebook/react/bridge/NativeArray;)V
+
+    .line 320
     return-void
 .end method
 
@@ -1166,6 +1244,9 @@
 
 .method public loadScriptFromAssets(Landroid/content/res/AssetManager;Ljava/lang/String;Z)V
     .locals 0
+    .param p1, "assetManager"    # Landroid/content/res/AssetManager;
+    .param p2, "assetURL"    # Ljava/lang/String;
+    .param p3, "loadSynchronously"    # Z
 
     .line 217
     iput-object p2, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mSourceURL:Ljava/lang/String;
@@ -1173,11 +1254,15 @@
     .line 218
     invoke-direct {p0, p1, p2, p3}, Lcom/facebook/react/bridge/CatalystInstanceImpl;->jniLoadScriptFromAssets(Landroid/content/res/AssetManager;Ljava/lang/String;Z)V
 
+    .line 219
     return-void
 .end method
 
 .method public loadScriptFromDeltaBundle(Ljava/lang/String;Lcom/facebook/react/bridge/NativeDeltaClient;Z)V
     .locals 0
+    .param p1, "sourceURL"    # Ljava/lang/String;
+    .param p2, "deltaClient"    # Lcom/facebook/react/bridge/NativeDeltaClient;
+    .param p3, "loadSynchronously"    # Z
 
     .line 232
     iput-object p1, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mSourceURL:Ljava/lang/String;
@@ -1185,11 +1270,15 @@
     .line 233
     invoke-direct {p0, p1, p2, p3}, Lcom/facebook/react/bridge/CatalystInstanceImpl;->jniLoadScriptFromDeltaBundle(Ljava/lang/String;Lcom/facebook/react/bridge/NativeDeltaClient;Z)V
 
+    .line 234
     return-void
 .end method
 
 .method public loadScriptFromFile(Ljava/lang/String;Ljava/lang/String;Z)V
     .locals 0
+    .param p1, "fileName"    # Ljava/lang/String;
+    .param p2, "sourceURL"    # Ljava/lang/String;
+    .param p3, "loadSynchronously"    # Z
 
     .line 223
     iput-object p2, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mSourceURL:Ljava/lang/String;
@@ -1197,37 +1286,43 @@
     .line 224
     invoke-direct {p0, p1, p2, p3}, Lcom/facebook/react/bridge/CatalystInstanceImpl;->jniLoadScriptFromFile(Ljava/lang/String;Ljava/lang/String;Z)V
 
+    .line 225
     return-void
 .end method
 
 .method public registerSegment(ILjava/lang/String;)V
     .locals 0
+    .param p1, "segmentId"    # I
+    .param p2, "path"    # Ljava/lang/String;
 
     .line 212
     invoke-direct {p0, p1, p2}, Lcom/facebook/react/bridge/CatalystInstanceImpl;->jniRegisterSegment(ILjava/lang/String;)V
 
+    .line 213
     return-void
 .end method
 
 .method public removeBridgeIdleDebugListener(Lcom/facebook/react/bridge/NotThreadSafeBridgeIdleDebugListener;)V
     .locals 1
+    .param p1, "listener"    # Lcom/facebook/react/bridge/NotThreadSafeBridgeIdleDebugListener;
 
     .line 476
     iget-object v0, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mBridgeIdleListeners:Ljava/util/concurrent/CopyOnWriteArrayList;
 
     invoke-virtual {v0, p1}, Ljava/util/concurrent/CopyOnWriteArrayList;->remove(Ljava/lang/Object;)Z
 
+    .line 477
     return-void
 .end method
 
 .method public runJSBundle()V
     .locals 4
 
+    .line 244
     const-string v0, "ReactNative"
 
     const-string v1, "CatalystInstanceImpl.runJSBundle()"
 
-    .line 244
     invoke-static {v0, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
     .line 245
@@ -1276,8 +1371,11 @@
     check-cast v3, Lcom/facebook/react/bridge/CatalystInstanceImpl$PendingJSCall;
 
     .line 257
+    .local v3, "function":Lcom/facebook/react/bridge/CatalystInstanceImpl$PendingJSCall;
     invoke-virtual {v3, p0}, Lcom/facebook/react/bridge/CatalystInstanceImpl$PendingJSCall;->call(Lcom/facebook/react/bridge/CatalystInstanceImpl;)V
 
+    .line 258
+    .end local v3    # "function":Lcom/facebook/react/bridge/CatalystInstanceImpl$PendingJSCall;
     goto :goto_0
 
     .line 259
@@ -1299,24 +1397,19 @@
 
     invoke-static {v0}, Lcom/facebook/systrace/Systrace;->registerListener(Lcom/facebook/systrace/TraceListener;)V
 
+    .line 265
     return-void
 
+    .line 261
     :catchall_0
     move-exception v1
 
-    .line 261
     :try_start_1
     monitor-exit v0
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
-    goto :goto_2
-
-    :goto_1
     throw v1
-
-    :goto_2
-    goto :goto_1
 .end method
 
 .method public native setGlobalVariable(Ljava/lang/String;Ljava/lang/String;)V
@@ -1324,6 +1417,8 @@
 
 .method public setSourceURLs(Ljava/lang/String;Ljava/lang/String;)V
     .locals 0
+    .param p1, "deviceURL"    # Ljava/lang/String;
+    .param p2, "remoteURL"    # Ljava/lang/String;
 
     .line 206
     iput-object p1, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl;->mSourceURL:Ljava/lang/String;
@@ -1331,5 +1426,6 @@
     .line 207
     invoke-direct {p0, p2}, Lcom/facebook/react/bridge/CatalystInstanceImpl;->jniSetSourceURL(Ljava/lang/String;)V
 
+    .line 208
     return-void
 .end method

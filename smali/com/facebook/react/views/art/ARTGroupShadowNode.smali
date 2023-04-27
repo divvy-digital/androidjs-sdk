@@ -22,6 +22,7 @@
 
 .method private static createClipping([F)Landroid/graphics/RectF;
     .locals 6
+    .param p0, "data"    # [F
 
     .line 77
     array-length v0, p0
@@ -53,35 +54,42 @@
 
     const/4 v5, 0x3
 
-    aget p0, p0, v5
+    aget v5, p0, v5
 
-    add-float/2addr v3, p0
+    add-float/2addr v3, v5
 
     invoke-direct {v0, v2, v4, v1, v3}, Landroid/graphics/RectF;-><init>(FFFF)V
 
+    .line 83
+    .local v0, "clippingRect":Landroid/graphics/RectF;
     return-object v0
 
     .line 78
+    .end local v0    # "clippingRect":Landroid/graphics/RectF;
     :cond_0
-    new-instance p0, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
+    new-instance v0, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
 
-    const-string v0, "Clipping should be array of length 4 (e.g. [x, y, width, height])"
+    const-string v1, "Clipping should be array of length 4 (e.g. [x, y, width, height])"
 
-    invoke-direct {p0, v0}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
 
-    throw p0
+    throw v0
 .end method
 
 
 # virtual methods
 .method public draw(Landroid/graphics/Canvas;Landroid/graphics/Paint;F)V
     .locals 8
+    .param p1, "canvas"    # Landroid/graphics/Canvas;
+    .param p2, "paint"    # Landroid/graphics/Paint;
+    .param p3, "opacity"    # F
 
     .line 46
     iget v0, p0, Lcom/facebook/react/views/art/ARTGroupShadowNode;->mOpacity:F
 
     mul-float p3, p3, v0
 
+    .line 47
     const v0, 0x3c23d70a    # 0.01f
 
     cmpl-float v0, p3, v0
@@ -133,10 +141,11 @@
 
     invoke-virtual/range {v2 .. v7}, Landroid/graphics/Canvas;->clipRect(FFFFLandroid/graphics/Region$Op;)Z
 
+    .line 59
     :cond_0
     const/4 v0, 0x0
 
-    .line 59
+    .local v0, "i":I
     :goto_0
     invoke-virtual {p0}, Lcom/facebook/react/views/art/ARTGroupShadowNode;->getChildCount()I
 
@@ -152,19 +161,24 @@
     check-cast v1, Lcom/facebook/react/views/art/ARTVirtualNode;
 
     .line 61
+    .local v1, "child":Lcom/facebook/react/views/art/ARTVirtualNode;
     invoke-virtual {v1, p1, p2, p3}, Lcom/facebook/react/views/art/ARTVirtualNode;->draw(Landroid/graphics/Canvas;Landroid/graphics/Paint;F)V
 
     .line 62
     invoke-virtual {v1}, Lcom/facebook/react/views/art/ARTVirtualNode;->markUpdateSeen()V
 
+    .line 59
+    .end local v1    # "child":Lcom/facebook/react/views/art/ARTVirtualNode;
     add-int/lit8 v0, v0, 0x1
 
     goto :goto_0
 
     .line 65
+    .end local v0    # "i":I
     :cond_1
     invoke-virtual {p0, p1}, Lcom/facebook/react/views/art/ARTGroupShadowNode;->restoreCanvas(Landroid/graphics/Canvas;)V
 
+    .line 67
     :cond_2
     return-void
 .end method
@@ -172,14 +186,15 @@
 .method public isVirtual()Z
     .locals 1
 
+    .line 42
     const/4 v0, 0x1
 
     return v0
 .end method
 
 .method public setClipping(Lcom/facebook/react/bridge/ReadableArray;)V
-    .locals 0
-    .param p1    # Lcom/facebook/react/bridge/ReadableArray;
+    .locals 2
+    .param p1, "clippingDims"    # Lcom/facebook/react/bridge/ReadableArray;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -190,20 +205,23 @@
     .line 33
     invoke-static {p1}, Lcom/facebook/react/views/art/PropHelper;->toFloatArray(Lcom/facebook/react/bridge/ReadableArray;)[F
 
-    move-result-object p1
+    move-result-object v0
 
-    if-eqz p1, :cond_0
+    .line 34
+    .local v0, "clippingData":[F
+    if-eqz v0, :cond_0
 
     .line 35
-    invoke-static {p1}, Lcom/facebook/react/views/art/ARTGroupShadowNode;->createClipping([F)Landroid/graphics/RectF;
+    invoke-static {v0}, Lcom/facebook/react/views/art/ARTGroupShadowNode;->createClipping([F)Landroid/graphics/RectF;
 
-    move-result-object p1
+    move-result-object v1
 
-    iput-object p1, p0, Lcom/facebook/react/views/art/ARTGroupShadowNode;->mClipping:Landroid/graphics/RectF;
+    iput-object v1, p0, Lcom/facebook/react/views/art/ARTGroupShadowNode;->mClipping:Landroid/graphics/RectF;
 
     .line 36
     invoke-virtual {p0}, Lcom/facebook/react/views/art/ARTGroupShadowNode;->markUpdated()V
 
+    .line 38
     :cond_0
     return-void
 .end method

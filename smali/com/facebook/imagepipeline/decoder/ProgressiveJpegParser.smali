@@ -41,7 +41,8 @@
 
 # direct methods
 .method public constructor <init>(Lcom/facebook/common/memory/ByteArrayPool;)V
-    .locals 0
+    .locals 1
+    .param p1, "byteArrayPool"    # Lcom/facebook/common/memory/ByteArrayPool;
 
     .line 93
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -49,291 +50,328 @@
     .line 94
     invoke-static {p1}, Lcom/facebook/common/internal/Preconditions;->checkNotNull(Ljava/lang/Object;)Ljava/lang/Object;
 
-    move-result-object p1
+    move-result-object v0
 
-    check-cast p1, Lcom/facebook/common/memory/ByteArrayPool;
+    check-cast v0, Lcom/facebook/common/memory/ByteArrayPool;
 
-    iput-object p1, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mByteArrayPool:Lcom/facebook/common/memory/ByteArrayPool;
-
-    const/4 p1, 0x0
+    iput-object v0, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mByteArrayPool:Lcom/facebook/common/memory/ByteArrayPool;
 
     .line 95
-    iput p1, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mBytesParsed:I
+    const/4 v0, 0x0
+
+    iput v0, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mBytesParsed:I
 
     .line 96
-    iput p1, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mLastByteRead:I
+    iput v0, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mLastByteRead:I
 
     .line 97
-    iput p1, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mNextFullScanNumber:I
+    iput v0, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mNextFullScanNumber:I
 
     .line 98
-    iput p1, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mBestScanEndOffset:I
+    iput v0, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mBestScanEndOffset:I
 
     .line 99
-    iput p1, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mBestScanNumber:I
+    iput v0, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mBestScanNumber:I
 
     .line 100
-    iput p1, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mParserState:I
+    iput v0, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mParserState:I
 
+    .line 102
     return-void
 .end method
 
 .method private doParseMoreData(Ljava/io/InputStream;)Z
     .locals 10
+    .param p1, "inputStream"    # Ljava/io/InputStream;
 
     .line 151
     iget v0, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mBestScanNumber:I
 
+    .line 154
+    .local v0, "oldBestScanNumber":I
     :goto_0
-    const/4 v1, 0x0
+    const/4 v1, 0x1
 
-    const/4 v2, 0x1
+    const/4 v2, 0x0
 
     const/4 v3, 0x6
 
-    .line 154
     :try_start_0
     iget v4, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mParserState:I
 
-    if-eq v4, v3, :cond_f
+    if-eq v4, v3, :cond_9
 
     invoke-virtual {p1}, Ljava/io/InputStream;->read()I
 
     move-result v4
 
-    const/4 v5, -0x1
+    move v5, v4
 
-    if-eq v4, v5, :cond_f
+    .local v5, "nextByte":I
+    const/4 v6, -0x1
+
+    if-eq v4, v6, :cond_9
 
     .line 155
-    iget v5, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mBytesParsed:I
+    iget v4, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mBytesParsed:I
 
-    add-int/2addr v5, v2
+    add-int/2addr v4, v1
 
-    iput v5, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mBytesParsed:I
+    iput v4, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mBytesParsed:I
 
     .line 156
-    iget-boolean v5, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mEndMarkerRead:Z
+    iget-boolean v6, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mEndMarkerRead:Z
 
-    if-eqz v5, :cond_0
+    if-eqz v6, :cond_0
 
     .line 159
     iput v3, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mParserState:I
 
     .line 160
-    iput-boolean v1, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mEndMarkerRead:Z
+    iput-boolean v2, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mEndMarkerRead:Z
 
-    return v1
+    .line 161
+    return v2
 
     .line 163
     :cond_0
-    iget v5, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mParserState:I
+    iget v6, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mParserState:I
 
-    const/16 v6, 0xff
+    const/4 v7, 0x3
 
-    if-eqz v5, :cond_c
+    const/16 v8, 0xff
 
-    const/4 v7, 0x2
+    const/4 v9, 0x2
 
-    if-eq v5, v2, :cond_a
-
-    const/4 v8, 0x3
-
-    if-eq v5, v7, :cond_9
-
-    const/4 v9, 0x4
-
-    if-eq v5, v8, :cond_3
-
-    const/4 v6, 0x5
-
-    if-eq v5, v9, :cond_2
-
-    if-eq v5, v6, :cond_1
+    packed-switch v6, :pswitch_data_0
 
     .line 228
-    invoke-static {v1}, Lcom/facebook/common/internal/Preconditions;->checkState(Z)V
+    invoke-static {v2}, Lcom/facebook/common/internal/Preconditions;->checkState(Z)V
 
     goto :goto_1
 
     .line 215
-    :cond_1
-    iget v5, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mLastByteRead:I
+    :pswitch_0
+    iget v4, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mLastByteRead:I
 
-    shl-int/lit8 v5, v5, 0x8
+    shl-int/lit8 v4, v4, 0x8
 
-    add-int/2addr v5, v4
+    add-int/2addr v4, v5
 
-    sub-int/2addr v5, v7
-
-    int-to-long v8, v5
+    .line 220
+    .local v4, "size":I
+    add-int/lit8 v6, v4, -0x2
 
     .line 221
-    invoke-static {p1, v8, v9}, Lcom/facebook/common/util/StreamUtil;->skip(Ljava/io/InputStream;J)J
+    .local v6, "bytesToSkip":I
+    int-to-long v7, v6
+
+    invoke-static {p1, v7, v8}, Lcom/facebook/common/util/StreamUtil;->skip(Ljava/io/InputStream;J)J
 
     .line 222
-    iget v6, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mBytesParsed:I
+    iget v7, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mBytesParsed:I
 
-    add-int/2addr v6, v5
+    add-int/2addr v7, v6
 
-    iput v6, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mBytesParsed:I
+    iput v7, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mBytesParsed:I
 
     .line 223
-    iput v7, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mParserState:I
+    iput v9, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mParserState:I
 
+    .line 224
     goto :goto_1
 
     .line 211
-    :cond_2
-    iput v6, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mParserState:I
+    .end local v4    # "size":I
+    .end local v6    # "bytesToSkip":I
+    :pswitch_1
+    const/4 v4, 0x5
 
+    iput v4, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mParserState:I
+
+    .line 212
     goto :goto_1
 
-    :cond_3
-    if-ne v4, v6, :cond_4
+    .line 187
+    :pswitch_2
+    if-ne v5, v8, :cond_1
 
     .line 188
-    iput v8, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mParserState:I
+    iput v7, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mParserState:I
 
     goto :goto_1
 
-    :cond_4
-    if-nez v4, :cond_5
+    .line 189
+    :cond_1
+    if-nez v5, :cond_2
 
     .line 190
-    iput v7, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mParserState:I
-
-    goto :goto_1
-
-    :cond_5
-    const/16 v5, 0xd9
-
-    if-ne v4, v5, :cond_6
-
-    .line 192
-    iput-boolean v2, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mEndMarkerRead:Z
-
-    .line 193
-    iget v5, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mBytesParsed:I
-
-    sub-int/2addr v5, v7
-
-    invoke-direct {p0, v5}, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->newScanOrImageEndFound(I)V
-
-    .line 196
-    iput v7, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mParserState:I
-
-    goto :goto_1
-
-    :cond_6
-    const/16 v5, 0xda
-
-    if-ne v4, v5, :cond_7
-
-    .line 199
-    iget v5, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mBytesParsed:I
-
-    sub-int/2addr v5, v7
-
-    invoke-direct {p0, v5}, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->newScanOrImageEndFound(I)V
-
-    .line 202
-    :cond_7
-    invoke-static {v4}, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->doesMarkerStartSegment(I)Z
-
-    move-result v5
-
-    if-eqz v5, :cond_8
-
-    .line 203
     iput v9, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mParserState:I
 
     goto :goto_1
 
-    .line 205
-    :cond_8
-    iput v7, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mParserState:I
+    .line 191
+    :cond_2
+    const/16 v6, 0xd9
+
+    if-ne v5, v6, :cond_3
+
+    .line 192
+    iput-boolean v1, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mEndMarkerRead:Z
+
+    .line 193
+    add-int/lit8 v4, v4, -0x2
+
+    invoke-direct {p0, v4}, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->newScanOrImageEndFound(I)V
+
+    .line 196
+    iput v9, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mParserState:I
 
     goto :goto_1
 
-    :cond_9
-    if-ne v4, v6, :cond_e
+    .line 198
+    :cond_3
+    const/16 v6, 0xda
+
+    if-ne v5, v6, :cond_4
+
+    .line 199
+    add-int/lit8 v4, v4, -0x2
+
+    invoke-direct {p0, v4}, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->newScanOrImageEndFound(I)V
+
+    .line 202
+    :cond_4
+    invoke-static {v5}, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->doesMarkerStartSegment(I)Z
+
+    move-result v4
+
+    if-eqz v4, :cond_5
+
+    .line 203
+    const/4 v4, 0x4
+
+    iput v4, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mParserState:I
+
+    goto :goto_1
+
+    .line 205
+    :cond_5
+    iput v9, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mParserState:I
+
+    .line 208
+    goto :goto_1
+
+    .line 181
+    :pswitch_3
+    if-ne v5, v8, :cond_8
 
     .line 182
-    iput v8, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mParserState:I
+    iput v7, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mParserState:I
 
     goto :goto_1
 
-    :cond_a
-    const/16 v5, 0xd8
+    .line 173
+    :pswitch_4
+    const/16 v4, 0xd8
 
-    if-ne v4, v5, :cond_b
+    if-ne v5, v4, :cond_6
 
     .line 174
-    iput v7, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mParserState:I
+    iput v9, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mParserState:I
 
     goto :goto_1
 
     .line 176
-    :cond_b
+    :cond_6
     iput v3, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mParserState:I
 
+    .line 178
     goto :goto_1
 
-    :cond_c
-    if-ne v4, v6, :cond_d
+    .line 165
+    :pswitch_5
+    if-ne v5, v8, :cond_7
 
     .line 166
-    iput v2, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mParserState:I
+    iput v1, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mParserState:I
 
     goto :goto_1
 
     .line 168
-    :cond_d
+    :cond_7
     iput v3, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mParserState:I
 
+    .line 170
+    nop
+
     .line 231
-    :cond_e
+    :cond_8
     :goto_1
-    iput v4, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mLastByteRead:I
+    iput v5, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mLastByteRead:I
     :try_end_0
     .catch Ljava/io/IOException; {:try_start_0 .. :try_end_0} :catch_0
 
     goto/16 :goto_0
 
+    .line 236
+    .end local v5    # "nextByte":I
+    :cond_9
+    goto :goto_2
+
+    .line 233
     :catch_0
-    move-exception p1
+    move-exception v4
 
     .line 235
-    invoke-static {p1}, Lcom/facebook/common/internal/Throwables;->propagate(Ljava/lang/Throwable;)Ljava/lang/RuntimeException;
+    .local v4, "ioe":Ljava/io/IOException;
+    invoke-static {v4}, Lcom/facebook/common/internal/Throwables;->propagate(Ljava/lang/Throwable;)Ljava/lang/RuntimeException;
 
     .line 237
-    :cond_f
-    iget p1, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mParserState:I
+    .end local v4    # "ioe":Ljava/io/IOException;
+    :goto_2
+    iget v4, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mParserState:I
 
-    if-eq p1, v3, :cond_10
+    if-eq v4, v3, :cond_a
 
-    iget p1, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mBestScanNumber:I
+    iget v3, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mBestScanNumber:I
 
-    if-eq p1, v0, :cond_10
+    if-eq v3, v0, :cond_a
 
-    const/4 v1, 0x1
+    goto :goto_3
 
-    :cond_10
+    :cond_a
+    const/4 v1, 0x0
+
+    :goto_3
     return v1
+
+    :pswitch_data_0
+    .packed-switch 0x0
+        :pswitch_5
+        :pswitch_4
+        :pswitch_3
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method private static doesMarkerStartSegment(I)Z
     .locals 3
+    .param p0, "markerSecondByte"    # I
 
-    const/4 v0, 0x1
+    .line 244
+    const/4 v0, 0x0
 
-    const/4 v1, 0x0
+    const/4 v1, 0x1
 
-    if-ne p0, v0, :cond_0
+    if-ne p0, v1, :cond_0
 
-    return v1
+    .line 245
+    return v0
 
+    .line 248
     :cond_0
     const/16 v2, 0xd0
 
@@ -343,8 +381,10 @@
 
     if-gt p0, v2, :cond_1
 
-    return v1
+    .line 249
+    return v0
 
+    .line 252
     :cond_1
     const/16 v2, 0xd9
 
@@ -354,17 +394,15 @@
 
     if-eq p0, v2, :cond_2
 
-    goto :goto_0
+    const/4 v0, 0x1
 
     :cond_2
-    const/4 v0, 0x0
-
-    :goto_0
     return v0
 .end method
 
 .method private newScanOrImageEndFound(I)V
-    .locals 1
+    .locals 2
+    .param p1, "offset"    # I
 
     .line 256
     iget v0, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mNextFullScanNumber:I
@@ -376,14 +414,13 @@
 
     .line 259
     :cond_0
-    iget p1, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mNextFullScanNumber:I
+    add-int/lit8 v1, v0, 0x1
 
-    add-int/lit8 v0, p1, 0x1
+    iput v1, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mNextFullScanNumber:I
 
-    iput v0, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mNextFullScanNumber:I
+    iput v0, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mBestScanNumber:I
 
-    iput p1, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mBestScanNumber:I
-
+    .line 260
     return-void
 .end method
 
@@ -442,18 +479,20 @@
 .end method
 
 .method public parseMoreData(Lcom/facebook/imagepipeline/image/EncodedImage;)Z
-    .locals 4
+    .locals 6
+    .param p1, "encodedImage"    # Lcom/facebook/imagepipeline/image/EncodedImage;
 
     .line 116
     iget v0, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mParserState:I
 
-    const/4 v1, 0x0
+    const/4 v1, 0x6
 
-    const/4 v2, 0x6
+    const/4 v2, 0x0
 
-    if-ne v0, v2, :cond_0
+    if-ne v0, v1, :cond_0
 
-    return v1
+    .line 117
+    return v2
 
     .line 120
     :cond_0
@@ -462,79 +501,92 @@
     move-result v0
 
     .line 125
-    iget v2, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mBytesParsed:I
+    .local v0, "dataBufferSize":I
+    iget v1, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mBytesParsed:I
 
-    if-gt v0, v2, :cond_1
+    if-gt v0, v1, :cond_1
 
-    return v1
+    .line 126
+    return v2
 
     .line 129
     :cond_1
-    new-instance v0, Lcom/facebook/common/memory/PooledByteArrayBufferedInputStream;
+    new-instance v1, Lcom/facebook/common/memory/PooledByteArrayBufferedInputStream;
 
     .line 130
     invoke-virtual {p1}, Lcom/facebook/imagepipeline/image/EncodedImage;->getInputStream()Ljava/io/InputStream;
 
-    move-result-object p1
+    move-result-object v3
 
-    iget-object v2, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mByteArrayPool:Lcom/facebook/common/memory/ByteArrayPool;
-
-    const/16 v3, 0x4000
+    iget-object v4, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mByteArrayPool:Lcom/facebook/common/memory/ByteArrayPool;
 
     .line 131
-    invoke-interface {v2, v3}, Lcom/facebook/common/memory/ByteArrayPool;->get(I)Ljava/lang/Object;
+    const/16 v5, 0x4000
 
-    move-result-object v2
+    invoke-interface {v4, v5}, Lcom/facebook/common/memory/ByteArrayPool;->get(I)Ljava/lang/Object;
 
-    check-cast v2, [B
+    move-result-object v4
 
-    iget-object v3, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mByteArrayPool:Lcom/facebook/common/memory/ByteArrayPool;
+    check-cast v4, [B
 
-    invoke-direct {v0, p1, v2, v3}, Lcom/facebook/common/memory/PooledByteArrayBufferedInputStream;-><init>(Ljava/io/InputStream;[BLcom/facebook/common/references/ResourceReleaser;)V
+    iget-object v5, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mByteArrayPool:Lcom/facebook/common/memory/ByteArrayPool;
+
+    invoke-direct {v1, v3, v4, v5}, Lcom/facebook/common/memory/PooledByteArrayBufferedInputStream;-><init>(Ljava/io/InputStream;[BLcom/facebook/common/references/ResourceReleaser;)V
 
     .line 134
+    .local v1, "bufferedDataStream":Ljava/io/InputStream;
     :try_start_0
-    iget p1, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mBytesParsed:I
+    iget v3, p0, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->mBytesParsed:I
 
-    int-to-long v2, p1
+    int-to-long v3, v3
 
-    invoke-static {v0, v2, v3}, Lcom/facebook/common/util/StreamUtil;->skip(Ljava/io/InputStream;J)J
+    invoke-static {v1, v3, v4}, Lcom/facebook/common/util/StreamUtil;->skip(Ljava/io/InputStream;J)J
 
     .line 135
-    invoke-direct {p0, v0}, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->doParseMoreData(Ljava/io/InputStream;)Z
+    invoke-direct {p0, v1}, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->doParseMoreData(Ljava/io/InputStream;)Z
 
-    move-result p1
+    move-result v2
     :try_end_0
     .catch Ljava/io/IOException; {:try_start_0 .. :try_end_0} :catch_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
     .line 141
-    invoke-static {v0}, Lcom/facebook/common/internal/Closeables;->closeQuietly(Ljava/io/InputStream;)V
+    invoke-static {v1}, Lcom/facebook/common/internal/Closeables;->closeQuietly(Ljava/io/InputStream;)V
 
-    return p1
+    .line 135
+    return v2
 
+    .line 141
     :catchall_0
-    move-exception p1
+    move-exception v2
 
     goto :goto_0
 
+    .line 136
     :catch_0
-    move-exception p1
+    move-exception v3
 
     .line 138
+    .local v3, "ioe":Ljava/io/IOException;
     :try_start_1
-    invoke-static {p1}, Lcom/facebook/common/internal/Throwables;->propagate(Ljava/lang/Throwable;)Ljava/lang/RuntimeException;
+    invoke-static {v3}, Lcom/facebook/common/internal/Throwables;->propagate(Ljava/lang/Throwable;)Ljava/lang/RuntimeException;
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
+    .line 139
+    nop
+
     .line 141
-    invoke-static {v0}, Lcom/facebook/common/internal/Closeables;->closeQuietly(Ljava/io/InputStream;)V
+    invoke-static {v1}, Lcom/facebook/common/internal/Closeables;->closeQuietly(Ljava/io/InputStream;)V
 
-    return v1
+    .line 139
+    return v2
 
+    .line 141
+    .end local v3    # "ioe":Ljava/io/IOException;
     :goto_0
-    invoke-static {v0}, Lcom/facebook/common/internal/Closeables;->closeQuietly(Ljava/io/InputStream;)V
+    invoke-static {v1}, Lcom/facebook/common/internal/Closeables;->closeQuietly(Ljava/io/InputStream;)V
 
     .line 142
-    throw p1
+    throw v2
 .end method

@@ -21,6 +21,7 @@
 # direct methods
 .method constructor <init>(Lokhttp3/RealCall;)V
     .locals 0
+    .param p1, "this$0"    # Lokhttp3/RealCall;
 
     .line 63
     iput-object p1, p0, Lokhttp3/RealCall$1;->this$0:Lokhttp3/RealCall;
@@ -40,5 +41,6 @@
 
     invoke-virtual {v0}, Lokhttp3/RealCall;->cancel()V
 
+    .line 66
     return-void
 .end method

@@ -26,6 +26,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/imagepipeline/producers/NetworkFetchProducer;Lcom/facebook/imagepipeline/producers/FetchState;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/imagepipeline/producers/NetworkFetchProducer;
 
     .line 65
     iput-object p1, p0, Lcom/facebook/imagepipeline/producers/NetworkFetchProducer$1;->this$0:Lcom/facebook/imagepipeline/producers/NetworkFetchProducer;
@@ -49,11 +50,13 @@
 
     invoke-static {v0, v1}, Lcom/facebook/imagepipeline/producers/NetworkFetchProducer;->access$100(Lcom/facebook/imagepipeline/producers/NetworkFetchProducer;Lcom/facebook/imagepipeline/producers/FetchState;)V
 
+    .line 79
     return-void
 .end method
 
 .method public onFailure(Ljava/lang/Throwable;)V
     .locals 2
+    .param p1, "throwable"    # Ljava/lang/Throwable;
 
     .line 73
     iget-object v0, p0, Lcom/facebook/imagepipeline/producers/NetworkFetchProducer$1;->this$0:Lcom/facebook/imagepipeline/producers/NetworkFetchProducer;
@@ -62,11 +65,14 @@
 
     invoke-static {v0, v1, p1}, Lcom/facebook/imagepipeline/producers/NetworkFetchProducer;->access$000(Lcom/facebook/imagepipeline/producers/NetworkFetchProducer;Lcom/facebook/imagepipeline/producers/FetchState;Ljava/lang/Throwable;)V
 
+    .line 74
     return-void
 .end method
 
 .method public onResponse(Ljava/io/InputStream;I)V
     .locals 2
+    .param p1, "response"    # Ljava/io/InputStream;
+    .param p2, "responseLength"    # I
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -80,5 +86,6 @@
 
     invoke-virtual {v0, v1, p1, p2}, Lcom/facebook/imagepipeline/producers/NetworkFetchProducer;->onResponse(Lcom/facebook/imagepipeline/producers/FetchState;Ljava/io/InputStream;I)V
 
+    .line 69
     return-void
 .end method

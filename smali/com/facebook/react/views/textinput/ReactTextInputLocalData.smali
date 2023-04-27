@@ -22,6 +22,7 @@
 # direct methods
 .method public constructor <init>(Landroid/widget/EditText;)V
     .locals 2
+    .param p1, "editText"    # Landroid/widget/EditText;
 
     .line 26
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -82,18 +83,19 @@
     .line 35
     invoke-virtual {p1}, Landroid/widget/EditText;->getBreakStrategy()I
 
-    move-result p1
+    move-result v0
 
-    iput p1, p0, Lcom/facebook/react/views/textinput/ReactTextInputLocalData;->mBreakStrategy:I
+    iput v0, p0, Lcom/facebook/react/views/textinput/ReactTextInputLocalData;->mBreakStrategy:I
 
     goto :goto_0
 
-    :cond_0
-    const/4 p1, 0x0
-
     .line 37
-    iput p1, p0, Lcom/facebook/react/views/textinput/ReactTextInputLocalData;->mBreakStrategy:I
+    :cond_0
+    const/4 v0, 0x0
 
+    iput v0, p0, Lcom/facebook/react/views/textinput/ReactTextInputLocalData;->mBreakStrategy:I
+
+    .line 39
     :goto_0
     return-void
 .end method
@@ -102,6 +104,7 @@
 # virtual methods
 .method public apply(Landroid/widget/EditText;)V
     .locals 2
+    .param p1, "editText"    # Landroid/widget/EditText;
 
     .line 42
     iget-object v0, p0, Lcom/facebook/react/views/textinput/ReactTextInputLocalData;->mText:Landroid/text/SpannableStringBuilder;
@@ -109,11 +112,11 @@
     invoke-virtual {p1, v0}, Landroid/widget/EditText;->setText(Ljava/lang/CharSequence;)V
 
     .line 43
-    iget v0, p0, Lcom/facebook/react/views/textinput/ReactTextInputLocalData;->mTextSize:F
+    const/4 v0, 0x0
 
-    const/4 v1, 0x0
+    iget v1, p0, Lcom/facebook/react/views/textinput/ReactTextInputLocalData;->mTextSize:F
 
-    invoke-virtual {p1, v1, v0}, Landroid/widget/EditText;->setTextSize(IF)V
+    invoke-virtual {p1, v0, v1}, Landroid/widget/EditText;->setTextSize(IF)V
 
     .line 44
     iget v0, p0, Lcom/facebook/react/views/textinput/ReactTextInputLocalData;->mMinLines:I
@@ -147,6 +150,7 @@
 
     invoke-virtual {p1, v0}, Landroid/widget/EditText;->setBreakStrategy(I)V
 
+    .line 51
     :cond_0
     return-void
 .end method

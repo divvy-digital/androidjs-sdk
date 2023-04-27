@@ -16,10 +16,12 @@
 # direct methods
 .method public constructor <init>(Lcom/facebook/react/bridge/ReactApplicationContext;)V
     .locals 0
+    .param p1, "reactContext"    # Lcom/facebook/react/bridge/ReactApplicationContext;
 
     .line 37
     invoke-direct {p0, p1}, Lcom/facebook/react/bridge/ReactContextBaseJavaModule;-><init>(Lcom/facebook/react/bridge/ReactApplicationContext;)V
 
+    .line 38
     return-void
 .end method
 
@@ -27,12 +29,14 @@
 # virtual methods
 .method public canOpenURL(Ljava/lang/String;Lcom/facebook/react/bridge/Promise;)V
     .locals 4
+    .param p1, "url"    # Ljava/lang/String;
+    .param p2, "promise"    # Lcom/facebook/react/bridge/Promise;
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
+    .line 124
     if-eqz p1, :cond_2
 
-    .line 124
     invoke-virtual {p1}, Ljava/lang/String;->isEmpty()Z
 
     move-result v0
@@ -54,10 +58,14 @@
 
     invoke-direct {v0, v1, v2}, Landroid/content/Intent;-><init>(Ljava/lang/String;Landroid/net/Uri;)V
 
+    .line 133
+    .local v0, "intent":Landroid/content/Intent;
     const/high16 v1, 0x10000000
 
-    .line 133
     invoke-virtual {v0, v1}, Landroid/content/Intent;->addFlags(I)Landroid/content/Intent;
+
+    .line 134
+    nop
 
     .line 135
     invoke-virtual {p0}, Lcom/facebook/react/modules/intent/IntentModule;->getReactApplicationContext()Lcom/facebook/react/bridge/ReactApplicationContext;
@@ -70,33 +78,39 @@
 
     invoke-virtual {v0, v1}, Landroid/content/Intent;->resolveActivity(Landroid/content/pm/PackageManager;)Landroid/content/ComponentName;
 
-    move-result-object v0
+    move-result-object v1
 
-    if-eqz v0, :cond_1
+    if-eqz v1, :cond_1
 
-    const/4 v0, 0x1
+    const/4 v1, 0x1
 
     goto :goto_0
 
     :cond_1
-    const/4 v0, 0x0
+    const/4 v1, 0x0
 
     .line 136
+    .local v1, "canOpen":Z
     :goto_0
-    invoke-static {v0}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+    invoke-static {v1}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    move-result-object v0
+    move-result-object v2
 
-    invoke-interface {p2, v0}, Lcom/facebook/react/bridge/Promise;->resolve(Ljava/lang/Object;)V
+    invoke-interface {p2, v2}, Lcom/facebook/react/bridge/Promise;->resolve(Ljava/lang/Object;)V
     :try_end_0
     .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
 
+    .line 140
+    .end local v0    # "intent":Landroid/content/Intent;
+    .end local v1    # "canOpen":Z
     goto :goto_1
 
+    .line 137
     :catch_0
     move-exception v0
 
     .line 138
+    .local v0, "e":Ljava/lang/Exception;
     new-instance v1, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
 
     new-instance v2, Ljava/lang/StringBuilder;
@@ -107,28 +121,38 @@
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v2, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    const-string p1, "\' can be opened: "
+    move-result-object v2
 
     invoke-virtual {v2, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v2
+
+    const-string v3, "\' can be opened: "
+
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v2
 
     .line 139
     invoke-virtual {v0}, Ljava/lang/Exception;->getMessage()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v3
 
-    invoke-virtual {v2, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v2
 
     invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v2
 
-    invoke-direct {v1, p1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v1, v2}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
 
     .line 138
     invoke-interface {p2, v1}, Lcom/facebook/react/bridge/Promise;->reject(Ljava/lang/Throwable;)V
 
+    .line 141
+    .end local v0    # "e":Ljava/lang/Exception;
     :goto_1
     return-void
 
@@ -145,21 +169,27 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v1
 
-    invoke-direct {v0, p1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
 
     invoke-interface {p2, v0}, Lcom/facebook/react/bridge/Promise;->reject(Ljava/lang/Throwable;)V
 
+    .line 126
     return-void
 .end method
 
 .method public getInitialURL(Lcom/facebook/react/bridge/Promise;)V
-    .locals 4
+    .locals 6
+    .param p1, "promise"    # Lcom/facebook/react/bridge/Promise;
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -169,53 +199,70 @@
 
     move-result-object v0
 
+    .line 54
+    .local v0, "currentActivity":Landroid/app/Activity;
     const/4 v1, 0x0
 
+    .line 56
+    .local v1, "initialURL":Ljava/lang/String;
     if-eqz v0, :cond_0
 
     .line 57
     invoke-virtual {v0}, Landroid/app/Activity;->getIntent()Landroid/content/Intent;
 
-    move-result-object v0
-
-    .line 58
-    invoke-virtual {v0}, Landroid/content/Intent;->getAction()Ljava/lang/String;
-
     move-result-object v2
 
+    .line 58
+    .local v2, "intent":Landroid/content/Intent;
+    invoke-virtual {v2}, Landroid/content/Intent;->getAction()Ljava/lang/String;
+
+    move-result-object v3
+
     .line 59
-    invoke-virtual {v0}, Landroid/content/Intent;->getData()Landroid/net/Uri;
+    .local v3, "action":Ljava/lang/String;
+    invoke-virtual {v2}, Landroid/content/Intent;->getData()Landroid/net/Uri;
 
-    move-result-object v0
-
-    const-string v3, "android.intent.action.VIEW"
+    move-result-object v4
 
     .line 61
-    invoke-virtual {v3, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    .local v4, "uri":Landroid/net/Uri;
+    const-string v5, "android.intent.action.VIEW"
 
-    move-result v2
+    invoke-virtual {v5, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    if-eqz v2, :cond_0
+    move-result v5
 
-    if-eqz v0, :cond_0
+    if-eqz v5, :cond_0
+
+    if-eqz v4, :cond_0
 
     .line 62
-    invoke-virtual {v0}, Landroid/net/Uri;->toString()Ljava/lang/String;
+    invoke-virtual {v4}, Landroid/net/Uri;->toString()Ljava/lang/String;
 
-    move-result-object v1
+    move-result-object v5
+
+    move-object v1, v5
 
     .line 66
+    .end local v2    # "intent":Landroid/content/Intent;
+    .end local v3    # "action":Ljava/lang/String;
+    .end local v4    # "uri":Landroid/net/Uri;
     :cond_0
     invoke-interface {p1, v1}, Lcom/facebook/react/bridge/Promise;->resolve(Ljava/lang/Object;)V
     :try_end_0
     .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
 
+    .line 70
+    .end local v0    # "currentActivity":Landroid/app/Activity;
+    .end local v1    # "initialURL":Ljava/lang/String;
     goto :goto_0
 
+    .line 67
     :catch_0
     move-exception v0
 
     .line 68
+    .local v0, "e":Ljava/lang/Exception;
     new-instance v1, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
 
     new-instance v2, Ljava/lang/StringBuilder;
@@ -226,22 +273,28 @@
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v2
+
     .line 69
     invoke-virtual {v0}, Ljava/lang/Exception;->getMessage()Ljava/lang/String;
 
-    move-result-object v0
+    move-result-object v3
 
-    invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v2
 
     invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object v0
+    move-result-object v2
 
-    invoke-direct {v1, v0}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v1, v2}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
 
     .line 68
     invoke-interface {p1, v1}, Lcom/facebook/react/bridge/Promise;->reject(Ljava/lang/Throwable;)V
 
+    .line 71
+    .end local v0    # "e":Ljava/lang/Exception;
     :goto_0
     return-void
 .end method
@@ -249,19 +302,22 @@
 .method public getName()Ljava/lang/String;
     .locals 1
 
+    .line 42
     const-string v0, "IntentAndroid"
 
     return-object v0
 .end method
 
 .method public openURL(Ljava/lang/String;Lcom/facebook/react/bridge/Promise;)V
-    .locals 4
+    .locals 6
+    .param p1, "url"    # Ljava/lang/String;
+    .param p2, "promise"    # Lcom/facebook/react/bridge/Promise;
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
+    .line 83
     if-eqz p1, :cond_5
 
-    .line 83
     invoke-virtual {p1}, Ljava/lang/String;->isEmpty()Z
 
     move-result v0
@@ -278,6 +334,7 @@
     move-result-object v0
 
     .line 90
+    .local v0, "currentActivity":Landroid/app/Activity;
     new-instance v1, Landroid/content/Intent;
 
     const-string v2, "android.intent.action.VIEW"
@@ -293,6 +350,7 @@
     invoke-direct {v1, v2, v3}, Landroid/content/Intent;-><init>(Ljava/lang/String;Landroid/net/Uri;)V
 
     .line 92
+    .local v1, "intent":Landroid/content/Intent;
     invoke-virtual {p0}, Lcom/facebook/react/modules/intent/IntentModule;->getReactApplicationContext()Lcom/facebook/react/bridge/ReactApplicationContext;
 
     move-result-object v2
@@ -300,6 +358,10 @@
     invoke-virtual {v2}, Lcom/facebook/react/bridge/ReactApplicationContext;->getPackageName()Ljava/lang/String;
 
     move-result-object v2
+
+    .line 93
+    .local v2, "selfPackageName":Ljava/lang/String;
+    nop
 
     .line 94
     invoke-virtual {p0}, Lcom/facebook/react/modules/intent/IntentModule;->getReactApplicationContext()Lcom/facebook/react/bridge/ReactApplicationContext;
@@ -315,34 +377,37 @@
 
     move-result-object v3
 
+    .line 95
+    .local v3, "componentName":Landroid/content/ComponentName;
     if-eqz v3, :cond_1
 
-    .line 95
     invoke-virtual {v3}, Landroid/content/ComponentName;->getPackageName()Ljava/lang/String;
 
-    move-result-object v3
+    move-result-object v4
 
     goto :goto_0
 
     :cond_1
-    const-string v3, ""
+    const-string v4, ""
 
+    .line 99
+    .local v4, "otherPackageName":Ljava/lang/String;
     :goto_0
     if-eqz v0, :cond_2
 
-    .line 99
-    invoke-virtual {v2, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v2, v4}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v2
+    move-result v5
 
-    if-nez v2, :cond_3
-
-    :cond_2
-    const/high16 v2, 0x10000000
+    if-nez v5, :cond_3
 
     .line 100
-    invoke-virtual {v1, v2}, Landroid/content/Intent;->addFlags(I)Landroid/content/Intent;
+    :cond_2
+    const/high16 v5, 0x10000000
 
+    invoke-virtual {v1, v5}, Landroid/content/Intent;->addFlags(I)Landroid/content/Intent;
+
+    .line 103
     :cond_3
     if-eqz v0, :cond_4
 
@@ -355,28 +420,36 @@
     :cond_4
     invoke-virtual {p0}, Lcom/facebook/react/modules/intent/IntentModule;->getReactApplicationContext()Lcom/facebook/react/bridge/ReactApplicationContext;
 
-    move-result-object v0
+    move-result-object v5
 
-    invoke-virtual {v0, v1}, Lcom/facebook/react/bridge/ReactApplicationContext;->startActivity(Landroid/content/Intent;)V
-
-    :goto_1
-    const/4 v0, 0x1
+    invoke-virtual {v5, v1}, Lcom/facebook/react/bridge/ReactApplicationContext;->startActivity(Landroid/content/Intent;)V
 
     .line 109
-    invoke-static {v0}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+    :goto_1
+    const/4 v5, 0x1
 
-    move-result-object v0
+    invoke-static {v5}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
-    invoke-interface {p2, v0}, Lcom/facebook/react/bridge/Promise;->resolve(Ljava/lang/Object;)V
+    move-result-object v5
+
+    invoke-interface {p2, v5}, Lcom/facebook/react/bridge/Promise;->resolve(Ljava/lang/Object;)V
     :try_end_0
     .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
 
+    .line 113
+    .end local v0    # "currentActivity":Landroid/app/Activity;
+    .end local v1    # "intent":Landroid/content/Intent;
+    .end local v2    # "selfPackageName":Ljava/lang/String;
+    .end local v3    # "componentName":Landroid/content/ComponentName;
+    .end local v4    # "otherPackageName":Ljava/lang/String;
     goto :goto_2
 
+    .line 110
     :catch_0
     move-exception v0
 
     .line 111
+    .local v0, "e":Ljava/lang/Exception;
     new-instance v1, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
 
     new-instance v2, Ljava/lang/StringBuilder;
@@ -387,28 +460,38 @@
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v2, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    const-string p1, "\': "
+    move-result-object v2
 
     invoke-virtual {v2, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v2
+
+    const-string v3, "\': "
+
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v2
 
     .line 112
     invoke-virtual {v0}, Ljava/lang/Exception;->getMessage()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v3
 
-    invoke-virtual {v2, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v2
 
     invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v2
 
-    invoke-direct {v1, p1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v1, v2}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
 
     .line 111
     invoke-interface {p2, v1}, Lcom/facebook/react/bridge/Promise;->reject(Ljava/lang/Throwable;)V
 
+    .line 114
+    .end local v0    # "e":Ljava/lang/Exception;
     :goto_2
     return-void
 
@@ -425,33 +508,40 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v1
 
-    invoke-direct {v0, p1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
 
     invoke-interface {p2, v0}, Lcom/facebook/react/bridge/Promise;->reject(Ljava/lang/Throwable;)V
 
+    .line 85
     return-void
 .end method
 
 .method public sendIntent(Ljava/lang/String;Lcom/facebook/react/bridge/ReadableArray;Lcom/facebook/react/bridge/Promise;)V
-    .locals 5
-    .param p2    # Lcom/facebook/react/bridge/ReadableArray;
+    .locals 9
+    .param p1, "action"    # Ljava/lang/String;
+    .param p2, "extras"    # Lcom/facebook/react/bridge/ReadableArray;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
+    .param p3, "promise"    # Lcom/facebook/react/bridge/Promise;
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
+    .line 158
     const-string v0, "."
 
-    if-eqz p1, :cond_6
+    if-eqz p1, :cond_3
 
-    .line 158
     invoke-virtual {p1}, Ljava/lang/String;->isEmpty()Z
 
     move-result v1
@@ -467,6 +557,7 @@
     invoke-direct {v1, p1}, Landroid/content/Intent;-><init>(Ljava/lang/String;)V
 
     .line 165
+    .local v1, "intent":Landroid/content/Intent;
     invoke-virtual {p0}, Lcom/facebook/react/modules/intent/IntentModule;->getReactApplicationContext()Lcom/facebook/react/bridge/ReactApplicationContext;
 
     move-result-object v2
@@ -476,189 +567,228 @@
     move-result-object v2
 
     .line 166
+    .local v2, "packageManager":Landroid/content/pm/PackageManager;
     invoke-virtual {v1, v2}, Landroid/content/Intent;->resolveActivity(Landroid/content/pm/PackageManager;)Landroid/content/ComponentName;
-
-    move-result-object v2
-
-    if-nez v2, :cond_1
-
-    .line 167
-    new-instance p2, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
-
-    new-instance v1, Ljava/lang/StringBuilder;
-
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v2, "Could not launch Intent with action "
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object p1
-
-    invoke-direct {p2, p1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
-
-    invoke-interface {p3, p2}, Lcom/facebook/react/bridge/Promise;->reject(Ljava/lang/Throwable;)V
-
-    return-void
-
-    :cond_1
-    if-eqz p2, :cond_5
-
-    const/4 p1, 0x0
-
-    .line 172
-    :goto_0
-    invoke-interface {p2}, Lcom/facebook/react/bridge/ReadableArray;->size()I
-
-    move-result v0
-
-    if-ge p1, v0, :cond_5
-
-    .line 173
-    invoke-interface {p2, p1}, Lcom/facebook/react/bridge/ReadableArray;->getMap(I)Lcom/facebook/react/bridge/ReadableMap;
-
-    move-result-object v0
-
-    .line 174
-    invoke-interface {v0}, Lcom/facebook/react/bridge/ReadableMap;->keySetIterator()Lcom/facebook/react/bridge/ReadableMapKeySetIterator;
-
-    move-result-object v2
-
-    invoke-interface {v2}, Lcom/facebook/react/bridge/ReadableMapKeySetIterator;->nextKey()Ljava/lang/String;
-
-    move-result-object v2
-
-    .line 175
-    invoke-interface {v0, v2}, Lcom/facebook/react/bridge/ReadableMap;->getType(Ljava/lang/String;)Lcom/facebook/react/bridge/ReadableType;
 
     move-result-object v3
 
-    .line 177
-    sget-object v4, Lcom/facebook/react/modules/intent/IntentModule$1;->$SwitchMap$com$facebook$react$bridge$ReadableType:[I
+    if-nez v3, :cond_1
 
-    invoke-virtual {v3}, Lcom/facebook/react/bridge/ReadableType;->ordinal()I
+    .line 167
+    new-instance v3, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
+
+    new-instance v4, Ljava/lang/StringBuilder;
+
+    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v5, "Could not launch Intent with action "
+
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v4
+
+    invoke-virtual {v4, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v4
+
+    invoke-virtual {v4, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-direct {v3, v0}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+
+    invoke-interface {p3, v3}, Lcom/facebook/react/bridge/Promise;->reject(Ljava/lang/Throwable;)V
+
+    .line 168
+    return-void
+
+    .line 171
+    :cond_1
+    if-eqz p2, :cond_2
+
+    .line 172
+    const/4 v0, 0x0
+
+    .local v0, "i":I
+    :goto_0
+    invoke-interface {p2}, Lcom/facebook/react/bridge/ReadableArray;->size()I
 
     move-result v3
 
-    aget v3, v4, v3
+    if-ge v0, v3, :cond_2
 
-    const/4 v4, 0x1
+    .line 173
+    invoke-interface {p2, v0}, Lcom/facebook/react/bridge/ReadableArray;->getMap(I)Lcom/facebook/react/bridge/ReadableMap;
 
-    if-eq v3, v4, :cond_4
+    move-result-object v3
 
-    const/4 v4, 0x2
+    .line 174
+    .local v3, "map":Lcom/facebook/react/bridge/ReadableMap;
+    invoke-interface {v3}, Lcom/facebook/react/bridge/ReadableMap;->keySetIterator()Lcom/facebook/react/bridge/ReadableMapKeySetIterator;
 
-    if-eq v3, v4, :cond_3
+    move-result-object v4
 
-    const/4 v4, 0x3
+    invoke-interface {v4}, Lcom/facebook/react/bridge/ReadableMapKeySetIterator;->nextKey()Ljava/lang/String;
 
-    if-eq v3, v4, :cond_2
+    move-result-object v4
+
+    .line 175
+    .local v4, "name":Ljava/lang/String;
+    invoke-interface {v3, v4}, Lcom/facebook/react/bridge/ReadableMap;->getType(Ljava/lang/String;)Lcom/facebook/react/bridge/ReadableType;
+
+    move-result-object v5
+
+    .line 177
+    .local v5, "type":Lcom/facebook/react/bridge/ReadableType;
+    sget-object v6, Lcom/facebook/react/modules/intent/IntentModule$1;->$SwitchMap$com$facebook$react$bridge$ReadableType:[I
+
+    invoke-virtual {v5}, Lcom/facebook/react/bridge/ReadableType;->ordinal()I
+
+    move-result v7
+
+    aget v6, v6, v7
+
+    packed-switch v6, :pswitch_data_0
 
     .line 195
-    new-instance p1, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
+    new-instance v6, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
 
-    new-instance p2, Ljava/lang/StringBuilder;
+    new-instance v7, Ljava/lang/StringBuilder;
 
-    invoke-direct {p2}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v7}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v0, "Extra type for "
+    const-string v8, "Extra type for "
 
-    invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {p2, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v7
 
-    const-string v0, " not supported."
+    invoke-virtual {v7, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v7
 
-    invoke-virtual {p2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    const-string v8, " not supported."
 
-    move-result-object p2
+    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-direct {p1, p2}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+    move-result-object v7
 
-    invoke-interface {p3, p1}, Lcom/facebook/react/bridge/Promise;->reject(Ljava/lang/Throwable;)V
+    invoke-virtual {v7}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
+    move-result-object v7
+
+    invoke-direct {v6, v7}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+
+    invoke-interface {p3, v6}, Lcom/facebook/react/bridge/Promise;->reject(Ljava/lang/Throwable;)V
+
+    .line 197
     return-void
 
     .line 191
-    :cond_2
-    invoke-interface {v0, v2}, Lcom/facebook/react/bridge/ReadableMap;->getBoolean(Ljava/lang/String;)Z
+    :pswitch_0
+    invoke-interface {v3, v4}, Lcom/facebook/react/bridge/ReadableMap;->getBoolean(Ljava/lang/String;)Z
 
-    move-result v0
+    move-result v6
 
-    invoke-virtual {v1, v2, v0}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Z)Landroid/content/Intent;
+    invoke-virtual {v1, v4, v6}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Z)Landroid/content/Intent;
 
+    .line 192
     goto :goto_1
 
     .line 186
-    :cond_3
-    invoke-interface {v0, v2}, Lcom/facebook/react/bridge/ReadableMap;->getDouble(Ljava/lang/String;)D
+    :pswitch_1
+    invoke-interface {v3, v4}, Lcom/facebook/react/bridge/ReadableMap;->getDouble(Ljava/lang/String;)D
 
-    move-result-wide v3
+    move-result-wide v6
 
-    invoke-static {v3, v4}, Ljava/lang/Double;->valueOf(D)Ljava/lang/Double;
+    invoke-static {v6, v7}, Ljava/lang/Double;->valueOf(D)Ljava/lang/Double;
 
-    move-result-object v0
+    move-result-object v6
 
     .line 187
-    invoke-virtual {v1, v2, v0}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Ljava/io/Serializable;)Landroid/content/Intent;
+    .local v6, "number":Ljava/lang/Double;
+    invoke-virtual {v1, v4, v6}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Ljava/io/Serializable;)Landroid/content/Intent;
 
+    .line 188
     goto :goto_1
 
     .line 179
-    :cond_4
-    invoke-interface {v0, v2}, Lcom/facebook/react/bridge/ReadableMap;->getString(Ljava/lang/String;)Ljava/lang/String;
+    .end local v6    # "number":Ljava/lang/Double;
+    :pswitch_2
+    invoke-interface {v3, v4}, Lcom/facebook/react/bridge/ReadableMap;->getString(Ljava/lang/String;)Ljava/lang/String;
 
-    move-result-object v0
+    move-result-object v6
 
-    invoke-virtual {v1, v2, v0}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;
+    invoke-virtual {v1, v4, v6}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;
 
+    .line 180
+    nop
+
+    .line 172
+    .end local v3    # "map":Lcom/facebook/react/bridge/ReadableMap;
+    .end local v4    # "name":Ljava/lang/String;
+    .end local v5    # "type":Lcom/facebook/react/bridge/ReadableType;
     :goto_1
-    add-int/lit8 p1, p1, 0x1
+    add-int/lit8 v0, v0, 0x1
 
     goto :goto_0
 
     .line 203
-    :cond_5
+    .end local v0    # "i":I
+    :cond_2
     invoke-virtual {p0}, Lcom/facebook/react/modules/intent/IntentModule;->getReactApplicationContext()Lcom/facebook/react/bridge/ReactApplicationContext;
 
-    move-result-object p1
+    move-result-object v0
 
-    invoke-virtual {p1, v1}, Lcom/facebook/react/bridge/ReactApplicationContext;->startActivity(Landroid/content/Intent;)V
+    invoke-virtual {v0, v1}, Lcom/facebook/react/bridge/ReactApplicationContext;->startActivity(Landroid/content/Intent;)V
 
+    .line 204
     return-void
 
     .line 159
-    :cond_6
+    .end local v1    # "intent":Landroid/content/Intent;
+    .end local v2    # "packageManager":Landroid/content/pm/PackageManager;
+    :cond_3
     :goto_2
-    new-instance p2, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
+    new-instance v1, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
 
-    new-instance v1, Ljava/lang/StringBuilder;
+    new-instance v2, Ljava/lang/StringBuilder;
 
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v2, "Invalid Action: "
+    const-string v3, "Invalid Action: "
 
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v2
 
-    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v2, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    move-result-object v2
 
-    move-result-object p1
+    invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-direct {p2, p1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+    move-result-object v0
 
-    invoke-interface {p3, p2}, Lcom/facebook/react/bridge/Promise;->reject(Ljava/lang/Throwable;)V
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
+    move-result-object v0
+
+    invoke-direct {v1, v0}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+
+    invoke-interface {p3, v1}, Lcom/facebook/react/bridge/Promise;->reject(Ljava/lang/Throwable;)V
+
+    .line 160
     return-void
+
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method

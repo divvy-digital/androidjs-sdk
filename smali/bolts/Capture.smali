@@ -29,8 +29,10 @@
     .locals 0
 
     .line 20
+    .local p0, "this":Lbolts/Capture;, "Lbolts/Capture<TT;>;"
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
+    .line 21
     return-void
 .end method
 
@@ -43,11 +45,14 @@
     .end annotation
 
     .line 23
+    .local p0, "this":Lbolts/Capture;, "Lbolts/Capture<TT;>;"
+    .local p1, "value":Ljava/lang/Object;, "TT;"
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     .line 24
     iput-object p1, p0, Lbolts/Capture;->value:Ljava/lang/Object;
 
+    .line 25
     return-void
 .end method
 
@@ -62,6 +67,7 @@
     .end annotation
 
     .line 28
+    .local p0, "this":Lbolts/Capture;, "Lbolts/Capture<TT;>;"
     iget-object v0, p0, Lbolts/Capture;->value:Ljava/lang/Object;
 
     return-object v0
@@ -76,7 +82,10 @@
     .end annotation
 
     .line 32
+    .local p0, "this":Lbolts/Capture;, "Lbolts/Capture<TT;>;"
+    .local p1, "value":Ljava/lang/Object;, "TT;"
     iput-object p1, p0, Lbolts/Capture;->value:Ljava/lang/Object;
 
+    .line 33
     return-void
 .end method

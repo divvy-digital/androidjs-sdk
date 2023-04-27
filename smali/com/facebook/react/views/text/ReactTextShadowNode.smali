@@ -3,12 +3,6 @@
 .source "ReactTextShadowNode.java"
 
 
-# annotations
-.annotation build Landroid/annotation/TargetApi;
-    value = 0x17
-.end annotation
-
-
 # static fields
 .field private static final sTextPaintInstance:Landroid/text/TextPaint;
 
@@ -56,6 +50,7 @@
     .line 169
     invoke-direct {p0}, Lcom/facebook/react/views/text/ReactTextShadowNode;->initMeasureFunction()V
 
+    .line 170
     return-void
 .end method
 
@@ -69,64 +64,73 @@
 .end method
 
 .method static synthetic access$100(Lcom/facebook/react/views/text/ReactTextShadowNode;)Landroid/text/Spannable;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/views/text/ReactTextShadowNode;
 
     .line 42
-    iget-object p0, p0, Lcom/facebook/react/views/text/ReactTextShadowNode;->mPreparedSpannableText:Landroid/text/Spannable;
+    iget-object v0, p0, Lcom/facebook/react/views/text/ReactTextShadowNode;->mPreparedSpannableText:Landroid/text/Spannable;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$200(Lcom/facebook/react/views/text/ReactTextShadowNode;)I
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/views/text/ReactTextShadowNode;
 
     .line 42
     invoke-direct {p0}, Lcom/facebook/react/views/text/ReactTextShadowNode;->getTextAlign()I
 
-    move-result p0
+    move-result v0
 
-    return p0
+    return v0
 .end method
 
 .method static synthetic access$300(Lcom/facebook/react/views/text/ReactTextShadowNode;)Z
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/views/text/ReactTextShadowNode;
 
     .line 42
-    iget-boolean p0, p0, Lcom/facebook/react/views/text/ReactTextShadowNode;->mShouldNotifyOnTextLayout:Z
+    iget-boolean v0, p0, Lcom/facebook/react/views/text/ReactTextShadowNode;->mShouldNotifyOnTextLayout:Z
 
-    return p0
+    return v0
 .end method
 
 .method private getTextAlign()I
-    .locals 5
+    .locals 3
 
     .line 180
     iget v0, p0, Lcom/facebook/react/views/text/ReactTextShadowNode;->mTextAlign:I
 
     .line 181
+    .local v0, "textAlign":I
     invoke-virtual {p0}, Lcom/facebook/react/views/text/ReactTextShadowNode;->getLayoutDirection()Lcom/facebook/yoga/YogaDirection;
 
     move-result-object v1
 
     sget-object v2, Lcom/facebook/yoga/YogaDirection;->RTL:Lcom/facebook/yoga/YogaDirection;
 
-    const/4 v3, 0x3
-
-    const/4 v4, 0x5
-
     if-ne v1, v2, :cond_1
 
-    if-ne v0, v4, :cond_0
+    .line 182
+    const/4 v1, 0x5
 
+    if-ne v0, v1, :cond_0
+
+    .line 183
     const/4 v0, 0x3
 
     goto :goto_0
 
+    .line 184
     :cond_0
-    if-ne v0, v3, :cond_1
+    const/4 v1, 0x3
 
+    if-ne v0, v1, :cond_1
+
+    .line 185
     const/4 v0, 0x5
 
+    .line 188
     :cond_1
     :goto_0
     return v0
@@ -147,6 +151,7 @@
 
     invoke-virtual {p0, v0}, Lcom/facebook/react/views/text/ReactTextShadowNode;->setMeasureFunction(Lcom/facebook/yoga/YogaMeasureFunction;)V
 
+    .line 176
     :cond_0
     return-void
 .end method
@@ -156,6 +161,7 @@
 .method public isVirtualAnchor()Z
     .locals 1
 
+    .line 199
     const/4 v0, 0x1
 
     return v0
@@ -170,15 +176,16 @@
     .line 206
     invoke-super {p0}, Lcom/facebook/react/views/text/ReactBaseTextShadowNode;->dirty()V
 
+    .line 207
     return-void
 .end method
 
 .method public onBeforeLayout()V
     .locals 1
 
+    .line 193
     const/4 v0, 0x0
 
-    .line 193
     invoke-static {p0, v0}, Lcom/facebook/react/views/text/ReactTextShadowNode;->spannedFromShadowNode(Lcom/facebook/react/views/text/ReactBaseTextShadowNode;Ljava/lang/String;)Landroid/text/Spannable;
 
     move-result-object v0
@@ -188,11 +195,13 @@
     .line 194
     invoke-virtual {p0}, Lcom/facebook/react/views/text/ReactTextShadowNode;->markUpdated()V
 
+    .line 195
     return-void
 .end method
 
 .method public onCollectExtraUpdates(Lcom/facebook/react/uimanager/UIViewOperationQueue;)V
     .locals 12
+    .param p1, "uiViewOperationQueue"    # Lcom/facebook/react/uimanager/UIViewOperationQueue;
 
     .line 211
     invoke-super {p0, p1}, Lcom/facebook/react/views/text/ReactBaseTextShadowNode;->onCollectExtraUpdates(Lcom/facebook/react/uimanager/UIViewOperationQueue;)V
@@ -209,30 +218,30 @@
 
     iget-boolean v3, p0, Lcom/facebook/react/views/text/ReactTextShadowNode;->mContainsImages:Z
 
+    .line 219
     const/4 v0, 0x4
 
-    .line 219
     invoke-virtual {p0, v0}, Lcom/facebook/react/views/text/ReactTextShadowNode;->getPadding(I)F
 
     move-result v4
 
+    .line 220
     const/4 v0, 0x1
 
-    .line 220
     invoke-virtual {p0, v0}, Lcom/facebook/react/views/text/ReactTextShadowNode;->getPadding(I)F
 
     move-result v5
 
+    .line 221
     const/4 v0, 0x5
 
-    .line 221
     invoke-virtual {p0, v0}, Lcom/facebook/react/views/text/ReactTextShadowNode;->getPadding(I)F
 
     move-result v6
 
+    .line 222
     const/4 v0, 0x3
 
-    .line 222
     invoke-virtual {p0, v0}, Lcom/facebook/react/views/text/ReactTextShadowNode;->getPadding(I)F
 
     move-result v7
@@ -251,18 +260,22 @@
     invoke-direct/range {v0 .. v10}, Lcom/facebook/react/views/text/ReactTextUpdate;-><init>(Landroid/text/Spannable;IZFFFFIII)V
 
     .line 226
+    .local v0, "reactTextUpdate":Lcom/facebook/react/views/text/ReactTextUpdate;
     invoke-virtual {p0}, Lcom/facebook/react/views/text/ReactTextShadowNode;->getReactTag()I
 
-    move-result v0
+    move-result v1
 
-    invoke-virtual {p1, v0, v11}, Lcom/facebook/react/uimanager/UIViewOperationQueue;->enqueueUpdateExtraData(ILjava/lang/Object;)V
+    invoke-virtual {p1, v1, v0}, Lcom/facebook/react/uimanager/UIViewOperationQueue;->enqueueUpdateExtraData(ILjava/lang/Object;)V
 
+    .line 228
+    .end local v0    # "reactTextUpdate":Lcom/facebook/react/views/text/ReactTextUpdate;
     :cond_0
     return-void
 .end method
 
 .method public setShouldNotifyOnTextLayout(Z)V
     .locals 0
+    .param p1, "shouldNotifyOnTextLayout"    # Z
     .annotation runtime Lcom/facebook/react/uimanager/annotations/ReactProp;
         name = "onTextLayout"
     .end annotation
@@ -270,5 +283,6 @@
     .line 232
     iput-boolean p1, p0, Lcom/facebook/react/views/text/ReactTextShadowNode;->mShouldNotifyOnTextLayout:Z
 
+    .line 233
     return-void
 .end method

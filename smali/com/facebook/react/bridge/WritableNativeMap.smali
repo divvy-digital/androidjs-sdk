@@ -6,11 +6,6 @@
 .implements Lcom/facebook/react/bridge/WritableMap;
 
 
-# annotations
-.annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-.end annotation
-
-
 # direct methods
 .method static constructor <clinit>()V
     .locals 0
@@ -18,6 +13,7 @@
     .line 27
     invoke-static {}, Lcom/facebook/react/bridge/ReactBridge;->staticInit()V
 
+    .line 28
     return-void
 .end method
 
@@ -31,6 +27,7 @@
 
     invoke-direct {p0, v0}, Lcom/facebook/react/bridge/ReadableNativeMap;-><init>(Lcom/facebook/jni/HybridData;)V
 
+    .line 66
     return-void
 .end method
 
@@ -50,7 +47,7 @@
 # virtual methods
 .method public merge(Lcom/facebook/react/bridge/ReadableMap;)V
     .locals 2
-    .param p1    # Lcom/facebook/react/bridge/ReadableMap;
+    .param p1, "source"    # Lcom/facebook/react/bridge/ReadableMap;
         .annotation runtime Ljavax/annotation/Nonnull;
         .end annotation
     .end param
@@ -63,27 +60,30 @@
     invoke-static {v0, v1}, Lcom/facebook/infer/annotation/Assertions;->assertCondition(ZLjava/lang/String;)V
 
     .line 61
-    check-cast p1, Lcom/facebook/react/bridge/ReadableNativeMap;
+    move-object v0, p1
 
-    invoke-direct {p0, p1}, Lcom/facebook/react/bridge/WritableNativeMap;->mergeNativeMap(Lcom/facebook/react/bridge/ReadableNativeMap;)V
+    check-cast v0, Lcom/facebook/react/bridge/ReadableNativeMap;
 
+    invoke-direct {p0, v0}, Lcom/facebook/react/bridge/WritableNativeMap;->mergeNativeMap(Lcom/facebook/react/bridge/ReadableNativeMap;)V
+
+    .line 62
     return-void
 .end method
 
 .method public putArray(Ljava/lang/String;Lcom/facebook/react/bridge/WritableArray;)V
     .locals 2
-    .param p1    # Ljava/lang/String;
+    .param p1, "key"    # Ljava/lang/String;
         .annotation runtime Ljavax/annotation/Nonnull;
         .end annotation
     .end param
-    .param p2    # Lcom/facebook/react/bridge/WritableArray;
+    .param p2, "value"    # Lcom/facebook/react/bridge/WritableArray;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
 
+    .line 52
     if-eqz p2, :cond_1
 
-    .line 52
     instance-of v0, p2, Lcom/facebook/react/bridge/WritableNativeArray;
 
     if-eqz v0, :cond_0
@@ -105,10 +105,13 @@
     invoke-static {v0, v1}, Lcom/facebook/infer/annotation/Assertions;->assertCondition(ZLjava/lang/String;)V
 
     .line 54
-    check-cast p2, Lcom/facebook/react/bridge/WritableNativeArray;
+    move-object v0, p2
 
-    invoke-direct {p0, p1, p2}, Lcom/facebook/react/bridge/WritableNativeMap;->putNativeArray(Ljava/lang/String;Lcom/facebook/react/bridge/WritableNativeArray;)V
+    check-cast v0, Lcom/facebook/react/bridge/WritableNativeArray;
 
+    invoke-direct {p0, p1, v0}, Lcom/facebook/react/bridge/WritableNativeMap;->putNativeArray(Ljava/lang/String;Lcom/facebook/react/bridge/WritableNativeArray;)V
+
+    .line 55
     return-void
 .end method
 
@@ -135,18 +138,18 @@
 
 .method public putMap(Ljava/lang/String;Lcom/facebook/react/bridge/WritableMap;)V
     .locals 2
-    .param p1    # Ljava/lang/String;
+    .param p1, "key"    # Ljava/lang/String;
         .annotation runtime Ljavax/annotation/Nonnull;
         .end annotation
     .end param
-    .param p2    # Lcom/facebook/react/bridge/WritableMap;
+    .param p2, "value"    # Lcom/facebook/react/bridge/WritableMap;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
 
+    .line 44
     if-eqz p2, :cond_1
 
-    .line 44
     instance-of v0, p2, Lcom/facebook/react/bridge/WritableNativeMap;
 
     if-eqz v0, :cond_0
@@ -168,18 +171,17 @@
     invoke-static {v0, v1}, Lcom/facebook/infer/annotation/Assertions;->assertCondition(ZLjava/lang/String;)V
 
     .line 46
-    check-cast p2, Lcom/facebook/react/bridge/WritableNativeMap;
+    move-object v0, p2
 
-    invoke-direct {p0, p1, p2}, Lcom/facebook/react/bridge/WritableNativeMap;->putNativeMap(Ljava/lang/String;Lcom/facebook/react/bridge/WritableNativeMap;)V
+    check-cast v0, Lcom/facebook/react/bridge/WritableNativeMap;
 
+    invoke-direct {p0, p1, v0}, Lcom/facebook/react/bridge/WritableNativeMap;->putNativeMap(Ljava/lang/String;Lcom/facebook/react/bridge/WritableNativeMap;)V
+
+    .line 47
     return-void
 .end method
 
 .method public native putNull(Ljava/lang/String;)V
-    .param p1    # Ljava/lang/String;
-        .annotation build Landroid/support/annotation/NonNull;
-        .end annotation
-    .end param
 .end method
 
 .method public native putString(Ljava/lang/String;Ljava/lang/String;)V

@@ -24,6 +24,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/bridge/ReadableMap;)V
     .locals 0
+    .param p1, "config"    # Lcom/facebook/react/bridge/ReadableMap;
 
     .line 30
     invoke-direct {p0}, Lcom/facebook/react/animated/AnimationDriver;-><init>()V
@@ -31,27 +32,31 @@
     .line 31
     invoke-virtual {p0, p1}, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->resetConfig(Lcom/facebook/react/bridge/ReadableMap;)V
 
+    .line 32
     return-void
 .end method
 
 
 # virtual methods
 .method public resetConfig(Lcom/facebook/react/bridge/ReadableMap;)V
-    .locals 7
-
-    const-string v0, "frames"
+    .locals 6
+    .param p1, "config"    # Lcom/facebook/react/bridge/ReadableMap;
 
     .line 36
+    const-string v0, "frames"
+
     invoke-interface {p1, v0}, Lcom/facebook/react/bridge/ReadableMap;->getArray(Ljava/lang/String;)Lcom/facebook/react/bridge/ReadableArray;
 
     move-result-object v0
 
     .line 37
+    .local v0, "frames":Lcom/facebook/react/bridge/ReadableArray;
     invoke-interface {v0}, Lcom/facebook/react/bridge/ReadableArray;->size()I
 
     move-result v1
 
     .line 38
+    .local v1, "numberOfFrames":I
     iget-object v2, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mFrames:[D
 
     if-eqz v2, :cond_0
@@ -66,104 +71,109 @@
 
     iput-object v2, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mFrames:[D
 
+    .line 41
     :cond_1
     const/4 v2, 0x0
 
-    const/4 v3, 0x0
-
+    .local v2, "i":I
     :goto_0
-    if-ge v3, v1, :cond_2
+    if-ge v2, v1, :cond_2
 
     .line 42
-    iget-object v4, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mFrames:[D
+    iget-object v3, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mFrames:[D
 
-    invoke-interface {v0, v3}, Lcom/facebook/react/bridge/ReadableArray;->getDouble(I)D
+    invoke-interface {v0, v2}, Lcom/facebook/react/bridge/ReadableArray;->getDouble(I)D
 
-    move-result-wide v5
+    move-result-wide v4
 
-    aput-wide v5, v4, v3
+    aput-wide v4, v3, v2
 
-    add-int/lit8 v3, v3, 0x1
+    .line 41
+    add-int/lit8 v2, v2, 0x1
 
     goto :goto_0
 
-    :cond_2
-    const-string v0, "toValue"
-
     .line 44
-    invoke-interface {p1, v0}, Lcom/facebook/react/bridge/ReadableMap;->hasKey(Ljava/lang/String;)Z
+    .end local v2    # "i":I
+    :cond_2
+    const-string v2, "toValue"
 
-    move-result v1
+    invoke-interface {p1, v2}, Lcom/facebook/react/bridge/ReadableMap;->hasKey(Ljava/lang/String;)Z
 
-    if-eqz v1, :cond_3
+    move-result v3
 
-    invoke-interface {p1, v0}, Lcom/facebook/react/bridge/ReadableMap;->getDouble(Ljava/lang/String;)D
+    if-eqz v3, :cond_3
 
-    move-result-wide v0
+    invoke-interface {p1, v2}, Lcom/facebook/react/bridge/ReadableMap;->getDouble(Ljava/lang/String;)D
+
+    move-result-wide v2
 
     goto :goto_1
 
     :cond_3
-    const-wide/16 v0, 0x0
+    const-wide/16 v2, 0x0
 
     :goto_1
-    iput-wide v0, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mToValue:D
-
-    const-string v0, "iterations"
+    iput-wide v2, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mToValue:D
 
     .line 45
-    invoke-interface {p1, v0}, Lcom/facebook/react/bridge/ReadableMap;->hasKey(Ljava/lang/String;)Z
+    const-string v2, "iterations"
 
-    move-result v1
+    invoke-interface {p1, v2}, Lcom/facebook/react/bridge/ReadableMap;->hasKey(Ljava/lang/String;)Z
 
-    const/4 v3, 0x1
+    move-result v3
 
-    if-eqz v1, :cond_4
+    const/4 v4, 0x1
 
-    invoke-interface {p1, v0}, Lcom/facebook/react/bridge/ReadableMap;->getInt(Ljava/lang/String;)I
+    if-eqz v3, :cond_4
 
-    move-result p1
+    invoke-interface {p1, v2}, Lcom/facebook/react/bridge/ReadableMap;->getInt(Ljava/lang/String;)I
+
+    move-result v2
 
     goto :goto_2
 
     :cond_4
-    const/4 p1, 0x1
-
-    :goto_2
-    iput p1, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mIterations:I
-
-    .line 46
-    iput v3, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mCurrentLoop:I
-
-    .line 47
-    iget p1, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mIterations:I
-
-    if-nez p1, :cond_5
-
     const/4 v2, 0x1
 
-    :cond_5
-    iput-boolean v2, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mHasFinished:Z
+    :goto_2
+    iput v2, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mIterations:I
 
-    const-wide/16 v0, -0x1
+    .line 46
+    iput v4, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mCurrentLoop:I
+
+    .line 47
+    if-nez v2, :cond_5
+
+    goto :goto_3
+
+    :cond_5
+    const/4 v4, 0x0
+
+    :goto_3
+    iput-boolean v4, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mHasFinished:Z
 
     .line 48
-    iput-wide v0, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mStartFrameTimeNanos:J
+    const-wide/16 v2, -0x1
 
+    iput-wide v2, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mStartFrameTimeNanos:J
+
+    .line 49
     return-void
 .end method
 
 .method public runAnimationStep(J)V
-    .locals 6
+    .locals 10
+    .param p1, "frameTimeNanos"    # J
 
     .line 53
     iget-wide v0, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mStartFrameTimeNanos:J
 
-    const/4 v2, 0x1
+    const-wide/16 v2, 0x0
 
-    const-wide/16 v3, 0x0
+    const/4 v4, 0x1
 
-    cmp-long v5, v0, v3
+    cmp-long v5, v0, v2
 
     if-gez v5, :cond_0
 
@@ -173,7 +183,7 @@
     .line 55
     iget v0, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mCurrentLoop:I
 
-    if-ne v0, v2, :cond_0
+    if-ne v0, v4, :cond_0
 
     .line 57
     iget-object v0, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mAnimatedValue:Lcom/facebook/react/animated/ValueAnimatedNode;
@@ -186,113 +196,120 @@
     :cond_0
     iget-wide v0, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mStartFrameTimeNanos:J
 
-    sub-long/2addr p1, v0
+    sub-long v0, p1, v0
 
-    const-wide/32 v0, 0xf4240
+    const-wide/32 v2, 0xf4240
 
-    div-long/2addr p1, v0
-
-    long-to-double p1, p1
-
-    const-wide v0, 0x4030aaaaaaaaaaabL    # 16.666666666666668
+    div-long/2addr v0, v2
 
     .line 61
-    invoke-static {p1, p2}, Ljava/lang/Double;->isNaN(D)Z
+    .local v0, "timeFromStartMillis":J
+    long-to-double v2, v0
 
-    div-double/2addr p1, v0
+    const-wide v5, 0x4030aaaaaaaaaaabL    # 16.666666666666668
 
-    invoke-static {p1, p2}, Ljava/lang/Math;->round(D)J
+    div-double/2addr v2, v5
 
-    move-result-wide p1
+    invoke-static {v2, v3}, Ljava/lang/Math;->round(D)J
 
-    long-to-int p2, p1
+    move-result-wide v2
 
-    if-ltz p2, :cond_5
+    long-to-int v3, v2
+
+    .line 62
+    .local v3, "frameIndex":I
+    if-ltz v3, :cond_5
 
     .line 64
-    iget-boolean p1, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mHasFinished:Z
+    iget-boolean v2, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mHasFinished:Z
 
-    if-eqz p1, :cond_1
+    if-eqz v2, :cond_1
 
+    .line 66
     return-void
 
     .line 69
     :cond_1
-    iget-object p1, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mFrames:[D
+    iget-object v2, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mFrames:[D
 
-    array-length v0, p1
+    array-length v5, v2
 
-    sub-int/2addr v0, v2
+    sub-int/2addr v5, v4
 
-    if-lt p2, v0, :cond_4
+    if-lt v3, v5, :cond_4
 
     .line 70
-    iget-wide p1, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mToValue:D
+    iget-wide v5, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mToValue:D
 
     .line 71
-    iget v0, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mIterations:I
+    .local v5, "nextValue":D
+    iget v2, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mIterations:I
 
-    const/4 v1, -0x1
+    const/4 v7, -0x1
 
-    if-eq v0, v1, :cond_3
+    if-eq v2, v7, :cond_3
 
-    iget v1, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mCurrentLoop:I
+    iget v7, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mCurrentLoop:I
 
-    if-ge v1, v0, :cond_2
+    if-ge v7, v2, :cond_2
 
     goto :goto_0
 
     .line 75
     :cond_2
-    iput-boolean v2, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mHasFinished:Z
+    iput-boolean v4, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mHasFinished:Z
 
     goto :goto_1
 
+    .line 72
     :cond_3
     :goto_0
-    const-wide/16 v0, -0x1
+    const-wide/16 v7, -0x1
 
-    .line 72
-    iput-wide v0, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mStartFrameTimeNanos:J
+    iput-wide v7, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mStartFrameTimeNanos:J
 
     .line 73
-    iget v0, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mCurrentLoop:I
+    iget v2, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mCurrentLoop:I
 
-    add-int/2addr v0, v2
+    add-int/2addr v2, v4
 
-    iput v0, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mCurrentLoop:I
+    iput v2, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mCurrentLoop:I
 
     goto :goto_1
 
     .line 78
+    .end local v5    # "nextValue":D
     :cond_4
-    iget-wide v0, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mFromValue:D
+    iget-wide v4, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mFromValue:D
 
-    aget-wide v2, p1, p2
+    aget-wide v6, v2, v3
 
-    iget-wide p1, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mToValue:D
+    iget-wide v8, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mToValue:D
 
-    sub-double/2addr p1, v0
+    sub-double/2addr v8, v4
 
-    mul-double v2, v2, p1
+    mul-double v6, v6, v8
 
-    add-double p1, v0, v2
+    add-double v5, v4, v6
 
     .line 80
+    .restart local v5    # "nextValue":D
     :goto_1
-    iget-object v0, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mAnimatedValue:Lcom/facebook/react/animated/ValueAnimatedNode;
+    iget-object v2, p0, Lcom/facebook/react/animated/FrameBasedAnimationDriver;->mAnimatedValue:Lcom/facebook/react/animated/ValueAnimatedNode;
 
-    iput-wide p1, v0, Lcom/facebook/react/animated/ValueAnimatedNode;->mValue:D
+    iput-wide v5, v2, Lcom/facebook/react/animated/ValueAnimatedNode;->mValue:D
 
+    .line 81
     return-void
 
     .line 63
+    .end local v5    # "nextValue":D
     :cond_5
-    new-instance p1, Ljava/lang/IllegalStateException;
+    new-instance v2, Ljava/lang/IllegalStateException;
 
-    const-string p2, "Calculated frame index should never be lower than 0"
+    const-string v4, "Calculated frame index should never be lower than 0"
 
-    invoke-direct {p1, p2}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v2, v4}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v2
 .end method

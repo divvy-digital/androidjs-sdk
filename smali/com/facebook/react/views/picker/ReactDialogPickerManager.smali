@@ -38,6 +38,7 @@
 
 .method protected createViewInstance(Lcom/facebook/react/uimanager/ThemedReactContext;)Lcom/facebook/react/views/picker/ReactPicker;
     .locals 2
+    .param p1, "reactContext"    # Lcom/facebook/react/uimanager/ThemedReactContext;
 
     .line 30
     new-instance v0, Lcom/facebook/react/views/picker/ReactPicker;
@@ -52,6 +53,7 @@
 .method public getName()Ljava/lang/String;
     .locals 1
 
+    .line 25
     const-string v0, "AndroidDialogPicker"
 
     return-object v0

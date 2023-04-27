@@ -25,6 +25,7 @@
 
     invoke-direct {v0}, Lokhttp3/OkHttpClient;-><init>()V
 
+    .line 45
     return-void
 .end method
 

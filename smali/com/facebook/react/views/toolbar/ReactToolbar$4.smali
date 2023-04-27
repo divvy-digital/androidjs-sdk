@@ -24,6 +24,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/views/toolbar/ReactToolbar;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/views/toolbar/ReactToolbar;
 
     .line 164
     iput-object p1, p0, Lcom/facebook/react/views/toolbar/ReactToolbar$4;->this$0:Lcom/facebook/react/views/toolbar/ReactToolbar;
@@ -93,5 +94,6 @@
 
     invoke-virtual {v0, v1, v2, v3, v4}, Lcom/facebook/react/views/toolbar/ReactToolbar;->layout(IIII)V
 
+    .line 171
     return-void
 .end method

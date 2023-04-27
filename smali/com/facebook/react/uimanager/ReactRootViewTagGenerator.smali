@@ -6,12 +6,17 @@
 # static fields
 .field private static final ROOT_VIEW_TAG_INCREMENT:I = 0xa
 
-.field private static sNextRootViewTag:I = 0x1
+.field private static sNextRootViewTag:I
 
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 0
+    .locals 1
+
+    .line 15
+    const/4 v0, 0x1
+
+    sput v0, Lcom/facebook/react/uimanager/ReactRootViewTagGenerator;->sNextRootViewTag:I
 
     return-void
 .end method
@@ -36,20 +41,23 @@
     :try_start_0
     sget v1, Lcom/facebook/react/uimanager/ReactRootViewTagGenerator;->sNextRootViewTag:I
 
+    move v2, v1
+
     .line 19
-    sget v2, Lcom/facebook/react/uimanager/ReactRootViewTagGenerator;->sNextRootViewTag:I
+    .local v2, "tag":I
+    add-int/lit8 v1, v1, 0xa
 
-    add-int/lit8 v2, v2, 0xa
-
-    sput v2, Lcom/facebook/react/uimanager/ReactRootViewTagGenerator;->sNextRootViewTag:I
+    sput v1, Lcom/facebook/react/uimanager/ReactRootViewTagGenerator;->sNextRootViewTag:I
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
     .line 20
     monitor-exit v0
 
-    return v1
+    return v2
 
+    .line 17
+    .end local v2    # "tag":I
     :catchall_0
     move-exception v1
 

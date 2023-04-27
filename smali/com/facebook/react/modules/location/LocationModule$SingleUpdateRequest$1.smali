@@ -24,6 +24,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/modules/location/LocationModule$SingleUpdateRequest;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/modules/location/LocationModule$SingleUpdateRequest;
 
     .line 260
     iput-object p1, p0, Lcom/facebook/react/modules/location/LocationModule$SingleUpdateRequest$1;->this$0:Lcom/facebook/react/modules/location/LocationModule$SingleUpdateRequest;
@@ -36,7 +37,7 @@
 
 # virtual methods
 .method public run()V
-    .locals 7
+    .locals 6
 
     .line 263
     iget-object v0, p0, Lcom/facebook/react/modules/location/LocationModule$SingleUpdateRequest$1;->this$0:Lcom/facebook/react/modules/location/LocationModule$SingleUpdateRequest;
@@ -64,17 +65,17 @@
 
     new-array v3, v2, [Ljava/lang/Object;
 
-    const/4 v4, 0x0
+    sget v4, Lcom/facebook/react/modules/location/PositionError;->TIMEOUT:I
 
-    sget v5, Lcom/facebook/react/modules/location/PositionError;->TIMEOUT:I
+    const-string v5, "Location request timed out"
 
-    const-string v6, "Location request timed out"
+    invoke-static {v4, v5}, Lcom/facebook/react/modules/location/PositionError;->buildError(ILjava/lang/String;)Lcom/facebook/react/bridge/WritableMap;
 
-    invoke-static {v5, v6}, Lcom/facebook/react/modules/location/PositionError;->buildError(ILjava/lang/String;)Lcom/facebook/react/bridge/WritableMap;
+    move-result-object v4
 
-    move-result-object v5
+    const/4 v5, 0x0
 
-    aput-object v5, v3, v4
+    aput-object v4, v3, v5
 
     invoke-interface {v1, v3}, Lcom/facebook/react/bridge/Callback;->invoke([Ljava/lang/Object;)V
 
@@ -93,11 +94,11 @@
 
     invoke-virtual {v1, v3}, Landroid/location/LocationManager;->removeUpdates(Landroid/location/LocationListener;)V
 
+    .line 267
     const-string v1, "ReactNative"
 
     const-string v3, "LocationModule: Location request timed out"
 
-    .line 267
     invoke-static {v1, v3}, Lcom/facebook/common/logging/FLog;->i(Ljava/lang/String;Ljava/lang/String;)V
 
     .line 268
@@ -109,8 +110,10 @@
     :cond_0
     monitor-exit v0
 
+    .line 271
     return-void
 
+    .line 270
     :catchall_0
     move-exception v1
 

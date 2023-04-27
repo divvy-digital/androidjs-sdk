@@ -6,16 +6,8 @@
 .implements Lcom/facebook/react/bridge/NativeModule;
 
 
-# annotations
-.annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-.end annotation
-
-
 # instance fields
 .field private mHybridData:Lcom/facebook/jni/HybridData;
-    .annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-    .end annotation
-.end field
 
 
 # direct methods
@@ -25,11 +17,13 @@
     .line 21
     invoke-static {}, Lcom/facebook/react/bridge/ReactBridge;->staticInit()V
 
+    .line 22
     return-void
 .end method
 
 .method protected constructor <init>(Lcom/facebook/jni/HybridData;)V
     .locals 0
+    .param p1, "hd"    # Lcom/facebook/jni/HybridData;
 
     .line 46
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -37,6 +31,7 @@
     .line 47
     iput-object p1, p0, Lcom/facebook/react/bridge/CxxModuleWrapperBase;->mHybridData:Lcom/facebook/jni/HybridData;
 
+    .line 48
     return-void
 .end method
 
@@ -45,6 +40,7 @@
 .method public canOverrideExistingModule()Z
     .locals 1
 
+    .line 37
     const/4 v0, 0x0
 
     return v0
@@ -56,6 +52,7 @@
 .method public initialize()V
     .locals 0
 
+    .line 33
     return-void
 .end method
 
@@ -67,11 +64,13 @@
 
     invoke-virtual {v0}, Lcom/facebook/jni/HybridData;->resetNative()V
 
+    .line 43
     return-void
 .end method
 
 .method protected resetModule(Lcom/facebook/jni/HybridData;)V
     .locals 1
+    .param p1, "hd"    # Lcom/facebook/jni/HybridData;
 
     .line 52
     iget-object v0, p0, Lcom/facebook/react/bridge/CxxModuleWrapperBase;->mHybridData:Lcom/facebook/jni/HybridData;
@@ -84,6 +83,7 @@
     .line 54
     iput-object p1, p0, Lcom/facebook/react/bridge/CxxModuleWrapperBase;->mHybridData:Lcom/facebook/jni/HybridData;
 
+    .line 56
     :cond_0
     return-void
 .end method

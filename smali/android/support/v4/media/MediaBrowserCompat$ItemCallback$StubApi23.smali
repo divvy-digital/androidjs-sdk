@@ -30,6 +30,7 @@
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
+    .line 870
     return-void
 .end method
 
@@ -37,37 +38,37 @@
 # virtual methods
 .method public onError(Ljava/lang/String;)V
     .locals 1
-    .param p1    # Ljava/lang/String;
-        .annotation build Landroid/support/annotation/NonNull;
-        .end annotation
-    .end param
+    .param p1, "itemId"    # Ljava/lang/String;
 
     .line 887
     iget-object v0, p0, Landroid/support/v4/media/MediaBrowserCompat$ItemCallback$StubApi23;->this$0:Landroid/support/v4/media/MediaBrowserCompat$ItemCallback;
 
     invoke-virtual {v0, p1}, Landroid/support/v4/media/MediaBrowserCompat$ItemCallback;->onError(Ljava/lang/String;)V
 
+    .line 888
     return-void
 .end method
 
 .method public onItemLoaded(Landroid/os/Parcel;)V
-    .locals 1
+    .locals 2
+    .param p1, "itemParcel"    # Landroid/os/Parcel;
 
+    .line 874
     if-nez p1, :cond_0
 
     .line 875
-    iget-object p1, p0, Landroid/support/v4/media/MediaBrowserCompat$ItemCallback$StubApi23;->this$0:Landroid/support/v4/media/MediaBrowserCompat$ItemCallback;
+    iget-object v0, p0, Landroid/support/v4/media/MediaBrowserCompat$ItemCallback$StubApi23;->this$0:Landroid/support/v4/media/MediaBrowserCompat$ItemCallback;
 
-    const/4 v0, 0x0
+    const/4 v1, 0x0
 
-    invoke-virtual {p1, v0}, Landroid/support/v4/media/MediaBrowserCompat$ItemCallback;->onItemLoaded(Landroid/support/v4/media/MediaBrowserCompat$MediaItem;)V
+    invoke-virtual {v0, v1}, Landroid/support/v4/media/MediaBrowserCompat$ItemCallback;->onItemLoaded(Landroid/support/v4/media/MediaBrowserCompat$MediaItem;)V
 
     goto :goto_0
 
+    .line 877
     :cond_0
     const/4 v0, 0x0
 
-    .line 877
     invoke-virtual {p1, v0}, Landroid/os/Parcel;->setDataPosition(I)V
 
     .line 878
@@ -81,13 +82,16 @@
     check-cast v0, Landroid/support/v4/media/MediaBrowserCompat$MediaItem;
 
     .line 880
+    .local v0, "item":Landroid/support/v4/media/MediaBrowserCompat$MediaItem;
     invoke-virtual {p1}, Landroid/os/Parcel;->recycle()V
 
     .line 881
-    iget-object p1, p0, Landroid/support/v4/media/MediaBrowserCompat$ItemCallback$StubApi23;->this$0:Landroid/support/v4/media/MediaBrowserCompat$ItemCallback;
+    iget-object v1, p0, Landroid/support/v4/media/MediaBrowserCompat$ItemCallback$StubApi23;->this$0:Landroid/support/v4/media/MediaBrowserCompat$ItemCallback;
 
-    invoke-virtual {p1, v0}, Landroid/support/v4/media/MediaBrowserCompat$ItemCallback;->onItemLoaded(Landroid/support/v4/media/MediaBrowserCompat$MediaItem;)V
+    invoke-virtual {v1, v0}, Landroid/support/v4/media/MediaBrowserCompat$ItemCallback;->onItemLoaded(Landroid/support/v4/media/MediaBrowserCompat$MediaItem;)V
 
+    .line 883
+    .end local v0    # "item":Landroid/support/v4/media/MediaBrowserCompat$MediaItem;
     :goto_0
     return-void
 .end method

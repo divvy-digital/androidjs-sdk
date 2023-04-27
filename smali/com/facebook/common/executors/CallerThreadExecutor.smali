@@ -27,6 +27,7 @@
     .line 42
     invoke-direct {p0}, Ljava/util/concurrent/AbstractExecutorService;-><init>()V
 
+    .line 43
     return-void
 .end method
 
@@ -42,30 +43,36 @@
 
 # virtual methods
 .method public awaitTermination(JLjava/util/concurrent/TimeUnit;)Z
-    .locals 0
+    .locals 1
+    .param p1, "timeout"    # J
+    .param p3, "unit"    # Ljava/util/concurrent/TimeUnit;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/lang/InterruptedException;
         }
     .end annotation
 
-    const/4 p1, 0x1
+    .line 73
+    const/4 v0, 0x1
 
-    return p1
+    return v0
 .end method
 
 .method public execute(Ljava/lang/Runnable;)V
     .locals 0
+    .param p1, "command"    # Ljava/lang/Runnable;
 
     .line 47
     invoke-interface {p1}, Ljava/lang/Runnable;->run()V
 
+    .line 48
     return-void
 .end method
 
 .method public isShutdown()Z
     .locals 1
 
+    .line 52
     const/4 v0, 0x0
 
     return v0
@@ -74,6 +81,7 @@
 .method public isTerminated()Z
     .locals 1
 
+    .line 68
     const/4 v0, 0x0
 
     return v0
@@ -82,6 +90,7 @@
 .method public shutdown()V
     .locals 0
 
+    .line 58
     return-void
 .end method
 

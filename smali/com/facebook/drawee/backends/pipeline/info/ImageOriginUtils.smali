@@ -14,7 +14,8 @@
 .end method
 
 .method public static mapProducerNameToImageOrigin(Ljava/lang/String;)I
-    .locals 7
+    .locals 6
+    .param p0, "producerName"    # Ljava/lang/String;
 
     .line 33
     invoke-virtual {p0}, Ljava/lang/String;->hashCode()I
@@ -23,18 +24,17 @@
 
     const/4 v1, 0x0
 
-    const/4 v2, 0x4
+    const/4 v2, 0x1
 
-    const/4 v3, -0x1
+    const/4 v3, 0x2
 
     const/4 v4, 0x3
 
-    const/4 v5, 0x2
-
-    const/4 v6, 0x1
+    const/4 v5, -0x1
 
     sparse-switch v0, :sswitch_data_0
 
+    :cond_0
     goto :goto_0
 
     :sswitch_0
@@ -42,11 +42,11 @@
 
     invoke-virtual {p0, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result p0
+    move-result v0
 
-    if-eqz p0, :cond_0
+    if-eqz v0, :cond_0
 
-    const/4 p0, 0x1
+    const/4 v0, 0x1
 
     goto :goto_1
 
@@ -55,11 +55,11 @@
 
     invoke-virtual {p0, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result p0
+    move-result v0
 
-    if-eqz p0, :cond_0
+    if-eqz v0, :cond_0
 
-    const/4 p0, 0x3
+    const/4 v0, 0x3
 
     goto :goto_1
 
@@ -68,11 +68,11 @@
 
     invoke-virtual {p0, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result p0
+    move-result v0
 
-    if-eqz p0, :cond_0
+    if-eqz v0, :cond_0
 
-    const/4 p0, 0x4
+    const/4 v0, 0x4
 
     goto :goto_1
 
@@ -81,11 +81,11 @@
 
     invoke-virtual {p0, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result p0
+    move-result v0
 
-    if-eqz p0, :cond_0
+    if-eqz v0, :cond_0
 
-    const/4 p0, 0x2
+    const/4 v0, 0x2
 
     goto :goto_1
 
@@ -94,41 +94,37 @@
 
     invoke-virtual {p0, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result p0
+    move-result v0
 
-    if-eqz p0, :cond_0
+    if-eqz v0, :cond_0
 
-    const/4 p0, 0x0
+    const/4 v0, 0x0
 
     goto :goto_1
 
-    :cond_0
     :goto_0
-    const/4 p0, -0x1
+    const/4 v0, -0x1
 
     :goto_1
-    if-eqz p0, :cond_4
+    packed-switch v0, :pswitch_data_0
 
-    if-eq p0, v6, :cond_4
-
-    if-eq p0, v5, :cond_3
-
-    if-eq p0, v4, :cond_2
-
-    if-eq p0, v2, :cond_1
-
-    return v3
-
-    :cond_1
-    return v1
-
-    :cond_2
-    return v6
-
-    :cond_3
+    .line 44
     return v5
 
-    :cond_4
+    .line 42
+    :pswitch_0
+    return v1
+
+    .line 40
+    :pswitch_1
+    return v2
+
+    .line 38
+    :pswitch_2
+    return v3
+
+    .line 36
+    :pswitch_3
     return v4
 
     :sswitch_data_0
@@ -139,46 +135,58 @@
         0x271e6a77 -> :sswitch_1
         0x39158fe4 -> :sswitch_0
     .end sparse-switch
+
+    :pswitch_data_0
+    .packed-switch 0x0
+        :pswitch_3
+        :pswitch_3
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method public static toString(I)Ljava/lang/String;
     .locals 1
+    .param p0, "imageOrigin"    # I
 
-    if-eqz p0, :cond_3
+    .line 18
+    packed-switch p0, :pswitch_data_0
 
-    const/4 v0, 0x1
+    .line 28
+    const-string v0, "unknown"
 
-    if-eq p0, v0, :cond_2
+    return-object v0
 
-    const/4 v0, 0x2
+    .line 26
+    :pswitch_0
+    const-string v0, "memory_bitmap"
 
-    if-eq p0, v0, :cond_1
+    return-object v0
 
-    const/4 v0, 0x3
+    .line 24
+    :pswitch_1
+    const-string v0, "memory_encoded"
 
-    if-eq p0, v0, :cond_0
+    return-object v0
 
-    const-string p0, "unknown"
+    .line 22
+    :pswitch_2
+    const-string v0, "disk"
 
-    return-object p0
+    return-object v0
 
-    :cond_0
-    const-string p0, "memory_bitmap"
+    .line 20
+    :pswitch_3
+    const-string v0, "network"
 
-    return-object p0
+    return-object v0
 
-    :cond_1
-    const-string p0, "memory_encoded"
-
-    return-object p0
-
-    :cond_2
-    const-string p0, "disk"
-
-    return-object p0
-
-    :cond_3
-    const-string p0, "network"
-
-    return-object p0
+    :pswitch_data_0
+    .packed-switch 0x0
+        :pswitch_3
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method

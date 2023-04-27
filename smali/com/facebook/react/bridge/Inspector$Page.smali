@@ -4,9 +4,6 @@
 
 
 # annotations
-.annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-.end annotation
-
 .annotation system Ldalvik/annotation/EnclosingClass;
     value = Lcom/facebook/react/bridge/Inspector;
 .end annotation
@@ -28,8 +25,9 @@
 # direct methods
 .method private constructor <init>(ILjava/lang/String;Ljava/lang/String;)V
     .locals 0
-    .annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-    .end annotation
+    .param p1, "id"    # I
+    .param p2, "title"    # Ljava/lang/String;
+    .param p3, "vm"    # Ljava/lang/String;
 
     .line 80
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -43,6 +41,7 @@
     .line 83
     iput-object p3, p0, Lcom/facebook/react/bridge/Inspector$Page;->mVM:Ljava/lang/String;
 
+    .line 84
     return-void
 .end method
 
@@ -87,25 +86,37 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     iget v1, p0, Lcom/facebook/react/bridge/Inspector$Page;->mId:I
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     const-string v1, ", mTitle=\'"
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     iget-object v1, p0, Lcom/facebook/react/bridge/Inspector$Page;->mTitle:Ljava/lang/String;
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     const/16 v1, 0x27
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     const/16 v1, 0x7d
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 

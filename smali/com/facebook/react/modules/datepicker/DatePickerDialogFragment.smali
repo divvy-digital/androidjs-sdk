@@ -1,14 +1,6 @@
 .class public Lcom/facebook/react/modules/datepicker/DatePickerDialogFragment;
-.super Landroid/support/v4/app/DialogFragment;
+.super Landroidx/fragment/app/DialogFragment;
 .source "DatePickerDialogFragment.java"
-
-
-# annotations
-.annotation build Landroid/annotation/SuppressLint;
-    value = {
-        "ValidFragment"
-    }
-.end annotation
 
 
 # static fields
@@ -32,408 +24,386 @@
     .locals 0
 
     .line 28
-    invoke-direct {p0}, Landroid/support/v4/app/DialogFragment;-><init>()V
+    invoke-direct {p0}, Landroidx/fragment/app/DialogFragment;-><init>()V
 
     return-void
 .end method
 
 .method static createDialog(Landroid/os/Bundle;Landroid/content/Context;Landroid/app/DatePickerDialog$OnDateSetListener;)Landroid/app/Dialog;
-    .locals 13
-    .param p2    # Landroid/app/DatePickerDialog$OnDateSetListener;
+    .locals 15
+    .param p0, "args"    # Landroid/os/Bundle;
+    .param p1, "activityContext"    # Landroid/content/Context;
+    .param p2, "onDateSetListener"    # Landroid/app/DatePickerDialog$OnDateSetListener;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
 
     .line 48
+    move-object v0, p0
+
     invoke-static {}, Ljava/util/Calendar;->getInstance()Ljava/util/Calendar;
 
-    move-result-object v0
-
-    if-eqz p0, :cond_0
-
-    const-string v1, "date"
+    move-result-object v1
 
     .line 49
-    invoke-virtual {p0, v1}, Landroid/os/Bundle;->containsKey(Ljava/lang/String;)Z
+    .local v1, "c":Ljava/util/Calendar;
+    if-eqz v0, :cond_0
+
+    const-string v2, "date"
+
+    invoke-virtual {p0, v2}, Landroid/os/Bundle;->containsKey(Ljava/lang/String;)Z
+
+    move-result v3
+
+    if-eqz v3, :cond_0
+
+    .line 50
+    invoke-virtual {p0, v2}, Landroid/os/Bundle;->getLong(Ljava/lang/String;)J
+
+    move-result-wide v2
+
+    invoke-virtual {v1, v2, v3}, Ljava/util/Calendar;->setTimeInMillis(J)V
+
+    .line 52
+    :cond_0
+    const/4 v2, 0x1
+
+    invoke-virtual {v1, v2}, Ljava/util/Calendar;->get(I)I
 
     move-result v2
 
-    if-eqz v2, :cond_0
-
-    .line 50
-    invoke-virtual {p0, v1}, Landroid/os/Bundle;->getLong(Ljava/lang/String;)J
-
-    move-result-wide v1
-
-    invoke-virtual {v0, v1, v2}, Ljava/util/Calendar;->setTimeInMillis(J)V
-
-    :cond_0
-    const/4 v1, 0x1
-
-    .line 52
-    invoke-virtual {v0, v1}, Ljava/util/Calendar;->get(I)I
-
-    move-result v6
-
-    const/4 v8, 0x2
-
     .line 53
-    invoke-virtual {v0, v8}, Ljava/util/Calendar;->get(I)I
+    .local v2, "year":I
+    const/4 v3, 0x2
 
-    move-result v7
+    invoke-virtual {v1, v3}, Ljava/util/Calendar;->get(I)I
 
-    const/4 v2, 0x5
+    move-result v10
 
     .line 54
-    invoke-virtual {v0, v2}, Ljava/util/Calendar;->get(I)I
+    .local v10, "month":I
+    const/4 v3, 0x5
 
-    move-result v9
+    invoke-virtual {v1, v3}, Ljava/util/Calendar;->get(I)I
+
+    move-result v11
 
     .line 56
-    sget-object v2, Lcom/facebook/react/modules/datepicker/DatePickerMode;->DEFAULT:Lcom/facebook/react/modules/datepicker/DatePickerMode;
-
-    const/4 v3, 0x0
-
-    if-eqz p0, :cond_1
-
-    const-string v4, "mode"
+    .local v11, "day":I
+    sget-object v3, Lcom/facebook/react/modules/datepicker/DatePickerMode;->DEFAULT:Lcom/facebook/react/modules/datepicker/DatePickerMode;
 
     .line 57
-    invoke-virtual {p0, v4, v3}, Landroid/os/Bundle;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+    .local v3, "mode":Lcom/facebook/react/modules/datepicker/DatePickerMode;
+    if-eqz v0, :cond_1
 
-    move-result-object v5
+    const/4 v4, 0x0
 
-    if-eqz v5, :cond_1
+    const-string v5, "mode"
+
+    invoke-virtual {p0, v5, v4}, Landroid/os/Bundle;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v4
+
+    if-eqz v4, :cond_1
 
     .line 58
-    invoke-virtual {p0, v4}, Landroid/os/Bundle;->getString(Ljava/lang/String;)Ljava/lang/String;
+    invoke-virtual {p0, v5}, Landroid/os/Bundle;->getString(Ljava/lang/String;)Ljava/lang/String;
 
-    move-result-object v2
+    move-result-object v4
 
-    sget-object v4, Ljava/util/Locale;->US:Ljava/util/Locale;
+    sget-object v5, Ljava/util/Locale;->US:Ljava/util/Locale;
 
-    invoke-virtual {v2, v4}, Ljava/lang/String;->toUpperCase(Ljava/util/Locale;)Ljava/lang/String;
+    invoke-virtual {v4, v5}, Ljava/lang/String;->toUpperCase(Ljava/util/Locale;)Ljava/lang/String;
 
-    move-result-object v2
+    move-result-object v4
 
-    invoke-static {v2}, Lcom/facebook/react/modules/datepicker/DatePickerMode;->valueOf(Ljava/lang/String;)Lcom/facebook/react/modules/datepicker/DatePickerMode;
+    invoke-static {v4}, Lcom/facebook/react/modules/datepicker/DatePickerMode;->valueOf(Ljava/lang/String;)Lcom/facebook/react/modules/datepicker/DatePickerMode;
 
-    move-result-object v2
+    move-result-object v3
 
+    move-object v12, v3
+
+    goto :goto_0
+
+    .line 61
     :cond_1
-    move-object v10, v2
+    move-object v12, v3
+
+    .end local v3    # "mode":Lcom/facebook/react/modules/datepicker/DatePickerMode;
+    .local v12, "mode":Lcom/facebook/react/modules/datepicker/DatePickerMode;
+    :goto_0
+    const/4 v13, 0x0
 
     .line 63
-    sget v2, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    const/16 v4, 0x15
-
-    const/4 v11, 0x0
-
-    if-lt v2, v4, :cond_5
+    .local v13, "dialog":Landroid/app/DatePickerDialog;
+    nop
 
     .line 64
-    sget-object v2, Lcom/facebook/react/modules/datepicker/DatePickerDialogFragment$1;->$SwitchMap$com$facebook$react$modules$datepicker$DatePickerMode:[I
+    sget-object v3, Lcom/facebook/react/modules/datepicker/DatePickerDialogFragment$1;->$SwitchMap$com$facebook$react$modules$datepicker$DatePickerMode:[I
 
-    invoke-virtual {v10}, Lcom/facebook/react/modules/datepicker/DatePickerMode;->ordinal()I
+    invoke-virtual {v12}, Lcom/facebook/react/modules/datepicker/DatePickerMode;->ordinal()I
 
     move-result v4
 
-    aget v2, v2, v4
+    aget v3, v3, v4
 
     const-string v4, "style"
 
-    if-eq v2, v1, :cond_4
+    packed-switch v3, :pswitch_data_0
 
-    if-eq v2, v8, :cond_3
-
-    const/4 v1, 0x3
-
-    if-eq v2, v1, :cond_2
-
-    move-object v1, v3
-
-    goto/16 :goto_1
+    goto :goto_1
 
     .line 76
-    :cond_2
-    new-instance v1, Lcom/facebook/react/modules/datepicker/DismissableDatePickerDialog;
+    :pswitch_0
+    new-instance v9, Lcom/facebook/react/modules/datepicker/DismissableDatePickerDialog;
 
-    move-object v2, v1
+    move-object v3, v9
 
-    move-object v3, p1
+    move-object/from16 v4, p1
 
-    move-object v4, p2
+    move-object/from16 v5, p2
 
-    move v5, v6
+    move v6, v2
 
-    move v6, v7
+    move v7, v10
 
-    move v7, v9
+    move v8, v11
 
-    invoke-direct/range {v2 .. v7}, Lcom/facebook/react/modules/datepicker/DismissableDatePickerDialog;-><init>(Landroid/content/Context;Landroid/app/DatePickerDialog$OnDateSetListener;III)V
+    invoke-direct/range {v3 .. v8}, Lcom/facebook/react/modules/datepicker/DismissableDatePickerDialog;-><init>(Landroid/content/Context;Landroid/app/DatePickerDialog$OnDateSetListener;III)V
 
-    goto/16 :goto_1
+    move-object v13, v9
+
+    goto :goto_1
 
     .line 71
-    :cond_3
-    new-instance v1, Lcom/facebook/react/modules/datepicker/DismissableDatePickerDialog;
+    :pswitch_1
+    new-instance v14, Lcom/facebook/react/modules/datepicker/DismissableDatePickerDialog;
 
     .line 72
-    invoke-virtual {p1}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
-
-    move-result-object v2
-
-    invoke-virtual {p1}, Landroid/content/Context;->getPackageName()Ljava/lang/String;
+    invoke-virtual/range {p1 .. p1}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
 
     move-result-object v3
 
     const-string v5, "SpinnerDatePickerDialog"
 
-    invoke-virtual {v2, v5, v4, v3}, Landroid/content/res/Resources;->getIdentifier(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I
+    invoke-virtual/range {p1 .. p1}, Landroid/content/Context;->getPackageName()Ljava/lang/String;
 
-    move-result v4
+    move-result-object v6
 
-    move-object v2, v1
+    invoke-virtual {v3, v5, v4, v6}, Landroid/content/res/Resources;->getIdentifier(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I
 
-    move-object v3, p1
+    move-result v5
 
-    move-object v5, p2
+    move-object v3, v14
 
-    move v8, v9
+    move-object/from16 v4, p1
 
-    invoke-direct/range {v2 .. v8}, Lcom/facebook/react/modules/datepicker/DismissableDatePickerDialog;-><init>(Landroid/content/Context;ILandroid/app/DatePickerDialog$OnDateSetListener;III)V
+    move-object/from16 v6, p2
 
+    move v7, v2
+
+    move v8, v10
+
+    move v9, v11
+
+    invoke-direct/range {v3 .. v9}, Lcom/facebook/react/modules/datepicker/DismissableDatePickerDialog;-><init>(Landroid/content/Context;ILandroid/app/DatePickerDialog$OnDateSetListener;III)V
+
+    move-object v13, v14
+
+    .line 74
     goto :goto_1
 
     .line 66
-    :cond_4
-    new-instance v1, Lcom/facebook/react/modules/datepicker/DismissableDatePickerDialog;
+    :pswitch_2
+    new-instance v14, Lcom/facebook/react/modules/datepicker/DismissableDatePickerDialog;
 
     .line 67
-    invoke-virtual {p1}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
-
-    move-result-object v2
-
-    invoke-virtual {p1}, Landroid/content/Context;->getPackageName()Ljava/lang/String;
+    invoke-virtual/range {p1 .. p1}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
 
     move-result-object v3
 
     const-string v5, "CalendarDatePickerDialog"
 
-    invoke-virtual {v2, v5, v4, v3}, Landroid/content/res/Resources;->getIdentifier(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I
+    invoke-virtual/range {p1 .. p1}, Landroid/content/Context;->getPackageName()Ljava/lang/String;
 
-    move-result v4
+    move-result-object v6
 
-    move-object v2, v1
+    invoke-virtual {v3, v5, v4, v6}, Landroid/content/res/Resources;->getIdentifier(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I
 
-    move-object v3, p1
+    move-result v5
 
-    move-object v5, p2
+    move-object v3, v14
 
-    move v8, v9
+    move-object/from16 v4, p1
 
-    invoke-direct/range {v2 .. v8}, Lcom/facebook/react/modules/datepicker/DismissableDatePickerDialog;-><init>(Landroid/content/Context;ILandroid/app/DatePickerDialog$OnDateSetListener;III)V
+    move-object/from16 v6, p2
 
-    goto :goto_1
+    move v7, v2
 
-    .line 80
-    :cond_5
-    new-instance v12, Lcom/facebook/react/modules/datepicker/DismissableDatePickerDialog;
+    move v8, v10
 
-    move-object v2, v12
+    move v9, v11
 
-    move-object v3, p1
+    invoke-direct/range {v3 .. v9}, Lcom/facebook/react/modules/datepicker/DismissableDatePickerDialog;-><init>(Landroid/content/Context;ILandroid/app/DatePickerDialog$OnDateSetListener;III)V
 
-    move-object v4, p2
+    move-object v13, v14
 
-    move v5, v6
+    .line 69
+    nop
 
-    move v6, v7
-
-    move v7, v9
-
-    invoke-direct/range {v2 .. v7}, Lcom/facebook/react/modules/datepicker/DismissableDatePickerDialog;-><init>(Landroid/content/Context;Landroid/app/DatePickerDialog$OnDateSetListener;III)V
-
-    .line 82
-    sget-object p1, Lcom/facebook/react/modules/datepicker/DatePickerDialogFragment$1;->$SwitchMap$com$facebook$react$modules$datepicker$DatePickerMode:[I
-
-    invoke-virtual {v10}, Lcom/facebook/react/modules/datepicker/DatePickerMode;->ordinal()I
-
-    move-result p2
-
-    aget p1, p1, p2
-
-    if-eq p1, v1, :cond_7
-
-    if-eq p1, v8, :cond_6
-
-    goto :goto_0
-
-    .line 88
-    :cond_6
-    invoke-virtual {v12}, Landroid/app/DatePickerDialog;->getDatePicker()Landroid/widget/DatePicker;
-
-    move-result-object p1
-
-    invoke-virtual {p1, v11}, Landroid/widget/DatePicker;->setCalendarViewShown(Z)V
-
-    goto :goto_0
-
-    .line 84
-    :cond_7
-    invoke-virtual {v12}, Landroid/app/DatePickerDialog;->getDatePicker()Landroid/widget/DatePicker;
-
-    move-result-object p1
-
-    invoke-virtual {p1, v1}, Landroid/widget/DatePicker;->setCalendarViewShown(Z)V
-
-    .line 85
-    invoke-virtual {v12}, Landroid/app/DatePickerDialog;->getDatePicker()Landroid/widget/DatePicker;
-
-    move-result-object p1
-
-    invoke-virtual {p1, v11}, Landroid/widget/DatePicker;->setSpinnersShown(Z)V
-
-    :goto_0
-    move-object v1, v12
+    .line 77
+    :goto_1
+    nop
 
     .line 93
-    :goto_1
-    invoke-virtual {v1}, Landroid/app/DatePickerDialog;->getDatePicker()Landroid/widget/DatePicker;
+    invoke-virtual {v13}, Landroid/app/DatePickerDialog;->getDatePicker()Landroid/widget/DatePicker;
 
-    move-result-object p1
-
-    const/16 p2, 0xe
-
-    const/16 v2, 0xd
-
-    const/16 v3, 0xc
-
-    const/16 v4, 0xb
-
-    if-eqz p0, :cond_8
-
-    const-string v5, "minDate"
+    move-result-object v3
 
     .line 95
-    invoke-virtual {p0, v5}, Landroid/os/Bundle;->containsKey(Ljava/lang/String;)Z
+    .local v3, "datePicker":Landroid/widget/DatePicker;
+    const/16 v4, 0xe
 
-    move-result v6
+    const/16 v5, 0xd
 
-    if-eqz v6, :cond_8
+    const/16 v6, 0xc
+
+    const/16 v7, 0xb
+
+    if-eqz v0, :cond_2
+
+    const-string v8, "minDate"
+
+    invoke-virtual {p0, v8}, Landroid/os/Bundle;->containsKey(Ljava/lang/String;)Z
+
+    move-result v9
+
+    if-eqz v9, :cond_2
 
     .line 99
-    invoke-virtual {p0, v5}, Landroid/os/Bundle;->getLong(Ljava/lang/String;)J
+    invoke-virtual {p0, v8}, Landroid/os/Bundle;->getLong(Ljava/lang/String;)J
 
-    move-result-wide v5
+    move-result-wide v8
 
-    invoke-virtual {v0, v5, v6}, Ljava/util/Calendar;->setTimeInMillis(J)V
+    invoke-virtual {v1, v8, v9}, Ljava/util/Calendar;->setTimeInMillis(J)V
 
     .line 100
-    invoke-virtual {v0, v4, v11}, Ljava/util/Calendar;->set(II)V
+    const/4 v8, 0x0
+
+    invoke-virtual {v1, v7, v8}, Ljava/util/Calendar;->set(II)V
 
     .line 101
-    invoke-virtual {v0, v3, v11}, Ljava/util/Calendar;->set(II)V
+    invoke-virtual {v1, v6, v8}, Ljava/util/Calendar;->set(II)V
 
     .line 102
-    invoke-virtual {v0, v2, v11}, Ljava/util/Calendar;->set(II)V
+    invoke-virtual {v1, v5, v8}, Ljava/util/Calendar;->set(II)V
 
     .line 103
-    invoke-virtual {v0, p2, v11}, Ljava/util/Calendar;->set(II)V
+    invoke-virtual {v1, v4, v8}, Ljava/util/Calendar;->set(II)V
 
     .line 104
-    invoke-virtual {v0}, Ljava/util/Calendar;->getTimeInMillis()J
+    invoke-virtual {v1}, Ljava/util/Calendar;->getTimeInMillis()J
 
-    move-result-wide v5
+    move-result-wide v8
 
-    invoke-virtual {p1, v5, v6}, Landroid/widget/DatePicker;->setMinDate(J)V
+    invoke-virtual {v3, v8, v9}, Landroid/widget/DatePicker;->setMinDate(J)V
 
     goto :goto_2
 
-    :cond_8
-    const-wide v5, -0x20251fe2401L
-
     .line 108
-    invoke-virtual {p1, v5, v6}, Landroid/widget/DatePicker;->setMinDate(J)V
+    :cond_2
+    const-wide v8, -0x20251fe2401L
 
-    :goto_2
-    if-eqz p0, :cond_9
-
-    const-string v5, "maxDate"
+    invoke-virtual {v3, v8, v9}, Landroid/widget/DatePicker;->setMinDate(J)V
 
     .line 110
-    invoke-virtual {p0, v5}, Landroid/os/Bundle;->containsKey(Ljava/lang/String;)Z
+    :goto_2
+    if-eqz v0, :cond_3
 
-    move-result v6
+    const-string v8, "maxDate"
 
-    if-eqz v6, :cond_9
+    invoke-virtual {p0, v8}, Landroid/os/Bundle;->containsKey(Ljava/lang/String;)Z
+
+    move-result v9
+
+    if-eqz v9, :cond_3
 
     .line 112
-    invoke-virtual {p0, v5}, Landroid/os/Bundle;->getLong(Ljava/lang/String;)J
+    invoke-virtual {p0, v8}, Landroid/os/Bundle;->getLong(Ljava/lang/String;)J
 
-    move-result-wide v5
+    move-result-wide v8
 
-    invoke-virtual {v0, v5, v6}, Ljava/util/Calendar;->setTimeInMillis(J)V
-
-    const/16 p0, 0x17
+    invoke-virtual {v1, v8, v9}, Ljava/util/Calendar;->setTimeInMillis(J)V
 
     .line 113
-    invoke-virtual {v0, v4, p0}, Ljava/util/Calendar;->set(II)V
+    const/16 v8, 0x17
 
-    const/16 p0, 0x3b
+    invoke-virtual {v1, v7, v8}, Ljava/util/Calendar;->set(II)V
 
     .line 114
-    invoke-virtual {v0, v3, p0}, Ljava/util/Calendar;->set(II)V
+    const/16 v7, 0x3b
+
+    invoke-virtual {v1, v6, v7}, Ljava/util/Calendar;->set(II)V
 
     .line 115
-    invoke-virtual {v0, v2, p0}, Ljava/util/Calendar;->set(II)V
-
-    const/16 p0, 0x3e7
+    invoke-virtual {v1, v5, v7}, Ljava/util/Calendar;->set(II)V
 
     .line 116
-    invoke-virtual {v0, p2, p0}, Ljava/util/Calendar;->set(II)V
+    const/16 v5, 0x3e7
+
+    invoke-virtual {v1, v4, v5}, Ljava/util/Calendar;->set(II)V
 
     .line 117
-    invoke-virtual {v0}, Ljava/util/Calendar;->getTimeInMillis()J
+    invoke-virtual {v1}, Ljava/util/Calendar;->getTimeInMillis()J
 
-    move-result-wide v2
+    move-result-wide v4
 
-    invoke-virtual {p1, v2, v3}, Landroid/widget/DatePicker;->setMaxDate(J)V
+    invoke-virtual {v3, v4, v5}, Landroid/widget/DatePicker;->setMaxDate(J)V
 
-    :cond_9
-    return-object v1
+    .line 120
+    :cond_3
+    return-object v13
+
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method
 
 
 # virtual methods
 .method public onCreateDialog(Landroid/os/Bundle;)Landroid/app/Dialog;
-    .locals 2
+    .locals 3
+    .param p1, "savedInstanceState"    # Landroid/os/Bundle;
 
     .line 42
     invoke-virtual {p0}, Lcom/facebook/react/modules/datepicker/DatePickerDialogFragment;->getArguments()Landroid/os/Bundle;
 
-    move-result-object p1
-
-    .line 43
-    invoke-virtual {p0}, Lcom/facebook/react/modules/datepicker/DatePickerDialogFragment;->getActivity()Landroid/support/v4/app/FragmentActivity;
-
     move-result-object v0
 
-    iget-object v1, p0, Lcom/facebook/react/modules/datepicker/DatePickerDialogFragment;->mOnDateSetListener:Landroid/app/DatePickerDialog$OnDateSetListener;
+    .line 43
+    .local v0, "args":Landroid/os/Bundle;
+    invoke-virtual {p0}, Lcom/facebook/react/modules/datepicker/DatePickerDialogFragment;->getActivity()Landroidx/fragment/app/FragmentActivity;
 
-    invoke-static {p1, v0, v1}, Lcom/facebook/react/modules/datepicker/DatePickerDialogFragment;->createDialog(Landroid/os/Bundle;Landroid/content/Context;Landroid/app/DatePickerDialog$OnDateSetListener;)Landroid/app/Dialog;
+    move-result-object v1
 
-    move-result-object p1
+    iget-object v2, p0, Lcom/facebook/react/modules/datepicker/DatePickerDialogFragment;->mOnDateSetListener:Landroid/app/DatePickerDialog$OnDateSetListener;
 
-    return-object p1
+    invoke-static {v0, v1, v2}, Lcom/facebook/react/modules/datepicker/DatePickerDialogFragment;->createDialog(Landroid/os/Bundle;Landroid/content/Context;Landroid/app/DatePickerDialog$OnDateSetListener;)Landroid/app/Dialog;
+
+    move-result-object v1
+
+    return-object v1
 .end method
 
 .method public onDismiss(Landroid/content/DialogInterface;)V
     .locals 1
+    .param p1, "dialog"    # Landroid/content/DialogInterface;
 
     .line 125
-    invoke-super {p0, p1}, Landroid/support/v4/app/DialogFragment;->onDismiss(Landroid/content/DialogInterface;)V
+    invoke-super {p0, p1}, Landroidx/fragment/app/DialogFragment;->onDismiss(Landroid/content/DialogInterface;)V
 
     .line 126
     iget-object v0, p0, Lcom/facebook/react/modules/datepicker/DatePickerDialogFragment;->mOnDismissListener:Landroid/content/DialogInterface$OnDismissListener;
@@ -443,13 +413,14 @@
     .line 127
     invoke-interface {v0, p1}, Landroid/content/DialogInterface$OnDismissListener;->onDismiss(Landroid/content/DialogInterface;)V
 
+    .line 129
     :cond_0
     return-void
 .end method
 
 .method setOnDateSetListener(Landroid/app/DatePickerDialog$OnDateSetListener;)V
     .locals 0
-    .param p1    # Landroid/app/DatePickerDialog$OnDateSetListener;
+    .param p1, "onDateSetListener"    # Landroid/app/DatePickerDialog$OnDateSetListener;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -457,12 +428,13 @@
     .line 132
     iput-object p1, p0, Lcom/facebook/react/modules/datepicker/DatePickerDialogFragment;->mOnDateSetListener:Landroid/app/DatePickerDialog$OnDateSetListener;
 
+    .line 133
     return-void
 .end method
 
 .method setOnDismissListener(Landroid/content/DialogInterface$OnDismissListener;)V
     .locals 0
-    .param p1    # Landroid/content/DialogInterface$OnDismissListener;
+    .param p1, "onDismissListener"    # Landroid/content/DialogInterface$OnDismissListener;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -470,5 +442,6 @@
     .line 136
     iput-object p1, p0, Lcom/facebook/react/modules/datepicker/DatePickerDialogFragment;->mOnDismissListener:Landroid/content/DialogInterface$OnDismissListener;
 
+    .line 137
     return-void
 .end method

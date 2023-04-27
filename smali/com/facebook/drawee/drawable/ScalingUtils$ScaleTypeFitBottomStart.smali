@@ -44,63 +44,76 @@
 
 # virtual methods
 .method public getTransformImpl(Landroid/graphics/Matrix;Landroid/graphics/Rect;IIFFFF)V
-    .locals 0
+    .locals 5
+    .param p1, "outTransform"    # Landroid/graphics/Matrix;
+    .param p2, "parentRect"    # Landroid/graphics/Rect;
+    .param p3, "childWidth"    # I
+    .param p4, "childHeight"    # I
+    .param p5, "focusX"    # F
+    .param p6, "focusY"    # F
+    .param p7, "scaleX"    # F
+    .param p8, "scaleY"    # F
 
     .line 233
     invoke-static {p7, p8}, Ljava/lang/Math;->min(FF)F
 
-    move-result p3
+    move-result v0
 
     .line 234
-    iget p5, p2, Landroid/graphics/Rect;->left:I
+    .local v0, "scale":F
+    iget v1, p2, Landroid/graphics/Rect;->left:I
 
-    int-to-float p5, p5
+    int-to-float v1, v1
 
     .line 235
-    iget p6, p2, Landroid/graphics/Rect;->top:I
+    .local v1, "dx":F
+    iget v2, p2, Landroid/graphics/Rect;->top:I
 
-    int-to-float p6, p6
+    int-to-float v2, v2
 
     invoke-virtual {p2}, Landroid/graphics/Rect;->height()I
 
-    move-result p2
+    move-result v3
 
-    int-to-float p2, p2
+    int-to-float v3, v3
 
-    int-to-float p4, p4
+    int-to-float v4, p4
 
-    mul-float p4, p4, p3
+    mul-float v4, v4, v0
 
-    sub-float/2addr p2, p4
+    sub-float/2addr v3, v4
 
-    add-float/2addr p6, p2
+    add-float/2addr v2, v3
 
     .line 236
-    invoke-virtual {p1, p3, p3}, Landroid/graphics/Matrix;->setScale(FF)V
-
-    const/high16 p2, 0x3f000000    # 0.5f
-
-    add-float/2addr p5, p2
-
-    float-to-int p3, p5
-
-    int-to-float p3, p3
-
-    add-float/2addr p6, p2
-
-    float-to-int p2, p6
-
-    int-to-float p2, p2
+    .local v2, "dy":F
+    invoke-virtual {p1, v0, v0}, Landroid/graphics/Matrix;->setScale(FF)V
 
     .line 237
-    invoke-virtual {p1, p3, p2}, Landroid/graphics/Matrix;->postTranslate(FF)Z
+    const/high16 v3, 0x3f000000    # 0.5f
 
+    add-float v4, v1, v3
+
+    float-to-int v4, v4
+
+    int-to-float v4, v4
+
+    add-float/2addr v3, v2
+
+    float-to-int v3, v3
+
+    int-to-float v3, v3
+
+    invoke-virtual {p1, v4, v3}, Landroid/graphics/Matrix;->postTranslate(FF)Z
+
+    .line 238
     return-void
 .end method
 
 .method public toString()Ljava/lang/String;
     .locals 1
 
+    .line 242
     const-string v0, "fit_bottom_start"
 
     return-object v0

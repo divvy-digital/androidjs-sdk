@@ -27,7 +27,9 @@
 .end method
 
 .method public addChildAt(Lcom/facebook/react/uimanager/ReactShadowNodeImpl;I)V
-    .locals 1
+    .locals 2
+    .param p1, "child"    # Lcom/facebook/react/uimanager/ReactShadowNodeImpl;
+    .param p2, "i"    # I
 
     .line 32
     invoke-super {p0, p1, p2}, Lcom/facebook/react/uimanager/LayoutShadowNode;->addChildAt(Lcom/facebook/react/uimanager/ReactShadowNodeImpl;I)V
@@ -35,25 +37,27 @@
     .line 33
     invoke-virtual {p0}, Lcom/facebook/react/views/modal/ModalHostShadowNode;->getThemedContext()Lcom/facebook/react/uimanager/ThemedReactContext;
 
-    move-result-object p2
+    move-result-object v0
 
-    invoke-static {p2}, Lcom/facebook/react/views/modal/ModalHostHelper;->getModalHostSize(Landroid/content/Context;)Landroid/graphics/Point;
+    invoke-static {v0}, Lcom/facebook/react/views/modal/ModalHostHelper;->getModalHostSize(Landroid/content/Context;)Landroid/graphics/Point;
 
-    move-result-object p2
+    move-result-object v0
 
     .line 34
-    iget v0, p2, Landroid/graphics/Point;->x:I
+    .local v0, "modalSize":Landroid/graphics/Point;
+    iget v1, v0, Landroid/graphics/Point;->x:I
 
-    int-to-float v0, v0
+    int-to-float v1, v1
 
-    invoke-virtual {p1, v0}, Lcom/facebook/react/uimanager/ReactShadowNodeImpl;->setStyleWidth(F)V
+    invoke-virtual {p1, v1}, Lcom/facebook/react/uimanager/ReactShadowNodeImpl;->setStyleWidth(F)V
 
     .line 35
-    iget p2, p2, Landroid/graphics/Point;->y:I
+    iget v1, v0, Landroid/graphics/Point;->y:I
 
-    int-to-float p2, p2
+    int-to-float v1, v1
 
-    invoke-virtual {p1, p2}, Lcom/facebook/react/uimanager/ReactShadowNodeImpl;->setStyleHeight(F)V
+    invoke-virtual {p1, v1}, Lcom/facebook/react/uimanager/ReactShadowNodeImpl;->setStyleHeight(F)V
 
+    .line 36
     return-void
 .end method

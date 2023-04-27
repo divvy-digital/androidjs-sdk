@@ -57,6 +57,7 @@
 # direct methods
 .method public constructor <init>(Lcom/facebook/react/bridge/ReactApplicationContext;)V
     .locals 1
+    .param p1, "reactContext"    # Lcom/facebook/react/bridge/ReactApplicationContext;
 
     .line 92
     invoke-direct {p0, p1}, Lcom/facebook/react/bridge/ReactContextBaseJavaModule;-><init>(Lcom/facebook/react/bridge/ReactApplicationContext;)V
@@ -89,47 +90,52 @@
 
     iput-object v0, p0, Lcom/facebook/react/animated/NativeAnimatedModule;->mAnimatedFrameCallback:Lcom/facebook/react/uimanager/GuardedFrameCallback;
 
+    .line 112
     return-void
 .end method
 
 .method static synthetic access$000(Lcom/facebook/react/animated/NativeAnimatedModule;)Lcom/facebook/react/animated/NativeAnimatedNodesManager;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/animated/NativeAnimatedModule;
 
     .line 75
     invoke-direct {p0}, Lcom/facebook/react/animated/NativeAnimatedModule;->getNodesManager()Lcom/facebook/react/animated/NativeAnimatedNodesManager;
 
-    move-result-object p0
+    move-result-object v0
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$100(Lcom/facebook/react/animated/NativeAnimatedModule;)Lcom/facebook/react/uimanager/GuardedFrameCallback;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/animated/NativeAnimatedModule;
 
     .line 75
-    iget-object p0, p0, Lcom/facebook/react/animated/NativeAnimatedModule;->mAnimatedFrameCallback:Lcom/facebook/react/uimanager/GuardedFrameCallback;
+    iget-object v0, p0, Lcom/facebook/react/animated/NativeAnimatedModule;->mAnimatedFrameCallback:Lcom/facebook/react/uimanager/GuardedFrameCallback;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$200(Lcom/facebook/react/animated/NativeAnimatedModule;)Lcom/facebook/react/modules/core/ReactChoreographer;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/animated/NativeAnimatedModule;
 
     .line 75
-    iget-object p0, p0, Lcom/facebook/react/animated/NativeAnimatedModule;->mReactChoreographer:Lcom/facebook/react/modules/core/ReactChoreographer;
+    iget-object v0, p0, Lcom/facebook/react/animated/NativeAnimatedModule;->mReactChoreographer:Lcom/facebook/react/modules/core/ReactChoreographer;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$300(Lcom/facebook/react/animated/NativeAnimatedModule;)Lcom/facebook/react/bridge/ReactApplicationContext;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/animated/NativeAnimatedModule;
 
     .line 75
     invoke-virtual {p0}, Lcom/facebook/react/animated/NativeAnimatedModule;->getReactApplicationContext()Lcom/facebook/react/bridge/ReactApplicationContext;
 
-    move-result-object p0
+    move-result-object v0
 
-    return-object p0
+    return-object v0
 .end method
 
 .method private clearFrameCallback()V
@@ -150,6 +156,7 @@
 
     invoke-virtual {v0, v1, v2}, Lcom/facebook/react/modules/core/ReactChoreographer;->removeFrameCallback(Lcom/facebook/react/modules/core/ReactChoreographer$CallbackType;Lcom/facebook/react/modules/core/ChoreographerCompat$FrameCallback;)V
 
+    .line 184
     return-void
 .end method
 
@@ -171,6 +178,7 @@
 
     invoke-virtual {v0, v1, v2}, Lcom/facebook/react/modules/core/ReactChoreographer;->postFrameCallback(Lcom/facebook/react/modules/core/ReactChoreographer$CallbackType;Lcom/facebook/react/modules/core/ChoreographerCompat$FrameCallback;)V
 
+    .line 190
     return-void
 .end method
 
@@ -196,6 +204,7 @@
     check-cast v0, Lcom/facebook/react/uimanager/UIManagerModule;
 
     .line 174
+    .local v0, "uiManager":Lcom/facebook/react/uimanager/UIManagerModule;
     new-instance v1, Lcom/facebook/react/animated/NativeAnimatedNodesManager;
 
     invoke-direct {v1, v0}, Lcom/facebook/react/animated/NativeAnimatedNodesManager;-><init>(Lcom/facebook/react/uimanager/UIManagerModule;)V
@@ -203,6 +212,7 @@
     iput-object v1, p0, Lcom/facebook/react/animated/NativeAnimatedModule;->mNodesManager:Lcom/facebook/react/animated/NativeAnimatedNodesManager;
 
     .line 177
+    .end local v0    # "uiManager":Lcom/facebook/react/uimanager/UIManagerModule;
     :cond_0
     iget-object v0, p0, Lcom/facebook/react/animated/NativeAnimatedModule;->mNodesManager:Lcom/facebook/react/animated/NativeAnimatedNodesManager;
 
@@ -213,6 +223,9 @@
 # virtual methods
 .method public addAnimatedEventToView(ILjava/lang/String;Lcom/facebook/react/bridge/ReadableMap;)V
     .locals 2
+    .param p1, "viewTag"    # I
+    .param p2, "eventName"    # Ljava/lang/String;
+    .param p3, "eventMapping"    # Lcom/facebook/react/bridge/ReadableMap;
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -225,11 +238,14 @@
 
     invoke-virtual {v0, v1}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
+    .line 369
     return-void
 .end method
 
 .method public connectAnimatedNodeToView(II)V
     .locals 2
+    .param p1, "animatedNodeTag"    # I
+    .param p2, "viewTag"    # I
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -242,11 +258,14 @@
 
     invoke-virtual {v0, v1}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
+    .line 343
     return-void
 .end method
 
 .method public connectAnimatedNodes(II)V
     .locals 2
+    .param p1, "parentNodeTag"    # I
+    .param p2, "childNodeTag"    # I
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -259,11 +278,14 @@
 
     invoke-virtual {v0, v1}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
+    .line 323
     return-void
 .end method
 
 .method public createAnimatedNode(ILcom/facebook/react/bridge/ReadableMap;)V
     .locals 2
+    .param p1, "tag"    # I
+    .param p2, "config"    # Lcom/facebook/react/bridge/ReadableMap;
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -276,11 +298,14 @@
 
     invoke-virtual {v0, v1}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
+    .line 205
     return-void
 .end method
 
 .method public disconnectAnimatedNodeFromView(II)V
     .locals 2
+    .param p1, "animatedNodeTag"    # I
+    .param p2, "viewTag"    # I
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -302,11 +327,14 @@
 
     invoke-virtual {v0, v1}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
+    .line 359
     return-void
 .end method
 
 .method public disconnectAnimatedNodes(II)V
     .locals 2
+    .param p1, "parentNodeTag"    # I
+    .param p2, "childNodeTag"    # I
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -319,11 +347,13 @@
 
     invoke-virtual {v0, v1}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
+    .line 333
     return-void
 .end method
 
 .method public dropAnimatedNode(I)V
     .locals 2
+    .param p1, "tag"    # I
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -336,11 +366,13 @@
 
     invoke-virtual {v0, v1}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
+    .line 245
     return-void
 .end method
 
 .method public extractAnimatedNodeOffset(I)V
     .locals 2
+    .param p1, "tag"    # I
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -353,11 +385,13 @@
 
     invoke-virtual {v0, v1}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
+    .line 285
     return-void
 .end method
 
 .method public flattenAnimatedNodeOffset(I)V
     .locals 2
+    .param p1, "tag"    # I
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -370,12 +404,14 @@
 
     invoke-virtual {v0, v1}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
+    .line 275
     return-void
 .end method
 
 .method public getName()Ljava/lang/String;
     .locals 1
 
+    .line 168
     const-string v0, "NativeAnimatedModule"
 
     return-object v0
@@ -390,6 +426,7 @@
     move-result-object v0
 
     .line 117
+    .local v0, "reactCtx":Lcom/facebook/react/bridge/ReactApplicationContext;
     const-class v1, Lcom/facebook/react/uimanager/UIManagerModule;
 
     invoke-virtual {v0, v1}, Lcom/facebook/react/bridge/ReactApplicationContext;->getNativeModule(Ljava/lang/Class;)Lcom/facebook/react/bridge/NativeModule;
@@ -399,17 +436,20 @@
     check-cast v1, Lcom/facebook/react/uimanager/UIManagerModule;
 
     .line 118
+    .local v1, "uiManager":Lcom/facebook/react/uimanager/UIManagerModule;
     invoke-virtual {v0, p0}, Lcom/facebook/react/bridge/ReactApplicationContext;->addLifecycleEventListener(Lcom/facebook/react/bridge/LifecycleEventListener;)V
 
     .line 119
     invoke-virtual {v1, p0}, Lcom/facebook/react/uimanager/UIManagerModule;->addUIManagerListener(Lcom/facebook/react/uimanager/UIManagerModuleListener;)V
 
+    .line 120
     return-void
 .end method
 
 .method public onHostDestroy()V
     .locals 0
 
+    .line 164
     return-void
 .end method
 
@@ -419,6 +459,7 @@
     .line 158
     invoke-direct {p0}, Lcom/facebook/react/animated/NativeAnimatedModule;->clearFrameCallback()V
 
+    .line 159
     return-void
 .end method
 
@@ -428,11 +469,15 @@
     .line 124
     invoke-direct {p0}, Lcom/facebook/react/animated/NativeAnimatedModule;->enqueueFrameCallback()V
 
+    .line 125
     return-void
 .end method
 
 .method public removeAnimatedEventFromView(ILjava/lang/String;I)V
     .locals 2
+    .param p1, "viewTag"    # I
+    .param p2, "eventName"    # Ljava/lang/String;
+    .param p3, "animatedValueTag"    # I
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -445,11 +490,14 @@
 
     invoke-virtual {v0, v1}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
+    .line 379
     return-void
 .end method
 
 .method public setAnimatedNodeOffset(ID)V
     .locals 2
+    .param p1, "tag"    # I
+    .param p2, "value"    # D
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -462,11 +510,14 @@
 
     invoke-virtual {v0, v1}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
+    .line 265
     return-void
 .end method
 
 .method public setAnimatedNodeValue(ID)V
     .locals 2
+    .param p1, "tag"    # I
+    .param p2, "value"    # D
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -479,22 +530,27 @@
 
     invoke-virtual {v0, v1}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
+    .line 255
     return-void
 .end method
 
 .method public setNodesManager(Lcom/facebook/react/animated/NativeAnimatedNodesManager;)V
     .locals 0
-    .annotation build Lcom/facebook/react/common/annotations/VisibleForTesting;
-    .end annotation
+    .param p1, "nodesManager"    # Lcom/facebook/react/animated/NativeAnimatedNodesManager;
 
     .line 194
     iput-object p1, p0, Lcom/facebook/react/animated/NativeAnimatedModule;->mNodesManager:Lcom/facebook/react/animated/NativeAnimatedNodesManager;
 
+    .line 195
     return-void
 .end method
 
 .method public startAnimatingNode(IILcom/facebook/react/bridge/ReadableMap;Lcom/facebook/react/bridge/Callback;)V
     .locals 8
+    .param p1, "animationId"    # I
+    .param p2, "animatedNodeTag"    # I
+    .param p3, "animationConfig"    # Lcom/facebook/react/bridge/ReadableMap;
+    .param p4, "endCallback"    # Lcom/facebook/react/bridge/Callback;
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -519,11 +575,13 @@
 
     invoke-virtual {v0, v7}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
+    .line 303
     return-void
 .end method
 
 .method public startListeningToAnimatedNodeValue(I)V
     .locals 3
+    .param p1, "tag"    # I
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -533,6 +591,7 @@
     invoke-direct {v0, p0, p1}, Lcom/facebook/react/animated/NativeAnimatedModule$5;-><init>(Lcom/facebook/react/animated/NativeAnimatedModule;I)V
 
     .line 219
+    .local v0, "listener":Lcom/facebook/react/animated/AnimatedNodeValueListener;
     iget-object v1, p0, Lcom/facebook/react/animated/NativeAnimatedModule;->mOperations:Ljava/util/ArrayList;
 
     new-instance v2, Lcom/facebook/react/animated/NativeAnimatedModule$6;
@@ -541,11 +600,13 @@
 
     invoke-virtual {v1, v2}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
+    .line 225
     return-void
 .end method
 
 .method public stopAnimation(I)V
     .locals 2
+    .param p1, "animationId"    # I
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -558,11 +619,13 @@
 
     invoke-virtual {v0, v1}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
+    .line 313
     return-void
 .end method
 
 .method public stopListeningToAnimatedNodeValue(I)V
     .locals 2
+    .param p1, "tag"    # I
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -575,11 +638,13 @@
 
     invoke-virtual {v0, v1}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
+    .line 235
     return-void
 .end method
 
 .method public willDispatchViewUpdates(Lcom/facebook/react/uimanager/UIManagerModule;)V
     .locals 3
+    .param p1, "uiManager"    # Lcom/facebook/react/uimanager/UIManagerModule;
 
     .line 129
     iget-object v0, p0, Lcom/facebook/react/animated/NativeAnimatedModule;->mOperations:Ljava/util/ArrayList;
@@ -598,6 +663,7 @@
 
     if-eqz v0, :cond_0
 
+    .line 130
     return-void
 
     .line 132
@@ -605,9 +671,11 @@
     iget-object v0, p0, Lcom/facebook/react/animated/NativeAnimatedModule;->mPreOperations:Ljava/util/ArrayList;
 
     .line 133
+    .local v0, "preOperations":Ljava/util/ArrayList;, "Ljava/util/ArrayList<Lcom/facebook/react/animated/NativeAnimatedModule$UIThreadOperation;>;"
     iget-object v1, p0, Lcom/facebook/react/animated/NativeAnimatedModule;->mOperations:Ljava/util/ArrayList;
 
     .line 134
+    .local v1, "operations":Ljava/util/ArrayList;, "Ljava/util/ArrayList<Lcom/facebook/react/animated/NativeAnimatedModule$UIThreadOperation;>;"
     new-instance v2, Ljava/util/ArrayList;
 
     invoke-direct {v2}, Ljava/util/ArrayList;-><init>()V
@@ -629,11 +697,12 @@
     invoke-virtual {p1, v2}, Lcom/facebook/react/uimanager/UIManagerModule;->prependUIBlock(Lcom/facebook/react/uimanager/UIBlock;)V
 
     .line 145
-    new-instance v0, Lcom/facebook/react/animated/NativeAnimatedModule$3;
+    new-instance v2, Lcom/facebook/react/animated/NativeAnimatedModule$3;
 
-    invoke-direct {v0, p0, v1}, Lcom/facebook/react/animated/NativeAnimatedModule$3;-><init>(Lcom/facebook/react/animated/NativeAnimatedModule;Ljava/util/ArrayList;)V
+    invoke-direct {v2, p0, v1}, Lcom/facebook/react/animated/NativeAnimatedModule$3;-><init>(Lcom/facebook/react/animated/NativeAnimatedModule;Ljava/util/ArrayList;)V
 
-    invoke-virtual {p1, v0}, Lcom/facebook/react/uimanager/UIManagerModule;->addUIBlock(Lcom/facebook/react/uimanager/UIBlock;)V
+    invoke-virtual {p1, v2}, Lcom/facebook/react/uimanager/UIManagerModule;->addUIBlock(Lcom/facebook/react/uimanager/UIBlock;)V
 
+    .line 154
     return-void
 .end method

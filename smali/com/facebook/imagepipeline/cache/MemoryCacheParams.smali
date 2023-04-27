@@ -18,6 +18,11 @@
 # direct methods
 .method public constructor <init>(IIIII)V
     .locals 0
+    .param p1, "maxCacheSize"    # I
+    .param p2, "maxCacheEntries"    # I
+    .param p3, "maxEvictionQueueSize"    # I
+    .param p4, "maxEvictionQueueEntries"    # I
+    .param p5, "maxCacheEntrySize"    # I
 
     .line 37
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -37,5 +42,6 @@
     .line 42
     iput p5, p0, Lcom/facebook/imagepipeline/cache/MemoryCacheParams;->maxCacheEntrySize:I
 
+    .line 43
     return-void
 .end method

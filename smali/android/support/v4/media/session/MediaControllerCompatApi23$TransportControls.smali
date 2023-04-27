@@ -21,16 +21,23 @@
     .line 33
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
+    .line 34
     return-void
 .end method
 
 .method public static playFromUri(Ljava/lang/Object;Landroid/net/Uri;Landroid/os/Bundle;)V
-    .locals 0
+    .locals 1
+    .param p0, "controlsObj"    # Ljava/lang/Object;
+    .param p1, "uri"    # Landroid/net/Uri;
+    .param p2, "extras"    # Landroid/os/Bundle;
 
     .line 30
-    check-cast p0, Landroid/media/session/MediaController$TransportControls;
+    move-object v0, p0
 
-    invoke-virtual {p0, p1, p2}, Landroid/media/session/MediaController$TransportControls;->playFromUri(Landroid/net/Uri;Landroid/os/Bundle;)V
+    check-cast v0, Landroid/media/session/MediaController$TransportControls;
 
+    invoke-virtual {v0, p1, p2}, Landroid/media/session/MediaController$TransportControls;->playFromUri(Landroid/net/Uri;Landroid/os/Bundle;)V
+
+    .line 31
     return-void
 .end method

@@ -15,9 +15,6 @@
     }
 .end annotation
 
-.annotation build Ljavax/annotation/concurrent/ThreadSafe;
-.end annotation
-
 
 # instance fields
 .field private final mBucketSizes:[I
@@ -25,50 +22,58 @@
 
 # direct methods
 .method public constructor <init>(Lcom/facebook/common/memory/MemoryTrimmableRegistry;Lcom/facebook/imagepipeline/memory/PoolParams;Lcom/facebook/imagepipeline/memory/PoolStatsTracker;)V
-    .locals 1
+    .locals 4
+    .param p1, "memoryTrimmableRegistry"    # Lcom/facebook/common/memory/MemoryTrimmableRegistry;
+    .param p2, "poolParams"    # Lcom/facebook/imagepipeline/memory/PoolParams;
+    .param p3, "poolStatsTracker"    # Lcom/facebook/imagepipeline/memory/PoolStatsTracker;
 
     .line 40
     invoke-direct {p0, p1, p2, p3}, Lcom/facebook/imagepipeline/memory/BasePool;-><init>(Lcom/facebook/common/memory/MemoryTrimmableRegistry;Lcom/facebook/imagepipeline/memory/PoolParams;Lcom/facebook/imagepipeline/memory/PoolStatsTracker;)V
 
     .line 41
-    iget-object p1, p2, Lcom/facebook/imagepipeline/memory/PoolParams;->bucketSizes:Landroid/util/SparseIntArray;
+    iget-object v0, p2, Lcom/facebook/imagepipeline/memory/PoolParams;->bucketSizes:Landroid/util/SparseIntArray;
 
     .line 42
-    invoke-virtual {p1}, Landroid/util/SparseIntArray;->size()I
+    .local v0, "bucketSizes":Landroid/util/SparseIntArray;
+    invoke-virtual {v0}, Landroid/util/SparseIntArray;->size()I
 
-    move-result p2
+    move-result v1
 
-    new-array p2, p2, [I
+    new-array v1, v1, [I
 
-    iput-object p2, p0, Lcom/facebook/imagepipeline/memory/GenericByteArrayPool;->mBucketSizes:[I
-
-    const/4 p2, 0x0
+    iput-object v1, p0, Lcom/facebook/imagepipeline/memory/GenericByteArrayPool;->mBucketSizes:[I
 
     .line 43
+    const/4 v1, 0x0
+
+    .local v1, "i":I
     :goto_0
-    invoke-virtual {p1}, Landroid/util/SparseIntArray;->size()I
+    invoke-virtual {v0}, Landroid/util/SparseIntArray;->size()I
 
-    move-result p3
+    move-result v2
 
-    if-ge p2, p3, :cond_0
+    if-ge v1, v2, :cond_0
 
     .line 44
-    iget-object p3, p0, Lcom/facebook/imagepipeline/memory/GenericByteArrayPool;->mBucketSizes:[I
+    iget-object v2, p0, Lcom/facebook/imagepipeline/memory/GenericByteArrayPool;->mBucketSizes:[I
 
-    invoke-virtual {p1, p2}, Landroid/util/SparseIntArray;->keyAt(I)I
+    invoke-virtual {v0, v1}, Landroid/util/SparseIntArray;->keyAt(I)I
 
-    move-result v0
+    move-result v3
 
-    aput v0, p3, p2
+    aput v3, v2, v1
 
-    add-int/lit8 p2, p2, 0x1
+    .line 43
+    add-int/lit8 v1, v1, 0x1
 
     goto :goto_0
 
     .line 46
+    .end local v1    # "i":I
     :cond_0
     invoke-virtual {p0}, Lcom/facebook/imagepipeline/memory/GenericByteArrayPool;->initialize()V
 
+    .line 47
     return-void
 .end method
 
@@ -86,12 +91,13 @@
 .end method
 
 .method protected alloc(I)[B
-    .locals 0
+    .locals 1
+    .param p1, "bucketedSize"    # I
 
     .line 64
-    new-array p1, p1, [B
+    new-array v0, p1, [B
 
-    return-object p1
+    return-object v0
 .end method
 
 .method protected bridge synthetic free(Ljava/lang/Object;)V
@@ -107,59 +113,67 @@
 
 .method protected free([B)V
     .locals 0
+    .param p1, "value"    # [B
 
     .line 73
     invoke-static {p1}, Lcom/facebook/common/internal/Preconditions;->checkNotNull(Ljava/lang/Object;)Ljava/lang/Object;
 
+    .line 75
     return-void
 .end method
 
 .method protected getBucketedSize(I)I
-    .locals 4
+    .locals 5
+    .param p1, "requestSize"    # I
 
-    if-lez p1, :cond_2
+    .line 99
+    move v0, p1
+
+    .line 100
+    .local v0, "intRequestSize":I
+    if-lez v0, :cond_2
 
     .line 105
-    iget-object v0, p0, Lcom/facebook/imagepipeline/memory/GenericByteArrayPool;->mBucketSizes:[I
+    iget-object v1, p0, Lcom/facebook/imagepipeline/memory/GenericByteArrayPool;->mBucketSizes:[I
 
-    array-length v1, v0
+    array-length v2, v1
 
-    const/4 v2, 0x0
+    const/4 v3, 0x0
 
     :goto_0
-    if-ge v2, v1, :cond_1
+    if-ge v3, v2, :cond_1
 
-    aget v3, v0, v2
+    aget v4, v1, v3
 
-    if-lt v3, p1, :cond_0
+    .line 106
+    .local v4, "bucketedSize":I
+    if-lt v4, v0, :cond_0
 
-    return v3
+    .line 107
+    return v4
 
+    .line 105
+    .end local v4    # "bucketedSize":I
     :cond_0
-    add-int/lit8 v2, v2, 0x1
+    add-int/lit8 v3, v3, 0x1
 
     goto :goto_0
 
+    .line 113
     :cond_1
     return p1
 
     .line 101
     :cond_2
-    new-instance v0, Lcom/facebook/imagepipeline/memory/BasePool$InvalidSizeException;
+    new-instance v1, Lcom/facebook/imagepipeline/memory/BasePool$InvalidSizeException;
 
     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object p1
+    move-result-object v2
 
-    invoke-direct {v0, p1}, Lcom/facebook/imagepipeline/memory/BasePool$InvalidSizeException;-><init>(Ljava/lang/Object;)V
+    invoke-direct {v1, v2}, Lcom/facebook/imagepipeline/memory/BasePool$InvalidSizeException;-><init>(Ljava/lang/Object;)V
 
-    goto :goto_2
-
-    :goto_1
-    throw v0
-
-    :goto_2
-    goto :goto_1
+    throw v1
 .end method
 
 .method protected bridge synthetic getBucketedSizeForValue(Ljava/lang/Object;)I
@@ -176,15 +190,16 @@
 .end method
 
 .method protected getBucketedSizeForValue([B)I
-    .locals 0
+    .locals 1
+    .param p1, "value"    # [B
 
     .line 123
     invoke-static {p1}, Lcom/facebook/common/internal/Preconditions;->checkNotNull(Ljava/lang/Object;)Ljava/lang/Object;
 
     .line 124
-    array-length p1, p1
+    array-length v0, p1
 
-    return p1
+    return v0
 .end method
 
 .method public getMinBufferSize()I
@@ -202,6 +217,8 @@
 
 .method protected getSizeInBytes(I)I
     .locals 0
+    .param p1, "bucketedSize"    # I
 
+    .line 84
     return p1
 .end method

@@ -17,6 +17,3 @@
 .annotation runtime Ljavax/annotation/Nonnull;
     when = .enum Ljavax/annotation/meta/When;->UNKNOWN:Ljavax/annotation/meta/When;
 .end annotation
-
-.annotation build Ljavax/annotation/meta/TypeQualifierNickname;
-.end annotation

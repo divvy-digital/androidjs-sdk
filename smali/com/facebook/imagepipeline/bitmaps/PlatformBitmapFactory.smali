@@ -14,79 +14,90 @@
 .end method
 
 .method private static checkFinalImageBounds(Landroid/graphics/Bitmap;IIII)V
-    .locals 2
+    .locals 4
+    .param p0, "source"    # Landroid/graphics/Bitmap;
+    .param p1, "x"    # I
+    .param p2, "y"    # I
+    .param p3, "width"    # I
+    .param p4, "height"    # I
 
-    add-int/2addr p1, p3
+    .line 736
+    add-int v0, p1, p3
 
     .line 737
     invoke-virtual {p0}, Landroid/graphics/Bitmap;->getWidth()I
 
-    move-result p3
+    move-result v1
+
+    const/4 v2, 0x1
+
+    const/4 v3, 0x0
+
+    if-gt v0, v1, :cond_0
 
     const/4 v0, 0x1
-
-    const/4 v1, 0x0
-
-    if-gt p1, p3, :cond_0
-
-    const/4 p1, 0x1
 
     goto :goto_0
 
     :cond_0
-    const/4 p1, 0x0
-
-    :goto_0
-    const-string p3, "x + width must be <= bitmap.width()"
+    const/4 v0, 0x0
 
     .line 736
-    invoke-static {p1, p3}, Lcom/facebook/common/internal/Preconditions;->checkArgument(ZLjava/lang/Object;)V
+    :goto_0
+    const-string v1, "x + width must be <= bitmap.width()"
 
-    add-int/2addr p2, p4
+    invoke-static {v0, v1}, Lcom/facebook/common/internal/Preconditions;->checkArgument(ZLjava/lang/Object;)V
+
+    .line 739
+    add-int v0, p2, p4
 
     .line 740
     invoke-virtual {p0}, Landroid/graphics/Bitmap;->getHeight()I
 
-    move-result p0
+    move-result v1
 
-    if-gt p2, p0, :cond_1
+    if-gt v0, v1, :cond_1
 
     goto :goto_1
 
     :cond_1
-    const/4 v0, 0x0
-
-    :goto_1
-    const-string p0, "y + height must be <= bitmap.height()"
+    const/4 v2, 0x0
 
     .line 739
-    invoke-static {v0, p0}, Lcom/facebook/common/internal/Preconditions;->checkArgument(ZLjava/lang/Object;)V
+    :goto_1
+    const-string v0, "y + height must be <= bitmap.height()"
 
+    invoke-static {v2, v0}, Lcom/facebook/common/internal/Preconditions;->checkArgument(ZLjava/lang/Object;)V
+
+    .line 742
     return-void
 .end method
 
 .method private static checkWidthHeight(II)V
-    .locals 3
+    .locals 4
+    .param p0, "width"    # I
+    .param p1, "height"    # I
 
+    .line 711
     const/4 v0, 0x1
 
     const/4 v1, 0x0
 
     if-lez p0, :cond_0
 
-    const/4 p0, 0x1
+    const/4 v2, 0x1
 
     goto :goto_0
 
     :cond_0
-    const/4 p0, 0x0
+    const/4 v2, 0x0
 
     :goto_0
-    const-string v2, "width must be > 0"
+    const-string v3, "width must be > 0"
 
-    .line 711
-    invoke-static {p0, v2}, Lcom/facebook/common/internal/Preconditions;->checkArgument(ZLjava/lang/Object;)V
+    invoke-static {v2, v3}, Lcom/facebook/common/internal/Preconditions;->checkArgument(ZLjava/lang/Object;)V
 
+    .line 712
     if-lez p1, :cond_1
 
     goto :goto_1
@@ -95,36 +106,39 @@
     const/4 v0, 0x0
 
     :goto_1
-    const-string p0, "height must be > 0"
+    const-string v1, "height must be > 0"
 
-    .line 712
-    invoke-static {v0, p0}, Lcom/facebook/common/internal/Preconditions;->checkArgument(ZLjava/lang/Object;)V
+    invoke-static {v0, v1}, Lcom/facebook/common/internal/Preconditions;->checkArgument(ZLjava/lang/Object;)V
 
+    .line 713
     return-void
 .end method
 
 .method private static checkXYSign(II)V
-    .locals 3
+    .locals 4
+    .param p0, "x"    # I
+    .param p1, "y"    # I
 
+    .line 722
     const/4 v0, 0x1
 
     const/4 v1, 0x0
 
     if-ltz p0, :cond_0
 
-    const/4 p0, 0x1
+    const/4 v2, 0x1
 
     goto :goto_0
 
     :cond_0
-    const/4 p0, 0x0
+    const/4 v2, 0x0
 
     :goto_0
-    const-string v2, "x must be >= 0"
+    const-string v3, "x must be >= 0"
 
-    .line 722
-    invoke-static {p0, v2}, Lcom/facebook/common/internal/Preconditions;->checkArgument(ZLjava/lang/Object;)V
+    invoke-static {v2, v3}, Lcom/facebook/common/internal/Preconditions;->checkArgument(ZLjava/lang/Object;)V
 
+    .line 723
     if-ltz p1, :cond_1
 
     goto :goto_1
@@ -133,16 +147,20 @@
     const/4 v0, 0x0
 
     :goto_1
-    const-string p0, "y must be >= 0"
+    const-string v1, "y must be >= 0"
 
-    .line 723
-    invoke-static {v0, p0}, Lcom/facebook/common/internal/Preconditions;->checkArgument(ZLjava/lang/Object;)V
+    invoke-static {v0, v1}, Lcom/facebook/common/internal/Preconditions;->checkArgument(ZLjava/lang/Object;)V
 
+    .line 724
     return-void
 .end method
 
 .method private createBitmap(IILandroid/graphics/Bitmap$Config;Z)Lcom/facebook/common/references/CloseableReference;
     .locals 6
+    .param p1, "width"    # I
+    .param p2, "height"    # I
+    .param p3, "config"    # Landroid/graphics/Bitmap$Config;
+    .param p4, "hasAlpha"    # Z
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(II",
@@ -154,6 +172,7 @@
         }
     .end annotation
 
+    .line 424
     const/4 v5, 0x0
 
     move-object v0, p0
@@ -166,17 +185,20 @@
 
     move v4, p4
 
-    .line 424
     invoke-direct/range {v0 .. v5}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->createBitmap(IILandroid/graphics/Bitmap$Config;ZLjava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method private createBitmap(IILandroid/graphics/Bitmap$Config;ZLjava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
     .locals 7
-    .param p5    # Ljava/lang/Object;
+    .param p1, "width"    # I
+    .param p2, "height"    # I
+    .param p3, "config"    # Landroid/graphics/Bitmap$Config;
+    .param p4, "hasAlpha"    # Z
+    .param p5, "callerContext"    # Ljava/lang/Object;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -193,6 +215,7 @@
         }
     .end annotation
 
+    .line 448
     const/4 v1, 0x0
 
     move-object v0, p0
@@ -207,16 +230,20 @@
 
     move-object v6, p5
 
-    .line 448
     invoke-direct/range {v0 .. v6}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->createBitmap(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;ZLjava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method private createBitmap(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;Z)Lcom/facebook/common/references/CloseableReference;
     .locals 7
+    .param p1, "display"    # Landroid/util/DisplayMetrics;
+    .param p2, "width"    # I
+    .param p3, "height"    # I
+    .param p4, "config"    # Landroid/graphics/Bitmap$Config;
+    .param p5, "hasAlpha"    # Z
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -230,6 +257,7 @@
         }
     .end annotation
 
+    .line 472
     const/4 v6, 0x0
 
     move-object v0, p0
@@ -244,17 +272,21 @@
 
     move v5, p5
 
-    .line 472
     invoke-direct/range {v0 .. v6}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->createBitmap(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;ZLjava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method private createBitmap(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;ZLjava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
-    .locals 0
-    .param p6    # Ljava/lang/Object;
+    .locals 3
+    .param p1, "display"    # Landroid/util/DisplayMetrics;
+    .param p2, "width"    # I
+    .param p3, "height"    # I
+    .param p4, "config"    # Landroid/graphics/Bitmap$Config;
+    .param p5, "hasAlpha"    # Z
+    .param p6, "callerContext"    # Ljava/lang/Object;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -279,79 +311,76 @@
     .line 499
     invoke-virtual {p0, p2, p3, p4}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->createBitmapInternal(IILandroid/graphics/Bitmap$Config;)Lcom/facebook/common/references/CloseableReference;
 
-    move-result-object p2
+    move-result-object v0
 
     .line 501
-    invoke-virtual {p2}, Lcom/facebook/common/references/CloseableReference;->get()Ljava/lang/Object;
+    .local v0, "bitmapRef":Lcom/facebook/common/references/CloseableReference;, "Lcom/facebook/common/references/CloseableReference<Landroid/graphics/Bitmap;>;"
+    invoke-virtual {v0}, Lcom/facebook/common/references/CloseableReference;->get()Ljava/lang/Object;
 
-    move-result-object p3
+    move-result-object v1
 
-    check-cast p3, Landroid/graphics/Bitmap;
+    check-cast v1, Landroid/graphics/Bitmap;
 
+    .line 502
+    .local v1, "bitmap":Landroid/graphics/Bitmap;
     if-eqz p1, :cond_0
 
     .line 503
-    iget p1, p1, Landroid/util/DisplayMetrics;->densityDpi:I
+    iget v2, p1, Landroid/util/DisplayMetrics;->densityDpi:I
 
-    invoke-virtual {p3, p1}, Landroid/graphics/Bitmap;->setDensity(I)V
+    invoke-virtual {v1, v2}, Landroid/graphics/Bitmap;->setDensity(I)V
 
     .line 506
     :cond_0
-    sget p1, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    const/16 p6, 0xc
-
-    if-lt p1, p6, :cond_1
+    nop
 
     .line 507
-    invoke-virtual {p3, p5}, Landroid/graphics/Bitmap;->setHasAlpha(Z)V
+    invoke-virtual {v1, p5}, Landroid/graphics/Bitmap;->setHasAlpha(Z)V
 
     .line 510
-    :cond_1
-    sget-object p1, Landroid/graphics/Bitmap$Config;->ARGB_8888:Landroid/graphics/Bitmap$Config;
+    sget-object v2, Landroid/graphics/Bitmap$Config;->ARGB_8888:Landroid/graphics/Bitmap$Config;
 
-    if-ne p4, p1, :cond_2
+    if-ne p4, v2, :cond_1
 
-    if-nez p5, :cond_2
-
-    const/high16 p1, -0x1000000
+    if-nez p5, :cond_1
 
     .line 511
-    invoke-virtual {p3, p1}, Landroid/graphics/Bitmap;->eraseColor(I)V
+    const/high16 v2, -0x1000000
 
-    :cond_2
-    return-object p2
+    invoke-virtual {v1, v2}, Landroid/graphics/Bitmap;->eraseColor(I)V
+
+    .line 514
+    :cond_1
+    return-object v0
 .end method
 
 .method private static getSuitableBitmapConfig(Landroid/graphics/Bitmap;)Landroid/graphics/Bitmap$Config;
-    .locals 1
+    .locals 4
+    .param p0, "source"    # Landroid/graphics/Bitmap;
 
     .line 682
     sget-object v0, Landroid/graphics/Bitmap$Config;->ARGB_8888:Landroid/graphics/Bitmap$Config;
 
     .line 683
+    .local v0, "finalConfig":Landroid/graphics/Bitmap$Config;
     invoke-virtual {p0}, Landroid/graphics/Bitmap;->getConfig()Landroid/graphics/Bitmap$Config;
 
-    move-result-object p0
+    move-result-object v1
 
-    if-eqz p0, :cond_2
+    .line 686
+    .local v1, "sourceConfig":Landroid/graphics/Bitmap$Config;
+    if-eqz v1, :cond_0
 
     .line 687
-    sget-object v0, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory$1;->$SwitchMap$android$graphics$Bitmap$Config:[I
+    sget-object v2, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory$1;->$SwitchMap$android$graphics$Bitmap$Config:[I
 
-    invoke-virtual {p0}, Landroid/graphics/Bitmap$Config;->ordinal()I
+    invoke-virtual {v1}, Landroid/graphics/Bitmap$Config;->ordinal()I
 
-    move-result p0
+    move-result v3
 
-    aget p0, v0, p0
+    aget v2, v2, v3
 
-    const/4 v0, 0x1
-
-    if-eq p0, v0, :cond_1
-
-    const/4 v0, 0x2
-
-    if-eq p0, v0, :cond_0
+    packed-switch v2, :pswitch_data_0
 
     .line 697
     sget-object v0, Landroid/graphics/Bitmap$Config;->ARGB_8888:Landroid/graphics/Bitmap$Config;
@@ -359,22 +388,37 @@
     goto :goto_0
 
     .line 692
-    :cond_0
+    :pswitch_0
     sget-object v0, Landroid/graphics/Bitmap$Config;->ALPHA_8:Landroid/graphics/Bitmap$Config;
 
+    .line 693
     goto :goto_0
 
     .line 689
-    :cond_1
+    :pswitch_1
     sget-object v0, Landroid/graphics/Bitmap$Config;->RGB_565:Landroid/graphics/Bitmap$Config;
 
-    :cond_2
+    .line 690
+    nop
+
+    .line 701
+    :cond_0
     :goto_0
     return-object v0
+
+    nop
+
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method private static setPropertyFromSourceBitmap(Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;)V
-    .locals 2
+    .locals 1
+    .param p0, "source"    # Landroid/graphics/Bitmap;
+    .param p1, "destination"    # Landroid/graphics/Bitmap;
 
     .line 753
     invoke-virtual {p0}, Landroid/graphics/Bitmap;->getDensity()I
@@ -384,11 +428,7 @@
     invoke-virtual {p1, v0}, Landroid/graphics/Bitmap;->setDensity(I)V
 
     .line 754
-    sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    const/16 v1, 0xc
-
-    if-lt v0, v1, :cond_0
+    nop
 
     .line 755
     invoke-virtual {p0}, Landroid/graphics/Bitmap;->hasAlpha()Z
@@ -398,21 +438,16 @@
     invoke-virtual {p1, v0}, Landroid/graphics/Bitmap;->setHasAlpha(Z)V
 
     .line 758
-    :cond_0
-    sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    const/16 v1, 0x13
-
-    if-lt v0, v1, :cond_1
+    nop
 
     .line 759
     invoke-virtual {p0}, Landroid/graphics/Bitmap;->isPremultiplied()Z
 
-    move-result p0
+    move-result v0
 
-    invoke-virtual {p1, p0}, Landroid/graphics/Bitmap;->setPremultiplied(Z)V
+    invoke-virtual {p1, v0}, Landroid/graphics/Bitmap;->setPremultiplied(Z)V
 
-    :cond_1
+    .line 761
     return-void
 .end method
 
@@ -420,6 +455,8 @@
 # virtual methods
 .method public createBitmap(II)Lcom/facebook/common/references/CloseableReference;
     .locals 1
+    .param p1, "width"    # I
+    .param p2, "height"    # I
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(II)",
@@ -434,13 +471,16 @@
 
     invoke-virtual {p0, p1, p2, v0}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->createBitmap(IILandroid/graphics/Bitmap$Config;)Lcom/facebook/common/references/CloseableReference;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public createBitmap(IILandroid/graphics/Bitmap$Config;)Lcom/facebook/common/references/CloseableReference;
     .locals 1
+    .param p1, "width"    # I
+    .param p2, "height"    # I
+    .param p3, "bitmapConfig"    # Landroid/graphics/Bitmap$Config;
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(II",
@@ -452,19 +492,22 @@
         }
     .end annotation
 
+    .line 41
     const/4 v0, 0x0
 
-    .line 41
     invoke-virtual {p0, p1, p2, p3, v0}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->createBitmap(IILandroid/graphics/Bitmap$Config;Ljava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public createBitmap(IILandroid/graphics/Bitmap$Config;Ljava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
-    .locals 0
-    .param p4    # Ljava/lang/Object;
+    .locals 1
+    .param p1, "width"    # I
+    .param p2, "height"    # I
+    .param p3, "bitmapConfig"    # Landroid/graphics/Bitmap$Config;
+    .param p4, "callerContext"    # Ljava/lang/Object;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -483,14 +526,16 @@
     .line 74
     invoke-virtual {p0, p1, p2, p3}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->createBitmapInternal(IILandroid/graphics/Bitmap$Config;)Lcom/facebook/common/references/CloseableReference;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public createBitmap(IILjava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
     .locals 1
-    .param p3    # Ljava/lang/Object;
+    .param p1, "width"    # I
+    .param p2, "height"    # I
+    .param p3, "callerContext"    # Ljava/lang/Object;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -510,13 +555,14 @@
 
     invoke-virtual {p0, p1, p2, v0, p3}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->createBitmap(IILandroid/graphics/Bitmap$Config;Ljava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public createBitmap(Landroid/graphics/Bitmap;)Lcom/facebook/common/references/CloseableReference;
     .locals 1
+    .param p1, "source"    # Landroid/graphics/Bitmap;
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -528,18 +574,23 @@
         }
     .end annotation
 
+    .line 108
     const/4 v0, 0x0
 
-    .line 108
     invoke-virtual {p0, p1, v0}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->createBitmap(Landroid/graphics/Bitmap;Ljava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public createBitmap(Landroid/graphics/Bitmap;IIII)Lcom/facebook/common/references/CloseableReference;
     .locals 7
+    .param p1, "source"    # Landroid/graphics/Bitmap;
+    .param p2, "x"    # I
+    .param p3, "y"    # I
+    .param p4, "width"    # I
+    .param p5, "height"    # I
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -551,6 +602,7 @@
         }
     .end annotation
 
+    .line 150
     const/4 v6, 0x0
 
     move-object v0, p0
@@ -565,20 +617,25 @@
 
     move v5, p5
 
-    .line 150
     invoke-virtual/range {v0 .. v6}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->createBitmap(Landroid/graphics/Bitmap;IIIILjava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public createBitmap(Landroid/graphics/Bitmap;IIIILandroid/graphics/Matrix;Z)Lcom/facebook/common/references/CloseableReference;
     .locals 9
-    .param p6    # Landroid/graphics/Matrix;
+    .param p1, "source"    # Landroid/graphics/Bitmap;
+    .param p2, "x"    # I
+    .param p3, "y"    # I
+    .param p4, "width"    # I
+    .param p5, "height"    # I
+    .param p6, "matrix"    # Landroid/graphics/Matrix;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
+    .param p7, "filter"    # Z
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -592,6 +649,7 @@
         }
     .end annotation
 
+    .line 209
     const/4 v8, 0x0
 
     move-object v0, p0
@@ -610,7 +668,6 @@
 
     move/from16 v7, p7
 
-    .line 209
     invoke-virtual/range {v0 .. v8}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->createBitmap(Landroid/graphics/Bitmap;IIIILandroid/graphics/Matrix;ZLjava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
 
     move-result-object v0
@@ -619,12 +676,18 @@
 .end method
 
 .method public createBitmap(Landroid/graphics/Bitmap;IIIILandroid/graphics/Matrix;ZLjava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
-    .locals 16
-    .param p6    # Landroid/graphics/Matrix;
+    .locals 21
+    .param p1, "source"    # Landroid/graphics/Bitmap;
+    .param p2, "x"    # I
+    .param p3, "y"    # I
+    .param p4, "width"    # I
+    .param p5, "height"    # I
+    .param p6, "matrix"    # Landroid/graphics/Matrix;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
-    .param p8    # Ljava/lang/Object;
+    .param p7, "filter"    # Z
+    .param p8, "callerContext"    # Ljava/lang/Object;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -643,22 +706,22 @@
         }
     .end annotation
 
+    .line 304
     move-object/from16 v0, p1
 
     move/from16 v1, p2
 
     move/from16 v2, p3
 
-    move/from16 v3, p4
+    move/from16 v9, p4
 
-    move/from16 v4, p5
+    move/from16 v10, p5
 
-    move-object/from16 v5, p6
+    move-object/from16 v11, p6
 
-    const-string v6, "Source bitmap cannot be null"
+    const-string v3, "Source bitmap cannot be null"
 
-    .line 304
-    invoke-static {v0, v6}, Lcom/facebook/common/internal/Preconditions;->checkNotNull(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-static {v0, v3}, Lcom/facebook/common/internal/Preconditions;->checkNotNull(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
     .line 305
     invoke-static/range {p2 .. p3}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->checkXYSign(II)V
@@ -669,194 +732,235 @@
     .line 307
     invoke-static/range {p1 .. p5}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->checkFinalImageBounds(Landroid/graphics/Bitmap;IIII)V
 
+    .line 310
+    move/from16 v4, p4
+
+    .line 311
+    .local v4, "newWidth":I
+    move/from16 v5, p5
+
     .line 317
-    new-instance v7, Landroid/graphics/Rect;
+    .local v5, "newHeight":I
+    new-instance v3, Landroid/graphics/Rect;
 
-    add-int v6, v1, v3
+    add-int v6, v1, v9
 
-    add-int v8, v2, v4
+    add-int v7, v2, v10
 
-    invoke-direct {v7, v1, v2, v6, v8}, Landroid/graphics/Rect;-><init>(IIII)V
+    invoke-direct {v3, v1, v2, v6, v7}, Landroid/graphics/Rect;-><init>(IIII)V
+
+    move-object v12, v3
 
     .line 318
-    new-instance v8, Landroid/graphics/RectF;
+    .local v12, "srcRectangle":Landroid/graphics/Rect;
+    new-instance v3, Landroid/graphics/RectF;
 
-    int-to-float v1, v3
+    int-to-float v6, v9
 
-    int-to-float v2, v4
+    int-to-float v7, v10
 
-    const/4 v6, 0x0
+    const/4 v8, 0x0
 
-    invoke-direct {v8, v6, v6, v1, v2}, Landroid/graphics/RectF;-><init>(FFFF)V
+    invoke-direct {v3, v8, v8, v6, v7}, Landroid/graphics/RectF;-><init>(FFFF)V
+
+    move-object v13, v3
 
     .line 319
+    .local v13, "dstRectangle":Landroid/graphics/RectF;
     invoke-static/range {p1 .. p1}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->getSuitableBitmapConfig(Landroid/graphics/Bitmap;)Landroid/graphics/Bitmap$Config;
 
-    move-result-object v6
-
-    const/4 v9, 0x0
-
-    if-eqz v5, :cond_4
+    move-result-object v14
 
     .line 321
+    .local v14, "newConfig":Landroid/graphics/Bitmap$Config;
+    if-eqz v11, :cond_4
+
     invoke-virtual/range {p6 .. p6}, Landroid/graphics/Matrix;->isIdentity()Z
 
-    move-result v1
+    move-result v3
 
-    if-eqz v1, :cond_0
+    if-eqz v3, :cond_0
 
-    goto :goto_2
+    move/from16 v15, p7
+
+    goto/16 :goto_3
 
     .line 327
     :cond_0
     invoke-virtual/range {p6 .. p6}, Landroid/graphics/Matrix;->rectStaysRect()Z
 
-    move-result v1
+    move-result v3
 
-    const/4 v2, 0x1
+    const/4 v6, 0x1
 
-    xor-int/2addr v1, v2
+    xor-int/2addr v3, v6
 
     .line 328
-    new-instance v3, Landroid/graphics/RectF;
+    .local v3, "transformed":Z
+    new-instance v7, Landroid/graphics/RectF;
 
-    invoke-direct {v3}, Landroid/graphics/RectF;-><init>()V
+    invoke-direct {v7}, Landroid/graphics/RectF;-><init>()V
 
     .line 329
-    invoke-virtual {v5, v3, v8}, Landroid/graphics/Matrix;->mapRect(Landroid/graphics/RectF;Landroid/graphics/RectF;)Z
+    .local v7, "deviceRectangle":Landroid/graphics/RectF;
+    invoke-virtual {v11, v7, v13}, Landroid/graphics/Matrix;->mapRect(Landroid/graphics/RectF;Landroid/graphics/RectF;)Z
 
     .line 331
-    invoke-virtual {v3}, Landroid/graphics/RectF;->width()F
+    invoke-virtual {v7}, Landroid/graphics/RectF;->width()F
+
+    move-result v8
+
+    invoke-static {v8}, Ljava/lang/Math;->round(F)I
 
     move-result v4
-
-    invoke-static {v4}, Ljava/lang/Math;->round(F)I
-
-    move-result v11
 
     .line 332
-    invoke-virtual {v3}, Landroid/graphics/RectF;->height()F
+    invoke-virtual {v7}, Landroid/graphics/RectF;->height()F
 
-    move-result v4
+    move-result v8
 
-    invoke-static {v4}, Ljava/lang/Math;->round(F)I
+    invoke-static {v8}, Ljava/lang/Math;->round(F)I
 
-    move-result v12
-
-    if-eqz v1, :cond_1
+    move-result v5
 
     .line 333
-    sget-object v6, Landroid/graphics/Bitmap$Config;->ARGB_8888:Landroid/graphics/Bitmap$Config;
+    if-eqz v3, :cond_1
+
+    sget-object v8, Landroid/graphics/Bitmap$Config;->ARGB_8888:Landroid/graphics/Bitmap$Config;
+
+    move-object/from16 v18, v8
+
+    goto :goto_0
 
     :cond_1
-    move-object v13, v6
+    move-object/from16 v18, v14
 
-    if-nez v1, :cond_3
+    :goto_0
+    if-nez v3, :cond_3
 
     .line 338
     invoke-virtual/range {p1 .. p1}, Landroid/graphics/Bitmap;->hasAlpha()Z
 
-    move-result v4
+    move-result v8
 
-    if-eqz v4, :cond_2
-
-    goto :goto_0
-
-    :cond_2
-    const/4 v4, 0x0
-
-    const/4 v14, 0x0
+    if-eqz v8, :cond_2
 
     goto :goto_1
 
+    :cond_2
+    const/4 v8, 0x0
+
+    const/16 v19, 0x0
+
+    goto :goto_2
+
     :cond_3
-    :goto_0
-    const/4 v14, 0x1
-
     :goto_1
-    move-object/from16 v10, p0
-
-    move-object/from16 v15, p8
+    const/16 v19, 0x1
 
     .line 334
-    invoke-direct/range {v10 .. v15}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->createBitmap(IILandroid/graphics/Bitmap$Config;ZLjava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
+    :goto_2
+    move-object/from16 v15, p0
 
-    move-result-object v4
+    move/from16 v16, v4
+
+    move/from16 v17, v5
+
+    move-object/from16 v20, p8
+
+    invoke-direct/range {v15 .. v20}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->createBitmap(IILandroid/graphics/Bitmap$Config;ZLjava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
+
+    move-result-object v8
 
     .line 341
-    invoke-virtual {v4}, Lcom/facebook/common/references/CloseableReference;->get()Ljava/lang/Object;
+    .local v8, "bitmapRef":Lcom/facebook/common/references/CloseableReference;, "Lcom/facebook/common/references/CloseableReference<Landroid/graphics/Bitmap;>;"
+    invoke-virtual {v8}, Lcom/facebook/common/references/CloseableReference;->get()Ljava/lang/Object;
 
-    move-result-object v6
+    move-result-object v15
+
+    check-cast v15, Landroid/graphics/Bitmap;
+
+    invoke-static {v0, v15}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->setPropertyFromSourceBitmap(Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;)V
+
+    .line 342
+    new-instance v15, Landroid/graphics/Canvas;
+
+    invoke-virtual {v8}, Lcom/facebook/common/references/CloseableReference;->get()Ljava/lang/Object;
+
+    move-result-object v16
+
+    move-object/from16 v6, v16
 
     check-cast v6, Landroid/graphics/Bitmap;
 
-    invoke-static {v0, v6}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->setPropertyFromSourceBitmap(Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;)V
+    invoke-direct {v15, v6}, Landroid/graphics/Canvas;-><init>(Landroid/graphics/Bitmap;)V
 
-    .line 342
-    new-instance v6, Landroid/graphics/Canvas;
-
-    invoke-virtual {v4}, Lcom/facebook/common/references/CloseableReference;->get()Ljava/lang/Object;
-
-    move-result-object v10
-
-    check-cast v10, Landroid/graphics/Bitmap;
-
-    invoke-direct {v6, v10}, Landroid/graphics/Canvas;-><init>(Landroid/graphics/Bitmap;)V
+    move-object v6, v15
 
     .line 343
-    iget v10, v3, Landroid/graphics/RectF;->left:F
+    .local v6, "canvas":Landroid/graphics/Canvas;
+    iget v15, v7, Landroid/graphics/RectF;->left:F
 
-    neg-float v10, v10
+    neg-float v15, v15
 
-    iget v3, v3, Landroid/graphics/RectF;->top:F
+    iget v1, v7, Landroid/graphics/RectF;->top:F
 
-    neg-float v3, v3
+    neg-float v1, v1
 
-    invoke-virtual {v6, v10, v3}, Landroid/graphics/Canvas;->translate(FF)V
+    invoke-virtual {v6, v15, v1}, Landroid/graphics/Canvas;->translate(FF)V
 
     .line 344
-    invoke-virtual {v6, v5}, Landroid/graphics/Canvas;->concat(Landroid/graphics/Matrix;)V
+    invoke-virtual {v6, v11}, Landroid/graphics/Canvas;->concat(Landroid/graphics/Matrix;)V
 
     .line 346
-    new-instance v3, Landroid/graphics/Paint;
+    new-instance v1, Landroid/graphics/Paint;
 
-    invoke-direct {v3}, Landroid/graphics/Paint;-><init>()V
-
-    move/from16 v5, p7
+    invoke-direct {v1}, Landroid/graphics/Paint;-><init>()V
 
     .line 347
-    invoke-virtual {v3, v5}, Landroid/graphics/Paint;->setFilterBitmap(Z)V
+    .local v1, "paint":Landroid/graphics/Paint;
+    move/from16 v15, p7
 
-    if-eqz v1, :cond_5
+    invoke-virtual {v1, v15}, Landroid/graphics/Paint;->setFilterBitmap(Z)V
+
+    .line 348
+    if-eqz v3, :cond_5
 
     .line 349
-    invoke-virtual {v3, v2}, Landroid/graphics/Paint;->setAntiAlias(Z)V
+    const/4 v2, 0x1
 
-    goto :goto_3
+    invoke-virtual {v1, v2}, Landroid/graphics/Paint;->setAntiAlias(Z)V
+
+    goto :goto_4
+
+    .line 321
+    .end local v1    # "paint":Landroid/graphics/Paint;
+    .end local v3    # "transformed":Z
+    .end local v6    # "canvas":Landroid/graphics/Canvas;
+    .end local v7    # "deviceRectangle":Landroid/graphics/RectF;
+    .end local v8    # "bitmapRef":Lcom/facebook/common/references/CloseableReference;, "Lcom/facebook/common/references/CloseableReference<Landroid/graphics/Bitmap;>;"
+    :cond_4
+    move/from16 v15, p7
 
     .line 322
-    :cond_4
-    :goto_2
+    :goto_3
     invoke-virtual/range {p1 .. p1}, Landroid/graphics/Bitmap;->hasAlpha()Z
 
-    move-result v5
+    move-result v7
 
-    move-object/from16 v1, p0
+    move-object/from16 v3, p0
 
-    move/from16 v2, p4
+    move-object v6, v14
 
-    move/from16 v3, p5
+    move-object/from16 v8, p8
 
-    move-object v4, v6
+    invoke-direct/range {v3 .. v8}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->createBitmap(IILandroid/graphics/Bitmap$Config;ZLjava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
 
-    move-object/from16 v6, p8
-
-    invoke-direct/range {v1 .. v6}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->createBitmap(IILandroid/graphics/Bitmap$Config;ZLjava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
-
-    move-result-object v4
+    move-result-object v8
 
     .line 323
-    invoke-virtual {v4}, Lcom/facebook/common/references/CloseableReference;->get()Ljava/lang/Object;
+    .restart local v8    # "bitmapRef":Lcom/facebook/common/references/CloseableReference;, "Lcom/facebook/common/references/CloseableReference<Landroid/graphics/Bitmap;>;"
+    invoke-virtual {v8}, Lcom/facebook/common/references/CloseableReference;->get()Ljava/lang/Object;
 
     move-result-object v1
 
@@ -865,32 +969,45 @@
     invoke-static {v0, v1}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->setPropertyFromSourceBitmap(Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;)V
 
     .line 324
-    new-instance v6, Landroid/graphics/Canvas;
+    new-instance v1, Landroid/graphics/Canvas;
 
-    invoke-virtual {v4}, Lcom/facebook/common/references/CloseableReference;->get()Ljava/lang/Object;
+    invoke-virtual {v8}, Lcom/facebook/common/references/CloseableReference;->get()Ljava/lang/Object;
 
-    move-result-object v1
+    move-result-object v2
 
-    check-cast v1, Landroid/graphics/Bitmap;
+    check-cast v2, Landroid/graphics/Bitmap;
 
-    invoke-direct {v6, v1}, Landroid/graphics/Canvas;-><init>(Landroid/graphics/Bitmap;)V
+    invoke-direct {v1, v2}, Landroid/graphics/Canvas;-><init>(Landroid/graphics/Bitmap;)V
 
-    move-object v3, v9
+    move-object v6, v1
+
+    .line 325
+    .restart local v6    # "canvas":Landroid/graphics/Canvas;
+    const/4 v1, 0x0
 
     .line 353
+    .restart local v1    # "paint":Landroid/graphics/Paint;
     :cond_5
-    :goto_3
-    invoke-virtual {v6, v0, v7, v8, v3}, Landroid/graphics/Canvas;->drawBitmap(Landroid/graphics/Bitmap;Landroid/graphics/Rect;Landroid/graphics/RectF;Landroid/graphics/Paint;)V
+    :goto_4
+    invoke-virtual {v6, v0, v12, v13, v1}, Landroid/graphics/Canvas;->drawBitmap(Landroid/graphics/Bitmap;Landroid/graphics/Rect;Landroid/graphics/RectF;Landroid/graphics/Paint;)V
 
     .line 354
-    invoke-virtual {v6, v9}, Landroid/graphics/Canvas;->setBitmap(Landroid/graphics/Bitmap;)V
+    const/4 v2, 0x0
 
-    return-object v4
+    invoke-virtual {v6, v2}, Landroid/graphics/Canvas;->setBitmap(Landroid/graphics/Bitmap;)V
+
+    .line 356
+    return-object v8
 .end method
 
 .method public createBitmap(Landroid/graphics/Bitmap;IIIILjava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
     .locals 9
-    .param p6    # Ljava/lang/Object;
+    .param p1, "source"    # Landroid/graphics/Bitmap;
+    .param p2, "x"    # I
+    .param p3, "y"    # I
+    .param p4, "width"    # I
+    .param p5, "height"    # I
+    .param p6, "callerContext"    # Ljava/lang/Object;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -907,6 +1024,7 @@
         }
     .end annotation
 
+    .line 177
     const/4 v6, 0x0
 
     const/4 v7, 0x0
@@ -925,17 +1043,17 @@
 
     move-object v8, p6
 
-    .line 177
     invoke-virtual/range {v0 .. v8}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->createBitmap(Landroid/graphics/Bitmap;IIIILandroid/graphics/Matrix;ZLjava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public createBitmap(Landroid/graphics/Bitmap;Ljava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
     .locals 7
-    .param p2    # Ljava/lang/Object;
+    .param p1, "source"    # Landroid/graphics/Bitmap;
+    .param p2, "callerContext"    # Ljava/lang/Object;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -952,6 +1070,10 @@
     .end annotation
 
     .line 125
+    const/4 v2, 0x0
+
+    const/4 v3, 0x0
+
     invoke-virtual {p1}, Landroid/graphics/Bitmap;->getWidth()I
 
     move-result v4
@@ -959,10 +1081,6 @@
     invoke-virtual {p1}, Landroid/graphics/Bitmap;->getHeight()I
 
     move-result v5
-
-    const/4 v2, 0x0
-
-    const/4 v3, 0x0
 
     move-object v0, p0
 
@@ -972,13 +1090,17 @@
 
     invoke-virtual/range {v0 .. v6}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->createBitmap(Landroid/graphics/Bitmap;IIIILjava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public createBitmap(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;)Lcom/facebook/common/references/CloseableReference;
     .locals 6
+    .param p1, "display"    # Landroid/util/DisplayMetrics;
+    .param p2, "width"    # I
+    .param p3, "height"    # I
+    .param p4, "config"    # Landroid/graphics/Bitmap$Config;
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -992,6 +1114,7 @@
         }
     .end annotation
 
+    .line 378
     const/4 v5, 0x0
 
     move-object v0, p0
@@ -1004,17 +1127,20 @@
 
     move-object v4, p4
 
-    .line 378
     invoke-virtual/range {v0 .. v5}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->createBitmap(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;Ljava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public createBitmap(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;Ljava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
     .locals 7
-    .param p5    # Ljava/lang/Object;
+    .param p1, "display"    # Landroid/util/DisplayMetrics;
+    .param p2, "width"    # I
+    .param p3, "height"    # I
+    .param p4, "config"    # Landroid/graphics/Bitmap$Config;
+    .param p5, "callerContext"    # Ljava/lang/Object;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -1032,6 +1158,7 @@
         }
     .end annotation
 
+    .line 402
     const/4 v5, 0x1
 
     move-object v0, p0
@@ -1046,16 +1173,22 @@
 
     move-object v6, p5
 
-    .line 402
     invoke-direct/range {v0 .. v6}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->createBitmap(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;ZLjava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public createBitmap(Landroid/util/DisplayMetrics;[IIIIILandroid/graphics/Bitmap$Config;)Lcom/facebook/common/references/CloseableReference;
     .locals 9
+    .param p1, "display"    # Landroid/util/DisplayMetrics;
+    .param p2, "colors"    # [I
+    .param p3, "offset"    # I
+    .param p4, "stride"    # I
+    .param p5, "width"    # I
+    .param p6, "height"    # I
+    .param p7, "config"    # Landroid/graphics/Bitmap$Config;
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -1069,6 +1202,7 @@
         }
     .end annotation
 
+    .line 635
     const/4 v8, 0x0
 
     move-object v0, p0
@@ -1087,7 +1221,6 @@
 
     move-object/from16 v7, p7
 
-    .line 635
     invoke-virtual/range {v0 .. v8}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->createBitmap(Landroid/util/DisplayMetrics;[IIIIILandroid/graphics/Bitmap$Config;Ljava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
 
     move-result-object v0
@@ -1097,7 +1230,14 @@
 
 .method public createBitmap(Landroid/util/DisplayMetrics;[IIIIILandroid/graphics/Bitmap$Config;Ljava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
     .locals 10
-    .param p8    # Ljava/lang/Object;
+    .param p1, "display"    # Landroid/util/DisplayMetrics;
+    .param p2, "colors"    # [I
+    .param p3, "offset"    # I
+    .param p4, "stride"    # I
+    .param p5, "width"    # I
+    .param p6, "height"    # I
+    .param p7, "config"    # Landroid/graphics/Bitmap$Config;
+    .param p8, "callerContext"    # Ljava/lang/Object;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -1115,6 +1255,7 @@
         }
     .end annotation
 
+    .line 664
     move-object v0, p0
 
     move-object v1, p1
@@ -1127,23 +1268,25 @@
 
     move-object/from16 v5, p8
 
-    .line 664
     invoke-virtual/range {v0 .. v5}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->createBitmap(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;Ljava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
 
     move-result-object v0
 
     .line 670
+    .local v0, "bitmapRef":Lcom/facebook/common/references/CloseableReference;, "Lcom/facebook/common/references/CloseableReference<Landroid/graphics/Bitmap;>;"
     invoke-virtual {v0}, Lcom/facebook/common/references/CloseableReference;->get()Ljava/lang/Object;
 
     move-result-object v1
 
-    move-object v2, v1
+    check-cast v1, Landroid/graphics/Bitmap;
 
-    check-cast v2, Landroid/graphics/Bitmap;
-
+    .line 671
+    .local v1, "bitmap":Landroid/graphics/Bitmap;
     const/4 v6, 0x0
 
     const/4 v7, 0x0
+
+    move-object v2, v1
 
     move-object v3, p2
 
@@ -1155,14 +1298,19 @@
 
     move/from16 v9, p6
 
-    .line 671
     invoke-virtual/range {v2 .. v9}, Landroid/graphics/Bitmap;->setPixels([IIIIIII)V
 
+    .line 672
     return-object v0
 .end method
 
 .method public createBitmap(Landroid/util/DisplayMetrics;[IIILandroid/graphics/Bitmap$Config;)Lcom/facebook/common/references/CloseableReference;
     .locals 7
+    .param p1, "display"    # Landroid/util/DisplayMetrics;
+    .param p2, "colors"    # [I
+    .param p3, "width"    # I
+    .param p4, "height"    # I
+    .param p5, "config"    # Landroid/graphics/Bitmap$Config;
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -1176,6 +1324,7 @@
         }
     .end annotation
 
+    .line 582
     const/4 v6, 0x0
 
     move-object v0, p0
@@ -1190,17 +1339,21 @@
 
     move-object v5, p5
 
-    .line 582
     invoke-virtual/range {v0 .. v6}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->createBitmap(Landroid/util/DisplayMetrics;[IIILandroid/graphics/Bitmap$Config;Ljava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public createBitmap(Landroid/util/DisplayMetrics;[IIILandroid/graphics/Bitmap$Config;Ljava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
     .locals 9
-    .param p6    # Ljava/lang/Object;
+    .param p1, "display"    # Landroid/util/DisplayMetrics;
+    .param p2, "colors"    # [I
+    .param p3, "width"    # I
+    .param p4, "height"    # I
+    .param p5, "config"    # Landroid/graphics/Bitmap$Config;
+    .param p6, "callerContext"    # Ljava/lang/Object;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -1218,6 +1371,7 @@
         }
     .end annotation
 
+    .line 608
     const/4 v3, 0x0
 
     move-object v0, p0
@@ -1236,16 +1390,19 @@
 
     move-object v8, p6
 
-    .line 608
     invoke-virtual/range {v0 .. v8}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->createBitmap(Landroid/util/DisplayMetrics;[IIIIILandroid/graphics/Bitmap$Config;Ljava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public createBitmap([IIILandroid/graphics/Bitmap$Config;)Lcom/facebook/common/references/CloseableReference;
     .locals 6
+    .param p1, "colors"    # [I
+    .param p2, "width"    # I
+    .param p3, "height"    # I
+    .param p4, "config"    # Landroid/graphics/Bitmap$Config;
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "([III",
@@ -1257,6 +1414,7 @@
         }
     .end annotation
 
+    .line 534
     const/4 v5, 0x0
 
     move-object v0, p0
@@ -1269,17 +1427,20 @@
 
     move-object v4, p4
 
-    .line 534
     invoke-virtual/range {v0 .. v5}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->createBitmap([IIILandroid/graphics/Bitmap$Config;Ljava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public createBitmap([IIILandroid/graphics/Bitmap$Config;Ljava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
-    .locals 8
-    .param p5    # Ljava/lang/Object;
+    .locals 10
+    .param p1, "colors"    # [I
+    .param p2, "width"    # I
+    .param p3, "height"    # I
+    .param p4, "config"    # Landroid/graphics/Bitmap$Config;
+    .param p5, "callerContext"    # Ljava/lang/Object;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -1298,35 +1459,38 @@
     .line 556
     invoke-virtual {p0, p2, p3, p4}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->createBitmapInternal(IILandroid/graphics/Bitmap$Config;)Lcom/facebook/common/references/CloseableReference;
 
-    move-result-object p4
+    move-result-object v0
 
     .line 557
-    invoke-virtual {p4}, Lcom/facebook/common/references/CloseableReference;->get()Ljava/lang/Object;
+    .local v0, "bitmapRef":Lcom/facebook/common/references/CloseableReference;, "Lcom/facebook/common/references/CloseableReference<Landroid/graphics/Bitmap;>;"
+    invoke-virtual {v0}, Lcom/facebook/common/references/CloseableReference;->get()Ljava/lang/Object;
 
-    move-result-object p5
+    move-result-object v1
 
-    move-object v0, p5
-
-    check-cast v0, Landroid/graphics/Bitmap;
-
-    const/4 v2, 0x0
-
-    const/4 v4, 0x0
-
-    const/4 v5, 0x0
-
-    move-object v1, p1
-
-    move v3, p2
-
-    move v6, p2
-
-    move v7, p3
+    check-cast v1, Landroid/graphics/Bitmap;
 
     .line 558
-    invoke-virtual/range {v0 .. v7}, Landroid/graphics/Bitmap;->setPixels([IIIIIII)V
+    .local v1, "bitmap":Landroid/graphics/Bitmap;
+    const/4 v4, 0x0
 
-    return-object p4
+    const/4 v6, 0x0
+
+    const/4 v7, 0x0
+
+    move-object v2, v1
+
+    move-object v3, p1
+
+    move v5, p2
+
+    move v8, p2
+
+    move v9, p3
+
+    invoke-virtual/range {v2 .. v9}, Landroid/graphics/Bitmap;->setPixels([IIIIIII)V
+
+    .line 559
+    return-object v0
 .end method
 
 .method public abstract createBitmapInternal(IILandroid/graphics/Bitmap$Config;)Lcom/facebook/common/references/CloseableReference;
@@ -1344,6 +1508,10 @@
 
 .method public createScaledBitmap(Landroid/graphics/Bitmap;IIZ)Lcom/facebook/common/references/CloseableReference;
     .locals 6
+    .param p1, "source"    # Landroid/graphics/Bitmap;
+    .param p2, "destinationWidth"    # I
+    .param p3, "destinationHeight"    # I
+    .param p4, "filter"    # Z
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -1355,6 +1523,7 @@
         }
     .end annotation
 
+    .line 238
     const/4 v5, 0x0
 
     move-object v0, p0
@@ -1367,17 +1536,20 @@
 
     move v4, p4
 
-    .line 238
     invoke-virtual/range {v0 .. v5}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->createScaledBitmap(Landroid/graphics/Bitmap;IIZLjava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public createScaledBitmap(Landroid/graphics/Bitmap;IIZLjava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
-    .locals 9
-    .param p5    # Ljava/lang/Object;
+    .locals 16
+    .param p1, "source"    # Landroid/graphics/Bitmap;
+    .param p2, "destinationWidth"    # I
+    .param p3, "destinationHeight"    # I
+    .param p4, "filter"    # Z
+    .param p5, "callerContext"    # Ljava/lang/Object;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -1395,54 +1567,71 @@
     .end annotation
 
     .line 261
-    invoke-static {p2, p3}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->checkWidthHeight(II)V
+    invoke-static/range {p2 .. p3}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->checkWidthHeight(II)V
 
     .line 263
-    new-instance v6, Landroid/graphics/Matrix;
+    new-instance v0, Landroid/graphics/Matrix;
 
-    invoke-direct {v6}, Landroid/graphics/Matrix;-><init>()V
+    invoke-direct {v0}, Landroid/graphics/Matrix;-><init>()V
 
     .line 264
-    invoke-virtual {p1}, Landroid/graphics/Bitmap;->getWidth()I
+    .local v0, "matrix":Landroid/graphics/Matrix;
+    invoke-virtual/range {p1 .. p1}, Landroid/graphics/Bitmap;->getWidth()I
 
-    move-result v4
+    move-result v10
 
     .line 265
-    invoke-virtual {p1}, Landroid/graphics/Bitmap;->getHeight()I
+    .local v10, "width":I
+    invoke-virtual/range {p1 .. p1}, Landroid/graphics/Bitmap;->getHeight()I
 
-    move-result v5
+    move-result v11
 
-    int-to-float p2, p2
+    .line 266
+    .local v11, "height":I
+    move/from16 v12, p2
 
-    int-to-float v0, v4
+    int-to-float v1, v12
 
-    div-float/2addr p2, v0
+    int-to-float v2, v10
 
-    int-to-float p3, p3
+    div-float v13, v1, v2
 
-    int-to-float v0, v5
+    .line 267
+    .local v13, "sx":F
+    move/from16 v14, p3
 
-    div-float/2addr p3, v0
+    int-to-float v1, v14
+
+    int-to-float v2, v11
+
+    div-float v15, v1, v2
 
     .line 268
-    invoke-virtual {v6, p2, p3}, Landroid/graphics/Matrix;->setScale(FF)V
-
-    const/4 v2, 0x0
-
-    const/4 v3, 0x0
-
-    move-object v0, p0
-
-    move-object v1, p1
-
-    move v7, p4
-
-    move-object v8, p5
+    .local v15, "sy":F
+    invoke-virtual {v0, v13, v15}, Landroid/graphics/Matrix;->setScale(FF)V
 
     .line 270
-    invoke-virtual/range {v0 .. v8}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->createBitmap(Landroid/graphics/Bitmap;IIIILandroid/graphics/Matrix;ZLjava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
+    const/4 v3, 0x0
 
-    move-result-object p1
+    const/4 v4, 0x0
 
-    return-object p1
+    move-object/from16 v1, p0
+
+    move-object/from16 v2, p1
+
+    move v5, v10
+
+    move v6, v11
+
+    move-object v7, v0
+
+    move/from16 v8, p4
+
+    move-object/from16 v9, p5
+
+    invoke-virtual/range {v1 .. v9}, Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;->createBitmap(Landroid/graphics/Bitmap;IIIILandroid/graphics/Matrix;ZLjava/lang/Object;)Lcom/facebook/common/references/CloseableReference;
+
+    move-result-object v1
+
+    return-object v1
 .end method

@@ -10,6 +10,7 @@
     .line 36
     invoke-direct {p0}, Lcom/facebook/react/LazyReactPackage;-><init>()V
 
+    .line 37
     return-void
 .end method
 
@@ -17,6 +18,7 @@
 # virtual methods
 .method public getNativeModules(Lcom/facebook/react/bridge/ReactApplicationContext;)Ljava/util/List;
     .locals 3
+    .param p1, "reactContext"    # Lcom/facebook/react/bridge/ReactApplicationContext;
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -34,6 +36,7 @@
     invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V
 
     .line 42
+    .local v0, "moduleSpecList":Ljava/util/List;, "Ljava/util/List<Lcom/facebook/react/bridge/ModuleSpec;>;"
     const-class v1, Lcom/facebook/react/devsupport/JSCHeapCapture;
 
     new-instance v2, Lcom/facebook/react/DebugCorePackage$1;
@@ -58,11 +61,12 @@
     .line 52
     invoke-static {v1, v2}, Lcom/facebook/react/bridge/ModuleSpec;->nativeModuleSpec(Ljava/lang/Class;Ljavax/inject/Provider;)Lcom/facebook/react/bridge/ModuleSpec;
 
-    move-result-object p1
+    move-result-object v1
 
     .line 51
-    invoke-interface {v0, p1}, Ljava/util/List;->add(Ljava/lang/Object;)Z
+    invoke-interface {v0, v1}, Ljava/util/List;->add(Ljava/lang/Object;)Z
 
+    .line 60
     return-object v0
 .end method
 

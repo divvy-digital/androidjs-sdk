@@ -24,6 +24,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/devsupport/DevSupportManagerImpl;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/devsupport/DevSupportManagerImpl;
 
     .line 499
     iput-object p1, p0, Lcom/facebook/react/devsupport/DevSupportManagerImpl$9;->this$0:Lcom/facebook/react/devsupport/DevSupportManagerImpl;
@@ -59,5 +60,6 @@
 
     invoke-virtual {v0, v1}, Lcom/facebook/react/devsupport/DevInternalSettings;->setReloadOnJSChangeEnabled(Z)V
 
+    .line 503
     return-void
 .end method

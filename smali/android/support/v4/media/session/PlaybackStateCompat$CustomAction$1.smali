@@ -40,6 +40,7 @@
 # virtual methods
 .method public createFromParcel(Landroid/os/Parcel;)Landroid/support/v4/media/session/PlaybackStateCompat$CustomAction;
     .locals 1
+    .param p1, "p"    # Landroid/os/Parcel;
 
     .line 970
     new-instance v0, Landroid/support/v4/media/session/PlaybackStateCompat$CustomAction;
@@ -61,12 +62,13 @@
 .end method
 
 .method public newArray(I)[Landroid/support/v4/media/session/PlaybackStateCompat$CustomAction;
-    .locals 0
+    .locals 1
+    .param p1, "size"    # I
 
     .line 975
-    new-array p1, p1, [Landroid/support/v4/media/session/PlaybackStateCompat$CustomAction;
+    new-array v0, p1, [Landroid/support/v4/media/session/PlaybackStateCompat$CustomAction;
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public bridge synthetic newArray(I)[Ljava/lang/Object;

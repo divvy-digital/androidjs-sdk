@@ -42,6 +42,7 @@
 # virtual methods
 .method public loadScript(Lcom/facebook/react/bridge/JSBundleLoaderDelegate;)Ljava/lang/String;
     .locals 3
+    .param p1, "delegate"    # Lcom/facebook/react/bridge/JSBundleLoaderDelegate;
 
     .line 31
     iget-object v0, p0, Lcom/facebook/react/bridge/JSBundleLoader$1;->val$context:Landroid/content/Context;
@@ -57,7 +58,7 @@
     invoke-interface {p1, v0, v1, v2}, Lcom/facebook/react/bridge/JSBundleLoaderDelegate;->loadScriptFromAssets(Landroid/content/res/AssetManager;Ljava/lang/String;Z)V
 
     .line 32
-    iget-object p1, p0, Lcom/facebook/react/bridge/JSBundleLoader$1;->val$assetUrl:Ljava/lang/String;
+    iget-object v0, p0, Lcom/facebook/react/bridge/JSBundleLoader$1;->val$assetUrl:Ljava/lang/String;
 
-    return-object p1
+    return-object v0
 .end method

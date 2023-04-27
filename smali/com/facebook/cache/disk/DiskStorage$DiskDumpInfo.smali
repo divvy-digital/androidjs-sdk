@@ -58,5 +58,6 @@
 
     iput-object v0, p0, Lcom/facebook/cache/disk/DiskStorage$DiskDumpInfo;->typeCounts:Ljava/util/Map;
 
+    .line 44
     return-void
 .end method

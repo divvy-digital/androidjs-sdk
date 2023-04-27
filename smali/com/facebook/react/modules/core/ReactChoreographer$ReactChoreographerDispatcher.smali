@@ -32,6 +32,8 @@
 
 .method synthetic constructor <init>(Lcom/facebook/react/modules/core/ReactChoreographer;Lcom/facebook/react/modules/core/ReactChoreographer$1;)V
     .locals 0
+    .param p1, "x0"    # Lcom/facebook/react/modules/core/ReactChoreographer;
+    .param p2, "x1"    # Lcom/facebook/react/modules/core/ReactChoreographer$1;
 
     .line 157
     invoke-direct {p0, p1}, Lcom/facebook/react/modules/core/ReactChoreographer$ReactChoreographerDispatcher;-><init>(Lcom/facebook/react/modules/core/ReactChoreographer;)V
@@ -42,7 +44,8 @@
 
 # virtual methods
 .method public doFrame(J)V
-    .locals 6
+    .locals 5
+    .param p1, "frameTimeNanos"    # J
 
     .line 161
     iget-object v0, p0, Lcom/facebook/react/modules/core/ReactChoreographer$ReactChoreographerDispatcher;->this$0:Lcom/facebook/react/modules/core/ReactChoreographer;
@@ -57,92 +60,97 @@
 
     invoke-static {v1, v2}, Lcom/facebook/react/modules/core/ReactChoreographer;->access$202(Lcom/facebook/react/modules/core/ReactChoreographer;Z)Z
 
+    .line 163
     const/4 v1, 0x0
 
-    .line 163
+    .local v1, "i":I
     :goto_0
-    iget-object v3, p0, Lcom/facebook/react/modules/core/ReactChoreographer$ReactChoreographerDispatcher;->this$0:Lcom/facebook/react/modules/core/ReactChoreographer;
+    iget-object v2, p0, Lcom/facebook/react/modules/core/ReactChoreographer$ReactChoreographerDispatcher;->this$0:Lcom/facebook/react/modules/core/ReactChoreographer;
 
-    invoke-static {v3}, Lcom/facebook/react/modules/core/ReactChoreographer;->access$300(Lcom/facebook/react/modules/core/ReactChoreographer;)[Ljava/util/ArrayDeque;
+    invoke-static {v2}, Lcom/facebook/react/modules/core/ReactChoreographer;->access$300(Lcom/facebook/react/modules/core/ReactChoreographer;)[Ljava/util/ArrayDeque;
 
-    move-result-object v3
+    move-result-object v2
 
-    array-length v3, v3
+    array-length v2, v2
 
-    if-ge v1, v3, :cond_1
+    if-ge v1, v2, :cond_1
 
     .line 164
-    iget-object v3, p0, Lcom/facebook/react/modules/core/ReactChoreographer$ReactChoreographerDispatcher;->this$0:Lcom/facebook/react/modules/core/ReactChoreographer;
+    iget-object v2, p0, Lcom/facebook/react/modules/core/ReactChoreographer$ReactChoreographerDispatcher;->this$0:Lcom/facebook/react/modules/core/ReactChoreographer;
 
-    invoke-static {v3}, Lcom/facebook/react/modules/core/ReactChoreographer;->access$300(Lcom/facebook/react/modules/core/ReactChoreographer;)[Ljava/util/ArrayDeque;
+    invoke-static {v2}, Lcom/facebook/react/modules/core/ReactChoreographer;->access$300(Lcom/facebook/react/modules/core/ReactChoreographer;)[Ljava/util/ArrayDeque;
 
-    move-result-object v3
+    move-result-object v2
 
-    aget-object v3, v3, v1
+    aget-object v2, v2, v1
 
-    invoke-virtual {v3}, Ljava/util/ArrayDeque;->size()I
+    invoke-virtual {v2}, Ljava/util/ArrayDeque;->size()I
 
-    move-result v3
+    move-result v2
 
-    const/4 v4, 0x0
+    .line 165
+    .local v2, "initialLength":I
+    const/4 v3, 0x0
 
+    .local v3, "callback":I
     :goto_1
-    if-ge v4, v3, :cond_0
+    if-ge v3, v2, :cond_0
 
     .line 166
-    iget-object v5, p0, Lcom/facebook/react/modules/core/ReactChoreographer$ReactChoreographerDispatcher;->this$0:Lcom/facebook/react/modules/core/ReactChoreographer;
+    iget-object v4, p0, Lcom/facebook/react/modules/core/ReactChoreographer$ReactChoreographerDispatcher;->this$0:Lcom/facebook/react/modules/core/ReactChoreographer;
 
-    invoke-static {v5}, Lcom/facebook/react/modules/core/ReactChoreographer;->access$300(Lcom/facebook/react/modules/core/ReactChoreographer;)[Ljava/util/ArrayDeque;
+    invoke-static {v4}, Lcom/facebook/react/modules/core/ReactChoreographer;->access$300(Lcom/facebook/react/modules/core/ReactChoreographer;)[Ljava/util/ArrayDeque;
 
-    move-result-object v5
+    move-result-object v4
 
-    aget-object v5, v5, v1
+    aget-object v4, v4, v1
 
-    invoke-virtual {v5}, Ljava/util/ArrayDeque;->removeFirst()Ljava/lang/Object;
+    invoke-virtual {v4}, Ljava/util/ArrayDeque;->removeFirst()Ljava/lang/Object;
 
-    move-result-object v5
+    move-result-object v4
 
-    check-cast v5, Lcom/facebook/react/modules/core/ChoreographerCompat$FrameCallback;
+    check-cast v4, Lcom/facebook/react/modules/core/ChoreographerCompat$FrameCallback;
 
-    invoke-virtual {v5, p1, p2}, Lcom/facebook/react/modules/core/ChoreographerCompat$FrameCallback;->doFrame(J)V
+    invoke-virtual {v4, p1, p2}, Lcom/facebook/react/modules/core/ChoreographerCompat$FrameCallback;->doFrame(J)V
 
     .line 167
-    iget-object v5, p0, Lcom/facebook/react/modules/core/ReactChoreographer$ReactChoreographerDispatcher;->this$0:Lcom/facebook/react/modules/core/ReactChoreographer;
+    iget-object v4, p0, Lcom/facebook/react/modules/core/ReactChoreographer$ReactChoreographerDispatcher;->this$0:Lcom/facebook/react/modules/core/ReactChoreographer;
 
-    invoke-static {v5}, Lcom/facebook/react/modules/core/ReactChoreographer;->access$410(Lcom/facebook/react/modules/core/ReactChoreographer;)I
+    invoke-static {v4}, Lcom/facebook/react/modules/core/ReactChoreographer;->access$410(Lcom/facebook/react/modules/core/ReactChoreographer;)I
 
-    add-int/lit8 v4, v4, 0x1
+    .line 165
+    add-int/lit8 v3, v3, 0x1
 
     goto :goto_1
 
+    .line 163
+    .end local v2    # "initialLength":I
+    .end local v3    # "callback":I
     :cond_0
     add-int/lit8 v1, v1, 0x1
 
     goto :goto_0
 
     .line 170
+    .end local v1    # "i":I
     :cond_1
-    iget-object p1, p0, Lcom/facebook/react/modules/core/ReactChoreographer$ReactChoreographerDispatcher;->this$0:Lcom/facebook/react/modules/core/ReactChoreographer;
+    iget-object v1, p0, Lcom/facebook/react/modules/core/ReactChoreographer$ReactChoreographerDispatcher;->this$0:Lcom/facebook/react/modules/core/ReactChoreographer;
 
-    invoke-static {p1}, Lcom/facebook/react/modules/core/ReactChoreographer;->access$500(Lcom/facebook/react/modules/core/ReactChoreographer;)V
+    invoke-static {v1}, Lcom/facebook/react/modules/core/ReactChoreographer;->access$500(Lcom/facebook/react/modules/core/ReactChoreographer;)V
 
     .line 171
     monitor-exit v0
 
+    .line 172
     return-void
 
+    .line 171
     :catchall_0
-    move-exception p1
+    move-exception v1
 
     monitor-exit v0
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    goto :goto_3
-
-    :goto_2
-    throw p1
-
-    :goto_3
-    goto :goto_2
+    throw v1
 .end method

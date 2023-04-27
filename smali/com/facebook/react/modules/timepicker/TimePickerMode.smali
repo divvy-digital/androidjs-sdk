@@ -25,59 +25,53 @@
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 5
+    .locals 7
 
     .line 12
     new-instance v0, Lcom/facebook/react/modules/timepicker/TimePickerMode;
 
-    const/4 v1, 0x0
+    const-string v1, "CLOCK"
 
-    const-string v2, "CLOCK"
+    const/4 v2, 0x0
 
-    invoke-direct {v0, v2, v1}, Lcom/facebook/react/modules/timepicker/TimePickerMode;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v0, v1, v2}, Lcom/facebook/react/modules/timepicker/TimePickerMode;-><init>(Ljava/lang/String;I)V
 
     sput-object v0, Lcom/facebook/react/modules/timepicker/TimePickerMode;->CLOCK:Lcom/facebook/react/modules/timepicker/TimePickerMode;
 
     .line 13
-    new-instance v0, Lcom/facebook/react/modules/timepicker/TimePickerMode;
-
-    const/4 v2, 0x1
+    new-instance v1, Lcom/facebook/react/modules/timepicker/TimePickerMode;
 
     const-string v3, "SPINNER"
 
-    invoke-direct {v0, v3, v2}, Lcom/facebook/react/modules/timepicker/TimePickerMode;-><init>(Ljava/lang/String;I)V
+    const/4 v4, 0x1
 
-    sput-object v0, Lcom/facebook/react/modules/timepicker/TimePickerMode;->SPINNER:Lcom/facebook/react/modules/timepicker/TimePickerMode;
+    invoke-direct {v1, v3, v4}, Lcom/facebook/react/modules/timepicker/TimePickerMode;-><init>(Ljava/lang/String;I)V
+
+    sput-object v1, Lcom/facebook/react/modules/timepicker/TimePickerMode;->SPINNER:Lcom/facebook/react/modules/timepicker/TimePickerMode;
 
     .line 14
-    new-instance v0, Lcom/facebook/react/modules/timepicker/TimePickerMode;
+    new-instance v3, Lcom/facebook/react/modules/timepicker/TimePickerMode;
 
-    const/4 v3, 0x2
+    const-string v5, "DEFAULT"
 
-    const-string v4, "DEFAULT"
+    const/4 v6, 0x2
 
-    invoke-direct {v0, v4, v3}, Lcom/facebook/react/modules/timepicker/TimePickerMode;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v3, v5, v6}, Lcom/facebook/react/modules/timepicker/TimePickerMode;-><init>(Ljava/lang/String;I)V
 
-    sput-object v0, Lcom/facebook/react/modules/timepicker/TimePickerMode;->DEFAULT:Lcom/facebook/react/modules/timepicker/TimePickerMode;
-
-    const/4 v0, 0x3
+    sput-object v3, Lcom/facebook/react/modules/timepicker/TimePickerMode;->DEFAULT:Lcom/facebook/react/modules/timepicker/TimePickerMode;
 
     .line 11
-    new-array v0, v0, [Lcom/facebook/react/modules/timepicker/TimePickerMode;
+    const/4 v5, 0x3
 
-    sget-object v4, Lcom/facebook/react/modules/timepicker/TimePickerMode;->CLOCK:Lcom/facebook/react/modules/timepicker/TimePickerMode;
+    new-array v5, v5, [Lcom/facebook/react/modules/timepicker/TimePickerMode;
 
-    aput-object v4, v0, v1
+    aput-object v0, v5, v2
 
-    sget-object v1, Lcom/facebook/react/modules/timepicker/TimePickerMode;->SPINNER:Lcom/facebook/react/modules/timepicker/TimePickerMode;
+    aput-object v1, v5, v4
 
-    aput-object v1, v0, v2
+    aput-object v3, v5, v6
 
-    sget-object v1, Lcom/facebook/react/modules/timepicker/TimePickerMode;->DEFAULT:Lcom/facebook/react/modules/timepicker/TimePickerMode;
-
-    aput-object v1, v0, v3
-
-    sput-object v0, Lcom/facebook/react/modules/timepicker/TimePickerMode;->$VALUES:[Lcom/facebook/react/modules/timepicker/TimePickerMode;
+    sput-object v5, Lcom/facebook/react/modules/timepicker/TimePickerMode;->$VALUES:[Lcom/facebook/react/modules/timepicker/TimePickerMode;
 
     return-void
 .end method
@@ -98,17 +92,18 @@
 
 .method public static valueOf(Ljava/lang/String;)Lcom/facebook/react/modules/timepicker/TimePickerMode;
     .locals 1
+    .param p0, "name"    # Ljava/lang/String;
 
     .line 11
     const-class v0, Lcom/facebook/react/modules/timepicker/TimePickerMode;
 
     invoke-static {v0, p0}, Ljava/lang/Enum;->valueOf(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
 
-    move-result-object p0
+    move-result-object v0
 
-    check-cast p0, Lcom/facebook/react/modules/timepicker/TimePickerMode;
+    check-cast v0, Lcom/facebook/react/modules/timepicker/TimePickerMode;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method public static values()[Lcom/facebook/react/modules/timepicker/TimePickerMode;

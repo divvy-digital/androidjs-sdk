@@ -54,5 +54,6 @@
 
     invoke-virtual {v0}, Lbolts/TaskCompletionSource;->trySetCancelled()Z
 
+    .line 279
     return-void
 .end method

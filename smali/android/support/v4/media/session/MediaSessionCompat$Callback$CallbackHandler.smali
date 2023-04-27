@@ -25,6 +25,7 @@
 # direct methods
 .method constructor <init>(Landroid/support/v4/media/session/MediaSessionCompat$Callback;Landroid/os/Looper;)V
     .locals 0
+    .param p2, "looper"    # Landroid/os/Looper;
 
     .line 1330
     iput-object p1, p0, Landroid/support/v4/media/session/MediaSessionCompat$Callback$CallbackHandler;->this$0:Landroid/support/v4/media/session/MediaSessionCompat$Callback;
@@ -32,6 +33,7 @@
     .line 1331
     invoke-direct {p0, p2}, Landroid/os/Handler;-><init>(Landroid/os/Looper;)V
 
+    .line 1332
     return-void
 .end method
 
@@ -39,6 +41,7 @@
 # virtual methods
 .method public handleMessage(Landroid/os/Message;)V
     .locals 2
+    .param p1, "msg"    # Landroid/os/Message;
 
     .line 1336
     iget v0, p1, Landroid/os/Message;->what:I
@@ -50,12 +53,13 @@
     .line 1337
     iget-object v0, p0, Landroid/support/v4/media/session/MediaSessionCompat$Callback$CallbackHandler;->this$0:Landroid/support/v4/media/session/MediaSessionCompat$Callback;
 
-    iget-object p1, p1, Landroid/os/Message;->obj:Ljava/lang/Object;
+    iget-object v1, p1, Landroid/os/Message;->obj:Ljava/lang/Object;
 
-    check-cast p1, Landroid/support/v4/media/MediaSessionManager$RemoteUserInfo;
+    check-cast v1, Landroidx/media/MediaSessionManager$RemoteUserInfo;
 
-    invoke-virtual {v0, p1}, Landroid/support/v4/media/session/MediaSessionCompat$Callback;->handleMediaPlayPauseKeySingleTapIfPending(Landroid/support/v4/media/MediaSessionManager$RemoteUserInfo;)V
+    invoke-virtual {v0, v1}, Landroid/support/v4/media/session/MediaSessionCompat$Callback;->handleMediaPlayPauseKeySingleTapIfPending(Landroidx/media/MediaSessionManager$RemoteUserInfo;)V
 
+    .line 1339
     :cond_0
     return-void
 .end method

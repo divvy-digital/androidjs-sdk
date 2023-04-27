@@ -13,15 +13,21 @@
 
 # direct methods
 .method public constructor <init>(Lokhttp3/Address;Ljava/net/Proxy;Ljava/net/InetSocketAddress;)V
-    .locals 0
+    .locals 2
+    .param p1, "address"    # Lokhttp3/Address;
+    .param p2, "proxy"    # Ljava/net/Proxy;
+    .param p3, "inetSocketAddress"    # Ljava/net/InetSocketAddress;
 
     .line 42
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
+    .line 43
     if-eqz p1, :cond_2
 
+    .line 46
     if-eqz p2, :cond_1
 
+    .line 49
     if-eqz p3, :cond_0
 
     .line 52
@@ -33,37 +39,38 @@
     .line 54
     iput-object p3, p0, Lokhttp3/Route;->inetSocketAddress:Ljava/net/InetSocketAddress;
 
+    .line 55
     return-void
 
     .line 50
     :cond_0
-    new-instance p1, Ljava/lang/NullPointerException;
+    new-instance v0, Ljava/lang/NullPointerException;
 
-    const-string p2, "inetSocketAddress == null"
+    const-string v1, "inetSocketAddress == null"
 
-    invoke-direct {p1, p2}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 
     .line 47
     :cond_1
-    new-instance p1, Ljava/lang/NullPointerException;
+    new-instance v0, Ljava/lang/NullPointerException;
 
-    const-string p2, "proxy == null"
+    const-string v1, "proxy == null"
 
-    invoke-direct {p1, p2}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 
     .line 44
     :cond_2
-    new-instance p1, Ljava/lang/NullPointerException;
+    new-instance v0, Ljava/lang/NullPointerException;
 
-    const-string p2, "address == null"
+    const-string v1, "address == null"
 
-    invoke-direct {p1, p2}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 
@@ -79,7 +86,7 @@
 
 .method public equals(Ljava/lang/Object;)Z
     .locals 2
-    .param p1    # Ljava/lang/Object;
+    .param p1, "other"    # Ljava/lang/Object;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -89,9 +96,11 @@
 
     if-eqz v0, :cond_0
 
-    check-cast p1, Lokhttp3/Route;
+    move-object v0, p1
 
-    iget-object v0, p1, Lokhttp3/Route;->address:Lokhttp3/Address;
+    check-cast v0, Lokhttp3/Route;
+
+    iget-object v0, v0, Lokhttp3/Route;->address:Lokhttp3/Address;
 
     iget-object v1, p0, Lokhttp3/Route;->address:Lokhttp3/Address;
 
@@ -102,7 +111,11 @@
 
     if-eqz v0, :cond_0
 
-    iget-object v0, p1, Lokhttp3/Route;->proxy:Ljava/net/Proxy;
+    move-object v0, p1
+
+    check-cast v0, Lokhttp3/Route;
+
+    iget-object v0, v0, Lokhttp3/Route;->proxy:Ljava/net/Proxy;
 
     iget-object v1, p0, Lokhttp3/Route;->proxy:Ljava/net/Proxy;
 
@@ -113,64 +126,80 @@
 
     if-eqz v0, :cond_0
 
-    iget-object p1, p1, Lokhttp3/Route;->inetSocketAddress:Ljava/net/InetSocketAddress;
+    move-object v0, p1
 
-    iget-object v0, p0, Lokhttp3/Route;->inetSocketAddress:Ljava/net/InetSocketAddress;
+    check-cast v0, Lokhttp3/Route;
+
+    iget-object v0, v0, Lokhttp3/Route;->inetSocketAddress:Ljava/net/InetSocketAddress;
+
+    iget-object v1, p0, Lokhttp3/Route;->inetSocketAddress:Ljava/net/InetSocketAddress;
 
     .line 87
-    invoke-virtual {p1, v0}, Ljava/net/InetSocketAddress;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v0, v1}, Ljava/net/InetSocketAddress;->equals(Ljava/lang/Object;)Z
 
-    move-result p1
+    move-result v0
 
-    if-eqz p1, :cond_0
+    if-eqz v0, :cond_0
 
-    const/4 p1, 0x1
+    const/4 v0, 0x1
 
     goto :goto_0
 
     :cond_0
-    const/4 p1, 0x0
+    const/4 v0, 0x0
 
+    .line 84
     :goto_0
-    return p1
+    return v0
 .end method
 
 .method public hashCode()I
-    .locals 2
+    .locals 3
+
+    .line 91
+    const/16 v0, 0x11
 
     .line 92
-    iget-object v0, p0, Lokhttp3/Route;->address:Lokhttp3/Address;
+    .local v0, "result":I
+    mul-int/lit8 v1, v0, 0x1f
 
-    invoke-virtual {v0}, Lokhttp3/Address;->hashCode()I
+    iget-object v2, p0, Lokhttp3/Route;->address:Lokhttp3/Address;
 
-    move-result v0
+    invoke-virtual {v2}, Lokhttp3/Address;->hashCode()I
 
-    const/16 v1, 0x20f
+    move-result v2
 
-    add-int/2addr v1, v0
-
-    mul-int/lit8 v1, v1, 0x1f
+    add-int/2addr v1, v2
 
     .line 93
-    iget-object v0, p0, Lokhttp3/Route;->proxy:Ljava/net/Proxy;
+    .end local v0    # "result":I
+    .local v1, "result":I
+    mul-int/lit8 v0, v1, 0x1f
 
-    invoke-virtual {v0}, Ljava/net/Proxy;->hashCode()I
+    iget-object v2, p0, Lokhttp3/Route;->proxy:Ljava/net/Proxy;
 
-    move-result v0
+    invoke-virtual {v2}, Ljava/net/Proxy;->hashCode()I
 
-    add-int/2addr v1, v0
+    move-result v2
 
-    mul-int/lit8 v1, v1, 0x1f
+    add-int/2addr v0, v2
 
     .line 94
-    iget-object v0, p0, Lokhttp3/Route;->inetSocketAddress:Ljava/net/InetSocketAddress;
+    .end local v1    # "result":I
+    .restart local v0    # "result":I
+    mul-int/lit8 v1, v0, 0x1f
 
-    invoke-virtual {v0}, Ljava/net/InetSocketAddress;->hashCode()I
+    iget-object v2, p0, Lokhttp3/Route;->inetSocketAddress:Ljava/net/InetSocketAddress;
 
-    move-result v0
+    invoke-virtual {v2}, Ljava/net/InetSocketAddress;->hashCode()I
 
-    add-int/2addr v1, v0
+    move-result v2
 
+    add-int/2addr v1, v2
+
+    .line 95
+    .end local v0    # "result":I
+    .restart local v1    # "result":I
     return v1
 .end method
 
@@ -235,13 +264,19 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     iget-object v1, p0, Lokhttp3/Route;->inetSocketAddress:Ljava/net/InetSocketAddress;
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     const-string v1, "}"
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 

@@ -23,6 +23,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/imagepipeline/producers/PostprocessorProducer$RepeatedPostprocessorConsumer;Lcom/facebook/imagepipeline/producers/PostprocessorProducer;)V
     .locals 0
+    .param p1, "this$1"    # Lcom/facebook/imagepipeline/producers/PostprocessorProducer$RepeatedPostprocessorConsumer;
 
     .line 347
     iput-object p1, p0, Lcom/facebook/imagepipeline/producers/PostprocessorProducer$RepeatedPostprocessorConsumer$1;->this$1:Lcom/facebook/imagepipeline/producers/PostprocessorProducer$RepeatedPostprocessorConsumer;
@@ -57,6 +58,7 @@
 
     invoke-interface {v0}, Lcom/facebook/imagepipeline/producers/Consumer;->onCancellation()V
 
+    .line 353
     :cond_0
     return-void
 .end method

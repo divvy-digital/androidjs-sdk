@@ -16,9 +16,6 @@
 
 # instance fields
 .field mHolders:Ljava/util/ArrayList;
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
-
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "Ljava/util/ArrayList<",
@@ -29,9 +26,6 @@
 .end field
 
 .field mIsAttached:Z
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
-.end field
 
 
 # direct methods
@@ -39,11 +33,12 @@
     .locals 1
 
     .line 32
+    .local p0, "this":Lcom/facebook/drawee/view/MultiDraweeHolder;, "Lcom/facebook/drawee/view/MultiDraweeHolder<TDH;>;"
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
+    .line 34
     const/4 v0, 0x0
 
-    .line 34
     iput-boolean v0, p0, Lcom/facebook/drawee/view/MultiDraweeHolder;->mIsAttached:Z
 
     .line 35
@@ -60,6 +55,7 @@
 # virtual methods
 .method public add(ILcom/facebook/drawee/view/DraweeHolder;)V
     .locals 1
+    .param p1, "index"    # I
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(I",
@@ -69,6 +65,8 @@
     .end annotation
 
     .line 92
+    .local p0, "this":Lcom/facebook/drawee/view/MultiDraweeHolder;, "Lcom/facebook/drawee/view/MultiDraweeHolder<TDH;>;"
+    .local p2, "holder":Lcom/facebook/drawee/view/DraweeHolder;, "Lcom/facebook/drawee/view/DraweeHolder<TDH;>;"
     invoke-static {p2}, Lcom/facebook/common/internal/Preconditions;->checkNotNull(Ljava/lang/Object;)Ljava/lang/Object;
 
     .line 93
@@ -88,13 +86,14 @@
     invoke-virtual {v0, p1, p2}, Ljava/util/ArrayList;->add(ILjava/lang/Object;)V
 
     .line 95
-    iget-boolean p1, p0, Lcom/facebook/drawee/view/MultiDraweeHolder;->mIsAttached:Z
+    iget-boolean v0, p0, Lcom/facebook/drawee/view/MultiDraweeHolder;->mIsAttached:Z
 
-    if-eqz p1, :cond_0
+    if-eqz v0, :cond_0
 
     .line 96
     invoke-virtual {p2}, Lcom/facebook/drawee/view/DraweeHolder;->onAttach()V
 
+    .line 98
     :cond_0
     return-void
 .end method
@@ -110,6 +109,8 @@
     .end annotation
 
     .line 88
+    .local p0, "this":Lcom/facebook/drawee/view/MultiDraweeHolder;, "Lcom/facebook/drawee/view/MultiDraweeHolder<TDH;>;"
+    .local p1, "holder":Lcom/facebook/drawee/view/DraweeHolder;, "Lcom/facebook/drawee/view/DraweeHolder<TDH;>;"
     iget-object v0, p0, Lcom/facebook/drawee/view/MultiDraweeHolder;->mHolders:Ljava/util/ArrayList;
 
     invoke-virtual {v0}, Ljava/util/ArrayList;->size()I
@@ -118,6 +119,7 @@
 
     invoke-virtual {p0, v0, p1}, Lcom/facebook/drawee/view/MultiDraweeHolder;->add(ILcom/facebook/drawee/view/DraweeHolder;)V
 
+    .line 89
     return-void
 .end method
 
@@ -125,13 +127,15 @@
     .locals 2
 
     .line 79
+    .local p0, "this":Lcom/facebook/drawee/view/MultiDraweeHolder;, "Lcom/facebook/drawee/view/MultiDraweeHolder<TDH;>;"
     iget-boolean v0, p0, Lcom/facebook/drawee/view/MultiDraweeHolder;->mIsAttached:Z
 
     if-eqz v0, :cond_0
 
+    .line 80
     const/4 v0, 0x0
 
-    .line 80
+    .local v0, "i":I
     :goto_0
     iget-object v1, p0, Lcom/facebook/drawee/view/MultiDraweeHolder;->mHolders:Ljava/util/ArrayList;
 
@@ -152,25 +156,31 @@
 
     invoke-virtual {v1}, Lcom/facebook/drawee/view/DraweeHolder;->onDetach()V
 
+    .line 80
     add-int/lit8 v0, v0, 0x1
 
     goto :goto_0
 
     .line 84
+    .end local v0    # "i":I
     :cond_0
     iget-object v0, p0, Lcom/facebook/drawee/view/MultiDraweeHolder;->mHolders:Ljava/util/ArrayList;
 
     invoke-virtual {v0}, Ljava/util/ArrayList;->clear()V
 
+    .line 85
     return-void
 .end method
 
 .method public draw(Landroid/graphics/Canvas;)V
     .locals 2
-
-    const/4 v0, 0x0
+    .param p1, "canvas"    # Landroid/graphics/Canvas;
 
     .line 118
+    .local p0, "this":Lcom/facebook/drawee/view/MultiDraweeHolder;, "Lcom/facebook/drawee/view/MultiDraweeHolder<TDH;>;"
+    const/4 v0, 0x0
+
+    .local v0, "i":I
     :goto_0
     iget-object v1, p0, Lcom/facebook/drawee/view/MultiDraweeHolder;->mHolders:Ljava/util/ArrayList;
 
@@ -189,22 +199,29 @@
 
     move-result-object v1
 
+    .line 120
+    .local v1, "drawable":Landroid/graphics/drawable/Drawable;
     if-eqz v1, :cond_0
 
     .line 121
     invoke-virtual {v1, p1}, Landroid/graphics/drawable/Drawable;->draw(Landroid/graphics/Canvas;)V
 
+    .line 118
+    .end local v1    # "drawable":Landroid/graphics/drawable/Drawable;
     :cond_0
     add-int/lit8 v0, v0, 0x1
 
     goto :goto_0
 
+    .line 124
+    .end local v0    # "i":I
     :cond_1
     return-void
 .end method
 
 .method public get(I)Lcom/facebook/drawee/view/DraweeHolder;
     .locals 1
+    .param p1, "index"    # I
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(I)",
@@ -214,36 +231,40 @@
     .end annotation
 
     .line 109
+    .local p0, "this":Lcom/facebook/drawee/view/MultiDraweeHolder;, "Lcom/facebook/drawee/view/MultiDraweeHolder<TDH;>;"
     iget-object v0, p0, Lcom/facebook/drawee/view/MultiDraweeHolder;->mHolders:Ljava/util/ArrayList;
 
     invoke-virtual {v0, p1}, Ljava/util/ArrayList;->get(I)Ljava/lang/Object;
 
-    move-result-object p1
+    move-result-object v0
 
-    check-cast p1, Lcom/facebook/drawee/view/DraweeHolder;
+    check-cast v0, Lcom/facebook/drawee/view/DraweeHolder;
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public onAttach()V
     .locals 2
 
     .line 44
+    .local p0, "this":Lcom/facebook/drawee/view/MultiDraweeHolder;, "Lcom/facebook/drawee/view/MultiDraweeHolder<TDH;>;"
     iget-boolean v0, p0, Lcom/facebook/drawee/view/MultiDraweeHolder;->mIsAttached:Z
 
     if-eqz v0, :cond_0
 
+    .line 45
     return-void
 
+    .line 47
     :cond_0
     const/4 v0, 0x1
 
-    .line 47
     iput-boolean v0, p0, Lcom/facebook/drawee/view/MultiDraweeHolder;->mIsAttached:Z
 
+    .line 48
     const/4 v0, 0x0
 
-    .line 48
+    .local v0, "i":I
     :goto_0
     iget-object v1, p0, Lcom/facebook/drawee/view/MultiDraweeHolder;->mHolders:Ljava/util/ArrayList;
 
@@ -264,10 +285,13 @@
 
     invoke-virtual {v1}, Lcom/facebook/drawee/view/DraweeHolder;->onAttach()V
 
+    .line 48
     add-int/lit8 v0, v0, 0x1
 
     goto :goto_0
 
+    .line 51
+    .end local v0    # "i":I
     :cond_1
     return-void
 .end method
@@ -276,19 +300,24 @@
     .locals 2
 
     .line 60
+    .local p0, "this":Lcom/facebook/drawee/view/MultiDraweeHolder;, "Lcom/facebook/drawee/view/MultiDraweeHolder<TDH;>;"
     iget-boolean v0, p0, Lcom/facebook/drawee/view/MultiDraweeHolder;->mIsAttached:Z
 
     if-nez v0, :cond_0
 
+    .line 61
     return-void
 
+    .line 63
     :cond_0
     const/4 v0, 0x0
 
-    .line 63
     iput-boolean v0, p0, Lcom/facebook/drawee/view/MultiDraweeHolder;->mIsAttached:Z
 
     .line 64
+    const/4 v0, 0x0
+
+    .local v0, "i":I
     :goto_0
     iget-object v1, p0, Lcom/facebook/drawee/view/MultiDraweeHolder;->mHolders:Ljava/util/ArrayList;
 
@@ -309,63 +338,75 @@
 
     invoke-virtual {v1}, Lcom/facebook/drawee/view/DraweeHolder;->onDetach()V
 
+    .line 64
     add-int/lit8 v0, v0, 0x1
 
     goto :goto_0
 
+    .line 67
+    .end local v0    # "i":I
     :cond_1
     return-void
 .end method
 
 .method public onTouchEvent(Landroid/view/MotionEvent;)Z
-    .locals 3
-
-    const/4 v0, 0x0
-
-    const/4 v1, 0x0
+    .locals 2
+    .param p1, "event"    # Landroid/view/MotionEvent;
 
     .line 70
+    .local p0, "this":Lcom/facebook/drawee/view/MultiDraweeHolder;, "Lcom/facebook/drawee/view/MultiDraweeHolder<TDH;>;"
+    const/4 v0, 0x0
+
+    .local v0, "i":I
     :goto_0
-    iget-object v2, p0, Lcom/facebook/drawee/view/MultiDraweeHolder;->mHolders:Ljava/util/ArrayList;
+    iget-object v1, p0, Lcom/facebook/drawee/view/MultiDraweeHolder;->mHolders:Ljava/util/ArrayList;
 
-    invoke-virtual {v2}, Ljava/util/ArrayList;->size()I
+    invoke-virtual {v1}, Ljava/util/ArrayList;->size()I
 
-    move-result v2
+    move-result v1
 
-    if-ge v1, v2, :cond_1
+    if-ge v0, v1, :cond_1
 
     .line 71
-    iget-object v2, p0, Lcom/facebook/drawee/view/MultiDraweeHolder;->mHolders:Ljava/util/ArrayList;
+    iget-object v1, p0, Lcom/facebook/drawee/view/MultiDraweeHolder;->mHolders:Ljava/util/ArrayList;
 
-    invoke-virtual {v2, v1}, Ljava/util/ArrayList;->get(I)Ljava/lang/Object;
+    invoke-virtual {v1, v0}, Ljava/util/ArrayList;->get(I)Ljava/lang/Object;
 
-    move-result-object v2
+    move-result-object v1
 
-    check-cast v2, Lcom/facebook/drawee/view/DraweeHolder;
+    check-cast v1, Lcom/facebook/drawee/view/DraweeHolder;
 
-    invoke-virtual {v2, p1}, Lcom/facebook/drawee/view/DraweeHolder;->onTouchEvent(Landroid/view/MotionEvent;)Z
+    invoke-virtual {v1, p1}, Lcom/facebook/drawee/view/DraweeHolder;->onTouchEvent(Landroid/view/MotionEvent;)Z
 
-    move-result v2
+    move-result v1
 
-    if-eqz v2, :cond_0
+    if-eqz v1, :cond_0
 
-    const/4 p1, 0x1
+    .line 72
+    const/4 v1, 0x1
 
-    return p1
+    return v1
 
+    .line 70
     :cond_0
-    add-int/lit8 v1, v1, 0x1
+    add-int/lit8 v0, v0, 0x1
 
     goto :goto_0
 
+    .line 75
+    .end local v0    # "i":I
     :cond_1
+    const/4 v0, 0x0
+
     return v0
 .end method
 
 .method public remove(I)V
     .locals 2
+    .param p1, "index"    # I
 
     .line 101
+    .local p0, "this":Lcom/facebook/drawee/view/MultiDraweeHolder;, "Lcom/facebook/drawee/view/MultiDraweeHolder<TDH;>;"
     iget-object v0, p0, Lcom/facebook/drawee/view/MultiDraweeHolder;->mHolders:Ljava/util/ArrayList;
 
     invoke-virtual {v0, p1}, Ljava/util/ArrayList;->get(I)Ljava/lang/Object;
@@ -375,6 +416,7 @@
     check-cast v0, Lcom/facebook/drawee/view/DraweeHolder;
 
     .line 102
+    .local v0, "holder":Lcom/facebook/drawee/view/DraweeHolder;, "Lcom/facebook/drawee/view/DraweeHolder<TDH;>;"
     iget-boolean v1, p0, Lcom/facebook/drawee/view/MultiDraweeHolder;->mIsAttached:Z
 
     if-eqz v1, :cond_0
@@ -384,10 +426,11 @@
 
     .line 105
     :cond_0
-    iget-object v0, p0, Lcom/facebook/drawee/view/MultiDraweeHolder;->mHolders:Ljava/util/ArrayList;
+    iget-object v1, p0, Lcom/facebook/drawee/view/MultiDraweeHolder;->mHolders:Ljava/util/ArrayList;
 
-    invoke-virtual {v0, p1}, Ljava/util/ArrayList;->remove(I)Ljava/lang/Object;
+    invoke-virtual {v1, p1}, Ljava/util/ArrayList;->remove(I)Ljava/lang/Object;
 
+    .line 106
     return-void
 .end method
 
@@ -395,6 +438,7 @@
     .locals 1
 
     .line 113
+    .local p0, "this":Lcom/facebook/drawee/view/MultiDraweeHolder;, "Lcom/facebook/drawee/view/MultiDraweeHolder<TDH;>;"
     iget-object v0, p0, Lcom/facebook/drawee/view/MultiDraweeHolder;->mHolders:Ljava/util/ArrayList;
 
     invoke-virtual {v0}, Ljava/util/ArrayList;->size()I
@@ -405,42 +449,49 @@
 .end method
 
 .method public verifyDrawable(Landroid/graphics/drawable/Drawable;)Z
-    .locals 3
-
-    const/4 v0, 0x0
-
-    const/4 v1, 0x0
+    .locals 2
+    .param p1, "who"    # Landroid/graphics/drawable/Drawable;
 
     .line 128
+    .local p0, "this":Lcom/facebook/drawee/view/MultiDraweeHolder;, "Lcom/facebook/drawee/view/MultiDraweeHolder<TDH;>;"
+    const/4 v0, 0x0
+
+    .local v0, "i":I
     :goto_0
-    iget-object v2, p0, Lcom/facebook/drawee/view/MultiDraweeHolder;->mHolders:Ljava/util/ArrayList;
+    iget-object v1, p0, Lcom/facebook/drawee/view/MultiDraweeHolder;->mHolders:Ljava/util/ArrayList;
 
-    invoke-virtual {v2}, Ljava/util/ArrayList;->size()I
+    invoke-virtual {v1}, Ljava/util/ArrayList;->size()I
 
-    move-result v2
+    move-result v1
 
-    if-ge v1, v2, :cond_1
+    if-ge v0, v1, :cond_1
 
     .line 129
-    invoke-virtual {p0, v1}, Lcom/facebook/drawee/view/MultiDraweeHolder;->get(I)Lcom/facebook/drawee/view/DraweeHolder;
+    invoke-virtual {p0, v0}, Lcom/facebook/drawee/view/MultiDraweeHolder;->get(I)Lcom/facebook/drawee/view/DraweeHolder;
 
-    move-result-object v2
+    move-result-object v1
 
-    invoke-virtual {v2}, Lcom/facebook/drawee/view/DraweeHolder;->getTopLevelDrawable()Landroid/graphics/drawable/Drawable;
+    invoke-virtual {v1}, Lcom/facebook/drawee/view/DraweeHolder;->getTopLevelDrawable()Landroid/graphics/drawable/Drawable;
 
-    move-result-object v2
+    move-result-object v1
 
-    if-ne p1, v2, :cond_0
+    if-ne p1, v1, :cond_0
 
-    const/4 p1, 0x1
+    .line 130
+    const/4 v1, 0x1
 
-    return p1
+    return v1
 
+    .line 128
     :cond_0
-    add-int/lit8 v1, v1, 0x1
+    add-int/lit8 v0, v0, 0x1
 
     goto :goto_0
 
+    .line 133
+    .end local v0    # "i":I
     :cond_1
+    const/4 v0, 0x0
+
     return v0
 .end method

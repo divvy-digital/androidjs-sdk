@@ -21,11 +21,13 @@
     .line 35
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
+    .line 36
     return-void
 .end method
 
 .method static recycle(Lokio/Segment;)V
-    .locals 8
+    .locals 10
+    .param p0, "segment"    # Lokio/Segment;
 
     .line 52
     iget-object v0, p0, Lokio/Segment;->next:Lokio/Segment;
@@ -55,13 +57,13 @@
 
     const-wide/16 v3, 0x2000
 
-    add-long/2addr v1, v3
+    add-long v5, v1, v3
 
-    const-wide/32 v5, 0x10000
+    const-wide/32 v7, 0x10000
 
-    cmp-long v7, v1, v5
+    cmp-long v9, v5, v7
 
-    if-lez v7, :cond_1
+    if-lez v9, :cond_1
 
     monitor-exit v0
 
@@ -69,8 +71,6 @@
 
     .line 56
     :cond_1
-    sget-wide v1, Lokio/SegmentPool;->byteCount:J
-
     add-long/2addr v1, v3
 
     sput-wide v1, Lokio/SegmentPool;->byteCount:J
@@ -80,9 +80,9 @@
 
     iput-object v1, p0, Lokio/Segment;->next:Lokio/Segment;
 
+    .line 58
     const/4 v1, 0x0
 
-    .line 58
     iput v1, p0, Lokio/Segment;->limit:I
 
     iput v1, p0, Lokio/Segment;->pos:I
@@ -93,24 +93,26 @@
     .line 60
     monitor-exit v0
 
+    .line 61
     return-void
 
+    .line 60
     :catchall_0
-    move-exception p0
+    move-exception v1
 
     monitor-exit v0
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    throw p0
+    throw v1
 
     .line 52
     :cond_2
-    new-instance p0, Ljava/lang/IllegalArgumentException;
+    new-instance v0, Ljava/lang/IllegalArgumentException;
 
-    invoke-direct {p0}, Ljava/lang/IllegalArgumentException;-><init>()V
+    invoke-direct {v0}, Ljava/lang/IllegalArgumentException;-><init>()V
 
-    throw p0
+    throw v0
 .end method
 
 .method static take()Lokio/Segment;
@@ -128,16 +130,17 @@
     if-eqz v1, :cond_0
 
     .line 41
-    sget-object v1, Lokio/SegmentPool;->next:Lokio/Segment;
+    nop
 
     .line 42
+    .local v1, "result":Lokio/Segment;
     iget-object v2, v1, Lokio/Segment;->next:Lokio/Segment;
 
     sput-object v2, Lokio/SegmentPool;->next:Lokio/Segment;
 
+    .line 43
     const/4 v2, 0x0
 
-    .line 43
     iput-object v2, v1, Lokio/Segment;->next:Lokio/Segment;
 
     .line 44
@@ -155,6 +158,7 @@
     return-object v1
 
     .line 47
+    .end local v1    # "result":Lokio/Segment;
     :cond_0
     monitor-exit v0
     :try_end_0
@@ -167,10 +171,10 @@
 
     return-object v0
 
+    .line 47
     :catchall_0
     move-exception v1
 
-    .line 47
     :try_start_1
     monitor-exit v0
     :try_end_1

@@ -32,9 +32,9 @@
 
     invoke-direct {p0}, Lcom/facebook/react/modules/core/ChoreographerCompat$FrameCallback;-><init>()V
 
+    .line 71
     const/4 p1, 0x0
 
-    .line 71
     iput-object p1, p0, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;->mTimersToCall:Lcom/facebook/react/bridge/WritableArray;
 
     return-void
@@ -42,6 +42,8 @@
 
 .method synthetic constructor <init>(Lcom/facebook/react/modules/core/Timing;Lcom/facebook/react/modules/core/Timing$1;)V
     .locals 0
+    .param p1, "x0"    # Lcom/facebook/react/modules/core/Timing;
+    .param p2, "x1"    # Lcom/facebook/react/modules/core/Timing$1;
 
     .line 68
     invoke-direct {p0, p1}, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;-><init>(Lcom/facebook/react/modules/core/Timing;)V
@@ -52,7 +54,8 @@
 
 # virtual methods
 .method public doFrame(J)V
-    .locals 4
+    .locals 6
+    .param p1, "frameTimeNanos"    # J
 
     .line 78
     iget-object v0, p0, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;->this$0:Lcom/facebook/react/modules/core/Timing;
@@ -79,201 +82,202 @@
 
     if-nez v0, :cond_0
 
+    .line 79
     return-void
 
+    .line 82
     :cond_0
     const-wide/32 v0, 0xf4240
 
-    .line 82
-    div-long/2addr p1, v0
+    div-long v0, p1, v0
 
     .line 83
-    iget-object v0, p0, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;->this$0:Lcom/facebook/react/modules/core/Timing;
+    .local v0, "frameTimeMillis":J
+    iget-object v2, p0, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;->this$0:Lcom/facebook/react/modules/core/Timing;
 
-    invoke-static {v0}, Lcom/facebook/react/modules/core/Timing;->access$200(Lcom/facebook/react/modules/core/Timing;)Ljava/lang/Object;
+    invoke-static {v2}, Lcom/facebook/react/modules/core/Timing;->access$200(Lcom/facebook/react/modules/core/Timing;)Ljava/lang/Object;
 
-    move-result-object v0
+    move-result-object v2
 
-    monitor-enter v0
+    monitor-enter v2
 
     .line 84
     :goto_0
     :try_start_0
-    iget-object v1, p0, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;->this$0:Lcom/facebook/react/modules/core/Timing;
+    iget-object v3, p0, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;->this$0:Lcom/facebook/react/modules/core/Timing;
 
-    invoke-static {v1}, Lcom/facebook/react/modules/core/Timing;->access$300(Lcom/facebook/react/modules/core/Timing;)Ljava/util/PriorityQueue;
+    invoke-static {v3}, Lcom/facebook/react/modules/core/Timing;->access$300(Lcom/facebook/react/modules/core/Timing;)Ljava/util/PriorityQueue;
 
-    move-result-object v1
+    move-result-object v3
 
-    invoke-virtual {v1}, Ljava/util/PriorityQueue;->isEmpty()Z
+    invoke-virtual {v3}, Ljava/util/PriorityQueue;->isEmpty()Z
 
-    move-result v1
+    move-result v3
 
-    if-nez v1, :cond_3
+    if-nez v3, :cond_3
 
-    iget-object v1, p0, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;->this$0:Lcom/facebook/react/modules/core/Timing;
+    iget-object v3, p0, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;->this$0:Lcom/facebook/react/modules/core/Timing;
 
-    invoke-static {v1}, Lcom/facebook/react/modules/core/Timing;->access$300(Lcom/facebook/react/modules/core/Timing;)Ljava/util/PriorityQueue;
+    invoke-static {v3}, Lcom/facebook/react/modules/core/Timing;->access$300(Lcom/facebook/react/modules/core/Timing;)Ljava/util/PriorityQueue;
 
-    move-result-object v1
+    move-result-object v3
 
-    invoke-virtual {v1}, Ljava/util/PriorityQueue;->peek()Ljava/lang/Object;
+    invoke-virtual {v3}, Ljava/util/PriorityQueue;->peek()Ljava/lang/Object;
 
-    move-result-object v1
+    move-result-object v3
 
-    check-cast v1, Lcom/facebook/react/modules/core/Timing$Timer;
+    check-cast v3, Lcom/facebook/react/modules/core/Timing$Timer;
 
-    invoke-static {v1}, Lcom/facebook/react/modules/core/Timing$Timer;->access$400(Lcom/facebook/react/modules/core/Timing$Timer;)J
+    invoke-static {v3}, Lcom/facebook/react/modules/core/Timing$Timer;->access$400(Lcom/facebook/react/modules/core/Timing$Timer;)J
 
-    move-result-wide v1
+    move-result-wide v3
 
-    cmp-long v3, v1, p1
+    cmp-long v5, v3, v0
 
-    if-gez v3, :cond_3
+    if-gez v5, :cond_3
 
     .line 85
-    iget-object v1, p0, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;->this$0:Lcom/facebook/react/modules/core/Timing;
+    iget-object v3, p0, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;->this$0:Lcom/facebook/react/modules/core/Timing;
 
-    invoke-static {v1}, Lcom/facebook/react/modules/core/Timing;->access$300(Lcom/facebook/react/modules/core/Timing;)Ljava/util/PriorityQueue;
+    invoke-static {v3}, Lcom/facebook/react/modules/core/Timing;->access$300(Lcom/facebook/react/modules/core/Timing;)Ljava/util/PriorityQueue;
 
-    move-result-object v1
+    move-result-object v3
 
-    invoke-virtual {v1}, Ljava/util/PriorityQueue;->poll()Ljava/lang/Object;
+    invoke-virtual {v3}, Ljava/util/PriorityQueue;->poll()Ljava/lang/Object;
 
-    move-result-object v1
+    move-result-object v3
 
-    check-cast v1, Lcom/facebook/react/modules/core/Timing$Timer;
+    check-cast v3, Lcom/facebook/react/modules/core/Timing$Timer;
 
     .line 86
-    iget-object v2, p0, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;->mTimersToCall:Lcom/facebook/react/bridge/WritableArray;
+    .local v3, "timer":Lcom/facebook/react/modules/core/Timing$Timer;
+    iget-object v4, p0, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;->mTimersToCall:Lcom/facebook/react/bridge/WritableArray;
 
-    if-nez v2, :cond_1
+    if-nez v4, :cond_1
 
     .line 87
     invoke-static {}, Lcom/facebook/react/bridge/Arguments;->createArray()Lcom/facebook/react/bridge/WritableArray;
 
-    move-result-object v2
+    move-result-object v4
 
-    iput-object v2, p0, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;->mTimersToCall:Lcom/facebook/react/bridge/WritableArray;
+    iput-object v4, p0, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;->mTimersToCall:Lcom/facebook/react/bridge/WritableArray;
 
     .line 89
     :cond_1
-    iget-object v2, p0, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;->mTimersToCall:Lcom/facebook/react/bridge/WritableArray;
+    iget-object v4, p0, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;->mTimersToCall:Lcom/facebook/react/bridge/WritableArray;
 
-    invoke-static {v1}, Lcom/facebook/react/modules/core/Timing$Timer;->access$500(Lcom/facebook/react/modules/core/Timing$Timer;)I
+    invoke-static {v3}, Lcom/facebook/react/modules/core/Timing$Timer;->access$500(Lcom/facebook/react/modules/core/Timing$Timer;)I
 
-    move-result v3
+    move-result v5
 
-    invoke-interface {v2, v3}, Lcom/facebook/react/bridge/WritableArray;->pushInt(I)V
+    invoke-interface {v4, v5}, Lcom/facebook/react/bridge/WritableArray;->pushInt(I)V
 
     .line 90
-    invoke-static {v1}, Lcom/facebook/react/modules/core/Timing$Timer;->access$600(Lcom/facebook/react/modules/core/Timing$Timer;)Z
+    invoke-static {v3}, Lcom/facebook/react/modules/core/Timing$Timer;->access$600(Lcom/facebook/react/modules/core/Timing$Timer;)Z
 
-    move-result v2
+    move-result v4
 
-    if-eqz v2, :cond_2
+    if-eqz v4, :cond_2
 
     .line 91
-    invoke-static {v1}, Lcom/facebook/react/modules/core/Timing$Timer;->access$700(Lcom/facebook/react/modules/core/Timing$Timer;)I
+    invoke-static {v3}, Lcom/facebook/react/modules/core/Timing$Timer;->access$700(Lcom/facebook/react/modules/core/Timing$Timer;)I
 
-    move-result v2
+    move-result v4
 
-    int-to-long v2, v2
+    int-to-long v4, v4
 
-    add-long/2addr v2, p1
+    add-long/2addr v4, v0
 
-    invoke-static {v1, v2, v3}, Lcom/facebook/react/modules/core/Timing$Timer;->access$402(Lcom/facebook/react/modules/core/Timing$Timer;J)J
+    invoke-static {v3, v4, v5}, Lcom/facebook/react/modules/core/Timing$Timer;->access$402(Lcom/facebook/react/modules/core/Timing$Timer;J)J
 
     .line 92
-    iget-object v2, p0, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;->this$0:Lcom/facebook/react/modules/core/Timing;
+    iget-object v4, p0, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;->this$0:Lcom/facebook/react/modules/core/Timing;
 
-    invoke-static {v2}, Lcom/facebook/react/modules/core/Timing;->access$300(Lcom/facebook/react/modules/core/Timing;)Ljava/util/PriorityQueue;
+    invoke-static {v4}, Lcom/facebook/react/modules/core/Timing;->access$300(Lcom/facebook/react/modules/core/Timing;)Ljava/util/PriorityQueue;
 
-    move-result-object v2
+    move-result-object v4
 
-    invoke-virtual {v2, v1}, Ljava/util/PriorityQueue;->add(Ljava/lang/Object;)Z
+    invoke-virtual {v4, v3}, Ljava/util/PriorityQueue;->add(Ljava/lang/Object;)Z
 
-    goto :goto_0
+    goto :goto_1
 
     .line 94
     :cond_2
-    iget-object v2, p0, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;->this$0:Lcom/facebook/react/modules/core/Timing;
+    iget-object v4, p0, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;->this$0:Lcom/facebook/react/modules/core/Timing;
 
-    invoke-static {v2}, Lcom/facebook/react/modules/core/Timing;->access$800(Lcom/facebook/react/modules/core/Timing;)Landroid/util/SparseArray;
+    invoke-static {v4}, Lcom/facebook/react/modules/core/Timing;->access$800(Lcom/facebook/react/modules/core/Timing;)Landroid/util/SparseArray;
 
-    move-result-object v2
+    move-result-object v4
 
-    invoke-static {v1}, Lcom/facebook/react/modules/core/Timing$Timer;->access$500(Lcom/facebook/react/modules/core/Timing$Timer;)I
+    invoke-static {v3}, Lcom/facebook/react/modules/core/Timing$Timer;->access$500(Lcom/facebook/react/modules/core/Timing$Timer;)I
 
-    move-result v1
+    move-result v5
 
-    invoke-virtual {v2, v1}, Landroid/util/SparseArray;->remove(I)V
+    invoke-virtual {v4, v5}, Landroid/util/SparseArray;->remove(I)V
 
+    .line 96
+    .end local v3    # "timer":Lcom/facebook/react/modules/core/Timing$Timer;
+    :goto_1
     goto :goto_0
 
     .line 97
     :cond_3
-    monitor-exit v0
+    monitor-exit v2
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
     .line 99
-    iget-object p1, p0, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;->mTimersToCall:Lcom/facebook/react/bridge/WritableArray;
+    iget-object v2, p0, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;->mTimersToCall:Lcom/facebook/react/bridge/WritableArray;
 
-    if-eqz p1, :cond_4
+    if-eqz v2, :cond_4
 
     .line 100
-    iget-object p1, p0, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;->this$0:Lcom/facebook/react/modules/core/Timing;
+    iget-object v2, p0, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;->this$0:Lcom/facebook/react/modules/core/Timing;
 
-    invoke-static {p1}, Lcom/facebook/react/modules/core/Timing;->access$900(Lcom/facebook/react/modules/core/Timing;)Lcom/facebook/react/bridge/ReactApplicationContext;
+    invoke-static {v2}, Lcom/facebook/react/modules/core/Timing;->access$900(Lcom/facebook/react/modules/core/Timing;)Lcom/facebook/react/bridge/ReactApplicationContext;
 
-    move-result-object p1
+    move-result-object v2
 
-    const-class p2, Lcom/facebook/react/modules/core/JSTimers;
+    const-class v3, Lcom/facebook/react/modules/core/JSTimers;
 
-    invoke-virtual {p1, p2}, Lcom/facebook/react/bridge/ReactApplicationContext;->getJSModule(Ljava/lang/Class;)Lcom/facebook/react/bridge/JavaScriptModule;
+    invoke-virtual {v2, v3}, Lcom/facebook/react/bridge/ReactApplicationContext;->getJSModule(Ljava/lang/Class;)Lcom/facebook/react/bridge/JavaScriptModule;
 
-    move-result-object p1
+    move-result-object v2
 
-    check-cast p1, Lcom/facebook/react/modules/core/JSTimers;
+    check-cast v2, Lcom/facebook/react/modules/core/JSTimers;
 
-    iget-object p2, p0, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;->mTimersToCall:Lcom/facebook/react/bridge/WritableArray;
+    iget-object v3, p0, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;->mTimersToCall:Lcom/facebook/react/bridge/WritableArray;
 
-    invoke-interface {p1, p2}, Lcom/facebook/react/modules/core/JSTimers;->callTimers(Lcom/facebook/react/bridge/WritableArray;)V
-
-    const/4 p1, 0x0
+    invoke-interface {v2, v3}, Lcom/facebook/react/modules/core/JSTimers;->callTimers(Lcom/facebook/react/bridge/WritableArray;)V
 
     .line 101
-    iput-object p1, p0, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;->mTimersToCall:Lcom/facebook/react/bridge/WritableArray;
+    const/4 v2, 0x0
+
+    iput-object v2, p0, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;->mTimersToCall:Lcom/facebook/react/bridge/WritableArray;
 
     .line 104
     :cond_4
-    iget-object p1, p0, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;->this$0:Lcom/facebook/react/modules/core/Timing;
+    iget-object v2, p0, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;->this$0:Lcom/facebook/react/modules/core/Timing;
 
-    invoke-static {p1}, Lcom/facebook/react/modules/core/Timing;->access$1000(Lcom/facebook/react/modules/core/Timing;)Lcom/facebook/react/modules/core/ReactChoreographer;
+    invoke-static {v2}, Lcom/facebook/react/modules/core/Timing;->access$1000(Lcom/facebook/react/modules/core/Timing;)Lcom/facebook/react/modules/core/ReactChoreographer;
 
-    move-result-object p1
+    move-result-object v2
 
-    sget-object p2, Lcom/facebook/react/modules/core/ReactChoreographer$CallbackType;->TIMERS_EVENTS:Lcom/facebook/react/modules/core/ReactChoreographer$CallbackType;
+    sget-object v3, Lcom/facebook/react/modules/core/ReactChoreographer$CallbackType;->TIMERS_EVENTS:Lcom/facebook/react/modules/core/ReactChoreographer$CallbackType;
 
-    invoke-virtual {p1, p2, p0}, Lcom/facebook/react/modules/core/ReactChoreographer;->postFrameCallback(Lcom/facebook/react/modules/core/ReactChoreographer$CallbackType;Lcom/facebook/react/modules/core/ChoreographerCompat$FrameCallback;)V
+    invoke-virtual {v2, v3, p0}, Lcom/facebook/react/modules/core/ReactChoreographer;->postFrameCallback(Lcom/facebook/react/modules/core/ReactChoreographer$CallbackType;Lcom/facebook/react/modules/core/ChoreographerCompat$FrameCallback;)V
 
+    .line 105
     return-void
 
-    :catchall_0
-    move-exception p1
-
     .line 97
+    :catchall_0
+    move-exception v3
+
     :try_start_1
-    monitor-exit v0
+    monitor-exit v2
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
-    goto :goto_2
-
-    :goto_1
-    throw p1
-
-    :goto_2
-    goto :goto_1
+    throw v3
 .end method

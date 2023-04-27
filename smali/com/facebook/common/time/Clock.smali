@@ -3,11 +3,6 @@
 .source "Clock.java"
 
 
-# annotations
-.annotation build Ljavax/annotation/concurrent/ThreadSafe;
-.end annotation
-
-
 # static fields
 .field public static final MAX_TIME:J = 0x7fffffffffffffffL
 

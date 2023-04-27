@@ -38,14 +38,16 @@
 
 # virtual methods
 .method public apply(Ljava/lang/Object;)Z
-    .locals 0
+    .locals 1
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(TT;)Z"
         }
     .end annotation
 
-    const/4 p1, 0x1
+    .line 21
+    .local p1, "t":Ljava/lang/Object;, "TT;"
+    const/4 v0, 0x1
 
-    return p1
+    return v0
 .end method

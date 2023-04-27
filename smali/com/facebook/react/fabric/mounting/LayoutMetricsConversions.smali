@@ -18,7 +18,8 @@
 .end method
 
 .method public static getMaxSize(I)F
-    .locals 1
+    .locals 3
+    .param p0, "viewMeasureSpec"    # I
 
     .line 28
     invoke-static {p0}, Landroid/view/View$MeasureSpec;->getMode(I)I
@@ -26,25 +27,29 @@
     move-result v0
 
     .line 29
+    .local v0, "mode":I
     invoke-static {p0}, Landroid/view/View$MeasureSpec;->getSize(I)I
 
-    move-result p0
+    move-result v1
 
+    .line 31
+    .local v1, "size":I
     if-nez v0, :cond_0
 
-    const/high16 p0, -0x31000000
+    const/high16 v2, -0x31000000
 
     goto :goto_0
 
     :cond_0
-    int-to-float p0, p0
+    int-to-float v2, v1
 
     :goto_0
-    return p0
+    return v2
 .end method
 
 .method public static getMinSize(I)F
-    .locals 2
+    .locals 3
+    .param p0, "viewMeasureSpec"    # I
 
     .line 21
     invoke-static {p0}, Landroid/view/View$MeasureSpec;->getMode(I)I
@@ -52,88 +57,112 @@
     move-result v0
 
     .line 22
+    .local v0, "mode":I
     invoke-static {p0}, Landroid/view/View$MeasureSpec;->getSize(I)I
 
-    move-result p0
+    move-result v1
 
-    const/high16 v1, 0x40000000    # 2.0f
+    .line 24
+    .local v1, "size":I
+    const/high16 v2, 0x40000000    # 2.0f
 
-    if-ne v0, v1, :cond_0
+    if-ne v0, v2, :cond_0
 
-    int-to-float p0, p0
+    int-to-float v2, v1
 
     goto :goto_0
 
     :cond_0
-    const/4 p0, 0x0
+    const/4 v2, 0x0
 
     :goto_0
-    return p0
+    return v2
 .end method
 
 .method public static getYogaMeasureMode(FF)Lcom/facebook/yoga/YogaMeasureMode;
-    .locals 0
+    .locals 1
+    .param p0, "minSize"    # F
+    .param p1, "maxSize"    # F
 
-    cmpl-float p0, p0, p1
+    .line 48
+    cmpl-float v0, p0, p1
 
-    if-nez p0, :cond_0
+    if-nez v0, :cond_0
 
     .line 49
-    sget-object p0, Lcom/facebook/yoga/YogaMeasureMode;->EXACTLY:Lcom/facebook/yoga/YogaMeasureMode;
+    sget-object v0, Lcom/facebook/yoga/YogaMeasureMode;->EXACTLY:Lcom/facebook/yoga/YogaMeasureMode;
 
+    .local v0, "yogaMeasureMode":Lcom/facebook/yoga/YogaMeasureMode;
     goto :goto_0
 
+    .line 50
+    .end local v0    # "yogaMeasureMode":Lcom/facebook/yoga/YogaMeasureMode;
     :cond_0
-    const/high16 p0, -0x31000000
+    const/high16 v0, -0x31000000
 
-    cmpl-float p0, p1, p0
+    cmpl-float v0, p1, v0
 
-    if-nez p0, :cond_1
+    if-nez v0, :cond_1
 
     .line 51
-    sget-object p0, Lcom/facebook/yoga/YogaMeasureMode;->UNDEFINED:Lcom/facebook/yoga/YogaMeasureMode;
+    sget-object v0, Lcom/facebook/yoga/YogaMeasureMode;->UNDEFINED:Lcom/facebook/yoga/YogaMeasureMode;
 
+    .restart local v0    # "yogaMeasureMode":Lcom/facebook/yoga/YogaMeasureMode;
     goto :goto_0
 
     .line 53
+    .end local v0    # "yogaMeasureMode":Lcom/facebook/yoga/YogaMeasureMode;
     :cond_1
-    sget-object p0, Lcom/facebook/yoga/YogaMeasureMode;->AT_MOST:Lcom/facebook/yoga/YogaMeasureMode;
+    sget-object v0, Lcom/facebook/yoga/YogaMeasureMode;->AT_MOST:Lcom/facebook/yoga/YogaMeasureMode;
 
+    .line 55
+    .restart local v0    # "yogaMeasureMode":Lcom/facebook/yoga/YogaMeasureMode;
     :goto_0
-    return-object p0
+    return-object v0
 .end method
 
 .method public static getYogaSize(FF)F
-    .locals 0
+    .locals 1
+    .param p0, "minSize"    # F
+    .param p1, "maxSize"    # F
 
-    cmpl-float p0, p0, p1
+    .line 36
+    cmpl-float v0, p0, p1
 
-    if-nez p0, :cond_0
+    if-nez v0, :cond_0
 
     .line 37
     invoke-static {p1}, Lcom/facebook/react/uimanager/PixelUtil;->toPixelFromDIP(F)F
 
-    move-result p0
+    move-result v0
 
+    .local v0, "yogaSize":F
     goto :goto_0
 
+    .line 38
+    .end local v0    # "yogaSize":F
     :cond_0
-    const/high16 p0, -0x31000000
+    const/high16 v0, -0x31000000
 
-    cmpl-float p0, p1, p0
+    cmpl-float v0, p1, v0
 
-    if-nez p0, :cond_1
+    if-nez v0, :cond_1
 
-    const/4 p0, 0x0
+    .line 39
+    const/4 v0, 0x0
 
+    .restart local v0    # "yogaSize":F
     goto :goto_0
 
     .line 41
+    .end local v0    # "yogaSize":F
     :cond_1
     invoke-static {p1}, Lcom/facebook/react/uimanager/PixelUtil;->toPixelFromDIP(F)F
 
-    move-result p0
+    move-result v0
 
+    .line 43
+    .restart local v0    # "yogaSize":F
     :goto_0
-    return p0
+    return v0
 .end method

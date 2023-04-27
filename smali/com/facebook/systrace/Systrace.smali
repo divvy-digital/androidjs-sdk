@@ -35,108 +35,147 @@
 
 .method public static beginAsyncSection(JLjava/lang/String;I)V
     .locals 0
+    .param p0, "tag"    # J
+    .param p2, "sectionName"    # Ljava/lang/String;
+    .param p3, "cookie"    # I
 
+    .line 73
     return-void
 .end method
 
 .method public static beginAsyncSection(JLjava/lang/String;IJ)V
     .locals 0
+    .param p0, "tag"    # J
+    .param p2, "sectionName"    # Ljava/lang/String;
+    .param p3, "cookie"    # I
+    .param p4, "startNanos"    # J
 
+    .line 76
     return-void
 .end method
 
 .method public static beginSection(JLjava/lang/String;)V
     .locals 0
+    .param p0, "tag"    # J
+    .param p2, "sectionName"    # Ljava/lang/String;
 
     .line 58
-    sget p0, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    const/16 p1, 0x12
-
-    if-lt p0, p1, :cond_0
+    nop
 
     .line 59
     invoke-static {p2}, Landroid/os/Trace;->beginSection(Ljava/lang/String;)V
 
-    :cond_0
+    .line 61
     return-void
 .end method
 
 .method public static endAsyncFlow(JLjava/lang/String;I)V
     .locals 0
+    .param p0, "tag"    # J
+    .param p2, "sectionName"    # Ljava/lang/String;
+    .param p3, "cookie"    # I
 
+    .line 109
     return-void
 .end method
 
 .method public static endAsyncSection(JLjava/lang/String;I)V
     .locals 0
+    .param p0, "tag"    # J
+    .param p2, "sectionName"    # Ljava/lang/String;
+    .param p3, "cookie"    # I
 
+    .line 82
     return-void
 .end method
 
 .method public static endAsyncSection(JLjava/lang/String;IJ)V
     .locals 0
+    .param p0, "tag"    # J
+    .param p2, "sectionName"    # Ljava/lang/String;
+    .param p3, "cookie"    # I
+    .param p4, "endNanos"    # J
 
+    .line 85
     return-void
 .end method
 
 .method public static endSection(J)V
     .locals 0
+    .param p0, "tag"    # J
 
     .line 64
-    sget p0, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    const/16 p1, 0x12
-
-    if-lt p0, p1, :cond_0
+    nop
 
     .line 65
     invoke-static {}, Landroid/os/Trace;->endSection()V
 
-    :cond_0
+    .line 67
     return-void
 .end method
 
 .method public static isTracing(J)Z
-    .locals 0
+    .locals 1
+    .param p0, "tag"    # J
 
-    const/4 p0, 0x0
+    .line 48
+    const/4 v0, 0x0
 
-    return p0
+    return v0
 .end method
 
 .method public static registerListener(Lcom/facebook/systrace/TraceListener;)V
     .locals 0
+    .param p0, "listener"    # Lcom/facebook/systrace/TraceListener;
 
+    .line 42
     return-void
 .end method
 
 .method public static startAsyncFlow(JLjava/lang/String;I)V
     .locals 0
+    .param p0, "tag"    # J
+    .param p2, "sectionName"    # Ljava/lang/String;
+    .param p3, "cookie"    # I
 
+    .line 97
     return-void
 .end method
 
 .method public static stepAsyncFlow(JLjava/lang/String;I)V
     .locals 0
+    .param p0, "tag"    # J
+    .param p2, "sectionName"    # Ljava/lang/String;
+    .param p3, "cookie"    # I
 
+    .line 103
     return-void
 .end method
 
 .method public static traceCounter(JLjava/lang/String;I)V
     .locals 0
+    .param p0, "tag"    # J
+    .param p2, "counterName"    # Ljava/lang/String;
+    .param p3, "counterValue"    # I
 
+    .line 91
     return-void
 .end method
 
 .method public static traceInstant(JLjava/lang/String;Lcom/facebook/systrace/Systrace$EventScope;)V
     .locals 0
+    .param p0, "tag"    # J
+    .param p2, "title"    # Ljava/lang/String;
+    .param p3, "scope"    # Lcom/facebook/systrace/Systrace$EventScope;
 
+    .line 55
     return-void
 .end method
 
 .method public static unregisterListener(Lcom/facebook/systrace/TraceListener;)V
     .locals 0
+    .param p0, "listener"    # Lcom/facebook/systrace/TraceListener;
 
+    .line 45
     return-void
 .end method

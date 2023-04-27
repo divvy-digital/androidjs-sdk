@@ -24,6 +24,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/imagepipeline/backends/okhttp3/OkHttpNetworkFetcher$1;)V
     .locals 0
+    .param p1, "this$1"    # Lcom/facebook/imagepipeline/backends/okhttp3/OkHttpNetworkFetcher$1;
 
     .line 140
     iput-object p1, p0, Lcom/facebook/imagepipeline/backends/okhttp3/OkHttpNetworkFetcher$1$1;->this$1:Lcom/facebook/imagepipeline/backends/okhttp3/OkHttpNetworkFetcher$1;
@@ -45,5 +46,6 @@
 
     invoke-interface {v0}, Lokhttp3/Call;->cancel()V
 
+    .line 144
     return-void
 .end method

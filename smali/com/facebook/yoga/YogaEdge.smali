@@ -4,9 +4,6 @@
 
 
 # annotations
-.annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-.end annotation
-
 .annotation system Ldalvik/annotation/Signature;
     value = {
         "Ljava/lang/Enum<",
@@ -44,155 +41,144 @@
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 11
+    .locals 16
 
     .line 14
     new-instance v0, Lcom/facebook/yoga/YogaEdge;
 
-    const/4 v1, 0x0
+    const-string v1, "LEFT"
 
-    const-string v2, "LEFT"
+    const/4 v2, 0x0
 
-    invoke-direct {v0, v2, v1, v1}, Lcom/facebook/yoga/YogaEdge;-><init>(Ljava/lang/String;II)V
+    invoke-direct {v0, v1, v2, v2}, Lcom/facebook/yoga/YogaEdge;-><init>(Ljava/lang/String;II)V
 
     sput-object v0, Lcom/facebook/yoga/YogaEdge;->LEFT:Lcom/facebook/yoga/YogaEdge;
 
     .line 15
-    new-instance v0, Lcom/facebook/yoga/YogaEdge;
-
-    const/4 v2, 0x1
+    new-instance v1, Lcom/facebook/yoga/YogaEdge;
 
     const-string v3, "TOP"
 
-    invoke-direct {v0, v3, v2, v2}, Lcom/facebook/yoga/YogaEdge;-><init>(Ljava/lang/String;II)V
+    const/4 v4, 0x1
 
-    sput-object v0, Lcom/facebook/yoga/YogaEdge;->TOP:Lcom/facebook/yoga/YogaEdge;
+    invoke-direct {v1, v3, v4, v4}, Lcom/facebook/yoga/YogaEdge;-><init>(Ljava/lang/String;II)V
+
+    sput-object v1, Lcom/facebook/yoga/YogaEdge;->TOP:Lcom/facebook/yoga/YogaEdge;
 
     .line 16
-    new-instance v0, Lcom/facebook/yoga/YogaEdge;
+    new-instance v3, Lcom/facebook/yoga/YogaEdge;
 
-    const/4 v3, 0x2
+    const-string v5, "RIGHT"
 
-    const-string v4, "RIGHT"
+    const/4 v6, 0x2
 
-    invoke-direct {v0, v4, v3, v3}, Lcom/facebook/yoga/YogaEdge;-><init>(Ljava/lang/String;II)V
+    invoke-direct {v3, v5, v6, v6}, Lcom/facebook/yoga/YogaEdge;-><init>(Ljava/lang/String;II)V
 
-    sput-object v0, Lcom/facebook/yoga/YogaEdge;->RIGHT:Lcom/facebook/yoga/YogaEdge;
+    sput-object v3, Lcom/facebook/yoga/YogaEdge;->RIGHT:Lcom/facebook/yoga/YogaEdge;
 
     .line 17
-    new-instance v0, Lcom/facebook/yoga/YogaEdge;
+    new-instance v5, Lcom/facebook/yoga/YogaEdge;
 
-    const/4 v4, 0x3
+    const-string v7, "BOTTOM"
 
-    const-string v5, "BOTTOM"
+    const/4 v8, 0x3
 
-    invoke-direct {v0, v5, v4, v4}, Lcom/facebook/yoga/YogaEdge;-><init>(Ljava/lang/String;II)V
+    invoke-direct {v5, v7, v8, v8}, Lcom/facebook/yoga/YogaEdge;-><init>(Ljava/lang/String;II)V
 
-    sput-object v0, Lcom/facebook/yoga/YogaEdge;->BOTTOM:Lcom/facebook/yoga/YogaEdge;
+    sput-object v5, Lcom/facebook/yoga/YogaEdge;->BOTTOM:Lcom/facebook/yoga/YogaEdge;
 
     .line 18
-    new-instance v0, Lcom/facebook/yoga/YogaEdge;
+    new-instance v7, Lcom/facebook/yoga/YogaEdge;
 
-    const/4 v5, 0x4
+    const-string v9, "START"
 
-    const-string v6, "START"
+    const/4 v10, 0x4
 
-    invoke-direct {v0, v6, v5, v5}, Lcom/facebook/yoga/YogaEdge;-><init>(Ljava/lang/String;II)V
+    invoke-direct {v7, v9, v10, v10}, Lcom/facebook/yoga/YogaEdge;-><init>(Ljava/lang/String;II)V
 
-    sput-object v0, Lcom/facebook/yoga/YogaEdge;->START:Lcom/facebook/yoga/YogaEdge;
+    sput-object v7, Lcom/facebook/yoga/YogaEdge;->START:Lcom/facebook/yoga/YogaEdge;
 
     .line 19
-    new-instance v0, Lcom/facebook/yoga/YogaEdge;
+    new-instance v9, Lcom/facebook/yoga/YogaEdge;
 
-    const/4 v6, 0x5
+    const-string v11, "END"
 
-    const-string v7, "END"
+    const/4 v12, 0x5
 
-    invoke-direct {v0, v7, v6, v6}, Lcom/facebook/yoga/YogaEdge;-><init>(Ljava/lang/String;II)V
+    invoke-direct {v9, v11, v12, v12}, Lcom/facebook/yoga/YogaEdge;-><init>(Ljava/lang/String;II)V
 
-    sput-object v0, Lcom/facebook/yoga/YogaEdge;->END:Lcom/facebook/yoga/YogaEdge;
+    sput-object v9, Lcom/facebook/yoga/YogaEdge;->END:Lcom/facebook/yoga/YogaEdge;
 
     .line 20
-    new-instance v0, Lcom/facebook/yoga/YogaEdge;
+    new-instance v11, Lcom/facebook/yoga/YogaEdge;
 
-    const/4 v7, 0x6
+    const-string v13, "HORIZONTAL"
 
-    const-string v8, "HORIZONTAL"
+    const/4 v14, 0x6
 
-    invoke-direct {v0, v8, v7, v7}, Lcom/facebook/yoga/YogaEdge;-><init>(Ljava/lang/String;II)V
+    invoke-direct {v11, v13, v14, v14}, Lcom/facebook/yoga/YogaEdge;-><init>(Ljava/lang/String;II)V
 
-    sput-object v0, Lcom/facebook/yoga/YogaEdge;->HORIZONTAL:Lcom/facebook/yoga/YogaEdge;
+    sput-object v11, Lcom/facebook/yoga/YogaEdge;->HORIZONTAL:Lcom/facebook/yoga/YogaEdge;
 
     .line 21
-    new-instance v0, Lcom/facebook/yoga/YogaEdge;
+    new-instance v13, Lcom/facebook/yoga/YogaEdge;
 
-    const/4 v8, 0x7
+    const-string v15, "VERTICAL"
 
-    const-string v9, "VERTICAL"
+    const/4 v14, 0x7
 
-    invoke-direct {v0, v9, v8, v8}, Lcom/facebook/yoga/YogaEdge;-><init>(Ljava/lang/String;II)V
+    invoke-direct {v13, v15, v14, v14}, Lcom/facebook/yoga/YogaEdge;-><init>(Ljava/lang/String;II)V
 
-    sput-object v0, Lcom/facebook/yoga/YogaEdge;->VERTICAL:Lcom/facebook/yoga/YogaEdge;
+    sput-object v13, Lcom/facebook/yoga/YogaEdge;->VERTICAL:Lcom/facebook/yoga/YogaEdge;
 
     .line 22
-    new-instance v0, Lcom/facebook/yoga/YogaEdge;
+    new-instance v15, Lcom/facebook/yoga/YogaEdge;
 
-    const/16 v9, 0x8
+    const-string v14, "ALL"
 
-    const-string v10, "ALL"
+    const/16 v12, 0x8
 
-    invoke-direct {v0, v10, v9, v9}, Lcom/facebook/yoga/YogaEdge;-><init>(Ljava/lang/String;II)V
+    invoke-direct {v15, v14, v12, v12}, Lcom/facebook/yoga/YogaEdge;-><init>(Ljava/lang/String;II)V
 
-    sput-object v0, Lcom/facebook/yoga/YogaEdge;->ALL:Lcom/facebook/yoga/YogaEdge;
-
-    const/16 v0, 0x9
+    sput-object v15, Lcom/facebook/yoga/YogaEdge;->ALL:Lcom/facebook/yoga/YogaEdge;
 
     .line 12
-    new-array v0, v0, [Lcom/facebook/yoga/YogaEdge;
+    const/16 v14, 0x9
 
-    sget-object v10, Lcom/facebook/yoga/YogaEdge;->LEFT:Lcom/facebook/yoga/YogaEdge;
+    new-array v14, v14, [Lcom/facebook/yoga/YogaEdge;
 
-    aput-object v10, v0, v1
+    aput-object v0, v14, v2
 
-    sget-object v1, Lcom/facebook/yoga/YogaEdge;->TOP:Lcom/facebook/yoga/YogaEdge;
+    aput-object v1, v14, v4
 
-    aput-object v1, v0, v2
+    aput-object v3, v14, v6
 
-    sget-object v1, Lcom/facebook/yoga/YogaEdge;->RIGHT:Lcom/facebook/yoga/YogaEdge;
+    aput-object v5, v14, v8
 
-    aput-object v1, v0, v3
+    aput-object v7, v14, v10
 
-    sget-object v1, Lcom/facebook/yoga/YogaEdge;->BOTTOM:Lcom/facebook/yoga/YogaEdge;
+    const/4 v0, 0x5
 
-    aput-object v1, v0, v4
+    aput-object v9, v14, v0
 
-    sget-object v1, Lcom/facebook/yoga/YogaEdge;->START:Lcom/facebook/yoga/YogaEdge;
+    const/4 v0, 0x6
 
-    aput-object v1, v0, v5
+    aput-object v11, v14, v0
 
-    sget-object v1, Lcom/facebook/yoga/YogaEdge;->END:Lcom/facebook/yoga/YogaEdge;
+    const/4 v0, 0x7
 
-    aput-object v1, v0, v6
+    aput-object v13, v14, v0
 
-    sget-object v1, Lcom/facebook/yoga/YogaEdge;->HORIZONTAL:Lcom/facebook/yoga/YogaEdge;
+    aput-object v15, v14, v12
 
-    aput-object v1, v0, v7
-
-    sget-object v1, Lcom/facebook/yoga/YogaEdge;->VERTICAL:Lcom/facebook/yoga/YogaEdge;
-
-    aput-object v1, v0, v8
-
-    sget-object v1, Lcom/facebook/yoga/YogaEdge;->ALL:Lcom/facebook/yoga/YogaEdge;
-
-    aput-object v1, v0, v9
-
-    sput-object v0, Lcom/facebook/yoga/YogaEdge;->$VALUES:[Lcom/facebook/yoga/YogaEdge;
+    sput-object v14, Lcom/facebook/yoga/YogaEdge;->$VALUES:[Lcom/facebook/yoga/YogaEdge;
 
     return-void
 .end method
 
 .method private constructor <init>(Ljava/lang/String;II)V
     .locals 0
+    .param p3, "intValue"    # I
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(I)V"
@@ -205,12 +191,15 @@
     .line 27
     iput p3, p0, Lcom/facebook/yoga/YogaEdge;->mIntValue:I
 
+    .line 28
     return-void
 .end method
 
 .method public static fromInt(I)Lcom/facebook/yoga/YogaEdge;
     .locals 3
+    .param p0, "value"    # I
 
+    .line 35
     packed-switch p0, :pswitch_data_0
 
     .line 45
@@ -224,69 +213,73 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     invoke-virtual {v1, p0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object p0
+    move-result-object v1
 
-    invoke-direct {v0, p0}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
 
     throw v0
 
     .line 44
     :pswitch_0
-    sget-object p0, Lcom/facebook/yoga/YogaEdge;->ALL:Lcom/facebook/yoga/YogaEdge;
+    sget-object v0, Lcom/facebook/yoga/YogaEdge;->ALL:Lcom/facebook/yoga/YogaEdge;
 
-    return-object p0
+    return-object v0
 
     .line 43
     :pswitch_1
-    sget-object p0, Lcom/facebook/yoga/YogaEdge;->VERTICAL:Lcom/facebook/yoga/YogaEdge;
+    sget-object v0, Lcom/facebook/yoga/YogaEdge;->VERTICAL:Lcom/facebook/yoga/YogaEdge;
 
-    return-object p0
+    return-object v0
 
     .line 42
     :pswitch_2
-    sget-object p0, Lcom/facebook/yoga/YogaEdge;->HORIZONTAL:Lcom/facebook/yoga/YogaEdge;
+    sget-object v0, Lcom/facebook/yoga/YogaEdge;->HORIZONTAL:Lcom/facebook/yoga/YogaEdge;
 
-    return-object p0
+    return-object v0
 
     .line 41
     :pswitch_3
-    sget-object p0, Lcom/facebook/yoga/YogaEdge;->END:Lcom/facebook/yoga/YogaEdge;
+    sget-object v0, Lcom/facebook/yoga/YogaEdge;->END:Lcom/facebook/yoga/YogaEdge;
 
-    return-object p0
+    return-object v0
 
     .line 40
     :pswitch_4
-    sget-object p0, Lcom/facebook/yoga/YogaEdge;->START:Lcom/facebook/yoga/YogaEdge;
+    sget-object v0, Lcom/facebook/yoga/YogaEdge;->START:Lcom/facebook/yoga/YogaEdge;
 
-    return-object p0
+    return-object v0
 
     .line 39
     :pswitch_5
-    sget-object p0, Lcom/facebook/yoga/YogaEdge;->BOTTOM:Lcom/facebook/yoga/YogaEdge;
+    sget-object v0, Lcom/facebook/yoga/YogaEdge;->BOTTOM:Lcom/facebook/yoga/YogaEdge;
 
-    return-object p0
+    return-object v0
 
     .line 38
     :pswitch_6
-    sget-object p0, Lcom/facebook/yoga/YogaEdge;->RIGHT:Lcom/facebook/yoga/YogaEdge;
+    sget-object v0, Lcom/facebook/yoga/YogaEdge;->RIGHT:Lcom/facebook/yoga/YogaEdge;
 
-    return-object p0
+    return-object v0
 
     .line 37
     :pswitch_7
-    sget-object p0, Lcom/facebook/yoga/YogaEdge;->TOP:Lcom/facebook/yoga/YogaEdge;
+    sget-object v0, Lcom/facebook/yoga/YogaEdge;->TOP:Lcom/facebook/yoga/YogaEdge;
 
-    return-object p0
+    return-object v0
 
     .line 36
     :pswitch_8
-    sget-object p0, Lcom/facebook/yoga/YogaEdge;->LEFT:Lcom/facebook/yoga/YogaEdge;
+    sget-object v0, Lcom/facebook/yoga/YogaEdge;->LEFT:Lcom/facebook/yoga/YogaEdge;
 
-    return-object p0
+    return-object v0
 
     nop
 
@@ -306,17 +299,18 @@
 
 .method public static valueOf(Ljava/lang/String;)Lcom/facebook/yoga/YogaEdge;
     .locals 1
+    .param p0, "name"    # Ljava/lang/String;
 
     .line 12
     const-class v0, Lcom/facebook/yoga/YogaEdge;
 
     invoke-static {v0, p0}, Ljava/lang/Enum;->valueOf(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
 
-    move-result-object p0
+    move-result-object v0
 
-    check-cast p0, Lcom/facebook/yoga/YogaEdge;
+    check-cast v0, Lcom/facebook/yoga/YogaEdge;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method public static values()[Lcom/facebook/yoga/YogaEdge;

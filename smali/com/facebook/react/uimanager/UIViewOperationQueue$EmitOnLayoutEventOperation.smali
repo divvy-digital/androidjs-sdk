@@ -29,6 +29,11 @@
 # direct methods
 .method public constructor <init>(Lcom/facebook/react/uimanager/UIViewOperationQueue;IIIII)V
     .locals 0
+    .param p2, "tag"    # I
+    .param p3, "screenX"    # I
+    .param p4, "screenY"    # I
+    .param p5, "screenWidth"    # I
+    .param p6, "screenHeight"    # I
 
     .line 111
     iput-object p1, p0, Lcom/facebook/react/uimanager/UIViewOperationQueue$EmitOnLayoutEventOperation;->this$0:Lcom/facebook/react/uimanager/UIViewOperationQueue;
@@ -48,6 +53,7 @@
     .line 116
     iput p6, p0, Lcom/facebook/react/uimanager/UIViewOperationQueue$EmitOnLayoutEventOperation;->mScreenHeight:I
 
+    .line 117
     return-void
 .end method
 
@@ -93,5 +99,6 @@
 
     invoke-virtual {v0, v1}, Lcom/facebook/react/uimanager/events/EventDispatcher;->dispatchEvent(Lcom/facebook/react/uimanager/events/Event;)V
 
+    .line 129
     return-void
 .end method

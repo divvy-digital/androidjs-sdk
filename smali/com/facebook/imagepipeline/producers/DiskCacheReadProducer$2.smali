@@ -23,6 +23,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/imagepipeline/producers/DiskCacheReadProducer;Ljava/util/concurrent/atomic/AtomicBoolean;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/imagepipeline/producers/DiskCacheReadProducer;
 
     .line 164
     iput-object p1, p0, Lcom/facebook/imagepipeline/producers/DiskCacheReadProducer$2;->this$0:Lcom/facebook/imagepipeline/producers/DiskCacheReadProducer;
@@ -46,5 +47,6 @@
 
     invoke-virtual {v0, v1}, Ljava/util/concurrent/atomic/AtomicBoolean;->set(Z)V
 
+    .line 168
     return-void
 .end method

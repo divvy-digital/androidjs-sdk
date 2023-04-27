@@ -46,7 +46,8 @@
 
 # direct methods
 .method constructor <init>(Lokhttp3/internal/cache/DiskLruCache;)V
-    .locals 1
+    .locals 2
+    .param p1, "this$0"    # Lokhttp3/internal/cache/DiskLruCache;
 
     .line 737
     iput-object p1, p0, Lokhttp3/internal/cache/DiskLruCache$3;->this$0:Lokhttp3/internal/cache/DiskLruCache;
@@ -54,23 +55,21 @@
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     .line 739
-    new-instance p1, Ljava/util/ArrayList;
+    new-instance v0, Ljava/util/ArrayList;
 
-    iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache$3;->this$0:Lokhttp3/internal/cache/DiskLruCache;
+    iget-object v1, p1, Lokhttp3/internal/cache/DiskLruCache;->lruEntries:Ljava/util/LinkedHashMap;
 
-    iget-object v0, v0, Lokhttp3/internal/cache/DiskLruCache;->lruEntries:Ljava/util/LinkedHashMap;
+    invoke-virtual {v1}, Ljava/util/LinkedHashMap;->values()Ljava/util/Collection;
 
-    invoke-virtual {v0}, Ljava/util/LinkedHashMap;->values()Ljava/util/Collection;
+    move-result-object v1
+
+    invoke-direct {v0, v1}, Ljava/util/ArrayList;-><init>(Ljava/util/Collection;)V
+
+    invoke-virtual {v0}, Ljava/util/ArrayList;->iterator()Ljava/util/Iterator;
 
     move-result-object v0
 
-    invoke-direct {p1, v0}, Ljava/util/ArrayList;-><init>(Ljava/util/Collection;)V
-
-    invoke-virtual {p1}, Ljava/util/ArrayList;->iterator()Ljava/util/Iterator;
-
-    move-result-object p1
-
-    iput-object p1, p0, Lokhttp3/internal/cache/DiskLruCache$3;->delegate:Ljava/util/Iterator;
+    iput-object v0, p0, Lokhttp3/internal/cache/DiskLruCache$3;->delegate:Ljava/util/Iterator;
 
     return-void
 .end method
@@ -78,7 +77,7 @@
 
 # virtual methods
 .method public hasNext()Z
-    .locals 4
+    .locals 5
 
     .line 748
     iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache$3;->nextSnapshot:Lokhttp3/internal/cache/DiskLruCache$Snapshot;
@@ -130,17 +129,20 @@
     check-cast v2, Lokhttp3/internal/cache/DiskLruCache$Entry;
 
     .line 756
+    .local v2, "entry":Lokhttp3/internal/cache/DiskLruCache$Entry;
     invoke-virtual {v2}, Lokhttp3/internal/cache/DiskLruCache$Entry;->snapshot()Lokhttp3/internal/cache/DiskLruCache$Snapshot;
 
-    move-result-object v2
+    move-result-object v4
 
-    if-nez v2, :cond_2
+    .line 757
+    .local v4, "snapshot":Lokhttp3/internal/cache/DiskLruCache$Snapshot;
+    if-nez v4, :cond_2
 
     goto :goto_0
 
     .line 758
     :cond_2
-    iput-object v2, p0, Lokhttp3/internal/cache/DiskLruCache$3;->nextSnapshot:Lokhttp3/internal/cache/DiskLruCache$Snapshot;
+    iput-object v4, p0, Lokhttp3/internal/cache/DiskLruCache$3;->nextSnapshot:Lokhttp3/internal/cache/DiskLruCache$Snapshot;
 
     .line 759
     monitor-exit v0
@@ -148,11 +150,15 @@
     return v1
 
     .line 761
+    .end local v2    # "entry":Lokhttp3/internal/cache/DiskLruCache$Entry;
+    .end local v4    # "snapshot":Lokhttp3/internal/cache/DiskLruCache$Snapshot;
     :cond_3
     monitor-exit v0
 
+    .line 763
     return v3
 
+    .line 761
     :catchall_0
     move-exception v1
 
@@ -160,13 +166,7 @@
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    goto :goto_2
-
-    :goto_1
     throw v1
-
-    :goto_2
-    goto :goto_1
 .end method
 
 .method public bridge synthetic next()Ljava/lang/Object;
@@ -181,7 +181,7 @@
 .end method
 
 .method public next()Lokhttp3/internal/cache/DiskLruCache$Snapshot;
-    .locals 1
+    .locals 2
 
     .line 767
     invoke-virtual {p0}, Lokhttp3/internal/cache/DiskLruCache$3;->hasNext()Z
@@ -195,14 +195,12 @@
 
     iput-object v0, p0, Lokhttp3/internal/cache/DiskLruCache$3;->removeSnapshot:Lokhttp3/internal/cache/DiskLruCache$Snapshot;
 
-    const/4 v0, 0x0
-
     .line 769
-    iput-object v0, p0, Lokhttp3/internal/cache/DiskLruCache$3;->nextSnapshot:Lokhttp3/internal/cache/DiskLruCache$Snapshot;
+    const/4 v1, 0x0
+
+    iput-object v1, p0, Lokhttp3/internal/cache/DiskLruCache$3;->nextSnapshot:Lokhttp3/internal/cache/DiskLruCache$Snapshot;
 
     .line 770
-    iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache$3;->removeSnapshot:Lokhttp3/internal/cache/DiskLruCache$Snapshot;
-
     return-object v0
 
     .line 767
@@ -222,9 +220,9 @@
 
     if-eqz v0, :cond_0
 
+    .line 776
     const/4 v1, 0x0
 
-    .line 776
     :try_start_0
     iget-object v2, p0, Lokhttp3/internal/cache/DiskLruCache$3;->this$0:Lokhttp3/internal/cache/DiskLruCache;
 
@@ -239,18 +237,26 @@
 
     goto :goto_0
 
+    .line 781
     :catchall_0
     move-exception v0
 
-    .line 781
     iput-object v1, p0, Lokhttp3/internal/cache/DiskLruCache$3;->removeSnapshot:Lokhttp3/internal/cache/DiskLruCache$Snapshot;
 
     throw v0
 
+    .line 777
     :catch_0
+    move-exception v0
+
+    .line 781
     :goto_0
     iput-object v1, p0, Lokhttp3/internal/cache/DiskLruCache$3;->removeSnapshot:Lokhttp3/internal/cache/DiskLruCache$Snapshot;
 
+    .line 782
+    nop
+
+    .line 783
     return-void
 
     .line 774

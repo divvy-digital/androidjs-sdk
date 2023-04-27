@@ -14,12 +14,14 @@
 .end method
 
 .method public static create(Lokhttp3/MediaType;Ljava/io/File;)Lokhttp3/RequestBody;
-    .locals 1
-    .param p0    # Lokhttp3/MediaType;
+    .locals 2
+    .param p0, "contentType"    # Lokhttp3/MediaType;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
+    .param p1, "file"    # Ljava/io/File;
 
+    .line 105
     if-eqz p1, :cond_0
 
     .line 107
@@ -31,25 +33,28 @@
 
     .line 105
     :cond_0
-    new-instance p0, Ljava/lang/NullPointerException;
+    new-instance v0, Ljava/lang/NullPointerException;
 
-    const-string p1, "file == null"
+    const-string v1, "file == null"
 
-    invoke-direct {p0, p1}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
 
-    throw p0
+    throw v0
 .end method
 
 .method public static create(Lokhttp3/MediaType;Ljava/lang/String;)Lokhttp3/RequestBody;
-    .locals 2
-    .param p0    # Lokhttp3/MediaType;
+    .locals 3
+    .param p0, "contentType"    # Lokhttp3/MediaType;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
+    .param p1, "content"    # Ljava/lang/String;
 
     .line 48
     sget-object v0, Lokhttp3/internal/Util;->UTF_8:Ljava/nio/charset/Charset;
 
+    .line 49
+    .local v0, "charset":Ljava/nio/charset/Charset;
     if-eqz p0, :cond_0
 
     .line 50
@@ -57,6 +62,7 @@
 
     move-result-object v0
 
+    .line 51
     if-nez v0, :cond_0
 
     .line 52
@@ -69,15 +75,19 @@
 
     invoke-virtual {v1, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
 
-    const-string p0, "; charset=utf-8"
+    move-result-object v1
 
-    invoke-virtual {v1, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    const-string v2, "; charset=utf-8"
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object p0
+    move-result-object v1
 
-    invoke-static {p0}, Lokhttp3/MediaType;->parse(Ljava/lang/String;)Lokhttp3/MediaType;
+    invoke-static {v1}, Lokhttp3/MediaType;->parse(Ljava/lang/String;)Lokhttp3/MediaType;
 
     move-result-object p0
 
@@ -85,22 +95,24 @@
     :cond_0
     invoke-virtual {p1, v0}, Ljava/lang/String;->getBytes(Ljava/nio/charset/Charset;)[B
 
-    move-result-object p1
+    move-result-object v1
 
     .line 57
-    invoke-static {p0, p1}, Lokhttp3/RequestBody;->create(Lokhttp3/MediaType;[B)Lokhttp3/RequestBody;
+    .local v1, "bytes":[B
+    invoke-static {p0, v1}, Lokhttp3/RequestBody;->create(Lokhttp3/MediaType;[B)Lokhttp3/RequestBody;
 
-    move-result-object p0
+    move-result-object v2
 
-    return-object p0
+    return-object v2
 .end method
 
 .method public static create(Lokhttp3/MediaType;Lokio/ByteString;)Lokhttp3/RequestBody;
     .locals 1
-    .param p0    # Lokhttp3/MediaType;
+    .param p0, "contentType"    # Lokhttp3/MediaType;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
+    .param p1, "content"    # Lokio/ByteString;
 
     .line 63
     new-instance v0, Lokhttp3/RequestBody$1;
@@ -112,30 +124,35 @@
 
 .method public static create(Lokhttp3/MediaType;[B)Lokhttp3/RequestBody;
     .locals 2
-    .param p0    # Lokhttp3/MediaType;
+    .param p0, "contentType"    # Lokhttp3/MediaType;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
+    .param p1, "content"    # [B
 
     .line 80
-    array-length v0, p1
+    const/4 v0, 0x0
 
-    const/4 v1, 0x0
+    array-length v1, p1
 
-    invoke-static {p0, p1, v1, v0}, Lokhttp3/RequestBody;->create(Lokhttp3/MediaType;[BII)Lokhttp3/RequestBody;
+    invoke-static {p0, p1, v0, v1}, Lokhttp3/RequestBody;->create(Lokhttp3/MediaType;[BII)Lokhttp3/RequestBody;
 
-    move-result-object p0
+    move-result-object v0
 
-    return-object p0
+    return-object v0
 .end method
 
 .method public static create(Lokhttp3/MediaType;[BII)Lokhttp3/RequestBody;
     .locals 7
-    .param p0    # Lokhttp3/MediaType;
+    .param p0, "contentType"    # Lokhttp3/MediaType;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
+    .param p1, "content"    # [B
+    .param p2, "offset"    # I
+    .param p3, "byteCount"    # I
 
+    .line 86
     if-eqz p1, :cond_0
 
     .line 87
@@ -158,13 +175,13 @@
 
     .line 86
     :cond_0
-    new-instance p0, Ljava/lang/NullPointerException;
+    new-instance v0, Ljava/lang/NullPointerException;
 
-    const-string p1, "content == null"
+    const-string v1, "content == null"
 
-    invoke-direct {p0, p1}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
 
-    throw p0
+    throw v0
 .end method
 
 
@@ -177,6 +194,7 @@
         }
     .end annotation
 
+    .line 37
     const-wide/16 v0, -0x1
 
     return-wide v0

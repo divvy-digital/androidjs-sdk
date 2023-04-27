@@ -24,6 +24,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/modules/camera/ImageEditingManager$CleanTask;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/modules/camera/ImageEditingManager$CleanTask;
 
     .line 140
     iput-object p1, p0, Lcom/facebook/react/modules/camera/ImageEditingManager$CleanTask$1;->this$0:Lcom/facebook/react/modules/camera/ImageEditingManager$CleanTask;
@@ -36,14 +37,16 @@
 
 # virtual methods
 .method public accept(Ljava/io/File;Ljava/lang/String;)Z
-    .locals 0
-
-    const-string p1, "ReactNative_cropped_image_"
+    .locals 1
+    .param p1, "dir"    # Ljava/io/File;
+    .param p2, "filename"    # Ljava/lang/String;
 
     .line 143
-    invoke-virtual {p2, p1}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+    const-string v0, "ReactNative_cropped_image_"
 
-    move-result p1
+    invoke-virtual {p2, v0}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
 
-    return p1
+    move-result v0
+
+    return v0
 .end method

@@ -17,7 +17,12 @@
 .end method
 
 .method public static possiblyUpdateInlineImageSpans(Landroid/text/Spannable;Landroid/widget/TextView;)V
-    .locals 3
+    .locals 4
+    .param p0, "spannable"    # Landroid/text/Spannable;
+    .param p1, "view"    # Landroid/widget/TextView;
+
+    .line 31
+    nop
 
     .line 32
     invoke-interface {p0}, Landroid/text/Spannable;->length()I
@@ -30,28 +35,33 @@
 
     invoke-interface {p0, v2, v0, v1}, Landroid/text/Spannable;->getSpans(IILjava/lang/Class;)[Ljava/lang/Object;
 
-    move-result-object p0
+    move-result-object v0
 
-    check-cast p0, [Lcom/facebook/react/views/text/TextInlineImageSpan;
+    check-cast v0, [Lcom/facebook/react/views/text/TextInlineImageSpan;
 
     .line 33
-    array-length v0, p0
+    .local v0, "spans":[Lcom/facebook/react/views/text/TextInlineImageSpan;
+    array-length v1, v0
 
     :goto_0
-    if-ge v2, v0, :cond_0
+    if-ge v2, v1, :cond_0
 
-    aget-object v1, p0, v2
+    aget-object v3, v0, v2
 
     .line 34
-    invoke-virtual {v1}, Lcom/facebook/react/views/text/TextInlineImageSpan;->onAttachedToWindow()V
+    .local v3, "span":Lcom/facebook/react/views/text/TextInlineImageSpan;
+    invoke-virtual {v3}, Lcom/facebook/react/views/text/TextInlineImageSpan;->onAttachedToWindow()V
 
     .line 35
-    invoke-virtual {v1, p1}, Lcom/facebook/react/views/text/TextInlineImageSpan;->setTextView(Landroid/widget/TextView;)V
+    invoke-virtual {v3, p1}, Lcom/facebook/react/views/text/TextInlineImageSpan;->setTextView(Landroid/widget/TextView;)V
 
+    .line 33
+    .end local v3    # "span":Lcom/facebook/react/views/text/TextInlineImageSpan;
     add-int/lit8 v2, v2, 0x1
 
     goto :goto_0
 
+    .line 37
     :cond_0
     return-void
 .end method

@@ -49,6 +49,7 @@
     .locals 0
 
     .line 16
+    .local p0, "this":Lcom/facebook/drawee/controller/BaseControllerListener;, "Lcom/facebook/drawee/controller/BaseControllerListener<TINFO;>;"
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     return-void
@@ -76,17 +77,22 @@
 # virtual methods
 .method public onFailure(Ljava/lang/String;Ljava/lang/Throwable;)V
     .locals 0
+    .param p1, "id"    # Ljava/lang/String;
+    .param p2, "throwable"    # Ljava/lang/Throwable;
 
+    .line 48
+    .local p0, "this":Lcom/facebook/drawee/controller/BaseControllerListener;, "Lcom/facebook/drawee/controller/BaseControllerListener<TINFO;>;"
     return-void
 .end method
 
 .method public onFinalImageSet(Ljava/lang/String;Ljava/lang/Object;Landroid/graphics/drawable/Animatable;)V
     .locals 0
+    .param p1, "id"    # Ljava/lang/String;
     .param p2    # Ljava/lang/Object;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
-    .param p3    # Landroid/graphics/drawable/Animatable;
+    .param p3, "animatable"    # Landroid/graphics/drawable/Animatable;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -100,17 +106,25 @@
         }
     .end annotation
 
+    .line 36
+    .local p0, "this":Lcom/facebook/drawee/controller/BaseControllerListener;, "Lcom/facebook/drawee/controller/BaseControllerListener<TINFO;>;"
+    .local p2, "imageInfo":Ljava/lang/Object;, "TINFO;"
     return-void
 .end method
 
 .method public onIntermediateImageFailed(Ljava/lang/String;Ljava/lang/Throwable;)V
     .locals 0
+    .param p1, "id"    # Ljava/lang/String;
+    .param p2, "throwable"    # Ljava/lang/Throwable;
 
+    .line 44
+    .local p0, "this":Lcom/facebook/drawee/controller/BaseControllerListener;, "Lcom/facebook/drawee/controller/BaseControllerListener<TINFO;>;"
     return-void
 .end method
 
 .method public onIntermediateImageSet(Ljava/lang/String;Ljava/lang/Object;)V
     .locals 0
+    .param p1, "id"    # Ljava/lang/String;
     .param p2    # Ljava/lang/Object;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
@@ -123,17 +137,27 @@
         }
     .end annotation
 
+    .line 40
+    .local p0, "this":Lcom/facebook/drawee/controller/BaseControllerListener;, "Lcom/facebook/drawee/controller/BaseControllerListener<TINFO;>;"
+    .local p2, "imageInfo":Ljava/lang/Object;, "TINFO;"
     return-void
 .end method
 
 .method public onRelease(Ljava/lang/String;)V
     .locals 0
+    .param p1, "id"    # Ljava/lang/String;
 
+    .line 52
+    .local p0, "this":Lcom/facebook/drawee/controller/BaseControllerListener;, "Lcom/facebook/drawee/controller/BaseControllerListener<TINFO;>;"
     return-void
 .end method
 
 .method public onSubmit(Ljava/lang/String;Ljava/lang/Object;)V
     .locals 0
+    .param p1, "id"    # Ljava/lang/String;
+    .param p2, "callerContext"    # Ljava/lang/Object;
 
+    .line 29
+    .local p0, "this":Lcom/facebook/drawee/controller/BaseControllerListener;, "Lcom/facebook/drawee/controller/BaseControllerListener<TINFO;>;"
     return-void
 .end method

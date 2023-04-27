@@ -21,6 +21,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/packagerconnection/FileIoHandler;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/packagerconnection/FileIoHandler;
 
     .line 99
     iput-object p1, p0, Lcom/facebook/react/packagerconnection/FileIoHandler$2;->this$0:Lcom/facebook/react/packagerconnection/FileIoHandler;
@@ -33,11 +34,12 @@
 
 # virtual methods
 .method public onRequest(Ljava/lang/Object;Lcom/facebook/react/packagerconnection/Responder;)V
-    .locals 3
-    .param p1    # Ljava/lang/Object;
+    .locals 4
+    .param p1, "params"    # Ljava/lang/Object;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
+    .param p2, "responder"    # Lcom/facebook/react/packagerconnection/Responder;
 
     .line 103
     iget-object v0, p0, Lcom/facebook/react/packagerconnection/FileIoHandler$2;->this$0:Lcom/facebook/react/packagerconnection/FileIoHandler;
@@ -79,6 +81,8 @@
 
     check-cast v1, Lcom/facebook/react/packagerconnection/FileIoHandler$TtlFileInputStream;
 
+    .line 109
+    .local v1, "stream":Lcom/facebook/react/packagerconnection/FileIoHandler$TtlFileInputStream;
     if-eqz v1, :cond_0
 
     .line 113
@@ -88,77 +92,97 @@
 
     move-result-object v2
 
-    check-cast p1, Ljava/lang/Integer;
+    move-object v3, p1
 
-    invoke-virtual {p1}, Ljava/lang/Integer;->intValue()I
+    check-cast v3, Ljava/lang/Integer;
 
-    move-result p1
+    invoke-virtual {v3}, Ljava/lang/Integer;->intValue()I
 
-    invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    move-result v3
 
-    move-result-object p1
+    invoke-static {v3}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    invoke-interface {v2, p1}, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;
+    move-result-object v3
+
+    invoke-interface {v2, v3}, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;
 
     .line 114
     invoke-virtual {v1}, Lcom/facebook/react/packagerconnection/FileIoHandler$TtlFileInputStream;->close()V
 
-    const-string p1, ""
-
     .line 115
-    invoke-interface {p2, p1}, Lcom/facebook/react/packagerconnection/Responder;->respond(Ljava/lang/Object;)V
+    const-string v2, ""
 
+    invoke-interface {p2, v2}, Lcom/facebook/react/packagerconnection/Responder;->respond(Ljava/lang/Object;)V
+
+    .line 118
+    .end local v1    # "stream":Lcom/facebook/react/packagerconnection/FileIoHandler$TtlFileInputStream;
     goto :goto_0
 
     .line 110
+    .restart local v1    # "stream":Lcom/facebook/react/packagerconnection/FileIoHandler$TtlFileInputStream;
     :cond_0
-    new-instance p1, Ljava/lang/Exception;
+    new-instance v2, Ljava/lang/Exception;
 
-    const-string v1, "invalid file handle, it might have timed out"
+    const-string v3, "invalid file handle, it might have timed out"
 
-    invoke-direct {p1, v1}, Ljava/lang/Exception;-><init>(Ljava/lang/String;)V
+    invoke-direct {v2, v3}, Ljava/lang/Exception;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    .end local p1    # "params":Ljava/lang/Object;
+    .end local p2    # "responder":Lcom/facebook/react/packagerconnection/Responder;
+    throw v2
 
     .line 106
+    .end local v1    # "stream":Lcom/facebook/react/packagerconnection/FileIoHandler$TtlFileInputStream;
+    .restart local p1    # "params":Ljava/lang/Object;
+    .restart local p2    # "responder":Lcom/facebook/react/packagerconnection/Responder;
     :cond_1
-    new-instance p1, Ljava/lang/Exception;
+    new-instance v1, Ljava/lang/Exception;
 
-    const-string v1, "params must be a file handle"
+    const-string v2, "params must be a file handle"
 
-    invoke-direct {p1, v1}, Ljava/lang/Exception;-><init>(Ljava/lang/String;)V
+    invoke-direct {v1, v2}, Ljava/lang/Exception;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    .end local p1    # "params":Ljava/lang/Object;
+    .end local p2    # "responder":Lcom/facebook/react/packagerconnection/Responder;
+    throw v1
     :try_end_0
     .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
+    .line 119
+    .restart local p1    # "params":Ljava/lang/Object;
+    .restart local p2    # "responder":Lcom/facebook/react/packagerconnection/Responder;
     :catchall_0
-    move-exception p1
+    move-exception v1
 
     goto :goto_1
 
+    .line 116
     :catch_0
-    move-exception p1
+    move-exception v1
 
     .line 117
+    .local v1, "e":Ljava/lang/Exception;
     :try_start_1
-    invoke-virtual {p1}, Ljava/lang/Exception;->toString()Ljava/lang/String;
+    invoke-virtual {v1}, Ljava/lang/Exception;->toString()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v2
 
-    invoke-interface {p2, p1}, Lcom/facebook/react/packagerconnection/Responder;->error(Ljava/lang/Object;)V
+    invoke-interface {p2, v2}, Lcom/facebook/react/packagerconnection/Responder;->error(Ljava/lang/Object;)V
 
     .line 119
+    .end local v1    # "e":Ljava/lang/Exception;
     :goto_0
     monitor-exit v0
 
+    .line 120
     return-void
 
+    .line 119
     :goto_1
     monitor-exit v0
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
-    throw p1
+    throw v1
 .end method

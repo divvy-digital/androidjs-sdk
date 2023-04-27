@@ -25,6 +25,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/imagepipeline/producers/ResizeAndRotateProducer$TransformingConsumer;Lcom/facebook/imagepipeline/producers/ResizeAndRotateProducer;Lcom/facebook/imagepipeline/producers/Consumer;)V
     .locals 0
+    .param p1, "this$1"    # Lcom/facebook/imagepipeline/producers/ResizeAndRotateProducer$TransformingConsumer;
 
     .line 117
     iput-object p1, p0, Lcom/facebook/imagepipeline/producers/ResizeAndRotateProducer$TransformingConsumer$2;->this$1:Lcom/facebook/imagepipeline/producers/ResizeAndRotateProducer$TransformingConsumer;
@@ -64,6 +65,7 @@
 
     invoke-interface {v0}, Lcom/facebook/imagepipeline/producers/Consumer;->onCancellation()V
 
+    .line 130
     return-void
 .end method
 
@@ -92,6 +94,7 @@
 
     invoke-virtual {v0}, Lcom/facebook/imagepipeline/producers/JobScheduler;->scheduleJob()Z
 
+    .line 123
     :cond_0
     return-void
 .end method

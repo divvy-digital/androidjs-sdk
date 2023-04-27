@@ -24,6 +24,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/packagerconnection/ReconnectingWebSocket;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/packagerconnection/ReconnectingWebSocket;
 
     .line 98
     iput-object p1, p0, Lcom/facebook/react/packagerconnection/ReconnectingWebSocket$1;->this$0:Lcom/facebook/react/packagerconnection/ReconnectingWebSocket;
@@ -43,5 +44,6 @@
 
     invoke-static {v0}, Lcom/facebook/react/packagerconnection/ReconnectingWebSocket;->access$000(Lcom/facebook/react/packagerconnection/ReconnectingWebSocket;)V
 
+    .line 102
     return-void
 .end method

@@ -21,6 +21,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/packagerconnection/FileIoHandler;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/packagerconnection/FileIoHandler;
 
     .line 70
     iput-object p1, p0, Lcom/facebook/react/packagerconnection/FileIoHandler$1;->this$0:Lcom/facebook/react/packagerconnection/FileIoHandler;
@@ -33,11 +34,12 @@
 
 # virtual methods
 .method public onRequest(Ljava/lang/Object;Lcom/facebook/react/packagerconnection/Responder;)V
-    .locals 4
-    .param p1    # Ljava/lang/Object;
+    .locals 7
+    .param p1, "params"    # Ljava/lang/Object;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
+    .param p2, "responder"    # Lcom/facebook/react/packagerconnection/Responder;
 
     .line 74
     iget-object v0, p0, Lcom/facebook/react/packagerconnection/FileIoHandler$1;->this$0:Lcom/facebook/react/packagerconnection/FileIoHandler;
@@ -50,133 +52,177 @@
 
     .line 76
     :try_start_0
-    check-cast p1, Lorg/json/JSONObject;
+    move-object v1, p1
 
-    if-eqz p1, :cond_3
+    check-cast v1, Lorg/json/JSONObject;
 
-    const-string v1, "mode"
+    .line 77
+    .local v1, "paramsObj":Lorg/json/JSONObject;
+    if-eqz v1, :cond_3
 
     .line 80
-    invoke-virtual {p1, v1}, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
+    const-string v2, "mode"
 
-    move-result-object v1
+    invoke-virtual {v1, v2}, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
 
-    if-eqz v1, :cond_2
+    move-result-object v2
 
-    const-string v2, "filename"
+    .line 81
+    .local v2, "mode":Ljava/lang/String;
+    if-eqz v2, :cond_2
 
     .line 84
-    invoke-virtual {p1, v2}, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
+    const-string v3, "filename"
 
-    move-result-object p1
+    invoke-virtual {v1, v3}, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
 
-    if-eqz p1, :cond_1
+    move-result-object v3
 
-    const-string v2, "r"
+    .line 85
+    .local v3, "filename":Ljava/lang/String;
+    if-eqz v3, :cond_1
 
     .line 88
-    invoke-virtual {v1, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    const-string v4, "r"
 
-    move-result v2
+    invoke-virtual {v2, v4}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    if-eqz v2, :cond_0
+    move-result v4
+
+    if-eqz v4, :cond_0
 
     .line 92
-    iget-object v1, p0, Lcom/facebook/react/packagerconnection/FileIoHandler$1;->this$0:Lcom/facebook/react/packagerconnection/FileIoHandler;
+    iget-object v4, p0, Lcom/facebook/react/packagerconnection/FileIoHandler$1;->this$0:Lcom/facebook/react/packagerconnection/FileIoHandler;
 
-    invoke-static {v1, p1}, Lcom/facebook/react/packagerconnection/FileIoHandler;->access$100(Lcom/facebook/react/packagerconnection/FileIoHandler;Ljava/lang/String;)I
+    invoke-static {v4, v3}, Lcom/facebook/react/packagerconnection/FileIoHandler;->access$100(Lcom/facebook/react/packagerconnection/FileIoHandler;Ljava/lang/String;)I
 
-    move-result p1
+    move-result v4
 
-    invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    invoke-static {v4}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object p1
+    move-result-object v4
 
-    invoke-interface {p2, p1}, Lcom/facebook/react/packagerconnection/Responder;->respond(Ljava/lang/Object;)V
+    invoke-interface {p2, v4}, Lcom/facebook/react/packagerconnection/Responder;->respond(Ljava/lang/Object;)V
 
+    .line 95
+    .end local v1    # "paramsObj":Lorg/json/JSONObject;
+    .end local v2    # "mode":Ljava/lang/String;
+    .end local v3    # "filename":Ljava/lang/String;
     goto :goto_0
 
     .line 89
+    .restart local v1    # "paramsObj":Lorg/json/JSONObject;
+    .restart local v2    # "mode":Ljava/lang/String;
+    .restart local v3    # "filename":Ljava/lang/String;
     :cond_0
-    new-instance p1, Ljava/lang/IllegalArgumentException;
+    new-instance v4, Ljava/lang/IllegalArgumentException;
 
-    new-instance v2, Ljava/lang/StringBuilder;
+    new-instance v5, Ljava/lang/StringBuilder;
 
-    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v3, "unsupported mode: "
+    const-string v6, "unsupported mode: "
 
-    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v2, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v5
 
-    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual {v5, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v1
+    move-result-object v5
 
-    invoke-direct {p1, v1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    throw p1
+    move-result-object v5
+
+    invoke-direct {v4, v5}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+
+    .end local p1    # "params":Ljava/lang/Object;
+    .end local p2    # "responder":Lcom/facebook/react/packagerconnection/Responder;
+    throw v4
 
     .line 86
+    .restart local p1    # "params":Ljava/lang/Object;
+    .restart local p2    # "responder":Lcom/facebook/react/packagerconnection/Responder;
     :cond_1
-    new-instance p1, Ljava/lang/Exception;
+    new-instance v4, Ljava/lang/Exception;
 
-    const-string v1, "missing params.filename"
+    const-string v5, "missing params.filename"
 
-    invoke-direct {p1, v1}, Ljava/lang/Exception;-><init>(Ljava/lang/String;)V
+    invoke-direct {v4, v5}, Ljava/lang/Exception;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    .end local p1    # "params":Ljava/lang/Object;
+    .end local p2    # "responder":Lcom/facebook/react/packagerconnection/Responder;
+    throw v4
 
     .line 82
+    .end local v3    # "filename":Ljava/lang/String;
+    .restart local p1    # "params":Ljava/lang/Object;
+    .restart local p2    # "responder":Lcom/facebook/react/packagerconnection/Responder;
     :cond_2
-    new-instance p1, Ljava/lang/Exception;
+    new-instance v3, Ljava/lang/Exception;
 
-    const-string v1, "missing params.mode"
+    const-string v4, "missing params.mode"
 
-    invoke-direct {p1, v1}, Ljava/lang/Exception;-><init>(Ljava/lang/String;)V
+    invoke-direct {v3, v4}, Ljava/lang/Exception;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    .end local p1    # "params":Ljava/lang/Object;
+    .end local p2    # "responder":Lcom/facebook/react/packagerconnection/Responder;
+    throw v3
 
     .line 78
+    .end local v2    # "mode":Ljava/lang/String;
+    .restart local p1    # "params":Ljava/lang/Object;
+    .restart local p2    # "responder":Lcom/facebook/react/packagerconnection/Responder;
     :cond_3
-    new-instance p1, Ljava/lang/Exception;
+    new-instance v2, Ljava/lang/Exception;
 
-    const-string v1, "params must be an object { mode: string, filename: string }"
+    const-string v3, "params must be an object { mode: string, filename: string }"
 
-    invoke-direct {p1, v1}, Ljava/lang/Exception;-><init>(Ljava/lang/String;)V
+    invoke-direct {v2, v3}, Ljava/lang/Exception;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    .end local p1    # "params":Ljava/lang/Object;
+    .end local p2    # "responder":Lcom/facebook/react/packagerconnection/Responder;
+    throw v2
     :try_end_0
     .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
+    .line 96
+    .end local v1    # "paramsObj":Lorg/json/JSONObject;
+    .restart local p1    # "params":Ljava/lang/Object;
+    .restart local p2    # "responder":Lcom/facebook/react/packagerconnection/Responder;
     :catchall_0
-    move-exception p1
+    move-exception v1
 
     goto :goto_1
 
+    .line 93
     :catch_0
-    move-exception p1
+    move-exception v1
 
     .line 94
+    .local v1, "e":Ljava/lang/Exception;
     :try_start_1
-    invoke-virtual {p1}, Ljava/lang/Exception;->toString()Ljava/lang/String;
+    invoke-virtual {v1}, Ljava/lang/Exception;->toString()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v2
 
-    invoke-interface {p2, p1}, Lcom/facebook/react/packagerconnection/Responder;->error(Ljava/lang/Object;)V
+    invoke-interface {p2, v2}, Lcom/facebook/react/packagerconnection/Responder;->error(Ljava/lang/Object;)V
 
     .line 96
+    .end local v1    # "e":Ljava/lang/Exception;
     :goto_0
     monitor-exit v0
 
+    .line 97
     return-void
 
+    .line 96
     :goto_1
     monitor-exit v0
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
-    throw p1
+    throw v1
 .end method

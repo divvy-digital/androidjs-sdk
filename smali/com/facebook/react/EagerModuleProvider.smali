@@ -24,6 +24,7 @@
 # direct methods
 .method public constructor <init>(Lcom/facebook/react/bridge/NativeModule;)V
     .locals 0
+    .param p1, "module"    # Lcom/facebook/react/bridge/NativeModule;
 
     .line 19
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -31,6 +32,7 @@
     .line 20
     iput-object p1, p0, Lcom/facebook/react/EagerModuleProvider;->mModule:Lcom/facebook/react/bridge/NativeModule;
 
+    .line 21
     return-void
 .end method
 

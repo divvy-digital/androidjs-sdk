@@ -3,16 +3,8 @@
 .source "IteratorHelper.java"
 
 
-# annotations
-.annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-.end annotation
-
-
 # instance fields
 .field private mElement:Ljava/lang/Object;
-    .annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-    .end annotation
-
     .annotation runtime Ljavax/annotation/Nullable;
     .end annotation
 .end field
@@ -22,9 +14,8 @@
 
 # direct methods
 .method public constructor <init>(Ljava/lang/Iterable;)V
-    .locals 0
-    .annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-    .end annotation
+    .locals 1
+    .param p1, "iterable"    # Ljava/lang/Iterable;
 
     .line 36
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -32,17 +23,17 @@
     .line 37
     invoke-interface {p1}, Ljava/lang/Iterable;->iterator()Ljava/util/Iterator;
 
-    move-result-object p1
+    move-result-object v0
 
-    iput-object p1, p0, Lcom/facebook/jni/IteratorHelper;->mIterator:Ljava/util/Iterator;
+    iput-object v0, p0, Lcom/facebook/jni/IteratorHelper;->mIterator:Ljava/util/Iterator;
 
+    .line 38
     return-void
 .end method
 
 .method public constructor <init>(Ljava/util/Iterator;)V
     .locals 0
-    .annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-    .end annotation
+    .param p1, "iterator"    # Ljava/util/Iterator;
 
     .line 31
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -50,6 +41,7 @@
     .line 32
     iput-object p1, p0, Lcom/facebook/jni/IteratorHelper;->mIterator:Ljava/util/Iterator;
 
+    .line 33
     return-void
 .end method
 
@@ -57,8 +49,6 @@
 # virtual methods
 .method hasNext()Z
     .locals 1
-    .annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-    .end annotation
 
     .line 46
     iget-object v0, p0, Lcom/facebook/jni/IteratorHelper;->mIterator:Ljava/util/Iterator;
@@ -78,16 +68,18 @@
 
     iput-object v0, p0, Lcom/facebook/jni/IteratorHelper;->mElement:Ljava/lang/Object;
 
+    .line 48
     const/4 v0, 0x1
 
     return v0
 
+    .line 50
     :cond_0
     const/4 v0, 0x0
 
-    .line 50
     iput-object v0, p0, Lcom/facebook/jni/IteratorHelper;->mElement:Ljava/lang/Object;
 
+    .line 51
     const/4 v0, 0x0
 
     return v0

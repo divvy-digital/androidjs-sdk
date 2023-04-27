@@ -8,9 +8,6 @@
 
 # instance fields
 .field private final mCommandArgs:Lcom/facebook/react/bridge/ReadableArray;
-    .annotation build Landroid/support/annotation/Nullable;
-    .end annotation
-.end field
 
 .field private final mCommandId:I
 
@@ -20,10 +17,9 @@
 # direct methods
 .method public constructor <init>(IILcom/facebook/react/bridge/ReadableArray;)V
     .locals 0
-    .param p3    # Lcom/facebook/react/bridge/ReadableArray;
-        .annotation build Landroid/support/annotation/Nullable;
-        .end annotation
-    .end param
+    .param p1, "reactTag"    # I
+    .param p2, "commandId"    # I
+    .param p3, "commandArgs"    # Lcom/facebook/react/bridge/ReadableArray;
 
     .line 21
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -37,6 +33,7 @@
     .line 24
     iput-object p3, p0, Lcom/facebook/react/fabric/mounting/mountitems/DispatchCommandMountItem;->mCommandArgs:Lcom/facebook/react/bridge/ReadableArray;
 
+    .line 25
     return-void
 .end method
 
@@ -44,6 +41,7 @@
 # virtual methods
 .method public execute(Lcom/facebook/react/fabric/mounting/MountingManager;)V
     .locals 3
+    .param p1, "mountingManager"    # Lcom/facebook/react/fabric/mounting/MountingManager;
 
     .line 29
     invoke-static {}, Lcom/facebook/react/bridge/UiThreadUtil;->assertOnUiThread()V
@@ -57,6 +55,7 @@
 
     invoke-virtual {p1, v0, v1, v2}, Lcom/facebook/react/fabric/mounting/MountingManager;->receiveCommand(IILcom/facebook/react/bridge/ReadableArray;)V
 
+    .line 31
     return-void
 .end method
 
@@ -72,17 +71,25 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     iget v1, p0, Lcom/facebook/react/fabric/mounting/mountitems/DispatchCommandMountItem;->mReactTag:I
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     const-string v1, "] "
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     iget v1, p0, Lcom/facebook/react/fabric/mounting/mountitems/DispatchCommandMountItem;->mCommandId:I
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 

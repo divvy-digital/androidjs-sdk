@@ -63,20 +63,24 @@
 
     iput-object v0, p0, Lbolts/CancellationTokenSource;->executor:Ljava/util/concurrent/ScheduledExecutorService;
 
+    .line 42
     return-void
 .end method
 
 .method static synthetic access$000(Lbolts/CancellationTokenSource;)Ljava/lang/Object;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lbolts/CancellationTokenSource;
 
     .line 29
-    iget-object p0, p0, Lbolts/CancellationTokenSource;->lock:Ljava/lang/Object;
+    iget-object v0, p0, Lbolts/CancellationTokenSource;->lock:Ljava/lang/Object;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$102(Lbolts/CancellationTokenSource;Ljava/util/concurrent/ScheduledFuture;)Ljava/util/concurrent/ScheduledFuture;
     .locals 0
+    .param p0, "x0"    # Lbolts/CancellationTokenSource;
+    .param p1, "x1"    # Ljava/util/concurrent/ScheduledFuture;
 
     .line 29
     iput-object p1, p0, Lbolts/CancellationTokenSource;->scheduledCancellation:Ljava/util/concurrent/ScheduledFuture;
@@ -86,13 +90,17 @@
 
 .method private cancelAfter(JLjava/util/concurrent/TimeUnit;)V
     .locals 5
+    .param p1, "delay"    # J
+    .param p3, "timeUnit"    # Ljava/util/concurrent/TimeUnit;
 
+    .line 93
     const-wide/16 v0, -0x1
 
     cmp-long v2, p1, v0
 
     if-ltz v2, :cond_3
 
+    .line 97
     const-wide/16 v2, 0x0
 
     cmp-long v4, p1, v2
@@ -102,6 +110,7 @@
     .line 98
     invoke-virtual {p0}, Lbolts/CancellationTokenSource;->cancel()V
 
+    .line 99
     return-void
 
     .line 102
@@ -125,6 +134,7 @@
     :cond_1
     invoke-direct {p0}, Lbolts/CancellationTokenSource;->cancelScheduledCancellation()V
 
+    .line 109
     cmp-long v3, p1, v0
 
     if-eqz v3, :cond_2
@@ -138,34 +148,36 @@
 
     invoke-interface {v0, v1, p1, p2, p3}, Ljava/util/concurrent/ScheduledExecutorService;->schedule(Ljava/lang/Runnable;JLjava/util/concurrent/TimeUnit;)Ljava/util/concurrent/ScheduledFuture;
 
-    move-result-object p1
+    move-result-object v0
 
-    iput-object p1, p0, Lbolts/CancellationTokenSource;->scheduledCancellation:Ljava/util/concurrent/ScheduledFuture;
+    iput-object v0, p0, Lbolts/CancellationTokenSource;->scheduledCancellation:Ljava/util/concurrent/ScheduledFuture;
 
     .line 120
     :cond_2
     monitor-exit v2
 
+    .line 121
     return-void
 
+    .line 120
     :catchall_0
-    move-exception p1
+    move-exception v0
 
     monitor-exit v2
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    throw p1
+    throw v0
 
     .line 94
     :cond_3
-    new-instance p1, Ljava/lang/IllegalArgumentException;
+    new-instance v0, Ljava/lang/IllegalArgumentException;
 
-    const-string p2, "Delay must be >= -1"
+    const-string v1, "Delay must be >= -1"
 
-    invoke-direct {p1, p2}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 .method private cancelScheduledCancellation()V
@@ -176,22 +188,23 @@
 
     if-eqz v0, :cond_0
 
+    .line 206
     const/4 v1, 0x1
 
-    .line 206
     invoke-interface {v0, v1}, Ljava/util/concurrent/ScheduledFuture;->cancel(Z)Z
 
+    .line 207
     const/4 v0, 0x0
 
-    .line 207
     iput-object v0, p0, Lbolts/CancellationTokenSource;->scheduledCancellation:Ljava/util/concurrent/ScheduledFuture;
 
+    .line 209
     :cond_0
     return-void
 .end method
 
 .method private notifyListeners(Ljava/util/List;)V
-    .locals 1
+    .locals 2
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -202,28 +215,35 @@
     .end annotation
 
     .line 181
+    .local p1, "registrations":Ljava/util/List;, "Ljava/util/List<Lbolts/CancellationTokenRegistration;>;"
     invoke-interface {p1}, Ljava/util/List;->iterator()Ljava/util/Iterator;
-
-    move-result-object p1
-
-    :goto_0
-    invoke-interface {p1}, Ljava/util/Iterator;->hasNext()Z
-
-    move-result v0
-
-    if-eqz v0, :cond_0
-
-    invoke-interface {p1}, Ljava/util/Iterator;->next()Ljava/lang/Object;
 
     move-result-object v0
 
-    check-cast v0, Lbolts/CancellationTokenRegistration;
+    .local v0, "i$":Ljava/util/Iterator;
+    :goto_0
+    invoke-interface {v0}, Ljava/util/Iterator;->hasNext()Z
+
+    move-result v1
+
+    if-eqz v1, :cond_0
+
+    invoke-interface {v0}, Ljava/util/Iterator;->next()Ljava/lang/Object;
+
+    move-result-object v1
+
+    check-cast v1, Lbolts/CancellationTokenRegistration;
 
     .line 182
-    invoke-virtual {v0}, Lbolts/CancellationTokenRegistration;->runAction()V
+    .local v1, "registration":Lbolts/CancellationTokenRegistration;
+    invoke-virtual {v1}, Lbolts/CancellationTokenRegistration;->runAction()V
 
+    .line 183
+    .end local v1    # "registration":Lbolts/CancellationTokenRegistration;
     goto :goto_0
 
+    .line 184
+    .end local v0    # "i$":Ljava/util/Iterator;
     :cond_0
     return-void
 .end method
@@ -236,6 +256,7 @@
 
     if-nez v0, :cond_0
 
+    .line 201
     return-void
 
     .line 199
@@ -252,7 +273,7 @@
 
 # virtual methods
 .method public cancel()V
-    .locals 3
+    .locals 4
 
     .line 69
     iget-object v0, p0, Lbolts/CancellationTokenSource;->lock:Ljava/lang/Object;
@@ -260,13 +281,15 @@
     monitor-enter v0
 
     .line 70
+    const/4 v1, 0x0
+
     :try_start_0
     invoke-direct {p0}, Lbolts/CancellationTokenSource;->throwIfClosed()V
 
     .line 71
-    iget-boolean v1, p0, Lbolts/CancellationTokenSource;->cancellationRequested:Z
+    iget-boolean v2, p0, Lbolts/CancellationTokenSource;->cancellationRequested:Z
 
-    if-eqz v1, :cond_0
+    if-eqz v2, :cond_0
 
     .line 72
     monitor-exit v0
@@ -277,48 +300,65 @@
     :cond_0
     invoke-direct {p0}, Lbolts/CancellationTokenSource;->cancelScheduledCancellation()V
 
-    const/4 v1, 0x1
-
     .line 77
-    iput-boolean v1, p0, Lbolts/CancellationTokenSource;->cancellationRequested:Z
+    const/4 v2, 0x1
+
+    iput-boolean v2, p0, Lbolts/CancellationTokenSource;->cancellationRequested:Z
 
     .line 78
-    new-instance v1, Ljava/util/ArrayList;
+    new-instance v2, Ljava/util/ArrayList;
 
-    iget-object v2, p0, Lbolts/CancellationTokenSource;->registrations:Ljava/util/List;
+    iget-object v3, p0, Lbolts/CancellationTokenSource;->registrations:Ljava/util/List;
 
-    invoke-direct {v1, v2}, Ljava/util/ArrayList;-><init>(Ljava/util/Collection;)V
-
-    .line 79
-    monitor-exit v0
+    invoke-direct {v2, v3}, Ljava/util/ArrayList;-><init>(Ljava/util/Collection;)V
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
+
+    move-object v1, v2
+
+    .line 79
+    .local v1, "registrations":Ljava/util/List;, "Ljava/util/List<Lbolts/CancellationTokenRegistration;>;"
+    :try_start_1
+    monitor-exit v0
+    :try_end_1
+    .catchall {:try_start_1 .. :try_end_1} :catchall_1
 
     .line 80
     invoke-direct {p0, v1}, Lbolts/CancellationTokenSource;->notifyListeners(Ljava/util/List;)V
 
+    .line 81
     return-void
 
-    :catchall_0
-    move-exception v1
-
     .line 79
-    :try_start_1
-    monitor-exit v0
-    :try_end_1
-    .catchall {:try_start_1 .. :try_end_1} :catchall_0
+    .end local v1    # "registrations":Ljava/util/List;, "Ljava/util/List<Lbolts/CancellationTokenRegistration;>;"
+    :catchall_0
+    move-exception v2
 
-    throw v1
+    .restart local v1    # "registrations":Ljava/util/List;, "Ljava/util/List<Lbolts/CancellationTokenRegistration;>;"
+    :goto_0
+    :try_start_2
+    monitor-exit v0
+    :try_end_2
+    .catchall {:try_start_2 .. :try_end_2} :catchall_1
+
+    throw v2
+
+    :catchall_1
+    move-exception v2
+
+    goto :goto_0
 .end method
 
 .method public cancelAfter(J)V
     .locals 1
+    .param p1, "delay"    # J
 
     .line 89
     sget-object v0, Ljava/util/concurrent/TimeUnit;->MILLISECONDS:Ljava/util/concurrent/TimeUnit;
 
     invoke-direct {p0, p1, p2, v0}, Lbolts/CancellationTokenSource;->cancelAfter(JLjava/util/concurrent/TimeUnit;)V
 
+    .line 90
     return-void
 .end method
 
@@ -352,6 +392,7 @@
 
     move-result-object v1
 
+    .local v1, "i$":Ljava/util/Iterator;
     :goto_0
     invoke-interface {v1}, Ljava/util/Iterator;->hasNext()Z
 
@@ -366,26 +407,32 @@
     check-cast v2, Lbolts/CancellationTokenRegistration;
 
     .line 133
+    .local v2, "registration":Lbolts/CancellationTokenRegistration;
     invoke-virtual {v2}, Lbolts/CancellationTokenRegistration;->close()V
 
+    .line 134
+    .end local v2    # "registration":Lbolts/CancellationTokenRegistration;
     goto :goto_0
 
     .line 135
+    .end local v1    # "i$":Ljava/util/Iterator;
     :cond_1
     iget-object v1, p0, Lbolts/CancellationTokenSource;->registrations:Ljava/util/List;
 
     invoke-interface {v1}, Ljava/util/List;->clear()V
 
+    .line 136
     const/4 v1, 0x1
 
-    .line 136
     iput-boolean v1, p0, Lbolts/CancellationTokenSource;->closed:Z
 
     .line 137
     monitor-exit v0
 
+    .line 138
     return-void
 
+    .line 137
     :catchall_0
     move-exception v1
 
@@ -393,13 +440,7 @@
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    goto :goto_2
-
-    :goto_1
     throw v1
-
-    :goto_2
-    goto :goto_1
 .end method
 
 .method public getToken()Lbolts/CancellationToken;
@@ -423,10 +464,10 @@
 
     return-object v1
 
+    .line 61
     :catchall_0
     move-exception v1
 
-    .line 61
     monitor-exit v0
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
@@ -453,10 +494,10 @@
 
     return v1
 
+    .line 51
     :catchall_0
     move-exception v1
 
-    .line 51
     monitor-exit v0
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
@@ -465,7 +506,8 @@
 .end method
 
 .method register(Ljava/lang/Runnable;)Lbolts/CancellationTokenRegistration;
-    .locals 2
+    .locals 3
+    .param p1, "action"    # Ljava/lang/Runnable;
 
     .line 142
     iget-object v0, p0, Lbolts/CancellationTokenSource;->lock:Ljava/lang/Object;
@@ -473,18 +515,26 @@
     monitor-enter v0
 
     .line 143
+    const/4 v1, 0x0
+
     :try_start_0
     invoke-direct {p0}, Lbolts/CancellationTokenSource;->throwIfClosed()V
 
     .line 145
-    new-instance v1, Lbolts/CancellationTokenRegistration;
+    new-instance v2, Lbolts/CancellationTokenRegistration;
 
-    invoke-direct {v1, p0, p1}, Lbolts/CancellationTokenRegistration;-><init>(Lbolts/CancellationTokenSource;Ljava/lang/Runnable;)V
+    invoke-direct {v2, p0, p1}, Lbolts/CancellationTokenRegistration;-><init>(Lbolts/CancellationTokenSource;Ljava/lang/Runnable;)V
+    :try_end_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_0
+
+    move-object v1, v2
 
     .line 146
-    iget-boolean p1, p0, Lbolts/CancellationTokenSource;->cancellationRequested:Z
+    .local v1, "ctr":Lbolts/CancellationTokenRegistration;
+    :try_start_1
+    iget-boolean v2, p0, Lbolts/CancellationTokenSource;->cancellationRequested:Z
 
-    if-eqz p1, :cond_0
+    if-eqz v2, :cond_0
 
     .line 147
     invoke-virtual {v1}, Lbolts/CancellationTokenRegistration;->runAction()V
@@ -493,24 +543,34 @@
 
     .line 149
     :cond_0
-    iget-object p1, p0, Lbolts/CancellationTokenSource;->registrations:Ljava/util/List;
+    iget-object v2, p0, Lbolts/CancellationTokenSource;->registrations:Ljava/util/List;
 
-    invoke-interface {p1, v1}, Ljava/util/List;->add(Ljava/lang/Object;)Z
+    invoke-interface {v2, v1}, Ljava/util/List;->add(Ljava/lang/Object;)Z
 
     .line 151
     :goto_0
     monitor-exit v0
 
+    .line 152
     return-object v1
 
+    .line 151
+    .end local v1    # "ctr":Lbolts/CancellationTokenRegistration;
     :catchall_0
-    move-exception p1
+    move-exception v2
 
+    .restart local v1    # "ctr":Lbolts/CancellationTokenRegistration;
+    :goto_1
     monitor-exit v0
-    :try_end_0
-    .catchall {:try_start_0 .. :try_end_0} :catchall_0
+    :try_end_1
+    .catchall {:try_start_1 .. :try_end_1} :catchall_1
 
-    throw p1
+    throw v2
+
+    :catchall_1
+    move-exception v2
+
+    goto :goto_1
 .end method
 
 .method throwIfCancellationRequested()V
@@ -538,6 +598,7 @@
     .line 165
     monitor-exit v0
 
+    .line 166
     return-void
 
     .line 163
@@ -548,10 +609,10 @@
 
     throw v1
 
+    .line 165
     :catchall_0
     move-exception v1
 
-    .line 165
     monitor-exit v0
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
@@ -616,6 +677,7 @@
 
 .method unregister(Lbolts/CancellationTokenRegistration;)V
     .locals 2
+    .param p1, "registration"    # Lbolts/CancellationTokenRegistration;
 
     .line 169
     iget-object v0, p0, Lbolts/CancellationTokenSource;->lock:Ljava/lang/Object;
@@ -634,14 +696,16 @@
     .line 172
     monitor-exit v0
 
+    .line 173
     return-void
 
+    .line 172
     :catchall_0
-    move-exception p1
+    move-exception v1
 
     monitor-exit v0
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    throw p1
+    throw v1
 .end method

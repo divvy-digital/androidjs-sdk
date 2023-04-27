@@ -44,134 +44,120 @@
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 10
+    .locals 16
 
     .line 114
     new-instance v0, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
 
-    const/4 v1, 0x0
+    const-string v1, "TOP_LEFT"
 
-    const-string v2, "TOP_LEFT"
+    const/4 v2, 0x0
 
-    invoke-direct {v0, v2, v1}, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v0, v1, v2}, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;-><init>(Ljava/lang/String;I)V
 
     sput-object v0, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;->TOP_LEFT:Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
 
     .line 115
-    new-instance v0, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
-
-    const/4 v2, 0x1
+    new-instance v1, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
 
     const-string v3, "TOP_RIGHT"
 
-    invoke-direct {v0, v3, v2}, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;-><init>(Ljava/lang/String;I)V
+    const/4 v4, 0x1
 
-    sput-object v0, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;->TOP_RIGHT:Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
+    invoke-direct {v1, v3, v4}, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;-><init>(Ljava/lang/String;I)V
+
+    sput-object v1, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;->TOP_RIGHT:Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
 
     .line 116
-    new-instance v0, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
+    new-instance v3, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
 
-    const/4 v3, 0x2
+    const-string v5, "BOTTOM_RIGHT"
 
-    const-string v4, "BOTTOM_RIGHT"
+    const/4 v6, 0x2
 
-    invoke-direct {v0, v4, v3}, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v3, v5, v6}, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;-><init>(Ljava/lang/String;I)V
 
-    sput-object v0, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;->BOTTOM_RIGHT:Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
+    sput-object v3, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;->BOTTOM_RIGHT:Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
 
     .line 117
-    new-instance v0, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
+    new-instance v5, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
 
-    const/4 v4, 0x3
+    const-string v7, "BOTTOM_LEFT"
 
-    const-string v5, "BOTTOM_LEFT"
+    const/4 v8, 0x3
 
-    invoke-direct {v0, v5, v4}, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v5, v7, v8}, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;-><init>(Ljava/lang/String;I)V
 
-    sput-object v0, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;->BOTTOM_LEFT:Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
+    sput-object v5, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;->BOTTOM_LEFT:Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
 
     .line 118
-    new-instance v0, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
+    new-instance v7, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
 
-    const/4 v5, 0x4
+    const-string v9, "TOP_START"
 
-    const-string v6, "TOP_START"
+    const/4 v10, 0x4
 
-    invoke-direct {v0, v6, v5}, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v7, v9, v10}, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;-><init>(Ljava/lang/String;I)V
 
-    sput-object v0, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;->TOP_START:Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
+    sput-object v7, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;->TOP_START:Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
 
     .line 119
-    new-instance v0, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
+    new-instance v9, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
 
-    const/4 v6, 0x5
+    const-string v11, "TOP_END"
 
-    const-string v7, "TOP_END"
+    const/4 v12, 0x5
 
-    invoke-direct {v0, v7, v6}, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v9, v11, v12}, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;-><init>(Ljava/lang/String;I)V
 
-    sput-object v0, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;->TOP_END:Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
+    sput-object v9, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;->TOP_END:Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
 
     .line 120
-    new-instance v0, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
+    new-instance v11, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
 
-    const/4 v7, 0x6
+    const-string v13, "BOTTOM_START"
 
-    const-string v8, "BOTTOM_START"
+    const/4 v14, 0x6
 
-    invoke-direct {v0, v8, v7}, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v11, v13, v14}, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;-><init>(Ljava/lang/String;I)V
 
-    sput-object v0, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;->BOTTOM_START:Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
+    sput-object v11, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;->BOTTOM_START:Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
 
     .line 121
-    new-instance v0, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
+    new-instance v13, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
 
-    const/4 v8, 0x7
+    const-string v15, "BOTTOM_END"
 
-    const-string v9, "BOTTOM_END"
+    const/4 v14, 0x7
 
-    invoke-direct {v0, v9, v8}, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v13, v15, v14}, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;-><init>(Ljava/lang/String;I)V
 
-    sput-object v0, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;->BOTTOM_END:Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
-
-    const/16 v0, 0x8
+    sput-object v13, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;->BOTTOM_END:Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
 
     .line 113
-    new-array v0, v0, [Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
+    const/16 v15, 0x8
 
-    sget-object v9, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;->TOP_LEFT:Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
+    new-array v15, v15, [Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
 
-    aput-object v9, v0, v1
+    aput-object v0, v15, v2
 
-    sget-object v1, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;->TOP_RIGHT:Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
+    aput-object v1, v15, v4
 
-    aput-object v1, v0, v2
+    aput-object v3, v15, v6
 
-    sget-object v1, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;->BOTTOM_RIGHT:Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
+    aput-object v5, v15, v8
 
-    aput-object v1, v0, v3
+    aput-object v7, v15, v10
 
-    sget-object v1, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;->BOTTOM_LEFT:Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
+    aput-object v9, v15, v12
 
-    aput-object v1, v0, v4
+    const/4 v0, 0x6
 
-    sget-object v1, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;->TOP_START:Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
+    aput-object v11, v15, v0
 
-    aput-object v1, v0, v5
+    aput-object v13, v15, v14
 
-    sget-object v1, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;->TOP_END:Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
-
-    aput-object v1, v0, v6
-
-    sget-object v1, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;->BOTTOM_START:Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
-
-    aput-object v1, v0, v7
-
-    sget-object v1, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;->BOTTOM_END:Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
-
-    aput-object v1, v0, v8
-
-    sput-object v0, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;->$VALUES:[Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
+    sput-object v15, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;->$VALUES:[Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
 
     return-void
 .end method
@@ -192,17 +178,18 @@
 
 .method public static valueOf(Ljava/lang/String;)Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
     .locals 1
+    .param p0, "name"    # Ljava/lang/String;
 
     .line 113
     const-class v0, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
 
     invoke-static {v0, p0}, Ljava/lang/Enum;->valueOf(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
 
-    move-result-object p0
+    move-result-object v0
 
-    check-cast p0, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
+    check-cast v0, Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method public static values()[Lcom/facebook/react/views/view/ReactViewBackgroundDrawable$BorderRadiusLocation;

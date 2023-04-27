@@ -38,71 +38,66 @@
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 6
+    .locals 8
 
     .line 99
     new-instance v0, Lcom/facebook/react/devsupport/DevServerHelper$BundleType;
 
-    const/4 v1, 0x0
+    const-string v1, "bundle"
 
     const-string v2, "BUNDLE"
 
-    const-string v3, "bundle"
+    const/4 v3, 0x0
 
-    invoke-direct {v0, v2, v1, v3}, Lcom/facebook/react/devsupport/DevServerHelper$BundleType;-><init>(Ljava/lang/String;ILjava/lang/String;)V
+    invoke-direct {v0, v2, v3, v1}, Lcom/facebook/react/devsupport/DevServerHelper$BundleType;-><init>(Ljava/lang/String;ILjava/lang/String;)V
 
     sput-object v0, Lcom/facebook/react/devsupport/DevServerHelper$BundleType;->BUNDLE:Lcom/facebook/react/devsupport/DevServerHelper$BundleType;
 
     .line 100
-    new-instance v0, Lcom/facebook/react/devsupport/DevServerHelper$BundleType;
+    new-instance v1, Lcom/facebook/react/devsupport/DevServerHelper$BundleType;
 
-    const/4 v2, 0x1
+    const-string v2, "delta"
 
-    const-string v3, "DELTA"
+    const-string v4, "DELTA"
 
-    const-string v4, "delta"
+    const/4 v5, 0x1
 
-    invoke-direct {v0, v3, v2, v4}, Lcom/facebook/react/devsupport/DevServerHelper$BundleType;-><init>(Ljava/lang/String;ILjava/lang/String;)V
+    invoke-direct {v1, v4, v5, v2}, Lcom/facebook/react/devsupport/DevServerHelper$BundleType;-><init>(Ljava/lang/String;ILjava/lang/String;)V
 
-    sput-object v0, Lcom/facebook/react/devsupport/DevServerHelper$BundleType;->DELTA:Lcom/facebook/react/devsupport/DevServerHelper$BundleType;
+    sput-object v1, Lcom/facebook/react/devsupport/DevServerHelper$BundleType;->DELTA:Lcom/facebook/react/devsupport/DevServerHelper$BundleType;
 
     .line 101
-    new-instance v0, Lcom/facebook/react/devsupport/DevServerHelper$BundleType;
+    new-instance v2, Lcom/facebook/react/devsupport/DevServerHelper$BundleType;
 
-    const/4 v3, 0x2
+    const-string v4, "map"
 
-    const-string v4, "MAP"
+    const-string v6, "MAP"
 
-    const-string v5, "map"
+    const/4 v7, 0x2
 
-    invoke-direct {v0, v4, v3, v5}, Lcom/facebook/react/devsupport/DevServerHelper$BundleType;-><init>(Ljava/lang/String;ILjava/lang/String;)V
+    invoke-direct {v2, v6, v7, v4}, Lcom/facebook/react/devsupport/DevServerHelper$BundleType;-><init>(Ljava/lang/String;ILjava/lang/String;)V
 
-    sput-object v0, Lcom/facebook/react/devsupport/DevServerHelper$BundleType;->MAP:Lcom/facebook/react/devsupport/DevServerHelper$BundleType;
-
-    const/4 v0, 0x3
+    sput-object v2, Lcom/facebook/react/devsupport/DevServerHelper$BundleType;->MAP:Lcom/facebook/react/devsupport/DevServerHelper$BundleType;
 
     .line 98
-    new-array v0, v0, [Lcom/facebook/react/devsupport/DevServerHelper$BundleType;
+    const/4 v4, 0x3
 
-    sget-object v4, Lcom/facebook/react/devsupport/DevServerHelper$BundleType;->BUNDLE:Lcom/facebook/react/devsupport/DevServerHelper$BundleType;
+    new-array v4, v4, [Lcom/facebook/react/devsupport/DevServerHelper$BundleType;
 
-    aput-object v4, v0, v1
+    aput-object v0, v4, v3
 
-    sget-object v1, Lcom/facebook/react/devsupport/DevServerHelper$BundleType;->DELTA:Lcom/facebook/react/devsupport/DevServerHelper$BundleType;
+    aput-object v1, v4, v5
 
-    aput-object v1, v0, v2
+    aput-object v2, v4, v7
 
-    sget-object v1, Lcom/facebook/react/devsupport/DevServerHelper$BundleType;->MAP:Lcom/facebook/react/devsupport/DevServerHelper$BundleType;
-
-    aput-object v1, v0, v3
-
-    sput-object v0, Lcom/facebook/react/devsupport/DevServerHelper$BundleType;->$VALUES:[Lcom/facebook/react/devsupport/DevServerHelper$BundleType;
+    sput-object v4, Lcom/facebook/react/devsupport/DevServerHelper$BundleType;->$VALUES:[Lcom/facebook/react/devsupport/DevServerHelper$BundleType;
 
     return-void
 .end method
 
 .method private constructor <init>(Ljava/lang/String;ILjava/lang/String;)V
     .locals 0
+    .param p3, "typeID"    # Ljava/lang/String;
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -117,22 +112,24 @@
     .line 106
     iput-object p3, p0, Lcom/facebook/react/devsupport/DevServerHelper$BundleType;->mTypeID:Ljava/lang/String;
 
+    .line 107
     return-void
 .end method
 
 .method public static valueOf(Ljava/lang/String;)Lcom/facebook/react/devsupport/DevServerHelper$BundleType;
     .locals 1
+    .param p0, "name"    # Ljava/lang/String;
 
     .line 98
     const-class v0, Lcom/facebook/react/devsupport/DevServerHelper$BundleType;
 
     invoke-static {v0, p0}, Ljava/lang/Enum;->valueOf(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
 
-    move-result-object p0
+    move-result-object v0
 
-    check-cast p0, Lcom/facebook/react/devsupport/DevServerHelper$BundleType;
+    check-cast v0, Lcom/facebook/react/devsupport/DevServerHelper$BundleType;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method public static values()[Lcom/facebook/react/devsupport/DevServerHelper$BundleType;

@@ -34,8 +34,6 @@
     sput-object v0, Lcom/facebook/imagepipeline/core/ImagePipeline$8;->$SwitchMap$com$facebook$imagepipeline$request$ImageRequest$CacheChoice:[I
 
     :try_start_0
-    sget-object v0, Lcom/facebook/imagepipeline/core/ImagePipeline$8;->$SwitchMap$com$facebook$imagepipeline$request$ImageRequest$CacheChoice:[I
-
     sget-object v1, Lcom/facebook/imagepipeline/request/ImageRequest$CacheChoice;->DEFAULT:Lcom/facebook/imagepipeline/request/ImageRequest$CacheChoice;
 
     invoke-virtual {v1}, Lcom/facebook/imagepipeline/request/ImageRequest$CacheChoice;->ordinal()I
@@ -48,7 +46,12 @@
     :try_end_0
     .catch Ljava/lang/NoSuchFieldError; {:try_start_0 .. :try_end_0} :catch_0
 
+    goto :goto_0
+
     :catch_0
+    move-exception v0
+
+    :goto_0
     :try_start_1
     sget-object v0, Lcom/facebook/imagepipeline/core/ImagePipeline$8;->$SwitchMap$com$facebook$imagepipeline$request$ImageRequest$CacheChoice:[I
 
@@ -64,6 +67,11 @@
     :try_end_1
     .catch Ljava/lang/NoSuchFieldError; {:try_start_1 .. :try_end_1} :catch_1
 
+    goto :goto_1
+
     :catch_1
+    move-exception v0
+
+    :goto_1
     return-void
 .end method

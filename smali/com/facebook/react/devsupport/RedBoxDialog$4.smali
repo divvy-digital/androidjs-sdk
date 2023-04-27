@@ -24,6 +24,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/devsupport/RedBoxDialog;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/devsupport/RedBoxDialog;
 
     .line 286
     iput-object p1, p0, Lcom/facebook/react/devsupport/RedBoxDialog$4;->this$0:Lcom/facebook/react/devsupport/RedBoxDialog;
@@ -36,12 +37,14 @@
 
 # virtual methods
 .method public onClick(Landroid/view/View;)V
-    .locals 0
+    .locals 1
+    .param p1, "v"    # Landroid/view/View;
 
     .line 289
-    iget-object p1, p0, Lcom/facebook/react/devsupport/RedBoxDialog$4;->this$0:Lcom/facebook/react/devsupport/RedBoxDialog;
+    iget-object v0, p0, Lcom/facebook/react/devsupport/RedBoxDialog$4;->this$0:Lcom/facebook/react/devsupport/RedBoxDialog;
 
-    invoke-virtual {p1}, Lcom/facebook/react/devsupport/RedBoxDialog;->dismiss()V
+    invoke-virtual {v0}, Lcom/facebook/react/devsupport/RedBoxDialog;->dismiss()V
 
+    .line 290
     return-void
 .end method

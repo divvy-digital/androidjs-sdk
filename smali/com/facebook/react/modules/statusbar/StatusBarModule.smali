@@ -20,17 +20,19 @@
 # direct methods
 .method public constructor <init>(Lcom/facebook/react/bridge/ReactApplicationContext;)V
     .locals 0
+    .param p1, "reactContext"    # Lcom/facebook/react/bridge/ReactApplicationContext;
 
     .line 45
     invoke-direct {p0, p1}, Lcom/facebook/react/bridge/ReactContextBaseJavaModule;-><init>(Lcom/facebook/react/bridge/ReactApplicationContext;)V
 
+    .line 46
     return-void
 .end method
 
 
 # virtual methods
 .method public getConstants()Ljava/util/Map;
-    .locals 6
+    .locals 9
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "()",
@@ -50,161 +52,168 @@
     move-result-object v0
 
     .line 56
+    .local v0, "context":Landroid/content/Context;
     invoke-virtual {p0}, Lcom/facebook/react/modules/statusbar/StatusBarModule;->getCurrentActivity()Landroid/app/Activity;
 
     move-result-object v1
 
     .line 58
+    .local v1, "activity":Landroid/app/Activity;
     invoke-virtual {v0}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
 
     move-result-object v2
 
+    .line 59
     const-string v3, "status_bar_height"
 
     const-string v4, "dimen"
 
     const-string v5, "android"
 
-    .line 59
     invoke-virtual {v2, v3, v4, v5}, Landroid/content/res/Resources;->getIdentifier(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I
 
     move-result v2
 
+    .line 60
+    .local v2, "heightResId":I
     if-lez v2, :cond_0
 
     .line 61
     invoke-virtual {v0}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
 
-    move-result-object v0
+    move-result-object v3
 
-    invoke-virtual {v0, v2}, Landroid/content/res/Resources;->getDimensionPixelSize(I)I
+    invoke-virtual {v3, v2}, Landroid/content/res/Resources;->getDimensionPixelSize(I)I
 
-    move-result v0
+    move-result v3
 
-    int-to-float v0, v0
+    int-to-float v3, v3
 
-    invoke-static {v0}, Lcom/facebook/react/uimanager/PixelUtil;->toDIPFromPixel(F)F
+    invoke-static {v3}, Lcom/facebook/react/uimanager/PixelUtil;->toDIPFromPixel(F)F
 
-    move-result v0
+    move-result v3
 
     goto :goto_0
 
     :cond_0
-    const/4 v0, 0x0
+    const/4 v3, 0x0
 
+    .line 63
+    .local v3, "height":F
     :goto_0
-    if-eqz v1, :cond_1
+    const-string v4, "black"
 
     .line 65
-    sget v2, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    const/16 v3, 0x15
-
-    if-lt v2, v3, :cond_1
+    .local v4, "statusBarColorString":Ljava/lang/String;
+    if-eqz v1, :cond_1
 
     .line 66
     invoke-virtual {v1}, Landroid/app/Activity;->getWindow()Landroid/view/Window;
 
-    move-result-object v1
+    move-result-object v5
 
-    invoke-virtual {v1}, Landroid/view/Window;->getStatusBarColor()I
+    invoke-virtual {v5}, Landroid/view/Window;->getStatusBarColor()I
 
-    move-result v1
-
-    const/4 v2, 0x1
+    move-result v5
 
     .line 67
-    new-array v2, v2, [Ljava/lang/Object;
+    .local v5, "statusBarColor":I
+    const/4 v6, 0x1
 
-    const/4 v3, 0x0
+    new-array v6, v6, [Ljava/lang/Object;
 
-    const v4, 0xffffff
+    const v7, 0xffffff
 
-    and-int/2addr v1, v4
+    and-int/2addr v7, v5
 
-    invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    invoke-static {v7}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object v1
+    move-result-object v7
 
-    aput-object v1, v2, v3
+    const/4 v8, 0x0
 
-    const-string v1, "#%06X"
+    aput-object v7, v6, v8
 
-    invoke-static {v1, v2}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+    const-string v7, "#%06X"
 
-    move-result-object v1
+    invoke-static {v7, v6}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
 
-    goto :goto_1
-
-    :cond_1
-    const-string v1, "black"
-
-    .line 71
-    :goto_1
-    invoke-static {v0}, Ljava/lang/Float;->valueOf(F)Ljava/lang/Float;
-
-    move-result-object v0
-
-    const-string v2, "HEIGHT"
-
-    const-string v3, "DEFAULT_BACKGROUND_COLOR"
+    move-result-object v4
 
     .line 70
-    invoke-static {v2, v0, v3, v1}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+    .end local v5    # "statusBarColor":I
+    :cond_1
+    nop
 
-    move-result-object v0
+    .line 71
+    invoke-static {v3}, Ljava/lang/Float;->valueOf(F)Ljava/lang/Float;
 
-    return-object v0
+    move-result-object v5
+
+    .line 70
+    const-string v6, "HEIGHT"
+
+    const-string v7, "DEFAULT_BACKGROUND_COLOR"
+
+    invoke-static {v6, v5, v7, v4}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+
+    move-result-object v5
+
+    return-object v5
 .end method
 
 .method public getName()Ljava/lang/String;
     .locals 1
 
+    .line 50
     const-string v0, "StatusBarManager"
 
     return-object v0
 .end method
 
 .method public setColor(IZ)V
-    .locals 7
+    .locals 8
+    .param p1, "color"    # I
+    .param p2, "animated"    # Z
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
     .line 76
     invoke-virtual {p0}, Lcom/facebook/react/modules/statusbar/StatusBarModule;->getCurrentActivity()Landroid/app/Activity;
 
-    move-result-object v3
+    move-result-object v6
 
-    if-nez v3, :cond_0
-
-    const-string p1, "ReactNative"
-
-    const-string p2, "StatusBarModule: Ignored status bar change, current activity is null."
+    .line 77
+    .local v6, "activity":Landroid/app/Activity;
+    if-nez v6, :cond_0
 
     .line 78
-    invoke-static {p1, p2}, Lcom/facebook/common/logging/FLog;->w(Ljava/lang/String;Ljava/lang/String;)V
+    const-string v0, "ReactNative"
 
+    const-string v1, "StatusBarModule: Ignored status bar change, current activity is null."
+
+    invoke-static {v0, v1}, Lcom/facebook/common/logging/FLog;->w(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 79
     return-void
 
     .line 82
     :cond_0
-    sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    const/16 v1, 0x15
-
-    if-lt v0, v1, :cond_1
+    nop
 
     .line 84
-    new-instance v6, Lcom/facebook/react/modules/statusbar/StatusBarModule$1;
+    new-instance v7, Lcom/facebook/react/modules/statusbar/StatusBarModule$1;
 
     .line 85
     invoke-virtual {p0}, Lcom/facebook/react/modules/statusbar/StatusBarModule;->getReactApplicationContext()Lcom/facebook/react/bridge/ReactApplicationContext;
 
     move-result-object v2
 
-    move-object v0, v6
+    move-object v0, v7
 
     move-object v1, p0
+
+    move-object v3, v6
 
     move v4, p2
 
@@ -213,14 +222,15 @@
     invoke-direct/range {v0 .. v5}, Lcom/facebook/react/modules/statusbar/StatusBarModule$1;-><init>(Lcom/facebook/react/modules/statusbar/StatusBarModule;Lcom/facebook/react/bridge/ReactContext;Landroid/app/Activity;ZI)V
 
     .line 84
-    invoke-static {v6}, Lcom/facebook/react/bridge/UiThreadUtil;->runOnUiThread(Ljava/lang/Runnable;)V
+    invoke-static {v7}, Lcom/facebook/react/bridge/UiThreadUtil;->runOnUiThread(Ljava/lang/Runnable;)V
 
-    :cond_1
+    .line 114
     return-void
 .end method
 
 .method public setHidden(Z)V
-    .locals 2
+    .locals 3
+    .param p1, "hidden"    # Z
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -229,15 +239,18 @@
 
     move-result-object v0
 
+    .line 158
+    .local v0, "activity":Landroid/app/Activity;
     if-nez v0, :cond_0
 
-    const-string p1, "ReactNative"
-
-    const-string v0, "StatusBarModule: Ignored status bar change, current activity is null."
-
     .line 159
-    invoke-static {p1, v0}, Lcom/facebook/common/logging/FLog;->w(Ljava/lang/String;Ljava/lang/String;)V
+    const-string v1, "ReactNative"
 
+    const-string v2, "StatusBarModule: Ignored status bar change, current activity is null."
+
+    invoke-static {v1, v2}, Lcom/facebook/common/logging/FLog;->w(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 160
     return-void
 
     .line 162
@@ -248,12 +261,13 @@
 
     invoke-static {v1}, Lcom/facebook/react/bridge/UiThreadUtil;->runOnUiThread(Ljava/lang/Runnable;)V
 
+    .line 175
     return-void
 .end method
 
 .method public setStyle(Ljava/lang/String;)V
     .locals 3
-    .param p1    # Ljava/lang/String;
+    .param p1, "style"    # Ljava/lang/String;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -265,15 +279,18 @@
 
     move-result-object v0
 
+    .line 180
+    .local v0, "activity":Landroid/app/Activity;
     if-nez v0, :cond_0
 
-    const-string p1, "ReactNative"
-
-    const-string v0, "StatusBarModule: Ignored status bar change, current activity is null."
-
     .line 181
-    invoke-static {p1, v0}, Lcom/facebook/common/logging/FLog;->w(Ljava/lang/String;Ljava/lang/String;)V
+    const-string v1, "ReactNative"
 
+    const-string v2, "StatusBarModule: Ignored status bar change, current activity is null."
+
+    invoke-static {v1, v2}, Lcom/facebook/common/logging/FLog;->w(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 182
     return-void
 
     .line 185
@@ -291,12 +308,14 @@
 
     invoke-static {v1}, Lcom/facebook/react/bridge/UiThreadUtil;->runOnUiThread(Ljava/lang/Runnable;)V
 
+    .line 203
     :cond_1
     return-void
 .end method
 
 .method public setTranslucent(Z)V
     .locals 3
+    .param p1, "translucent"    # Z
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -305,24 +324,23 @@
 
     move-result-object v0
 
+    .line 119
+    .local v0, "activity":Landroid/app/Activity;
     if-nez v0, :cond_0
 
-    const-string p1, "ReactNative"
-
-    const-string v0, "StatusBarModule: Ignored status bar change, current activity is null."
-
     .line 120
-    invoke-static {p1, v0}, Lcom/facebook/common/logging/FLog;->w(Ljava/lang/String;Ljava/lang/String;)V
+    const-string v1, "ReactNative"
 
+    const-string v2, "StatusBarModule: Ignored status bar change, current activity is null."
+
+    invoke-static {v1, v2}, Lcom/facebook/common/logging/FLog;->w(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 121
     return-void
 
     .line 124
     :cond_0
-    sget v1, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    const/16 v2, 0x15
-
-    if-lt v1, v2, :cond_1
+    nop
 
     .line 125
     new-instance v1, Lcom/facebook/react/modules/statusbar/StatusBarModule$2;
@@ -337,6 +355,6 @@
     .line 125
     invoke-static {v1}, Lcom/facebook/react/bridge/UiThreadUtil;->runOnUiThread(Ljava/lang/Runnable;)V
 
-    :cond_1
+    .line 153
     return-void
 .end method

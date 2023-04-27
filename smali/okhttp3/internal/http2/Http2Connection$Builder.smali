@@ -35,6 +35,7 @@
 # direct methods
 .method public constructor <init>(Z)V
     .locals 1
+    .param p1, "client"    # Z
 
     .line 555
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -52,6 +53,7 @@
     .line 556
     iput-boolean p1, p0, Lokhttp3/internal/http2/Http2Connection$Builder;->client:Z
 
+    .line 557
     return-void
 .end method
 
@@ -70,33 +72,40 @@
 
 .method public listener(Lokhttp3/internal/http2/Http2Connection$Listener;)Lokhttp3/internal/http2/Http2Connection$Builder;
     .locals 0
+    .param p1, "listener"    # Lokhttp3/internal/http2/Http2Connection$Listener;
 
     .line 574
     iput-object p1, p0, Lokhttp3/internal/http2/Http2Connection$Builder;->listener:Lokhttp3/internal/http2/Http2Connection$Listener;
 
+    .line 575
     return-object p0
 .end method
 
 .method public pingIntervalMillis(I)Lokhttp3/internal/http2/Http2Connection$Builder;
     .locals 0
+    .param p1, "pingIntervalMillis"    # I
 
     .line 584
     iput p1, p0, Lokhttp3/internal/http2/Http2Connection$Builder;->pingIntervalMillis:I
 
+    .line 585
     return-object p0
 .end method
 
 .method public pushObserver(Lokhttp3/internal/http2/PushObserver;)Lokhttp3/internal/http2/Http2Connection$Builder;
     .locals 0
+    .param p1, "pushObserver"    # Lokhttp3/internal/http2/PushObserver;
 
     .line 579
     iput-object p1, p0, Lokhttp3/internal/http2/Http2Connection$Builder;->pushObserver:Lokhttp3/internal/http2/PushObserver;
 
+    .line 580
     return-object p0
 .end method
 
 .method public socket(Ljava/net/Socket;)Lokhttp3/internal/http2/Http2Connection$Builder;
     .locals 3
+    .param p1, "socket"    # Ljava/net/Socket;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -134,13 +143,17 @@
     .line 560
     invoke-virtual {p0, p1, v0, v1, v2}, Lokhttp3/internal/http2/Http2Connection$Builder;->socket(Ljava/net/Socket;Ljava/lang/String;Lokio/BufferedSource;Lokio/BufferedSink;)Lokhttp3/internal/http2/Http2Connection$Builder;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public socket(Ljava/net/Socket;Ljava/lang/String;Lokio/BufferedSource;Lokio/BufferedSink;)Lokhttp3/internal/http2/Http2Connection$Builder;
     .locals 0
+    .param p1, "socket"    # Ljava/net/Socket;
+    .param p2, "hostname"    # Ljava/lang/String;
+    .param p3, "source"    # Lokio/BufferedSource;
+    .param p4, "sink"    # Lokio/BufferedSink;
 
     .line 566
     iput-object p1, p0, Lokhttp3/internal/http2/Http2Connection$Builder;->socket:Ljava/net/Socket;
@@ -154,5 +167,6 @@
     .line 569
     iput-object p4, p0, Lokhttp3/internal/http2/Http2Connection$Builder;->sink:Lokio/BufferedSink;
 
+    .line 570
     return-object p0
 .end method

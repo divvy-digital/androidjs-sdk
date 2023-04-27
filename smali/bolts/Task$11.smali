@@ -44,6 +44,7 @@
     .locals 0
 
     .line 705
+    .local p0, "this":Lbolts/Task$11;, "Lbolts/Task.11;"
     iput-object p1, p0, Lbolts/Task$11;->this$0:Lbolts/Task;
 
     iput-object p2, p0, Lbolts/Task$11;->val$tcs:Lbolts/TaskCompletionSource;
@@ -62,7 +63,8 @@
 
 # virtual methods
 .method public bridge synthetic then(Lbolts/Task;)Ljava/lang/Object;
-    .locals 0
+    .locals 1
+    .param p1, "x0"    # Lbolts/Task;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/lang/Exception;
@@ -70,11 +72,12 @@
     .end annotation
 
     .line 705
+    .local p0, "this":Lbolts/Task$11;, "Lbolts/Task.11;"
     invoke-virtual {p0, p1}, Lbolts/Task$11;->then(Lbolts/Task;)Ljava/lang/Void;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public then(Lbolts/Task;)Ljava/lang/Void;
@@ -89,6 +92,8 @@
     .end annotation
 
     .line 708
+    .local p0, "this":Lbolts/Task$11;, "Lbolts/Task.11;"
+    .local p1, "task":Lbolts/Task;, "Lbolts/Task<TTResult;>;"
     iget-object v0, p0, Lbolts/Task$11;->val$tcs:Lbolts/TaskCompletionSource;
 
     iget-object v1, p0, Lbolts/Task$11;->val$continuation:Lbolts/Continuation;
@@ -99,7 +104,8 @@
 
     invoke-static {v0, v1, p1, v2, v3}, Lbolts/Task;->access$100(Lbolts/TaskCompletionSource;Lbolts/Continuation;Lbolts/Task;Ljava/util/concurrent/Executor;Lbolts/CancellationToken;)V
 
-    const/4 p1, 0x0
+    .line 709
+    const/4 v0, 0x0
 
-    return-object p1
+    return-object v0
 .end method

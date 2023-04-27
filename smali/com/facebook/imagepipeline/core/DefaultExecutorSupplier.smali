@@ -25,6 +25,7 @@
 # direct methods
 .method public constructor <init>(I)V
     .locals 4
+    .param p1, "numCpuBoundThreads"    # I
 
     .line 30
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -34,16 +35,16 @@
 
     const/16 v1, 0xa
 
-    const/4 v2, 0x1
+    const-string v2, "FrescoIoBoundExecutor"
 
-    const-string v3, "FrescoIoBoundExecutor"
+    const/4 v3, 0x1
 
-    invoke-direct {v0, v1, v3, v2}, Lcom/facebook/imagepipeline/core/PriorityThreadFactory;-><init>(ILjava/lang/String;Z)V
-
-    const/4 v3, 0x2
+    invoke-direct {v0, v1, v2, v3}, Lcom/facebook/imagepipeline/core/PriorityThreadFactory;-><init>(ILjava/lang/String;Z)V
 
     .line 32
-    invoke-static {v3, v0}, Ljava/util/concurrent/Executors;->newFixedThreadPool(ILjava/util/concurrent/ThreadFactory;)Ljava/util/concurrent/ExecutorService;
+    const/4 v2, 0x2
+
+    invoke-static {v2, v0}, Ljava/util/concurrent/Executors;->newFixedThreadPool(ILjava/util/concurrent/ThreadFactory;)Ljava/util/concurrent/ExecutorService;
 
     move-result-object v0
 
@@ -52,9 +53,9 @@
     .line 36
     new-instance v0, Lcom/facebook/imagepipeline/core/PriorityThreadFactory;
 
-    const-string v3, "FrescoDecodeExecutor"
+    const-string v2, "FrescoDecodeExecutor"
 
-    invoke-direct {v0, v1, v3, v2}, Lcom/facebook/imagepipeline/core/PriorityThreadFactory;-><init>(ILjava/lang/String;Z)V
+    invoke-direct {v0, v1, v2, v3}, Lcom/facebook/imagepipeline/core/PriorityThreadFactory;-><init>(ILjava/lang/String;Z)V
 
     .line 37
     invoke-static {p1, v0}, Ljava/util/concurrent/Executors;->newFixedThreadPool(ILjava/util/concurrent/ThreadFactory;)Ljava/util/concurrent/ExecutorService;
@@ -66,31 +67,32 @@
     .line 41
     new-instance v0, Lcom/facebook/imagepipeline/core/PriorityThreadFactory;
 
-    const-string v3, "FrescoBackgroundExecutor"
+    const-string v2, "FrescoBackgroundExecutor"
 
-    invoke-direct {v0, v1, v3, v2}, Lcom/facebook/imagepipeline/core/PriorityThreadFactory;-><init>(ILjava/lang/String;Z)V
+    invoke-direct {v0, v1, v2, v3}, Lcom/facebook/imagepipeline/core/PriorityThreadFactory;-><init>(ILjava/lang/String;Z)V
 
     .line 42
     invoke-static {p1, v0}, Ljava/util/concurrent/Executors;->newFixedThreadPool(ILjava/util/concurrent/ThreadFactory;)Ljava/util/concurrent/ExecutorService;
 
-    move-result-object p1
+    move-result-object v0
 
-    iput-object p1, p0, Lcom/facebook/imagepipeline/core/DefaultExecutorSupplier;->mBackgroundExecutor:Ljava/util/concurrent/Executor;
+    iput-object v0, p0, Lcom/facebook/imagepipeline/core/DefaultExecutorSupplier;->mBackgroundExecutor:Ljava/util/concurrent/Executor;
 
     .line 46
-    new-instance p1, Lcom/facebook/imagepipeline/core/PriorityThreadFactory;
+    new-instance v0, Lcom/facebook/imagepipeline/core/PriorityThreadFactory;
 
-    const-string v0, "FrescoLightWeightBackgroundExecutor"
+    const-string v2, "FrescoLightWeightBackgroundExecutor"
 
-    invoke-direct {p1, v1, v0, v2}, Lcom/facebook/imagepipeline/core/PriorityThreadFactory;-><init>(ILjava/lang/String;Z)V
+    invoke-direct {v0, v1, v2, v3}, Lcom/facebook/imagepipeline/core/PriorityThreadFactory;-><init>(ILjava/lang/String;Z)V
 
     .line 47
-    invoke-static {v2, p1}, Ljava/util/concurrent/Executors;->newFixedThreadPool(ILjava/util/concurrent/ThreadFactory;)Ljava/util/concurrent/ExecutorService;
+    invoke-static {v3, v0}, Ljava/util/concurrent/Executors;->newFixedThreadPool(ILjava/util/concurrent/ThreadFactory;)Ljava/util/concurrent/ExecutorService;
 
-    move-result-object p1
+    move-result-object v0
 
-    iput-object p1, p0, Lcom/facebook/imagepipeline/core/DefaultExecutorSupplier;->mLightWeightBackgroundExecutor:Ljava/util/concurrent/Executor;
+    iput-object v0, p0, Lcom/facebook/imagepipeline/core/DefaultExecutorSupplier;->mLightWeightBackgroundExecutor:Ljava/util/concurrent/Executor;
 
+    .line 52
     return-void
 .end method
 

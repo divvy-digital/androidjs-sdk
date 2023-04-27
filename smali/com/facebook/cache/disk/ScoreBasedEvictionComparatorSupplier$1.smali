@@ -26,6 +26,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/cache/disk/ScoreBasedEvictionComparatorSupplier;)V
     .locals 2
+    .param p1, "this$0"    # Lcom/facebook/cache/disk/ScoreBasedEvictionComparatorSupplier;
 
     .line 27
     iput-object p1, p0, Lcom/facebook/cache/disk/ScoreBasedEvictionComparatorSupplier$1;->this$0:Lcom/facebook/cache/disk/ScoreBasedEvictionComparatorSupplier;
@@ -45,7 +46,9 @@
 
 # virtual methods
 .method public compare(Lcom/facebook/cache/disk/DiskStorage$Entry;Lcom/facebook/cache/disk/DiskStorage$Entry;)I
-    .locals 3
+    .locals 4
+    .param p1, "lhs"    # Lcom/facebook/cache/disk/DiskStorage$Entry;
+    .param p2, "rhs"    # Lcom/facebook/cache/disk/DiskStorage$Entry;
 
     .line 36
     iget-object v0, p0, Lcom/facebook/cache/disk/ScoreBasedEvictionComparatorSupplier$1;->this$0:Lcom/facebook/cache/disk/ScoreBasedEvictionComparatorSupplier;
@@ -54,39 +57,42 @@
 
     invoke-virtual {v0, p1, v1, v2}, Lcom/facebook/cache/disk/ScoreBasedEvictionComparatorSupplier;->calculateScore(Lcom/facebook/cache/disk/DiskStorage$Entry;J)F
 
-    move-result p1
+    move-result v0
 
     .line 37
-    iget-object v0, p0, Lcom/facebook/cache/disk/ScoreBasedEvictionComparatorSupplier$1;->this$0:Lcom/facebook/cache/disk/ScoreBasedEvictionComparatorSupplier;
+    .local v0, "score1":F
+    iget-object v1, p0, Lcom/facebook/cache/disk/ScoreBasedEvictionComparatorSupplier$1;->this$0:Lcom/facebook/cache/disk/ScoreBasedEvictionComparatorSupplier;
 
-    iget-wide v1, p0, Lcom/facebook/cache/disk/ScoreBasedEvictionComparatorSupplier$1;->now:J
+    iget-wide v2, p0, Lcom/facebook/cache/disk/ScoreBasedEvictionComparatorSupplier$1;->now:J
 
-    invoke-virtual {v0, p2, v1, v2}, Lcom/facebook/cache/disk/ScoreBasedEvictionComparatorSupplier;->calculateScore(Lcom/facebook/cache/disk/DiskStorage$Entry;J)F
+    invoke-virtual {v1, p2, v2, v3}, Lcom/facebook/cache/disk/ScoreBasedEvictionComparatorSupplier;->calculateScore(Lcom/facebook/cache/disk/DiskStorage$Entry;J)F
 
-    move-result p2
+    move-result v1
 
-    cmpg-float v0, p1, p2
+    .line 38
+    .local v1, "score2":F
+    cmpg-float v2, v0, v1
 
-    if-gez v0, :cond_0
+    if-gez v2, :cond_0
 
-    const/4 p1, 0x1
+    const/4 v2, 0x1
 
     goto :goto_0
 
     :cond_0
-    cmpl-float p1, p2, p1
+    cmpl-float v2, v1, v0
 
-    if-nez p1, :cond_1
+    if-nez v2, :cond_1
 
-    const/4 p1, 0x0
+    const/4 v2, 0x0
 
     goto :goto_0
 
     :cond_1
-    const/4 p1, -0x1
+    const/4 v2, -0x1
 
     :goto_0
-    return p1
+    return v2
 .end method
 
 .method public bridge synthetic compare(Ljava/lang/Object;Ljava/lang/Object;)I

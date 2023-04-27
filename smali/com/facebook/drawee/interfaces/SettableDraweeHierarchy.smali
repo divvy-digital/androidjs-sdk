@@ -6,11 +6,6 @@
 .implements Lcom/facebook/drawee/interfaces/DraweeHierarchy;
 
 
-# annotations
-.annotation build Ljavax/annotation/concurrent/ThreadSafe;
-.end annotation
-
-
 # virtual methods
 .method public abstract reset()V
 .end method

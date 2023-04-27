@@ -44,87 +44,100 @@
 
 # virtual methods
 .method public getTransformImpl(Landroid/graphics/Matrix;Landroid/graphics/Rect;IIFFFF)V
-    .locals 0
+    .locals 6
+    .param p1, "outTransform"    # Landroid/graphics/Matrix;
+    .param p2, "parentRect"    # Landroid/graphics/Rect;
+    .param p3, "childWidth"    # I
+    .param p4, "childHeight"    # I
+    .param p5, "focusX"    # F
+    .param p6, "focusY"    # F
+    .param p7, "scaleX"    # F
+    .param p8, "scaleY"    # F
 
     .line 339
     invoke-static {p7, p8}, Ljava/lang/Math;->min(FF)F
 
-    move-result p5
+    move-result v0
 
-    const/high16 p6, 0x3f800000    # 1.0f
+    const/high16 v1, 0x3f800000    # 1.0f
 
-    invoke-static {p5, p6}, Ljava/lang/Math;->min(FF)F
+    invoke-static {v0, v1}, Ljava/lang/Math;->min(FF)F
 
-    move-result p5
+    move-result v0
 
     .line 340
-    iget p6, p2, Landroid/graphics/Rect;->left:I
+    .local v0, "scale":F
+    iget v1, p2, Landroid/graphics/Rect;->left:I
 
-    int-to-float p6, p6
+    int-to-float v1, v1
 
     invoke-virtual {p2}, Landroid/graphics/Rect;->width()I
 
-    move-result p7
+    move-result v2
 
-    int-to-float p7, p7
+    int-to-float v2, v2
 
-    int-to-float p3, p3
+    int-to-float v3, p3
 
-    mul-float p3, p3, p5
+    mul-float v3, v3, v0
 
-    sub-float/2addr p7, p3
+    sub-float/2addr v2, v3
 
-    const/high16 p3, 0x3f000000    # 0.5f
+    const/high16 v3, 0x3f000000    # 0.5f
 
-    mul-float p7, p7, p3
+    mul-float v2, v2, v3
 
-    add-float/2addr p6, p7
+    add-float/2addr v1, v2
 
     .line 341
-    iget p7, p2, Landroid/graphics/Rect;->top:I
+    .local v1, "dx":F
+    iget v2, p2, Landroid/graphics/Rect;->top:I
 
-    int-to-float p7, p7
+    int-to-float v2, v2
 
     invoke-virtual {p2}, Landroid/graphics/Rect;->height()I
 
-    move-result p2
+    move-result v4
 
-    int-to-float p2, p2
+    int-to-float v4, v4
 
-    int-to-float p4, p4
+    int-to-float v5, p4
 
-    mul-float p4, p4, p5
+    mul-float v5, v5, v0
 
-    sub-float/2addr p2, p4
+    sub-float/2addr v4, v5
 
-    mul-float p2, p2, p3
+    mul-float v4, v4, v3
 
-    add-float/2addr p7, p2
+    add-float/2addr v2, v4
 
     .line 342
-    invoke-virtual {p1, p5, p5}, Landroid/graphics/Matrix;->setScale(FF)V
-
-    add-float/2addr p6, p3
-
-    float-to-int p2, p6
-
-    int-to-float p2, p2
-
-    add-float/2addr p7, p3
-
-    float-to-int p3, p7
-
-    int-to-float p3, p3
+    .local v2, "dy":F
+    invoke-virtual {p1, v0, v0}, Landroid/graphics/Matrix;->setScale(FF)V
 
     .line 343
-    invoke-virtual {p1, p2, p3}, Landroid/graphics/Matrix;->postTranslate(FF)Z
+    add-float v4, v1, v3
 
+    float-to-int v4, v4
+
+    int-to-float v4, v4
+
+    add-float/2addr v3, v2
+
+    float-to-int v3, v3
+
+    int-to-float v3, v3
+
+    invoke-virtual {p1, v4, v3}, Landroid/graphics/Matrix;->postTranslate(FF)Z
+
+    .line 344
     return-void
 .end method
 
 .method public toString()Ljava/lang/String;
     .locals 1
 
+    .line 348
     const-string v0, "center_inside"
 
     return-object v0

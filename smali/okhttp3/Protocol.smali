@@ -35,122 +35,111 @@
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 9
+    .locals 14
 
     .line 33
     new-instance v0, Lokhttp3/Protocol;
 
-    const/4 v1, 0x0
+    const-string v1, "http/1.0"
 
     const-string v2, "HTTP_1_0"
 
-    const-string v3, "http/1.0"
+    const/4 v3, 0x0
 
-    invoke-direct {v0, v2, v1, v3}, Lokhttp3/Protocol;-><init>(Ljava/lang/String;ILjava/lang/String;)V
+    invoke-direct {v0, v2, v3, v1}, Lokhttp3/Protocol;-><init>(Ljava/lang/String;ILjava/lang/String;)V
 
     sput-object v0, Lokhttp3/Protocol;->HTTP_1_0:Lokhttp3/Protocol;
 
     .line 41
-    new-instance v0, Lokhttp3/Protocol;
+    new-instance v1, Lokhttp3/Protocol;
 
-    const/4 v2, 0x1
+    const-string v2, "http/1.1"
 
-    const-string v3, "HTTP_1_1"
+    const-string v4, "HTTP_1_1"
 
-    const-string v4, "http/1.1"
+    const/4 v5, 0x1
 
-    invoke-direct {v0, v3, v2, v4}, Lokhttp3/Protocol;-><init>(Ljava/lang/String;ILjava/lang/String;)V
+    invoke-direct {v1, v4, v5, v2}, Lokhttp3/Protocol;-><init>(Ljava/lang/String;ILjava/lang/String;)V
 
-    sput-object v0, Lokhttp3/Protocol;->HTTP_1_1:Lokhttp3/Protocol;
+    sput-object v1, Lokhttp3/Protocol;->HTTP_1_1:Lokhttp3/Protocol;
 
     .line 51
-    new-instance v0, Lokhttp3/Protocol;
+    new-instance v2, Lokhttp3/Protocol;
 
-    const/4 v3, 0x2
+    const-string v4, "spdy/3.1"
 
-    const-string v4, "SPDY_3"
+    const-string v6, "SPDY_3"
 
-    const-string v5, "spdy/3.1"
+    const/4 v7, 0x2
 
-    invoke-direct {v0, v4, v3, v5}, Lokhttp3/Protocol;-><init>(Ljava/lang/String;ILjava/lang/String;)V
+    invoke-direct {v2, v6, v7, v4}, Lokhttp3/Protocol;-><init>(Ljava/lang/String;ILjava/lang/String;)V
 
-    sput-object v0, Lokhttp3/Protocol;->SPDY_3:Lokhttp3/Protocol;
+    sput-object v2, Lokhttp3/Protocol;->SPDY_3:Lokhttp3/Protocol;
 
     .line 62
-    new-instance v0, Lokhttp3/Protocol;
-
-    const/4 v4, 0x3
-
-    const-string v5, "HTTP_2"
+    new-instance v4, Lokhttp3/Protocol;
 
     const-string v6, "h2"
 
-    invoke-direct {v0, v5, v4, v6}, Lokhttp3/Protocol;-><init>(Ljava/lang/String;ILjava/lang/String;)V
+    const-string v8, "HTTP_2"
 
-    sput-object v0, Lokhttp3/Protocol;->HTTP_2:Lokhttp3/Protocol;
+    const/4 v9, 0x3
+
+    invoke-direct {v4, v8, v9, v6}, Lokhttp3/Protocol;-><init>(Ljava/lang/String;ILjava/lang/String;)V
+
+    sput-object v4, Lokhttp3/Protocol;->HTTP_2:Lokhttp3/Protocol;
 
     .line 71
-    new-instance v0, Lokhttp3/Protocol;
+    new-instance v6, Lokhttp3/Protocol;
 
-    const/4 v5, 0x4
+    const-string v8, "h2_prior_knowledge"
 
-    const-string v6, "H2_PRIOR_KNOWLEDGE"
+    const-string v10, "H2_PRIOR_KNOWLEDGE"
 
-    const-string v7, "h2_prior_knowledge"
+    const/4 v11, 0x4
 
-    invoke-direct {v0, v6, v5, v7}, Lokhttp3/Protocol;-><init>(Ljava/lang/String;ILjava/lang/String;)V
+    invoke-direct {v6, v10, v11, v8}, Lokhttp3/Protocol;-><init>(Ljava/lang/String;ILjava/lang/String;)V
 
-    sput-object v0, Lokhttp3/Protocol;->H2_PRIOR_KNOWLEDGE:Lokhttp3/Protocol;
+    sput-object v6, Lokhttp3/Protocol;->H2_PRIOR_KNOWLEDGE:Lokhttp3/Protocol;
 
     .line 81
-    new-instance v0, Lokhttp3/Protocol;
+    new-instance v8, Lokhttp3/Protocol;
 
-    const/4 v6, 0x5
+    const-string v10, "quic"
 
-    const-string v7, "QUIC"
+    const-string v12, "QUIC"
 
-    const-string v8, "quic"
+    const/4 v13, 0x5
 
-    invoke-direct {v0, v7, v6, v8}, Lokhttp3/Protocol;-><init>(Ljava/lang/String;ILjava/lang/String;)V
+    invoke-direct {v8, v12, v13, v10}, Lokhttp3/Protocol;-><init>(Ljava/lang/String;ILjava/lang/String;)V
 
-    sput-object v0, Lokhttp3/Protocol;->QUIC:Lokhttp3/Protocol;
-
-    const/4 v0, 0x6
+    sput-object v8, Lokhttp3/Protocol;->QUIC:Lokhttp3/Protocol;
 
     .line 29
-    new-array v0, v0, [Lokhttp3/Protocol;
+    const/4 v10, 0x6
 
-    sget-object v7, Lokhttp3/Protocol;->HTTP_1_0:Lokhttp3/Protocol;
+    new-array v10, v10, [Lokhttp3/Protocol;
 
-    aput-object v7, v0, v1
+    aput-object v0, v10, v3
 
-    sget-object v1, Lokhttp3/Protocol;->HTTP_1_1:Lokhttp3/Protocol;
+    aput-object v1, v10, v5
 
-    aput-object v1, v0, v2
+    aput-object v2, v10, v7
 
-    sget-object v1, Lokhttp3/Protocol;->SPDY_3:Lokhttp3/Protocol;
+    aput-object v4, v10, v9
 
-    aput-object v1, v0, v3
+    aput-object v6, v10, v11
 
-    sget-object v1, Lokhttp3/Protocol;->HTTP_2:Lokhttp3/Protocol;
+    aput-object v8, v10, v13
 
-    aput-object v1, v0, v4
-
-    sget-object v1, Lokhttp3/Protocol;->H2_PRIOR_KNOWLEDGE:Lokhttp3/Protocol;
-
-    aput-object v1, v0, v5
-
-    sget-object v1, Lokhttp3/Protocol;->QUIC:Lokhttp3/Protocol;
-
-    aput-object v1, v0, v6
-
-    sput-object v0, Lokhttp3/Protocol;->$VALUES:[Lokhttp3/Protocol;
+    sput-object v10, Lokhttp3/Protocol;->$VALUES:[Lokhttp3/Protocol;
 
     return-void
 .end method
 
 .method private constructor <init>(Ljava/lang/String;ILjava/lang/String;)V
     .locals 0
+    .param p3, "protocol"    # Ljava/lang/String;
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -165,11 +154,13 @@
     .line 86
     iput-object p3, p0, Lokhttp3/Protocol;->protocol:Ljava/lang/String;
 
+    .line 87
     return-void
 .end method
 
 .method public static get(Ljava/lang/String;)Lokhttp3/Protocol;
     .locals 3
+    .param p0, "protocol"    # Ljava/lang/String;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -179,97 +170,85 @@
     .line 96
     sget-object v0, Lokhttp3/Protocol;->HTTP_1_0:Lokhttp3/Protocol;
 
-    iget-object v0, v0, Lokhttp3/Protocol;->protocol:Ljava/lang/String;
+    iget-object v1, v0, Lokhttp3/Protocol;->protocol:Ljava/lang/String;
 
-    invoke-virtual {p0, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v0
+    move-result v1
 
-    if-eqz v0, :cond_0
+    if-eqz v1, :cond_0
 
-    sget-object p0, Lokhttp3/Protocol;->HTTP_1_0:Lokhttp3/Protocol;
-
-    return-object p0
+    return-object v0
 
     .line 97
     :cond_0
     sget-object v0, Lokhttp3/Protocol;->HTTP_1_1:Lokhttp3/Protocol;
 
-    iget-object v0, v0, Lokhttp3/Protocol;->protocol:Ljava/lang/String;
+    iget-object v1, v0, Lokhttp3/Protocol;->protocol:Ljava/lang/String;
 
-    invoke-virtual {p0, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v0
+    move-result v1
 
-    if-eqz v0, :cond_1
+    if-eqz v1, :cond_1
 
-    sget-object p0, Lokhttp3/Protocol;->HTTP_1_1:Lokhttp3/Protocol;
-
-    return-object p0
+    return-object v0
 
     .line 98
     :cond_1
     sget-object v0, Lokhttp3/Protocol;->H2_PRIOR_KNOWLEDGE:Lokhttp3/Protocol;
 
-    iget-object v0, v0, Lokhttp3/Protocol;->protocol:Ljava/lang/String;
+    iget-object v1, v0, Lokhttp3/Protocol;->protocol:Ljava/lang/String;
 
-    invoke-virtual {p0, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v0
+    move-result v1
 
-    if-eqz v0, :cond_2
+    if-eqz v1, :cond_2
 
-    sget-object p0, Lokhttp3/Protocol;->H2_PRIOR_KNOWLEDGE:Lokhttp3/Protocol;
-
-    return-object p0
+    return-object v0
 
     .line 99
     :cond_2
     sget-object v0, Lokhttp3/Protocol;->HTTP_2:Lokhttp3/Protocol;
 
-    iget-object v0, v0, Lokhttp3/Protocol;->protocol:Ljava/lang/String;
+    iget-object v1, v0, Lokhttp3/Protocol;->protocol:Ljava/lang/String;
 
-    invoke-virtual {p0, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v0
+    move-result v1
 
-    if-eqz v0, :cond_3
+    if-eqz v1, :cond_3
 
-    sget-object p0, Lokhttp3/Protocol;->HTTP_2:Lokhttp3/Protocol;
-
-    return-object p0
+    return-object v0
 
     .line 100
     :cond_3
     sget-object v0, Lokhttp3/Protocol;->SPDY_3:Lokhttp3/Protocol;
 
-    iget-object v0, v0, Lokhttp3/Protocol;->protocol:Ljava/lang/String;
+    iget-object v1, v0, Lokhttp3/Protocol;->protocol:Ljava/lang/String;
 
-    invoke-virtual {p0, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v0
+    move-result v1
 
-    if-eqz v0, :cond_4
+    if-eqz v1, :cond_4
 
-    sget-object p0, Lokhttp3/Protocol;->SPDY_3:Lokhttp3/Protocol;
-
-    return-object p0
+    return-object v0
 
     .line 101
     :cond_4
     sget-object v0, Lokhttp3/Protocol;->QUIC:Lokhttp3/Protocol;
 
-    iget-object v0, v0, Lokhttp3/Protocol;->protocol:Ljava/lang/String;
+    iget-object v1, v0, Lokhttp3/Protocol;->protocol:Ljava/lang/String;
 
-    invoke-virtual {p0, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v0
+    move-result v1
 
-    if-eqz v0, :cond_5
+    if-eqz v1, :cond_5
 
-    sget-object p0, Lokhttp3/Protocol;->QUIC:Lokhttp3/Protocol;
-
-    return-object p0
+    return-object v0
 
     .line 102
     :cond_5
@@ -283,30 +262,35 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     invoke-virtual {v1, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object p0
+    move-result-object v1
 
-    invoke-direct {v0, p0}, Ljava/io/IOException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/io/IOException;-><init>(Ljava/lang/String;)V
 
     throw v0
 .end method
 
 .method public static valueOf(Ljava/lang/String;)Lokhttp3/Protocol;
     .locals 1
+    .param p0, "name"    # Ljava/lang/String;
 
     .line 29
     const-class v0, Lokhttp3/Protocol;
 
     invoke-static {v0, p0}, Ljava/lang/Enum;->valueOf(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
 
-    move-result-object p0
+    move-result-object v0
 
-    check-cast p0, Lokhttp3/Protocol;
+    check-cast v0, Lokhttp3/Protocol;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method public static values()[Lokhttp3/Protocol;

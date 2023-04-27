@@ -3,20 +3,16 @@
 .source "CpuCapabilitiesJni.java"
 
 
-# annotations
-.annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-.end annotation
-
-
 # direct methods
 .method static constructor <clinit>()V
     .locals 1
 
+    .line 18
     const-string v0, "fb"
 
-    .line 18
     invoke-static {v0}, Lcom/facebook/soloader/SoLoader;->loadLibrary(Ljava/lang/String;)Z
 
+    .line 19
     return-void
 .end method
 
@@ -30,16 +26,10 @@
 .end method
 
 .method public static native nativeDeviceSupportsNeon()Z
-    .annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-    .end annotation
 .end method
 
 .method public static native nativeDeviceSupportsVFPFP16()Z
-    .annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-    .end annotation
 .end method
 
 .method public static native nativeDeviceSupportsX86()Z
-    .annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-    .end annotation
 .end method

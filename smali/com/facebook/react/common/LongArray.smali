@@ -15,26 +15,29 @@
 
 # direct methods
 .method private constructor <init>(I)V
-    .locals 0
+    .locals 1
+    .param p1, "initialCapacity"    # I
 
     .line 24
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     .line 25
-    new-array p1, p1, [J
+    new-array v0, p1, [J
 
-    iput-object p1, p0, Lcom/facebook/react/common/LongArray;->mArray:[J
-
-    const/4 p1, 0x0
+    iput-object v0, p0, Lcom/facebook/react/common/LongArray;->mArray:[J
 
     .line 26
-    iput p1, p0, Lcom/facebook/react/common/LongArray;->mLength:I
+    const/4 v0, 0x0
 
+    iput v0, p0, Lcom/facebook/react/common/LongArray;->mLength:I
+
+    .line 27
     return-void
 .end method
 
 .method public static createWithInitialCapacity(I)Lcom/facebook/react/common/LongArray;
     .locals 1
+    .param p0, "initialCapacity"    # I
 
     .line 21
     new-instance v0, Lcom/facebook/react/common/LongArray;
@@ -56,14 +59,12 @@
 
     if-ne v0, v1, :cond_0
 
+    .line 70
     add-int/lit8 v1, v0, 0x1
 
     int-to-double v2, v0
 
     const-wide v4, 0x3ffccccccccccccdL    # 1.8
-
-    .line 70
-    invoke-static {v2, v3}, Ljava/lang/Double;->isNaN(D)Z
 
     mul-double v2, v2, v4
 
@@ -74,20 +75,25 @@
     move-result v0
 
     .line 71
-    new-array v0, v0, [J
+    .local v0, "newSize":I
+    new-array v1, v0, [J
 
     .line 72
-    iget-object v1, p0, Lcom/facebook/react/common/LongArray;->mArray:[J
+    .local v1, "newArray":[J
+    iget-object v2, p0, Lcom/facebook/react/common/LongArray;->mArray:[J
 
-    iget v2, p0, Lcom/facebook/react/common/LongArray;->mLength:I
+    iget v3, p0, Lcom/facebook/react/common/LongArray;->mLength:I
 
-    const/4 v3, 0x0
+    const/4 v4, 0x0
 
-    invoke-static {v1, v3, v0, v3, v2}, Ljava/lang/System;->arraycopy(Ljava/lang/Object;ILjava/lang/Object;II)V
+    invoke-static {v2, v4, v1, v4, v3}, Ljava/lang/System;->arraycopy(Ljava/lang/Object;ILjava/lang/Object;II)V
 
     .line 73
-    iput-object v0, p0, Lcom/facebook/react/common/LongArray;->mArray:[J
+    iput-object v1, p0, Lcom/facebook/react/common/LongArray;->mArray:[J
 
+    .line 75
+    .end local v0    # "newSize":I
+    .end local v1    # "newArray":[J
     :cond_0
     return-void
 .end method
@@ -96,6 +102,7 @@
 # virtual methods
 .method public add(J)V
     .locals 3
+    .param p1, "value"    # J
 
     .line 30
     invoke-direct {p0}, Lcom/facebook/react/common/LongArray;->growArrayIfNeeded()V
@@ -111,22 +118,25 @@
 
     aput-wide p1, v0, v1
 
+    .line 32
     return-void
 .end method
 
 .method public dropTail(I)V
     .locals 3
+    .param p1, "n"    # I
 
     .line 60
     iget v0, p0, Lcom/facebook/react/common/LongArray;->mLength:I
 
     if-gt p1, v0, :cond_0
 
+    .line 64
     sub-int/2addr v0, p1
 
-    .line 64
     iput v0, p0, Lcom/facebook/react/common/LongArray;->mLength:I
 
+    .line 65
     return-void
 
     .line 61
@@ -141,27 +151,36 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    const-string p1, " items from array of length "
-
-    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    iget p1, p0, Lcom/facebook/react/common/LongArray;->mLength:I
+    move-result-object v1
 
     invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    const-string v2, " items from array of length "
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    iget v2, p0, Lcom/facebook/react/common/LongArray;->mLength:I
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v1
 
-    invoke-direct {v0, p1}, Ljava/lang/IndexOutOfBoundsException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IndexOutOfBoundsException;-><init>(Ljava/lang/String;)V
 
     throw v0
 .end method
 
 .method public get(I)J
     .locals 3
+    .param p1, "index"    # I
 
     .line 35
     iget v0, p0, Lcom/facebook/react/common/LongArray;->mLength:I
@@ -187,21 +206,29 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    const-string p1, " >= "
-
-    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    iget p1, p0, Lcom/facebook/react/common/LongArray;->mLength:I
+    move-result-object v1
 
     invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    const-string v2, " >= "
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    iget v2, p0, Lcom/facebook/react/common/LongArray;->mLength:I
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v1
 
-    invoke-direct {v0, p1}, Ljava/lang/IndexOutOfBoundsException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IndexOutOfBoundsException;-><init>(Ljava/lang/String;)V
 
     throw v0
 .end method
@@ -226,7 +253,9 @@
 .end method
 
 .method public set(IJ)V
-    .locals 1
+    .locals 3
+    .param p1, "index"    # I
+    .param p2, "value"    # J
 
     .line 42
     iget v0, p0, Lcom/facebook/react/common/LongArray;->mLength:I
@@ -238,37 +267,46 @@
 
     aput-wide p2, v0, p1
 
+    .line 46
     return-void
 
     .line 43
     :cond_0
-    new-instance p2, Ljava/lang/IndexOutOfBoundsException;
+    new-instance v0, Ljava/lang/IndexOutOfBoundsException;
 
-    new-instance p3, Ljava/lang/StringBuilder;
+    new-instance v1, Ljava/lang/StringBuilder;
 
-    invoke-direct {p3}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v0, ""
+    const-string v2, ""
 
-    invoke-virtual {p3, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {p3, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+    move-result-object v1
 
-    const-string p1, " >= "
+    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    invoke-virtual {p3, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v1
 
-    iget p1, p0, Lcom/facebook/react/common/LongArray;->mLength:I
+    const-string v2, " >= "
 
-    invoke-virtual {p3, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {p3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    move-result-object v1
 
-    move-result-object p1
+    iget v2, p0, Lcom/facebook/react/common/LongArray;->mLength:I
 
-    invoke-direct {p2, p1}, Ljava/lang/IndexOutOfBoundsException;-><init>(Ljava/lang/String;)V
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    throw p2
+    move-result-object v1
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-direct {v0, v1}, Ljava/lang/IndexOutOfBoundsException;-><init>(Ljava/lang/String;)V
+
+    throw v0
 .end method
 
 .method public size()I

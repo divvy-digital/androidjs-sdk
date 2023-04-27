@@ -68,6 +68,7 @@
     .end annotation
 
     .line 18
+    .local p0, "instance":Ljava/lang/Object;, "TT;"
     new-instance v0, Lcom/facebook/common/internal/Suppliers$1;
 
     invoke-direct {v0, p0}, Lcom/facebook/common/internal/Suppliers$1;-><init>(Ljava/lang/Object;)V

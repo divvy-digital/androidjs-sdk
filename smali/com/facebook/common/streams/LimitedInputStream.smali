@@ -11,42 +11,47 @@
 
 # direct methods
 .method public constructor <init>(Ljava/io/InputStream;I)V
-    .locals 0
+    .locals 2
+    .param p1, "inputStream"    # Ljava/io/InputStream;
+    .param p2, "limit"    # I
 
     .line 22
     invoke-direct {p0, p1}, Ljava/io/FilterInputStream;-><init>(Ljava/io/InputStream;)V
 
+    .line 23
     if-eqz p1, :cond_1
 
+    .line 26
     if-ltz p2, :cond_0
 
     .line 29
     iput p2, p0, Lcom/facebook/common/streams/LimitedInputStream;->mBytesToRead:I
 
-    const/4 p1, -0x1
-
     .line 30
-    iput p1, p0, Lcom/facebook/common/streams/LimitedInputStream;->mBytesToReadWhenMarked:I
+    const/4 v0, -0x1
 
+    iput v0, p0, Lcom/facebook/common/streams/LimitedInputStream;->mBytesToReadWhenMarked:I
+
+    .line 31
     return-void
 
     .line 27
     :cond_0
-    new-instance p1, Ljava/lang/IllegalArgumentException;
+    new-instance v0, Ljava/lang/IllegalArgumentException;
 
-    const-string p2, "limit must be >= 0"
+    const-string v1, "limit must be >= 0"
 
-    invoke-direct {p1, p2}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 
     .line 24
     :cond_1
-    new-instance p1, Ljava/lang/NullPointerException;
+    new-instance v0, Ljava/lang/NullPointerException;
 
-    invoke-direct {p1}, Ljava/lang/NullPointerException;-><init>()V
+    invoke-direct {v0}, Ljava/lang/NullPointerException;-><init>()V
 
-    throw p1
+    throw v0
 .end method
 
 
@@ -77,6 +82,7 @@
 
 .method public mark(I)V
     .locals 1
+    .param p1, "readLimit"    # I
 
     .line 77
     iget-object v0, p0, Lcom/facebook/common/streams/LimitedInputStream;->in:Ljava/io/InputStream;
@@ -93,10 +99,11 @@
     invoke-virtual {v0, p1}, Ljava/io/InputStream;->mark(I)V
 
     .line 79
-    iget p1, p0, Lcom/facebook/common/streams/LimitedInputStream;->mBytesToRead:I
+    iget v0, p0, Lcom/facebook/common/streams/LimitedInputStream;->mBytesToRead:I
 
-    iput p1, p0, Lcom/facebook/common/streams/LimitedInputStream;->mBytesToReadWhenMarked:I
+    iput v0, p0, Lcom/facebook/common/streams/LimitedInputStream;->mBytesToReadWhenMarked:I
 
+    .line 81
     :cond_0
     return-void
 .end method
@@ -116,6 +123,7 @@
 
     if-nez v0, :cond_0
 
+    .line 36
     return v1
 
     .line 39
@@ -126,6 +134,8 @@
 
     move-result v0
 
+    .line 40
+    .local v0, "readByte":I
     if-eq v0, v1, :cond_1
 
     .line 41
@@ -135,12 +145,16 @@
 
     iput v1, p0, Lcom/facebook/common/streams/LimitedInputStream;->mBytesToRead:I
 
+    .line 44
     :cond_1
     return v0
 .end method
 
 .method public read([BII)I
-    .locals 1
+    .locals 3
+    .param p1, "buffer"    # [B
+    .param p2, "byteOffset"    # I
+    .param p3, "byteCount"    # I
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -152,34 +166,39 @@
 
     if-nez v0, :cond_0
 
-    const/4 p1, -0x1
+    .line 50
+    const/4 v0, -0x1
 
-    return p1
+    return v0
 
     .line 53
     :cond_0
     invoke-static {p3, v0}, Ljava/lang/Math;->min(II)I
 
-    move-result p3
+    move-result v0
 
     .line 54
-    iget-object v0, p0, Lcom/facebook/common/streams/LimitedInputStream;->in:Ljava/io/InputStream;
+    .local v0, "maxBytesToRead":I
+    iget-object v1, p0, Lcom/facebook/common/streams/LimitedInputStream;->in:Ljava/io/InputStream;
 
-    invoke-virtual {v0, p1, p2, p3}, Ljava/io/InputStream;->read([BII)I
+    invoke-virtual {v1, p1, p2, v0}, Ljava/io/InputStream;->read([BII)I
 
-    move-result p1
+    move-result v1
 
-    if-lez p1, :cond_1
+    .line 55
+    .local v1, "bytesRead":I
+    if-lez v1, :cond_1
 
     .line 56
-    iget p2, p0, Lcom/facebook/common/streams/LimitedInputStream;->mBytesToRead:I
+    iget v2, p0, Lcom/facebook/common/streams/LimitedInputStream;->mBytesToRead:I
 
-    sub-int/2addr p2, p1
+    sub-int/2addr v2, v1
 
-    iput p2, p0, Lcom/facebook/common/streams/LimitedInputStream;->mBytesToRead:I
+    iput v2, p0, Lcom/facebook/common/streams/LimitedInputStream;->mBytesToRead:I
 
+    .line 59
     :cond_1
-    return p1
+    return v1
 .end method
 
 .method public reset()V
@@ -216,6 +235,7 @@
 
     iput v0, p0, Lcom/facebook/common/streams/LimitedInputStream;->mBytesToRead:I
 
+    .line 95
     return-void
 
     .line 90
@@ -240,7 +260,8 @@
 .end method
 
 .method public skip(J)J
-    .locals 2
+    .locals 6
+    .param p1, "byteCount"    # J
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -254,25 +275,28 @@
 
     invoke-static {p1, p2, v0, v1}, Ljava/lang/Math;->min(JJ)J
 
-    move-result-wide p1
+    move-result-wide v0
 
     .line 65
-    iget-object v0, p0, Lcom/facebook/common/streams/LimitedInputStream;->in:Ljava/io/InputStream;
+    .local v0, "maxBytesToSkip":J
+    iget-object v2, p0, Lcom/facebook/common/streams/LimitedInputStream;->in:Ljava/io/InputStream;
 
-    invoke-virtual {v0, p1, p2}, Ljava/io/InputStream;->skip(J)J
+    invoke-virtual {v2, v0, v1}, Ljava/io/InputStream;->skip(J)J
 
-    move-result-wide p1
+    move-result-wide v2
 
     .line 66
-    iget v0, p0, Lcom/facebook/common/streams/LimitedInputStream;->mBytesToRead:I
+    .local v2, "bytesSkipped":J
+    iget v4, p0, Lcom/facebook/common/streams/LimitedInputStream;->mBytesToRead:I
 
-    int-to-long v0, v0
+    int-to-long v4, v4
 
-    sub-long/2addr v0, p1
+    sub-long/2addr v4, v2
 
-    long-to-int v1, v0
+    long-to-int v5, v4
 
-    iput v1, p0, Lcom/facebook/common/streams/LimitedInputStream;->mBytesToRead:I
+    iput v5, p0, Lcom/facebook/common/streams/LimitedInputStream;->mBytesToRead:I
 
-    return-wide p1
+    .line 67
+    return-wide v2
 .end method

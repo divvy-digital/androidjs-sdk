@@ -24,6 +24,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/devsupport/DevSupportManagerImpl;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/devsupport/DevSupportManagerImpl;
 
     .line 908
     iput-object p1, p0, Lcom/facebook/react/devsupport/DevSupportManagerImpl$22;->this$0:Lcom/facebook/react/devsupport/DevSupportManagerImpl;
@@ -49,11 +50,13 @@
     invoke-direct {v0}, Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor;-><init>()V
 
     .line 912
+    .local v0, "executor":Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor;
     new-instance v1, Lcom/facebook/react/common/futures/SimpleSettableFuture;
 
     invoke-direct {v1}, Lcom/facebook/react/common/futures/SimpleSettableFuture;-><init>()V
 
     .line 913
+    .local v1, "future":Lcom/facebook/react/common/futures/SimpleSettableFuture;, "Lcom/facebook/react/common/futures/SimpleSettableFuture<Ljava/lang/Boolean;>;"
     iget-object v2, p0, Lcom/facebook/react/devsupport/DevSupportManagerImpl$22;->this$0:Lcom/facebook/react/devsupport/DevSupportManagerImpl;
 
     .line 914
@@ -75,45 +78,51 @@
     .line 913
     invoke-virtual {v0, v2, v3}, Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor;->connect(Ljava/lang/String;Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor$JSExecutorConnectCallback;)V
 
-    const-wide/16 v2, 0x5a
-
     .line 918
     :try_start_0
-    sget-object v4, Ljava/util/concurrent/TimeUnit;->SECONDS:Ljava/util/concurrent/TimeUnit;
+    sget-object v2, Ljava/util/concurrent/TimeUnit;->SECONDS:Ljava/util/concurrent/TimeUnit;
 
-    invoke-virtual {v1, v2, v3, v4}, Lcom/facebook/react/common/futures/SimpleSettableFuture;->get(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object;
+    const-wide/16 v3, 0x5a
+
+    invoke-virtual {v1, v3, v4, v2}, Lcom/facebook/react/common/futures/SimpleSettableFuture;->get(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object;
     :try_end_0
     .catch Ljava/util/concurrent/ExecutionException; {:try_start_0 .. :try_end_0} :catch_2
     .catch Ljava/lang/InterruptedException; {:try_start_0 .. :try_end_0} :catch_1
     .catch Ljava/util/concurrent/TimeoutException; {:try_start_0 .. :try_end_0} :catch_0
 
+    .line 919
     return-object v0
 
+    .line 922
     :catch_0
-    move-exception v0
+    move-exception v2
 
     goto :goto_0
 
     :catch_1
-    move-exception v0
+    move-exception v2
 
     .line 923
+    .local v2, "e":Ljava/lang/Exception;
     :goto_0
-    new-instance v1, Ljava/lang/RuntimeException;
+    new-instance v3, Ljava/lang/RuntimeException;
 
-    invoke-direct {v1, v0}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/Throwable;)V
+    invoke-direct {v3, v2}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/Throwable;)V
 
-    throw v1
+    throw v3
 
+    .line 920
+    .end local v2    # "e":Ljava/lang/Exception;
     :catch_2
-    move-exception v0
+    move-exception v2
 
     .line 921
-    invoke-virtual {v0}, Ljava/util/concurrent/ExecutionException;->getCause()Ljava/lang/Throwable;
+    .local v2, "e":Ljava/util/concurrent/ExecutionException;
+    invoke-virtual {v2}, Ljava/util/concurrent/ExecutionException;->getCause()Ljava/lang/Throwable;
 
-    move-result-object v0
+    move-result-object v3
 
-    check-cast v0, Ljava/lang/Exception;
+    check-cast v3, Ljava/lang/Exception;
 
-    throw v0
+    throw v3
 .end method

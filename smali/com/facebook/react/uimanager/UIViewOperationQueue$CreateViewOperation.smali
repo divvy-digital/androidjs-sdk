@@ -29,11 +29,14 @@
 
 # direct methods
 .method public constructor <init>(Lcom/facebook/react/uimanager/UIViewOperationQueue;Lcom/facebook/react/uimanager/ThemedReactContext;ILjava/lang/String;Lcom/facebook/react/uimanager/ReactStylesDiffMap;)V
-    .locals 0
-    .param p4    # Ljava/lang/String;
+    .locals 3
+    .param p2, "themedContext"    # Lcom/facebook/react/uimanager/ThemedReactContext;
+    .param p3, "tag"    # I
+    .param p4, "className"    # Ljava/lang/String;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
+    .param p5, "initialProps"    # Lcom/facebook/react/uimanager/ReactStylesDiffMap;
 
     .line 189
     iput-object p1, p0, Lcom/facebook/react/uimanager/UIViewOperationQueue$CreateViewOperation;->this$0:Lcom/facebook/react/uimanager/UIViewOperationQueue;
@@ -51,14 +54,15 @@
     iput-object p5, p0, Lcom/facebook/react/uimanager/UIViewOperationQueue$CreateViewOperation;->mInitialProps:Lcom/facebook/react/uimanager/ReactStylesDiffMap;
 
     .line 194
-    iget p1, p0, Lcom/facebook/react/uimanager/UIViewOperationQueue$CreateViewOperation;->mTag:I
+    const-string p1, "createView"
 
-    const-wide/16 p2, 0x0
+    iget v0, p0, Lcom/facebook/react/uimanager/UIViewOperationQueue$CreateViewOperation;->mTag:I
 
-    const-string p4, "createView"
+    const-wide/16 v1, 0x0
 
-    invoke-static {p2, p3, p4, p1}, Lcom/facebook/systrace/Systrace;->startAsyncFlow(JLjava/lang/String;I)V
+    invoke-static {v1, v2, p1, v0}, Lcom/facebook/systrace/Systrace;->startAsyncFlow(JLjava/lang/String;I)V
 
+    .line 195
     return-void
 .end method
 
@@ -68,13 +72,13 @@
     .locals 5
 
     .line 199
-    iget v0, p0, Lcom/facebook/react/uimanager/UIViewOperationQueue$CreateViewOperation;->mTag:I
+    const-string v0, "createView"
 
-    const-wide/16 v1, 0x0
+    iget v1, p0, Lcom/facebook/react/uimanager/UIViewOperationQueue$CreateViewOperation;->mTag:I
 
-    const-string v3, "createView"
+    const-wide/16 v2, 0x0
 
-    invoke-static {v1, v2, v3, v0}, Lcom/facebook/systrace/Systrace;->endAsyncFlow(JLjava/lang/String;I)V
+    invoke-static {v2, v3, v0, v1}, Lcom/facebook/systrace/Systrace;->endAsyncFlow(JLjava/lang/String;I)V
 
     .line 200
     iget-object v0, p0, Lcom/facebook/react/uimanager/UIViewOperationQueue$CreateViewOperation;->this$0:Lcom/facebook/react/uimanager/UIViewOperationQueue;
@@ -93,5 +97,6 @@
 
     invoke-virtual {v0, v1, v2, v3, v4}, Lcom/facebook/react/uimanager/NativeViewHierarchyManager;->createView(Lcom/facebook/react/uimanager/ThemedReactContext;ILjava/lang/String;Lcom/facebook/react/uimanager/ReactStylesDiffMap;)V
 
+    .line 205
     return-void
 .end method

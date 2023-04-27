@@ -23,6 +23,8 @@
 # direct methods
 .method constructor <init>(Lokhttp3/Cache$CacheResponseBody;Lokio/Source;Lokhttp3/internal/cache/DiskLruCache$Snapshot;)V
     .locals 0
+    .param p1, "this$0"    # Lokhttp3/Cache$CacheResponseBody;
+    .param p2, "arg0"    # Lokio/Source;
 
     .line 750
     iput-object p1, p0, Lokhttp3/Cache$CacheResponseBody$1;->this$0:Lokhttp3/Cache$CacheResponseBody;
@@ -52,5 +54,6 @@
     .line 753
     invoke-super {p0}, Lokio/ForwardingSource;->close()V
 
+    .line 754
     return-void
 .end method

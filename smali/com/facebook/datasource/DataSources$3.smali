@@ -31,9 +31,11 @@
 # virtual methods
 .method public execute(Ljava/lang/Runnable;)V
     .locals 0
+    .param p1, "command"    # Ljava/lang/Runnable;
 
     .line 104
     invoke-interface {p1}, Ljava/lang/Runnable;->run()V
 
+    .line 105
     return-void
 .end method

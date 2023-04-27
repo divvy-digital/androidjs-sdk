@@ -29,123 +29,135 @@
 # direct methods
 .method public constructor <init>(Lcom/facebook/react/modules/timepicker/TimePickerDialogModule;Lcom/facebook/react/bridge/Promise;)V
     .locals 0
+    .param p2, "promise"    # Lcom/facebook/react/bridge/Promise;
 
     .line 65
     iput-object p1, p0, Lcom/facebook/react/modules/timepicker/TimePickerDialogModule$TimePickerDialogListener;->this$0:Lcom/facebook/react/modules/timepicker/TimePickerDialogModule;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
+    .line 63
     const/4 p1, 0x0
 
-    .line 63
     iput-boolean p1, p0, Lcom/facebook/react/modules/timepicker/TimePickerDialogModule$TimePickerDialogListener;->mPromiseResolved:Z
 
     .line 66
     iput-object p2, p0, Lcom/facebook/react/modules/timepicker/TimePickerDialogModule$TimePickerDialogListener;->mPromise:Lcom/facebook/react/bridge/Promise;
 
+    .line 67
     return-void
 .end method
 
 
 # virtual methods
 .method public onDismiss(Landroid/content/DialogInterface;)V
-    .locals 2
+    .locals 3
+    .param p1, "dialog"    # Landroid/content/DialogInterface;
 
     .line 83
-    iget-boolean p1, p0, Lcom/facebook/react/modules/timepicker/TimePickerDialogModule$TimePickerDialogListener;->mPromiseResolved:Z
+    iget-boolean v0, p0, Lcom/facebook/react/modules/timepicker/TimePickerDialogModule$TimePickerDialogListener;->mPromiseResolved:Z
 
-    if-nez p1, :cond_0
+    if-nez v0, :cond_0
 
-    iget-object p1, p0, Lcom/facebook/react/modules/timepicker/TimePickerDialogModule$TimePickerDialogListener;->this$0:Lcom/facebook/react/modules/timepicker/TimePickerDialogModule;
+    iget-object v0, p0, Lcom/facebook/react/modules/timepicker/TimePickerDialogModule$TimePickerDialogListener;->this$0:Lcom/facebook/react/modules/timepicker/TimePickerDialogModule;
 
-    invoke-static {p1}, Lcom/facebook/react/modules/timepicker/TimePickerDialogModule;->access$100(Lcom/facebook/react/modules/timepicker/TimePickerDialogModule;)Lcom/facebook/react/bridge/ReactApplicationContext;
+    invoke-static {v0}, Lcom/facebook/react/modules/timepicker/TimePickerDialogModule;->access$100(Lcom/facebook/react/modules/timepicker/TimePickerDialogModule;)Lcom/facebook/react/bridge/ReactApplicationContext;
 
-    move-result-object p1
+    move-result-object v0
 
-    invoke-virtual {p1}, Lcom/facebook/react/bridge/ReactApplicationContext;->hasActiveCatalystInstance()Z
+    invoke-virtual {v0}, Lcom/facebook/react/bridge/ReactApplicationContext;->hasActiveCatalystInstance()Z
 
-    move-result p1
+    move-result v0
 
-    if-eqz p1, :cond_0
+    if-eqz v0, :cond_0
 
     .line 84
-    new-instance p1, Lcom/facebook/react/bridge/WritableNativeMap;
+    new-instance v0, Lcom/facebook/react/bridge/WritableNativeMap;
 
-    invoke-direct {p1}, Lcom/facebook/react/bridge/WritableNativeMap;-><init>()V
-
-    const-string v0, "action"
-
-    const-string v1, "dismissedAction"
+    invoke-direct {v0}, Lcom/facebook/react/bridge/WritableNativeMap;-><init>()V
 
     .line 85
-    invoke-interface {p1, v0, v1}, Lcom/facebook/react/bridge/WritableMap;->putString(Ljava/lang/String;Ljava/lang/String;)V
+    .local v0, "result":Lcom/facebook/react/bridge/WritableMap;
+    const-string v1, "action"
+
+    const-string v2, "dismissedAction"
+
+    invoke-interface {v0, v1, v2}, Lcom/facebook/react/bridge/WritableMap;->putString(Ljava/lang/String;Ljava/lang/String;)V
 
     .line 86
-    iget-object v0, p0, Lcom/facebook/react/modules/timepicker/TimePickerDialogModule$TimePickerDialogListener;->mPromise:Lcom/facebook/react/bridge/Promise;
+    iget-object v1, p0, Lcom/facebook/react/modules/timepicker/TimePickerDialogModule$TimePickerDialogListener;->mPromise:Lcom/facebook/react/bridge/Promise;
 
-    invoke-interface {v0, p1}, Lcom/facebook/react/bridge/Promise;->resolve(Ljava/lang/Object;)V
-
-    const/4 p1, 0x1
+    invoke-interface {v1, v0}, Lcom/facebook/react/bridge/Promise;->resolve(Ljava/lang/Object;)V
 
     .line 87
-    iput-boolean p1, p0, Lcom/facebook/react/modules/timepicker/TimePickerDialogModule$TimePickerDialogListener;->mPromiseResolved:Z
+    const/4 v1, 0x1
 
+    iput-boolean v1, p0, Lcom/facebook/react/modules/timepicker/TimePickerDialogModule$TimePickerDialogListener;->mPromiseResolved:Z
+
+    .line 89
+    .end local v0    # "result":Lcom/facebook/react/bridge/WritableMap;
     :cond_0
     return-void
 .end method
 
 .method public onTimeSet(Landroid/widget/TimePicker;II)V
-    .locals 2
+    .locals 3
+    .param p1, "view"    # Landroid/widget/TimePicker;
+    .param p2, "hour"    # I
+    .param p3, "minute"    # I
 
     .line 71
-    iget-boolean p1, p0, Lcom/facebook/react/modules/timepicker/TimePickerDialogModule$TimePickerDialogListener;->mPromiseResolved:Z
+    iget-boolean v0, p0, Lcom/facebook/react/modules/timepicker/TimePickerDialogModule$TimePickerDialogListener;->mPromiseResolved:Z
 
-    if-nez p1, :cond_0
+    if-nez v0, :cond_0
 
-    iget-object p1, p0, Lcom/facebook/react/modules/timepicker/TimePickerDialogModule$TimePickerDialogListener;->this$0:Lcom/facebook/react/modules/timepicker/TimePickerDialogModule;
+    iget-object v0, p0, Lcom/facebook/react/modules/timepicker/TimePickerDialogModule$TimePickerDialogListener;->this$0:Lcom/facebook/react/modules/timepicker/TimePickerDialogModule;
 
-    invoke-static {p1}, Lcom/facebook/react/modules/timepicker/TimePickerDialogModule;->access$000(Lcom/facebook/react/modules/timepicker/TimePickerDialogModule;)Lcom/facebook/react/bridge/ReactApplicationContext;
+    invoke-static {v0}, Lcom/facebook/react/modules/timepicker/TimePickerDialogModule;->access$000(Lcom/facebook/react/modules/timepicker/TimePickerDialogModule;)Lcom/facebook/react/bridge/ReactApplicationContext;
 
-    move-result-object p1
+    move-result-object v0
 
-    invoke-virtual {p1}, Lcom/facebook/react/bridge/ReactApplicationContext;->hasActiveCatalystInstance()Z
+    invoke-virtual {v0}, Lcom/facebook/react/bridge/ReactApplicationContext;->hasActiveCatalystInstance()Z
 
-    move-result p1
+    move-result v0
 
-    if-eqz p1, :cond_0
+    if-eqz v0, :cond_0
 
     .line 72
-    new-instance p1, Lcom/facebook/react/bridge/WritableNativeMap;
+    new-instance v0, Lcom/facebook/react/bridge/WritableNativeMap;
 
-    invoke-direct {p1}, Lcom/facebook/react/bridge/WritableNativeMap;-><init>()V
-
-    const-string v0, "action"
-
-    const-string v1, "timeSetAction"
+    invoke-direct {v0}, Lcom/facebook/react/bridge/WritableNativeMap;-><init>()V
 
     .line 73
-    invoke-interface {p1, v0, v1}, Lcom/facebook/react/bridge/WritableMap;->putString(Ljava/lang/String;Ljava/lang/String;)V
+    .local v0, "result":Lcom/facebook/react/bridge/WritableMap;
+    const-string v1, "action"
 
-    const-string v0, "hour"
+    const-string v2, "timeSetAction"
+
+    invoke-interface {v0, v1, v2}, Lcom/facebook/react/bridge/WritableMap;->putString(Ljava/lang/String;Ljava/lang/String;)V
 
     .line 74
-    invoke-interface {p1, v0, p2}, Lcom/facebook/react/bridge/WritableMap;->putInt(Ljava/lang/String;I)V
+    const-string v1, "hour"
 
-    const-string p2, "minute"
+    invoke-interface {v0, v1, p2}, Lcom/facebook/react/bridge/WritableMap;->putInt(Ljava/lang/String;I)V
 
     .line 75
-    invoke-interface {p1, p2, p3}, Lcom/facebook/react/bridge/WritableMap;->putInt(Ljava/lang/String;I)V
+    const-string v1, "minute"
+
+    invoke-interface {v0, v1, p3}, Lcom/facebook/react/bridge/WritableMap;->putInt(Ljava/lang/String;I)V
 
     .line 76
-    iget-object p2, p0, Lcom/facebook/react/modules/timepicker/TimePickerDialogModule$TimePickerDialogListener;->mPromise:Lcom/facebook/react/bridge/Promise;
+    iget-object v1, p0, Lcom/facebook/react/modules/timepicker/TimePickerDialogModule$TimePickerDialogListener;->mPromise:Lcom/facebook/react/bridge/Promise;
 
-    invoke-interface {p2, p1}, Lcom/facebook/react/bridge/Promise;->resolve(Ljava/lang/Object;)V
-
-    const/4 p1, 0x1
+    invoke-interface {v1, v0}, Lcom/facebook/react/bridge/Promise;->resolve(Ljava/lang/Object;)V
 
     .line 77
-    iput-boolean p1, p0, Lcom/facebook/react/modules/timepicker/TimePickerDialogModule$TimePickerDialogListener;->mPromiseResolved:Z
+    const/4 v1, 0x1
 
+    iput-boolean v1, p0, Lcom/facebook/react/modules/timepicker/TimePickerDialogModule$TimePickerDialogListener;->mPromiseResolved:Z
+
+    .line 79
+    .end local v0    # "result":Lcom/facebook/react/bridge/WritableMap;
     :cond_0
     return-void
 .end method

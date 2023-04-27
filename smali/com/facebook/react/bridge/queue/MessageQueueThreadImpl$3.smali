@@ -32,10 +32,11 @@
 .method public run()V
     .locals 1
 
+    .line 203
     const/4 v0, -0x4
 
-    .line 203
     invoke-static {v0}, Landroid/os/Process;->setThreadPriority(I)V
 
+    .line 204
     return-void
 .end method

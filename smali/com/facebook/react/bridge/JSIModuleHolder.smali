@@ -12,6 +12,7 @@
 # direct methods
 .method public constructor <init>(Lcom/facebook/react/bridge/JSIModuleSpec;)V
     .locals 0
+    .param p1, "spec"    # Lcom/facebook/react/bridge/JSIModuleSpec;
 
     .line 15
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -19,6 +20,7 @@
     .line 16
     iput-object p1, p0, Lcom/facebook/react/bridge/JSIModuleHolder;->mSpec:Lcom/facebook/react/bridge/JSIModuleSpec;
 
+    .line 17
     return-void
 .end method
 
@@ -42,8 +44,6 @@
     if-eqz v0, :cond_0
 
     .line 23
-    iget-object v0, p0, Lcom/facebook/react/bridge/JSIModuleHolder;->mModule:Lcom/facebook/react/bridge/JSIModule;
-
     monitor-exit p0
 
     return-object v0
@@ -63,8 +63,6 @@
     iput-object v0, p0, Lcom/facebook/react/bridge/JSIModuleHolder;->mModule:Lcom/facebook/react/bridge/JSIModule;
 
     .line 26
-    iget-object v0, p0, Lcom/facebook/react/bridge/JSIModuleHolder;->mModule:Lcom/facebook/react/bridge/JSIModule;
-
     invoke-interface {v0}, Lcom/facebook/react/bridge/JSIModule;->initialize()V
 
     .line 27
@@ -100,6 +98,7 @@
     .line 34
     invoke-interface {v0}, Lcom/facebook/react/bridge/JSIModule;->onCatalystInstanceDestroy()V
 
+    .line 36
     :cond_0
     return-void
 .end method

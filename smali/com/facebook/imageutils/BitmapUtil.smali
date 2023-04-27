@@ -10,10 +10,10 @@
 
 .field public static final ARGB_8888_BYTES_PER_PIXEL:I = 0x4
 
-.field private static final DECODE_BUFFERS:Landroid/support/v4/util/Pools$SynchronizedPool;
+.field private static final DECODE_BUFFERS:Landroidx/core/util/Pools$SynchronizedPool;
     .annotation system Ldalvik/annotation/Signature;
         value = {
-            "Landroid/support/v4/util/Pools$SynchronizedPool<",
+            "Landroidx/core/util/Pools$SynchronizedPool<",
             "Ljava/nio/ByteBuffer;",
             ">;"
         }
@@ -34,13 +34,13 @@
     .locals 2
 
     .line 28
-    new-instance v0, Landroid/support/v4/util/Pools$SynchronizedPool;
+    new-instance v0, Landroidx/core/util/Pools$SynchronizedPool;
 
     const/16 v1, 0xc
 
-    invoke-direct {v0, v1}, Landroid/support/v4/util/Pools$SynchronizedPool;-><init>(I)V
+    invoke-direct {v0, v1}, Landroidx/core/util/Pools$SynchronizedPool;-><init>(I)V
 
-    sput-object v0, Lcom/facebook/imageutils/BitmapUtil;->DECODE_BUFFERS:Landroid/support/v4/util/Pools$SynchronizedPool;
+    sput-object v0, Lcom/facebook/imageutils/BitmapUtil;->DECODE_BUFFERS:Landroidx/core/util/Pools$SynchronizedPool;
 
     return-void
 .end method
@@ -55,7 +55,8 @@
 .end method
 
 .method public static decodeDimensions(Ljava/io/InputStream;)Landroid/util/Pair;
-    .locals 4
+    .locals 6
+    .param p0, "is"    # Ljava/io/InputStream;
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -75,102 +76,106 @@
     invoke-static {p0}, Lcom/facebook/common/internal/Preconditions;->checkNotNull(Ljava/lang/Object;)Ljava/lang/Object;
 
     .line 88
-    sget-object v0, Lcom/facebook/imageutils/BitmapUtil;->DECODE_BUFFERS:Landroid/support/v4/util/Pools$SynchronizedPool;
+    sget-object v0, Lcom/facebook/imageutils/BitmapUtil;->DECODE_BUFFERS:Landroidx/core/util/Pools$SynchronizedPool;
 
-    invoke-virtual {v0}, Landroid/support/v4/util/Pools$SynchronizedPool;->acquire()Ljava/lang/Object;
+    invoke-virtual {v0}, Landroidx/core/util/Pools$SynchronizedPool;->acquire()Ljava/lang/Object;
 
-    move-result-object v0
+    move-result-object v1
 
-    check-cast v0, Ljava/nio/ByteBuffer;
+    check-cast v1, Ljava/nio/ByteBuffer;
 
-    if-nez v0, :cond_0
-
-    const/16 v0, 0x4000
+    .line 89
+    .local v1, "byteBuffer":Ljava/nio/ByteBuffer;
+    if-nez v1, :cond_0
 
     .line 90
-    invoke-static {v0}, Ljava/nio/ByteBuffer;->allocate(I)Ljava/nio/ByteBuffer;
+    const/16 v2, 0x4000
 
-    move-result-object v0
+    invoke-static {v2}, Ljava/nio/ByteBuffer;->allocate(I)Ljava/nio/ByteBuffer;
+
+    move-result-object v1
 
     .line 92
     :cond_0
-    new-instance v1, Landroid/graphics/BitmapFactory$Options;
+    new-instance v2, Landroid/graphics/BitmapFactory$Options;
 
-    invoke-direct {v1}, Landroid/graphics/BitmapFactory$Options;-><init>()V
-
-    const/4 v2, 0x1
+    invoke-direct {v2}, Landroid/graphics/BitmapFactory$Options;-><init>()V
 
     .line 93
-    iput-boolean v2, v1, Landroid/graphics/BitmapFactory$Options;->inJustDecodeBounds:Z
+    .local v2, "options":Landroid/graphics/BitmapFactory$Options;
+    const/4 v3, 0x1
+
+    iput-boolean v3, v2, Landroid/graphics/BitmapFactory$Options;->inJustDecodeBounds:Z
 
     .line 95
     :try_start_0
-    invoke-virtual {v0}, Ljava/nio/ByteBuffer;->array()[B
+    invoke-virtual {v1}, Ljava/nio/ByteBuffer;->array()[B
 
-    move-result-object v2
+    move-result-object v3
 
-    iput-object v2, v1, Landroid/graphics/BitmapFactory$Options;->inTempStorage:[B
-
-    const/4 v2, 0x0
+    iput-object v3, v2, Landroid/graphics/BitmapFactory$Options;->inTempStorage:[B
 
     .line 96
-    invoke-static {p0, v2, v1}, Landroid/graphics/BitmapFactory;->decodeStream(Ljava/io/InputStream;Landroid/graphics/Rect;Landroid/graphics/BitmapFactory$Options;)Landroid/graphics/Bitmap;
+    const/4 v3, 0x0
+
+    invoke-static {p0, v3, v2}, Landroid/graphics/BitmapFactory;->decodeStream(Ljava/io/InputStream;Landroid/graphics/Rect;Landroid/graphics/BitmapFactory$Options;)Landroid/graphics/Bitmap;
 
     .line 97
-    iget p0, v1, Landroid/graphics/BitmapFactory$Options;->outWidth:I
+    iget v4, v2, Landroid/graphics/BitmapFactory$Options;->outWidth:I
 
-    const/4 v3, -0x1
+    const/4 v5, -0x1
 
-    if-eq p0, v3, :cond_2
+    if-eq v4, v5, :cond_2
 
-    iget p0, v1, Landroid/graphics/BitmapFactory$Options;->outHeight:I
+    iget v4, v2, Landroid/graphics/BitmapFactory$Options;->outHeight:I
 
-    if-ne p0, v3, :cond_1
+    if-ne v4, v5, :cond_1
 
     goto :goto_0
 
     :cond_1
-    new-instance v2, Landroid/util/Pair;
+    new-instance v3, Landroid/util/Pair;
 
-    iget p0, v1, Landroid/graphics/BitmapFactory$Options;->outWidth:I
+    iget v4, v2, Landroid/graphics/BitmapFactory$Options;->outWidth:I
 
     .line 98
-    invoke-static {p0}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    invoke-static {v4}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object p0
+    move-result-object v4
 
-    iget v1, v1, Landroid/graphics/BitmapFactory$Options;->outHeight:I
+    iget v5, v2, Landroid/graphics/BitmapFactory$Options;->outHeight:I
 
-    invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    invoke-static {v5}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object v1
+    move-result-object v5
 
-    invoke-direct {v2, p0, v1}, Landroid/util/Pair;-><init>(Ljava/lang/Object;Ljava/lang/Object;)V
+    invoke-direct {v3, v4, v5}, Landroid/util/Pair;-><init>(Ljava/lang/Object;Ljava/lang/Object;)V
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
     .line 100
     :cond_2
     :goto_0
-    sget-object p0, Lcom/facebook/imageutils/BitmapUtil;->DECODE_BUFFERS:Landroid/support/v4/util/Pools$SynchronizedPool;
+    invoke-virtual {v0, v1}, Landroidx/core/util/Pools$SynchronizedPool;->release(Ljava/lang/Object;)Z
 
-    invoke-virtual {p0, v0}, Landroid/support/v4/util/Pools$SynchronizedPool;->release(Ljava/lang/Object;)Z
+    .line 97
+    return-object v3
 
-    return-object v2
-
+    .line 100
     :catchall_0
-    move-exception p0
+    move-exception v0
 
-    sget-object v1, Lcom/facebook/imageutils/BitmapUtil;->DECODE_BUFFERS:Landroid/support/v4/util/Pools$SynchronizedPool;
+    sget-object v3, Lcom/facebook/imageutils/BitmapUtil;->DECODE_BUFFERS:Landroidx/core/util/Pools$SynchronizedPool;
 
-    invoke-virtual {v1, v0}, Landroid/support/v4/util/Pools$SynchronizedPool;->release(Ljava/lang/Object;)Z
+    invoke-virtual {v3, v1}, Landroidx/core/util/Pools$SynchronizedPool;->release(Ljava/lang/Object;)Z
 
     .line 101
-    throw p0
+    throw v0
 .end method
 
 .method public static decodeDimensions([B)Landroid/util/Pair;
     .locals 1
+    .param p0, "bytes"    # [B
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "([B)",
@@ -191,139 +196,124 @@
 
     invoke-static {v0}, Lcom/facebook/imageutils/BitmapUtil;->decodeDimensions(Ljava/io/InputStream;)Landroid/util/Pair;
 
-    move-result-object p0
+    move-result-object v0
 
-    return-object p0
+    return-object v0
 .end method
 
 .method public static getPixelSizeForBitmapConfig(Landroid/graphics/Bitmap$Config;)I
-    .locals 3
+    .locals 2
+    .param p0, "bitmapConfig"    # Landroid/graphics/Bitmap$Config;
 
     .line 113
     sget-object v0, Lcom/facebook/imageutils/BitmapUtil$1;->$SwitchMap$android$graphics$Bitmap$Config:[I
 
     invoke-virtual {p0}, Landroid/graphics/Bitmap$Config;->ordinal()I
 
-    move-result p0
+    move-result v1
 
-    aget p0, v0, p0
+    aget v0, v0, v1
 
-    const/4 v0, 0x4
+    const/4 v1, 0x2
 
-    const/4 v1, 0x1
-
-    if-eq p0, v1, :cond_3
-
-    const/4 v2, 0x2
-
-    if-eq p0, v2, :cond_2
-
-    const/4 v1, 0x3
-
-    if-eq p0, v1, :cond_1
-
-    if-ne p0, v0, :cond_0
-
-    return v2
+    packed-switch v0, :pswitch_data_0
 
     .line 123
-    :cond_0
-    new-instance p0, Ljava/lang/UnsupportedOperationException;
+    new-instance v0, Ljava/lang/UnsupportedOperationException;
 
-    const-string v0, "The provided Bitmap.Config is not supported"
+    const-string v1, "The provided Bitmap.Config is not supported"
 
-    invoke-direct {p0, v0}, Ljava/lang/UnsupportedOperationException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/UnsupportedOperationException;-><init>(Ljava/lang/String;)V
 
-    throw p0
+    throw v0
 
-    :cond_1
-    return v2
-
-    :cond_2
+    .line 121
+    :pswitch_0
     return v1
 
-    :cond_3
+    .line 119
+    :pswitch_1
+    return v1
+
+    .line 117
+    :pswitch_2
+    const/4 v0, 0x1
+
     return v0
+
+    .line 115
+    :pswitch_3
+    const/4 v0, 0x4
+
+    return v0
+
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_3
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method public static getSizeInByteForBitmap(IILandroid/graphics/Bitmap$Config;)I
-    .locals 0
-
-    mul-int p0, p0, p1
+    .locals 2
+    .param p0, "width"    # I
+    .param p1, "height"    # I
+    .param p2, "bitmapConfig"    # Landroid/graphics/Bitmap$Config;
 
     .line 136
+    mul-int v0, p0, p1
+
     invoke-static {p2}, Lcom/facebook/imageutils/BitmapUtil;->getPixelSizeForBitmapConfig(Landroid/graphics/Bitmap$Config;)I
 
-    move-result p1
+    move-result v1
 
-    mul-int p0, p0, p1
+    mul-int v0, v0, v1
 
-    return p0
+    return v0
 .end method
 
 .method public static getSizeInBytes(Landroid/graphics/Bitmap;)I
-    .locals 2
-    .param p0    # Landroid/graphics/Bitmap;
+    .locals 1
+    .param p0, "bitmap"    # Landroid/graphics/Bitmap;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
-    .annotation build Landroid/annotation/SuppressLint;
-        value = {
-            "NewApi"
-        }
-    .end annotation
 
+    .line 46
     if-nez p0, :cond_0
 
-    const/4 p0, 0x0
+    .line 47
+    const/4 v0, 0x0
 
-    return p0
+    return v0
 
     .line 53
     :cond_0
-    sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    const/16 v1, 0x13
-
-    if-le v0, v1, :cond_1
+    nop
 
     .line 55
     :try_start_0
     invoke-virtual {p0}, Landroid/graphics/Bitmap;->getAllocationByteCount()I
 
-    move-result p0
+    move-result v0
     :try_end_0
     .catch Ljava/lang/NullPointerException; {:try_start_0 .. :try_end_0} :catch_0
 
-    return p0
+    return v0
+
+    .line 56
+    :catch_0
+    move-exception v0
 
     .line 61
-    :catch_0
-    :cond_1
-    sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    const/16 v1, 0xc
-
-    if-lt v0, v1, :cond_2
+    nop
 
     .line 62
     invoke-virtual {p0}, Landroid/graphics/Bitmap;->getByteCount()I
 
-    move-result p0
-
-    return p0
-
-    .line 66
-    :cond_2
-    invoke-virtual {p0}, Landroid/graphics/Bitmap;->getRowBytes()I
-
     move-result v0
-
-    invoke-virtual {p0}, Landroid/graphics/Bitmap;->getHeight()I
-
-    move-result p0
-
-    mul-int v0, v0, p0
 
     return v0
 .end method

@@ -30,6 +30,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor;Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor$JSExecutorConnectCallback;Ljava/util/concurrent/atomic/AtomicInteger;Ljava/lang/String;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor;
 
     .line 74
     iput-object p1, p0, Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor$1;->this$0:Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor;
@@ -48,7 +49,8 @@
 
 # virtual methods
 .method public onFailure(Ljava/lang/Throwable;)V
-    .locals 1
+    .locals 2
+    .param p1, "cause"    # Ljava/lang/Throwable;
 
     .line 82
     iget-object v0, p0, Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor$1;->val$retryCount:Ljava/util/concurrent/atomic/AtomicInteger;
@@ -68,12 +70,13 @@
 
     .line 85
     :cond_0
-    iget-object p1, p0, Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor$1;->this$0:Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor;
+    iget-object v0, p0, Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor$1;->this$0:Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor;
 
-    iget-object v0, p0, Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor$1;->val$webSocketServerUrl:Ljava/lang/String;
+    iget-object v1, p0, Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor$1;->val$webSocketServerUrl:Ljava/lang/String;
 
-    invoke-static {p1, v0, p0}, Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor;->access$000(Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor;Ljava/lang/String;Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor$JSExecutorConnectCallback;)V
+    invoke-static {v0, v1, p0}, Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor;->access$000(Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor;Ljava/lang/String;Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor$JSExecutorConnectCallback;)V
 
+    .line 87
     :goto_0
     return-void
 .end method
@@ -86,5 +89,6 @@
 
     invoke-interface {v0}, Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor$JSExecutorConnectCallback;->onSuccess()V
 
+    .line 78
     return-void
 .end method

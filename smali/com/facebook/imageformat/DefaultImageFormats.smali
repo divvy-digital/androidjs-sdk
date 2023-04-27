@@ -86,47 +86,47 @@
     .line 22
     new-instance v0, Lcom/facebook/imageformat/ImageFormat;
 
-    const-string v1, "webp"
+    const-string v1, "WEBP_SIMPLE"
 
-    const-string v2, "WEBP_SIMPLE"
+    const-string v2, "webp"
 
-    invoke-direct {v0, v2, v1}, Lcom/facebook/imageformat/ImageFormat;-><init>(Ljava/lang/String;Ljava/lang/String;)V
+    invoke-direct {v0, v1, v2}, Lcom/facebook/imageformat/ImageFormat;-><init>(Ljava/lang/String;Ljava/lang/String;)V
 
     sput-object v0, Lcom/facebook/imageformat/DefaultImageFormats;->WEBP_SIMPLE:Lcom/facebook/imageformat/ImageFormat;
 
     .line 23
     new-instance v0, Lcom/facebook/imageformat/ImageFormat;
 
-    const-string v2, "WEBP_LOSSLESS"
+    const-string v1, "WEBP_LOSSLESS"
 
-    invoke-direct {v0, v2, v1}, Lcom/facebook/imageformat/ImageFormat;-><init>(Ljava/lang/String;Ljava/lang/String;)V
+    invoke-direct {v0, v1, v2}, Lcom/facebook/imageformat/ImageFormat;-><init>(Ljava/lang/String;Ljava/lang/String;)V
 
     sput-object v0, Lcom/facebook/imageformat/DefaultImageFormats;->WEBP_LOSSLESS:Lcom/facebook/imageformat/ImageFormat;
 
     .line 24
     new-instance v0, Lcom/facebook/imageformat/ImageFormat;
 
-    const-string v2, "WEBP_EXTENDED"
+    const-string v1, "WEBP_EXTENDED"
 
-    invoke-direct {v0, v2, v1}, Lcom/facebook/imageformat/ImageFormat;-><init>(Ljava/lang/String;Ljava/lang/String;)V
+    invoke-direct {v0, v1, v2}, Lcom/facebook/imageformat/ImageFormat;-><init>(Ljava/lang/String;Ljava/lang/String;)V
 
     sput-object v0, Lcom/facebook/imageformat/DefaultImageFormats;->WEBP_EXTENDED:Lcom/facebook/imageformat/ImageFormat;
 
     .line 25
     new-instance v0, Lcom/facebook/imageformat/ImageFormat;
 
-    const-string v2, "WEBP_EXTENDED_WITH_ALPHA"
+    const-string v1, "WEBP_EXTENDED_WITH_ALPHA"
 
-    invoke-direct {v0, v2, v1}, Lcom/facebook/imageformat/ImageFormat;-><init>(Ljava/lang/String;Ljava/lang/String;)V
+    invoke-direct {v0, v1, v2}, Lcom/facebook/imageformat/ImageFormat;-><init>(Ljava/lang/String;Ljava/lang/String;)V
 
     sput-object v0, Lcom/facebook/imageformat/DefaultImageFormats;->WEBP_EXTENDED_WITH_ALPHA:Lcom/facebook/imageformat/ImageFormat;
 
     .line 27
     new-instance v0, Lcom/facebook/imageformat/ImageFormat;
 
-    const-string v2, "WEBP_ANIMATED"
+    const-string v1, "WEBP_ANIMATED"
 
-    invoke-direct {v0, v2, v1}, Lcom/facebook/imageformat/ImageFormat;-><init>(Ljava/lang/String;Ljava/lang/String;)V
+    invoke-direct {v0, v1, v2}, Lcom/facebook/imageformat/ImageFormat;-><init>(Ljava/lang/String;Ljava/lang/String;)V
 
     sput-object v0, Lcom/facebook/imageformat/DefaultImageFormats;->WEBP_ANIMATED:Lcom/facebook/imageformat/ImageFormat;
 
@@ -150,6 +150,7 @@
     .line 80
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
+    .line 81
     return-void
 .end method
 
@@ -177,6 +178,7 @@
     invoke-direct {v0, v1}, Ljava/util/ArrayList;-><init>(I)V
 
     .line 65
+    .local v0, "mDefaultFormats":Ljava/util/List;, "Ljava/util/List<Lcom/facebook/imageformat/ImageFormat;>;"
     sget-object v1, Lcom/facebook/imageformat/DefaultImageFormats;->JPEG:Lcom/facebook/imageformat/ImageFormat;
 
     invoke-interface {v0, v1}, Ljava/util/List;->add(Ljava/lang/Object;)Z
@@ -229,11 +231,12 @@
     .line 75
     invoke-static {v0}, Lcom/facebook/common/internal/ImmutableList;->copyOf(Ljava/util/List;)Lcom/facebook/common/internal/ImmutableList;
 
-    move-result-object v0
+    move-result-object v1
 
-    sput-object v0, Lcom/facebook/imageformat/DefaultImageFormats;->sAllDefaultFormats:Lcom/facebook/common/internal/ImmutableList;
+    sput-object v1, Lcom/facebook/imageformat/DefaultImageFormats;->sAllDefaultFormats:Lcom/facebook/common/internal/ImmutableList;
 
     .line 77
+    .end local v0    # "mDefaultFormats":Ljava/util/List;, "Ljava/util/List<Lcom/facebook/imageformat/ImageFormat;>;"
     :cond_0
     sget-object v0, Lcom/facebook/imageformat/DefaultImageFormats;->sAllDefaultFormats:Lcom/facebook/common/internal/ImmutableList;
 
@@ -242,6 +245,7 @@
 
 .method public static isStaticWebpFormat(Lcom/facebook/imageformat/ImageFormat;)Z
     .locals 1
+    .param p0, "imageFormat"    # Lcom/facebook/imageformat/ImageFormat;
 
     .line 50
     sget-object v0, Lcom/facebook/imageformat/DefaultImageFormats;->WEBP_SIMPLE:Lcom/facebook/imageformat/ImageFormat;
@@ -263,20 +267,21 @@
     goto :goto_0
 
     :cond_0
-    const/4 p0, 0x0
+    const/4 v0, 0x0
 
     goto :goto_1
 
     :cond_1
     :goto_0
-    const/4 p0, 0x1
+    const/4 v0, 0x1
 
     :goto_1
-    return p0
+    return v0
 .end method
 
 .method public static isWebpFormat(Lcom/facebook/imageformat/ImageFormat;)Z
     .locals 1
+    .param p0, "imageFormat"    # Lcom/facebook/imageformat/ImageFormat;
 
     .line 39
     invoke-static {p0}, Lcom/facebook/imageformat/DefaultImageFormats;->isStaticWebpFormat(Lcom/facebook/imageformat/ImageFormat;)Z
@@ -292,14 +297,14 @@
     goto :goto_0
 
     :cond_0
-    const/4 p0, 0x0
+    const/4 v0, 0x0
 
     goto :goto_1
 
     :cond_1
     :goto_0
-    const/4 p0, 0x1
+    const/4 v0, 0x1
 
     :goto_1
-    return p0
+    return v0
 .end method

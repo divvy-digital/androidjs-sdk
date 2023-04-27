@@ -17,12 +17,17 @@
 # virtual methods
 .method public connectFailed(Ljava/net/URI;Ljava/net/SocketAddress;Ljava/io/IOException;)V
     .locals 0
+    .param p1, "uri"    # Ljava/net/URI;
+    .param p2, "sa"    # Ljava/net/SocketAddress;
+    .param p3, "ioe"    # Ljava/io/IOException;
 
+    .line 38
     return-void
 .end method
 
 .method public select(Ljava/net/URI;)Ljava/util/List;
-    .locals 1
+    .locals 2
+    .param p1, "uri"    # Ljava/net/URI;
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -34,24 +39,25 @@
         }
     .end annotation
 
+    .line 31
     if-eqz p1, :cond_0
 
     .line 34
-    sget-object p1, Ljava/net/Proxy;->NO_PROXY:Ljava/net/Proxy;
+    sget-object v0, Ljava/net/Proxy;->NO_PROXY:Ljava/net/Proxy;
 
-    invoke-static {p1}, Ljava/util/Collections;->singletonList(Ljava/lang/Object;)Ljava/util/List;
+    invoke-static {v0}, Ljava/util/Collections;->singletonList(Ljava/lang/Object;)Ljava/util/List;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 
     .line 32
     :cond_0
-    new-instance p1, Ljava/lang/IllegalArgumentException;
+    new-instance v0, Ljava/lang/IllegalArgumentException;
 
-    const-string v0, "uri must not be null"
+    const-string v1, "uri must not be null"
 
-    invoke-direct {p1, v0}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method

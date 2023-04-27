@@ -32,7 +32,7 @@
 .end method
 
 .method public static getCommandsMap()Ljava/util/Map;
-    .locals 7
+    .locals 6
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "()",
@@ -43,35 +43,36 @@
         }
     .end annotation
 
-    const/4 v0, 0x1
+    .line 55
+    const-string v0, "scrollTo"
 
     .line 57
-    invoke-static {v0}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    const/4 v1, 0x1
 
-    move-result-object v2
+    invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    const/4 v0, 0x2
+    move-result-object v1
+
+    const-string v2, "scrollToEnd"
 
     .line 59
-    invoke-static {v0}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    const/4 v3, 0x2
 
-    move-result-object v4
+    invoke-static {v3}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    const/4 v0, 0x3
+    move-result-object v3
+
+    const-string v4, "flashScrollIndicators"
 
     .line 61
-    invoke-static {v0}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    const/4 v5, 0x3
 
-    move-result-object v6
+    invoke-static {v5}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    const-string v1, "scrollTo"
-
-    const-string v3, "scrollToEnd"
-
-    const-string v5, "flashScrollIndicators"
+    move-result-object v5
 
     .line 55
-    invoke-static/range {v1 .. v6}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+    invoke-static/range {v0 .. v5}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
 
     move-result-object v0
 
@@ -80,7 +81,8 @@
 
 .method public static receiveCommand(Lcom/facebook/react/views/scroll/ReactScrollViewCommandHelper$ScrollCommandHandler;Ljava/lang/Object;ILcom/facebook/react/bridge/ReadableArray;)V
     .locals 5
-    .param p3    # Lcom/facebook/react/bridge/ReadableArray;
+    .param p2, "commandType"    # I
+    .param p3, "args"    # Lcom/facebook/react/bridge/ReadableArray;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -97,6 +99,8 @@
     .end annotation
 
     .line 69
+    .local p0, "viewManager":Lcom/facebook/react/views/scroll/ReactScrollViewCommandHelper$ScrollCommandHandler;, "Lcom/facebook/react/views/scroll/ReactScrollViewCommandHelper$ScrollCommandHandler<TT;>;"
+    .local p1, "scrollView":Ljava/lang/Object;, "TT;"
     invoke-static {p0}, Lcom/facebook/infer/annotation/Assertions;->assertNotNull(Ljava/lang/Object;)Ljava/lang/Object;
 
     .line 70
@@ -105,113 +109,125 @@
     .line 71
     invoke-static {p3}, Lcom/facebook/infer/annotation/Assertions;->assertNotNull(Ljava/lang/Object;)Ljava/lang/Object;
 
-    const/4 v0, 0x0
+    .line 72
+    const/4 v0, 0x2
 
-    const/4 v1, 0x2
+    const/4 v1, 0x1
 
-    const/4 v2, 0x1
+    const/4 v2, 0x0
 
-    if-eq p2, v2, :cond_2
-
-    if-eq p2, v1, :cond_1
-
-    const/4 p3, 0x3
-
-    if-ne p2, p3, :cond_0
-
-    .line 86
-    invoke-interface {p0, p1}, Lcom/facebook/react/views/scroll/ReactScrollViewCommandHelper$ScrollCommandHandler;->flashScrollIndicators(Ljava/lang/Object;)V
-
-    return-void
+    packed-switch p2, :pswitch_data_0
 
     .line 90
-    :cond_0
-    new-instance p1, Ljava/lang/IllegalArgumentException;
+    new-instance v3, Ljava/lang/IllegalArgumentException;
 
-    new-array p3, v1, [Ljava/lang/Object;
+    new-array v0, v0, [Ljava/lang/Object;
 
     .line 92
     invoke-static {p2}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object p2
+    move-result-object v4
 
-    aput-object p2, p3, v0
+    aput-object v4, v0, v2
 
     .line 93
     invoke-virtual {p0}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
 
-    move-result-object p0
+    move-result-object v2
 
-    invoke-virtual {p0}, Ljava/lang/Class;->getSimpleName()Ljava/lang/String;
+    invoke-virtual {v2}, Ljava/lang/Class;->getSimpleName()Ljava/lang/String;
 
-    move-result-object p0
+    move-result-object v2
 
-    aput-object p0, p3, v2
-
-    const-string p0, "Unsupported command %d received by %s."
+    aput-object v2, v0, v1
 
     .line 90
-    invoke-static {p0, p3}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+    const-string v1, "Unsupported command %d received by %s."
 
-    move-result-object p0
+    invoke-static {v1, v0}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
 
-    invoke-direct {p1, p0}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+    move-result-object v0
 
-    throw p1
+    invoke-direct {v3, v0}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+
+    throw v3
+
+    .line 86
+    :pswitch_0
+    invoke-interface {p0, p1}, Lcom/facebook/react/views/scroll/ReactScrollViewCommandHelper$ScrollCommandHandler;->flashScrollIndicators(Ljava/lang/Object;)V
+
+    .line 87
+    return-void
 
     .line 81
-    :cond_1
-    invoke-interface {p3, v0}, Lcom/facebook/react/bridge/ReadableArray;->getBoolean(I)Z
+    :pswitch_1
+    invoke-interface {p3, v2}, Lcom/facebook/react/bridge/ReadableArray;->getBoolean(I)Z
 
-    move-result p2
+    move-result v0
 
     .line 82
-    new-instance p3, Lcom/facebook/react/views/scroll/ReactScrollViewCommandHelper$ScrollToEndCommandData;
+    .local v0, "animated":Z
+    new-instance v1, Lcom/facebook/react/views/scroll/ReactScrollViewCommandHelper$ScrollToEndCommandData;
 
-    invoke-direct {p3, p2}, Lcom/facebook/react/views/scroll/ReactScrollViewCommandHelper$ScrollToEndCommandData;-><init>(Z)V
+    invoke-direct {v1, v0}, Lcom/facebook/react/views/scroll/ReactScrollViewCommandHelper$ScrollToEndCommandData;-><init>(Z)V
 
-    invoke-interface {p0, p1, p3}, Lcom/facebook/react/views/scroll/ReactScrollViewCommandHelper$ScrollCommandHandler;->scrollToEnd(Ljava/lang/Object;Lcom/facebook/react/views/scroll/ReactScrollViewCommandHelper$ScrollToEndCommandData;)V
+    invoke-interface {p0, p1, v1}, Lcom/facebook/react/views/scroll/ReactScrollViewCommandHelper$ScrollCommandHandler;->scrollToEnd(Ljava/lang/Object;Lcom/facebook/react/views/scroll/ReactScrollViewCommandHelper$ScrollToEndCommandData;)V
 
+    .line 83
     return-void
 
     .line 74
-    :cond_2
-    invoke-interface {p3, v0}, Lcom/facebook/react/bridge/ReadableArray;->getDouble(I)D
-
-    move-result-wide v3
-
-    invoke-static {v3, v4}, Lcom/facebook/react/uimanager/PixelUtil;->toPixelFromDIP(D)F
-
-    move-result p2
-
-    invoke-static {p2}, Ljava/lang/Math;->round(F)I
-
-    move-result p2
-
-    .line 75
+    .end local v0    # "animated":Z
+    :pswitch_2
     invoke-interface {p3, v2}, Lcom/facebook/react/bridge/ReadableArray;->getDouble(I)D
 
     move-result-wide v2
 
     invoke-static {v2, v3}, Lcom/facebook/react/uimanager/PixelUtil;->toPixelFromDIP(D)F
 
-    move-result v0
+    move-result v2
 
-    invoke-static {v0}, Ljava/lang/Math;->round(F)I
+    invoke-static {v2}, Ljava/lang/Math;->round(F)I
 
-    move-result v0
+    move-result v2
+
+    .line 75
+    .local v2, "destX":I
+    invoke-interface {p3, v1}, Lcom/facebook/react/bridge/ReadableArray;->getDouble(I)D
+
+    move-result-wide v3
+
+    invoke-static {v3, v4}, Lcom/facebook/react/uimanager/PixelUtil;->toPixelFromDIP(D)F
+
+    move-result v1
+
+    invoke-static {v1}, Ljava/lang/Math;->round(F)I
+
+    move-result v1
 
     .line 76
-    invoke-interface {p3, v1}, Lcom/facebook/react/bridge/ReadableArray;->getBoolean(I)Z
+    .local v1, "destY":I
+    invoke-interface {p3, v0}, Lcom/facebook/react/bridge/ReadableArray;->getBoolean(I)Z
 
-    move-result p3
+    move-result v0
 
     .line 77
-    new-instance v1, Lcom/facebook/react/views/scroll/ReactScrollViewCommandHelper$ScrollToCommandData;
+    .restart local v0    # "animated":Z
+    new-instance v3, Lcom/facebook/react/views/scroll/ReactScrollViewCommandHelper$ScrollToCommandData;
 
-    invoke-direct {v1, p2, v0, p3}, Lcom/facebook/react/views/scroll/ReactScrollViewCommandHelper$ScrollToCommandData;-><init>(IIZ)V
+    invoke-direct {v3, v2, v1, v0}, Lcom/facebook/react/views/scroll/ReactScrollViewCommandHelper$ScrollToCommandData;-><init>(IIZ)V
 
-    invoke-interface {p0, p1, v1}, Lcom/facebook/react/views/scroll/ReactScrollViewCommandHelper$ScrollCommandHandler;->scrollTo(Ljava/lang/Object;Lcom/facebook/react/views/scroll/ReactScrollViewCommandHelper$ScrollToCommandData;)V
+    invoke-interface {p0, p1, v3}, Lcom/facebook/react/views/scroll/ReactScrollViewCommandHelper$ScrollCommandHandler;->scrollTo(Ljava/lang/Object;Lcom/facebook/react/views/scroll/ReactScrollViewCommandHelper$ScrollToCommandData;)V
 
+    .line 78
     return-void
+
+    nop
+
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method

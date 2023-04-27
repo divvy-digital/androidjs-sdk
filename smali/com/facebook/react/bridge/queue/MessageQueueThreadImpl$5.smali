@@ -34,8 +34,6 @@
     sput-object v0, Lcom/facebook/react/bridge/queue/MessageQueueThreadImpl$5;->$SwitchMap$com$facebook$react$bridge$queue$MessageQueueThreadSpec$ThreadType:[I
 
     :try_start_0
-    sget-object v0, Lcom/facebook/react/bridge/queue/MessageQueueThreadImpl$5;->$SwitchMap$com$facebook$react$bridge$queue$MessageQueueThreadSpec$ThreadType:[I
-
     sget-object v1, Lcom/facebook/react/bridge/queue/MessageQueueThreadSpec$ThreadType;->MAIN_UI:Lcom/facebook/react/bridge/queue/MessageQueueThreadSpec$ThreadType;
 
     invoke-virtual {v1}, Lcom/facebook/react/bridge/queue/MessageQueueThreadSpec$ThreadType;->ordinal()I
@@ -48,7 +46,12 @@
     :try_end_0
     .catch Ljava/lang/NoSuchFieldError; {:try_start_0 .. :try_end_0} :catch_0
 
+    goto :goto_0
+
     :catch_0
+    move-exception v0
+
+    :goto_0
     :try_start_1
     sget-object v0, Lcom/facebook/react/bridge/queue/MessageQueueThreadImpl$5;->$SwitchMap$com$facebook$react$bridge$queue$MessageQueueThreadSpec$ThreadType:[I
 
@@ -64,6 +67,11 @@
     :try_end_1
     .catch Ljava/lang/NoSuchFieldError; {:try_start_1 .. :try_end_1} :catch_1
 
+    goto :goto_1
+
     :catch_1
+    move-exception v0
+
+    :goto_1
     return-void
 .end method

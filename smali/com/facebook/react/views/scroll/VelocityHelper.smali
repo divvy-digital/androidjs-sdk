@@ -27,7 +27,8 @@
 
 # virtual methods
 .method public calculateVelocity(Landroid/view/MotionEvent;)V
-    .locals 2
+    .locals 3
+    .param p1, "ev"    # Landroid/view/MotionEvent;
 
     .line 31
     invoke-virtual {p1}, Landroid/view/MotionEvent;->getAction()I
@@ -37,6 +38,7 @@
     and-int/lit16 v0, v0, 0xff
 
     .line 32
+    .local v0, "action":I
     iget-object v1, p0, Lcom/facebook/react/views/scroll/VelocityHelper;->mVelocityTracker:Landroid/view/VelocityTracker;
 
     if-nez v1, :cond_0
@@ -54,56 +56,62 @@
 
     invoke-virtual {v1, p1}, Landroid/view/VelocityTracker;->addMovement(Landroid/view/MotionEvent;)V
 
-    const/4 p1, 0x1
+    .line 37
+    packed-switch v0, :pswitch_data_0
 
-    if-eq v0, p1, :cond_1
-
-    const/4 v1, 0x3
-
-    if-eq v0, v1, :cond_1
-
+    :pswitch_0
     goto :goto_0
 
     .line 41
-    :cond_1
-    iget-object v0, p0, Lcom/facebook/react/views/scroll/VelocityHelper;->mVelocityTracker:Landroid/view/VelocityTracker;
+    :pswitch_1
+    iget-object v1, p0, Lcom/facebook/react/views/scroll/VelocityHelper;->mVelocityTracker:Landroid/view/VelocityTracker;
 
-    invoke-virtual {v0, p1}, Landroid/view/VelocityTracker;->computeCurrentVelocity(I)V
+    const/4 v2, 0x1
+
+    invoke-virtual {v1, v2}, Landroid/view/VelocityTracker;->computeCurrentVelocity(I)V
 
     .line 42
-    iget-object p1, p0, Lcom/facebook/react/views/scroll/VelocityHelper;->mVelocityTracker:Landroid/view/VelocityTracker;
+    iget-object v1, p0, Lcom/facebook/react/views/scroll/VelocityHelper;->mVelocityTracker:Landroid/view/VelocityTracker;
 
-    invoke-virtual {p1}, Landroid/view/VelocityTracker;->getXVelocity()F
+    invoke-virtual {v1}, Landroid/view/VelocityTracker;->getXVelocity()F
 
-    move-result p1
+    move-result v1
 
-    iput p1, p0, Lcom/facebook/react/views/scroll/VelocityHelper;->mXVelocity:F
+    iput v1, p0, Lcom/facebook/react/views/scroll/VelocityHelper;->mXVelocity:F
 
     .line 43
-    iget-object p1, p0, Lcom/facebook/react/views/scroll/VelocityHelper;->mVelocityTracker:Landroid/view/VelocityTracker;
+    iget-object v1, p0, Lcom/facebook/react/views/scroll/VelocityHelper;->mVelocityTracker:Landroid/view/VelocityTracker;
 
-    invoke-virtual {p1}, Landroid/view/VelocityTracker;->getYVelocity()F
+    invoke-virtual {v1}, Landroid/view/VelocityTracker;->getYVelocity()F
 
-    move-result p1
+    move-result v1
 
-    iput p1, p0, Lcom/facebook/react/views/scroll/VelocityHelper;->mYVelocity:F
+    iput v1, p0, Lcom/facebook/react/views/scroll/VelocityHelper;->mYVelocity:F
 
     .line 45
-    iget-object p1, p0, Lcom/facebook/react/views/scroll/VelocityHelper;->mVelocityTracker:Landroid/view/VelocityTracker;
+    iget-object v1, p0, Lcom/facebook/react/views/scroll/VelocityHelper;->mVelocityTracker:Landroid/view/VelocityTracker;
 
-    if-eqz p1, :cond_2
+    if-eqz v1, :cond_1
 
     .line 46
-    invoke-virtual {p1}, Landroid/view/VelocityTracker;->recycle()V
-
-    const/4 p1, 0x0
+    invoke-virtual {v1}, Landroid/view/VelocityTracker;->recycle()V
 
     .line 47
-    iput-object p1, p0, Lcom/facebook/react/views/scroll/VelocityHelper;->mVelocityTracker:Landroid/view/VelocityTracker;
+    const/4 v1, 0x0
 
-    :cond_2
+    iput-object v1, p0, Lcom/facebook/react/views/scroll/VelocityHelper;->mVelocityTracker:Landroid/view/VelocityTracker;
+
+    .line 52
+    :cond_1
     :goto_0
     return-void
+
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_1
+        :pswitch_0
+        :pswitch_1
+    .end packed-switch
 .end method
 
 .method public getXVelocity()F

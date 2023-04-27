@@ -38,71 +38,66 @@
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 6
+    .locals 8
 
     .line 26
     new-instance v0, Lcom/facebook/systrace/Systrace$EventScope;
 
-    const/4 v1, 0x0
+    const/16 v1, 0x74
 
     const-string v2, "THREAD"
 
-    const/16 v3, 0x74
+    const/4 v3, 0x0
 
-    invoke-direct {v0, v2, v1, v3}, Lcom/facebook/systrace/Systrace$EventScope;-><init>(Ljava/lang/String;IC)V
+    invoke-direct {v0, v2, v3, v1}, Lcom/facebook/systrace/Systrace$EventScope;-><init>(Ljava/lang/String;IC)V
 
     sput-object v0, Lcom/facebook/systrace/Systrace$EventScope;->THREAD:Lcom/facebook/systrace/Systrace$EventScope;
 
     .line 27
-    new-instance v0, Lcom/facebook/systrace/Systrace$EventScope;
+    new-instance v1, Lcom/facebook/systrace/Systrace$EventScope;
 
-    const/4 v2, 0x1
+    const/16 v2, 0x70
 
-    const-string v3, "PROCESS"
+    const-string v4, "PROCESS"
 
-    const/16 v4, 0x70
+    const/4 v5, 0x1
 
-    invoke-direct {v0, v3, v2, v4}, Lcom/facebook/systrace/Systrace$EventScope;-><init>(Ljava/lang/String;IC)V
+    invoke-direct {v1, v4, v5, v2}, Lcom/facebook/systrace/Systrace$EventScope;-><init>(Ljava/lang/String;IC)V
 
-    sput-object v0, Lcom/facebook/systrace/Systrace$EventScope;->PROCESS:Lcom/facebook/systrace/Systrace$EventScope;
+    sput-object v1, Lcom/facebook/systrace/Systrace$EventScope;->PROCESS:Lcom/facebook/systrace/Systrace$EventScope;
 
     .line 28
-    new-instance v0, Lcom/facebook/systrace/Systrace$EventScope;
+    new-instance v2, Lcom/facebook/systrace/Systrace$EventScope;
 
-    const/4 v3, 0x2
+    const/16 v4, 0x67
 
-    const-string v4, "GLOBAL"
+    const-string v6, "GLOBAL"
 
-    const/16 v5, 0x67
+    const/4 v7, 0x2
 
-    invoke-direct {v0, v4, v3, v5}, Lcom/facebook/systrace/Systrace$EventScope;-><init>(Ljava/lang/String;IC)V
+    invoke-direct {v2, v6, v7, v4}, Lcom/facebook/systrace/Systrace$EventScope;-><init>(Ljava/lang/String;IC)V
 
-    sput-object v0, Lcom/facebook/systrace/Systrace$EventScope;->GLOBAL:Lcom/facebook/systrace/Systrace$EventScope;
-
-    const/4 v0, 0x3
+    sput-object v2, Lcom/facebook/systrace/Systrace$EventScope;->GLOBAL:Lcom/facebook/systrace/Systrace$EventScope;
 
     .line 25
-    new-array v0, v0, [Lcom/facebook/systrace/Systrace$EventScope;
+    const/4 v4, 0x3
 
-    sget-object v4, Lcom/facebook/systrace/Systrace$EventScope;->THREAD:Lcom/facebook/systrace/Systrace$EventScope;
+    new-array v4, v4, [Lcom/facebook/systrace/Systrace$EventScope;
 
-    aput-object v4, v0, v1
+    aput-object v0, v4, v3
 
-    sget-object v1, Lcom/facebook/systrace/Systrace$EventScope;->PROCESS:Lcom/facebook/systrace/Systrace$EventScope;
+    aput-object v1, v4, v5
 
-    aput-object v1, v0, v2
+    aput-object v2, v4, v7
 
-    sget-object v1, Lcom/facebook/systrace/Systrace$EventScope;->GLOBAL:Lcom/facebook/systrace/Systrace$EventScope;
-
-    aput-object v1, v0, v3
-
-    sput-object v0, Lcom/facebook/systrace/Systrace$EventScope;->$VALUES:[Lcom/facebook/systrace/Systrace$EventScope;
+    sput-object v4, Lcom/facebook/systrace/Systrace$EventScope;->$VALUES:[Lcom/facebook/systrace/Systrace$EventScope;
 
     return-void
 .end method
 
 .method private constructor <init>(Ljava/lang/String;IC)V
     .locals 0
+    .param p3, "code"    # C
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(C)V"
@@ -115,22 +110,24 @@
     .line 33
     iput-char p3, p0, Lcom/facebook/systrace/Systrace$EventScope;->mCode:C
 
+    .line 34
     return-void
 .end method
 
 .method public static valueOf(Ljava/lang/String;)Lcom/facebook/systrace/Systrace$EventScope;
     .locals 1
+    .param p0, "name"    # Ljava/lang/String;
 
     .line 25
     const-class v0, Lcom/facebook/systrace/Systrace$EventScope;
 
     invoke-static {v0, p0}, Ljava/lang/Enum;->valueOf(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
 
-    move-result-object p0
+    move-result-object v0
 
-    check-cast p0, Lcom/facebook/systrace/Systrace$EventScope;
+    check-cast v0, Lcom/facebook/systrace/Systrace$EventScope;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method public static values()[Lcom/facebook/systrace/Systrace$EventScope;

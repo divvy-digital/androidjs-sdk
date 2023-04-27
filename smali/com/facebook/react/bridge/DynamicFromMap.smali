@@ -11,7 +11,7 @@
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "Ljava/lang/ThreadLocal<",
-            "Landroid/support/v4/util/Pools$SimplePool<",
+            "Landroidx/core/util/Pools$SimplePool<",
             "Lcom/facebook/react/bridge/DynamicFromMap;",
             ">;>;"
         }
@@ -55,7 +55,9 @@
 .end method
 
 .method public static create(Lcom/facebook/react/bridge/ReadableMap;Ljava/lang/String;)Lcom/facebook/react/bridge/DynamicFromMap;
-    .locals 1
+    .locals 2
+    .param p0, "map"    # Lcom/facebook/react/bridge/ReadableMap;
+    .param p1, "name"    # Ljava/lang/String;
 
     .line 32
     sget-object v0, Lcom/facebook/react/bridge/DynamicFromMap;->sPool:Ljava/lang/ThreadLocal;
@@ -64,20 +66,24 @@
 
     move-result-object v0
 
-    check-cast v0, Landroid/support/v4/util/Pools$SimplePool;
+    check-cast v0, Landroidx/core/util/Pools$SimplePool;
 
-    invoke-virtual {v0}, Landroid/support/v4/util/Pools$SimplePool;->acquire()Ljava/lang/Object;
+    invoke-virtual {v0}, Landroidx/core/util/Pools$SimplePool;->acquire()Ljava/lang/Object;
 
     move-result-object v0
 
     check-cast v0, Lcom/facebook/react/bridge/DynamicFromMap;
 
+    .line 33
+    .local v0, "dynamic":Lcom/facebook/react/bridge/DynamicFromMap;
     if-nez v0, :cond_0
 
     .line 34
-    new-instance v0, Lcom/facebook/react/bridge/DynamicFromMap;
+    new-instance v1, Lcom/facebook/react/bridge/DynamicFromMap;
 
-    invoke-direct {v0}, Lcom/facebook/react/bridge/DynamicFromMap;-><init>()V
+    invoke-direct {v1}, Lcom/facebook/react/bridge/DynamicFromMap;-><init>()V
+
+    move-object v0, v1
 
     .line 36
     :cond_0
@@ -86,6 +92,7 @@
     .line 37
     iput-object p1, v0, Lcom/facebook/react/bridge/DynamicFromMap;->mName:Ljava/lang/String;
 
+    .line 38
     return-object v0
 .end method
 
@@ -334,9 +341,9 @@
 .method public recycle()V
     .locals 1
 
+    .line 43
     const/4 v0, 0x0
 
-    .line 43
     iput-object v0, p0, Lcom/facebook/react/bridge/DynamicFromMap;->mMap:Lcom/facebook/react/bridge/ReadableMap;
 
     .line 44
@@ -349,9 +356,10 @@
 
     move-result-object v0
 
-    check-cast v0, Landroid/support/v4/util/Pools$SimplePool;
+    check-cast v0, Landroidx/core/util/Pools$SimplePool;
 
-    invoke-virtual {v0, p0}, Landroid/support/v4/util/Pools$SimplePool;->release(Ljava/lang/Object;)Z
+    invoke-virtual {v0, p0}, Landroidx/core/util/Pools$SimplePool;->release(Ljava/lang/Object;)Z
 
+    .line 46
     return-void
 .end method

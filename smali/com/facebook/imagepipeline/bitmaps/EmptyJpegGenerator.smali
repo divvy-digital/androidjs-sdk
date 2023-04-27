@@ -17,18 +17,18 @@
 .method static constructor <clinit>()V
     .locals 1
 
+    .line 27
     const/16 v0, 0x4c
 
-    .line 27
     new-array v0, v0, [B
 
     fill-array-data v0, :array_0
 
     sput-object v0, Lcom/facebook/imagepipeline/bitmaps/EmptyJpegGenerator;->EMPTY_JPEG_PREFIX:[B
 
+    .line 53
     const/16 v0, 0x1cf
 
-    .line 53
     new-array v0, v0, [B
 
     fill-array-data v0, :array_1
@@ -589,6 +589,7 @@
 
 .method public constructor <init>(Lcom/facebook/common/memory/PooledByteBufferFactory;)V
     .locals 0
+    .param p1, "pooledByteBufferFactory"    # Lcom/facebook/common/memory/PooledByteBufferFactory;
 
     .line 161
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -596,13 +597,16 @@
     .line 162
     iput-object p1, p0, Lcom/facebook/imagepipeline/bitmaps/EmptyJpegGenerator;->mPooledByteBufferFactory:Lcom/facebook/common/memory/PooledByteBufferFactory;
 
+    .line 163
     return-void
 .end method
 
 
 # virtual methods
 .method public generate(SS)Lcom/facebook/common/references/CloseableReference;
-    .locals 4
+    .locals 6
+    .param p1, "width"    # S
+    .param p2, "height"    # S
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(SS)",
@@ -612,104 +616,117 @@
         }
     .end annotation
 
+    .line 166
     const/4 v0, 0x0
 
     .line 168
+    .local v0, "os":Lcom/facebook/common/memory/PooledByteBufferOutputStream;
     :try_start_0
     iget-object v1, p0, Lcom/facebook/imagepipeline/bitmaps/EmptyJpegGenerator;->mPooledByteBufferFactory:Lcom/facebook/common/memory/PooledByteBufferFactory;
 
     sget-object v2, Lcom/facebook/imagepipeline/bitmaps/EmptyJpegGenerator;->EMPTY_JPEG_PREFIX:[B
 
-    array-length v2, v2
+    array-length v3, v2
 
-    sget-object v3, Lcom/facebook/imagepipeline/bitmaps/EmptyJpegGenerator;->EMPTY_JPEG_SUFFIX:[B
+    sget-object v4, Lcom/facebook/imagepipeline/bitmaps/EmptyJpegGenerator;->EMPTY_JPEG_SUFFIX:[B
 
-    array-length v3, v3
+    array-length v5, v4
 
-    add-int/2addr v2, v3
+    add-int/2addr v3, v5
 
-    add-int/lit8 v2, v2, 0x4
+    add-int/lit8 v3, v3, 0x4
 
-    invoke-interface {v1, v2}, Lcom/facebook/common/memory/PooledByteBufferFactory;->newOutputStream(I)Lcom/facebook/common/memory/PooledByteBufferOutputStream;
+    invoke-interface {v1, v3}, Lcom/facebook/common/memory/PooledByteBufferFactory;->newOutputStream(I)Lcom/facebook/common/memory/PooledByteBufferOutputStream;
 
-    move-result-object v0
+    move-result-object v1
+
+    move-object v0, v1
 
     .line 170
-    sget-object v1, Lcom/facebook/imagepipeline/bitmaps/EmptyJpegGenerator;->EMPTY_JPEG_PREFIX:[B
+    invoke-virtual {v0, v2}, Lcom/facebook/common/memory/PooledByteBufferOutputStream;->write([B)V
 
-    invoke-virtual {v0, v1}, Lcom/facebook/common/memory/PooledByteBufferOutputStream;->write([B)V
-
+    .line 171
     shr-int/lit8 v1, p2, 0x8
 
     int-to-byte v1, v1
 
-    .line 171
     invoke-virtual {v0, v1}, Lcom/facebook/common/memory/PooledByteBufferOutputStream;->write(I)V
 
-    and-int/lit16 p2, p2, 0xff
-
-    int-to-byte p2, p2
-
     .line 172
-    invoke-virtual {v0, p2}, Lcom/facebook/common/memory/PooledByteBufferOutputStream;->write(I)V
+    and-int/lit16 v1, p2, 0xff
 
-    shr-int/lit8 p2, p1, 0x8
+    int-to-byte v1, v1
 
-    int-to-byte p2, p2
+    invoke-virtual {v0, v1}, Lcom/facebook/common/memory/PooledByteBufferOutputStream;->write(I)V
 
     .line 173
-    invoke-virtual {v0, p2}, Lcom/facebook/common/memory/PooledByteBufferOutputStream;->write(I)V
+    shr-int/lit8 v1, p1, 0x8
 
-    and-int/lit16 p1, p1, 0xff
+    int-to-byte v1, v1
 
-    int-to-byte p1, p1
+    invoke-virtual {v0, v1}, Lcom/facebook/common/memory/PooledByteBufferOutputStream;->write(I)V
 
     .line 174
-    invoke-virtual {v0, p1}, Lcom/facebook/common/memory/PooledByteBufferOutputStream;->write(I)V
+    and-int/lit16 v1, p1, 0xff
+
+    int-to-byte v1, v1
+
+    invoke-virtual {v0, v1}, Lcom/facebook/common/memory/PooledByteBufferOutputStream;->write(I)V
 
     .line 175
-    sget-object p1, Lcom/facebook/imagepipeline/bitmaps/EmptyJpegGenerator;->EMPTY_JPEG_SUFFIX:[B
-
-    invoke-virtual {v0, p1}, Lcom/facebook/common/memory/PooledByteBufferOutputStream;->write([B)V
+    invoke-virtual {v0, v4}, Lcom/facebook/common/memory/PooledByteBufferOutputStream;->write([B)V
 
     .line 176
     invoke-virtual {v0}, Lcom/facebook/common/memory/PooledByteBufferOutputStream;->toByteBuffer()Lcom/facebook/common/memory/PooledByteBuffer;
 
-    move-result-object p1
+    move-result-object v1
 
-    invoke-static {p1}, Lcom/facebook/common/references/CloseableReference;->of(Ljava/io/Closeable;)Lcom/facebook/common/references/CloseableReference;
+    invoke-static {v1}, Lcom/facebook/common/references/CloseableReference;->of(Ljava/io/Closeable;)Lcom/facebook/common/references/CloseableReference;
 
-    move-result-object p1
+    move-result-object v1
     :try_end_0
     .catch Ljava/io/IOException; {:try_start_0 .. :try_end_0} :catch_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
+    .line 180
     if-eqz v0, :cond_0
 
     .line 181
     invoke-virtual {v0}, Lcom/facebook/common/memory/PooledByteBufferOutputStream;->close()V
 
+    .line 176
     :cond_0
-    return-object p1
+    return-object v1
 
+    .line 180
     :catchall_0
-    move-exception p1
+    move-exception v1
 
     goto :goto_0
 
+    .line 177
     :catch_0
-    move-exception p1
+    move-exception v1
 
     .line 178
+    .local v1, "e":Ljava/io/IOException;
     :try_start_1
-    new-instance p2, Ljava/lang/RuntimeException;
+    new-instance v2, Ljava/lang/RuntimeException;
 
-    invoke-direct {p2, p1}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/Throwable;)V
+    invoke-direct {v2, v1}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/Throwable;)V
 
-    throw p2
+    .end local v0    # "os":Lcom/facebook/common/memory/PooledByteBufferOutputStream;
+    .end local p1    # "width":S
+    .end local p2    # "height":S
+    throw v2
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
+    .line 180
+    .end local v1    # "e":Ljava/io/IOException;
+    .restart local v0    # "os":Lcom/facebook/common/memory/PooledByteBufferOutputStream;
+    .restart local p1    # "width":S
+    .restart local p2    # "height":S
     :goto_0
     if-eqz v0, :cond_1
 
@@ -718,5 +735,5 @@
 
     .line 183
     :cond_1
-    throw p1
+    throw v1
 .end method

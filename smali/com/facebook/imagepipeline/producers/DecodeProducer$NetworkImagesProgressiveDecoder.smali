@@ -27,6 +27,10 @@
 # direct methods
 .method public constructor <init>(Lcom/facebook/imagepipeline/producers/DecodeProducer;Lcom/facebook/imagepipeline/producers/Consumer;Lcom/facebook/imagepipeline/producers/ProducerContext;Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;Lcom/facebook/imagepipeline/decoder/ProgressiveJpegConfig;Z)V
     .locals 0
+    .param p3, "producerContext"    # Lcom/facebook/imagepipeline/producers/ProducerContext;
+    .param p4, "progressiveJpegParser"    # Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;
+    .param p5, "progressiveJpegConfig"    # Lcom/facebook/imagepipeline/decoder/ProgressiveJpegConfig;
+    .param p6, "decodeCancellationEnabled"    # Z
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -42,6 +46,7 @@
     .end annotation
 
     .line 434
+    .local p2, "consumer":Lcom/facebook/imagepipeline/producers/Consumer;, "Lcom/facebook/imagepipeline/producers/Consumer<Lcom/facebook/common/references/CloseableReference<Lcom/facebook/imagepipeline/image/CloseableImage;>;>;"
     iput-object p1, p0, Lcom/facebook/imagepipeline/producers/DecodeProducer$NetworkImagesProgressiveDecoder;->this$0:Lcom/facebook/imagepipeline/producers/DecodeProducer;
 
     .line 435
@@ -65,27 +70,29 @@
 
     iput-object p1, p0, Lcom/facebook/imagepipeline/producers/DecodeProducer$NetworkImagesProgressiveDecoder;->mProgressiveJpegConfig:Lcom/facebook/imagepipeline/decoder/ProgressiveJpegConfig;
 
+    .line 438
     const/4 p1, 0x0
 
-    .line 438
     iput p1, p0, Lcom/facebook/imagepipeline/producers/DecodeProducer$NetworkImagesProgressiveDecoder;->mLastScheduledScanNumber:I
 
+    .line 439
     return-void
 .end method
 
 
 # virtual methods
 .method protected getIntermediateImageEndOffset(Lcom/facebook/imagepipeline/image/EncodedImage;)I
-    .locals 0
+    .locals 1
+    .param p1, "encodedImage"    # Lcom/facebook/imagepipeline/image/EncodedImage;
 
     .line 469
-    iget-object p1, p0, Lcom/facebook/imagepipeline/producers/DecodeProducer$NetworkImagesProgressiveDecoder;->mProgressiveJpegParser:Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;
+    iget-object v0, p0, Lcom/facebook/imagepipeline/producers/DecodeProducer$NetworkImagesProgressiveDecoder;->mProgressiveJpegParser:Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;
 
-    invoke-virtual {p1}, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->getBestScanEndOffset()I
+    invoke-virtual {v0}, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->getBestScanEndOffset()I
 
-    move-result p1
+    move-result v0
 
-    return p1
+    return v0
 .end method
 
 .method protected getQualityInfo()Lcom/facebook/imagepipeline/image/QualityInfo;
@@ -108,7 +115,9 @@
 .end method
 
 .method protected declared-synchronized updateDecodeJob(Lcom/facebook/imagepipeline/image/EncodedImage;I)Z
-    .locals 3
+    .locals 5
+    .param p1, "encodedImage"    # Lcom/facebook/imagepipeline/image/EncodedImage;
+    .param p2, "status"    # I
 
     monitor-enter p0
 
@@ -119,6 +128,7 @@
     move-result v0
 
     .line 444
+    .local v0, "ret":Z
     invoke-static {p2}, Lcom/facebook/imagepipeline/producers/DecodeProducer$NetworkImagesProgressiveDecoder;->isNotLast(I)Z
 
     move-result v1
@@ -133,113 +143,118 @@
 
     if-eqz v1, :cond_4
 
+    .line 445
+    .end local p0    # "this":Lcom/facebook/imagepipeline/producers/DecodeProducer$NetworkImagesProgressiveDecoder;
     :cond_0
     const/4 v1, 0x4
 
-    .line 445
     invoke-static {p2, v1}, Lcom/facebook/imagepipeline/producers/DecodeProducer$NetworkImagesProgressiveDecoder;->statusHasFlag(II)Z
 
-    move-result p2
+    move-result v1
 
-    if-nez p2, :cond_4
+    if-nez v1, :cond_4
 
     .line 446
     invoke-static {p1}, Lcom/facebook/imagepipeline/image/EncodedImage;->isValid(Lcom/facebook/imagepipeline/image/EncodedImage;)Z
 
-    move-result p2
+    move-result v1
 
-    if-eqz p2, :cond_4
+    if-eqz v1, :cond_4
 
     .line 447
     invoke-virtual {p1}, Lcom/facebook/imagepipeline/image/EncodedImage;->getImageFormat()Lcom/facebook/imageformat/ImageFormat;
 
-    move-result-object p2
+    move-result-object v1
 
-    sget-object v1, Lcom/facebook/imageformat/DefaultImageFormats;->JPEG:Lcom/facebook/imageformat/ImageFormat;
+    sget-object v2, Lcom/facebook/imageformat/DefaultImageFormats;->JPEG:Lcom/facebook/imageformat/ImageFormat;
 
-    if-ne p2, v1, :cond_4
+    if-ne v1, v2, :cond_4
 
     .line 448
-    iget-object p2, p0, Lcom/facebook/imagepipeline/producers/DecodeProducer$NetworkImagesProgressiveDecoder;->mProgressiveJpegParser:Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;
+    iget-object v1, p0, Lcom/facebook/imagepipeline/producers/DecodeProducer$NetworkImagesProgressiveDecoder;->mProgressiveJpegParser:Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;
 
-    invoke-virtual {p2, p1}, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->parseMoreData(Lcom/facebook/imagepipeline/image/EncodedImage;)Z
+    invoke-virtual {v1, p1}, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->parseMoreData(Lcom/facebook/imagepipeline/image/EncodedImage;)Z
 
-    move-result p1
+    move-result v1
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    const/4 p2, 0x0
+    const/4 v2, 0x0
 
-    if-nez p1, :cond_1
+    if-nez v1, :cond_1
 
     .line 449
     monitor-exit p0
 
-    return p2
+    return v2
 
     .line 451
     :cond_1
     :try_start_1
-    iget-object p1, p0, Lcom/facebook/imagepipeline/producers/DecodeProducer$NetworkImagesProgressiveDecoder;->mProgressiveJpegParser:Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;
+    iget-object v1, p0, Lcom/facebook/imagepipeline/producers/DecodeProducer$NetworkImagesProgressiveDecoder;->mProgressiveJpegParser:Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;
 
-    invoke-virtual {p1}, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->getBestScanNumber()I
+    invoke-virtual {v1}, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->getBestScanNumber()I
 
-    move-result p1
+    move-result v1
 
     .line 452
-    iget v1, p0, Lcom/facebook/imagepipeline/producers/DecodeProducer$NetworkImagesProgressiveDecoder;->mLastScheduledScanNumber:I
+    .local v1, "scanNum":I
+    iget v3, p0, Lcom/facebook/imagepipeline/producers/DecodeProducer$NetworkImagesProgressiveDecoder;->mLastScheduledScanNumber:I
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
-    if-gt p1, v1, :cond_2
+    if-gt v1, v3, :cond_2
 
     .line 454
     monitor-exit p0
 
-    return p2
+    return v2
 
     .line 456
     :cond_2
     :try_start_2
-    iget-object v1, p0, Lcom/facebook/imagepipeline/producers/DecodeProducer$NetworkImagesProgressiveDecoder;->mProgressiveJpegConfig:Lcom/facebook/imagepipeline/decoder/ProgressiveJpegConfig;
+    iget-object v4, p0, Lcom/facebook/imagepipeline/producers/DecodeProducer$NetworkImagesProgressiveDecoder;->mProgressiveJpegConfig:Lcom/facebook/imagepipeline/decoder/ProgressiveJpegConfig;
 
-    iget v2, p0, Lcom/facebook/imagepipeline/producers/DecodeProducer$NetworkImagesProgressiveDecoder;->mLastScheduledScanNumber:I
+    invoke-interface {v4, v3}, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegConfig;->getNextScanNumberToDecode(I)I
 
-    invoke-interface {v1, v2}, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegConfig;->getNextScanNumberToDecode(I)I
+    move-result v3
 
-    move-result v1
+    if-ge v1, v3, :cond_3
 
-    if-ge p1, v1, :cond_3
-
-    iget-object v1, p0, Lcom/facebook/imagepipeline/producers/DecodeProducer$NetworkImagesProgressiveDecoder;->mProgressiveJpegParser:Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;
+    iget-object v3, p0, Lcom/facebook/imagepipeline/producers/DecodeProducer$NetworkImagesProgressiveDecoder;->mProgressiveJpegParser:Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;
 
     .line 457
-    invoke-virtual {v1}, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->isEndMarkerRead()Z
+    invoke-virtual {v3}, Lcom/facebook/imagepipeline/decoder/ProgressiveJpegParser;->isEndMarkerRead()Z
 
-    move-result v1
+    move-result v3
     :try_end_2
     .catchall {:try_start_2 .. :try_end_2} :catchall_0
 
-    if-nez v1, :cond_3
+    if-nez v3, :cond_3
 
     .line 460
     monitor-exit p0
 
-    return p2
+    return v2
 
     .line 462
     :cond_3
     :try_start_3
-    iput p1, p0, Lcom/facebook/imagepipeline/producers/DecodeProducer$NetworkImagesProgressiveDecoder;->mLastScheduledScanNumber:I
+    iput v1, p0, Lcom/facebook/imagepipeline/producers/DecodeProducer$NetworkImagesProgressiveDecoder;->mLastScheduledScanNumber:I
     :try_end_3
     .catchall {:try_start_3 .. :try_end_3} :catchall_0
 
     .line 464
+    .end local v1    # "scanNum":I
     :cond_4
     monitor-exit p0
 
     return v0
 
+    .line 442
+    .end local v0    # "ret":Z
+    .end local p1    # "encodedImage":Lcom/facebook/imagepipeline/image/EncodedImage;
+    .end local p2    # "status":I
     :catchall_0
     move-exception p1
 

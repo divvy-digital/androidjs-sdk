@@ -24,10 +24,6 @@
             ">;"
         }
     .end annotation
-
-    .annotation build Ljavax/annotation/concurrent/GuardedBy;
-        value = "this"
-    .end annotation
 .end field
 
 
@@ -56,6 +52,7 @@
 
     iput-object v0, p0, Lcom/facebook/imagepipeline/cache/StagingArea;->mMap:Ljava/util/Map;
 
+    .line 35
     return-void
 .end method
 
@@ -100,6 +97,8 @@
 
     return-void
 
+    .line 187
+    .end local p0    # "this":Lcom/facebook/imagepipeline/cache/StagingArea;
     :catchall_0
     move-exception v0
 
@@ -129,6 +128,7 @@
     invoke-direct {v0, v1}, Ljava/util/ArrayList;-><init>(Ljava/util/Collection;)V
 
     .line 64
+    .local v0, "old":Ljava/util/List;, "Ljava/util/List<Lcom/facebook/imagepipeline/image/EncodedImage;>;"
     iget-object v1, p0, Lcom/facebook/imagepipeline/cache/StagingArea;->mMap:Ljava/util/Map;
 
     invoke-interface {v1}, Ljava/util/Map;->clear()V
@@ -138,9 +138,10 @@
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
+    .line 66
     const/4 v1, 0x0
 
-    .line 66
+    .local v1, "i":I
     :goto_0
     invoke-interface {v0}, Ljava/util/List;->size()I
 
@@ -155,39 +156,41 @@
 
     check-cast v2, Lcom/facebook/imagepipeline/image/EncodedImage;
 
+    .line 68
+    .local v2, "encodedImage":Lcom/facebook/imagepipeline/image/EncodedImage;
     if-eqz v2, :cond_0
 
     .line 69
     invoke-virtual {v2}, Lcom/facebook/imagepipeline/image/EncodedImage;->close()V
 
+    .line 66
+    .end local v2    # "encodedImage":Lcom/facebook/imagepipeline/image/EncodedImage;
     :cond_0
     add-int/lit8 v1, v1, 0x1
 
     goto :goto_0
 
+    .line 72
+    .end local v1    # "i":I
     :cond_1
     return-void
 
+    .line 65
+    .end local v0    # "old":Ljava/util/List;, "Ljava/util/List<Lcom/facebook/imagepipeline/image/EncodedImage;>;"
     :catchall_0
     move-exception v0
 
-    .line 65
     :try_start_1
     monitor-exit p0
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
-    goto :goto_2
-
-    :goto_1
     throw v0
-
-    :goto_2
-    goto :goto_1
 .end method
 
 .method public declared-synchronized containsKey(Lcom/facebook/cache/common/CacheKey;)Z
     .locals 7
+    .param p1, "key"    # Lcom/facebook/cache/common/CacheKey;
 
     monitor-enter p0
 
@@ -202,7 +205,7 @@
 
     move-result v0
     :try_end_0
-    .catchall {:try_start_0 .. :try_end_0} :catchall_1
+    .catchall {:try_start_0 .. :try_end_0} :catchall_2
 
     const/4 v1, 0x0
 
@@ -225,9 +228,10 @@
     check-cast v0, Lcom/facebook/imagepipeline/image/EncodedImage;
 
     .line 166
+    .local v0, "storedEncodedImage":Lcom/facebook/imagepipeline/image/EncodedImage;
     monitor-enter v0
     :try_end_1
-    .catchall {:try_start_1 .. :try_end_1} :catchall_1
+    .catchall {:try_start_1 .. :try_end_1} :catchall_2
 
     .line 167
     :try_start_2
@@ -271,18 +275,18 @@
 
     aput-object v6, v5, v3
 
-    const/4 v3, 0x2
-
     .line 177
     invoke-static {p1}, Ljava/lang/System;->identityHashCode(Ljava/lang/Object;)I
 
-    move-result p1
+    move-result v3
 
-    invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    invoke-static {v3}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object p1
+    move-result-object v3
 
-    aput-object p1, v5, v3
+    const/4 v6, 0x2
+
+    aput-object v3, v5, v6
 
     .line 172
     invoke-static {v2, v4, v5}, Lcom/facebook/common/logging/FLog;->w(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/Object;)V
@@ -307,21 +311,31 @@
 
     return v3
 
-    :catchall_0
-    move-exception p1
-
     .line 181
+    :catchall_0
+    move-exception v1
+
+    :goto_0
     :try_start_4
     monitor-exit v0
     :try_end_4
-    .catchall {:try_start_4 .. :try_end_4} :catchall_0
+    .catchall {:try_start_4 .. :try_end_4} :catchall_1
 
     :try_start_5
-    throw p1
+    throw v1
     :try_end_5
-    .catchall {:try_start_5 .. :try_end_5} :catchall_1
+    .catchall {:try_start_5 .. :try_end_5} :catchall_2
 
+    .end local p0    # "this":Lcom/facebook/imagepipeline/cache/StagingArea;
     :catchall_1
+    move-exception v1
+
+    goto :goto_0
+
+    .line 160
+    .end local v0    # "storedEncodedImage":Lcom/facebook/imagepipeline/image/EncodedImage;
+    .end local p1    # "key":Lcom/facebook/cache/common/CacheKey;
+    :catchall_2
     move-exception p1
 
     monitor-exit p0
@@ -330,7 +344,8 @@
 .end method
 
 .method public declared-synchronized get(Lcom/facebook/cache/common/CacheKey;)Lcom/facebook/imagepipeline/image/EncodedImage;
-    .locals 6
+    .locals 7
+    .param p1, "key"    # Lcom/facebook/cache/common/CacheKey;
 
     monitor-enter p0
 
@@ -347,22 +362,27 @@
 
     check-cast v0, Lcom/facebook/imagepipeline/image/EncodedImage;
 
+    .line 136
+    .local v0, "storedEncodedImage":Lcom/facebook/imagepipeline/image/EncodedImage;
     if-eqz v0, :cond_1
 
     .line 137
     monitor-enter v0
     :try_end_0
-    .catchall {:try_start_0 .. :try_end_0} :catchall_1
+    .catchall {:try_start_0 .. :try_end_0} :catchall_4
 
     .line 138
     :try_start_1
     invoke-static {v0}, Lcom/facebook/imagepipeline/image/EncodedImage;->isValid(Lcom/facebook/imagepipeline/image/EncodedImage;)Z
 
     move-result v1
+    :try_end_1
+    .catchall {:try_start_1 .. :try_end_1} :catchall_2
 
     if-nez v1, :cond_0
 
     .line 142
+    :try_start_2
     iget-object v1, p0, Lcom/facebook/imagepipeline/cache/StagingArea;->mMap:Ljava/util/Map;
 
     invoke-interface {v1, p1}, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;
@@ -376,89 +396,132 @@
 
     new-array v3, v3, [Ljava/lang/Object;
 
-    const/4 v4, 0x0
-
     .line 146
     invoke-static {v0}, Ljava/lang/System;->identityHashCode(Ljava/lang/Object;)I
 
-    move-result v5
+    move-result v4
 
-    invoke-static {v5}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    invoke-static {v4}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object v5
+    move-result-object v4
 
-    aput-object v5, v3, v4
+    const/4 v5, 0x0
 
-    const/4 v4, 0x1
+    aput-object v4, v3, v5
 
     .line 147
     invoke-interface {p1}, Lcom/facebook/cache/common/CacheKey;->getUriString()Ljava/lang/String;
 
-    move-result-object v5
+    move-result-object v4
 
-    aput-object v5, v3, v4
+    const/4 v5, 0x1
 
-    const/4 v4, 0x2
+    aput-object v4, v3, v5
 
     .line 148
     invoke-static {p1}, Ljava/lang/System;->identityHashCode(Ljava/lang/Object;)I
 
-    move-result p1
+    move-result v4
 
-    invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    invoke-static {v4}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object p1
+    move-result-object v4
 
-    aput-object p1, v3, v4
+    const/4 v5, 0x2
+
+    aput-object v4, v3, v5
 
     .line 143
     invoke-static {v1, v2, v3}, Lcom/facebook/common/logging/FLog;->w(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/Object;)V
 
-    const/4 p1, 0x0
-
     .line 149
-    monitor-exit v0
-    :try_end_1
-    .catchall {:try_start_1 .. :try_end_1} :catchall_0
-
-    monitor-exit p0
-
-    return-object p1
-
-    .line 151
-    :cond_0
-    :try_start_2
-    invoke-static {v0}, Lcom/facebook/imagepipeline/image/EncodedImage;->cloneOrNull(Lcom/facebook/imagepipeline/image/EncodedImage;)Lcom/facebook/imagepipeline/image/EncodedImage;
-
-    move-result-object p1
-
-    .line 152
-    monitor-exit v0
-
-    goto :goto_0
-
-    :catchall_0
-    move-exception p1
-
     monitor-exit v0
     :try_end_2
     .catchall {:try_start_2 .. :try_end_2} :catchall_0
 
-    :try_start_3
-    throw p1
-    :try_end_3
-    .catchall {:try_start_3 .. :try_end_3} :catchall_1
-
-    :cond_1
-    move-object p1, v0
-
-    .line 154
-    :goto_0
     monitor-exit p0
 
-    return-object p1
+    const/4 v1, 0x0
+
+    return-object v1
+
+    .line 152
+    :catchall_0
+    move-exception v1
+
+    move-object v2, v0
+
+    goto :goto_0
+
+    .line 151
+    :cond_0
+    :try_start_3
+    invoke-static {v0}, Lcom/facebook/imagepipeline/image/EncodedImage;->cloneOrNull(Lcom/facebook/imagepipeline/image/EncodedImage;)Lcom/facebook/imagepipeline/image/EncodedImage;
+
+    move-result-object v1
+    :try_end_3
+    .catchall {:try_start_3 .. :try_end_3} :catchall_2
+
+    .line 152
+    .end local v0    # "storedEncodedImage":Lcom/facebook/imagepipeline/image/EncodedImage;
+    .local v1, "storedEncodedImage":Lcom/facebook/imagepipeline/image/EncodedImage;
+    :try_start_4
+    monitor-exit v0
+    :try_end_4
+    .catchall {:try_start_4 .. :try_end_4} :catchall_1
+
+    move-object v0, v1
+
+    goto :goto_1
 
     :catchall_1
+    move-exception v2
+
+    move-object v6, v2
+
+    move-object v2, v1
+
+    move-object v1, v6
+
+    goto :goto_0
+
+    .end local v1    # "storedEncodedImage":Lcom/facebook/imagepipeline/image/EncodedImage;
+    :catchall_2
+    move-exception v1
+
+    move-object v2, v0
+
+    .local v2, "storedEncodedImage":Lcom/facebook/imagepipeline/image/EncodedImage;
+    :goto_0
+    :try_start_5
+    monitor-exit v0
+    :try_end_5
+    .catchall {:try_start_5 .. :try_end_5} :catchall_3
+
+    :try_start_6
+    throw v1
+    :try_end_6
+    .catchall {:try_start_6 .. :try_end_6} :catchall_4
+
+    .end local p0    # "this":Lcom/facebook/imagepipeline/cache/StagingArea;
+    :catchall_3
+    move-exception v1
+
+    goto :goto_0
+
+    .line 154
+    .end local v2    # "storedEncodedImage":Lcom/facebook/imagepipeline/image/EncodedImage;
+    .restart local v0    # "storedEncodedImage":Lcom/facebook/imagepipeline/image/EncodedImage;
+    :cond_1
+    :goto_1
+    monitor-exit p0
+
+    return-object v0
+
+    .line 133
+    .end local v0    # "storedEncodedImage":Lcom/facebook/imagepipeline/image/EncodedImage;
+    .end local p1    # "key":Lcom/facebook/cache/common/CacheKey;
+    :catchall_4
     move-exception p1
 
     monitor-exit p0
@@ -467,7 +530,9 @@
 .end method
 
 .method public declared-synchronized put(Lcom/facebook/cache/common/CacheKey;Lcom/facebook/imagepipeline/image/EncodedImage;)V
-    .locals 1
+    .locals 2
+    .param p1, "key"    # Lcom/facebook/cache/common/CacheKey;
+    .param p2, "encodedImage"    # Lcom/facebook/imagepipeline/image/EncodedImage;
 
     monitor-enter p0
 
@@ -487,16 +552,17 @@
 
     invoke-static {p2}, Lcom/facebook/imagepipeline/image/EncodedImage;->cloneOrNull(Lcom/facebook/imagepipeline/image/EncodedImage;)Lcom/facebook/imagepipeline/image/EncodedImage;
 
-    move-result-object p2
+    move-result-object v1
 
-    invoke-interface {v0, p1, p2}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-interface {v0, p1, v1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    move-result-object p1
+    move-result-object v0
 
-    check-cast p1, Lcom/facebook/imagepipeline/image/EncodedImage;
+    check-cast v0, Lcom/facebook/imagepipeline/image/EncodedImage;
 
     .line 53
-    invoke-static {p1}, Lcom/facebook/imagepipeline/image/EncodedImage;->closeSafely(Lcom/facebook/imagepipeline/image/EncodedImage;)V
+    .local v0, "oldEntry":Lcom/facebook/imagepipeline/image/EncodedImage;
+    invoke-static {v0}, Lcom/facebook/imagepipeline/image/EncodedImage;->closeSafely(Lcom/facebook/imagepipeline/image/EncodedImage;)V
 
     .line 54
     invoke-direct {p0}, Lcom/facebook/imagepipeline/cache/StagingArea;->logStats()V
@@ -508,6 +574,11 @@
 
     return-void
 
+    .line 47
+    .end local v0    # "oldEntry":Lcom/facebook/imagepipeline/image/EncodedImage;
+    .end local p0    # "this":Lcom/facebook/imagepipeline/cache/StagingArea;
+    .end local p1    # "key":Lcom/facebook/cache/common/CacheKey;
+    .end local p2    # "encodedImage":Lcom/facebook/imagepipeline/image/EncodedImage;
     :catchall_0
     move-exception p1
 
@@ -517,7 +588,8 @@
 .end method
 
 .method public remove(Lcom/facebook/cache/common/CacheKey;)Z
-    .locals 1
+    .locals 2
+    .param p1, "key"    # Lcom/facebook/cache/common/CacheKey;
 
     .line 80
     invoke-static {p1}, Lcom/facebook/common/internal/Preconditions;->checkNotNull(Ljava/lang/Object;)Ljava/lang/Object;
@@ -531,57 +603,65 @@
 
     invoke-interface {v0, p1}, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;
 
-    move-result-object p1
+    move-result-object v0
 
-    check-cast p1, Lcom/facebook/imagepipeline/image/EncodedImage;
+    check-cast v0, Lcom/facebook/imagepipeline/image/EncodedImage;
 
     .line 84
+    .local v0, "encodedImage":Lcom/facebook/imagepipeline/image/EncodedImage;
     monitor-exit p0
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_1
 
-    if-nez p1, :cond_0
+    .line 85
+    if-nez v0, :cond_0
 
-    const/4 p1, 0x0
+    .line 86
+    const/4 v1, 0x0
 
-    return p1
+    return v1
 
     .line 89
     :cond_0
     :try_start_1
-    invoke-virtual {p1}, Lcom/facebook/imagepipeline/image/EncodedImage;->isValid()Z
+    invoke-virtual {v0}, Lcom/facebook/imagepipeline/image/EncodedImage;->isValid()Z
 
-    move-result v0
+    move-result v1
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
     .line 91
-    invoke-virtual {p1}, Lcom/facebook/imagepipeline/image/EncodedImage;->close()V
+    invoke-virtual {v0}, Lcom/facebook/imagepipeline/image/EncodedImage;->close()V
 
-    return v0
+    .line 89
+    return v1
 
+    .line 91
     :catchall_0
-    move-exception v0
+    move-exception v1
 
-    invoke-virtual {p1}, Lcom/facebook/imagepipeline/image/EncodedImage;->close()V
+    invoke-virtual {v0}, Lcom/facebook/imagepipeline/image/EncodedImage;->close()V
 
     .line 92
-    throw v0
-
-    :catchall_1
-    move-exception p1
+    throw v1
 
     .line 84
+    .end local v0    # "encodedImage":Lcom/facebook/imagepipeline/image/EncodedImage;
+    :catchall_1
+    move-exception v0
+
     :try_start_2
     monitor-exit p0
     :try_end_2
     .catchall {:try_start_2 .. :try_end_2} :catchall_1
 
-    throw p1
+    throw v0
 .end method
 
 .method public declared-synchronized remove(Lcom/facebook/cache/common/CacheKey;Lcom/facebook/imagepipeline/image/EncodedImage;)Z
-    .locals 5
+    .locals 6
+    .param p1, "key"    # Lcom/facebook/cache/common/CacheKey;
+    .param p2, "encodedImage"    # Lcom/facebook/imagepipeline/image/EncodedImage;
 
     monitor-enter p0
 
@@ -610,6 +690,8 @@
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_1
 
+    .line 108
+    .local v0, "oldValue":Lcom/facebook/imagepipeline/image/EncodedImage;
     const/4 v1, 0x0
 
     if-nez v0, :cond_0
@@ -627,27 +709,29 @@
     move-result-object v2
 
     .line 113
+    .local v2, "oldRef":Lcom/facebook/common/references/CloseableReference;, "Lcom/facebook/common/references/CloseableReference<Lcom/facebook/common/memory/PooledByteBuffer;>;"
     invoke-virtual {p2}, Lcom/facebook/imagepipeline/image/EncodedImage;->getByteBufferRef()Lcom/facebook/common/references/CloseableReference;
 
-    move-result-object p2
+    move-result-object v3
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_1
 
+    .line 115
+    .local v3, "ref":Lcom/facebook/common/references/CloseableReference;, "Lcom/facebook/common/references/CloseableReference<Lcom/facebook/common/memory/PooledByteBuffer;>;"
     if-eqz v2, :cond_2
 
-    if-eqz p2, :cond_2
+    if-eqz v3, :cond_2
 
-    .line 115
     :try_start_2
     invoke-virtual {v2}, Lcom/facebook/common/references/CloseableReference;->get()Ljava/lang/Object;
 
-    move-result-object v3
-
-    invoke-virtual {p2}, Lcom/facebook/common/references/CloseableReference;->get()Ljava/lang/Object;
-
     move-result-object v4
 
-    if-eq v3, v4, :cond_1
+    invoke-virtual {v3}, Lcom/facebook/common/references/CloseableReference;->get()Ljava/lang/Object;
+
+    move-result-object v5
+
+    if-eq v4, v5, :cond_1
 
     goto :goto_0
 
@@ -661,32 +745,7 @@
 
     .line 120
     :try_start_3
-    invoke-static {p2}, Lcom/facebook/common/references/CloseableReference;->closeSafely(Lcom/facebook/common/references/CloseableReference;)V
-
-    .line 121
-    invoke-static {v2}, Lcom/facebook/common/references/CloseableReference;->closeSafely(Lcom/facebook/common/references/CloseableReference;)V
-
-    .line 122
-    invoke-static {v0}, Lcom/facebook/imagepipeline/image/EncodedImage;->closeSafely(Lcom/facebook/imagepipeline/image/EncodedImage;)V
-
-    .line 125
-    invoke-direct {p0}, Lcom/facebook/imagepipeline/cache/StagingArea;->logStats()V
-    :try_end_3
-    .catchall {:try_start_3 .. :try_end_3} :catchall_1
-
-    const/4 p1, 0x1
-
-    .line 126
-    monitor-exit p0
-
-    return p1
-
-    :catchall_0
-    move-exception p1
-
-    .line 120
-    :try_start_4
-    invoke-static {p2}, Lcom/facebook/common/references/CloseableReference;->closeSafely(Lcom/facebook/common/references/CloseableReference;)V
+    invoke-static {v3}, Lcom/facebook/common/references/CloseableReference;->closeSafely(Lcom/facebook/common/references/CloseableReference;)V
 
     .line 121
     invoke-static {v2}, Lcom/facebook/common/references/CloseableReference;->closeSafely(Lcom/facebook/common/references/CloseableReference;)V
@@ -695,12 +754,44 @@
     invoke-static {v0}, Lcom/facebook/imagepipeline/image/EncodedImage;->closeSafely(Lcom/facebook/imagepipeline/image/EncodedImage;)V
 
     .line 123
-    throw p1
+    nop
+
+    .line 125
+    invoke-direct {p0}, Lcom/facebook/imagepipeline/cache/StagingArea;->logStats()V
+    :try_end_3
+    .catchall {:try_start_3 .. :try_end_3} :catchall_1
+
+    .line 126
+    monitor-exit p0
+
+    const/4 v1, 0x1
+
+    return v1
 
     .line 120
+    .end local p0    # "this":Lcom/facebook/imagepipeline/cache/StagingArea;
+    :catchall_0
+    move-exception v1
+
+    :try_start_4
+    invoke-static {v3}, Lcom/facebook/common/references/CloseableReference;->closeSafely(Lcom/facebook/common/references/CloseableReference;)V
+
+    .line 121
+    invoke-static {v2}, Lcom/facebook/common/references/CloseableReference;->closeSafely(Lcom/facebook/common/references/CloseableReference;)V
+
+    .line 122
+    invoke-static {v0}, Lcom/facebook/imagepipeline/image/EncodedImage;->closeSafely(Lcom/facebook/imagepipeline/image/EncodedImage;)V
+
+    .line 123
+    throw v1
+
+    .line 116
     :cond_2
     :goto_0
-    invoke-static {p2}, Lcom/facebook/common/references/CloseableReference;->closeSafely(Lcom/facebook/common/references/CloseableReference;)V
+    nop
+
+    .line 120
+    invoke-static {v3}, Lcom/facebook/common/references/CloseableReference;->closeSafely(Lcom/facebook/common/references/CloseableReference;)V
 
     .line 121
     invoke-static {v2}, Lcom/facebook/common/references/CloseableReference;->closeSafely(Lcom/facebook/common/references/CloseableReference;)V
@@ -715,6 +806,12 @@
 
     return v1
 
+    .line 101
+    .end local v0    # "oldValue":Lcom/facebook/imagepipeline/image/EncodedImage;
+    .end local v2    # "oldRef":Lcom/facebook/common/references/CloseableReference;, "Lcom/facebook/common/references/CloseableReference<Lcom/facebook/common/memory/PooledByteBuffer;>;"
+    .end local v3    # "ref":Lcom/facebook/common/references/CloseableReference;, "Lcom/facebook/common/references/CloseableReference<Lcom/facebook/common/memory/PooledByteBuffer;>;"
+    .end local p1    # "key":Lcom/facebook/cache/common/CacheKey;
+    .end local p2    # "encodedImage":Lcom/facebook/imagepipeline/image/EncodedImage;
     :catchall_1
     move-exception p1
 

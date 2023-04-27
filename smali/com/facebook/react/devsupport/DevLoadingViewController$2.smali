@@ -30,6 +30,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/devsupport/DevLoadingViewController;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/devsupport/DevLoadingViewController;
 
     .line 92
     iput-object p1, p0, Lcom/facebook/react/devsupport/DevLoadingViewController$2;->this$0:Lcom/facebook/react/devsupport/DevLoadingViewController;
@@ -48,7 +49,7 @@
 
 # virtual methods
 .method public run()V
-    .locals 6
+    .locals 5
 
     .line 95
     new-instance v0, Ljava/lang/StringBuilder;
@@ -56,6 +57,7 @@
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
 
     .line 96
+    .local v0, "message":Ljava/lang/StringBuilder;
     iget-object v1, p0, Lcom/facebook/react/devsupport/DevLoadingViewController$2;->val$status:Ljava/lang/String;
 
     if-eqz v1, :cond_0
@@ -92,9 +94,15 @@
 
     new-array v2, v2, [Ljava/lang/Object;
 
-    const/4 v3, 0x0
+    iget-object v3, p0, Lcom/facebook/react/devsupport/DevLoadingViewController$2;->val$done:Ljava/lang/Integer;
 
-    iget-object v4, p0, Lcom/facebook/react/devsupport/DevLoadingViewController$2;->val$done:Ljava/lang/Integer;
+    invoke-virtual {v3}, Ljava/lang/Integer;->intValue()I
+
+    move-result v3
+
+    int-to-float v3, v3
+
+    iget-object v4, p0, Lcom/facebook/react/devsupport/DevLoadingViewController$2;->val$total:Ljava/lang/Integer;
 
     invoke-virtual {v4}, Ljava/lang/Integer;->intValue()I
 
@@ -102,25 +110,19 @@
 
     int-to-float v4, v4
 
-    iget-object v5, p0, Lcom/facebook/react/devsupport/DevLoadingViewController$2;->val$total:Ljava/lang/Integer;
+    div-float/2addr v3, v4
 
-    invoke-virtual {v5}, Ljava/lang/Integer;->intValue()I
+    const/high16 v4, 0x42c80000    # 100.0f
 
-    move-result v5
+    mul-float v3, v3, v4
 
-    int-to-float v5, v5
+    invoke-static {v3}, Ljava/lang/Float;->valueOf(F)Ljava/lang/Float;
 
-    div-float/2addr v4, v5
+    move-result-object v3
 
-    const/high16 v5, 0x42c80000    # 100.0f
+    const/4 v4, 0x0
 
-    mul-float v4, v4, v5
-
-    invoke-static {v4}, Ljava/lang/Float;->valueOf(F)Ljava/lang/Float;
-
-    move-result-object v4
-
-    aput-object v4, v2, v3
+    aput-object v3, v2, v4
 
     const/4 v3, 0x1
 
@@ -142,10 +144,10 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    .line 100
     :cond_1
     const-string v1, "\u2026"
 
-    .line 100
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     .line 101
@@ -166,6 +168,7 @@
 
     invoke-virtual {v1, v0}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
+    .line 104
     :cond_2
     return-void
 .end method

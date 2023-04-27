@@ -24,6 +24,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/modules/blob/BlobModule;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/modules/blob/BlobModule;
 
     .line 133
     iput-object p1, p0, Lcom/facebook/react/modules/blob/BlobModule$4;->this$0:Lcom/facebook/react/modules/blob/BlobModule;
@@ -37,19 +38,21 @@
 # virtual methods
 .method public supports(Ljava/lang/String;)Z
     .locals 1
-
-    const-string v0, "blob"
+    .param p1, "responseType"    # Ljava/lang/String;
 
     .line 136
+    const-string v0, "blob"
+
     invoke-virtual {v0, p1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result p1
+    move-result v0
 
-    return p1
+    return v0
 .end method
 
 .method public toResponseData(Lokhttp3/ResponseBody;)Lcom/facebook/react/bridge/WritableMap;
-    .locals 3
+    .locals 4
+    .param p1, "body"    # Lokhttp3/ResponseBody;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -59,37 +62,40 @@
     .line 141
     invoke-virtual {p1}, Lokhttp3/ResponseBody;->bytes()[B
 
-    move-result-object p1
-
-    .line 142
-    invoke-static {}, Lcom/facebook/react/bridge/Arguments;->createMap()Lcom/facebook/react/bridge/WritableMap;
-
     move-result-object v0
 
-    .line 143
-    iget-object v1, p0, Lcom/facebook/react/modules/blob/BlobModule$4;->this$0:Lcom/facebook/react/modules/blob/BlobModule;
-
-    invoke-virtual {v1, p1}, Lcom/facebook/react/modules/blob/BlobModule;->store([B)Ljava/lang/String;
+    .line 142
+    .local v0, "data":[B
+    invoke-static {}, Lcom/facebook/react/bridge/Arguments;->createMap()Lcom/facebook/react/bridge/WritableMap;
 
     move-result-object v1
 
-    const-string v2, "blobId"
+    .line 143
+    .local v1, "blob":Lcom/facebook/react/bridge/WritableMap;
+    iget-object v2, p0, Lcom/facebook/react/modules/blob/BlobModule$4;->this$0:Lcom/facebook/react/modules/blob/BlobModule;
 
-    invoke-interface {v0, v2, v1}, Lcom/facebook/react/bridge/WritableMap;->putString(Ljava/lang/String;Ljava/lang/String;)V
+    invoke-virtual {v2, v0}, Lcom/facebook/react/modules/blob/BlobModule;->store([B)Ljava/lang/String;
 
-    const-string v1, "offset"
+    move-result-object v2
 
-    const/4 v2, 0x0
+    const-string v3, "blobId"
+
+    invoke-interface {v1, v3, v2}, Lcom/facebook/react/bridge/WritableMap;->putString(Ljava/lang/String;Ljava/lang/String;)V
 
     .line 144
-    invoke-interface {v0, v1, v2}, Lcom/facebook/react/bridge/WritableMap;->putInt(Ljava/lang/String;I)V
+    const-string v2, "offset"
+
+    const/4 v3, 0x0
+
+    invoke-interface {v1, v2, v3}, Lcom/facebook/react/bridge/WritableMap;->putInt(Ljava/lang/String;I)V
 
     .line 145
-    array-length p1, p1
+    const-string v2, "size"
 
-    const-string v1, "size"
+    array-length v3, v0
 
-    invoke-interface {v0, v1, p1}, Lcom/facebook/react/bridge/WritableMap;->putInt(Ljava/lang/String;I)V
+    invoke-interface {v1, v2, v3}, Lcom/facebook/react/bridge/WritableMap;->putInt(Ljava/lang/String;I)V
 
-    return-object v0
+    .line 146
+    return-object v1
 .end method

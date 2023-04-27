@@ -35,51 +35,55 @@
 
 # direct methods
 .method public constructor <init>(Lcom/facebook/react/bridge/ReactApplicationContext;)V
-    .locals 0
+    .locals 1
+    .param p1, "reactContext"    # Lcom/facebook/react/bridge/ReactApplicationContext;
 
     .line 151
     invoke-direct {p0, p1}, Lcom/facebook/react/bridge/ReactContextBaseJavaModule;-><init>(Lcom/facebook/react/bridge/ReactApplicationContext;)V
 
     .line 53
-    new-instance p1, Ljava/util/HashMap;
+    new-instance v0, Ljava/util/HashMap;
 
-    invoke-direct {p1}, Ljava/util/HashMap;-><init>()V
+    invoke-direct {v0}, Ljava/util/HashMap;-><init>()V
 
-    iput-object p1, p0, Lcom/facebook/react/modules/blob/BlobModule;->mBlobs:Ljava/util/Map;
+    iput-object v0, p0, Lcom/facebook/react/modules/blob/BlobModule;->mBlobs:Ljava/util/Map;
 
     .line 55
-    new-instance p1, Lcom/facebook/react/modules/blob/BlobModule$1;
+    new-instance v0, Lcom/facebook/react/modules/blob/BlobModule$1;
 
-    invoke-direct {p1, p0}, Lcom/facebook/react/modules/blob/BlobModule$1;-><init>(Lcom/facebook/react/modules/blob/BlobModule;)V
+    invoke-direct {v0, p0}, Lcom/facebook/react/modules/blob/BlobModule$1;-><init>(Lcom/facebook/react/modules/blob/BlobModule;)V
 
-    iput-object p1, p0, Lcom/facebook/react/modules/blob/BlobModule;->mWebSocketContentHandler:Lcom/facebook/react/modules/websocket/WebSocketModule$ContentHandler;
+    iput-object v0, p0, Lcom/facebook/react/modules/blob/BlobModule;->mWebSocketContentHandler:Lcom/facebook/react/modules/websocket/WebSocketModule$ContentHandler;
 
     .line 77
-    new-instance p1, Lcom/facebook/react/modules/blob/BlobModule$2;
+    new-instance v0, Lcom/facebook/react/modules/blob/BlobModule$2;
 
-    invoke-direct {p1, p0}, Lcom/facebook/react/modules/blob/BlobModule$2;-><init>(Lcom/facebook/react/modules/blob/BlobModule;)V
+    invoke-direct {v0, p0}, Lcom/facebook/react/modules/blob/BlobModule$2;-><init>(Lcom/facebook/react/modules/blob/BlobModule;)V
 
-    iput-object p1, p0, Lcom/facebook/react/modules/blob/BlobModule;->mNetworkingUriHandler:Lcom/facebook/react/modules/network/NetworkingModule$UriHandler;
+    iput-object v0, p0, Lcom/facebook/react/modules/blob/BlobModule;->mNetworkingUriHandler:Lcom/facebook/react/modules/network/NetworkingModule$UriHandler;
 
     .line 105
-    new-instance p1, Lcom/facebook/react/modules/blob/BlobModule$3;
+    new-instance v0, Lcom/facebook/react/modules/blob/BlobModule$3;
 
-    invoke-direct {p1, p0}, Lcom/facebook/react/modules/blob/BlobModule$3;-><init>(Lcom/facebook/react/modules/blob/BlobModule;)V
+    invoke-direct {v0, p0}, Lcom/facebook/react/modules/blob/BlobModule$3;-><init>(Lcom/facebook/react/modules/blob/BlobModule;)V
 
-    iput-object p1, p0, Lcom/facebook/react/modules/blob/BlobModule;->mNetworkingRequestBodyHandler:Lcom/facebook/react/modules/network/NetworkingModule$RequestBodyHandler;
+    iput-object v0, p0, Lcom/facebook/react/modules/blob/BlobModule;->mNetworkingRequestBodyHandler:Lcom/facebook/react/modules/network/NetworkingModule$RequestBodyHandler;
 
     .line 132
-    new-instance p1, Lcom/facebook/react/modules/blob/BlobModule$4;
+    new-instance v0, Lcom/facebook/react/modules/blob/BlobModule$4;
 
-    invoke-direct {p1, p0}, Lcom/facebook/react/modules/blob/BlobModule$4;-><init>(Lcom/facebook/react/modules/blob/BlobModule;)V
+    invoke-direct {v0, p0}, Lcom/facebook/react/modules/blob/BlobModule$4;-><init>(Lcom/facebook/react/modules/blob/BlobModule;)V
 
-    iput-object p1, p0, Lcom/facebook/react/modules/blob/BlobModule;->mNetworkingResponseHandler:Lcom/facebook/react/modules/network/NetworkingModule$ResponseHandler;
+    iput-object v0, p0, Lcom/facebook/react/modules/blob/BlobModule;->mNetworkingResponseHandler:Lcom/facebook/react/modules/network/NetworkingModule$ResponseHandler;
 
+    .line 152
     return-void
 .end method
 
 .method static synthetic access$000(Lcom/facebook/react/modules/blob/BlobModule;Landroid/net/Uri;)[B
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/modules/blob/BlobModule;
+    .param p1, "x1"    # Landroid/net/Uri;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -89,46 +93,53 @@
     .line 49
     invoke-direct {p0, p1}, Lcom/facebook/react/modules/blob/BlobModule;->getBytesFromUri(Landroid/net/Uri;)[B
 
-    move-result-object p0
+    move-result-object v0
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$100(Lcom/facebook/react/modules/blob/BlobModule;Landroid/net/Uri;)Ljava/lang/String;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/modules/blob/BlobModule;
+    .param p1, "x1"    # Landroid/net/Uri;
 
     .line 49
     invoke-direct {p0, p1}, Lcom/facebook/react/modules/blob/BlobModule;->getMimeTypeFromUri(Landroid/net/Uri;)Ljava/lang/String;
 
-    move-result-object p0
+    move-result-object v0
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$200(Lcom/facebook/react/modules/blob/BlobModule;Landroid/net/Uri;)Ljava/lang/String;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/modules/blob/BlobModule;
+    .param p1, "x1"    # Landroid/net/Uri;
 
     .line 49
     invoke-direct {p0, p1}, Lcom/facebook/react/modules/blob/BlobModule;->getNameFromUri(Landroid/net/Uri;)Ljava/lang/String;
 
-    move-result-object p0
+    move-result-object v0
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$300(Lcom/facebook/react/modules/blob/BlobModule;Landroid/net/Uri;)J
-    .locals 0
+    .locals 2
+    .param p0, "x0"    # Lcom/facebook/react/modules/blob/BlobModule;
+    .param p1, "x1"    # Landroid/net/Uri;
 
     .line 49
     invoke-direct {p0, p1}, Lcom/facebook/react/modules/blob/BlobModule;->getLastModifiedFromUri(Landroid/net/Uri;)J
 
-    move-result-wide p0
+    move-result-wide v0
 
-    return-wide p0
+    return-wide v0
 .end method
 
 .method private getBytesFromUri(Landroid/net/Uri;)[B
-    .locals 4
+    .locals 7
+    .param p1, "contentUri"    # Landroid/net/Uri;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -148,83 +159,95 @@
 
     move-result-object v0
 
+    .line 224
+    .local v0, "is":Ljava/io/InputStream;
     if-eqz v0, :cond_1
 
     .line 228
-    new-instance p1, Ljava/io/ByteArrayOutputStream;
+    new-instance v1, Ljava/io/ByteArrayOutputStream;
 
-    invoke-direct {p1}, Ljava/io/ByteArrayOutputStream;-><init>()V
+    invoke-direct {v1}, Ljava/io/ByteArrayOutputStream;-><init>()V
 
-    const/16 v1, 0x400
+    .line 229
+    .local v1, "byteBuffer":Ljava/io/ByteArrayOutputStream;
+    const/16 v2, 0x400
 
     .line 230
-    new-array v1, v1, [B
+    .local v2, "bufferSize":I
+    new-array v3, v2, [B
 
     .line 232
+    .local v3, "buffer":[B
     :goto_0
-    invoke-virtual {v0, v1}, Ljava/io/InputStream;->read([B)I
+    invoke-virtual {v0, v3}, Ljava/io/InputStream;->read([B)I
 
-    move-result v2
+    move-result v4
 
-    const/4 v3, -0x1
+    move v5, v4
 
-    if-eq v2, v3, :cond_0
+    .local v5, "len":I
+    const/4 v6, -0x1
 
-    const/4 v3, 0x0
+    if-eq v4, v6, :cond_0
 
     .line 233
-    invoke-virtual {p1, v1, v3, v2}, Ljava/io/ByteArrayOutputStream;->write([BII)V
+    const/4 v4, 0x0
+
+    invoke-virtual {v1, v3, v4, v5}, Ljava/io/ByteArrayOutputStream;->write([BII)V
 
     goto :goto_0
 
     .line 235
     :cond_0
-    invoke-virtual {p1}, Ljava/io/ByteArrayOutputStream;->toByteArray()[B
+    invoke-virtual {v1}, Ljava/io/ByteArrayOutputStream;->toByteArray()[B
 
-    move-result-object p1
+    move-result-object v4
 
-    return-object p1
+    return-object v4
 
     .line 225
+    .end local v1    # "byteBuffer":Ljava/io/ByteArrayOutputStream;
+    .end local v2    # "bufferSize":I
+    .end local v3    # "buffer":[B
+    .end local v5    # "len":I
     :cond_1
-    new-instance v0, Ljava/io/FileNotFoundException;
+    new-instance v1, Ljava/io/FileNotFoundException;
 
-    new-instance v1, Ljava/lang/StringBuilder;
+    new-instance v2, Ljava/lang/StringBuilder;
 
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v2, "File not found for "
+    const-string v3, "File not found for "
 
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    move-result-object v2
 
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual {v2, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
 
-    move-result-object p1
+    move-result-object v2
 
-    invoke-direct {v0, p1}, Ljava/io/FileNotFoundException;-><init>(Ljava/lang/String;)V
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    goto :goto_2
+    move-result-object v2
 
-    :goto_1
-    throw v0
+    invoke-direct {v1, v2}, Ljava/io/FileNotFoundException;-><init>(Ljava/lang/String;)V
 
-    :goto_2
-    goto :goto_1
+    throw v1
 .end method
 
 .method private getLastModifiedFromUri(Landroid/net/Uri;)J
     .locals 2
+    .param p1, "contentUri"    # Landroid/net/Uri;
 
     .line 259
+    const-string v0, "file"
+
     invoke-virtual {p1}, Landroid/net/Uri;->getScheme()Ljava/lang/String;
 
-    move-result-object v0
+    move-result-object v1
 
-    const-string v1, "file"
-
-    invoke-virtual {v1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
     move-result v0
 
@@ -235,9 +258,9 @@
 
     invoke-virtual {p1}, Landroid/net/Uri;->toString()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v1
 
-    invoke-direct {v0, p1}, Ljava/io/File;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/io/File;-><init>(Ljava/lang/String;)V
 
     invoke-virtual {v0}, Ljava/io/File;->lastModified()J
 
@@ -245,6 +268,7 @@
 
     return-wide v0
 
+    .line 262
     :cond_0
     const-wide/16 v0, 0x0
 
@@ -252,7 +276,8 @@
 .end method
 
 .method private getMimeTypeFromUri(Landroid/net/Uri;)Ljava/lang/String;
-    .locals 1
+    .locals 3
+    .param p1, "contentUri"    # Landroid/net/Uri;
 
     .line 266
     invoke-virtual {p0}, Lcom/facebook/react/modules/blob/BlobModule;->getReactApplicationContext()Lcom/facebook/react/bridge/ReactApplicationContext;
@@ -267,48 +292,57 @@
 
     move-result-object v0
 
+    .line 268
+    .local v0, "type":Ljava/lang/String;
     if-nez v0, :cond_0
 
     .line 269
     invoke-virtual {p1}, Landroid/net/Uri;->getPath()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v1
 
-    invoke-static {p1}, Landroid/webkit/MimeTypeMap;->getFileExtensionFromUrl(Ljava/lang/String;)Ljava/lang/String;
+    invoke-static {v1}, Landroid/webkit/MimeTypeMap;->getFileExtensionFromUrl(Ljava/lang/String;)Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v1
 
-    if-eqz p1, :cond_0
+    .line 270
+    .local v1, "ext":Ljava/lang/String;
+    if-eqz v1, :cond_0
 
     .line 271
     invoke-static {}, Landroid/webkit/MimeTypeMap;->getSingleton()Landroid/webkit/MimeTypeMap;
 
+    move-result-object v2
+
+    invoke-virtual {v2, v1}, Landroid/webkit/MimeTypeMap;->getMimeTypeFromExtension(Ljava/lang/String;)Ljava/lang/String;
+
     move-result-object v0
 
-    invoke-virtual {v0, p1}, Landroid/webkit/MimeTypeMap;->getMimeTypeFromExtension(Ljava/lang/String;)Ljava/lang/String;
-
-    move-result-object v0
-
+    .line 275
+    .end local v1    # "ext":Ljava/lang/String;
     :cond_0
     if-nez v0, :cond_1
 
+    .line 276
     const-string v0, ""
 
+    .line 279
     :cond_1
     return-object v0
 .end method
 
 .method private getNameFromUri(Landroid/net/Uri;)Ljava/lang/String;
     .locals 7
+    .param p1, "contentUri"    # Landroid/net/Uri;
 
     .line 239
+    const-string v0, "file"
+
     invoke-virtual {p1}, Landroid/net/Uri;->getScheme()Ljava/lang/String;
 
-    move-result-object v0
+    move-result-object v1
 
-    const-string v1, "file"
-
-    invoke-virtual {v1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
     move-result v0
 
@@ -317,19 +351,20 @@
     .line 240
     invoke-virtual {p1}, Landroid/net/Uri;->getLastPathSegment()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 
+    .line 242
     :cond_0
     const-string v0, "_display_name"
 
-    .line 242
     filled-new-array {v0}, [Ljava/lang/String;
 
     move-result-object v3
 
     .line 243
+    .local v3, "projection":[Ljava/lang/String;
     invoke-virtual {p0}, Lcom/facebook/react/modules/blob/BlobModule;->getReactApplicationContext()Lcom/facebook/react/bridge/ReactApplicationContext;
 
     move-result-object v0
@@ -345,13 +380,15 @@
 
     const/4 v6, 0x0
 
+    .line 245
     move-object v2, p1
 
-    .line 245
     invoke-virtual/range {v1 .. v6}, Landroid/content/ContentResolver;->query(Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;
 
     move-result-object v0
 
+    .line 246
+    .local v0, "metaCursor":Landroid/database/Cursor;
     if-eqz v0, :cond_2
 
     .line 248
@@ -362,41 +399,45 @@
 
     if-eqz v1, :cond_1
 
-    const/4 p1, 0x0
-
     .line 249
-    invoke-interface {v0, p1}, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
+    const/4 v1, 0x0
 
-    move-result-object p1
+    invoke-interface {v0, v1}, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
+
+    move-result-object v1
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
     .line 252
     invoke-interface {v0}, Landroid/database/Cursor;->close()V
 
-    return-object p1
+    .line 249
+    return-object v1
 
+    .line 252
     :cond_1
     invoke-interface {v0}, Landroid/database/Cursor;->close()V
 
+    .line 253
     goto :goto_0
 
+    .line 252
     :catchall_0
-    move-exception p1
+    move-exception v1
 
     invoke-interface {v0}, Landroid/database/Cursor;->close()V
 
     .line 253
-    throw p1
+    throw v1
 
     .line 255
     :cond_2
     :goto_0
     invoke-virtual {p1}, Landroid/net/Uri;->getLastPathSegment()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v1
 
-    return-object p1
+    return-object v1
 .end method
 
 .method private getWebSocketModule()Lcom/facebook/react/modules/websocket/WebSocketModule;
@@ -439,6 +480,7 @@
     check-cast v0, Lcom/facebook/react/modules/network/NetworkingModule;
 
     .line 289
+    .local v0, "networkingModule":Lcom/facebook/react/modules/network/NetworkingModule;
     iget-object v1, p0, Lcom/facebook/react/modules/blob/BlobModule;->mNetworkingUriHandler:Lcom/facebook/react/modules/network/NetworkingModule$UriHandler;
 
     invoke-virtual {v0, v1}, Lcom/facebook/react/modules/network/NetworkingModule;->addUriHandler(Lcom/facebook/react/modules/network/NetworkingModule$UriHandler;)V
@@ -453,11 +495,13 @@
 
     invoke-virtual {v0, v1}, Lcom/facebook/react/modules/network/NetworkingModule;->addResponseHandler(Lcom/facebook/react/modules/network/NetworkingModule$ResponseHandler;)V
 
+    .line 292
     return-void
 .end method
 
 .method public addWebSocketHandler(I)V
     .locals 2
+    .param p1, "id"    # I
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -470,101 +514,130 @@
 
     invoke-virtual {v0, p1, v1}, Lcom/facebook/react/modules/websocket/WebSocketModule;->setContentHandler(ILcom/facebook/react/modules/websocket/WebSocketModule$ContentHandler;)V
 
+    .line 297
     return-void
 .end method
 
 .method public createFromParts(Lcom/facebook/react/bridge/ReadableArray;Ljava/lang/String;)V
-    .locals 11
+    .locals 8
+    .param p1, "parts"    # Lcom/facebook/react/bridge/ReadableArray;
+    .param p2, "blobId"    # Ljava/lang/String;
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
+    .line 317
+    const/4 v0, 0x0
+
     .line 318
-    new-instance v0, Ljava/util/ArrayList;
+    .local v0, "totalBlobSize":I
+    new-instance v1, Ljava/util/ArrayList;
 
     invoke-interface {p1}, Lcom/facebook/react/bridge/ReadableArray;->size()I
 
-    move-result v1
+    move-result v2
 
-    invoke-direct {v0, v1}, Ljava/util/ArrayList;-><init>(I)V
-
-    const/4 v1, 0x0
-
-    const/4 v2, 0x0
-
-    const/4 v3, 0x0
+    invoke-direct {v1, v2}, Ljava/util/ArrayList;-><init>(I)V
 
     .line 319
+    .local v1, "partList":Ljava/util/ArrayList;, "Ljava/util/ArrayList<[B>;"
+    const/4 v2, 0x0
+
+    .local v2, "i":I
     :goto_0
     invoke-interface {p1}, Lcom/facebook/react/bridge/ReadableArray;->size()I
 
-    move-result v4
+    move-result v3
 
-    if-ge v2, v4, :cond_5
+    if-ge v2, v3, :cond_1
 
     .line 320
     invoke-interface {p1, v2}, Lcom/facebook/react/bridge/ReadableArray;->getMap(I)Lcom/facebook/react/bridge/ReadableMap;
 
-    move-result-object v4
-
-    const-string v5, "type"
+    move-result-object v3
 
     .line 321
-    invoke-interface {v4, v5}, Lcom/facebook/react/bridge/ReadableMap;->getString(Ljava/lang/String;)Ljava/lang/String;
+    .local v3, "part":Lcom/facebook/react/bridge/ReadableMap;
+    const-string v4, "type"
+
+    invoke-interface {v3, v4}, Lcom/facebook/react/bridge/ReadableMap;->getString(Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v5
+
+    invoke-virtual {v5}, Ljava/lang/String;->hashCode()I
+
+    move-result v6
+
+    sparse-switch v6, :sswitch_data_0
+
+    :cond_0
+    goto :goto_1
+
+    :sswitch_0
+    const-string v6, "blob"
+
+    invoke-virtual {v5, v6}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v5
+
+    if-eqz v5, :cond_0
+
+    const/4 v5, 0x0
+
+    goto :goto_2
+
+    :sswitch_1
+    const-string v6, "string"
+
+    invoke-virtual {v5, v6}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v5
+
+    if-eqz v5, :cond_0
+
+    const/4 v5, 0x1
+
+    goto :goto_2
+
+    :goto_1
+    const/4 v5, -0x1
+
+    :goto_2
+    const-string v6, "data"
+
+    packed-switch v5, :pswitch_data_0
+
+    .line 333
+    new-instance v5, Ljava/lang/IllegalArgumentException;
+
+    new-instance v6, Ljava/lang/StringBuilder;
+
+    invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v7, "Invalid type for blob: "
+
+    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     move-result-object v6
 
-    const/4 v7, -0x1
+    invoke-interface {v3, v4}, Lcom/facebook/react/bridge/ReadableMap;->getString(Ljava/lang/String;)Ljava/lang/String;
 
-    invoke-virtual {v6}, Ljava/lang/String;->hashCode()I
+    move-result-object v4
 
-    move-result v8
+    invoke-virtual {v6, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    const v9, -0x352a9fef    # -6991880.5f
+    move-result-object v4
 
-    const/4 v10, 0x1
+    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    if-eq v8, v9, :cond_1
+    move-result-object v4
 
-    const v9, 0x2e2f9d
+    invoke-direct {v5, v4}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
 
-    if-eq v8, v9, :cond_0
-
-    goto :goto_1
-
-    :cond_0
-    const-string v8, "blob"
-
-    invoke-virtual {v6, v8}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
-
-    move-result v6
-
-    if-eqz v6, :cond_2
-
-    const/4 v7, 0x0
-
-    goto :goto_1
-
-    :cond_1
-    const-string v8, "string"
-
-    invoke-virtual {v6, v8}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
-
-    move-result v6
-
-    if-eqz v6, :cond_2
-
-    const/4 v7, 0x1
-
-    :cond_2
-    :goto_1
-    const-string v6, "data"
-
-    if-eqz v7, :cond_4
-
-    if-ne v7, v10, :cond_3
+    throw v5
 
     .line 328
-    invoke-interface {v4, v6}, Lcom/facebook/react/bridge/ReadableMap;->getString(Ljava/lang/String;)Ljava/lang/String;
+    :pswitch_0
+    invoke-interface {v3, v6}, Lcom/facebook/react/bridge/ReadableMap;->getString(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v4
 
@@ -579,113 +652,112 @@
     move-result-object v4
 
     .line 329
+    .local v4, "bytes":[B
     array-length v5, v4
 
-    add-int/2addr v3, v5
+    add-int/2addr v0, v5
 
     .line 330
-    invoke-virtual {v0, v2, v4}, Ljava/util/ArrayList;->add(ILjava/lang/Object;)V
+    invoke-virtual {v1, v2, v4}, Ljava/util/ArrayList;->add(ILjava/lang/Object;)V
 
-    goto :goto_2
-
-    .line 333
-    :cond_3
-    new-instance p1, Ljava/lang/IllegalArgumentException;
-
-    new-instance p2, Ljava/lang/StringBuilder;
-
-    invoke-direct {p2}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v0, "Invalid type for blob: "
-
-    invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-interface {v4, v5}, Lcom/facebook/react/bridge/ReadableMap;->getString(Ljava/lang/String;)Ljava/lang/String;
-
-    move-result-object v0
-
-    invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {p2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object p2
-
-    invoke-direct {p1, p2}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
-
-    throw p1
+    .line 331
+    goto :goto_3
 
     .line 323
-    :cond_4
-    invoke-interface {v4, v6}, Lcom/facebook/react/bridge/ReadableMap;->getMap(Ljava/lang/String;)Lcom/facebook/react/bridge/ReadableMap;
+    .end local v4    # "bytes":[B
+    :pswitch_1
+    invoke-interface {v3, v6}, Lcom/facebook/react/bridge/ReadableMap;->getMap(Ljava/lang/String;)Lcom/facebook/react/bridge/ReadableMap;
 
     move-result-object v4
 
+    .line 324
+    .local v4, "blob":Lcom/facebook/react/bridge/ReadableMap;
     const-string v5, "size"
 
-    .line 324
     invoke-interface {v4, v5}, Lcom/facebook/react/bridge/ReadableMap;->getInt(Ljava/lang/String;)I
 
     move-result v5
 
-    add-int/2addr v3, v5
+    add-int/2addr v0, v5
 
     .line 325
     invoke-virtual {p0, v4}, Lcom/facebook/react/modules/blob/BlobModule;->resolve(Lcom/facebook/react/bridge/ReadableMap;)[B
 
-    move-result-object v4
+    move-result-object v5
 
-    invoke-virtual {v0, v2, v4}, Ljava/util/ArrayList;->add(ILjava/lang/Object;)V
+    invoke-virtual {v1, v2, v5}, Ljava/util/ArrayList;->add(ILjava/lang/Object;)V
 
-    :goto_2
+    .line 326
+    nop
+
+    .line 319
+    .end local v3    # "part":Lcom/facebook/react/bridge/ReadableMap;
+    .end local v4    # "blob":Lcom/facebook/react/bridge/ReadableMap;
+    :goto_3
     add-int/lit8 v2, v2, 0x1
 
     goto :goto_0
 
     .line 336
-    :cond_5
-    invoke-static {v3}, Ljava/nio/ByteBuffer;->allocate(I)Ljava/nio/ByteBuffer;
+    .end local v2    # "i":I
+    :cond_1
+    invoke-static {v0}, Ljava/nio/ByteBuffer;->allocate(I)Ljava/nio/ByteBuffer;
 
-    move-result-object p1
+    move-result-object v2
 
     .line 337
-    invoke-virtual {v0}, Ljava/util/ArrayList;->iterator()Ljava/util/Iterator;
+    .local v2, "buffer":Ljava/nio/ByteBuffer;
+    invoke-virtual {v1}, Ljava/util/ArrayList;->iterator()Ljava/util/Iterator;
 
-    move-result-object v0
+    move-result-object v3
 
-    :goto_3
-    invoke-interface {v0}, Ljava/util/Iterator;->hasNext()Z
+    :goto_4
+    invoke-interface {v3}, Ljava/util/Iterator;->hasNext()Z
 
-    move-result v1
+    move-result v4
 
-    if-eqz v1, :cond_6
+    if-eqz v4, :cond_2
 
-    invoke-interface {v0}, Ljava/util/Iterator;->next()Ljava/lang/Object;
+    invoke-interface {v3}, Ljava/util/Iterator;->next()Ljava/lang/Object;
 
-    move-result-object v1
+    move-result-object v4
 
-    check-cast v1, [B
+    check-cast v4, [B
 
     .line 338
-    invoke-virtual {p1, v1}, Ljava/nio/ByteBuffer;->put([B)Ljava/nio/ByteBuffer;
+    .local v4, "bytes":[B
+    invoke-virtual {v2, v4}, Ljava/nio/ByteBuffer;->put([B)Ljava/nio/ByteBuffer;
 
-    goto :goto_3
+    .line 339
+    .end local v4    # "bytes":[B
+    goto :goto_4
 
     .line 340
-    :cond_6
-    invoke-virtual {p1}, Ljava/nio/ByteBuffer;->array()[B
+    :cond_2
+    invoke-virtual {v2}, Ljava/nio/ByteBuffer;->array()[B
 
-    move-result-object p1
+    move-result-object v3
 
-    invoke-virtual {p0, p1, p2}, Lcom/facebook/react/modules/blob/BlobModule;->store([BLjava/lang/String;)V
+    invoke-virtual {p0, v3, p2}, Lcom/facebook/react/modules/blob/BlobModule;->store([BLjava/lang/String;)V
 
+    .line 341
     return-void
+
+    :sswitch_data_0
+    .sparse-switch
+        -0x352a9fef -> :sswitch_1
+        0x2e2f9d -> :sswitch_0
+    .end sparse-switch
+
+    :pswitch_data_0
+    .packed-switch 0x0
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method public getConstants()Ljava/util/Map;
-    .locals 4
-    .annotation build Landroid/support/annotation/Nullable;
-    .end annotation
-
+    .locals 7
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "()",
@@ -706,6 +778,7 @@
     move-result-object v0
 
     .line 164
+    .local v0, "resources":Landroid/content/res/Resources;
     invoke-virtual {p0}, Lcom/facebook/react/modules/blob/BlobModule;->getReactApplicationContext()Lcom/facebook/react/bridge/ReactApplicationContext;
 
     move-result-object v1
@@ -714,44 +787,52 @@
 
     move-result-object v1
 
+    .line 165
+    .local v1, "packageName":Ljava/lang/String;
     const-string v2, "blob_provider_authority"
 
     const-string v3, "string"
 
-    .line 165
     invoke-virtual {v0, v2, v3, v1}, Landroid/content/res/Resources;->getIdentifier(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I
 
-    move-result v1
+    move-result v2
 
-    if-nez v1, :cond_0
+    .line 166
+    .local v2, "resourceId":I
+    if-nez v2, :cond_0
 
-    const/4 v0, 0x0
+    .line 167
+    const/4 v3, 0x0
 
-    return-object v0
-
-    .line 171
-    :cond_0
-    invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
-
-    move-result-object v0
-
-    const-string v1, "BLOB_URI_SCHEME"
-
-    const-string v2, "content"
-
-    const-string v3, "BLOB_URI_HOST"
+    return-object v3
 
     .line 170
-    invoke-static {v1, v2, v3, v0}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+    :cond_0
+    nop
 
-    move-result-object v0
+    .line 171
+    invoke-virtual {v0, v2}, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
 
-    return-object v0
+    move-result-object v3
+
+    .line 170
+    const-string v4, "BLOB_URI_SCHEME"
+
+    const-string v5, "content"
+
+    const-string v6, "BLOB_URI_HOST"
+
+    invoke-static {v4, v5, v6, v3}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+
+    move-result-object v3
+
+    return-object v3
 .end method
 
 .method public getName()Ljava/lang/String;
     .locals 1
 
+    .line 156
     const-string v0, "BlobModule"
 
     return-object v0
@@ -759,28 +840,33 @@
 
 .method public release(Ljava/lang/String;)V
     .locals 0
+    .param p1, "blobId"    # Ljava/lang/String;
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
     .line 345
     invoke-virtual {p0, p1}, Lcom/facebook/react/modules/blob/BlobModule;->remove(Ljava/lang/String;)V
 
+    .line 346
     return-void
 .end method
 
 .method public remove(Ljava/lang/String;)V
     .locals 1
+    .param p1, "blobId"    # Ljava/lang/String;
 
     .line 185
     iget-object v0, p0, Lcom/facebook/react/modules/blob/BlobModule;->mBlobs:Ljava/util/Map;
 
     invoke-interface {v0, p1}, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;
 
+    .line 186
     return-void
 .end method
 
 .method public removeWebSocketHandler(I)V
     .locals 2
+    .param p1, "id"    # I
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -793,77 +879,79 @@
 
     invoke-virtual {v0, p1, v1}, Lcom/facebook/react/modules/websocket/WebSocketModule;->setContentHandler(ILcom/facebook/react/modules/websocket/WebSocketModule$ContentHandler;)V
 
+    .line 302
     return-void
 .end method
 
 .method public resolve(Landroid/net/Uri;)[B
-    .locals 4
-    .annotation build Landroid/support/annotation/Nullable;
-    .end annotation
+    .locals 6
+    .param p1, "uri"    # Landroid/net/Uri;
 
     .line 189
     invoke-virtual {p1}, Landroid/net/Uri;->getLastPathSegment()Ljava/lang/String;
 
     move-result-object v0
 
-    const-string v1, "offset"
+    .line 190
+    .local v0, "blobId":Ljava/lang/String;
+    const/4 v1, 0x0
+
+    .line 191
+    .local v1, "offset":I
+    const/4 v2, -0x1
 
     .line 192
-    invoke-virtual {p1, v1}, Landroid/net/Uri;->getQueryParameter(Ljava/lang/String;)Ljava/lang/String;
+    .local v2, "size":I
+    const-string v3, "offset"
 
-    move-result-object v1
+    invoke-virtual {p1, v3}, Landroid/net/Uri;->getQueryParameter(Ljava/lang/String;)Ljava/lang/String;
 
-    const/16 v2, 0xa
+    move-result-object v3
 
-    if-eqz v1, :cond_0
+    .line 193
+    .local v3, "offsetParam":Ljava/lang/String;
+    const/16 v4, 0xa
+
+    if-eqz v3, :cond_0
 
     .line 194
-    invoke-static {v1, v2}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;I)I
+    invoke-static {v3, v4}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;I)I
 
     move-result v1
 
-    goto :goto_0
-
-    :cond_0
-    const/4 v1, 0x0
-
-    :goto_0
-    const-string v3, "size"
-
     .line 196
-    invoke-virtual {p1, v3}, Landroid/net/Uri;->getQueryParameter(Ljava/lang/String;)Ljava/lang/String;
+    :cond_0
+    const-string v5, "size"
 
-    move-result-object p1
+    invoke-virtual {p1, v5}, Landroid/net/Uri;->getQueryParameter(Ljava/lang/String;)Ljava/lang/String;
 
-    if-eqz p1, :cond_1
+    move-result-object v5
+
+    .line 197
+    .local v5, "sizeParam":Ljava/lang/String;
+    if-eqz v5, :cond_1
 
     .line 198
-    invoke-static {p1, v2}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;I)I
+    invoke-static {v5, v4}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;I)I
 
-    move-result p1
-
-    goto :goto_1
-
-    :cond_1
-    const/4 p1, -0x1
+    move-result v2
 
     .line 200
-    :goto_1
-    invoke-virtual {p0, v0, v1, p1}, Lcom/facebook/react/modules/blob/BlobModule;->resolve(Ljava/lang/String;II)[B
+    :cond_1
+    invoke-virtual {p0, v0, v1, v2}, Lcom/facebook/react/modules/blob/BlobModule;->resolve(Ljava/lang/String;II)[B
 
-    move-result-object p1
+    move-result-object v4
 
-    return-object p1
+    return-object v4
 .end method
 
 .method public resolve(Lcom/facebook/react/bridge/ReadableMap;)[B
     .locals 3
-    .annotation build Landroid/support/annotation/Nullable;
-    .end annotation
-
-    const-string v0, "blobId"
+    .param p1, "blob"    # Lcom/facebook/react/bridge/ReadableMap;
 
     .line 218
+    const-string v0, "blobId"
+
     invoke-interface {p1, v0}, Lcom/facebook/react/bridge/ReadableMap;->getString(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v0
@@ -878,73 +966,81 @@
 
     invoke-interface {p1, v2}, Lcom/facebook/react/bridge/ReadableMap;->getInt(Ljava/lang/String;)I
 
-    move-result p1
+    move-result v2
 
-    invoke-virtual {p0, v0, v1, p1}, Lcom/facebook/react/modules/blob/BlobModule;->resolve(Ljava/lang/String;II)[B
+    invoke-virtual {p0, v0, v1, v2}, Lcom/facebook/react/modules/blob/BlobModule;->resolve(Ljava/lang/String;II)[B
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public resolve(Ljava/lang/String;II)[B
-    .locals 1
-    .annotation build Landroid/support/annotation/Nullable;
-    .end annotation
+    .locals 2
+    .param p1, "blobId"    # Ljava/lang/String;
+    .param p2, "offset"    # I
+    .param p3, "size"    # I
 
     .line 204
     iget-object v0, p0, Lcom/facebook/react/modules/blob/BlobModule;->mBlobs:Ljava/util/Map;
 
     invoke-interface {v0, p1}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
 
-    move-result-object p1
+    move-result-object v0
 
-    check-cast p1, [B
+    check-cast v0, [B
 
-    if-nez p1, :cond_0
+    .line 205
+    .local v0, "data":[B
+    if-nez v0, :cond_0
 
-    const/4 p1, 0x0
+    .line 206
+    const/4 v1, 0x0
 
-    return-object p1
+    return-object v1
 
+    .line 208
     :cond_0
-    const/4 v0, -0x1
+    const/4 v1, -0x1
 
-    if-ne p3, v0, :cond_1
+    if-ne p3, v1, :cond_1
 
     .line 209
-    array-length p3, p1
+    array-length v1, v0
 
-    sub-int/2addr p3, p2
+    sub-int p3, v1, p2
 
+    .line 211
     :cond_1
     if-gtz p2, :cond_2
 
-    .line 211
-    array-length v0, p1
+    array-length v1, v0
 
-    if-eq p3, v0, :cond_3
-
-    :cond_2
-    add-int/2addr p3, p2
+    if-eq p3, v1, :cond_3
 
     .line 212
-    invoke-static {p1, p2, p3}, Ljava/util/Arrays;->copyOfRange([BII)[B
+    :cond_2
+    add-int v1, p2, p3
 
-    move-result-object p1
+    invoke-static {v0, p2, v1}, Ljava/util/Arrays;->copyOfRange([BII)[B
 
+    move-result-object v0
+
+    .line 214
     :cond_3
-    return-object p1
+    return-object v0
 .end method
 
 .method public sendOverSocket(Lcom/facebook/react/bridge/ReadableMap;I)V
-    .locals 3
+    .locals 4
+    .param p1, "blob"    # Lcom/facebook/react/bridge/ReadableMap;
+    .param p2, "id"    # I
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
+    .line 306
     const-string v0, "blobId"
 
-    .line 306
     invoke-interface {p1, v0}, Lcom/facebook/react/bridge/ReadableMap;->getString(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v0
@@ -959,24 +1055,26 @@
 
     invoke-interface {p1, v2}, Lcom/facebook/react/bridge/ReadableMap;->getInt(Ljava/lang/String;)I
 
-    move-result p1
+    move-result v2
 
-    invoke-virtual {p0, v0, v1, p1}, Lcom/facebook/react/modules/blob/BlobModule;->resolve(Ljava/lang/String;II)[B
+    invoke-virtual {p0, v0, v1, v2}, Lcom/facebook/react/modules/blob/BlobModule;->resolve(Ljava/lang/String;II)[B
 
-    move-result-object p1
+    move-result-object v0
 
-    if-eqz p1, :cond_0
+    .line 308
+    .local v0, "data":[B
+    if-eqz v0, :cond_0
 
     .line 309
     invoke-direct {p0}, Lcom/facebook/react/modules/blob/BlobModule;->getWebSocketModule()Lcom/facebook/react/modules/websocket/WebSocketModule;
 
-    move-result-object v0
+    move-result-object v1
 
-    invoke-static {p1}, Lokio/ByteString;->of([B)Lokio/ByteString;
+    invoke-static {v0}, Lokio/ByteString;->of([B)Lokio/ByteString;
 
-    move-result-object p1
+    move-result-object v2
 
-    invoke-virtual {v0, p1, p2}, Lcom/facebook/react/modules/websocket/WebSocketModule;->sendBinary(Lokio/ByteString;I)V
+    invoke-virtual {v1, v2, p2}, Lcom/facebook/react/modules/websocket/WebSocketModule;->sendBinary(Lokio/ByteString;I)V
 
     goto :goto_0
 
@@ -984,20 +1082,24 @@
     :cond_0
     invoke-direct {p0}, Lcom/facebook/react/modules/blob/BlobModule;->getWebSocketModule()Lcom/facebook/react/modules/websocket/WebSocketModule;
 
-    move-result-object p1
+    move-result-object v1
 
-    const/4 v0, 0x0
+    const/4 v2, 0x0
 
-    check-cast v0, Lokio/ByteString;
+    move-object v3, v2
 
-    invoke-virtual {p1, v0, p2}, Lcom/facebook/react/modules/websocket/WebSocketModule;->sendBinary(Lokio/ByteString;I)V
+    check-cast v3, Lokio/ByteString;
 
+    invoke-virtual {v1, v2, p2}, Lcom/facebook/react/modules/websocket/WebSocketModule;->sendBinary(Lokio/ByteString;I)V
+
+    .line 313
     :goto_0
     return-void
 .end method
 
 .method public store([B)Ljava/lang/String;
     .locals 1
+    .param p1, "data"    # [B
 
     .line 175
     invoke-static {}, Ljava/util/UUID;->randomUUID()Ljava/util/UUID;
@@ -1009,18 +1111,23 @@
     move-result-object v0
 
     .line 176
+    .local v0, "blobId":Ljava/lang/String;
     invoke-virtual {p0, p1, v0}, Lcom/facebook/react/modules/blob/BlobModule;->store([BLjava/lang/String;)V
 
+    .line 177
     return-object v0
 .end method
 
 .method public store([BLjava/lang/String;)V
     .locals 1
+    .param p1, "data"    # [B
+    .param p2, "blobId"    # Ljava/lang/String;
 
     .line 181
     iget-object v0, p0, Lcom/facebook/react/modules/blob/BlobModule;->mBlobs:Ljava/util/Map;
 
     invoke-interface {v0, p2, p1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
+    .line 182
     return-void
 .end method

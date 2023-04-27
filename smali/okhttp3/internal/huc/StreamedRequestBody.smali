@@ -13,6 +13,7 @@
 # direct methods
 .method constructor <init>(J)V
     .locals 3
+    .param p1, "expectedContentLength"    # J
 
     .line 32
     invoke-direct {p0}, Lokhttp3/internal/huc/OutputStreamRequestBody;-><init>()V
@@ -27,8 +28,6 @@
     iput-object v0, p0, Lokhttp3/internal/huc/StreamedRequestBody;->pipe:Lokio/Pipe;
 
     .line 33
-    iget-object v0, p0, Lokhttp3/internal/huc/StreamedRequestBody;->pipe:Lokio/Pipe;
-
     invoke-virtual {v0}, Lokio/Pipe;->sink()Lokio/Sink;
 
     move-result-object v0
@@ -39,6 +38,7 @@
 
     invoke-virtual {p0, v0, p1, p2}, Lokhttp3/internal/huc/StreamedRequestBody;->initOutputStream(Lokio/BufferedSink;J)V
 
+    .line 34
     return-void
 .end method
 
@@ -46,6 +46,7 @@
 # virtual methods
 .method public writeTo(Lokio/BufferedSink;)V
     .locals 6
+    .param p1, "sink"    # Lokio/BufferedSink;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -58,6 +59,7 @@
     invoke-direct {v0}, Lokio/Buffer;-><init>()V
 
     .line 38
+    .local v0, "buffer":Lokio/Buffer;
     :goto_0
     iget-object v1, p0, Lokhttp3/internal/huc/StreamedRequestBody;->pipe:Lokio/Pipe;
 
@@ -86,6 +88,7 @@
 
     goto :goto_0
 
+    .line 41
     :cond_0
     return-void
 .end method

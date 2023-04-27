@@ -21,6 +21,7 @@
 # direct methods
 .method constructor <init>(Lokio/RealBufferedSink;)V
     .locals 0
+    .param p1, "this$0"    # Lokio/RealBufferedSink;
 
     .line 191
     iput-object p1, p0, Lokio/RealBufferedSink$1;->this$0:Lokio/RealBufferedSink;
@@ -45,6 +46,7 @@
 
     invoke-virtual {v0}, Lokio/RealBufferedSink;->close()V
 
+    .line 213
     return-void
 .end method
 
@@ -68,6 +70,7 @@
 
     invoke-virtual {v0}, Lokio/RealBufferedSink;->flush()V
 
+    .line 209
     :cond_0
     return-void
 .end method
@@ -84,9 +87,13 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     const-string v1, ".outputStream()"
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -96,7 +103,8 @@
 .end method
 
 .method public write(I)V
-    .locals 1
+    .locals 2
+    .param p1, "b"    # I
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -115,30 +123,34 @@
 
     iget-object v0, v0, Lokio/RealBufferedSink;->buffer:Lokio/Buffer;
 
-    int-to-byte p1, p1
+    int-to-byte v1, p1
 
-    invoke-virtual {v0, p1}, Lokio/Buffer;->writeByte(I)Lokio/Buffer;
+    invoke-virtual {v0, v1}, Lokio/Buffer;->writeByte(I)Lokio/Buffer;
 
     .line 195
-    iget-object p1, p0, Lokio/RealBufferedSink$1;->this$0:Lokio/RealBufferedSink;
+    iget-object v0, p0, Lokio/RealBufferedSink$1;->this$0:Lokio/RealBufferedSink;
 
-    invoke-virtual {p1}, Lokio/RealBufferedSink;->emitCompleteSegments()Lokio/BufferedSink;
+    invoke-virtual {v0}, Lokio/RealBufferedSink;->emitCompleteSegments()Lokio/BufferedSink;
 
+    .line 196
     return-void
 
     .line 193
     :cond_0
-    new-instance p1, Ljava/io/IOException;
+    new-instance v0, Ljava/io/IOException;
 
-    const-string v0, "closed"
+    const-string v1, "closed"
 
-    invoke-direct {p1, v0}, Ljava/io/IOException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/io/IOException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 .method public write([BII)V
-    .locals 1
+    .locals 2
+    .param p1, "data"    # [B
+    .param p2, "offset"    # I
+    .param p3, "byteCount"    # I
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -160,19 +172,20 @@
     invoke-virtual {v0, p1, p2, p3}, Lokio/Buffer;->write([BII)Lokio/Buffer;
 
     .line 201
-    iget-object p1, p0, Lokio/RealBufferedSink$1;->this$0:Lokio/RealBufferedSink;
+    iget-object v0, p0, Lokio/RealBufferedSink$1;->this$0:Lokio/RealBufferedSink;
 
-    invoke-virtual {p1}, Lokio/RealBufferedSink;->emitCompleteSegments()Lokio/BufferedSink;
+    invoke-virtual {v0}, Lokio/RealBufferedSink;->emitCompleteSegments()Lokio/BufferedSink;
 
+    .line 202
     return-void
 
     .line 199
     :cond_0
-    new-instance p1, Ljava/io/IOException;
+    new-instance v0, Ljava/io/IOException;
 
-    const-string p2, "closed"
+    const-string v1, "closed"
 
-    invoke-direct {p1, p2}, Ljava/io/IOException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/io/IOException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method

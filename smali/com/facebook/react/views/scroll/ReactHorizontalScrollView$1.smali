@@ -25,17 +25,18 @@
 
 # direct methods
 .method constructor <init>(Lcom/facebook/react/views/scroll/ReactHorizontalScrollView;)V
-    .locals 0
+    .locals 1
+    .param p1, "this$0"    # Lcom/facebook/react/views/scroll/ReactHorizontalScrollView;
 
     .line 459
     iput-object p1, p0, Lcom/facebook/react/views/scroll/ReactHorizontalScrollView$1;->this$0:Lcom/facebook/react/views/scroll/ReactHorizontalScrollView;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    const/4 p1, 0x0
-
     .line 461
-    iput-boolean p1, p0, Lcom/facebook/react/views/scroll/ReactHorizontalScrollView$1;->mSnappingToPage:Z
+    const/4 v0, 0x0
+
+    iput-boolean v0, p0, Lcom/facebook/react/views/scroll/ReactHorizontalScrollView$1;->mSnappingToPage:Z
 
     return-void
 .end method
@@ -66,7 +67,7 @@
     .line 468
     iget-object v0, p0, Lcom/facebook/react/views/scroll/ReactHorizontalScrollView$1;->this$0:Lcom/facebook/react/views/scroll/ReactHorizontalScrollView;
 
-    invoke-static {v0, p0, v1, v2}, Landroid/support/v4/view/ViewCompat;->postOnAnimationDelayed(Landroid/view/View;Ljava/lang/Runnable;J)V
+    invoke-static {v0, p0, v1, v2}, Landroidx/core/view/ViewCompat;->postOnAnimationDelayed(Landroid/view/View;Ljava/lang/Runnable;J)V
 
     goto :goto_0
 
@@ -84,9 +85,9 @@
 
     if-nez v0, :cond_1
 
+    .line 475
     const/4 v0, 0x1
 
-    .line 475
     iput-boolean v0, p0, Lcom/facebook/react/views/scroll/ReactHorizontalScrollView$1;->mSnappingToPage:Z
 
     .line 476
@@ -97,7 +98,7 @@
     .line 477
     iget-object v0, p0, Lcom/facebook/react/views/scroll/ReactHorizontalScrollView$1;->this$0:Lcom/facebook/react/views/scroll/ReactHorizontalScrollView;
 
-    invoke-static {v0, p0, v1, v2}, Landroid/support/v4/view/ViewCompat;->postOnAnimationDelayed(Landroid/view/View;Ljava/lang/Runnable;J)V
+    invoke-static {v0, p0, v1, v2}, Landroidx/core/view/ViewCompat;->postOnAnimationDelayed(Landroid/view/View;Ljava/lang/Runnable;J)V
 
     goto :goto_0
 
@@ -129,6 +130,7 @@
 
     invoke-static {v0}, Lcom/facebook/react/views/scroll/ReactHorizontalScrollView;->access$500(Lcom/facebook/react/views/scroll/ReactHorizontalScrollView;)V
 
+    .line 488
     :goto_0
     return-void
 .end method

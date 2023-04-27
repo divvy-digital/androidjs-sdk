@@ -4,9 +4,6 @@
 
 
 # annotations
-.annotation build Lcom/facebook/common/internal/VisibleForTesting;
-.end annotation
-
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
         Lcom/facebook/common/references/SharedReference$NullReferenceException;
@@ -33,19 +30,11 @@
             ">;"
         }
     .end annotation
-
-    .annotation build Ljavax/annotation/concurrent/GuardedBy;
-        value = "itself"
-    .end annotation
 .end field
 
 
 # instance fields
 .field private mRefCount:I
-    .annotation build Ljavax/annotation/concurrent/GuardedBy;
-        value = "this"
-    .end annotation
-.end field
 
 .field private final mResourceReleaser:Lcom/facebook/common/references/ResourceReleaser;
     .annotation system Ldalvik/annotation/Signature;
@@ -61,10 +50,6 @@
         value = {
             "TT;"
         }
-    .end annotation
-
-    .annotation build Ljavax/annotation/concurrent/GuardedBy;
-        value = "this"
     .end annotation
 .end field
 
@@ -94,6 +79,9 @@
     .end annotation
 
     .line 116
+    .local p0, "this":Lcom/facebook/common/references/SharedReference;, "Lcom/facebook/common/references/SharedReference<TT;>;"
+    .local p1, "value":Ljava/lang/Object;, "TT;"
+    .local p2, "resourceReleaser":Lcom/facebook/common/references/ResourceReleaser;, "Lcom/facebook/common/references/ResourceReleaser<TT;>;"
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     .line 117
@@ -106,25 +94,27 @@
     .line 118
     invoke-static {p2}, Lcom/facebook/common/internal/Preconditions;->checkNotNull(Ljava/lang/Object;)Ljava/lang/Object;
 
-    move-result-object p2
+    move-result-object v0
 
-    check-cast p2, Lcom/facebook/common/references/ResourceReleaser;
+    check-cast v0, Lcom/facebook/common/references/ResourceReleaser;
 
-    iput-object p2, p0, Lcom/facebook/common/references/SharedReference;->mResourceReleaser:Lcom/facebook/common/references/ResourceReleaser;
-
-    const/4 p2, 0x1
+    iput-object v0, p0, Lcom/facebook/common/references/SharedReference;->mResourceReleaser:Lcom/facebook/common/references/ResourceReleaser;
 
     .line 119
-    iput p2, p0, Lcom/facebook/common/references/SharedReference;->mRefCount:I
+    const/4 v0, 0x1
+
+    iput v0, p0, Lcom/facebook/common/references/SharedReference;->mRefCount:I
 
     .line 120
     invoke-static {p1}, Lcom/facebook/common/references/SharedReference;->addLiveReference(Ljava/lang/Object;)V
 
+    .line 121
     return-void
 .end method
 
 .method private static addLiveReference(Ljava/lang/Object;)V
     .locals 4
+    .param p0, "value"    # Ljava/lang/Object;
 
     .line 130
     sget-object v0, Lcom/facebook/common/references/SharedReference;->sLiveObjects:Ljava/util/Map;
@@ -133,64 +123,64 @@
 
     .line 131
     :try_start_0
-    sget-object v1, Lcom/facebook/common/references/SharedReference;->sLiveObjects:Ljava/util/Map;
-
-    invoke-interface {v1, p0}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-interface {v0, p0}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
 
     move-result-object v1
 
     check-cast v1, Ljava/lang/Integer;
 
+    .line 132
+    .local v1, "count":Ljava/lang/Integer;
     const/4 v2, 0x1
 
     if-nez v1, :cond_0
 
     .line 133
-    sget-object v1, Lcom/facebook/common/references/SharedReference;->sLiveObjects:Ljava/util/Map;
-
     invoke-static {v2}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
     move-result-object v2
 
-    invoke-interface {v1, p0, v2}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-interface {v0, p0, v2}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
     goto :goto_0
 
     .line 135
     :cond_0
-    sget-object v3, Lcom/facebook/common/references/SharedReference;->sLiveObjects:Ljava/util/Map;
-
     invoke-virtual {v1}, Ljava/lang/Integer;->intValue()I
 
-    move-result v1
+    move-result v3
 
-    add-int/2addr v1, v2
+    add-int/2addr v3, v2
 
-    invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    invoke-static {v3}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object v1
+    move-result-object v2
 
-    invoke-interface {v3, p0, v1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-interface {v0, p0, v2}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
     .line 137
+    .end local v1    # "count":Ljava/lang/Integer;
     :goto_0
     monitor-exit v0
 
+    .line 138
     return-void
 
+    .line 137
     :catchall_0
-    move-exception p0
+    move-exception v1
 
     monitor-exit v0
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    throw p0
+    throw v1
 .end method
 
 .method private declared-synchronized decreaseRefCount()I
     .locals 2
 
+    .local p0, "this":Lcom/facebook/common/references/SharedReference;, "Lcom/facebook/common/references/SharedReference<TT;>;"
     monitor-enter p0
 
     .line 217
@@ -220,16 +210,16 @@
     sub-int/2addr v0, v1
 
     iput v0, p0, Lcom/facebook/common/references/SharedReference;->mRefCount:I
-
-    .line 221
-    iget v0, p0, Lcom/facebook/common/references/SharedReference;->mRefCount:I
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
+    .line 221
     monitor-exit p0
 
     return v0
 
+    .line 216
+    .end local p0    # "this":Lcom/facebook/common/references/SharedReference;, "Lcom/facebook/common/references/SharedReference<TT;>;"
     :catchall_0
     move-exception v0
 
@@ -242,12 +232,14 @@
     .locals 1
 
     .line 229
+    .local p0, "this":Lcom/facebook/common/references/SharedReference;, "Lcom/facebook/common/references/SharedReference<TT;>;"
     invoke-static {p0}, Lcom/facebook/common/references/SharedReference;->isValid(Lcom/facebook/common/references/SharedReference;)Z
 
     move-result v0
 
     if-eqz v0, :cond_0
 
+    .line 232
     return-void
 
     .line 230
@@ -260,7 +252,7 @@
 .end method
 
 .method public static isValid(Lcom/facebook/common/references/SharedReference;)Z
-    .locals 0
+    .locals 1
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -269,28 +261,30 @@
         }
     .end annotation
 
+    .line 184
+    .local p0, "ref":Lcom/facebook/common/references/SharedReference;, "Lcom/facebook/common/references/SharedReference<*>;"
     if-eqz p0, :cond_0
 
-    .line 184
     invoke-virtual {p0}, Lcom/facebook/common/references/SharedReference;->isValid()Z
 
-    move-result p0
+    move-result v0
 
-    if-eqz p0, :cond_0
+    if-eqz v0, :cond_0
 
-    const/4 p0, 0x1
+    const/4 v0, 0x1
 
     goto :goto_0
 
     :cond_0
-    const/4 p0, 0x0
+    const/4 v0, 0x0
 
     :goto_0
-    return p0
+    return v0
 .end method
 
 .method private static removeLiveReference(Ljava/lang/Object;)V
-    .locals 5
+    .locals 7
+    .param p0, "value"    # Ljava/lang/Object;
 
     .line 147
     sget-object v0, Lcom/facebook/common/references/SharedReference;->sLiveObjects:Ljava/util/Map;
@@ -299,36 +293,36 @@
 
     .line 148
     :try_start_0
-    sget-object v1, Lcom/facebook/common/references/SharedReference;->sLiveObjects:Ljava/util/Map;
-
-    invoke-interface {v1, p0}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-interface {v0, p0}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
 
     move-result-object v1
 
     check-cast v1, Ljava/lang/Integer;
 
+    .line 149
+    .local v1, "count":Ljava/lang/Integer;
     const/4 v2, 0x1
 
     if-nez v1, :cond_0
 
-    const-string v1, "SharedReference"
-
-    const-string v3, "No entry in sLiveObjects for value of type %s"
-
     .line 151
-    new-array v2, v2, [Ljava/lang/Object;
+    const-string v3, "SharedReference"
 
-    const/4 v4, 0x0
+    const-string v4, "No entry in sLiveObjects for value of type %s"
+
+    new-array v2, v2, [Ljava/lang/Object;
 
     .line 154
     invoke-virtual {p0}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
 
-    move-result-object p0
+    move-result-object v5
 
-    aput-object p0, v2, v4
+    const/4 v6, 0x0
+
+    aput-object v5, v2, v6
 
     .line 151
-    invoke-static {v1, v3, v2}, Lcom/facebook/common/logging/FLog;->wtf(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V
+    invoke-static {v3, v4, v2}, Lcom/facebook/common/logging/FLog;->wtf(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V
 
     goto :goto_0
 
@@ -341,42 +335,41 @@
     if-ne v3, v2, :cond_1
 
     .line 156
-    sget-object v1, Lcom/facebook/common/references/SharedReference;->sLiveObjects:Ljava/util/Map;
-
-    invoke-interface {v1, p0}, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-interface {v0, p0}, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;
 
     goto :goto_0
 
     .line 158
     :cond_1
-    sget-object v3, Lcom/facebook/common/references/SharedReference;->sLiveObjects:Ljava/util/Map;
-
     invoke-virtual {v1}, Ljava/lang/Integer;->intValue()I
 
-    move-result v1
+    move-result v3
 
-    sub-int/2addr v1, v2
+    sub-int/2addr v3, v2
 
-    invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    invoke-static {v3}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object v1
+    move-result-object v2
 
-    invoke-interface {v3, p0, v1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-interface {v0, p0, v2}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
     .line 160
+    .end local v1    # "count":Ljava/lang/Integer;
     :goto_0
     monitor-exit v0
 
+    .line 161
     return-void
 
+    .line 160
     :catchall_0
-    move-exception p0
+    move-exception v1
 
     monitor-exit v0
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    throw p0
+    throw v1
 .end method
 
 
@@ -384,6 +377,7 @@
 .method public declared-synchronized addReference()V
     .locals 1
 
+    .local p0, "this":Lcom/facebook/common/references/SharedReference;, "Lcom/facebook/common/references/SharedReference<TT;>;"
     monitor-enter p0
 
     .line 192
@@ -404,6 +398,8 @@
 
     return-void
 
+    .line 191
+    .end local p0    # "this":Lcom/facebook/common/references/SharedReference;, "Lcom/facebook/common/references/SharedReference<TT;>;"
     :catchall_0
     move-exception v0
 
@@ -416,6 +412,7 @@
     .locals 2
 
     .line 201
+    .local p0, "this":Lcom/facebook/common/references/SharedReference;, "Lcom/facebook/common/references/SharedReference<TT;>;"
     invoke-direct {p0}, Lcom/facebook/common/references/SharedReference;->decreaseRefCount()I
 
     move-result v0
@@ -429,9 +426,10 @@
     :try_start_0
     iget-object v0, p0, Lcom/facebook/common/references/SharedReference;->mValue:Ljava/lang/Object;
 
+    .line 205
+    .local v0, "deleted":Ljava/lang/Object;, "TT;"
     const/4 v1, 0x0
 
-    .line 205
     iput-object v1, p0, Lcom/facebook/common/references/SharedReference;->mValue:Ljava/lang/Object;
 
     .line 206
@@ -449,10 +447,11 @@
 
     goto :goto_0
 
+    .line 206
+    .end local v0    # "deleted":Ljava/lang/Object;, "TT;"
     :catchall_0
     move-exception v0
 
-    .line 206
     :try_start_1
     monitor-exit p0
     :try_end_1
@@ -460,6 +459,7 @@
 
     throw v0
 
+    .line 210
     :cond_0
     :goto_0
     return-void
@@ -473,6 +473,7 @@
         }
     .end annotation
 
+    .local p0, "this":Lcom/facebook/common/references/SharedReference;, "Lcom/facebook/common/references/SharedReference<TT;>;"
     monitor-enter p0
 
     .line 168
@@ -485,6 +486,8 @@
 
     return-object v0
 
+    .line 168
+    .end local p0    # "this":Lcom/facebook/common/references/SharedReference;, "Lcom/facebook/common/references/SharedReference<TT;>;"
     :catchall_0
     move-exception v0
 
@@ -496,6 +499,7 @@
 .method public declared-synchronized getRefCountTestOnly()I
     .locals 1
 
+    .local p0, "this":Lcom/facebook/common/references/SharedReference;, "Lcom/facebook/common/references/SharedReference<TT;>;"
     monitor-enter p0
 
     .line 239
@@ -508,6 +512,8 @@
 
     return v0
 
+    .line 239
+    .end local p0    # "this":Lcom/facebook/common/references/SharedReference;, "Lcom/facebook/common/references/SharedReference<TT;>;"
     :catchall_0
     move-exception v0
 
@@ -519,6 +525,7 @@
 .method public declared-synchronized isValid()Z
     .locals 1
 
+    .local p0, "this":Lcom/facebook/common/references/SharedReference;, "Lcom/facebook/common/references/SharedReference<TT;>;"
     monitor-enter p0
 
     .line 176
@@ -541,6 +548,8 @@
 
     return v0
 
+    .line 176
+    .end local p0    # "this":Lcom/facebook/common/references/SharedReference;, "Lcom/facebook/common/references/SharedReference<TT;>;"
     :catchall_0
     move-exception v0
 

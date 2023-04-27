@@ -30,6 +30,7 @@
 # direct methods
 .method private constructor <init>(Lcom/facebook/react/bridge/ReactContext;)V
     .locals 0
+    .param p1, "context"    # Lcom/facebook/react/bridge/ReactContext;
 
     .line 125
     invoke-direct {p0, p1}, Lcom/facebook/react/bridge/GuardedAsyncTask;-><init>(Lcom/facebook/react/bridge/ReactContext;)V
@@ -37,11 +38,14 @@
     .line 126
     iput-object p1, p0, Lcom/facebook/react/modules/camera/ImageEditingManager$CleanTask;->mContext:Landroid/content/Context;
 
+    .line 127
     return-void
 .end method
 
 .method synthetic constructor <init>(Lcom/facebook/react/bridge/ReactContext;Lcom/facebook/react/modules/camera/ImageEditingManager$1;)V
     .locals 0
+    .param p1, "x0"    # Lcom/facebook/react/bridge/ReactContext;
+    .param p2, "x1"    # Lcom/facebook/react/modules/camera/ImageEditingManager$1;
 
     .line 121
     invoke-direct {p0, p1}, Lcom/facebook/react/modules/camera/ImageEditingManager$CleanTask;-><init>(Lcom/facebook/react/bridge/ReactContext;)V
@@ -50,7 +54,8 @@
 .end method
 
 .method private cleanDirectory(Ljava/io/File;)V
-    .locals 3
+    .locals 4
+    .param p1, "directory"    # Ljava/io/File;
 
     .line 139
     new-instance v0, Lcom/facebook/react/modules/camera/ImageEditingManager$CleanTask$1;
@@ -59,27 +64,33 @@
 
     invoke-virtual {p1, v0}, Ljava/io/File;->listFiles(Ljava/io/FilenameFilter;)[Ljava/io/File;
 
-    move-result-object p1
+    move-result-object v0
 
-    if-eqz p1, :cond_0
+    .line 146
+    .local v0, "toDelete":[Ljava/io/File;
+    if-eqz v0, :cond_0
 
     .line 147
-    array-length v0, p1
+    array-length v1, v0
 
-    const/4 v1, 0x0
+    const/4 v2, 0x0
 
     :goto_0
-    if-ge v1, v0, :cond_0
+    if-ge v2, v1, :cond_0
 
-    aget-object v2, p1, v1
+    aget-object v3, v0, v2
 
     .line 148
-    invoke-virtual {v2}, Ljava/io/File;->delete()Z
+    .local v3, "file":Ljava/io/File;
+    invoke-virtual {v3}, Ljava/io/File;->delete()Z
 
-    add-int/lit8 v1, v1, 0x1
+    .line 147
+    .end local v3    # "file":Ljava/io/File;
+    add-int/lit8 v2, v2, 0x1
 
     goto :goto_0
 
+    .line 151
     :cond_0
     return-void
 .end method
@@ -98,29 +109,33 @@
 .end method
 
 .method protected varargs doInBackgroundGuarded([Ljava/lang/Void;)V
-    .locals 0
+    .locals 1
+    .param p1, "params"    # [Ljava/lang/Void;
 
     .line 131
-    iget-object p1, p0, Lcom/facebook/react/modules/camera/ImageEditingManager$CleanTask;->mContext:Landroid/content/Context;
+    iget-object v0, p0, Lcom/facebook/react/modules/camera/ImageEditingManager$CleanTask;->mContext:Landroid/content/Context;
 
-    invoke-virtual {p1}, Landroid/content/Context;->getCacheDir()Ljava/io/File;
+    invoke-virtual {v0}, Landroid/content/Context;->getCacheDir()Ljava/io/File;
 
-    move-result-object p1
+    move-result-object v0
 
-    invoke-direct {p0, p1}, Lcom/facebook/react/modules/camera/ImageEditingManager$CleanTask;->cleanDirectory(Ljava/io/File;)V
+    invoke-direct {p0, v0}, Lcom/facebook/react/modules/camera/ImageEditingManager$CleanTask;->cleanDirectory(Ljava/io/File;)V
 
     .line 132
-    iget-object p1, p0, Lcom/facebook/react/modules/camera/ImageEditingManager$CleanTask;->mContext:Landroid/content/Context;
+    iget-object v0, p0, Lcom/facebook/react/modules/camera/ImageEditingManager$CleanTask;->mContext:Landroid/content/Context;
 
-    invoke-virtual {p1}, Landroid/content/Context;->getExternalCacheDir()Ljava/io/File;
+    invoke-virtual {v0}, Landroid/content/Context;->getExternalCacheDir()Ljava/io/File;
 
-    move-result-object p1
+    move-result-object v0
 
-    if-eqz p1, :cond_0
+    .line 133
+    .local v0, "externalCacheDir":Ljava/io/File;
+    if-eqz v0, :cond_0
 
     .line 134
-    invoke-direct {p0, p1}, Lcom/facebook/react/modules/camera/ImageEditingManager$CleanTask;->cleanDirectory(Ljava/io/File;)V
+    invoke-direct {p0, v0}, Lcom/facebook/react/modules/camera/ImageEditingManager$CleanTask;->cleanDirectory(Ljava/io/File;)V
 
+    .line 136
     :cond_0
     return-void
 .end method

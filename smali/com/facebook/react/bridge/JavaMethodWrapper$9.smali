@@ -26,9 +26,9 @@
 .method constructor <init>()V
     .locals 1
 
+    .line 105
     const/4 v0, 0x0
 
-    .line 105
     invoke-direct {p0, v0}, Lcom/facebook/react/bridge/JavaMethodWrapper$ArgumentExtractor;-><init>(Lcom/facebook/react/bridge/JavaMethodWrapper$1;)V
 
     return-void
@@ -37,7 +37,10 @@
 
 # virtual methods
 .method public extractArgument(Lcom/facebook/react/bridge/JSInstance;Lcom/facebook/react/bridge/ReadableArray;I)Lcom/facebook/react/bridge/Callback;
-    .locals 1
+    .locals 2
+    .param p1, "jsInstance"    # Lcom/facebook/react/bridge/JSInstance;
+    .param p2, "jsArguments"    # Lcom/facebook/react/bridge/ReadableArray;
+    .param p3, "atIndex"    # I
     .annotation runtime Ljavax/annotation/Nullable;
     .end annotation
 
@@ -48,24 +51,26 @@
 
     if-eqz v0, :cond_0
 
-    const/4 p1, 0x0
+    .line 110
+    const/4 v0, 0x0
 
-    return-object p1
+    return-object v0
 
     .line 112
     :cond_0
     invoke-interface {p2, p3}, Lcom/facebook/react/bridge/ReadableArray;->getDouble(I)D
 
-    move-result-wide p2
+    move-result-wide v0
 
-    double-to-int p2, p2
+    double-to-int v0, v0
 
     .line 113
-    new-instance p3, Lcom/facebook/react/bridge/CallbackImpl;
+    .local v0, "id":I
+    new-instance v1, Lcom/facebook/react/bridge/CallbackImpl;
 
-    invoke-direct {p3, p1, p2}, Lcom/facebook/react/bridge/CallbackImpl;-><init>(Lcom/facebook/react/bridge/JSInstance;I)V
+    invoke-direct {v1, p1, v0}, Lcom/facebook/react/bridge/CallbackImpl;-><init>(Lcom/facebook/react/bridge/JSInstance;I)V
 
-    return-object p3
+    return-object v1
 .end method
 
 .method public bridge synthetic extractArgument(Lcom/facebook/react/bridge/JSInstance;Lcom/facebook/react/bridge/ReadableArray;I)Ljava/lang/Object;

@@ -225,27 +225,27 @@
 .method static constructor <clinit>()V
     .locals 44
 
+    .line 137
     const/4 v0, 0x7
 
-    .line 137
     new-array v0, v0, [I
 
     fill-array-data v0, :array_0
 
     sput-object v0, Lcom/facebook/react/uimanager/ViewProps;->BORDER_SPACING_TYPES:[I
 
+    .line 146
     const/16 v0, 0x9
 
-    .line 146
     new-array v0, v0, [I
 
     fill-array-data v0, :array_1
 
     sput-object v0, Lcom/facebook/react/uimanager/ViewProps;->PADDING_MARGIN_SPACING_TYPES:[I
 
+    .line 157
     const/4 v0, 0x4
 
-    .line 157
     new-array v0, v0, [I
 
     fill-array-data v0, :array_2
@@ -354,6 +354,7 @@
 
     sput-object v0, Lcom/facebook/react/uimanager/ViewProps;->LAYOUT_ONLY_PROPS:Ljava/util/HashSet;
 
+    .line 161
     return-void
 
     nop
@@ -402,12 +403,14 @@
 
 .method public static isLayoutOnly(Lcom/facebook/react/bridge/ReadableMap;Ljava/lang/String;)Z
     .locals 18
+    .param p0, "map"    # Lcom/facebook/react/bridge/ReadableMap;
+    .param p1, "prop"    # Ljava/lang/String;
 
+    .line 217
     move-object/from16 v0, p0
 
     move-object/from16 v1, p1
 
-    .line 217
     sget-object v2, Lcom/facebook/react/uimanager/ViewProps;->LAYOUT_ONLY_PROPS:Ljava/util/HashSet;
 
     invoke-virtual {v2, v1}, Ljava/util/HashSet;->contains(Ljava/lang/Object;)Z
@@ -418,12 +421,13 @@
 
     if-eqz v2, :cond_0
 
+    .line 218
     return v3
 
+    .line 219
     :cond_0
     const-string v2, "pointerEvents"
 
-    .line 219
     invoke-virtual {v2, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
     move-result v2
@@ -435,24 +439,25 @@
     .line 220
     invoke-interface/range {p0 .. p1}, Lcom/facebook/react/bridge/ReadableMap;->getString(Ljava/lang/String;)Ljava/lang/String;
 
-    move-result-object v0
-
-    const-string v1, "auto"
+    move-result-object v2
 
     .line 221
-    invoke-virtual {v1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    .local v2, "value":Ljava/lang/String;
+    const-string v5, "auto"
 
-    move-result v1
+    invoke-virtual {v5, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    if-nez v1, :cond_2
+    move-result v5
 
-    const-string v1, "box-none"
+    if-nez v5, :cond_2
 
-    invoke-virtual {v1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    const-string v5, "box-none"
 
-    move-result v0
+    invoke-virtual {v5, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    if-eqz v0, :cond_1
+    move-result v5
+
+    if-eqz v5, :cond_1
 
     goto :goto_0
 
@@ -464,201 +469,203 @@
     return v3
 
     .line 224
+    .end local v2    # "value":Ljava/lang/String;
     :cond_3
     invoke-virtual/range {p1 .. p1}, Ljava/lang/String;->hashCode()I
 
-    move-result v5
+    move-result v2
 
-    const-string v6, "borderLeftColor"
+    const-string v5, "borderLeftColor"
 
-    const-string v7, "borderBottomColor"
+    const-string v6, "borderBottomColor"
 
-    const-string v8, "borderTopColor"
+    const-string v7, "borderTopColor"
 
-    const-string v9, "borderRightColor"
+    const-string v8, "borderRightColor"
 
-    const-string v10, "overflow"
+    const-string v9, "overflow"
 
-    const-string v11, "borderLeftWidth"
+    const-string v10, "borderLeftWidth"
 
-    const-string v12, "opacity"
+    const-string v11, "opacity"
 
-    const-string v13, "borderBottomWidth"
+    const-string v12, "borderBottomWidth"
 
-    const-string v14, "borderTopWidth"
+    const-string v13, "borderTopWidth"
 
-    const-string v15, "borderRightWidth"
+    const-string v14, "borderRightWidth"
 
-    const-string v2, "borderWidth"
+    const-string v15, "borderWidth"
 
-    sparse-switch v5, :sswitch_data_0
+    sparse-switch v2, :sswitch_data_0
 
+    :cond_4
     goto/16 :goto_1
 
     :sswitch_0
-    const-string v5, "borderRadius"
+    const-string v2, "borderRadius"
 
-    invoke-virtual {v1, v5}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v1, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v2
 
-    if-eqz v1, :cond_4
+    if-eqz v2, :cond_4
 
-    const/4 v1, 0x1
+    const/4 v2, 0x1
 
     goto/16 :goto_2
 
     :sswitch_1
-    invoke-virtual {v1, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v1, v15}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v2
 
-    if-eqz v1, :cond_4
+    if-eqz v2, :cond_4
 
-    const/4 v1, 0x6
+    const/4 v2, 0x6
 
     goto :goto_2
 
     :sswitch_2
-    invoke-virtual {v1, v10}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v1, v9}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v2
 
-    if-eqz v1, :cond_4
+    if-eqz v2, :cond_4
 
-    const/16 v1, 0xb
+    const/16 v2, 0xb
 
     goto :goto_2
 
     :sswitch_3
-    invoke-virtual {v1, v11}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v1, v10}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v2
 
-    if-eqz v1, :cond_4
+    if-eqz v2, :cond_4
 
-    const/4 v1, 0x7
+    const/4 v2, 0x7
 
     goto :goto_2
 
     :sswitch_4
-    invoke-virtual {v1, v6}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v1, v5}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v2
 
-    if-eqz v1, :cond_4
+    if-eqz v2, :cond_4
 
-    const/4 v1, 0x2
+    const/4 v2, 0x2
 
     goto :goto_2
 
     :sswitch_5
-    invoke-virtual {v1, v12}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v1, v11}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v2
 
-    if-eqz v1, :cond_4
+    if-eqz v2, :cond_4
 
-    const/4 v1, 0x0
+    const/4 v2, 0x0
 
     goto :goto_2
 
     :sswitch_6
-    invoke-virtual {v1, v13}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v1, v12}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v2
 
-    if-eqz v1, :cond_4
+    if-eqz v2, :cond_4
 
-    const/16 v1, 0xa
+    const/16 v2, 0xa
 
     goto :goto_2
 
     :sswitch_7
-    invoke-virtual {v1, v7}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v1, v6}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v2
 
-    if-eqz v1, :cond_4
+    if-eqz v2, :cond_4
 
-    const/4 v1, 0x5
+    const/4 v2, 0x5
 
     goto :goto_2
 
     :sswitch_8
-    invoke-virtual {v1, v14}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v1, v13}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v2
 
-    if-eqz v1, :cond_4
+    if-eqz v2, :cond_4
 
-    const/16 v1, 0x8
+    const/16 v2, 0x8
 
     goto :goto_2
 
     :sswitch_9
-    invoke-virtual {v1, v8}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v1, v7}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v2
 
-    if-eqz v1, :cond_4
+    if-eqz v2, :cond_4
 
-    const/4 v1, 0x4
+    const/4 v2, 0x4
 
     goto :goto_2
 
     :sswitch_a
-    invoke-virtual {v1, v15}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v1, v14}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v2
 
-    if-eqz v1, :cond_4
+    if-eqz v2, :cond_4
 
-    const/16 v1, 0x9
+    const/16 v2, 0x9
 
     goto :goto_2
 
     :sswitch_b
-    invoke-virtual {v1, v9}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v1, v8}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v2
 
-    if-eqz v1, :cond_4
+    if-eqz v2, :cond_4
 
-    const/4 v1, 0x3
+    const/4 v2, 0x3
 
     goto :goto_2
 
-    :cond_4
     :goto_1
-    const/4 v1, -0x1
+    const/4 v2, -0x1
 
     :goto_2
     const-wide/16 v16, 0x0
 
-    packed-switch v1, :pswitch_data_0
+    packed-switch v2, :pswitch_data_0
 
+    .line 260
     return v4
 
     .line 258
     :pswitch_0
-    invoke-interface {v0, v10}, Lcom/facebook/react/bridge/ReadableMap;->isNull(Ljava/lang/String;)Z
+    invoke-interface {v0, v9}, Lcom/facebook/react/bridge/ReadableMap;->isNull(Ljava/lang/String;)Z
 
-    move-result v1
+    move-result v2
 
-    if-nez v1, :cond_6
+    if-nez v2, :cond_6
 
-    invoke-interface {v0, v10}, Lcom/facebook/react/bridge/ReadableMap;->getString(Ljava/lang/String;)Ljava/lang/String;
+    const-string v2, "visible"
 
-    move-result-object v0
+    invoke-interface {v0, v9}, Lcom/facebook/react/bridge/ReadableMap;->getString(Ljava/lang/String;)Ljava/lang/String;
 
-    const-string v1, "visible"
+    move-result-object v5
 
-    invoke-virtual {v1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v2, v5}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v0
+    move-result v2
 
-    if-eqz v0, :cond_5
+    if-eqz v2, :cond_5
 
     goto :goto_3
 
@@ -671,17 +678,17 @@
 
     .line 256
     :pswitch_1
-    invoke-interface {v0, v13}, Lcom/facebook/react/bridge/ReadableMap;->isNull(Ljava/lang/String;)Z
+    invoke-interface {v0, v12}, Lcom/facebook/react/bridge/ReadableMap;->isNull(Ljava/lang/String;)Z
 
-    move-result v1
+    move-result v2
 
-    if-nez v1, :cond_8
+    if-nez v2, :cond_8
 
-    invoke-interface {v0, v13}, Lcom/facebook/react/bridge/ReadableMap;->getDouble(Ljava/lang/String;)D
+    invoke-interface {v0, v12}, Lcom/facebook/react/bridge/ReadableMap;->getDouble(Ljava/lang/String;)D
 
-    move-result-wide v0
+    move-result-wide v5
 
-    cmpl-double v2, v0, v16
+    cmpl-double v2, v5, v16
 
     if-nez v2, :cond_7
 
@@ -696,17 +703,17 @@
 
     .line 254
     :pswitch_2
-    invoke-interface {v0, v15}, Lcom/facebook/react/bridge/ReadableMap;->isNull(Ljava/lang/String;)Z
+    invoke-interface {v0, v14}, Lcom/facebook/react/bridge/ReadableMap;->isNull(Ljava/lang/String;)Z
 
-    move-result v1
+    move-result v2
 
-    if-nez v1, :cond_a
+    if-nez v2, :cond_a
 
-    invoke-interface {v0, v15}, Lcom/facebook/react/bridge/ReadableMap;->getDouble(Ljava/lang/String;)D
+    invoke-interface {v0, v14}, Lcom/facebook/react/bridge/ReadableMap;->getDouble(Ljava/lang/String;)D
 
-    move-result-wide v0
+    move-result-wide v5
 
-    cmpl-double v2, v0, v16
+    cmpl-double v2, v5, v16
 
     if-nez v2, :cond_9
 
@@ -721,17 +728,17 @@
 
     .line 252
     :pswitch_3
-    invoke-interface {v0, v14}, Lcom/facebook/react/bridge/ReadableMap;->isNull(Ljava/lang/String;)Z
+    invoke-interface {v0, v13}, Lcom/facebook/react/bridge/ReadableMap;->isNull(Ljava/lang/String;)Z
 
-    move-result v1
+    move-result v2
 
-    if-nez v1, :cond_c
+    if-nez v2, :cond_c
 
-    invoke-interface {v0, v14}, Lcom/facebook/react/bridge/ReadableMap;->getDouble(Ljava/lang/String;)D
+    invoke-interface {v0, v13}, Lcom/facebook/react/bridge/ReadableMap;->getDouble(Ljava/lang/String;)D
 
-    move-result-wide v0
+    move-result-wide v5
 
-    cmpl-double v2, v0, v16
+    cmpl-double v2, v5, v16
 
     if-nez v2, :cond_b
 
@@ -746,17 +753,17 @@
 
     .line 250
     :pswitch_4
-    invoke-interface {v0, v11}, Lcom/facebook/react/bridge/ReadableMap;->isNull(Ljava/lang/String;)Z
+    invoke-interface {v0, v10}, Lcom/facebook/react/bridge/ReadableMap;->isNull(Ljava/lang/String;)Z
 
-    move-result v1
+    move-result v2
 
-    if-nez v1, :cond_e
+    if-nez v2, :cond_e
 
-    invoke-interface {v0, v11}, Lcom/facebook/react/bridge/ReadableMap;->getDouble(Ljava/lang/String;)D
+    invoke-interface {v0, v10}, Lcom/facebook/react/bridge/ReadableMap;->getDouble(Ljava/lang/String;)D
 
-    move-result-wide v0
+    move-result-wide v5
 
-    cmpl-double v2, v0, v16
+    cmpl-double v2, v5, v16
 
     if-nez v2, :cond_d
 
@@ -771,17 +778,17 @@
 
     .line 248
     :pswitch_5
-    invoke-interface {v0, v2}, Lcom/facebook/react/bridge/ReadableMap;->isNull(Ljava/lang/String;)Z
+    invoke-interface {v0, v15}, Lcom/facebook/react/bridge/ReadableMap;->isNull(Ljava/lang/String;)Z
 
-    move-result v1
+    move-result v2
 
-    if-nez v1, :cond_10
+    if-nez v2, :cond_10
 
-    invoke-interface {v0, v2}, Lcom/facebook/react/bridge/ReadableMap;->getDouble(Ljava/lang/String;)D
+    invoke-interface {v0, v15}, Lcom/facebook/react/bridge/ReadableMap;->getDouble(Ljava/lang/String;)D
 
-    move-result-wide v0
+    move-result-wide v5
 
-    cmpl-double v2, v0, v16
+    cmpl-double v2, v5, v16
 
     if-nez v2, :cond_f
 
@@ -796,11 +803,11 @@
 
     .line 246
     :pswitch_6
-    invoke-interface {v0, v7}, Lcom/facebook/react/bridge/ReadableMap;->getInt(Ljava/lang/String;)I
+    invoke-interface {v0, v6}, Lcom/facebook/react/bridge/ReadableMap;->getInt(Ljava/lang/String;)I
 
-    move-result v0
+    move-result v2
 
-    if-nez v0, :cond_11
+    if-nez v2, :cond_11
 
     goto :goto_9
 
@@ -812,11 +819,11 @@
 
     .line 244
     :pswitch_7
-    invoke-interface {v0, v8}, Lcom/facebook/react/bridge/ReadableMap;->getInt(Ljava/lang/String;)I
+    invoke-interface {v0, v7}, Lcom/facebook/react/bridge/ReadableMap;->getInt(Ljava/lang/String;)I
 
-    move-result v0
+    move-result v2
 
-    if-nez v0, :cond_12
+    if-nez v2, :cond_12
 
     goto :goto_a
 
@@ -828,11 +835,11 @@
 
     .line 242
     :pswitch_8
-    invoke-interface {v0, v9}, Lcom/facebook/react/bridge/ReadableMap;->getInt(Ljava/lang/String;)I
+    invoke-interface {v0, v8}, Lcom/facebook/react/bridge/ReadableMap;->getInt(Ljava/lang/String;)I
 
-    move-result v0
+    move-result v2
 
-    if-nez v0, :cond_13
+    if-nez v2, :cond_13
 
     goto :goto_b
 
@@ -844,11 +851,11 @@
 
     .line 240
     :pswitch_9
-    invoke-interface {v0, v6}, Lcom/facebook/react/bridge/ReadableMap;->getInt(Ljava/lang/String;)I
+    invoke-interface {v0, v5}, Lcom/facebook/react/bridge/ReadableMap;->getInt(Ljava/lang/String;)I
 
-    move-result v0
+    move-result v2
 
-    if-nez v0, :cond_14
+    if-nez v2, :cond_14
 
     goto :goto_c
 
@@ -858,68 +865,71 @@
     :goto_c
     return v3
 
-    :pswitch_a
-    const-string v1, "backgroundColor"
-
     .line 230
-    invoke-interface {v0, v1}, Lcom/facebook/react/bridge/ReadableMap;->hasKey(Ljava/lang/String;)Z
+    :pswitch_a
+    const-string v2, "backgroundColor"
+
+    invoke-interface {v0, v2}, Lcom/facebook/react/bridge/ReadableMap;->hasKey(Ljava/lang/String;)Z
 
     move-result v5
 
     if-eqz v5, :cond_15
 
-    invoke-interface {v0, v1}, Lcom/facebook/react/bridge/ReadableMap;->getInt(Ljava/lang/String;)I
+    invoke-interface {v0, v2}, Lcom/facebook/react/bridge/ReadableMap;->getInt(Ljava/lang/String;)I
 
-    move-result v1
+    move-result v2
 
-    if-eqz v1, :cond_15
+    if-eqz v2, :cond_15
 
+    .line 231
     return v4
 
     .line 233
     :cond_15
-    invoke-interface {v0, v2}, Lcom/facebook/react/bridge/ReadableMap;->hasKey(Ljava/lang/String;)Z
+    invoke-interface {v0, v15}, Lcom/facebook/react/bridge/ReadableMap;->hasKey(Ljava/lang/String;)Z
 
-    move-result v1
-
-    if-eqz v1, :cond_16
-
-    .line 234
-    invoke-interface {v0, v2}, Lcom/facebook/react/bridge/ReadableMap;->isNull(Ljava/lang/String;)Z
-
-    move-result v1
-
-    if-nez v1, :cond_16
-
-    .line 235
-    invoke-interface {v0, v2}, Lcom/facebook/react/bridge/ReadableMap;->getDouble(Ljava/lang/String;)D
-
-    move-result-wide v0
-
-    cmpl-double v2, v0, v16
+    move-result v2
 
     if-eqz v2, :cond_16
 
+    .line 234
+    invoke-interface {v0, v15}, Lcom/facebook/react/bridge/ReadableMap;->isNull(Ljava/lang/String;)Z
+
+    move-result v2
+
+    if-nez v2, :cond_16
+
+    .line 235
+    invoke-interface {v0, v15}, Lcom/facebook/react/bridge/ReadableMap;->getDouble(Ljava/lang/String;)D
+
+    move-result-wide v5
+
+    cmpl-double v2, v5, v16
+
+    if-eqz v2, :cond_16
+
+    .line 236
     return v4
 
+    .line 238
     :cond_16
     return v3
 
     .line 228
     :pswitch_b
-    invoke-interface {v0, v12}, Lcom/facebook/react/bridge/ReadableMap;->isNull(Ljava/lang/String;)Z
+    invoke-interface {v0, v11}, Lcom/facebook/react/bridge/ReadableMap;->isNull(Ljava/lang/String;)Z
 
-    move-result v1
+    move-result v2
 
-    if-nez v1, :cond_18
+    if-nez v2, :cond_18
 
-    invoke-interface {v0, v12}, Lcom/facebook/react/bridge/ReadableMap;->getDouble(Ljava/lang/String;)D
+    invoke-interface {v0, v11}, Lcom/facebook/react/bridge/ReadableMap;->getDouble(Ljava/lang/String;)D
 
-    move-result-wide v0
+    move-result-wide v5
 
-    const-wide/high16 v5, 0x3ff0000000000000L    # 1.0
+    const-wide/high16 v7, 0x3ff0000000000000L    # 1.0
 
-    cmpl-double v2, v0, v5
+    cmpl-double v2, v5, v7
 
     if-nez v2, :cond_17
 

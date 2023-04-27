@@ -39,16 +39,18 @@
 
 # direct methods
 .method public constructor <init>(Lcom/facebook/react/uimanager/ThemedReactContext;)V
-    .locals 0
+    .locals 1
+    .param p1, "reactContext"    # Lcom/facebook/react/uimanager/ThemedReactContext;
 
     .line 286
     invoke-direct {p0, p1}, Landroid/webkit/WebView;-><init>(Landroid/content/Context;)V
 
-    const/4 p1, 0x0
-
     .line 263
-    iput-boolean p1, p0, Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView;->messagingEnabled:Z
+    const/4 v0, 0x0
 
+    iput-boolean v0, p0, Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView;->messagingEnabled:Z
+
+    .line 287
     return-void
 .end method
 
@@ -88,13 +90,19 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     iget-object v1, p0, Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView;->injectedJS:Ljava/lang/String;
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     const-string v1, ";\n})();"
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -102,6 +110,7 @@
 
     invoke-virtual {p0, v0}, Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView;->evaluateJavascriptWithFallback(Ljava/lang/String;)V
 
+    .line 356
     :cond_0
     return-void
 .end method
@@ -109,19 +118,21 @@
 .method protected cleanupCallbacksAndDestroy()V
     .locals 1
 
+    .line 394
     const/4 v0, 0x0
 
-    .line 394
     invoke-virtual {p0, v0}, Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView;->setWebViewClient(Landroid/webkit/WebViewClient;)V
 
     .line 395
     invoke-virtual {p0}, Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView;->destroy()V
 
+    .line 396
     return-void
 .end method
 
 .method protected createReactWebViewBridge(Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView;)Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView$ReactWebViewBridge;
     .locals 1
+    .param p1, "webView"    # Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView;
 
     .line 319
     new-instance v0, Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView$ReactWebViewBridge;
@@ -132,60 +143,19 @@
 .end method
 
 .method protected evaluateJavascriptWithFallback(Ljava/lang/String;)V
-    .locals 2
+    .locals 1
+    .param p1, "script"    # Ljava/lang/String;
 
     .line 337
-    sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    const/16 v1, 0x13
-
-    if-lt v0, v1, :cond_0
-
-    const/4 v0, 0x0
+    nop
 
     .line 338
+    const/4 v0, 0x0
+
     invoke-virtual {p0, p1, v0}, Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView;->evaluateJavascript(Ljava/lang/String;Landroid/webkit/ValueCallback;)V
 
+    .line 339
     return-void
-
-    .line 343
-    :cond_0
-    :try_start_0
-    new-instance v0, Ljava/lang/StringBuilder;
-
-    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v1, "javascript:"
-
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    const-string v1, "UTF-8"
-
-    invoke-static {p1, v1}, Ljava/net/URLEncoder;->encode(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
-
-    move-result-object p1
-
-    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object p1
-
-    invoke-virtual {p0, p1}, Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView;->loadUrl(Ljava/lang/String;)V
-    :try_end_0
-    .catch Ljava/io/UnsupportedEncodingException; {:try_start_0 .. :try_end_0} :catch_0
-
-    return-void
-
-    :catch_0
-    move-exception p1
-
-    .line 346
-    new-instance v0, Ljava/lang/RuntimeException;
-
-    invoke-direct {v0, p1}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/Throwable;)V
-
-    throw v0
 .end method
 
 .method public getReactWebViewClient()Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebViewClient;
@@ -207,11 +177,12 @@
 
     if-eqz v0, :cond_0
 
+    .line 378
     const-string v0, "(window.originalPostMessage = window.postMessage,window.postMessage = function(data) {__REACT_WEB_VIEW_BRIDGE.postMessage(String(data));})"
 
-    .line 378
     invoke-virtual {p0, v0}, Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView;->evaluateJavascriptWithFallback(Ljava/lang/String;)V
 
+    .line 387
     :cond_0
     return-void
 .end method
@@ -222,23 +193,27 @@
     .line 301
     invoke-virtual {p0}, Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView;->cleanupCallbacksAndDestroy()V
 
+    .line 302
     return-void
 .end method
 
 .method public onHostPause()V
     .locals 0
 
+    .line 297
     return-void
 .end method
 
 .method public onHostResume()V
     .locals 0
 
+    .line 292
     return-void
 .end method
 
 .method public onMessage(Ljava/lang/String;)V
     .locals 2
+    .param p1, "message"    # Ljava/lang/String;
 
     .line 390
     new-instance v0, Lcom/facebook/react/views/webview/events/TopMessageEvent;
@@ -251,12 +226,13 @@
 
     invoke-static {p0, v0}, Lcom/facebook/react/views/webview/ReactWebViewManager;->dispatchEvent(Landroid/webkit/WebView;Lcom/facebook/react/uimanager/events/Event;)V
 
+    .line 391
     return-void
 .end method
 
 .method public setInjectedJavaScript(Ljava/lang/String;)V
     .locals 0
-    .param p1    # Ljava/lang/String;
+    .param p1, "js"    # Ljava/lang/String;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -264,23 +240,27 @@
     .line 315
     iput-object p1, p0, Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView;->injectedJS:Ljava/lang/String;
 
+    .line 316
     return-void
 .end method
 
 .method public setMessagingEnabled(Z)V
-    .locals 1
+    .locals 2
+    .param p1, "enabled"    # Z
 
     .line 323
     iget-boolean v0, p0, Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView;->messagingEnabled:Z
 
     if-ne v0, p1, :cond_0
 
+    .line 324
     return-void
 
     .line 327
     :cond_0
     iput-boolean p1, p0, Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView;->messagingEnabled:Z
 
+    .line 328
     const-string v0, "__REACT_WEB_VIEW_BRIDGE"
 
     if-eqz p1, :cond_1
@@ -288,9 +268,9 @@
     .line 329
     invoke-virtual {p0, p0}, Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView;->createReactWebViewBridge(Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView;)Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView$ReactWebViewBridge;
 
-    move-result-object p1
+    move-result-object v1
 
-    invoke-virtual {p0, p1, v0}, Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView;->addJavascriptInterface(Ljava/lang/Object;Ljava/lang/String;)V
+    invoke-virtual {p0, v1, v0}, Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView;->addJavascriptInterface(Ljava/lang/Object;Ljava/lang/String;)V
 
     .line 330
     invoke-virtual {p0}, Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView;->linkBridge()V
@@ -301,20 +281,25 @@
     :cond_1
     invoke-virtual {p0, v0}, Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView;->removeJavascriptInterface(Ljava/lang/String;)V
 
+    .line 334
     :goto_0
     return-void
 .end method
 
 .method public setWebViewClient(Landroid/webkit/WebViewClient;)V
-    .locals 0
+    .locals 1
+    .param p1, "client"    # Landroid/webkit/WebViewClient;
 
     .line 306
     invoke-super {p0, p1}, Landroid/webkit/WebView;->setWebViewClient(Landroid/webkit/WebViewClient;)V
 
     .line 307
-    check-cast p1, Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebViewClient;
+    move-object v0, p1
 
-    iput-object p1, p0, Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView;->mReactWebViewClient:Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebViewClient;
+    check-cast v0, Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebViewClient;
 
+    iput-object v0, p0, Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebView;->mReactWebViewClient:Lcom/facebook/react/views/webview/ReactWebViewManager$ReactWebViewClient;
+
+    .line 308
     return-void
 .end method

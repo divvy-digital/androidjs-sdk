@@ -24,6 +24,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/modules/location/LocationModule$SingleUpdateRequest;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/modules/location/LocationModule$SingleUpdateRequest;
 
     .line 273
     iput-object p1, p0, Lcom/facebook/react/modules/location/LocationModule$SingleUpdateRequest$2;->this$0:Lcom/facebook/react/modules/location/LocationModule$SingleUpdateRequest;
@@ -37,6 +38,7 @@
 # virtual methods
 .method public onLocationChanged(Landroid/location/Location;)V
     .locals 6
+    .param p1, "location"    # Landroid/location/Location;
 
     .line 276
     iget-object v0, p0, Lcom/facebook/react/modules/location/LocationModule$SingleUpdateRequest$2;->this$0:Lcom/facebook/react/modules/location/LocationModule$SingleUpdateRequest;
@@ -55,9 +57,7 @@
 
     iget-object v1, p0, Lcom/facebook/react/modules/location/LocationModule$SingleUpdateRequest$2;->this$0:Lcom/facebook/react/modules/location/LocationModule$SingleUpdateRequest;
 
-    iget-object v2, p0, Lcom/facebook/react/modules/location/LocationModule$SingleUpdateRequest$2;->this$0:Lcom/facebook/react/modules/location/LocationModule$SingleUpdateRequest;
-
-    invoke-static {v2}, Lcom/facebook/react/modules/location/LocationModule$SingleUpdateRequest;->access$1300(Lcom/facebook/react/modules/location/LocationModule$SingleUpdateRequest;)Landroid/location/Location;
+    invoke-static {v1}, Lcom/facebook/react/modules/location/LocationModule$SingleUpdateRequest;->access$1300(Lcom/facebook/react/modules/location/LocationModule$SingleUpdateRequest;)Landroid/location/Location;
 
     move-result-object v2
 
@@ -78,13 +78,13 @@
 
     new-array v3, v2, [Ljava/lang/Object;
 
-    const/4 v4, 0x0
-
     invoke-static {p1}, Lcom/facebook/react/modules/location/LocationModule;->access$000(Landroid/location/Location;)Lcom/facebook/react/bridge/WritableMap;
 
-    move-result-object v5
+    move-result-object v4
 
-    aput-object v5, v3, v4
+    const/4 v5, 0x0
+
+    aput-object v4, v3, v5
 
     invoke-interface {v1, v3}, Lcom/facebook/react/bridge/Callback;->invoke([Ljava/lang/Object;)V
 
@@ -132,32 +132,42 @@
     .line 285
     monitor-exit v0
 
+    .line 286
     return-void
 
+    .line 285
     :catchall_0
-    move-exception p1
+    move-exception v1
 
     monitor-exit v0
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    throw p1
+    throw v1
 .end method
 
 .method public onProviderDisabled(Ljava/lang/String;)V
     .locals 0
+    .param p1, "provider"    # Ljava/lang/String;
 
+    .line 295
     return-void
 .end method
 
 .method public onProviderEnabled(Ljava/lang/String;)V
     .locals 0
+    .param p1, "provider"    # Ljava/lang/String;
 
+    .line 292
     return-void
 .end method
 
 .method public onStatusChanged(Ljava/lang/String;ILandroid/os/Bundle;)V
     .locals 0
+    .param p1, "provider"    # Ljava/lang/String;
+    .param p2, "status"    # I
+    .param p3, "extras"    # Landroid/os/Bundle;
 
+    .line 289
     return-void
 .end method

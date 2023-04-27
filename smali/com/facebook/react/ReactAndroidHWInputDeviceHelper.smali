@@ -31,9 +31,9 @@
 
     move-result-object v0
 
+    .line 29
     const/16 v1, 0x17
 
-    .line 29
     invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
     move-result-object v1
@@ -44,9 +44,9 @@
 
     move-result-object v0
 
+    .line 30
     const/16 v1, 0x42
 
-    .line 30
     invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
     move-result-object v1
@@ -54,10 +54,10 @@
     invoke-virtual {v0, v1, v2}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
 
     move-result-object v0
-
-    const/16 v1, 0x3e
 
     .line 31
+    const/16 v1, 0x3e
+
     invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
     move-result-object v1
@@ -66,9 +66,9 @@
 
     move-result-object v0
 
+    .line 32
     const/16 v1, 0x55
 
-    .line 32
     invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
     move-result-object v1
@@ -79,9 +79,9 @@
 
     move-result-object v0
 
+    .line 33
     const/16 v1, 0x59
 
-    .line 33
     invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
     move-result-object v1
@@ -92,9 +92,9 @@
 
     move-result-object v0
 
+    .line 34
     const/16 v1, 0x5a
 
-    .line 34
     invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
     move-result-object v1
@@ -105,9 +105,9 @@
 
     move-result-object v0
 
+    .line 35
     const/16 v1, 0x13
 
-    .line 35
     invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
     move-result-object v1
@@ -118,9 +118,9 @@
 
     move-result-object v0
 
+    .line 36
     const/16 v1, 0x16
 
-    .line 36
     invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
     move-result-object v1
@@ -131,9 +131,9 @@
 
     move-result-object v0
 
+    .line 37
     const/16 v1, 0x14
 
-    .line 37
     invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
     move-result-object v1
@@ -144,9 +144,9 @@
 
     move-result-object v0
 
+    .line 38
     const/16 v1, 0x15
 
-    .line 38
     invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
     move-result-object v1
@@ -164,56 +164,64 @@
 
     sput-object v0, Lcom/facebook/react/ReactAndroidHWInputDeviceHelper;->KEY_EVENTS_ACTIONS:Ljava/util/Map;
 
+    .line 28
     return-void
 .end method
 
 .method constructor <init>(Lcom/facebook/react/ReactRootView;)V
     .locals 1
+    .param p1, "mReactRootView"    # Lcom/facebook/react/ReactRootView;
 
     .line 50
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
+    .line 46
     const/4 v0, -0x1
 
-    .line 46
     iput v0, p0, Lcom/facebook/react/ReactAndroidHWInputDeviceHelper;->mLastFocusedViewId:I
 
     .line 51
     iput-object p1, p0, Lcom/facebook/react/ReactAndroidHWInputDeviceHelper;->mReactRootView:Lcom/facebook/react/ReactRootView;
 
+    .line 52
     return-void
 .end method
 
 .method private dispatchEvent(Ljava/lang/String;I)V
-    .locals 2
+    .locals 3
+    .param p1, "eventType"    # Ljava/lang/String;
+    .param p2, "targetViewId"    # I
 
     .line 91
     new-instance v0, Lcom/facebook/react/bridge/WritableNativeMap;
 
     invoke-direct {v0}, Lcom/facebook/react/bridge/WritableNativeMap;-><init>()V
 
+    .line 92
+    .local v0, "event":Lcom/facebook/react/bridge/WritableMap;
     const-string v1, "eventType"
 
-    .line 92
     invoke-interface {v0, v1, p1}, Lcom/facebook/react/bridge/WritableMap;->putString(Ljava/lang/String;Ljava/lang/String;)V
 
-    const/4 p1, -0x1
+    .line 93
+    const/4 v1, -0x1
 
-    if-eq p2, p1, :cond_0
-
-    const-string p1, "tag"
+    if-eq p2, v1, :cond_0
 
     .line 94
-    invoke-interface {v0, p1, p2}, Lcom/facebook/react/bridge/WritableMap;->putInt(Ljava/lang/String;I)V
+    const-string v1, "tag"
+
+    invoke-interface {v0, v1, p2}, Lcom/facebook/react/bridge/WritableMap;->putInt(Ljava/lang/String;I)V
 
     .line 96
     :cond_0
-    iget-object p1, p0, Lcom/facebook/react/ReactAndroidHWInputDeviceHelper;->mReactRootView:Lcom/facebook/react/ReactRootView;
+    iget-object v1, p0, Lcom/facebook/react/ReactAndroidHWInputDeviceHelper;->mReactRootView:Lcom/facebook/react/ReactRootView;
 
-    const-string p2, "onHWKeyEvent"
+    const-string v2, "onHWKeyEvent"
 
-    invoke-virtual {p1, p2, v0}, Lcom/facebook/react/ReactRootView;->sendEvent(Ljava/lang/String;Lcom/facebook/react/bridge/WritableMap;)V
+    invoke-virtual {v1, v2, v0}, Lcom/facebook/react/ReactRootView;->sendEvent(Ljava/lang/String;Lcom/facebook/react/bridge/WritableMap;)V
 
+    .line 97
     return-void
 .end method
 
@@ -229,20 +237,22 @@
 
     if-eq v0, v1, :cond_0
 
+    .line 85
     const-string v2, "blur"
 
-    .line 85
     invoke-direct {p0, v2, v0}, Lcom/facebook/react/ReactAndroidHWInputDeviceHelper;->dispatchEvent(Ljava/lang/String;I)V
 
     .line 87
     :cond_0
     iput v1, p0, Lcom/facebook/react/ReactAndroidHWInputDeviceHelper;->mLastFocusedViewId:I
 
+    .line 88
     return-void
 .end method
 
 .method public handleKeyEvent(Landroid/view/KeyEvent;)V
-    .locals 2
+    .locals 4
+    .param p1, "ev"    # Landroid/view/KeyEvent;
 
     .line 59
     invoke-virtual {p1}, Landroid/view/KeyEvent;->getKeyCode()I
@@ -250,50 +260,52 @@
     move-result v0
 
     .line 60
+    .local v0, "eventKeyCode":I
     invoke-virtual {p1}, Landroid/view/KeyEvent;->getAction()I
 
-    move-result p1
-
-    const/4 v1, 0x1
-
-    if-ne p1, v1, :cond_0
+    move-result v1
 
     .line 61
-    sget-object p1, Lcom/facebook/react/ReactAndroidHWInputDeviceHelper;->KEY_EVENTS_ACTIONS:Ljava/util/Map;
+    .local v1, "eventKeyAction":I
+    const/4 v2, 0x1
+
+    if-ne v1, v2, :cond_0
+
+    sget-object v2, Lcom/facebook/react/ReactAndroidHWInputDeviceHelper;->KEY_EVENTS_ACTIONS:Ljava/util/Map;
 
     invoke-static {v0}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object v1
+    move-result-object v3
 
-    invoke-interface {p1, v1}, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z
+    invoke-interface {v2, v3}, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z
 
-    move-result p1
+    move-result v3
 
-    if-eqz p1, :cond_0
+    if-eqz v3, :cond_0
 
     .line 62
-    sget-object p1, Lcom/facebook/react/ReactAndroidHWInputDeviceHelper;->KEY_EVENTS_ACTIONS:Ljava/util/Map;
-
     invoke-static {v0}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object v0
+    move-result-object v3
 
-    invoke-interface {p1, v0}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-interface {v2, v3}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
 
-    move-result-object p1
+    move-result-object v2
 
-    check-cast p1, Ljava/lang/String;
+    check-cast v2, Ljava/lang/String;
 
-    iget v0, p0, Lcom/facebook/react/ReactAndroidHWInputDeviceHelper;->mLastFocusedViewId:I
+    iget v3, p0, Lcom/facebook/react/ReactAndroidHWInputDeviceHelper;->mLastFocusedViewId:I
 
-    invoke-direct {p0, p1, v0}, Lcom/facebook/react/ReactAndroidHWInputDeviceHelper;->dispatchEvent(Ljava/lang/String;I)V
+    invoke-direct {p0, v2, v3}, Lcom/facebook/react/ReactAndroidHWInputDeviceHelper;->dispatchEvent(Ljava/lang/String;I)V
 
+    .line 64
     :cond_0
     return-void
 .end method
 
 .method public onFocusChanged(Landroid/view/View;)V
     .locals 2
+    .param p1, "newFocusedView"    # Landroid/view/View;
 
     .line 70
     iget v0, p0, Lcom/facebook/react/ReactAndroidHWInputDeviceHelper;->mLastFocusedViewId:I
@@ -304,6 +316,7 @@
 
     if-ne v0, v1, :cond_0
 
+    .line 71
     return-void
 
     .line 73
@@ -314,9 +327,9 @@
 
     if-eq v0, v1, :cond_1
 
+    .line 74
     const-string v1, "blur"
 
-    .line 74
     invoke-direct {p0, v1, v0}, Lcom/facebook/react/ReactAndroidHWInputDeviceHelper;->dispatchEvent(Ljava/lang/String;I)V
 
     .line 76
@@ -328,13 +341,14 @@
     iput v0, p0, Lcom/facebook/react/ReactAndroidHWInputDeviceHelper;->mLastFocusedViewId:I
 
     .line 77
-    invoke-virtual {p1}, Landroid/view/View;->getId()I
-
-    move-result p1
-
     const-string v0, "focus"
 
-    invoke-direct {p0, v0, p1}, Lcom/facebook/react/ReactAndroidHWInputDeviceHelper;->dispatchEvent(Ljava/lang/String;I)V
+    invoke-virtual {p1}, Landroid/view/View;->getId()I
 
+    move-result v1
+
+    invoke-direct {p0, v0, v1}, Lcom/facebook/react/ReactAndroidHWInputDeviceHelper;->dispatchEvent(Ljava/lang/String;I)V
+
+    .line 78
     return-void
 .end method

@@ -26,11 +26,14 @@
 # direct methods
 .method public constructor <init>(IILandroid/util/SparseIntArray;)V
     .locals 7
-    .param p3    # Landroid/util/SparseIntArray;
+    .param p1, "maxSizeSoftCap"    # I
+    .param p2, "maxSizeHardCap"    # I
+    .param p3, "bucketSizes"    # Landroid/util/SparseIntArray;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
 
+    .line 80
     const/4 v4, 0x0
 
     const v5, 0x7fffffff
@@ -45,22 +48,28 @@
 
     move-object v3, p3
 
-    .line 80
     invoke-direct/range {v0 .. v6}, Lcom/facebook/imagepipeline/memory/PoolParams;-><init>(IILandroid/util/SparseIntArray;III)V
 
+    .line 81
     return-void
 .end method
 
 .method public constructor <init>(IILandroid/util/SparseIntArray;III)V
     .locals 1
-    .param p3    # Landroid/util/SparseIntArray;
+    .param p1, "maxSizeSoftCap"    # I
+    .param p2, "maxSizeHardCap"    # I
+    .param p3, "bucketSizes"    # Landroid/util/SparseIntArray;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
+    .param p4, "minBucketSize"    # I
+    .param p5, "maxBucketSize"    # I
+    .param p6, "maxNumThreads"    # I
 
     .line 98
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
+    .line 99
     if-ltz p1, :cond_0
 
     if-lt p2, p1, :cond_0
@@ -72,7 +81,6 @@
     :cond_0
     const/4 v0, 0x0
 
-    .line 99
     :goto_0
     invoke-static {v0}, Lcom/facebook/common/internal/Preconditions;->checkState(Z)V
 
@@ -94,16 +102,19 @@
     .line 105
     iput p6, p0, Lcom/facebook/imagepipeline/memory/PoolParams;->maxNumThreads:I
 
+    .line 106
     return-void
 .end method
 
 .method public constructor <init>(ILandroid/util/SparseIntArray;)V
     .locals 7
-    .param p2    # Landroid/util/SparseIntArray;
+    .param p1, "maxSize"    # I
+    .param p2, "bucketSizes"    # Landroid/util/SparseIntArray;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
 
+    .line 70
     const/4 v4, 0x0
 
     const v5, 0x7fffffff
@@ -118,8 +129,8 @@
 
     move-object v3, p2
 
-    .line 70
     invoke-direct/range {v0 .. v6}, Lcom/facebook/imagepipeline/memory/PoolParams;-><init>(IILandroid/util/SparseIntArray;III)V
 
+    .line 71
     return-void
 .end method

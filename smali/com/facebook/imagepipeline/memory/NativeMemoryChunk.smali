@@ -6,11 +6,6 @@
 .implements Ljava/io/Closeable;
 
 
-# annotations
-.annotation build Lcom/facebook/common/internal/DoNotStrip;
-.end annotation
-
-
 # static fields
 .field private static final TAG:Ljava/lang/String; = "NativeMemoryChunk"
 
@@ -30,41 +25,43 @@
     .line 31
     invoke-static {}, Lcom/facebook/imagepipeline/nativecode/ImagePipelineNativeLoader;->load()V
 
+    .line 32
     return-void
 .end method
 
 .method public constructor <init>()V
     .locals 2
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
 
     .line 58
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
+    .line 59
     const/4 v0, 0x0
 
-    .line 59
     iput v0, p0, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->mSize:I
 
+    .line 60
     const-wide/16 v0, 0x0
 
-    .line 60
     iput-wide v0, p0, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->mNativePtr:J
 
+    .line 61
     const/4 v0, 0x1
 
-    .line 61
     iput-boolean v0, p0, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->mClosed:Z
 
+    .line 62
     return-void
 .end method
 
 .method public constructor <init>(I)V
     .locals 3
+    .param p1, "size"    # I
 
     .line 50
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
+    .line 51
     const/4 v0, 0x0
 
     if-lez p1, :cond_0
@@ -76,7 +73,6 @@
     :cond_0
     const/4 v1, 0x0
 
-    .line 51
     :goto_0
     invoke-static {v1}, Lcom/facebook/common/internal/Preconditions;->checkArgument(Z)V
 
@@ -84,8 +80,6 @@
     iput p1, p0, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->mSize:I
 
     .line 53
-    iget p1, p0, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->mSize:I
-
     invoke-static {p1}, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->nativeAllocate(I)J
 
     move-result-wide v1
@@ -95,34 +89,43 @@
     .line 54
     iput-boolean v0, p0, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->mClosed:Z
 
+    .line 55
     return-void
 .end method
 
 .method private adjustByteCount(II)I
-    .locals 1
+    .locals 2
+    .param p1, "offset"    # I
+    .param p2, "count"    # I
 
     .line 249
     iget v0, p0, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->mSize:I
 
     sub-int/2addr v0, p1
 
-    const/4 p1, 0x0
+    const/4 v1, 0x0
 
-    invoke-static {p1, v0}, Ljava/lang/Math;->max(II)I
+    invoke-static {v1, v0}, Ljava/lang/Math;->max(II)I
 
-    move-result p1
+    move-result v0
 
     .line 250
-    invoke-static {p1, p2}, Ljava/lang/Math;->min(II)I
+    .local v0, "available":I
+    invoke-static {v0, p2}, Ljava/lang/Math;->min(II)I
 
-    move-result p1
+    move-result v1
 
-    return p1
+    return v1
 .end method
 
 .method private checkBounds(IIII)V
-    .locals 3
+    .locals 4
+    .param p1, "myOffset"    # I
+    .param p2, "otherLength"    # I
+    .param p3, "otherOffset"    # I
+    .param p4, "count"    # I
 
+    .line 261
     const/4 v0, 0x1
 
     const/4 v1, 0x0
@@ -136,10 +139,10 @@
     :cond_0
     const/4 v2, 0x0
 
-    .line 261
     :goto_0
     invoke-static {v2}, Lcom/facebook/common/internal/Preconditions;->checkArgument(Z)V
 
+    .line 262
     if-ltz p1, :cond_1
 
     const/4 v2, 0x1
@@ -149,10 +152,10 @@
     :cond_1
     const/4 v2, 0x0
 
-    .line 262
     :goto_1
     invoke-static {v2}, Lcom/facebook/common/internal/Preconditions;->checkArgument(Z)V
 
+    .line 263
     if-ltz p3, :cond_2
 
     const/4 v2, 0x1
@@ -162,45 +165,49 @@
     :cond_2
     const/4 v2, 0x0
 
-    .line 263
     :goto_2
     invoke-static {v2}, Lcom/facebook/common/internal/Preconditions;->checkArgument(Z)V
 
-    add-int/2addr p1, p4
-
     .line 264
-    iget v2, p0, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->mSize:I
+    add-int v2, p1, p4
 
-    if-gt p1, v2, :cond_3
+    iget v3, p0, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->mSize:I
 
-    const/4 p1, 0x1
+    if-gt v2, v3, :cond_3
+
+    const/4 v2, 0x1
 
     goto :goto_3
 
     :cond_3
-    const/4 p1, 0x0
+    const/4 v2, 0x0
 
     :goto_3
-    invoke-static {p1}, Lcom/facebook/common/internal/Preconditions;->checkArgument(Z)V
+    invoke-static {v2}, Lcom/facebook/common/internal/Preconditions;->checkArgument(Z)V
 
-    add-int/2addr p3, p4
+    .line 265
+    add-int v2, p3, p4
 
-    if-gt p3, p2, :cond_4
+    if-gt v2, p2, :cond_4
 
     goto :goto_4
 
     :cond_4
     const/4 v0, 0x0
 
-    .line 265
     :goto_4
     invoke-static {v0}, Lcom/facebook/common/internal/Preconditions;->checkArgument(Z)V
 
+    .line 266
     return-void
 .end method
 
 .method private doCopy(ILcom/facebook/imagepipeline/memory/NativeMemoryChunk;II)V
-    .locals 4
+    .locals 6
+    .param p1, "offset"    # I
+    .param p2, "other"    # Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;
+    .param p3, "otherOffset"    # I
+    .param p4, "count"    # I
 
     .line 214
     invoke-virtual {p0}, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->isClosed()Z
@@ -228,49 +235,38 @@
     .line 217
     iget-wide v0, p2, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->mNativePtr:J
 
-    int-to-long p2, p3
+    int-to-long v2, p3
 
-    add-long/2addr v0, p2
+    add-long/2addr v0, v2
 
-    iget-wide p2, p0, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->mNativePtr:J
+    iget-wide v2, p0, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->mNativePtr:J
 
-    int-to-long v2, p1
+    int-to-long v4, p1
 
-    add-long/2addr p2, v2
+    add-long/2addr v2, v4
 
-    invoke-static {v0, v1, p2, p3, p4}, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->nativeMemcpy(JJI)V
+    invoke-static {v0, v1, v2, v3, p4}, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->nativeMemcpy(JJI)V
 
+    .line 218
     return-void
 .end method
 
 .method private static native nativeAllocate(I)J
-    .annotation build Lcom/facebook/common/internal/DoNotStrip;
-    .end annotation
 .end method
 
 .method private static native nativeCopyFromByteArray(J[BII)V
-    .annotation build Lcom/facebook/common/internal/DoNotStrip;
-    .end annotation
 .end method
 
 .method private static native nativeCopyToByteArray(J[BII)V
-    .annotation build Lcom/facebook/common/internal/DoNotStrip;
-    .end annotation
 .end method
 
 .method private static native nativeFree(J)V
-    .annotation build Lcom/facebook/common/internal/DoNotStrip;
-    .end annotation
 .end method
 
 .method private static native nativeMemcpy(JJI)V
-    .annotation build Lcom/facebook/common/internal/DoNotStrip;
-    .end annotation
 .end method
 
 .method private static native nativeReadByte(J)B
-    .annotation build Lcom/facebook/common/internal/DoNotStrip;
-    .end annotation
 .end method
 
 
@@ -286,9 +282,9 @@
 
     if-nez v0, :cond_0
 
+    .line 69
     const/4 v0, 0x1
 
-    .line 69
     iput-boolean v0, p0, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->mClosed:Z
 
     .line 70
@@ -299,11 +295,13 @@
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
     .line 72
+    .end local p0    # "this":Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;
     :cond_0
     monitor-exit p0
 
     return-void
 
+    .line 67
     :catchall_0
     move-exception v0
 
@@ -314,6 +312,10 @@
 
 .method public copy(ILcom/facebook/imagepipeline/memory/NativeMemoryChunk;II)V
     .locals 5
+    .param p1, "offset"    # I
+    .param p2, "other"    # Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;
+    .param p3, "otherOffset"    # I
+    .param p4, "count"    # I
 
     .line 161
     invoke-static {p2}, Lcom/facebook/common/internal/Preconditions;->checkNotNull(Ljava/lang/Object;)Ljava/lang/Object;
@@ -328,65 +330,77 @@
     if-nez v4, :cond_0
 
     .line 172
-    new-instance v0, Ljava/lang/StringBuilder;
+    const-string v0, "NativeMemoryChunk"
 
-    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+    new-instance v1, Ljava/lang/StringBuilder;
 
-    const-string v1, "Copying from NativeMemoryChunk "
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
 
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    const-string v2, "Copying from NativeMemoryChunk "
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     .line 175
     invoke-static {p0}, Ljava/lang/System;->identityHashCode(Ljava/lang/Object;)I
 
-    move-result v1
+    move-result v2
 
-    invoke-static {v1}, Ljava/lang/Integer;->toHexString(I)Ljava/lang/String;
+    invoke-static {v2}, Ljava/lang/Integer;->toHexString(I)Ljava/lang/String;
+
+    move-result-object v2
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     move-result-object v1
 
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    const-string v2, " to NativeMemoryChunk "
 
-    const-string v1, " to NativeMemoryChunk "
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v1
 
     .line 177
     invoke-static {p2}, Ljava/lang/System;->identityHashCode(Ljava/lang/Object;)I
 
-    move-result v1
+    move-result v2
 
-    invoke-static {v1}, Ljava/lang/Integer;->toHexString(I)Ljava/lang/String;
+    invoke-static {v2}, Ljava/lang/Integer;->toHexString(I)Ljava/lang/String;
+
+    move-result-object v2
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     move-result-object v1
 
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    const-string v2, " which share the same address "
 
-    const-string v1, " which share the same address "
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v1
 
-    iget-wide v1, p0, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->mNativePtr:J
+    iget-wide v2, p0, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->mNativePtr:J
 
     .line 179
-    invoke-static {v1, v2}, Ljava/lang/Long;->toHexString(J)Ljava/lang/String;
+    invoke-static {v2, v3}, Ljava/lang/Long;->toHexString(J)Ljava/lang/String;
+
+    move-result-object v2
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     move-result-object v1
 
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v0
-
-    const-string v1, "NativeMemoryChunk"
+    move-result-object v1
 
     .line 172
-    invoke-static {v1, v0}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I
-
-    const/4 v0, 0x0
+    invoke-static {v0, v1}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I
 
     .line 180
+    const/4 v0, 0x0
+
     invoke-static {v0}, Lcom/facebook/common/internal/Preconditions;->checkArgument(Z)V
 
     .line 184
@@ -423,29 +437,38 @@
     :try_end_2
     .catchall {:try_start_2 .. :try_end_2} :catchall_1
 
+    .line 190
     return-void
 
-    :catchall_0
-    move-exception p1
-
     .line 188
+    :catchall_0
+    move-exception v0
+
     :try_start_3
     monitor-exit p0
     :try_end_3
     .catchall {:try_start_3 .. :try_end_3} :catchall_0
 
+    .end local p1    # "offset":I
+    .end local p2    # "other":Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;
+    .end local p3    # "otherOffset":I
+    .end local p4    # "count":I
     :try_start_4
-    throw p1
-
-    :catchall_1
-    move-exception p1
+    throw v0
 
     .line 189
+    .restart local p1    # "offset":I
+    .restart local p2    # "other":Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;
+    .restart local p3    # "otherOffset":I
+    .restart local p4    # "count":I
+    :catchall_1
+    move-exception v0
+
     monitor-exit p2
     :try_end_4
     .catchall {:try_start_4 .. :try_end_4} :catchall_1
 
-    throw p1
+    throw v0
 
     .line 194
     :cond_1
@@ -472,29 +495,38 @@
     :try_end_7
     .catchall {:try_start_7 .. :try_end_7} :catchall_3
 
+    .line 199
     return-void
 
-    :catchall_2
-    move-exception p1
-
     .line 197
+    :catchall_2
+    move-exception v0
+
     :try_start_8
     monitor-exit p2
     :try_end_8
     .catchall {:try_start_8 .. :try_end_8} :catchall_2
 
+    .end local p1    # "offset":I
+    .end local p2    # "other":Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;
+    .end local p3    # "otherOffset":I
+    .end local p4    # "count":I
     :try_start_9
-    throw p1
-
-    :catchall_3
-    move-exception p1
+    throw v0
 
     .line 198
+    .restart local p1    # "offset":I
+    .restart local p2    # "other":Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;
+    .restart local p3    # "otherOffset":I
+    .restart local p4    # "count":I
+    :catchall_3
+    move-exception v0
+
     monitor-exit p0
     :try_end_9
     .catchall {:try_start_9 .. :try_end_9} :catchall_3
 
-    throw p1
+    throw v0
 .end method
 
 .method protected finalize()V
@@ -512,6 +544,7 @@
 
     if-eqz v0, :cond_0
 
+    .line 227
     return-void
 
     .line 230
@@ -524,6 +557,8 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     .line 233
     invoke-static {p0}, Ljava/lang/System;->identityHashCode(Ljava/lang/Object;)I
 
@@ -535,9 +570,13 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     const-string v1, " still active. Underlying address = "
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     iget-wide v1, p0, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->mNativePtr:J
 
@@ -548,13 +587,15 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
     move-result-object v0
 
+    .line 230
     const-string v1, "NativeMemoryChunk"
 
-    .line 230
     invoke-static {v1, v0}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I
 
     .line 238
@@ -566,8 +607,13 @@
     .line 240
     invoke-super {p0}, Ljava/lang/Object;->finalize()V
 
+    .line 241
+    nop
+
+    .line 242
     return-void
 
+    .line 240
     :catchall_0
     move-exception v0
 
@@ -610,6 +656,8 @@
 
     return v0
 
+    .line 79
+    .end local p0    # "this":Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;
     :catchall_0
     move-exception v0
 
@@ -620,6 +668,7 @@
 
 .method public declared-synchronized read(I)B
     .locals 4
+    .param p1, "offset"    # I
 
     monitor-enter p0
 
@@ -645,6 +694,7 @@
     :goto_0
     invoke-static {v0}, Lcom/facebook/common/internal/Preconditions;->checkState(Z)V
 
+    .line 143
     if-ltz p1, :cond_1
 
     const/4 v0, 0x1
@@ -654,7 +704,6 @@
     :cond_1
     const/4 v0, 0x0
 
-    .line 143
     :goto_1
     invoke-static {v0}, Lcom/facebook/common/internal/Preconditions;->checkArgument(Z)V
 
@@ -680,14 +729,17 @@
 
     invoke-static {v0, v1}, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->nativeReadByte(J)B
 
-    move-result p1
+    move-result v0
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
     monitor-exit p0
 
-    return p1
+    return v0
 
+    .line 141
+    .end local p0    # "this":Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;
+    .end local p1    # "offset":I
     :catchall_0
     move-exception p1
 
@@ -697,7 +749,11 @@
 .end method
 
 .method public declared-synchronized read(I[BII)I
-    .locals 4
+    .locals 5
+    .param p1, "nativeMemoryOffset"    # I
+    .param p2, "byteArray"    # [B
+    .param p3, "byteArrayOffset"    # I
+    .param p4, "count"    # I
 
     monitor-enter p0
 
@@ -725,29 +781,37 @@
     .line 130
     invoke-direct {p0, p1, p4}, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->adjustByteCount(II)I
 
-    move-result p4
+    move-result v0
 
     .line 131
-    array-length v0, p2
+    .local v0, "actualCount":I
+    array-length v1, p2
 
-    invoke-direct {p0, p1, v0, p3, p4}, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->checkBounds(IIII)V
+    invoke-direct {p0, p1, v1, p3, v0}, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->checkBounds(IIII)V
 
     .line 132
-    iget-wide v0, p0, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->mNativePtr:J
+    iget-wide v1, p0, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->mNativePtr:J
 
-    int-to-long v2, p1
+    int-to-long v3, p1
 
-    add-long/2addr v0, v2
+    add-long/2addr v1, v3
 
-    invoke-static {v0, v1, p2, p3, p4}, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->nativeCopyToByteArray(J[BII)V
+    invoke-static {v1, v2, p2, p3, v0}, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->nativeCopyToByteArray(J[BII)V
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
     .line 133
     monitor-exit p0
 
-    return p4
+    return v0
 
+    .line 127
+    .end local v0    # "actualCount":I
+    .end local p0    # "this":Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;
+    .end local p1    # "nativeMemoryOffset":I
+    .end local p2    # "byteArray":[B
+    .end local p3    # "byteArrayOffset":I
+    .end local p4    # "count":I
     :catchall_0
     move-exception p1
 
@@ -757,7 +821,11 @@
 .end method
 
 .method public declared-synchronized write(I[BII)I
-    .locals 4
+    .locals 5
+    .param p1, "nativeMemoryOffset"    # I
+    .param p2, "byteArray"    # [B
+    .param p3, "byteArrayOffset"    # I
+    .param p4, "count"    # I
 
     monitor-enter p0
 
@@ -785,29 +853,37 @@
     .line 105
     invoke-direct {p0, p1, p4}, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->adjustByteCount(II)I
 
-    move-result p4
+    move-result v0
 
     .line 106
-    array-length v0, p2
+    .local v0, "actualCount":I
+    array-length v1, p2
 
-    invoke-direct {p0, p1, v0, p3, p4}, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->checkBounds(IIII)V
+    invoke-direct {p0, p1, v1, p3, v0}, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->checkBounds(IIII)V
 
     .line 107
-    iget-wide v0, p0, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->mNativePtr:J
+    iget-wide v1, p0, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->mNativePtr:J
 
-    int-to-long v2, p1
+    int-to-long v3, p1
 
-    add-long/2addr v0, v2
+    add-long/2addr v1, v3
 
-    invoke-static {v0, v1, p2, p3, p4}, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->nativeCopyFromByteArray(J[BII)V
+    invoke-static {v1, v2, p2, p3, v0}, Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;->nativeCopyFromByteArray(J[BII)V
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
     .line 112
     monitor-exit p0
 
-    return p4
+    return v0
 
+    .line 102
+    .end local v0    # "actualCount":I
+    .end local p0    # "this":Lcom/facebook/imagepipeline/memory/NativeMemoryChunk;
+    .end local p1    # "nativeMemoryOffset":I
+    .end local p2    # "byteArray":[B
+    .end local p3    # "byteArrayOffset":I
+    .end local p4    # "count":I
     :catchall_0
     move-exception p1
 

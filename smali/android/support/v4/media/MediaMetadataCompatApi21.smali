@@ -4,10 +4,6 @@
 
 
 # annotations
-.annotation build Landroid/support/annotation/RequiresApi;
-    value = 0x15
-.end annotation
-
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
         Landroid/support/v4/media/MediaMetadataCompatApi21$Builder;
@@ -22,76 +18,95 @@
     .line 91
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
+    .line 92
     return-void
 .end method
 
 .method public static createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
     .locals 1
+    .param p0, "in"    # Landroid/os/Parcel;
 
     .line 55
     sget-object v0, Landroid/media/MediaMetadata;->CREATOR:Landroid/os/Parcelable$Creator;
 
     invoke-interface {v0, p0}, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
 
-    move-result-object p0
+    move-result-object v0
 
-    return-object p0
+    return-object v0
 .end method
 
 .method public static getBitmap(Ljava/lang/Object;Ljava/lang/String;)Landroid/graphics/Bitmap;
-    .locals 0
+    .locals 1
+    .param p0, "metadataObj"    # Ljava/lang/Object;
+    .param p1, "key"    # Ljava/lang/String;
 
     .line 35
-    check-cast p0, Landroid/media/MediaMetadata;
+    move-object v0, p0
 
-    invoke-virtual {p0, p1}, Landroid/media/MediaMetadata;->getBitmap(Ljava/lang/String;)Landroid/graphics/Bitmap;
+    check-cast v0, Landroid/media/MediaMetadata;
 
-    move-result-object p0
+    invoke-virtual {v0, p1}, Landroid/media/MediaMetadata;->getBitmap(Ljava/lang/String;)Landroid/graphics/Bitmap;
 
-    return-object p0
+    move-result-object v0
+
+    return-object v0
 .end method
 
 .method public static getLong(Ljava/lang/Object;Ljava/lang/String;)J
-    .locals 0
+    .locals 2
+    .param p0, "metadataObj"    # Ljava/lang/Object;
+    .param p1, "key"    # Ljava/lang/String;
 
     .line 39
-    check-cast p0, Landroid/media/MediaMetadata;
+    move-object v0, p0
 
-    invoke-virtual {p0, p1}, Landroid/media/MediaMetadata;->getLong(Ljava/lang/String;)J
+    check-cast v0, Landroid/media/MediaMetadata;
 
-    move-result-wide p0
+    invoke-virtual {v0, p1}, Landroid/media/MediaMetadata;->getLong(Ljava/lang/String;)J
 
-    return-wide p0
+    move-result-wide v0
+
+    return-wide v0
 .end method
 
 .method public static getRating(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
-    .locals 0
+    .locals 1
+    .param p0, "metadataObj"    # Ljava/lang/Object;
+    .param p1, "key"    # Ljava/lang/String;
 
     .line 43
-    check-cast p0, Landroid/media/MediaMetadata;
+    move-object v0, p0
 
-    invoke-virtual {p0, p1}, Landroid/media/MediaMetadata;->getRating(Ljava/lang/String;)Landroid/media/Rating;
+    check-cast v0, Landroid/media/MediaMetadata;
 
-    move-result-object p0
+    invoke-virtual {v0, p1}, Landroid/media/MediaMetadata;->getRating(Ljava/lang/String;)Landroid/media/Rating;
 
-    return-object p0
+    move-result-object v0
+
+    return-object v0
 .end method
 
 .method public static getText(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/CharSequence;
-    .locals 0
+    .locals 1
+    .param p0, "metadataObj"    # Ljava/lang/Object;
+    .param p1, "key"    # Ljava/lang/String;
 
     .line 47
-    check-cast p0, Landroid/media/MediaMetadata;
+    move-object v0, p0
 
-    invoke-virtual {p0, p1}, Landroid/media/MediaMetadata;->getText(Ljava/lang/String;)Ljava/lang/CharSequence;
+    check-cast v0, Landroid/media/MediaMetadata;
 
-    move-result-object p0
+    invoke-virtual {v0, p1}, Landroid/media/MediaMetadata;->getText(Ljava/lang/String;)Ljava/lang/CharSequence;
 
-    return-object p0
+    move-result-object v0
+
+    return-object v0
 .end method
 
 .method public static keySet(Ljava/lang/Object;)Ljava/util/Set;
-    .locals 0
+    .locals 1
+    .param p0, "metadataObj"    # Ljava/lang/Object;
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -104,22 +119,30 @@
     .end annotation
 
     .line 31
-    check-cast p0, Landroid/media/MediaMetadata;
+    move-object v0, p0
 
-    invoke-virtual {p0}, Landroid/media/MediaMetadata;->keySet()Ljava/util/Set;
+    check-cast v0, Landroid/media/MediaMetadata;
 
-    move-result-object p0
+    invoke-virtual {v0}, Landroid/media/MediaMetadata;->keySet()Ljava/util/Set;
 
-    return-object p0
+    move-result-object v0
+
+    return-object v0
 .end method
 
 .method public static writeToParcel(Ljava/lang/Object;Landroid/os/Parcel;I)V
-    .locals 0
+    .locals 1
+    .param p0, "metadataObj"    # Ljava/lang/Object;
+    .param p1, "dest"    # Landroid/os/Parcel;
+    .param p2, "flags"    # I
 
     .line 51
-    check-cast p0, Landroid/media/MediaMetadata;
+    move-object v0, p0
 
-    invoke-virtual {p0, p1, p2}, Landroid/media/MediaMetadata;->writeToParcel(Landroid/os/Parcel;I)V
+    check-cast v0, Landroid/media/MediaMetadata;
 
+    invoke-virtual {v0, p1, p2}, Landroid/media/MediaMetadata;->writeToParcel(Landroid/os/Parcel;I)V
+
+    .line 52
     return-void
 .end method

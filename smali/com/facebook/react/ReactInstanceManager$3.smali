@@ -26,6 +26,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/ReactInstanceManager;Lcom/facebook/react/modules/debug/interfaces/DeveloperSettings;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/ReactInstanceManager;
 
     .line 382
     iput-object p1, p0, Lcom/facebook/react/ReactInstanceManager$3;->this$0:Lcom/facebook/react/ReactInstanceManager;
@@ -41,6 +42,7 @@
 # virtual methods
 .method public onPackagerStatusFetched(Z)V
     .locals 1
+    .param p1, "packagerIsRunning"    # Z
 
     .line 385
     new-instance v0, Lcom/facebook/react/ReactInstanceManager$3$1;
@@ -49,5 +51,6 @@
 
     invoke-static {v0}, Lcom/facebook/react/bridge/UiThreadUtil;->runOnUiThread(Ljava/lang/Runnable;)V
 
+    .line 398
     return-void
 .end method

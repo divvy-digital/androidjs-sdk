@@ -30,13 +30,15 @@
 
 # virtual methods
 .method public authenticate(Lokhttp3/Route;Lokhttp3/Response;)Lokhttp3/Request;
-    .locals 0
-    .param p1    # Lokhttp3/Route;
+    .locals 1
+    .param p1, "route"    # Lokhttp3/Route;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
+    .param p2, "response"    # Lokhttp3/Response;
 
-    const/4 p1, 0x0
+    .line 102
+    const/4 v0, 0x0
 
-    return-object p1
+    return-object v0
 .end method

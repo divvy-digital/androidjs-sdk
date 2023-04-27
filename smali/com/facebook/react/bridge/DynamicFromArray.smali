@@ -7,10 +7,10 @@
 
 
 # static fields
-.field private static final sPool:Landroid/support/v4/util/Pools$SimplePool;
+.field private static final sPool:Landroidx/core/util/Pools$SimplePool;
     .annotation system Ldalvik/annotation/Signature;
         value = {
-            "Landroid/support/v4/util/Pools$SimplePool<",
+            "Landroidx/core/util/Pools$SimplePool<",
             "Lcom/facebook/react/bridge/DynamicFromArray;",
             ">;"
         }
@@ -32,13 +32,13 @@
     .locals 2
 
     .line 18
-    new-instance v0, Landroid/support/v4/util/Pools$SimplePool;
+    new-instance v0, Landroidx/core/util/Pools$SimplePool;
 
     const/16 v1, 0xa
 
-    invoke-direct {v0, v1}, Landroid/support/v4/util/Pools$SimplePool;-><init>(I)V
+    invoke-direct {v0, v1}, Landroidx/core/util/Pools$SimplePool;-><init>(I)V
 
-    sput-object v0, Lcom/facebook/react/bridge/DynamicFromArray;->sPool:Landroid/support/v4/util/Pools$SimplePool;
+    sput-object v0, Lcom/facebook/react/bridge/DynamicFromArray;->sPool:Landroidx/core/util/Pools$SimplePool;
 
     return-void
 .end method
@@ -49,32 +49,39 @@
     .line 24
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
+    .line 21
     const/4 v0, -0x1
 
-    .line 21
     iput v0, p0, Lcom/facebook/react/bridge/DynamicFromArray;->mIndex:I
 
+    .line 24
     return-void
 .end method
 
 .method public static create(Lcom/facebook/react/bridge/ReadableArray;I)Lcom/facebook/react/bridge/DynamicFromArray;
-    .locals 1
+    .locals 2
+    .param p0, "array"    # Lcom/facebook/react/bridge/ReadableArray;
+    .param p1, "index"    # I
 
     .line 27
-    sget-object v0, Lcom/facebook/react/bridge/DynamicFromArray;->sPool:Landroid/support/v4/util/Pools$SimplePool;
+    sget-object v0, Lcom/facebook/react/bridge/DynamicFromArray;->sPool:Landroidx/core/util/Pools$SimplePool;
 
-    invoke-virtual {v0}, Landroid/support/v4/util/Pools$SimplePool;->acquire()Ljava/lang/Object;
+    invoke-virtual {v0}, Landroidx/core/util/Pools$SimplePool;->acquire()Ljava/lang/Object;
 
     move-result-object v0
 
     check-cast v0, Lcom/facebook/react/bridge/DynamicFromArray;
 
+    .line 28
+    .local v0, "dynamic":Lcom/facebook/react/bridge/DynamicFromArray;
     if-nez v0, :cond_0
 
     .line 29
-    new-instance v0, Lcom/facebook/react/bridge/DynamicFromArray;
+    new-instance v1, Lcom/facebook/react/bridge/DynamicFromArray;
 
-    invoke-direct {v0}, Lcom/facebook/react/bridge/DynamicFromArray;-><init>()V
+    invoke-direct {v1}, Lcom/facebook/react/bridge/DynamicFromArray;-><init>()V
+
+    move-object v0, v1
 
     .line 31
     :cond_0
@@ -83,6 +90,7 @@
     .line 32
     iput p1, v0, Lcom/facebook/react/bridge/DynamicFromArray;->mIndex:I
 
+    .line 33
     return-object v0
 .end method
 
@@ -315,20 +323,21 @@
 .method public recycle()V
     .locals 1
 
+    .line 38
     const/4 v0, 0x0
 
-    .line 38
     iput-object v0, p0, Lcom/facebook/react/bridge/DynamicFromArray;->mArray:Lcom/facebook/react/bridge/ReadableArray;
 
+    .line 39
     const/4 v0, -0x1
 
-    .line 39
     iput v0, p0, Lcom/facebook/react/bridge/DynamicFromArray;->mIndex:I
 
     .line 40
-    sget-object v0, Lcom/facebook/react/bridge/DynamicFromArray;->sPool:Landroid/support/v4/util/Pools$SimplePool;
+    sget-object v0, Lcom/facebook/react/bridge/DynamicFromArray;->sPool:Landroidx/core/util/Pools$SimplePool;
 
-    invoke-virtual {v0, p0}, Landroid/support/v4/util/Pools$SimplePool;->release(Ljava/lang/Object;)Z
+    invoke-virtual {v0, p0}, Landroidx/core/util/Pools$SimplePool;->release(Ljava/lang/Object;)Z
 
+    .line 41
     return-void
 .end method

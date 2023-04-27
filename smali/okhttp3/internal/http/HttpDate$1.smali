@@ -51,15 +51,16 @@
     .line 41
     new-instance v0, Ljava/text/SimpleDateFormat;
 
-    sget-object v1, Ljava/util/Locale;->US:Ljava/util/Locale;
+    const-string v1, "EEE, dd MMM yyyy HH:mm:ss \'GMT\'"
 
-    const-string v2, "EEE, dd MMM yyyy HH:mm:ss \'GMT\'"
+    sget-object v2, Ljava/util/Locale;->US:Ljava/util/Locale;
 
-    invoke-direct {v0, v2, v1}, Ljava/text/SimpleDateFormat;-><init>(Ljava/lang/String;Ljava/util/Locale;)V
-
-    const/4 v1, 0x0
+    invoke-direct {v0, v1, v2}, Ljava/text/SimpleDateFormat;-><init>(Ljava/lang/String;Ljava/util/Locale;)V
 
     .line 42
+    .local v0, "rfc1123":Ljava/text/DateFormat;
+    const/4 v1, 0x0
+
     invoke-virtual {v0, v1}, Ljava/text/DateFormat;->setLenient(Z)V
 
     .line 43
@@ -67,5 +68,6 @@
 
     invoke-virtual {v0, v1}, Ljava/text/DateFormat;->setTimeZone(Ljava/util/TimeZone;)V
 
+    .line 44
     return-object v0
 .end method

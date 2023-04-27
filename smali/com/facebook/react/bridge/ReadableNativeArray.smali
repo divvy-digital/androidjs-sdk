@@ -6,11 +6,6 @@
 .implements Lcom/facebook/react/bridge/ReadableArray;
 
 
-# annotations
-.annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-.end annotation
-
-
 # static fields
 .field private static jniPassCounter:I
 
@@ -34,9 +29,9 @@
     .line 27
     invoke-static {}, Lcom/facebook/react/bridge/ReactBridge;->staticInit()V
 
+    .line 38
     const/4 v0, 0x0
 
-    .line 38
     sput v0, Lcom/facebook/react/bridge/ReadableNativeArray;->jniPassCounter:I
 
     return-void
@@ -44,10 +39,12 @@
 
 .method protected constructor <init>(Lcom/facebook/jni/HybridData;)V
     .locals 0
+    .param p1, "hybridData"    # Lcom/facebook/jni/HybridData;
 
     .line 31
     invoke-direct {p0, p1}, Lcom/facebook/react/bridge/NativeArray;-><init>(Lcom/facebook/jni/HybridData;)V
 
+    .line 32
     return-void
 .end method
 
@@ -80,6 +77,7 @@
 
     if-eqz v0, :cond_0
 
+    .line 49
     return-object v0
 
     .line 51
@@ -123,10 +121,10 @@
 
     return-object v0
 
+    .line 57
     :catchall_0
     move-exception v0
 
-    .line 57
     :try_start_1
     monitor-exit p0
     :try_end_1
@@ -143,6 +141,7 @@
 
     if-eqz v0, :cond_0
 
+    .line 65
     return-object v0
 
     .line 67
@@ -174,19 +173,21 @@
     check-cast v0, [Ljava/lang/Object;
 
     .line 72
+    .local v0, "tempArray":[Ljava/lang/Object;
     array-length v1, v0
 
     const-class v2, [Lcom/facebook/react/bridge/ReadableType;
 
     invoke-static {v0, v1, v2}, Ljava/util/Arrays;->copyOf([Ljava/lang/Object;ILjava/lang/Class;)[Ljava/lang/Object;
 
-    move-result-object v0
+    move-result-object v1
 
-    check-cast v0, [Lcom/facebook/react/bridge/ReadableType;
+    check-cast v1, [Lcom/facebook/react/bridge/ReadableType;
 
-    iput-object v0, p0, Lcom/facebook/react/bridge/ReadableNativeArray;->mLocalTypeArray:[Lcom/facebook/react/bridge/ReadableType;
+    iput-object v1, p0, Lcom/facebook/react/bridge/ReadableNativeArray;->mLocalTypeArray:[Lcom/facebook/react/bridge/ReadableType;
 
     .line 74
+    .end local v0    # "tempArray":[Ljava/lang/Object;
     :cond_1
     monitor-exit p0
     :try_end_0
@@ -197,10 +198,10 @@
 
     return-object v0
 
+    .line 74
     :catchall_0
     move-exception v0
 
-    .line 74
     :try_start_1
     monitor-exit p0
     :try_end_1
@@ -229,10 +230,12 @@
 
 .method public static setUseNativeAccessor(Z)V
     .locals 0
+    .param p0, "useNativeAccessor"    # Z
 
     .line 40
     sput-boolean p0, Lcom/facebook/react/config/ReactFeatureFlags;->useArrayNativeAccessor:Z
 
+    .line 41
     return-void
 .end method
 
@@ -256,6 +259,7 @@
 
 .method public getArray(I)Lcom/facebook/react/bridge/ReadableNativeArray;
     .locals 1
+    .param p1, "index"    # I
     .annotation runtime Ljavax/annotation/Nullable;
     .end annotation
 
@@ -274,9 +278,9 @@
     .line 143
     invoke-direct {p0, p1}, Lcom/facebook/react/bridge/ReadableNativeArray;->getArrayNative(I)Lcom/facebook/react/bridge/ReadableNativeArray;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 
     .line 145
     :cond_0
@@ -284,15 +288,16 @@
 
     move-result-object v0
 
-    aget-object p1, v0, p1
+    aget-object v0, v0, p1
 
-    check-cast p1, Lcom/facebook/react/bridge/ReadableNativeArray;
+    check-cast v0, Lcom/facebook/react/bridge/ReadableNativeArray;
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public getBoolean(I)Z
     .locals 1
+    .param p1, "index"    # I
 
     .line 101
     sget-boolean v0, Lcom/facebook/react/config/ReactFeatureFlags;->useArrayNativeAccessor:Z
@@ -309,9 +314,9 @@
     .line 103
     invoke-direct {p0, p1}, Lcom/facebook/react/bridge/ReadableNativeArray;->getBooleanNative(I)Z
 
-    move-result p1
+    move-result v0
 
-    return p1
+    return v0
 
     .line 105
     :cond_0
@@ -319,19 +324,20 @@
 
     move-result-object v0
 
-    aget-object p1, v0, p1
+    aget-object v0, v0, p1
 
-    check-cast p1, Ljava/lang/Boolean;
+    check-cast v0, Ljava/lang/Boolean;
 
-    invoke-virtual {p1}, Ljava/lang/Boolean;->booleanValue()Z
+    invoke-virtual {v0}, Ljava/lang/Boolean;->booleanValue()Z
 
-    move-result p1
+    move-result v0
 
-    return p1
+    return v0
 .end method
 
 .method public getDouble(I)D
     .locals 2
+    .param p1, "index"    # I
 
     .line 111
     sget-boolean v0, Lcom/facebook/react/config/ReactFeatureFlags;->useArrayNativeAccessor:Z
@@ -358,11 +364,11 @@
 
     move-result-object v0
 
-    aget-object p1, v0, p1
+    aget-object v0, v0, p1
 
-    check-cast p1, Ljava/lang/Double;
+    check-cast v0, Ljava/lang/Double;
 
-    invoke-virtual {p1}, Ljava/lang/Double;->doubleValue()D
+    invoke-virtual {v0}, Ljava/lang/Double;->doubleValue()D
 
     move-result-wide v0
 
@@ -370,20 +376,22 @@
 .end method
 
 .method public getDynamic(I)Lcom/facebook/react/bridge/Dynamic;
-    .locals 0
+    .locals 1
+    .param p1, "index"    # I
     .annotation runtime Ljavax/annotation/Nonnull;
     .end annotation
 
     .line 172
     invoke-static {p0, p1}, Lcom/facebook/react/bridge/DynamicFromArray;->create(Lcom/facebook/react/bridge/ReadableArray;I)Lcom/facebook/react/bridge/DynamicFromArray;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public getInt(I)I
     .locals 1
+    .param p1, "index"    # I
 
     .line 121
     sget-boolean v0, Lcom/facebook/react/config/ReactFeatureFlags;->useArrayNativeAccessor:Z
@@ -400,9 +408,9 @@
     .line 123
     invoke-direct {p0, p1}, Lcom/facebook/react/bridge/ReadableNativeArray;->getIntNative(I)I
 
-    move-result p1
+    move-result v0
 
-    return p1
+    return v0
 
     .line 125
     :cond_0
@@ -410,15 +418,15 @@
 
     move-result-object v0
 
-    aget-object p1, v0, p1
+    aget-object v0, v0, p1
 
-    check-cast p1, Ljava/lang/Double;
+    check-cast v0, Ljava/lang/Double;
 
-    invoke-virtual {p1}, Ljava/lang/Double;->intValue()I
+    invoke-virtual {v0}, Ljava/lang/Double;->intValue()I
 
-    move-result p1
+    move-result v0
 
-    return p1
+    return v0
 .end method
 
 .method public bridge synthetic getMap(I)Lcom/facebook/react/bridge/ReadableMap;
@@ -436,6 +444,7 @@
 
 .method public getMap(I)Lcom/facebook/react/bridge/ReadableNativeMap;
     .locals 1
+    .param p1, "index"    # I
     .annotation runtime Ljavax/annotation/Nullable;
     .end annotation
 
@@ -454,9 +463,9 @@
     .line 153
     invoke-direct {p0, p1}, Lcom/facebook/react/bridge/ReadableNativeArray;->getMapNative(I)Lcom/facebook/react/bridge/ReadableNativeMap;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 
     .line 155
     :cond_0
@@ -464,15 +473,16 @@
 
     move-result-object v0
 
-    aget-object p1, v0, p1
+    aget-object v0, v0, p1
 
-    check-cast p1, Lcom/facebook/react/bridge/ReadableNativeMap;
+    check-cast v0, Lcom/facebook/react/bridge/ReadableNativeMap;
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public getString(I)Ljava/lang/String;
     .locals 1
+    .param p1, "index"    # I
     .annotation runtime Ljavax/annotation/Nullable;
     .end annotation
 
@@ -491,9 +501,9 @@
     .line 133
     invoke-direct {p0, p1}, Lcom/facebook/react/bridge/ReadableNativeArray;->getStringNative(I)Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 
     .line 135
     :cond_0
@@ -501,15 +511,16 @@
 
     move-result-object v0
 
-    aget-object p1, v0, p1
+    aget-object v0, v0, p1
 
-    check-cast p1, Ljava/lang/String;
+    check-cast v0, Ljava/lang/String;
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public getType(I)Lcom/facebook/react/bridge/ReadableType;
     .locals 1
+    .param p1, "index"    # I
     .annotation runtime Ljavax/annotation/Nonnull;
     .end annotation
 
@@ -528,9 +539,9 @@
     .line 163
     invoke-direct {p0, p1}, Lcom/facebook/react/bridge/ReadableNativeArray;->getTypeNative(I)Lcom/facebook/react/bridge/ReadableType;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 
     .line 165
     :cond_0
@@ -538,13 +549,14 @@
 
     move-result-object v0
 
-    aget-object p1, v0, p1
+    aget-object v0, v0, p1
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public isNull(I)Z
     .locals 2
+    .param p1, "index"    # I
 
     .line 91
     sget-boolean v0, Lcom/facebook/react/config/ReactFeatureFlags;->useArrayNativeAccessor:Z
@@ -563,9 +575,9 @@
     .line 93
     invoke-direct {p0, p1}, Lcom/facebook/react/bridge/ReadableNativeArray;->isNullNative(I)Z
 
-    move-result p1
+    move-result v0
 
-    return p1
+    return v0
 
     .line 95
     :cond_0
@@ -573,9 +585,9 @@
 
     move-result-object v0
 
-    aget-object p1, v0, p1
+    aget-object v0, v0, p1
 
-    if-nez p1, :cond_1
+    if-nez v0, :cond_1
 
     goto :goto_0
 
@@ -620,7 +632,7 @@
 .end method
 
 .method public toArrayList()Ljava/util/ArrayList;
-    .locals 4
+    .locals 5
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "()",
@@ -638,9 +650,11 @@
 
     invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V
 
+    .line 179
+    .local v0, "arrayList":Ljava/util/ArrayList;, "Ljava/util/ArrayList<Ljava/lang/Object;>;"
     const/4 v1, 0x0
 
-    .line 179
+    .local v1, "i":I
     :goto_0
     invoke-virtual {p0}, Lcom/facebook/react/bridge/ReadableNativeArray;->size()I
 
@@ -664,29 +678,35 @@
     packed-switch v2, :pswitch_data_0
 
     .line 200
-    new-instance v0, Ljava/lang/IllegalArgumentException;
+    new-instance v2, Ljava/lang/IllegalArgumentException;
 
-    new-instance v2, Ljava/lang/StringBuilder;
+    new-instance v3, Ljava/lang/StringBuilder;
 
-    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v3, "Could not convert object at index: "
+    const-string v4, "Could not convert object at index: "
 
-    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v2, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+    move-result-object v3
 
-    const-string v1, "."
+    invoke-virtual {v3, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v2, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v3
 
-    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    const-string v4, "."
 
-    move-result-object v1
+    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-direct {v0, v1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+    move-result-object v3
 
-    throw v0
+    invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v3
+
+    invoke-direct {v2, v3}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+
+    throw v2
 
     .line 197
     :pswitch_0
@@ -700,6 +720,7 @@
 
     invoke-virtual {v0, v2}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
+    .line 198
     goto :goto_1
 
     .line 194
@@ -714,6 +735,7 @@
 
     invoke-virtual {v0, v2}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
+    .line 195
     goto :goto_1
 
     .line 191
@@ -724,6 +746,7 @@
 
     invoke-virtual {v0, v2}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
+    .line 192
     goto :goto_1
 
     .line 188
@@ -738,6 +761,7 @@
 
     invoke-virtual {v0, v2}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
+    .line 189
     goto :goto_1
 
     .line 185
@@ -752,19 +776,26 @@
 
     invoke-virtual {v0, v2}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
+    .line 186
     goto :goto_1
 
+    .line 182
     :pswitch_5
     const/4 v2, 0x0
 
-    .line 182
     invoke-virtual {v0, v2}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
+    .line 183
+    nop
+
+    .line 179
     :goto_1
     add-int/lit8 v1, v1, 0x1
 
     goto :goto_0
 
+    .line 203
+    .end local v1    # "i":I
     :cond_0
     return-object v0
 

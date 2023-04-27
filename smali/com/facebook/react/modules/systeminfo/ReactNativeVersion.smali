@@ -18,41 +18,42 @@
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 9
-
-    const/4 v0, 0x0
-
-    .line 18
-    invoke-static {v0}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
-
-    move-result-object v2
-
-    const/16 v0, 0x3b
-
-    .line 19
-    invoke-static {v0}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
-
-    move-result-object v4
-
-    const/4 v0, 0x7
-
-    .line 20
-    invoke-static {v0}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
-
-    move-result-object v6
-
-    const-string v1, "major"
-
-    const-string v3, "minor"
-
-    const-string v5, "patch"
-
-    const-string v7, "prerelease"
-
-    const/4 v8, 0x0
+    .locals 8
 
     .line 17
-    invoke-static/range {v1 .. v8}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+    const-string v0, "major"
+
+    .line 18
+    const/4 v1, 0x0
+
+    invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+
+    move-result-object v1
+
+    const-string v2, "minor"
+
+    .line 19
+    const/16 v3, 0x3b
+
+    invoke-static {v3}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+
+    move-result-object v3
+
+    const-string v4, "patch"
+
+    .line 20
+    const/4 v5, 0x7
+
+    invoke-static {v5}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+
+    move-result-object v5
+
+    const-string v6, "prerelease"
+
+    const/4 v7, 0x0
+
+    .line 17
+    invoke-static/range {v0 .. v7}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
 
     move-result-object v0
 

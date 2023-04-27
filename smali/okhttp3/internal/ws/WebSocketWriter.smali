@@ -35,7 +35,10 @@
 
 # direct methods
 .method constructor <init>(ZLokio/BufferedSink;Ljava/util/Random;)V
-    .locals 1
+    .locals 2
+    .param p1, "isClient"    # Z
+    .param p2, "sink"    # Lokio/BufferedSink;
+    .param p3, "random"    # Ljava/util/Random;
 
     .line 61
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -54,8 +57,10 @@
 
     iput-object v0, p0, Lokhttp3/internal/ws/WebSocketWriter;->frameSink:Lokhttp3/internal/ws/WebSocketWriter$FrameSink;
 
+    .line 62
     if-eqz p2, :cond_3
 
+    .line 63
     if-eqz p3, :cond_2
 
     .line 64
@@ -67,65 +72,68 @@
     .line 66
     invoke-interface {p2}, Lokio/BufferedSink;->buffer()Lokio/Buffer;
 
-    move-result-object p2
+    move-result-object v0
 
-    iput-object p2, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
+    iput-object v0, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
 
     .line 67
     iput-object p3, p0, Lokhttp3/internal/ws/WebSocketWriter;->random:Ljava/util/Random;
 
-    const/4 p2, 0x0
+    .line 70
+    const/4 v0, 0x0
 
     if-eqz p1, :cond_0
 
-    const/4 p3, 0x4
+    const/4 v1, 0x4
 
-    .line 70
-    new-array p3, p3, [B
+    new-array v1, v1, [B
 
     goto :goto_0
 
     :cond_0
-    move-object p3, p2
+    move-object v1, v0
 
     :goto_0
-    iput-object p3, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskKey:[B
-
-    if-eqz p1, :cond_1
+    iput-object v1, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskKey:[B
 
     .line 71
-    new-instance p2, Lokio/Buffer$UnsafeCursor;
+    if-eqz p1, :cond_1
 
-    invoke-direct {p2}, Lokio/Buffer$UnsafeCursor;-><init>()V
+    new-instance v0, Lokio/Buffer$UnsafeCursor;
+
+    invoke-direct {v0}, Lokio/Buffer$UnsafeCursor;-><init>()V
 
     :cond_1
-    iput-object p2, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskCursor:Lokio/Buffer$UnsafeCursor;
+    iput-object v0, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskCursor:Lokio/Buffer$UnsafeCursor;
 
+    .line 72
     return-void
 
     .line 63
     :cond_2
-    new-instance p1, Ljava/lang/NullPointerException;
+    new-instance v0, Ljava/lang/NullPointerException;
 
-    const-string p2, "random == null"
+    const-string v1, "random == null"
 
-    invoke-direct {p1, p2}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 
     .line 62
     :cond_3
-    new-instance p1, Ljava/lang/NullPointerException;
+    new-instance v0, Ljava/lang/NullPointerException;
 
-    const-string p2, "sink == null"
+    const-string v1, "sink == null"
 
-    invoke-direct {p1, p2}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 .method private writeControlFrame(ILokio/ByteString;)V
-    .locals 6
+    .locals 7
+    .param p1, "opcode"    # I
+    .param p2, "payload"    # Lokio/ByteString;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -142,6 +150,8 @@
 
     move-result v0
 
+    .line 116
+    .local v0, "length":I
     int-to-long v1, v0
 
     const-wide/16 v3, 0x7d
@@ -150,133 +160,150 @@
 
     if-gtz v5, :cond_2
 
-    or-int/lit16 p1, p1, 0x80
+    .line 121
+    or-int/lit16 v1, p1, 0x80
 
     .line 122
-    iget-object v1, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
+    .local v1, "b0":I
+    iget-object v2, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
 
-    invoke-virtual {v1, p1}, Lokio/Buffer;->writeByte(I)Lokio/Buffer;
+    invoke-virtual {v2, v1}, Lokio/Buffer;->writeByte(I)Lokio/Buffer;
+
+    .line 124
+    move v2, v0
 
     .line 125
-    iget-boolean p1, p0, Lokhttp3/internal/ws/WebSocketWriter;->isClient:Z
+    .local v2, "b1":I
+    iget-boolean v3, p0, Lokhttp3/internal/ws/WebSocketWriter;->isClient:Z
 
-    if-eqz p1, :cond_0
+    if-eqz v3, :cond_0
 
-    or-int/lit16 p1, v0, 0x80
+    .line 126
+    or-int/lit16 v2, v2, 0x80
 
     .line 127
-    iget-object v1, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
+    iget-object v3, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
 
-    invoke-virtual {v1, p1}, Lokio/Buffer;->writeByte(I)Lokio/Buffer;
+    invoke-virtual {v3, v2}, Lokio/Buffer;->writeByte(I)Lokio/Buffer;
 
     .line 129
-    iget-object p1, p0, Lokhttp3/internal/ws/WebSocketWriter;->random:Ljava/util/Random;
+    iget-object v3, p0, Lokhttp3/internal/ws/WebSocketWriter;->random:Ljava/util/Random;
 
-    iget-object v1, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskKey:[B
+    iget-object v4, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskKey:[B
 
-    invoke-virtual {p1, v1}, Ljava/util/Random;->nextBytes([B)V
+    invoke-virtual {v3, v4}, Ljava/util/Random;->nextBytes([B)V
 
     .line 130
-    iget-object p1, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
+    iget-object v3, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
 
-    iget-object v1, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskKey:[B
+    iget-object v4, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskKey:[B
 
-    invoke-virtual {p1, v1}, Lokio/Buffer;->write([B)Lokio/Buffer;
+    invoke-virtual {v3, v4}, Lokio/Buffer;->write([B)Lokio/Buffer;
 
+    .line 132
     if-lez v0, :cond_1
 
     .line 133
-    iget-object p1, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
+    iget-object v3, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
 
-    invoke-virtual {p1}, Lokio/Buffer;->size()J
+    invoke-virtual {v3}, Lokio/Buffer;->size()J
 
-    move-result-wide v0
+    move-result-wide v3
 
     .line 134
-    iget-object p1, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
+    .local v3, "payloadStart":J
+    iget-object v5, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
 
-    invoke-virtual {p1, p2}, Lokio/Buffer;->write(Lokio/ByteString;)Lokio/Buffer;
+    invoke-virtual {v5, p2}, Lokio/Buffer;->write(Lokio/ByteString;)Lokio/Buffer;
 
     .line 136
-    iget-object p1, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
+    iget-object v5, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
 
-    iget-object p2, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskCursor:Lokio/Buffer$UnsafeCursor;
+    iget-object v6, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskCursor:Lokio/Buffer$UnsafeCursor;
 
-    invoke-virtual {p1, p2}, Lokio/Buffer;->readAndWriteUnsafe(Lokio/Buffer$UnsafeCursor;)Lokio/Buffer$UnsafeCursor;
+    invoke-virtual {v5, v6}, Lokio/Buffer;->readAndWriteUnsafe(Lokio/Buffer$UnsafeCursor;)Lokio/Buffer$UnsafeCursor;
 
     .line 137
-    iget-object p1, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskCursor:Lokio/Buffer$UnsafeCursor;
+    iget-object v5, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskCursor:Lokio/Buffer$UnsafeCursor;
 
-    invoke-virtual {p1, v0, v1}, Lokio/Buffer$UnsafeCursor;->seek(J)I
+    invoke-virtual {v5, v3, v4}, Lokio/Buffer$UnsafeCursor;->seek(J)I
 
     .line 138
-    iget-object p1, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskCursor:Lokio/Buffer$UnsafeCursor;
+    iget-object v5, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskCursor:Lokio/Buffer$UnsafeCursor;
 
-    iget-object p2, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskKey:[B
+    iget-object v6, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskKey:[B
 
-    invoke-static {p1, p2}, Lokhttp3/internal/ws/WebSocketProtocol;->toggleMask(Lokio/Buffer$UnsafeCursor;[B)V
+    invoke-static {v5, v6}, Lokhttp3/internal/ws/WebSocketProtocol;->toggleMask(Lokio/Buffer$UnsafeCursor;[B)V
 
     .line 139
-    iget-object p1, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskCursor:Lokio/Buffer$UnsafeCursor;
+    iget-object v5, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskCursor:Lokio/Buffer$UnsafeCursor;
 
-    invoke-virtual {p1}, Lokio/Buffer$UnsafeCursor;->close()V
+    invoke-virtual {v5}, Lokio/Buffer$UnsafeCursor;->close()V
 
+    .line 140
+    .end local v3    # "payloadStart":J
     goto :goto_0
 
     .line 142
     :cond_0
-    iget-object p1, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
+    iget-object v3, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
 
-    invoke-virtual {p1, v0}, Lokio/Buffer;->writeByte(I)Lokio/Buffer;
+    invoke-virtual {v3, v2}, Lokio/Buffer;->writeByte(I)Lokio/Buffer;
 
     .line 143
-    iget-object p1, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
+    iget-object v3, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
 
-    invoke-virtual {p1, p2}, Lokio/Buffer;->write(Lokio/ByteString;)Lokio/Buffer;
+    invoke-virtual {v3, p2}, Lokio/Buffer;->write(Lokio/ByteString;)Lokio/Buffer;
 
     .line 146
     :cond_1
     :goto_0
-    iget-object p1, p0, Lokhttp3/internal/ws/WebSocketWriter;->sink:Lokio/BufferedSink;
+    iget-object v3, p0, Lokhttp3/internal/ws/WebSocketWriter;->sink:Lokio/BufferedSink;
 
-    invoke-interface {p1}, Lokio/BufferedSink;->flush()V
+    invoke-interface {v3}, Lokio/BufferedSink;->flush()V
 
+    .line 147
     return-void
 
     .line 117
+    .end local v1    # "b0":I
+    .end local v2    # "b1":I
     :cond_2
-    new-instance p1, Ljava/lang/IllegalArgumentException;
+    new-instance v1, Ljava/lang/IllegalArgumentException;
 
-    const-string p2, "Payload size must be less than or equal to 125"
+    const-string v2, "Payload size must be less than or equal to 125"
 
-    invoke-direct {p1, p2}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v1, v2}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v1
 
     .line 113
+    .end local v0    # "length":I
     :cond_3
-    new-instance p1, Ljava/io/IOException;
+    new-instance v0, Ljava/io/IOException;
 
-    const-string p2, "closed"
+    const-string v1, "closed"
 
-    invoke-direct {p1, p2}, Ljava/io/IOException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/io/IOException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 
 # virtual methods
 .method newMessageSink(IJ)Lokio/Sink;
     .locals 2
+    .param p1, "formatOpcode"    # I
+    .param p2, "contentLength"    # J
 
     .line 154
     iget-boolean v0, p0, Lokhttp3/internal/ws/WebSocketWriter;->activeWriter:Z
 
     if-nez v0, :cond_0
 
+    .line 157
     const/4 v0, 0x1
 
-    .line 157
     iput-boolean v0, p0, Lokhttp3/internal/ws/WebSocketWriter;->activeWriter:Z
 
     .line 160
@@ -285,31 +312,42 @@
     iput p1, v1, Lokhttp3/internal/ws/WebSocketWriter$FrameSink;->formatOpcode:I
 
     .line 161
+    iget-object v1, p0, Lokhttp3/internal/ws/WebSocketWriter;->frameSink:Lokhttp3/internal/ws/WebSocketWriter$FrameSink;
+
     iput-wide p2, v1, Lokhttp3/internal/ws/WebSocketWriter$FrameSink;->contentLength:J
 
     .line 162
+    iget-object v1, p0, Lokhttp3/internal/ws/WebSocketWriter;->frameSink:Lokhttp3/internal/ws/WebSocketWriter$FrameSink;
+
     iput-boolean v0, v1, Lokhttp3/internal/ws/WebSocketWriter$FrameSink;->isFirstFrame:Z
 
-    const/4 p1, 0x0
-
     .line 163
-    iput-boolean p1, v1, Lokhttp3/internal/ws/WebSocketWriter$FrameSink;->closed:Z
+    iget-object v0, p0, Lokhttp3/internal/ws/WebSocketWriter;->frameSink:Lokhttp3/internal/ws/WebSocketWriter$FrameSink;
 
-    return-object v1
+    const/4 v1, 0x0
+
+    iput-boolean v1, v0, Lokhttp3/internal/ws/WebSocketWriter$FrameSink;->closed:Z
+
+    .line 165
+    iget-object v0, p0, Lokhttp3/internal/ws/WebSocketWriter;->frameSink:Lokhttp3/internal/ws/WebSocketWriter$FrameSink;
+
+    return-object v0
 
     .line 155
     :cond_0
-    new-instance p1, Ljava/lang/IllegalStateException;
+    new-instance v0, Ljava/lang/IllegalStateException;
 
-    const-string p2, "Another message writer is active. Did you call close()?"
+    const-string v1, "Another message writer is active. Did you call close()?"
 
-    invoke-direct {p1, p2}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 .method writeClose(ILokio/ByteString;)V
-    .locals 1
+    .locals 3
+    .param p1, "code"    # I
+    .param p2, "reason"    # Lokio/ByteString;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -319,10 +357,13 @@
     .line 92
     sget-object v0, Lokio/ByteString;->EMPTY:Lokio/ByteString;
 
+    .line 93
+    .local v0, "payload":Lokio/ByteString;
     if-nez p1, :cond_0
 
     if-eqz p2, :cond_3
 
+    .line 94
     :cond_0
     if-eqz p1, :cond_1
 
@@ -331,50 +372,62 @@
 
     .line 97
     :cond_1
-    new-instance v0, Lokio/Buffer;
+    new-instance v1, Lokio/Buffer;
 
-    invoke-direct {v0}, Lokio/Buffer;-><init>()V
+    invoke-direct {v1}, Lokio/Buffer;-><init>()V
 
     .line 98
-    invoke-virtual {v0, p1}, Lokio/Buffer;->writeShort(I)Lokio/Buffer;
+    .local v1, "buffer":Lokio/Buffer;
+    invoke-virtual {v1, p1}, Lokio/Buffer;->writeShort(I)Lokio/Buffer;
 
+    .line 99
     if-eqz p2, :cond_2
 
     .line 100
-    invoke-virtual {v0, p2}, Lokio/Buffer;->write(Lokio/ByteString;)Lokio/Buffer;
+    invoke-virtual {v1, p2}, Lokio/Buffer;->write(Lokio/ByteString;)Lokio/Buffer;
 
     .line 102
     :cond_2
-    invoke-virtual {v0}, Lokio/Buffer;->readByteString()Lokio/ByteString;
+    invoke-virtual {v1}, Lokio/Buffer;->readByteString()Lokio/ByteString;
 
     move-result-object v0
 
-    :cond_3
-    const/16 p1, 0x8
-
-    const/4 p2, 0x1
-
     .line 106
+    .end local v1    # "buffer":Lokio/Buffer;
+    :cond_3
+    const/16 v1, 0x8
+
+    const/4 v2, 0x1
+
     :try_start_0
-    invoke-direct {p0, p1, v0}, Lokhttp3/internal/ws/WebSocketWriter;->writeControlFrame(ILokio/ByteString;)V
+    invoke-direct {p0, v1, v0}, Lokhttp3/internal/ws/WebSocketWriter;->writeControlFrame(ILokio/ByteString;)V
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
     .line 108
-    iput-boolean p2, p0, Lokhttp3/internal/ws/WebSocketWriter;->writerClosed:Z
+    iput-boolean v2, p0, Lokhttp3/internal/ws/WebSocketWriter;->writerClosed:Z
 
+    .line 109
+    nop
+
+    .line 110
     return-void
 
+    .line 108
     :catchall_0
-    move-exception p1
+    move-exception v1
 
-    iput-boolean p2, p0, Lokhttp3/internal/ws/WebSocketWriter;->writerClosed:Z
+    iput-boolean v2, p0, Lokhttp3/internal/ws/WebSocketWriter;->writerClosed:Z
 
-    throw p1
+    throw v1
 .end method
 
 .method writeMessageFrame(IJZZ)V
-    .locals 1
+    .locals 6
+    .param p1, "formatOpcode"    # I
+    .param p2, "byteCount"    # J
+    .param p4, "isFirstFrame"    # Z
+    .param p5, "isFinal"    # Z
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -386,209 +439,234 @@
 
     if-nez v0, :cond_7
 
-    const/4 v0, 0x0
-
+    .line 172
     if-eqz p4, :cond_0
+
+    move v0, p1
 
     goto :goto_0
 
     :cond_0
-    const/4 p1, 0x0
+    const/4 v0, 0x0
 
+    .line 173
+    .local v0, "b0":I
     :goto_0
     if-eqz p5, :cond_1
 
-    or-int/lit16 p1, p1, 0x80
+    .line 174
+    or-int/lit16 v0, v0, 0x80
 
     .line 176
     :cond_1
-    iget-object p4, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
+    iget-object v1, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
 
-    invoke-virtual {p4, p1}, Lokio/Buffer;->writeByte(I)Lokio/Buffer;
+    invoke-virtual {v1, v0}, Lokio/Buffer;->writeByte(I)Lokio/Buffer;
+
+    .line 178
+    const/4 v1, 0x0
 
     .line 179
-    iget-boolean p1, p0, Lokhttp3/internal/ws/WebSocketWriter;->isClient:Z
+    .local v1, "b1":I
+    iget-boolean v2, p0, Lokhttp3/internal/ws/WebSocketWriter;->isClient:Z
 
-    if-eqz p1, :cond_2
+    if-eqz v2, :cond_2
 
-    const/16 v0, 0x80
+    .line 180
+    or-int/lit16 v1, v1, 0x80
 
+    .line 182
     :cond_2
-    const-wide/16 p4, 0x7d
+    const-wide/16 v2, 0x7d
 
-    cmp-long p1, p2, p4
+    cmp-long v4, p2, v2
 
-    if-gtz p1, :cond_3
+    if-gtz v4, :cond_3
 
-    long-to-int p1, p2
+    .line 183
+    long-to-int v2, p2
 
-    or-int/2addr p1, v0
+    or-int/2addr v1, v2
 
     .line 184
-    iget-object p4, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
+    iget-object v2, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
 
-    invoke-virtual {p4, p1}, Lokio/Buffer;->writeByte(I)Lokio/Buffer;
+    invoke-virtual {v2, v1}, Lokio/Buffer;->writeByte(I)Lokio/Buffer;
 
     goto :goto_1
 
+    .line 185
     :cond_3
-    const-wide/32 p4, 0xffff
+    const-wide/32 v2, 0xffff
 
-    cmp-long p1, p2, p4
+    cmp-long v4, p2, v2
 
-    if-gtz p1, :cond_4
+    if-gtz v4, :cond_4
 
-    or-int/lit8 p1, v0, 0x7e
+    .line 186
+    or-int/lit8 v1, v1, 0x7e
 
     .line 187
-    iget-object p4, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
+    iget-object v2, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
 
-    invoke-virtual {p4, p1}, Lokio/Buffer;->writeByte(I)Lokio/Buffer;
+    invoke-virtual {v2, v1}, Lokio/Buffer;->writeByte(I)Lokio/Buffer;
 
     .line 188
-    iget-object p1, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
+    iget-object v2, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
 
-    long-to-int p4, p2
+    long-to-int v3, p2
 
-    invoke-virtual {p1, p4}, Lokio/Buffer;->writeShort(I)Lokio/Buffer;
+    invoke-virtual {v2, v3}, Lokio/Buffer;->writeShort(I)Lokio/Buffer;
 
     goto :goto_1
 
+    .line 190
     :cond_4
-    or-int/lit8 p1, v0, 0x7f
+    or-int/lit8 v1, v1, 0x7f
 
     .line 191
-    iget-object p4, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
+    iget-object v2, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
 
-    invoke-virtual {p4, p1}, Lokio/Buffer;->writeByte(I)Lokio/Buffer;
+    invoke-virtual {v2, v1}, Lokio/Buffer;->writeByte(I)Lokio/Buffer;
 
     .line 192
-    iget-object p1, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
+    iget-object v2, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
 
-    invoke-virtual {p1, p2, p3}, Lokio/Buffer;->writeLong(J)Lokio/Buffer;
+    invoke-virtual {v2, p2, p3}, Lokio/Buffer;->writeLong(J)Lokio/Buffer;
 
     .line 195
     :goto_1
-    iget-boolean p1, p0, Lokhttp3/internal/ws/WebSocketWriter;->isClient:Z
+    iget-boolean v2, p0, Lokhttp3/internal/ws/WebSocketWriter;->isClient:Z
 
-    if-eqz p1, :cond_5
+    if-eqz v2, :cond_5
 
     .line 196
-    iget-object p1, p0, Lokhttp3/internal/ws/WebSocketWriter;->random:Ljava/util/Random;
+    iget-object v2, p0, Lokhttp3/internal/ws/WebSocketWriter;->random:Ljava/util/Random;
 
-    iget-object p4, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskKey:[B
+    iget-object v3, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskKey:[B
 
-    invoke-virtual {p1, p4}, Ljava/util/Random;->nextBytes([B)V
+    invoke-virtual {v2, v3}, Ljava/util/Random;->nextBytes([B)V
 
     .line 197
-    iget-object p1, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
+    iget-object v2, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
 
-    iget-object p4, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskKey:[B
+    iget-object v3, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskKey:[B
 
-    invoke-virtual {p1, p4}, Lokio/Buffer;->write([B)Lokio/Buffer;
+    invoke-virtual {v2, v3}, Lokio/Buffer;->write([B)Lokio/Buffer;
 
-    const-wide/16 p4, 0x0
+    .line 199
+    const-wide/16 v2, 0x0
 
-    cmp-long p1, p2, p4
+    cmp-long v4, p2, v2
 
-    if-lez p1, :cond_6
+    if-lez v4, :cond_6
 
     .line 200
-    iget-object p1, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
+    iget-object v2, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
 
-    invoke-virtual {p1}, Lokio/Buffer;->size()J
+    invoke-virtual {v2}, Lokio/Buffer;->size()J
 
-    move-result-wide p4
+    move-result-wide v2
 
     .line 201
-    iget-object p1, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
+    .local v2, "bufferStart":J
+    iget-object v4, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
 
-    iget-object v0, p0, Lokhttp3/internal/ws/WebSocketWriter;->buffer:Lokio/Buffer;
+    iget-object v5, p0, Lokhttp3/internal/ws/WebSocketWriter;->buffer:Lokio/Buffer;
 
-    invoke-virtual {p1, v0, p2, p3}, Lokio/Buffer;->write(Lokio/Buffer;J)V
+    invoke-virtual {v4, v5, p2, p3}, Lokio/Buffer;->write(Lokio/Buffer;J)V
 
     .line 203
-    iget-object p1, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
+    iget-object v4, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
 
-    iget-object p2, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskCursor:Lokio/Buffer$UnsafeCursor;
+    iget-object v5, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskCursor:Lokio/Buffer$UnsafeCursor;
 
-    invoke-virtual {p1, p2}, Lokio/Buffer;->readAndWriteUnsafe(Lokio/Buffer$UnsafeCursor;)Lokio/Buffer$UnsafeCursor;
+    invoke-virtual {v4, v5}, Lokio/Buffer;->readAndWriteUnsafe(Lokio/Buffer$UnsafeCursor;)Lokio/Buffer$UnsafeCursor;
 
     .line 204
-    iget-object p1, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskCursor:Lokio/Buffer$UnsafeCursor;
+    iget-object v4, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskCursor:Lokio/Buffer$UnsafeCursor;
 
-    invoke-virtual {p1, p4, p5}, Lokio/Buffer$UnsafeCursor;->seek(J)I
+    invoke-virtual {v4, v2, v3}, Lokio/Buffer$UnsafeCursor;->seek(J)I
 
     .line 205
-    iget-object p1, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskCursor:Lokio/Buffer$UnsafeCursor;
+    iget-object v4, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskCursor:Lokio/Buffer$UnsafeCursor;
 
-    iget-object p2, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskKey:[B
+    iget-object v5, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskKey:[B
 
-    invoke-static {p1, p2}, Lokhttp3/internal/ws/WebSocketProtocol;->toggleMask(Lokio/Buffer$UnsafeCursor;[B)V
+    invoke-static {v4, v5}, Lokhttp3/internal/ws/WebSocketProtocol;->toggleMask(Lokio/Buffer$UnsafeCursor;[B)V
 
     .line 206
-    iget-object p1, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskCursor:Lokio/Buffer$UnsafeCursor;
+    iget-object v4, p0, Lokhttp3/internal/ws/WebSocketWriter;->maskCursor:Lokio/Buffer$UnsafeCursor;
 
-    invoke-virtual {p1}, Lokio/Buffer$UnsafeCursor;->close()V
+    invoke-virtual {v4}, Lokio/Buffer$UnsafeCursor;->close()V
 
+    .line 207
+    .end local v2    # "bufferStart":J
     goto :goto_2
 
     .line 209
     :cond_5
-    iget-object p1, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
+    iget-object v2, p0, Lokhttp3/internal/ws/WebSocketWriter;->sinkBuffer:Lokio/Buffer;
 
-    iget-object p4, p0, Lokhttp3/internal/ws/WebSocketWriter;->buffer:Lokio/Buffer;
+    iget-object v3, p0, Lokhttp3/internal/ws/WebSocketWriter;->buffer:Lokio/Buffer;
 
-    invoke-virtual {p1, p4, p2, p3}, Lokio/Buffer;->write(Lokio/Buffer;J)V
+    invoke-virtual {v2, v3, p2, p3}, Lokio/Buffer;->write(Lokio/Buffer;J)V
 
     .line 212
     :cond_6
     :goto_2
-    iget-object p1, p0, Lokhttp3/internal/ws/WebSocketWriter;->sink:Lokio/BufferedSink;
+    iget-object v2, p0, Lokhttp3/internal/ws/WebSocketWriter;->sink:Lokio/BufferedSink;
 
-    invoke-interface {p1}, Lokio/BufferedSink;->emit()Lokio/BufferedSink;
+    invoke-interface {v2}, Lokio/BufferedSink;->emit()Lokio/BufferedSink;
 
+    .line 213
     return-void
 
     .line 170
+    .end local v0    # "b0":I
+    .end local v1    # "b1":I
     :cond_7
-    new-instance p1, Ljava/io/IOException;
+    new-instance v0, Ljava/io/IOException;
 
-    const-string p2, "closed"
+    const-string v1, "closed"
 
-    invoke-direct {p1, p2}, Ljava/io/IOException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/io/IOException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 .method writePing(Lokio/ByteString;)V
     .locals 1
+    .param p1, "payload"    # Lokio/ByteString;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
         }
     .end annotation
 
+    .line 76
     const/16 v0, 0x9
 
-    .line 76
     invoke-direct {p0, v0, p1}, Lokhttp3/internal/ws/WebSocketWriter;->writeControlFrame(ILokio/ByteString;)V
 
+    .line 77
     return-void
 .end method
 
 .method writePong(Lokio/ByteString;)V
     .locals 1
+    .param p1, "payload"    # Lokio/ByteString;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
         }
     .end annotation
 
+    .line 81
     const/16 v0, 0xa
 
-    .line 81
     invoke-direct {p0, v0, p1}, Lokhttp3/internal/ws/WebSocketWriter;->writeControlFrame(ILokio/ByteString;)V
 
+    .line 82
     return-void
 .end method

@@ -3,11 +3,6 @@
 .source "HybridClassBase.java"
 
 
-# annotations
-.annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-.end annotation
-
-
 # direct methods
 .method public constructor <init>()V
     .locals 0

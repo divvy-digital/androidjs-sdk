@@ -18,6 +18,8 @@
 # direct methods
 .method public constructor <init>(Lcom/facebook/react/bridge/ReadableMap;Lcom/facebook/react/animated/NativeAnimatedNodesManager;)V
     .locals 2
+    .param p1, "config"    # Lcom/facebook/react/bridge/ReadableMap;
+    .param p2, "nativeAnimatedNodesManager"    # Lcom/facebook/react/animated/NativeAnimatedNodesManager;
 
     .line 23
     invoke-direct {p0}, Lcom/facebook/react/animated/ValueAnimatedNode;-><init>()V
@@ -25,45 +27,46 @@
     .line 24
     iput-object p2, p0, Lcom/facebook/react/animated/DiffClampAnimatedNode;->mNativeAnimatedNodesManager:Lcom/facebook/react/animated/NativeAnimatedNodesManager;
 
-    const-string p2, "input"
-
     .line 25
-    invoke-interface {p1, p2}, Lcom/facebook/react/bridge/ReadableMap;->getInt(Ljava/lang/String;)I
+    const-string v0, "input"
 
-    move-result p2
+    invoke-interface {p1, v0}, Lcom/facebook/react/bridge/ReadableMap;->getInt(Ljava/lang/String;)I
 
-    iput p2, p0, Lcom/facebook/react/animated/DiffClampAnimatedNode;->mInputNodeTag:I
+    move-result v0
 
-    const-string p2, "min"
+    iput v0, p0, Lcom/facebook/react/animated/DiffClampAnimatedNode;->mInputNodeTag:I
 
     .line 26
-    invoke-interface {p1, p2}, Lcom/facebook/react/bridge/ReadableMap;->getDouble(Ljava/lang/String;)D
+    const-string v0, "min"
+
+    invoke-interface {p1, v0}, Lcom/facebook/react/bridge/ReadableMap;->getDouble(Ljava/lang/String;)D
 
     move-result-wide v0
 
     iput-wide v0, p0, Lcom/facebook/react/animated/DiffClampAnimatedNode;->mMin:D
 
-    const-string p2, "max"
-
     .line 27
-    invoke-interface {p1, p2}, Lcom/facebook/react/bridge/ReadableMap;->getDouble(Ljava/lang/String;)D
+    const-string v0, "max"
 
-    move-result-wide p1
+    invoke-interface {p1, v0}, Lcom/facebook/react/bridge/ReadableMap;->getDouble(Ljava/lang/String;)D
 
-    iput-wide p1, p0, Lcom/facebook/react/animated/DiffClampAnimatedNode;->mMax:D
+    move-result-wide v0
 
-    const-wide/16 p1, 0x0
+    iput-wide v0, p0, Lcom/facebook/react/animated/DiffClampAnimatedNode;->mMax:D
 
     .line 29
-    iput-wide p1, p0, Lcom/facebook/react/animated/DiffClampAnimatedNode;->mLastValue:D
+    const-wide/16 v0, 0x0
 
-    iput-wide p1, p0, Lcom/facebook/react/animated/DiffClampAnimatedNode;->mValue:D
+    iput-wide v0, p0, Lcom/facebook/react/animated/DiffClampAnimatedNode;->mLastValue:D
 
+    iput-wide v0, p0, Lcom/facebook/react/animated/DiffClampAnimatedNode;->mValue:D
+
+    .line 30
     return-void
 .end method
 
 .method private getInputNodeValue()D
-    .locals 2
+    .locals 3
 
     .line 42
     iget-object v0, p0, Lcom/facebook/react/animated/DiffClampAnimatedNode;->mNativeAnimatedNodesManager:Lcom/facebook/react/animated/NativeAnimatedNodesManager;
@@ -74,37 +77,40 @@
 
     move-result-object v0
 
+    .line 43
+    .local v0, "animatedNode":Lcom/facebook/react/animated/AnimatedNode;
     if-eqz v0, :cond_0
 
-    .line 43
     instance-of v1, v0, Lcom/facebook/react/animated/ValueAnimatedNode;
 
     if-eqz v1, :cond_0
 
     .line 49
-    check-cast v0, Lcom/facebook/react/animated/ValueAnimatedNode;
+    move-object v1, v0
 
-    invoke-virtual {v0}, Lcom/facebook/react/animated/ValueAnimatedNode;->getValue()D
+    check-cast v1, Lcom/facebook/react/animated/ValueAnimatedNode;
 
-    move-result-wide v0
+    invoke-virtual {v1}, Lcom/facebook/react/animated/ValueAnimatedNode;->getValue()D
 
-    return-wide v0
+    move-result-wide v1
+
+    return-wide v1
 
     .line 44
     :cond_0
-    new-instance v0, Lcom/facebook/react/bridge/JSApplicationCausedNativeException;
+    new-instance v1, Lcom/facebook/react/bridge/JSApplicationCausedNativeException;
 
-    const-string v1, "Illegal node ID set as an input for Animated.DiffClamp node"
+    const-string v2, "Illegal node ID set as an input for Animated.DiffClamp node"
 
-    invoke-direct {v0, v1}, Lcom/facebook/react/bridge/JSApplicationCausedNativeException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v1, v2}, Lcom/facebook/react/bridge/JSApplicationCausedNativeException;-><init>(Ljava/lang/String;)V
 
-    throw v0
+    throw v1
 .end method
 
 
 # virtual methods
 .method public update()V
-    .locals 4
+    .locals 8
 
     .line 34
     invoke-direct {p0}, Lcom/facebook/react/animated/DiffClampAnimatedNode;->getInputNodeValue()D
@@ -112,31 +118,34 @@
     move-result-wide v0
 
     .line 36
+    .local v0, "value":D
     iget-wide v2, p0, Lcom/facebook/react/animated/DiffClampAnimatedNode;->mLastValue:D
 
     sub-double v2, v0, v2
 
     .line 37
+    .local v2, "diff":D
     iput-wide v0, p0, Lcom/facebook/react/animated/DiffClampAnimatedNode;->mLastValue:D
 
     .line 38
-    iget-wide v0, p0, Lcom/facebook/react/animated/DiffClampAnimatedNode;->mValue:D
+    iget-wide v4, p0, Lcom/facebook/react/animated/DiffClampAnimatedNode;->mValue:D
 
-    add-double/2addr v0, v2
+    add-double/2addr v4, v2
 
-    iget-wide v2, p0, Lcom/facebook/react/animated/DiffClampAnimatedNode;->mMin:D
+    iget-wide v6, p0, Lcom/facebook/react/animated/DiffClampAnimatedNode;->mMin:D
 
-    invoke-static {v0, v1, v2, v3}, Ljava/lang/Math;->max(DD)D
+    invoke-static {v4, v5, v6, v7}, Ljava/lang/Math;->max(DD)D
 
-    move-result-wide v0
+    move-result-wide v4
 
-    iget-wide v2, p0, Lcom/facebook/react/animated/DiffClampAnimatedNode;->mMax:D
+    iget-wide v6, p0, Lcom/facebook/react/animated/DiffClampAnimatedNode;->mMax:D
 
-    invoke-static {v0, v1, v2, v3}, Ljava/lang/Math;->min(DD)D
+    invoke-static {v4, v5, v6, v7}, Ljava/lang/Math;->min(DD)D
 
-    move-result-wide v0
+    move-result-wide v4
 
-    iput-wide v0, p0, Lcom/facebook/react/animated/DiffClampAnimatedNode;->mValue:D
+    iput-wide v4, p0, Lcom/facebook/react/animated/DiffClampAnimatedNode;->mValue:D
 
+    .line 39
     return-void
 .end method

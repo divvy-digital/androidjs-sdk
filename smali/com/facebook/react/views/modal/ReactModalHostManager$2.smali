@@ -28,6 +28,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/views/modal/ReactModalHostManager;Lcom/facebook/react/uimanager/events/EventDispatcher;Lcom/facebook/react/views/modal/ReactModalHostView;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/views/modal/ReactModalHostManager;
 
     .line 84
     iput-object p1, p0, Lcom/facebook/react/views/modal/ReactModalHostManager$2;->this$0:Lcom/facebook/react/views/modal/ReactModalHostManager;
@@ -44,22 +45,24 @@
 
 # virtual methods
 .method public onShow(Landroid/content/DialogInterface;)V
-    .locals 2
+    .locals 3
+    .param p1, "dialog"    # Landroid/content/DialogInterface;
 
     .line 87
-    iget-object p1, p0, Lcom/facebook/react/views/modal/ReactModalHostManager$2;->val$dispatcher:Lcom/facebook/react/uimanager/events/EventDispatcher;
+    iget-object v0, p0, Lcom/facebook/react/views/modal/ReactModalHostManager$2;->val$dispatcher:Lcom/facebook/react/uimanager/events/EventDispatcher;
 
-    new-instance v0, Lcom/facebook/react/views/modal/ShowEvent;
+    new-instance v1, Lcom/facebook/react/views/modal/ShowEvent;
 
-    iget-object v1, p0, Lcom/facebook/react/views/modal/ReactModalHostManager$2;->val$view:Lcom/facebook/react/views/modal/ReactModalHostView;
+    iget-object v2, p0, Lcom/facebook/react/views/modal/ReactModalHostManager$2;->val$view:Lcom/facebook/react/views/modal/ReactModalHostView;
 
-    invoke-virtual {v1}, Lcom/facebook/react/views/modal/ReactModalHostView;->getId()I
+    invoke-virtual {v2}, Lcom/facebook/react/views/modal/ReactModalHostView;->getId()I
 
-    move-result v1
+    move-result v2
 
-    invoke-direct {v0, v1}, Lcom/facebook/react/views/modal/ShowEvent;-><init>(I)V
+    invoke-direct {v1, v2}, Lcom/facebook/react/views/modal/ShowEvent;-><init>(I)V
 
-    invoke-virtual {p1, v0}, Lcom/facebook/react/uimanager/events/EventDispatcher;->dispatchEvent(Lcom/facebook/react/uimanager/events/Event;)V
+    invoke-virtual {v0, v1}, Lcom/facebook/react/uimanager/events/EventDispatcher;->dispatchEvent(Lcom/facebook/react/uimanager/events/Event;)V
 
+    .line 88
     return-void
 .end method

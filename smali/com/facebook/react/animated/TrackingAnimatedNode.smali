@@ -17,7 +17,9 @@
 
 # direct methods
 .method constructor <init>(Lcom/facebook/react/bridge/ReadableMap;Lcom/facebook/react/animated/NativeAnimatedNodesManager;)V
-    .locals 0
+    .locals 1
+    .param p1, "config"    # Lcom/facebook/react/bridge/ReadableMap;
+    .param p2, "nativeAnimatedNodesManager"    # Lcom/facebook/react/animated/NativeAnimatedNodesManager;
 
     .line 21
     invoke-direct {p0}, Lcom/facebook/react/animated/AnimatedNode;-><init>()V
@@ -25,53 +27,54 @@
     .line 22
     iput-object p2, p0, Lcom/facebook/react/animated/TrackingAnimatedNode;->mNativeAnimatedNodesManager:Lcom/facebook/react/animated/NativeAnimatedNodesManager;
 
-    const-string p2, "animationId"
-
     .line 23
-    invoke-interface {p1, p2}, Lcom/facebook/react/bridge/ReadableMap;->getInt(Ljava/lang/String;)I
+    const-string v0, "animationId"
 
-    move-result p2
+    invoke-interface {p1, v0}, Lcom/facebook/react/bridge/ReadableMap;->getInt(Ljava/lang/String;)I
 
-    iput p2, p0, Lcom/facebook/react/animated/TrackingAnimatedNode;->mAnimationId:I
+    move-result v0
 
-    const-string p2, "toValue"
+    iput v0, p0, Lcom/facebook/react/animated/TrackingAnimatedNode;->mAnimationId:I
 
     .line 24
-    invoke-interface {p1, p2}, Lcom/facebook/react/bridge/ReadableMap;->getInt(Ljava/lang/String;)I
+    const-string v0, "toValue"
 
-    move-result p2
+    invoke-interface {p1, v0}, Lcom/facebook/react/bridge/ReadableMap;->getInt(Ljava/lang/String;)I
 
-    iput p2, p0, Lcom/facebook/react/animated/TrackingAnimatedNode;->mToValueNode:I
+    move-result v0
 
-    const-string p2, "value"
+    iput v0, p0, Lcom/facebook/react/animated/TrackingAnimatedNode;->mToValueNode:I
 
     .line 25
-    invoke-interface {p1, p2}, Lcom/facebook/react/bridge/ReadableMap;->getInt(Ljava/lang/String;)I
+    const-string v0, "value"
 
-    move-result p2
+    invoke-interface {p1, v0}, Lcom/facebook/react/bridge/ReadableMap;->getInt(Ljava/lang/String;)I
 
-    iput p2, p0, Lcom/facebook/react/animated/TrackingAnimatedNode;->mValueNode:I
+    move-result v0
 
-    const-string p2, "animationConfig"
+    iput v0, p0, Lcom/facebook/react/animated/TrackingAnimatedNode;->mValueNode:I
 
     .line 26
-    invoke-interface {p1, p2}, Lcom/facebook/react/bridge/ReadableMap;->getMap(Ljava/lang/String;)Lcom/facebook/react/bridge/ReadableMap;
+    const-string v0, "animationConfig"
 
-    move-result-object p1
+    invoke-interface {p1, v0}, Lcom/facebook/react/bridge/ReadableMap;->getMap(Ljava/lang/String;)Lcom/facebook/react/bridge/ReadableMap;
 
-    invoke-static {p1}, Lcom/facebook/react/bridge/JavaOnlyMap;->deepClone(Lcom/facebook/react/bridge/ReadableMap;)Lcom/facebook/react/bridge/JavaOnlyMap;
+    move-result-object v0
 
-    move-result-object p1
+    invoke-static {v0}, Lcom/facebook/react/bridge/JavaOnlyMap;->deepClone(Lcom/facebook/react/bridge/ReadableMap;)Lcom/facebook/react/bridge/JavaOnlyMap;
 
-    iput-object p1, p0, Lcom/facebook/react/animated/TrackingAnimatedNode;->mAnimationConfig:Lcom/facebook/react/bridge/JavaOnlyMap;
+    move-result-object v0
 
+    iput-object v0, p0, Lcom/facebook/react/animated/TrackingAnimatedNode;->mAnimationConfig:Lcom/facebook/react/bridge/JavaOnlyMap;
+
+    .line 27
     return-void
 .end method
 
 
 # virtual methods
 .method public update()V
-    .locals 5
+    .locals 6
 
     .line 31
     iget-object v0, p0, Lcom/facebook/react/animated/TrackingAnimatedNode;->mNativeAnimatedNodesManager:Lcom/facebook/react/animated/NativeAnimatedNodesManager;
@@ -83,30 +86,34 @@
     move-result-object v0
 
     .line 32
+    .local v0, "toValue":Lcom/facebook/react/animated/AnimatedNode;
     iget-object v1, p0, Lcom/facebook/react/animated/TrackingAnimatedNode;->mAnimationConfig:Lcom/facebook/react/bridge/JavaOnlyMap;
 
-    check-cast v0, Lcom/facebook/react/animated/ValueAnimatedNode;
+    move-object v2, v0
 
-    invoke-virtual {v0}, Lcom/facebook/react/animated/ValueAnimatedNode;->getValue()D
+    check-cast v2, Lcom/facebook/react/animated/ValueAnimatedNode;
+
+    invoke-virtual {v2}, Lcom/facebook/react/animated/ValueAnimatedNode;->getValue()D
 
     move-result-wide v2
 
-    const-string v0, "toValue"
+    const-string v4, "toValue"
 
-    invoke-virtual {v1, v0, v2, v3}, Lcom/facebook/react/bridge/JavaOnlyMap;->putDouble(Ljava/lang/String;D)V
+    invoke-virtual {v1, v4, v2, v3}, Lcom/facebook/react/bridge/JavaOnlyMap;->putDouble(Ljava/lang/String;D)V
 
     .line 33
-    iget-object v0, p0, Lcom/facebook/react/animated/TrackingAnimatedNode;->mNativeAnimatedNodesManager:Lcom/facebook/react/animated/NativeAnimatedNodesManager;
+    iget-object v1, p0, Lcom/facebook/react/animated/TrackingAnimatedNode;->mNativeAnimatedNodesManager:Lcom/facebook/react/animated/NativeAnimatedNodesManager;
 
-    iget v1, p0, Lcom/facebook/react/animated/TrackingAnimatedNode;->mAnimationId:I
+    iget v2, p0, Lcom/facebook/react/animated/TrackingAnimatedNode;->mAnimationId:I
 
-    iget v2, p0, Lcom/facebook/react/animated/TrackingAnimatedNode;->mValueNode:I
+    iget v3, p0, Lcom/facebook/react/animated/TrackingAnimatedNode;->mValueNode:I
 
-    iget-object v3, p0, Lcom/facebook/react/animated/TrackingAnimatedNode;->mAnimationConfig:Lcom/facebook/react/bridge/JavaOnlyMap;
+    iget-object v4, p0, Lcom/facebook/react/animated/TrackingAnimatedNode;->mAnimationConfig:Lcom/facebook/react/bridge/JavaOnlyMap;
 
-    const/4 v4, 0x0
+    const/4 v5, 0x0
 
-    invoke-virtual {v0, v1, v2, v3, v4}, Lcom/facebook/react/animated/NativeAnimatedNodesManager;->startAnimatingNode(IILcom/facebook/react/bridge/ReadableMap;Lcom/facebook/react/bridge/Callback;)V
+    invoke-virtual {v1, v2, v3, v4, v5}, Lcom/facebook/react/animated/NativeAnimatedNodesManager;->startAnimatingNode(IILcom/facebook/react/bridge/ReadableMap;Lcom/facebook/react/bridge/Callback;)V
 
+    .line 34
     return-void
 .end method

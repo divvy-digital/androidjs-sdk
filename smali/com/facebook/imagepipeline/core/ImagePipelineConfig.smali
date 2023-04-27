@@ -126,7 +126,8 @@
 .end method
 
 .method private constructor <init>(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)V
-    .locals 3
+    .locals 5
+    .param p1, "builder"    # Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;
 
     .line 97
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -142,29 +143,32 @@
 
     iput-object v0, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mImagePipelineExperiments:Lcom/facebook/imagepipeline/core/ImagePipelineExperiments;
 
+    .line 100
+    nop
+
     .line 101
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$200(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Lcom/facebook/common/internal/Supplier;
 
-    move-result-object v0
+    move-result-object v1
 
-    if-nez v0, :cond_0
+    if-nez v1, :cond_0
 
-    new-instance v0, Lcom/facebook/imagepipeline/cache/DefaultBitmapMemoryCacheParamsSupplier;
+    new-instance v1, Lcom/facebook/imagepipeline/cache/DefaultBitmapMemoryCacheParamsSupplier;
 
     .line 103
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$300(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Landroid/content/Context;
 
-    move-result-object v1
+    move-result-object v2
 
-    const-string v2, "activity"
+    const-string v3, "activity"
 
-    invoke-virtual {v1, v2}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+    invoke-virtual {v2, v3}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
 
-    move-result-object v1
+    move-result-object v2
 
-    check-cast v1, Landroid/app/ActivityManager;
+    check-cast v2, Landroid/app/ActivityManager;
 
-    invoke-direct {v0, v1}, Lcom/facebook/imagepipeline/cache/DefaultBitmapMemoryCacheParamsSupplier;-><init>(Landroid/app/ActivityManager;)V
+    invoke-direct {v1, v2}, Lcom/facebook/imagepipeline/cache/DefaultBitmapMemoryCacheParamsSupplier;-><init>(Landroid/app/ActivityManager;)V
 
     goto :goto_0
 
@@ -172,21 +176,24 @@
     :cond_0
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$200(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Lcom/facebook/common/internal/Supplier;
 
-    move-result-object v0
+    move-result-object v1
 
     :goto_0
-    iput-object v0, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mBitmapMemoryCacheParamsSupplier:Lcom/facebook/common/internal/Supplier;
+    iput-object v1, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mBitmapMemoryCacheParamsSupplier:Lcom/facebook/common/internal/Supplier;
+
+    .line 105
+    nop
 
     .line 106
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$400(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Lcom/facebook/imagepipeline/cache/CountingMemoryCache$CacheTrimStrategy;
 
-    move-result-object v0
+    move-result-object v1
 
-    if-nez v0, :cond_1
+    if-nez v1, :cond_1
 
-    new-instance v0, Lcom/facebook/imagepipeline/cache/BitmapMemoryCacheTrimStrategy;
+    new-instance v1, Lcom/facebook/imagepipeline/cache/BitmapMemoryCacheTrimStrategy;
 
-    invoke-direct {v0}, Lcom/facebook/imagepipeline/cache/BitmapMemoryCacheTrimStrategy;-><init>()V
+    invoke-direct {v1}, Lcom/facebook/imagepipeline/cache/BitmapMemoryCacheTrimStrategy;-><init>()V
 
     goto :goto_1
 
@@ -194,19 +201,22 @@
     :cond_1
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$400(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Lcom/facebook/imagepipeline/cache/CountingMemoryCache$CacheTrimStrategy;
 
-    move-result-object v0
+    move-result-object v1
 
     :goto_1
-    iput-object v0, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mBitmapMemoryCacheTrimStrategy:Lcom/facebook/imagepipeline/cache/CountingMemoryCache$CacheTrimStrategy;
+    iput-object v1, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mBitmapMemoryCacheTrimStrategy:Lcom/facebook/imagepipeline/cache/CountingMemoryCache$CacheTrimStrategy;
+
+    .line 109
+    nop
 
     .line 110
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$500(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Landroid/graphics/Bitmap$Config;
 
-    move-result-object v0
+    move-result-object v1
 
-    if-nez v0, :cond_2
+    if-nez v1, :cond_2
 
-    sget-object v0, Landroid/graphics/Bitmap$Config;->ARGB_8888:Landroid/graphics/Bitmap$Config;
+    sget-object v1, Landroid/graphics/Bitmap$Config;->ARGB_8888:Landroid/graphics/Bitmap$Config;
 
     goto :goto_2
 
@@ -214,22 +224,25 @@
     :cond_2
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$500(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Landroid/graphics/Bitmap$Config;
 
-    move-result-object v0
+    move-result-object v1
 
     :goto_2
-    iput-object v0, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mBitmapConfig:Landroid/graphics/Bitmap$Config;
+    iput-object v1, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mBitmapConfig:Landroid/graphics/Bitmap$Config;
+
+    .line 113
+    nop
 
     .line 114
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$600(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Lcom/facebook/imagepipeline/cache/CacheKeyFactory;
 
-    move-result-object v0
+    move-result-object v1
 
-    if-nez v0, :cond_3
+    if-nez v1, :cond_3
 
     .line 115
     invoke-static {}, Lcom/facebook/imagepipeline/cache/DefaultCacheKeyFactory;->getInstance()Lcom/facebook/imagepipeline/cache/DefaultCacheKeyFactory;
 
-    move-result-object v0
+    move-result-object v1
 
     goto :goto_3
 
@@ -237,38 +250,38 @@
     :cond_3
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$600(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Lcom/facebook/imagepipeline/cache/CacheKeyFactory;
 
-    move-result-object v0
+    move-result-object v1
 
     :goto_3
-    iput-object v0, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mCacheKeyFactory:Lcom/facebook/imagepipeline/cache/CacheKeyFactory;
+    iput-object v1, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mCacheKeyFactory:Lcom/facebook/imagepipeline/cache/CacheKeyFactory;
 
     .line 117
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$300(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Landroid/content/Context;
 
-    move-result-object v0
+    move-result-object v1
 
-    invoke-static {v0}, Lcom/facebook/common/internal/Preconditions;->checkNotNull(Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-static {v1}, Lcom/facebook/common/internal/Preconditions;->checkNotNull(Ljava/lang/Object;)Ljava/lang/Object;
 
-    move-result-object v0
+    move-result-object v1
 
-    check-cast v0, Landroid/content/Context;
+    check-cast v1, Landroid/content/Context;
 
-    iput-object v0, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mContext:Landroid/content/Context;
+    iput-object v1, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mContext:Landroid/content/Context;
 
     .line 118
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$700(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Lcom/facebook/imagepipeline/core/FileCacheFactory;
 
-    move-result-object v0
+    move-result-object v1
 
-    if-nez v0, :cond_4
+    if-nez v1, :cond_4
 
-    new-instance v0, Lcom/facebook/imagepipeline/core/DiskStorageCacheFactory;
+    new-instance v1, Lcom/facebook/imagepipeline/core/DiskStorageCacheFactory;
 
-    new-instance v1, Lcom/facebook/imagepipeline/core/DynamicDefaultDiskStorageFactory;
+    new-instance v2, Lcom/facebook/imagepipeline/core/DynamicDefaultDiskStorageFactory;
 
-    invoke-direct {v1}, Lcom/facebook/imagepipeline/core/DynamicDefaultDiskStorageFactory;-><init>()V
+    invoke-direct {v2}, Lcom/facebook/imagepipeline/core/DynamicDefaultDiskStorageFactory;-><init>()V
 
-    invoke-direct {v0, v1}, Lcom/facebook/imagepipeline/core/DiskStorageCacheFactory;-><init>(Lcom/facebook/imagepipeline/core/DiskStorageFactory;)V
+    invoke-direct {v1, v2}, Lcom/facebook/imagepipeline/core/DiskStorageCacheFactory;-><init>(Lcom/facebook/imagepipeline/core/DiskStorageFactory;)V
 
     goto :goto_4
 
@@ -276,28 +289,31 @@
     :cond_4
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$700(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Lcom/facebook/imagepipeline/core/FileCacheFactory;
 
-    move-result-object v0
+    move-result-object v1
 
     :goto_4
-    iput-object v0, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mFileCacheFactory:Lcom/facebook/imagepipeline/core/FileCacheFactory;
+    iput-object v1, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mFileCacheFactory:Lcom/facebook/imagepipeline/core/FileCacheFactory;
 
     .line 121
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$800(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Z
 
-    move-result v0
+    move-result v1
 
-    iput-boolean v0, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mDownsampleEnabled:Z
+    iput-boolean v1, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mDownsampleEnabled:Z
+
+    .line 122
+    nop
 
     .line 123
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$900(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Lcom/facebook/common/internal/Supplier;
 
-    move-result-object v0
+    move-result-object v1
 
-    if-nez v0, :cond_5
+    if-nez v1, :cond_5
 
-    new-instance v0, Lcom/facebook/imagepipeline/cache/DefaultEncodedMemoryCacheParamsSupplier;
+    new-instance v1, Lcom/facebook/imagepipeline/cache/DefaultEncodedMemoryCacheParamsSupplier;
 
-    invoke-direct {v0}, Lcom/facebook/imagepipeline/cache/DefaultEncodedMemoryCacheParamsSupplier;-><init>()V
+    invoke-direct {v1}, Lcom/facebook/imagepipeline/cache/DefaultEncodedMemoryCacheParamsSupplier;-><init>()V
 
     goto :goto_5
 
@@ -305,22 +321,25 @@
     :cond_5
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$900(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Lcom/facebook/common/internal/Supplier;
 
-    move-result-object v0
+    move-result-object v1
 
     :goto_5
-    iput-object v0, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mEncodedMemoryCacheParamsSupplier:Lcom/facebook/common/internal/Supplier;
+    iput-object v1, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mEncodedMemoryCacheParamsSupplier:Lcom/facebook/common/internal/Supplier;
+
+    .line 126
+    nop
 
     .line 127
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$1000(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Lcom/facebook/imagepipeline/cache/ImageCacheStatsTracker;
 
-    move-result-object v0
+    move-result-object v1
 
-    if-nez v0, :cond_6
+    if-nez v1, :cond_6
 
     .line 128
     invoke-static {}, Lcom/facebook/imagepipeline/cache/NoOpImageCacheStatsTracker;->getInstance()Lcom/facebook/imagepipeline/cache/NoOpImageCacheStatsTracker;
 
-    move-result-object v0
+    move-result-object v1
 
     goto :goto_6
 
@@ -328,28 +347,31 @@
     :cond_6
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$1000(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Lcom/facebook/imagepipeline/cache/ImageCacheStatsTracker;
 
-    move-result-object v0
+    move-result-object v1
 
     :goto_6
-    iput-object v0, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mImageCacheStatsTracker:Lcom/facebook/imagepipeline/cache/ImageCacheStatsTracker;
+    iput-object v1, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mImageCacheStatsTracker:Lcom/facebook/imagepipeline/cache/ImageCacheStatsTracker;
 
     .line 130
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$1100(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Lcom/facebook/imagepipeline/decoder/ImageDecoder;
 
-    move-result-object v0
+    move-result-object v1
 
-    iput-object v0, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mImageDecoder:Lcom/facebook/imagepipeline/decoder/ImageDecoder;
+    iput-object v1, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mImageDecoder:Lcom/facebook/imagepipeline/decoder/ImageDecoder;
+
+    .line 131
+    nop
 
     .line 132
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$1200(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Lcom/facebook/common/internal/Supplier;
 
-    move-result-object v0
+    move-result-object v1
 
-    if-nez v0, :cond_7
+    if-nez v1, :cond_7
 
-    new-instance v0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$1;
+    new-instance v1, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$1;
 
-    invoke-direct {v0, p0}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$1;-><init>(Lcom/facebook/imagepipeline/core/ImagePipelineConfig;)V
+    invoke-direct {v1, p0}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$1;-><init>(Lcom/facebook/imagepipeline/core/ImagePipelineConfig;)V
 
     goto :goto_7
 
@@ -357,26 +379,29 @@
     :cond_7
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$1200(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Lcom/facebook/common/internal/Supplier;
 
-    move-result-object v0
+    move-result-object v1
 
     :goto_7
-    iput-object v0, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mIsPrefetchEnabledSupplier:Lcom/facebook/common/internal/Supplier;
+    iput-object v1, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mIsPrefetchEnabledSupplier:Lcom/facebook/common/internal/Supplier;
+
+    .line 140
+    nop
 
     .line 141
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$1300(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Lcom/facebook/cache/disk/DiskCacheConfig;
 
-    move-result-object v0
+    move-result-object v1
 
-    if-nez v0, :cond_8
+    if-nez v1, :cond_8
 
     .line 142
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$300(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Landroid/content/Context;
 
-    move-result-object v0
+    move-result-object v1
 
-    invoke-static {v0}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->getDefaultMainDiskCacheConfig(Landroid/content/Context;)Lcom/facebook/cache/disk/DiskCacheConfig;
+    invoke-static {v1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->getDefaultMainDiskCacheConfig(Landroid/content/Context;)Lcom/facebook/cache/disk/DiskCacheConfig;
 
-    move-result-object v0
+    move-result-object v1
 
     goto :goto_8
 
@@ -384,22 +409,25 @@
     :cond_8
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$1300(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Lcom/facebook/cache/disk/DiskCacheConfig;
 
-    move-result-object v0
+    move-result-object v1
 
     :goto_8
-    iput-object v0, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mMainDiskCacheConfig:Lcom/facebook/cache/disk/DiskCacheConfig;
+    iput-object v1, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mMainDiskCacheConfig:Lcom/facebook/cache/disk/DiskCacheConfig;
+
+    .line 144
+    nop
 
     .line 145
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$1400(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Lcom/facebook/common/memory/MemoryTrimmableRegistry;
 
-    move-result-object v0
+    move-result-object v2
 
-    if-nez v0, :cond_9
+    if-nez v2, :cond_9
 
     .line 146
     invoke-static {}, Lcom/facebook/common/memory/NoOpMemoryTrimmableRegistry;->getInstance()Lcom/facebook/common/memory/NoOpMemoryTrimmableRegistry;
 
-    move-result-object v0
+    move-result-object v2
 
     goto :goto_9
 
@@ -407,19 +435,22 @@
     :cond_9
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$1400(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Lcom/facebook/common/memory/MemoryTrimmableRegistry;
 
-    move-result-object v0
+    move-result-object v2
 
     :goto_9
-    iput-object v0, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mMemoryTrimmableRegistry:Lcom/facebook/common/memory/MemoryTrimmableRegistry;
+    iput-object v2, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mMemoryTrimmableRegistry:Lcom/facebook/common/memory/MemoryTrimmableRegistry;
+
+    .line 148
+    nop
 
     .line 149
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$1500(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)I
 
-    move-result v0
+    move-result v2
 
-    if-gez v0, :cond_a
+    if-gez v2, :cond_a
 
-    const/16 v0, 0x7530
+    const/16 v2, 0x7530
 
     goto :goto_a
 
@@ -427,23 +458,24 @@
     :cond_a
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$1500(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)I
 
-    move-result v0
+    move-result v2
 
     :goto_a
-    iput v0, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mHttpNetworkTimeout:I
+    iput v2, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mHttpNetworkTimeout:I
+
+    .line 152
+    nop
 
     .line 153
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$1600(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Lcom/facebook/imagepipeline/producers/NetworkFetcher;
 
-    move-result-object v0
+    move-result-object v3
 
-    if-nez v0, :cond_b
+    if-nez v3, :cond_b
 
-    new-instance v0, Lcom/facebook/imagepipeline/producers/HttpUrlConnectionNetworkFetcher;
+    new-instance v3, Lcom/facebook/imagepipeline/producers/HttpUrlConnectionNetworkFetcher;
 
-    iget v1, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mHttpNetworkTimeout:I
-
-    invoke-direct {v0, v1}, Lcom/facebook/imagepipeline/producers/HttpUrlConnectionNetworkFetcher;-><init>(I)V
+    invoke-direct {v3, v2}, Lcom/facebook/imagepipeline/producers/HttpUrlConnectionNetworkFetcher;-><init>(I)V
 
     goto :goto_b
 
@@ -451,37 +483,40 @@
     :cond_b
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$1600(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Lcom/facebook/imagepipeline/producers/NetworkFetcher;
 
-    move-result-object v0
+    move-result-object v3
 
     :goto_b
-    iput-object v0, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mNetworkFetcher:Lcom/facebook/imagepipeline/producers/NetworkFetcher;
+    iput-object v3, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mNetworkFetcher:Lcom/facebook/imagepipeline/producers/NetworkFetcher;
 
     .line 156
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$1700(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;
 
-    move-result-object v0
+    move-result-object v2
 
-    iput-object v0, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mPlatformBitmapFactory:Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;
+    iput-object v2, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mPlatformBitmapFactory:Lcom/facebook/imagepipeline/bitmaps/PlatformBitmapFactory;
+
+    .line 157
+    nop
 
     .line 158
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$1800(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Lcom/facebook/imagepipeline/memory/PoolFactory;
 
-    move-result-object v0
+    move-result-object v2
 
-    if-nez v0, :cond_c
+    if-nez v2, :cond_c
 
-    new-instance v0, Lcom/facebook/imagepipeline/memory/PoolFactory;
+    new-instance v2, Lcom/facebook/imagepipeline/memory/PoolFactory;
 
     .line 159
     invoke-static {}, Lcom/facebook/imagepipeline/memory/PoolConfig;->newBuilder()Lcom/facebook/imagepipeline/memory/PoolConfig$Builder;
 
-    move-result-object v1
+    move-result-object v3
 
-    invoke-virtual {v1}, Lcom/facebook/imagepipeline/memory/PoolConfig$Builder;->build()Lcom/facebook/imagepipeline/memory/PoolConfig;
+    invoke-virtual {v3}, Lcom/facebook/imagepipeline/memory/PoolConfig$Builder;->build()Lcom/facebook/imagepipeline/memory/PoolConfig;
 
-    move-result-object v1
+    move-result-object v3
 
-    invoke-direct {v0, v1}, Lcom/facebook/imagepipeline/memory/PoolFactory;-><init>(Lcom/facebook/imagepipeline/memory/PoolConfig;)V
+    invoke-direct {v2, v3}, Lcom/facebook/imagepipeline/memory/PoolFactory;-><init>(Lcom/facebook/imagepipeline/memory/PoolConfig;)V
 
     goto :goto_c
 
@@ -489,21 +524,24 @@
     :cond_c
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$1800(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Lcom/facebook/imagepipeline/memory/PoolFactory;
 
-    move-result-object v0
+    move-result-object v2
 
     :goto_c
-    iput-object v0, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mPoolFactory:Lcom/facebook/imagepipeline/memory/PoolFactory;
+    iput-object v2, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mPoolFactory:Lcom/facebook/imagepipeline/memory/PoolFactory;
+
+    .line 161
+    nop
 
     .line 162
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$1900(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Lcom/facebook/imagepipeline/decoder/ProgressiveJpegConfig;
 
-    move-result-object v0
+    move-result-object v3
 
-    if-nez v0, :cond_d
+    if-nez v3, :cond_d
 
-    new-instance v0, Lcom/facebook/imagepipeline/decoder/SimpleProgressiveJpegConfig;
+    new-instance v3, Lcom/facebook/imagepipeline/decoder/SimpleProgressiveJpegConfig;
 
-    invoke-direct {v0}, Lcom/facebook/imagepipeline/decoder/SimpleProgressiveJpegConfig;-><init>()V
+    invoke-direct {v3}, Lcom/facebook/imagepipeline/decoder/SimpleProgressiveJpegConfig;-><init>()V
 
     goto :goto_d
 
@@ -511,21 +549,24 @@
     :cond_d
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$1900(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Lcom/facebook/imagepipeline/decoder/ProgressiveJpegConfig;
 
-    move-result-object v0
+    move-result-object v3
 
     :goto_d
-    iput-object v0, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mProgressiveJpegConfig:Lcom/facebook/imagepipeline/decoder/ProgressiveJpegConfig;
+    iput-object v3, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mProgressiveJpegConfig:Lcom/facebook/imagepipeline/decoder/ProgressiveJpegConfig;
+
+    .line 165
+    nop
 
     .line 166
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$2000(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Ljava/util/Set;
 
-    move-result-object v0
+    move-result-object v3
 
-    if-nez v0, :cond_e
+    if-nez v3, :cond_e
 
-    new-instance v0, Ljava/util/HashSet;
+    new-instance v3, Ljava/util/HashSet;
 
-    invoke-direct {v0}, Ljava/util/HashSet;-><init>()V
+    invoke-direct {v3}, Ljava/util/HashSet;-><init>()V
 
     goto :goto_e
 
@@ -533,26 +574,27 @@
     :cond_e
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$2000(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Ljava/util/Set;
 
-    move-result-object v0
+    move-result-object v3
 
     :goto_e
-    iput-object v0, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mRequestListeners:Ljava/util/Set;
+    iput-object v3, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mRequestListeners:Ljava/util/Set;
 
     .line 169
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$2100(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Z
 
-    move-result v0
+    move-result v3
 
-    iput-boolean v0, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mResizeAndRotateEnabledForNetwork:Z
+    iput-boolean v3, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mResizeAndRotateEnabledForNetwork:Z
+
+    .line 170
+    nop
 
     .line 171
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$2200(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Lcom/facebook/cache/disk/DiskCacheConfig;
 
-    move-result-object v0
+    move-result-object v3
 
-    if-nez v0, :cond_f
-
-    iget-object v0, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mMainDiskCacheConfig:Lcom/facebook/cache/disk/DiskCacheConfig;
+    if-nez v3, :cond_f
 
     goto :goto_f
 
@@ -560,35 +602,37 @@
     :cond_f
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$2200(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Lcom/facebook/cache/disk/DiskCacheConfig;
 
-    move-result-object v0
+    move-result-object v1
 
     :goto_f
-    iput-object v0, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mSmallImageDiskCacheConfig:Lcom/facebook/cache/disk/DiskCacheConfig;
+    iput-object v1, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mSmallImageDiskCacheConfig:Lcom/facebook/cache/disk/DiskCacheConfig;
 
     .line 174
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$2300(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Lcom/facebook/imagepipeline/decoder/ImageDecoderConfig;
 
-    move-result-object v0
+    move-result-object v1
 
-    iput-object v0, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mImageDecoderConfig:Lcom/facebook/imagepipeline/decoder/ImageDecoderConfig;
+    iput-object v1, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mImageDecoderConfig:Lcom/facebook/imagepipeline/decoder/ImageDecoderConfig;
 
     .line 176
-    iget-object v0, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mPoolFactory:Lcom/facebook/imagepipeline/memory/PoolFactory;
+    invoke-virtual {v2}, Lcom/facebook/imagepipeline/memory/PoolFactory;->getFlexByteArrayPoolMaxNumThreads()I
 
-    invoke-virtual {v0}, Lcom/facebook/imagepipeline/memory/PoolFactory;->getFlexByteArrayPoolMaxNumThreads()I
+    move-result v1
 
-    move-result v0
+    .line 177
+    .local v1, "numCpuBoundThreads":I
+    nop
 
     .line 178
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$2400(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Lcom/facebook/imagepipeline/core/ExecutorSupplier;
 
-    move-result-object v1
+    move-result-object v2
 
-    if-nez v1, :cond_10
+    if-nez v2, :cond_10
 
-    new-instance v1, Lcom/facebook/imagepipeline/core/DefaultExecutorSupplier;
+    new-instance v2, Lcom/facebook/imagepipeline/core/DefaultExecutorSupplier;
 
-    invoke-direct {v1, v0}, Lcom/facebook/imagepipeline/core/DefaultExecutorSupplier;-><init>(I)V
+    invoke-direct {v2, v1}, Lcom/facebook/imagepipeline/core/DefaultExecutorSupplier;-><init>(I)V
 
     goto :goto_10
 
@@ -596,78 +640,79 @@
     :cond_10
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$2400(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Lcom/facebook/imagepipeline/core/ExecutorSupplier;
 
-    move-result-object v1
+    move-result-object v2
 
     :goto_10
-    iput-object v1, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mExecutorSupplier:Lcom/facebook/imagepipeline/core/ExecutorSupplier;
+    iput-object v2, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mExecutorSupplier:Lcom/facebook/imagepipeline/core/ExecutorSupplier;
 
     .line 180
     invoke-static {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;->access$2500(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)Z
 
-    move-result p1
+    move-result v2
 
-    iput-boolean p1, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mDiskCacheEnabled:Z
+    iput-boolean v2, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mDiskCacheEnabled:Z
 
     .line 182
-    iget-object p1, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mImagePipelineExperiments:Lcom/facebook/imagepipeline/core/ImagePipelineExperiments;
+    invoke-virtual {v0}, Lcom/facebook/imagepipeline/core/ImagePipelineExperiments;->getWebpBitmapFactory()Lcom/facebook/common/webp/WebpBitmapFactory;
 
-    invoke-virtual {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineExperiments;->getWebpBitmapFactory()Lcom/facebook/common/webp/WebpBitmapFactory;
+    move-result-object v2
 
-    move-result-object p1
-
-    if-eqz p1, :cond_11
+    .line 183
+    .local v2, "webpBitmapFactory":Lcom/facebook/common/webp/WebpBitmapFactory;
+    if-eqz v2, :cond_11
 
     .line 184
-    new-instance v0, Lcom/facebook/imagepipeline/bitmaps/HoneycombBitmapCreator;
+    new-instance v3, Lcom/facebook/imagepipeline/bitmaps/HoneycombBitmapCreator;
 
     invoke-virtual {p0}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->getPoolFactory()Lcom/facebook/imagepipeline/memory/PoolFactory;
 
-    move-result-object v1
+    move-result-object v4
 
-    invoke-direct {v0, v1}, Lcom/facebook/imagepipeline/bitmaps/HoneycombBitmapCreator;-><init>(Lcom/facebook/imagepipeline/memory/PoolFactory;)V
+    invoke-direct {v3, v4}, Lcom/facebook/imagepipeline/bitmaps/HoneycombBitmapCreator;-><init>(Lcom/facebook/imagepipeline/memory/PoolFactory;)V
 
     .line 185
-    iget-object v1, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mImagePipelineExperiments:Lcom/facebook/imagepipeline/core/ImagePipelineExperiments;
+    .local v3, "bitmapCreator":Lcom/facebook/common/webp/BitmapCreator;
+    invoke-static {v2, v0, v3}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->setWebpBitmapFactory(Lcom/facebook/common/webp/WebpBitmapFactory;Lcom/facebook/imagepipeline/core/ImagePipelineExperiments;Lcom/facebook/common/webp/BitmapCreator;)V
 
-    invoke-static {p1, v1, v0}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->setWebpBitmapFactory(Lcom/facebook/common/webp/WebpBitmapFactory;Lcom/facebook/imagepipeline/core/ImagePipelineExperiments;Lcom/facebook/common/webp/BitmapCreator;)V
-
+    .line 186
+    .end local v3    # "bitmapCreator":Lcom/facebook/common/webp/BitmapCreator;
     goto :goto_11
 
     .line 188
     :cond_11
-    iget-object p1, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mImagePipelineExperiments:Lcom/facebook/imagepipeline/core/ImagePipelineExperiments;
+    invoke-virtual {v0}, Lcom/facebook/imagepipeline/core/ImagePipelineExperiments;->isWebpSupportEnabled()Z
 
-    invoke-virtual {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineExperiments;->isWebpSupportEnabled()Z
+    move-result v3
 
-    move-result p1
+    if-eqz v3, :cond_12
 
-    if-eqz p1, :cond_12
+    sget-boolean v3, Lcom/facebook/common/webp/WebpSupportStatus;->sIsWebpSupportRequired:Z
 
-    sget-boolean p1, Lcom/facebook/common/webp/WebpSupportStatus;->sIsWebpSupportRequired:Z
-
-    if-eqz p1, :cond_12
+    if-eqz v3, :cond_12
 
     .line 190
     invoke-static {}, Lcom/facebook/common/webp/WebpSupportStatus;->loadWebpBitmapFactoryIfExists()Lcom/facebook/common/webp/WebpBitmapFactory;
 
-    move-result-object p1
+    move-result-object v2
 
-    if-eqz p1, :cond_12
+    .line 191
+    if-eqz v2, :cond_12
 
     .line 192
-    new-instance v0, Lcom/facebook/imagepipeline/bitmaps/HoneycombBitmapCreator;
+    new-instance v3, Lcom/facebook/imagepipeline/bitmaps/HoneycombBitmapCreator;
 
     invoke-virtual {p0}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->getPoolFactory()Lcom/facebook/imagepipeline/memory/PoolFactory;
 
-    move-result-object v1
+    move-result-object v4
 
-    invoke-direct {v0, v1}, Lcom/facebook/imagepipeline/bitmaps/HoneycombBitmapCreator;-><init>(Lcom/facebook/imagepipeline/memory/PoolFactory;)V
+    invoke-direct {v3, v4}, Lcom/facebook/imagepipeline/bitmaps/HoneycombBitmapCreator;-><init>(Lcom/facebook/imagepipeline/memory/PoolFactory;)V
 
     .line 193
-    iget-object v1, p0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->mImagePipelineExperiments:Lcom/facebook/imagepipeline/core/ImagePipelineExperiments;
+    .restart local v3    # "bitmapCreator":Lcom/facebook/common/webp/BitmapCreator;
+    invoke-static {v2, v0, v3}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->setWebpBitmapFactory(Lcom/facebook/common/webp/WebpBitmapFactory;Lcom/facebook/imagepipeline/core/ImagePipelineExperiments;Lcom/facebook/common/webp/BitmapCreator;)V
 
-    invoke-static {p1, v1, v0}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->setWebpBitmapFactory(Lcom/facebook/common/webp/WebpBitmapFactory;Lcom/facebook/imagepipeline/core/ImagePipelineExperiments;Lcom/facebook/common/webp/BitmapCreator;)V
-
+    .line 197
+    .end local v3    # "bitmapCreator":Lcom/facebook/common/webp/BitmapCreator;
     :cond_12
     :goto_11
     return-void
@@ -675,6 +720,8 @@
 
 .method synthetic constructor <init>(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;Lcom/facebook/imagepipeline/core/ImagePipelineConfig$1;)V
     .locals 0
+    .param p1, "x0"    # Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;
+    .param p2, "x1"    # Lcom/facebook/imagepipeline/core/ImagePipelineConfig$1;
 
     .line 62
     invoke-direct {p0, p1}, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;-><init>(Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;)V
@@ -692,22 +739,24 @@
 .end method
 
 .method private static getDefaultMainDiskCacheConfig(Landroid/content/Context;)Lcom/facebook/cache/disk/DiskCacheConfig;
-    .locals 0
+    .locals 1
+    .param p0, "context"    # Landroid/content/Context;
 
     .line 215
     invoke-static {p0}, Lcom/facebook/cache/disk/DiskCacheConfig;->newBuilder(Landroid/content/Context;)Lcom/facebook/cache/disk/DiskCacheConfig$Builder;
 
-    move-result-object p0
+    move-result-object v0
 
-    invoke-virtual {p0}, Lcom/facebook/cache/disk/DiskCacheConfig$Builder;->build()Lcom/facebook/cache/disk/DiskCacheConfig;
+    invoke-virtual {v0}, Lcom/facebook/cache/disk/DiskCacheConfig$Builder;->build()Lcom/facebook/cache/disk/DiskCacheConfig;
 
-    move-result-object p0
+    move-result-object v0
 
-    return-object p0
+    return-object v0
 .end method
 
 .method public static newBuilder(Landroid/content/Context;)Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;
     .locals 2
+    .param p0, "context"    # Landroid/content/Context;
 
     .line 327
     new-instance v0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$Builder;
@@ -721,8 +770,6 @@
 
 .method static resetDefaultRequestConfig()V
     .locals 2
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
 
     .line 220
     new-instance v0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig$DefaultImageRequestConfig;
@@ -733,31 +780,42 @@
 
     sput-object v0, Lcom/facebook/imagepipeline/core/ImagePipelineConfig;->sDefaultImageRequestConfig:Lcom/facebook/imagepipeline/core/ImagePipelineConfig$DefaultImageRequestConfig;
 
+    .line 221
     return-void
 .end method
 
 .method private static setWebpBitmapFactory(Lcom/facebook/common/webp/WebpBitmapFactory;Lcom/facebook/imagepipeline/core/ImagePipelineExperiments;Lcom/facebook/common/webp/BitmapCreator;)V
-    .locals 0
+    .locals 1
+    .param p0, "webpBitmapFactory"    # Lcom/facebook/common/webp/WebpBitmapFactory;
+    .param p1, "imagePipelineExperiments"    # Lcom/facebook/imagepipeline/core/ImagePipelineExperiments;
+    .param p2, "bitmapCreator"    # Lcom/facebook/common/webp/BitmapCreator;
 
     .line 203
     sput-object p0, Lcom/facebook/common/webp/WebpSupportStatus;->sWebpBitmapFactory:Lcom/facebook/common/webp/WebpBitmapFactory;
 
+    .line 204
+    nop
+
     .line 205
     invoke-virtual {p1}, Lcom/facebook/imagepipeline/core/ImagePipelineExperiments;->getWebpErrorLogger()Lcom/facebook/common/webp/WebpBitmapFactory$WebpErrorLogger;
 
-    move-result-object p1
+    move-result-object v0
 
-    if-eqz p1, :cond_0
+    .line 206
+    .local v0, "webpErrorLogger":Lcom/facebook/common/webp/WebpBitmapFactory$WebpErrorLogger;
+    if-eqz v0, :cond_0
 
     .line 207
-    invoke-interface {p0, p1}, Lcom/facebook/common/webp/WebpBitmapFactory;->setWebpErrorLogger(Lcom/facebook/common/webp/WebpBitmapFactory$WebpErrorLogger;)V
+    invoke-interface {p0, v0}, Lcom/facebook/common/webp/WebpBitmapFactory;->setWebpErrorLogger(Lcom/facebook/common/webp/WebpBitmapFactory$WebpErrorLogger;)V
 
+    .line 209
     :cond_0
     if-eqz p2, :cond_1
 
     .line 210
     invoke-interface {p0, p2}, Lcom/facebook/common/webp/WebpBitmapFactory;->setBitmapCreator(Lcom/facebook/common/webp/BitmapCreator;)V
 
+    .line 212
     :cond_1
     return-void
 .end method

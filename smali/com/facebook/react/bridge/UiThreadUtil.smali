@@ -34,6 +34,7 @@
 
     invoke-static {v0, v1}, Lcom/facebook/react/bridge/SoftAssertions;->assertCondition(ZLjava/lang/String;)V
 
+    .line 41
     return-void
 .end method
 
@@ -49,6 +50,7 @@
 
     invoke-static {v0, v1}, Lcom/facebook/react/bridge/SoftAssertions;->assertCondition(ZLjava/lang/String;)V
 
+    .line 34
     return-void
 .end method
 
@@ -83,6 +85,7 @@
 
 .method public static runOnUiThread(Ljava/lang/Runnable;)V
     .locals 3
+    .param p0, "runnable"    # Ljava/lang/Runnable;
 
     .line 47
     const-class v0, Lcom/facebook/react/bridge/UiThreadUtil;
@@ -117,16 +120,17 @@
 
     invoke-virtual {v0, p0}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
 
+    .line 53
     return-void
 
-    :catchall_0
-    move-exception p0
-
     .line 51
+    :catchall_0
+    move-exception v1
+
     :try_start_1
     monitor-exit v0
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
-    throw p0
+    throw v1
 .end method

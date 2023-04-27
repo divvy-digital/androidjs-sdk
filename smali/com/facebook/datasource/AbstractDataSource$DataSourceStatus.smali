@@ -34,59 +34,53 @@
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 5
+    .locals 7
 
     .line 33
     new-instance v0, Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;
 
-    const/4 v1, 0x0
+    const-string v1, "IN_PROGRESS"
 
-    const-string v2, "IN_PROGRESS"
+    const/4 v2, 0x0
 
-    invoke-direct {v0, v2, v1}, Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v0, v1, v2}, Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;-><init>(Ljava/lang/String;I)V
 
     sput-object v0, Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;->IN_PROGRESS:Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;
 
     .line 36
-    new-instance v0, Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;
-
-    const/4 v2, 0x1
+    new-instance v1, Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;
 
     const-string v3, "SUCCESS"
 
-    invoke-direct {v0, v3, v2}, Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;-><init>(Ljava/lang/String;I)V
+    const/4 v4, 0x1
 
-    sput-object v0, Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;->SUCCESS:Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;
+    invoke-direct {v1, v3, v4}, Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;-><init>(Ljava/lang/String;I)V
+
+    sput-object v1, Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;->SUCCESS:Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;
 
     .line 39
-    new-instance v0, Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;
+    new-instance v3, Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;
 
-    const/4 v3, 0x2
+    const-string v5, "FAILURE"
 
-    const-string v4, "FAILURE"
+    const/4 v6, 0x2
 
-    invoke-direct {v0, v4, v3}, Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v3, v5, v6}, Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;-><init>(Ljava/lang/String;I)V
 
-    sput-object v0, Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;->FAILURE:Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;
-
-    const/4 v0, 0x3
+    sput-object v3, Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;->FAILURE:Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;
 
     .line 31
-    new-array v0, v0, [Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;
+    const/4 v5, 0x3
 
-    sget-object v4, Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;->IN_PROGRESS:Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;
+    new-array v5, v5, [Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;
 
-    aput-object v4, v0, v1
+    aput-object v0, v5, v2
 
-    sget-object v1, Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;->SUCCESS:Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;
+    aput-object v1, v5, v4
 
-    aput-object v1, v0, v2
+    aput-object v3, v5, v6
 
-    sget-object v1, Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;->FAILURE:Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;
-
-    aput-object v1, v0, v3
-
-    sput-object v0, Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;->$VALUES:[Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;
+    sput-object v5, Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;->$VALUES:[Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;
 
     return-void
 .end method
@@ -107,17 +101,18 @@
 
 .method public static valueOf(Ljava/lang/String;)Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;
     .locals 1
+    .param p0, "name"    # Ljava/lang/String;
 
     .line 31
     const-class v0, Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;
 
     invoke-static {v0, p0}, Ljava/lang/Enum;->valueOf(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
 
-    move-result-object p0
+    move-result-object v0
 
-    check-cast p0, Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;
+    check-cast v0, Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method public static values()[Lcom/facebook/datasource/AbstractDataSource$DataSourceStatus;

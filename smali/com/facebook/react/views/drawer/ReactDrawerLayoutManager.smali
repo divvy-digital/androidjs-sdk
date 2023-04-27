@@ -56,6 +56,8 @@
 
 .method protected addEventEmitters(Lcom/facebook/react/uimanager/ThemedReactContext;Lcom/facebook/react/views/drawer/ReactDrawerLayout;)V
     .locals 2
+    .param p1, "reactContext"    # Lcom/facebook/react/uimanager/ThemedReactContext;
+    .param p2, "view"    # Lcom/facebook/react/views/drawer/ReactDrawerLayout;
 
     .line 52
     new-instance v0, Lcom/facebook/react/views/drawer/ReactDrawerLayoutManager$DrawerEventEmitter;
@@ -65,19 +67,20 @@
     .line 55
     invoke-virtual {p1, v1}, Lcom/facebook/react/uimanager/ThemedReactContext;->getNativeModule(Ljava/lang/Class;)Lcom/facebook/react/bridge/NativeModule;
 
-    move-result-object p1
+    move-result-object v1
 
-    check-cast p1, Lcom/facebook/react/uimanager/UIManagerModule;
+    check-cast v1, Lcom/facebook/react/uimanager/UIManagerModule;
 
-    invoke-virtual {p1}, Lcom/facebook/react/uimanager/UIManagerModule;->getEventDispatcher()Lcom/facebook/react/uimanager/events/EventDispatcher;
+    invoke-virtual {v1}, Lcom/facebook/react/uimanager/UIManagerModule;->getEventDispatcher()Lcom/facebook/react/uimanager/events/EventDispatcher;
 
-    move-result-object p1
+    move-result-object v1
 
-    invoke-direct {v0, p2, p1}, Lcom/facebook/react/views/drawer/ReactDrawerLayoutManager$DrawerEventEmitter;-><init>(Landroid/support/v4/widget/DrawerLayout;Lcom/facebook/react/uimanager/events/EventDispatcher;)V
+    invoke-direct {v0, p2, v1}, Lcom/facebook/react/views/drawer/ReactDrawerLayoutManager$DrawerEventEmitter;-><init>(Landroidx/drawerlayout/widget/DrawerLayout;Lcom/facebook/react/uimanager/events/EventDispatcher;)V
 
     .line 52
-    invoke-virtual {p2, v0}, Lcom/facebook/react/views/drawer/ReactDrawerLayout;->setDrawerListener(Landroid/support/v4/widget/DrawerLayout$DrawerListener;)V
+    invoke-virtual {p2, v0}, Lcom/facebook/react/views/drawer/ReactDrawerLayout;->setDrawerListener(Landroidx/drawerlayout/widget/DrawerLayout$DrawerListener;)V
 
+    .line 56
     return-void
 .end method
 
@@ -93,7 +96,10 @@
 .end method
 
 .method public addView(Lcom/facebook/react/views/drawer/ReactDrawerLayout;Landroid/view/View;I)V
-    .locals 2
+    .locals 3
+    .param p1, "parent"    # Lcom/facebook/react/views/drawer/ReactDrawerLayout;
+    .param p2, "child"    # Landroid/view/View;
+    .param p3, "index"    # I
 
     .line 160
     invoke-virtual {p0, p1}, Lcom/facebook/react/views/drawer/ReactDrawerLayoutManager;->getChildCount(Landroid/view/ViewGroup;)I
@@ -104,6 +110,7 @@
 
     if-ge v0, v1, :cond_2
 
+    .line 164
     if-eqz p3, :cond_1
 
     const/4 v0, 0x1
@@ -114,29 +121,35 @@
 
     .line 165
     :cond_0
-    new-instance p1, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
+    new-instance v0, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
 
-    new-instance p2, Ljava/lang/StringBuilder;
+    new-instance v1, Ljava/lang/StringBuilder;
 
-    invoke-direct {p2}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v0, "The only valid indices for drawer\'s child are 0 or 1. Got "
+    const-string v2, "The only valid indices for drawer\'s child are 0 or 1. Got "
 
-    invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {p2, p3}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+    move-result-object v1
 
-    const-string p3, " instead."
+    invoke-virtual {v1, p3}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    invoke-virtual {p2, p3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v1
 
-    invoke-virtual {p2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    const-string v2, " instead."
 
-    move-result-object p2
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-direct {p1, p2}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+    move-result-object v1
 
-    throw p1
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-direct {v0, v1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+
+    throw v0
 
     .line 168
     :cond_1
@@ -146,17 +159,18 @@
     .line 169
     invoke-virtual {p1}, Lcom/facebook/react/views/drawer/ReactDrawerLayout;->setDrawerProperties()V
 
+    .line 170
     return-void
 
     .line 161
     :cond_2
-    new-instance p1, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
+    new-instance v0, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
 
-    const-string p2, "The Drawer cannot have more than two children"
+    const-string v1, "The Drawer cannot have more than two children"
 
-    invoke-direct {p1, p2}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 .method protected bridge synthetic createViewInstance(Lcom/facebook/react/uimanager/ThemedReactContext;)Landroid/view/View;
@@ -172,6 +186,7 @@
 
 .method protected createViewInstance(Lcom/facebook/react/uimanager/ThemedReactContext;)Lcom/facebook/react/views/drawer/ReactDrawerLayout;
     .locals 1
+    .param p1, "context"    # Lcom/facebook/react/uimanager/ThemedReactContext;
 
     .line 60
     new-instance v0, Lcom/facebook/react/views/drawer/ReactDrawerLayout;
@@ -196,9 +211,9 @@
     .annotation runtime Ljavax/annotation/Nullable;
     .end annotation
 
+    .line 118
     const/4 v0, 0x1
 
-    .line 118
     invoke-static {v0}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
     move-result-object v0
@@ -222,6 +237,8 @@
 
 .method public getDrawerWidth(Lcom/facebook/react/views/drawer/ReactDrawerLayout;F)V
     .locals 1
+    .param p1, "view"    # Lcom/facebook/react/views/drawer/ReactDrawerLayout;
+    .param p2, "width"    # F
     .annotation runtime Lcom/facebook/react/uimanager/annotations/ReactProp;
         defaultFloat = NaNf
         name = "drawerWidth"
@@ -234,7 +251,7 @@
 
     if-eqz v0, :cond_0
 
-    const/4 p2, -0x1
+    const/4 v0, -0x1
 
     goto :goto_0
 
@@ -242,64 +259,83 @@
     :cond_0
     invoke-static {p2}, Lcom/facebook/react/uimanager/PixelUtil;->toPixelFromDIP(F)F
 
-    move-result p2
+    move-result v0
 
-    invoke-static {p2}, Ljava/lang/Math;->round(F)I
+    invoke-static {v0}, Ljava/lang/Math;->round(F)I
 
-    move-result p2
+    move-result v0
+
+    :goto_0
+    nop
 
     .line 76
-    :goto_0
-    invoke-virtual {p1, p2}, Lcom/facebook/react/views/drawer/ReactDrawerLayout;->setDrawerWidth(I)V
+    .local v0, "widthInPx":I
+    invoke-virtual {p1, v0}, Lcom/facebook/react/views/drawer/ReactDrawerLayout;->setDrawerWidth(I)V
 
+    .line 77
     return-void
 .end method
 
 .method public getExportedCustomDirectEventTypeConstants()Ljava/util/Map;
-    .locals 10
+    .locals 9
     .annotation runtime Ljavax/annotation/Nullable;
     .end annotation
 
-    const-string v0, "registrationName"
-
-    const-string v1, "onDrawerSlide"
+    .line 145
+    const-string v0, "topDrawerSlide"
 
     .line 146
-    invoke-static {v0, v1}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+    const-string v1, "registrationName"
 
-    move-result-object v3
+    const-string v2, "onDrawerSlide"
 
-    const-string v1, "onDrawerOpen"
+    invoke-static {v1, v2}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+
+    move-result-object v2
+
+    const-string v3, "topDrawerOpened"
 
     .line 147
-    invoke-static {v0, v1}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+    const-string v4, "onDrawerOpen"
 
-    move-result-object v5
+    invoke-static {v1, v4}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
 
-    const-string v1, "onDrawerClose"
+    move-result-object v4
+
+    const-string v5, "topDrawerClosed"
 
     .line 148
-    invoke-static {v0, v1}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+    const-string v6, "onDrawerClose"
 
-    move-result-object v7
+    invoke-static {v1, v6}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
 
-    const-string v1, "onDrawerStateChanged"
+    move-result-object v6
+
+    const-string v7, "topDrawerStateChanged"
 
     .line 149
-    invoke-static {v0, v1}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+    const-string v8, "onDrawerStateChanged"
 
-    move-result-object v9
+    invoke-static {v1, v8}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
 
-    const-string v2, "topDrawerSlide"
-
-    const-string v4, "topDrawerOpened"
-
-    const-string v6, "topDrawerClosed"
-
-    const-string v8, "topDrawerStateChanged"
+    move-result-object v8
 
     .line 145
-    invoke-static/range {v2 .. v9}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+    move-object v1, v2
+
+    move-object v2, v3
+
+    move-object v3, v4
+
+    move-object v4, v5
+
+    move-object v5, v6
+
+    move-object v6, v7
+
+    move-object v7, v8
+
+    invoke-static/range {v0 .. v7}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
 
     move-result-object v0
 
@@ -311,9 +347,12 @@
     .annotation runtime Ljavax/annotation/Nullable;
     .end annotation
 
-    const v0, 0x800003
+    .line 138
+    nop
 
     .line 140
+    const v0, 0x800003
+
     invoke-static {v0}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
     move-result-object v0
@@ -332,9 +371,9 @@
 
     move-result-object v0
 
+    .line 138
     const-string v1, "DrawerPosition"
 
-    .line 138
     invoke-static {v1, v0}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
 
     move-result-object v0
@@ -345,6 +384,7 @@
 .method public getName()Ljava/lang/String;
     .locals 1
 
+    .line 47
     const-string v0, "AndroidDrawerLayout"
 
     return-object v0
@@ -353,6 +393,7 @@
 .method public needsCustomLayoutForChildren()Z
     .locals 1
 
+    .line 113
     const/4 v0, 0x1
 
     return v0
@@ -375,38 +416,48 @@
 
 .method public receiveCommand(Lcom/facebook/react/views/drawer/ReactDrawerLayout;ILcom/facebook/react/bridge/ReadableArray;)V
     .locals 0
-    .param p3    # Lcom/facebook/react/bridge/ReadableArray;
+    .param p1, "root"    # Lcom/facebook/react/views/drawer/ReactDrawerLayout;
+    .param p2, "commandId"    # I
+    .param p3, "args"    # Lcom/facebook/react/bridge/ReadableArray;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
 
-    const/4 p3, 0x1
-
-    if-eq p2, p3, :cond_1
-
-    const/4 p3, 0x2
-
-    if-eq p2, p3, :cond_0
+    .line 126
+    packed-switch p2, :pswitch_data_0
 
     goto :goto_0
 
     .line 131
-    :cond_0
+    :pswitch_0
     invoke-virtual {p1}, Lcom/facebook/react/views/drawer/ReactDrawerLayout;->closeDrawer()V
 
     goto :goto_0
 
     .line 128
-    :cond_1
+    :pswitch_1
     invoke-virtual {p1}, Lcom/facebook/react/views/drawer/ReactDrawerLayout;->openDrawer()V
 
+    .line 129
+    nop
+
+    .line 134
     :goto_0
     return-void
+
+    nop
+
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method public setDrawerLockMode(Lcom/facebook/react/views/drawer/ReactDrawerLayout;Ljava/lang/String;)V
-    .locals 2
-    .param p2    # Ljava/lang/String;
+    .locals 3
+    .param p1, "view"    # Lcom/facebook/react/views/drawer/ReactDrawerLayout;
+    .param p2, "drawerLockMode"    # Ljava/lang/String;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -414,11 +465,11 @@
         name = "drawerLockMode"
     .end annotation
 
+    .line 81
     if-eqz p2, :cond_3
 
     const-string v0, "unlocked"
 
-    .line 81
     invoke-virtual {v0, p2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
     move-result v0
@@ -427,80 +478,88 @@
 
     goto :goto_0
 
+    .line 83
     :cond_0
     const-string v0, "locked-closed"
 
-    .line 83
     invoke-virtual {v0, p2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
     move-result v0
 
     if-eqz v0, :cond_1
 
-    const/4 p2, 0x1
-
     .line 84
-    invoke-virtual {p1, p2}, Lcom/facebook/react/views/drawer/ReactDrawerLayout;->setDrawerLockMode(I)V
+    const/4 v0, 0x1
+
+    invoke-virtual {p1, v0}, Lcom/facebook/react/views/drawer/ReactDrawerLayout;->setDrawerLockMode(I)V
 
     goto :goto_1
 
+    .line 85
     :cond_1
     const-string v0, "locked-open"
 
-    .line 85
     invoke-virtual {v0, p2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
     move-result v0
 
     if-eqz v0, :cond_2
 
-    const/4 p2, 0x2
-
     .line 86
-    invoke-virtual {p1, p2}, Lcom/facebook/react/views/drawer/ReactDrawerLayout;->setDrawerLockMode(I)V
+    const/4 v0, 0x2
+
+    invoke-virtual {p1, v0}, Lcom/facebook/react/views/drawer/ReactDrawerLayout;->setDrawerLockMode(I)V
 
     goto :goto_1
 
     .line 88
     :cond_2
-    new-instance p1, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
+    new-instance v0, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
 
-    new-instance v0, Ljava/lang/StringBuilder;
+    new-instance v1, Ljava/lang/StringBuilder;
 
-    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v1, "Unknown drawerLockMode "
+    const-string v2, "Unknown drawerLockMode "
 
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v0, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v1
 
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual {v1, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object p2
+    move-result-object v1
 
-    invoke-direct {p1, p2}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    throw p1
+    move-result-object v1
 
-    :cond_3
-    :goto_0
-    const/4 p2, 0x0
+    invoke-direct {v0, v1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+
+    throw v0
 
     .line 82
-    invoke-virtual {p1, p2}, Lcom/facebook/react/views/drawer/ReactDrawerLayout;->setDrawerLockMode(I)V
+    :cond_3
+    :goto_0
+    const/4 v0, 0x0
 
+    invoke-virtual {p1, v0}, Lcom/facebook/react/views/drawer/ReactDrawerLayout;->setDrawerLockMode(I)V
+
+    .line 90
     :goto_1
     return-void
 .end method
 
 .method public setDrawerPosition(Lcom/facebook/react/views/drawer/ReactDrawerLayout;I)V
-    .locals 2
+    .locals 3
+    .param p1, "view"    # Lcom/facebook/react/views/drawer/ReactDrawerLayout;
+    .param p2, "drawerPosition"    # I
     .annotation runtime Lcom/facebook/react/uimanager/annotations/ReactProp;
         defaultInt = 0x800003
         name = "drawerPosition"
     .end annotation
 
+    .line 65
     const v0, 0x800003
 
     if-eq v0, p2, :cond_1
@@ -513,31 +572,36 @@
 
     .line 68
     :cond_0
-    new-instance p1, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
+    new-instance v0, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
 
-    new-instance v0, Ljava/lang/StringBuilder;
+    new-instance v1, Ljava/lang/StringBuilder;
 
-    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v1, "Unknown drawerPosition "
+    const-string v2, "Unknown drawerPosition "
 
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v0, p2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+    move-result-object v1
 
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual {v1, p2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    move-result-object p2
+    move-result-object v1
 
-    invoke-direct {p1, p2}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    throw p1
+    move-result-object v1
+
+    invoke-direct {v0, v1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+
+    throw v0
 
     .line 66
     :cond_1
     :goto_0
     invoke-virtual {p1, p2}, Lcom/facebook/react/views/drawer/ReactDrawerLayout;->setDrawerPosition(I)V
 
+    .line 70
     return-void
 .end method
 
@@ -554,13 +618,11 @@
 
 .method public setElevation(Lcom/facebook/react/views/drawer/ReactDrawerLayout;F)V
     .locals 6
+    .param p1, "view"    # Lcom/facebook/react/views/drawer/ReactDrawerLayout;
+    .param p2, "elevation"    # F
 
     .line 94
-    sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    const/16 v1, 0x15
-
-    if-lt v0, v1, :cond_0
+    nop
 
     .line 99
     :try_start_0
@@ -583,35 +645,43 @@
     move-result-object v0
 
     .line 100
+    .local v0, "method":Ljava/lang/reflect/Method;
     new-array v1, v2, [Ljava/lang/Object;
 
     invoke-static {p2}, Lcom/facebook/react/uimanager/PixelUtil;->toPixelFromDIP(F)F
 
-    move-result p2
+    move-result v2
 
-    invoke-static {p2}, Ljava/lang/Float;->valueOf(F)Ljava/lang/Float;
+    invoke-static {v2}, Ljava/lang/Float;->valueOf(F)Ljava/lang/Float;
 
-    move-result-object p2
+    move-result-object v2
 
-    aput-object p2, v1, v5
+    aput-object v2, v1, v5
 
     invoke-virtual {v0, p1, v1}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
     :try_end_0
     .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
 
+    .line 106
+    nop
+
+    .end local v0    # "method":Ljava/lang/reflect/Method;
     goto :goto_0
 
+    .line 101
     :catch_0
-    move-exception p1
-
-    const-string p2, "ReactNative"
-
-    const-string v0, "setDrawerElevation is not available in this version of the support lib."
+    move-exception v0
 
     .line 102
-    invoke-static {p2, v0, p1}, Lcom/facebook/common/logging/FLog;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V
+    .local v0, "ex":Ljava/lang/Exception;
+    const-string v1, "ReactNative"
 
-    :cond_0
+    const-string v2, "setDrawerElevation is not available in this version of the support lib."
+
+    invoke-static {v1, v2, v0}, Lcom/facebook/common/logging/FLog;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V
+
+    .line 108
+    .end local v0    # "ex":Ljava/lang/Exception;
     :goto_0
     return-void
 .end method

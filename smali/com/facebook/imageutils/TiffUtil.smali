@@ -52,134 +52,168 @@
 .end method
 
 .method public static getAutoRotateAngleFromOrientation(I)I
-    .locals 2
+    .locals 1
+    .param p0, "orientation"    # I
 
+    .line 34
     const/4 v0, 0x0
 
-    if-eqz p0, :cond_3
+    packed-switch p0, :pswitch_data_0
 
-    const/4 v1, 0x1
+    .line 45
+    :pswitch_0
+    return v0
 
-    if-eq p0, v1, :cond_3
-
-    const/4 v1, 0x3
-
-    if-eq p0, v1, :cond_2
-
-    const/4 v1, 0x6
-
-    if-eq p0, v1, :cond_1
-
-    const/16 v1, 0x8
-
-    if-eq p0, v1, :cond_0
+    .line 43
+    :pswitch_1
+    const/16 v0, 0x10e
 
     return v0
 
-    :cond_0
-    const/16 p0, 0x10e
+    .line 41
+    :pswitch_2
+    const/16 v0, 0x5a
 
-    return p0
-
-    :cond_1
-    const/16 p0, 0x5a
-
-    return p0
-
-    :cond_2
-    const/16 p0, 0xb4
-
-    return p0
-
-    :cond_3
     return v0
+
+    .line 39
+    :pswitch_3
+    const/16 v0, 0xb4
+
+    return v0
+
+    .line 37
+    :pswitch_4
+    return v0
+
+    nop
+
+    :pswitch_data_0
+    .packed-switch 0x0
+        :pswitch_4
+        :pswitch_4
+        :pswitch_0
+        :pswitch_3
+        :pswitch_0
+        :pswitch_0
+        :pswitch_2
+        :pswitch_0
+        :pswitch_1
+    .end packed-switch
 .end method
 
 .method private static getOrientationFromTiffEntry(Ljava/io/InputStream;IZ)I
-    .locals 3
+    .locals 5
+    .param p0, "is"    # Ljava/io/InputStream;
+    .param p1, "length"    # I
+    .param p2, "isLittleEndian"    # Z
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
         }
     .end annotation
 
-    const/4 v0, 0x0
+    .line 162
+    const/16 v0, 0xa
 
-    const/16 v1, 0xa
+    const/4 v1, 0x0
 
-    if-ge p1, v1, :cond_0
+    if-ge p1, v0, :cond_0
 
-    return v0
-
-    :cond_0
-    const/4 p1, 0x2
+    .line 163
+    return v1
 
     .line 166
-    invoke-static {p0, p1, p2}, Lcom/facebook/imageutils/StreamProcessor;->readPackedInt(Ljava/io/InputStream;IZ)I
+    :cond_0
+    const/4 v0, 0x2
 
-    move-result v1
+    invoke-static {p0, v0, p2}, Lcom/facebook/imageutils/StreamProcessor;->readPackedInt(Ljava/io/InputStream;IZ)I
 
-    const/4 v2, 0x3
+    move-result v2
 
-    if-eq v1, v2, :cond_1
+    .line 167
+    .local v2, "type":I
+    const/4 v3, 0x3
 
-    return v0
+    if-eq v2, v3, :cond_1
 
-    :cond_1
-    const/4 v1, 0x4
+    .line 168
+    return v1
 
     .line 171
-    invoke-static {p0, v1, p2}, Lcom/facebook/imageutils/StreamProcessor;->readPackedInt(Ljava/io/InputStream;IZ)I
+    :cond_1
+    const/4 v3, 0x4
 
-    move-result v1
+    invoke-static {p0, v3, p2}, Lcom/facebook/imageutils/StreamProcessor;->readPackedInt(Ljava/io/InputStream;IZ)I
 
-    const/4 v2, 0x1
+    move-result v3
 
-    if-eq v1, v2, :cond_2
+    .line 172
+    .local v3, "count":I
+    const/4 v4, 0x1
 
-    return v0
+    if-eq v3, v4, :cond_2
+
+    .line 173
+    return v1
 
     .line 175
     :cond_2
-    invoke-static {p0, p1, p2}, Lcom/facebook/imageutils/StreamProcessor;->readPackedInt(Ljava/io/InputStream;IZ)I
+    invoke-static {p0, v0, p2}, Lcom/facebook/imageutils/StreamProcessor;->readPackedInt(Ljava/io/InputStream;IZ)I
+
+    move-result v1
+
+    .line 176
+    .local v1, "value":I
+    invoke-static {p0, v0, p2}, Lcom/facebook/imageutils/StreamProcessor;->readPackedInt(Ljava/io/InputStream;IZ)I
 
     move-result v0
 
-    .line 176
-    invoke-static {p0, p1, p2}, Lcom/facebook/imageutils/StreamProcessor;->readPackedInt(Ljava/io/InputStream;IZ)I
-
-    return v0
+    .line 177
+    .local v0, "padding":I
+    return v1
 .end method
 
 .method private static moveToTiffEntryWithTag(Ljava/io/InputStream;IZI)I
     .locals 6
+    .param p0, "is"    # Ljava/io/InputStream;
+    .param p1, "length"    # I
+    .param p2, "isLittleEndian"    # Z
+    .param p3, "tagToFind"    # I
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
         }
     .end annotation
 
-    const/4 v0, 0x0
+    .line 133
+    const/16 v0, 0xe
 
-    const/16 v1, 0xe
+    const/4 v1, 0x0
 
-    if-ge p1, v1, :cond_0
+    if-ge p1, v0, :cond_0
 
-    return v0
-
-    :cond_0
-    const/4 v1, 0x2
+    .line 134
+    return v1
 
     .line 139
-    invoke-static {p0, v1, p2}, Lcom/facebook/imageutils/StreamProcessor;->readPackedInt(Ljava/io/InputStream;IZ)I
+    :cond_0
+    const/4 v0, 0x2
+
+    invoke-static {p0, v0, p2}, Lcom/facebook/imageutils/StreamProcessor;->readPackedInt(Ljava/io/InputStream;IZ)I
 
     move-result v2
 
+    .line 140
+    .local v2, "numEntries":I
     add-int/lit8 p1, p1, -0x2
 
+    .line 141
     :goto_0
     add-int/lit8 v3, v2, -0x1
 
+    .end local v2    # "numEntries":I
+    .local v3, "numEntries":I
     if-lez v2, :cond_2
 
     const/16 v2, 0xc
@@ -187,34 +221,46 @@
     if-lt p1, v2, :cond_2
 
     .line 142
-    invoke-static {p0, v1, p2}, Lcom/facebook/imageutils/StreamProcessor;->readPackedInt(Ljava/io/InputStream;IZ)I
+    invoke-static {p0, v0, p2}, Lcom/facebook/imageutils/StreamProcessor;->readPackedInt(Ljava/io/InputStream;IZ)I
 
     move-result v2
 
+    .line 143
+    .local v2, "tag":I
     add-int/lit8 p1, p1, -0x2
 
+    .line 144
     if-ne v2, p3, :cond_1
 
+    .line 145
     return p1
 
+    .line 147
     :cond_1
     const-wide/16 v4, 0xa
 
-    .line 147
     invoke-virtual {p0, v4, v5}, Ljava/io/InputStream;->skip(J)J
 
+    .line 148
+    nop
+
+    .end local v2    # "tag":I
     add-int/lit8 p1, p1, -0xa
 
+    .line 149
     move v2, v3
 
     goto :goto_0
 
+    .line 150
     :cond_2
-    return v0
+    return v1
 .end method
 
 .method public static readOrientationFromTIFF(Ljava/io/InputStream;I)I
     .locals 4
+    .param p0, "is"    # Ljava/io/InputStream;
+    .param p1, "length"    # I
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -229,6 +275,7 @@
     invoke-direct {v0, v1}, Lcom/facebook/imageutils/TiffUtil$TiffHeader;-><init>(Lcom/facebook/imageutils/TiffUtil$1;)V
 
     .line 57
+    .local v0, "tiffHeader":Lcom/facebook/imageutils/TiffUtil$TiffHeader;
     invoke-static {p0, p1, v0}, Lcom/facebook/imageutils/TiffUtil;->readTiffHeader(Ljava/io/InputStream;ILcom/facebook/imageutils/TiffUtil$TiffHeader;)I
 
     move-result p1
@@ -238,71 +285,81 @@
 
     add-int/lit8 v1, v1, -0x8
 
+    .line 63
+    .local v1, "toSkip":I
     if-eqz p1, :cond_1
 
     if-le v1, p1, :cond_0
 
     goto :goto_0
 
+    .line 66
     :cond_0
     int-to-long v2, v1
 
-    .line 66
     invoke-virtual {p0, v2, v3}, Ljava/io/InputStream;->skip(J)J
 
+    .line 67
     sub-int/2addr p1, v1
 
     .line 70
-    iget-boolean v1, v0, Lcom/facebook/imageutils/TiffUtil$TiffHeader;->isLittleEndian:Z
+    iget-boolean v2, v0, Lcom/facebook/imageutils/TiffUtil$TiffHeader;->isLittleEndian:Z
 
-    const/16 v2, 0x112
+    const/16 v3, 0x112
 
-    invoke-static {p0, p1, v1, v2}, Lcom/facebook/imageutils/TiffUtil;->moveToTiffEntryWithTag(Ljava/io/InputStream;IZI)I
+    invoke-static {p0, p1, v2, v3}, Lcom/facebook/imageutils/TiffUtil;->moveToTiffEntryWithTag(Ljava/io/InputStream;IZI)I
 
     move-result p1
 
     .line 73
-    iget-boolean v0, v0, Lcom/facebook/imageutils/TiffUtil$TiffHeader;->isLittleEndian:Z
+    iget-boolean v2, v0, Lcom/facebook/imageutils/TiffUtil$TiffHeader;->isLittleEndian:Z
 
-    invoke-static {p0, p1, v0}, Lcom/facebook/imageutils/TiffUtil;->getOrientationFromTiffEntry(Ljava/io/InputStream;IZ)I
+    invoke-static {p0, p1, v2}, Lcom/facebook/imageutils/TiffUtil;->getOrientationFromTiffEntry(Ljava/io/InputStream;IZ)I
 
-    move-result p0
+    move-result v2
 
-    return p0
+    return v2
 
+    .line 64
     :cond_1
     :goto_0
-    const/4 p0, 0x0
+    const/4 v2, 0x0
 
-    return p0
+    return v2
 .end method
 
 .method private static readTiffHeader(Ljava/io/InputStream;ILcom/facebook/imageutils/TiffUtil$TiffHeader;)I
     .locals 6
+    .param p0, "is"    # Ljava/io/InputStream;
+    .param p1, "length"    # I
+    .param p2, "tiffHeader"    # Lcom/facebook/imageutils/TiffUtil$TiffHeader;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
         }
     .end annotation
 
-    const/16 v0, 0x8
+    .line 94
+    const/4 v0, 0x0
 
-    const/4 v1, 0x0
+    const/16 v1, 0x8
 
-    if-gt p1, v0, :cond_0
+    if-gt p1, v1, :cond_0
 
-    return v1
+    .line 95
+    return v0
 
+    .line 99
     :cond_0
     const/4 v2, 0x4
 
-    .line 99
-    invoke-static {p0, v2, v1}, Lcom/facebook/imageutils/StreamProcessor;->readPackedInt(Ljava/io/InputStream;IZ)I
+    invoke-static {p0, v2, v0}, Lcom/facebook/imageutils/StreamProcessor;->readPackedInt(Ljava/io/InputStream;IZ)I
 
     move-result v3
 
     iput v3, p2, Lcom/facebook/imageutils/TiffUtil$TiffHeader;->byteOrder:I
 
+    .line 100
     add-int/lit8 p1, p1, -0x4
 
     .line 101
@@ -319,13 +376,14 @@
     if-eq v3, v5, :cond_1
 
     .line 103
-    sget-object p0, Lcom/facebook/imageutils/TiffUtil;->TAG:Ljava/lang/Class;
+    sget-object v1, Lcom/facebook/imageutils/TiffUtil;->TAG:Ljava/lang/Class;
 
-    const-string p1, "Invalid TIFF header"
+    const-string v2, "Invalid TIFF header"
 
-    invoke-static {p0, p1}, Lcom/facebook/common/logging/FLog;->e(Ljava/lang/Class;Ljava/lang/String;)V
+    invoke-static {v1, v2}, Lcom/facebook/common/logging/FLog;->e(Ljava/lang/Class;Ljava/lang/String;)V
 
-    return v1
+    .line 104
+    return v0
 
     .line 106
     :cond_1
@@ -348,36 +406,39 @@
 
     invoke-static {p0, v2, v3}, Lcom/facebook/imageutils/StreamProcessor;->readPackedInt(Ljava/io/InputStream;IZ)I
 
-    move-result p0
+    move-result v2
 
-    iput p0, p2, Lcom/facebook/imageutils/TiffUtil$TiffHeader;->firstIfdOffset:I
+    iput v2, p2, Lcom/facebook/imageutils/TiffUtil$TiffHeader;->firstIfdOffset:I
 
+    .line 110
     add-int/lit8 p1, p1, -0x4
 
     .line 111
-    iget p0, p2, Lcom/facebook/imageutils/TiffUtil$TiffHeader;->firstIfdOffset:I
+    iget v2, p2, Lcom/facebook/imageutils/TiffUtil$TiffHeader;->firstIfdOffset:I
 
-    if-lt p0, v0, :cond_4
+    if-lt v2, v1, :cond_4
 
-    iget p0, p2, Lcom/facebook/imageutils/TiffUtil$TiffHeader;->firstIfdOffset:I
+    iget v2, p2, Lcom/facebook/imageutils/TiffUtil$TiffHeader;->firstIfdOffset:I
 
-    sub-int/2addr p0, v0
+    sub-int/2addr v2, v1
 
-    if-le p0, p1, :cond_3
+    if-le v2, p1, :cond_3
 
     goto :goto_1
 
+    .line 116
     :cond_3
     return p1
 
     .line 112
     :cond_4
     :goto_1
-    sget-object p0, Lcom/facebook/imageutils/TiffUtil;->TAG:Ljava/lang/Class;
+    sget-object v1, Lcom/facebook/imageutils/TiffUtil;->TAG:Ljava/lang/Class;
 
-    const-string p1, "Invalid offset"
+    const-string v2, "Invalid offset"
 
-    invoke-static {p0, p1}, Lcom/facebook/common/logging/FLog;->e(Ljava/lang/Class;Ljava/lang/String;)V
+    invoke-static {v1, v2}, Lcom/facebook/common/logging/FLog;->e(Ljava/lang/Class;Ljava/lang/String;)V
 
-    return v1
+    .line 113
+    return v0
 .end method

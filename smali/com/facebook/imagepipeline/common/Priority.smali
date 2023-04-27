@@ -25,59 +25,53 @@
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 5
+    .locals 7
 
     .line 24
     new-instance v0, Lcom/facebook/imagepipeline/common/Priority;
 
-    const/4 v1, 0x0
+    const-string v1, "LOW"
 
-    const-string v2, "LOW"
+    const/4 v2, 0x0
 
-    invoke-direct {v0, v2, v1}, Lcom/facebook/imagepipeline/common/Priority;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v0, v1, v2}, Lcom/facebook/imagepipeline/common/Priority;-><init>(Ljava/lang/String;I)V
 
     sput-object v0, Lcom/facebook/imagepipeline/common/Priority;->LOW:Lcom/facebook/imagepipeline/common/Priority;
 
     .line 29
-    new-instance v0, Lcom/facebook/imagepipeline/common/Priority;
-
-    const/4 v2, 0x1
+    new-instance v1, Lcom/facebook/imagepipeline/common/Priority;
 
     const-string v3, "MEDIUM"
 
-    invoke-direct {v0, v3, v2}, Lcom/facebook/imagepipeline/common/Priority;-><init>(Ljava/lang/String;I)V
+    const/4 v4, 0x1
 
-    sput-object v0, Lcom/facebook/imagepipeline/common/Priority;->MEDIUM:Lcom/facebook/imagepipeline/common/Priority;
+    invoke-direct {v1, v3, v4}, Lcom/facebook/imagepipeline/common/Priority;-><init>(Ljava/lang/String;I)V
+
+    sput-object v1, Lcom/facebook/imagepipeline/common/Priority;->MEDIUM:Lcom/facebook/imagepipeline/common/Priority;
 
     .line 34
-    new-instance v0, Lcom/facebook/imagepipeline/common/Priority;
+    new-instance v3, Lcom/facebook/imagepipeline/common/Priority;
 
-    const/4 v3, 0x2
+    const-string v5, "HIGH"
 
-    const-string v4, "HIGH"
+    const/4 v6, 0x2
 
-    invoke-direct {v0, v4, v3}, Lcom/facebook/imagepipeline/common/Priority;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v3, v5, v6}, Lcom/facebook/imagepipeline/common/Priority;-><init>(Ljava/lang/String;I)V
 
-    sput-object v0, Lcom/facebook/imagepipeline/common/Priority;->HIGH:Lcom/facebook/imagepipeline/common/Priority;
-
-    const/4 v0, 0x3
+    sput-object v3, Lcom/facebook/imagepipeline/common/Priority;->HIGH:Lcom/facebook/imagepipeline/common/Priority;
 
     .line 15
-    new-array v0, v0, [Lcom/facebook/imagepipeline/common/Priority;
+    const/4 v5, 0x3
 
-    sget-object v4, Lcom/facebook/imagepipeline/common/Priority;->LOW:Lcom/facebook/imagepipeline/common/Priority;
+    new-array v5, v5, [Lcom/facebook/imagepipeline/common/Priority;
 
-    aput-object v4, v0, v1
+    aput-object v0, v5, v2
 
-    sget-object v1, Lcom/facebook/imagepipeline/common/Priority;->MEDIUM:Lcom/facebook/imagepipeline/common/Priority;
+    aput-object v1, v5, v4
 
-    aput-object v1, v0, v2
+    aput-object v3, v5, v6
 
-    sget-object v1, Lcom/facebook/imagepipeline/common/Priority;->HIGH:Lcom/facebook/imagepipeline/common/Priority;
-
-    aput-object v1, v0, v3
-
-    sput-object v0, Lcom/facebook/imagepipeline/common/Priority;->$VALUES:[Lcom/facebook/imagepipeline/common/Priority;
+    sput-object v5, Lcom/facebook/imagepipeline/common/Priority;->$VALUES:[Lcom/facebook/imagepipeline/common/Priority;
 
     return-void
 .end method
@@ -98,22 +92,26 @@
 
 .method public static getHigherPriority(Lcom/facebook/imagepipeline/common/Priority;Lcom/facebook/imagepipeline/common/Priority;)Lcom/facebook/imagepipeline/common/Priority;
     .locals 2
-    .param p0    # Lcom/facebook/imagepipeline/common/Priority;
+    .param p0, "priority1"    # Lcom/facebook/imagepipeline/common/Priority;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
-    .param p1    # Lcom/facebook/imagepipeline/common/Priority;
+    .param p1, "priority2"    # Lcom/facebook/imagepipeline/common/Priority;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
 
+    .line 45
     if-nez p0, :cond_0
 
+    .line 46
     return-object p1
 
+    .line 48
     :cond_0
     if-nez p1, :cond_1
 
+    .line 49
     return-object p0
 
     .line 51
@@ -128,25 +126,28 @@
 
     if-le v0, v1, :cond_2
 
+    .line 52
     return-object p0
 
+    .line 54
     :cond_2
     return-object p1
 .end method
 
 .method public static valueOf(Ljava/lang/String;)Lcom/facebook/imagepipeline/common/Priority;
     .locals 1
+    .param p0, "name"    # Ljava/lang/String;
 
     .line 15
     const-class v0, Lcom/facebook/imagepipeline/common/Priority;
 
     invoke-static {v0, p0}, Ljava/lang/Enum;->valueOf(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
 
-    move-result-object p0
+    move-result-object v0
 
-    check-cast p0, Lcom/facebook/imagepipeline/common/Priority;
+    check-cast v0, Lcom/facebook/imagepipeline/common/Priority;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method public static values()[Lcom/facebook/imagepipeline/common/Priority;

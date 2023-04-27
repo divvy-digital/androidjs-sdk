@@ -62,277 +62,273 @@
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 16
+    .locals 20
 
     .line 21
     new-instance v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
 
-    const/4 v1, 0x0
+    const-string v1, "READ_DECODE"
 
-    const-string v2, "READ_DECODE"
+    const/4 v2, 0x0
 
-    invoke-direct {v0, v2, v1}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v0, v1, v2}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
 
     sput-object v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->READ_DECODE:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
 
     .line 22
-    new-instance v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
-
-    const/4 v2, 0x1
+    new-instance v1, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
 
     const-string v3, "READ_FILE"
 
-    invoke-direct {v0, v3, v2}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
+    const/4 v4, 0x1
 
-    sput-object v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->READ_FILE:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+    invoke-direct {v1, v3, v4}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
+
+    sput-object v1, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->READ_FILE:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
 
     .line 23
-    new-instance v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+    new-instance v3, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
 
-    const/4 v3, 0x2
+    const-string v5, "READ_FILE_NOT_FOUND"
 
-    const-string v4, "READ_FILE_NOT_FOUND"
+    const/4 v6, 0x2
 
-    invoke-direct {v0, v4, v3}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v3, v5, v6}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
 
-    sput-object v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->READ_FILE_NOT_FOUND:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+    sput-object v3, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->READ_FILE_NOT_FOUND:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
 
     .line 24
-    new-instance v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+    new-instance v5, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
 
-    const/4 v4, 0x3
+    const-string v7, "READ_INVALID_ENTRY"
 
-    const-string v5, "READ_INVALID_ENTRY"
+    const/4 v8, 0x3
 
-    invoke-direct {v0, v5, v4}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v5, v7, v8}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
 
-    sput-object v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->READ_INVALID_ENTRY:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+    sput-object v5, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->READ_INVALID_ENTRY:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
 
     .line 26
-    new-instance v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+    new-instance v7, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
 
-    const/4 v5, 0x4
+    const-string v9, "WRITE_ENCODE"
 
-    const-string v6, "WRITE_ENCODE"
+    const/4 v10, 0x4
 
-    invoke-direct {v0, v6, v5}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v7, v9, v10}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
 
-    sput-object v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->WRITE_ENCODE:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+    sput-object v7, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->WRITE_ENCODE:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
 
     .line 27
-    new-instance v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+    new-instance v9, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
 
-    const/4 v6, 0x5
+    const-string v11, "WRITE_CREATE_TEMPFILE"
 
-    const-string v7, "WRITE_CREATE_TEMPFILE"
+    const/4 v12, 0x5
 
-    invoke-direct {v0, v7, v6}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v9, v11, v12}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
 
-    sput-object v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->WRITE_CREATE_TEMPFILE:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+    sput-object v9, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->WRITE_CREATE_TEMPFILE:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
 
     .line 28
-    new-instance v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+    new-instance v11, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
 
-    const/4 v7, 0x6
+    const-string v13, "WRITE_UPDATE_FILE_NOT_FOUND"
 
-    const-string v8, "WRITE_UPDATE_FILE_NOT_FOUND"
+    const/4 v14, 0x6
 
-    invoke-direct {v0, v8, v7}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v11, v13, v14}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
 
-    sput-object v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->WRITE_UPDATE_FILE_NOT_FOUND:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+    sput-object v11, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->WRITE_UPDATE_FILE_NOT_FOUND:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
 
     .line 29
-    new-instance v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+    new-instance v13, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
 
-    const/4 v8, 0x7
+    const-string v15, "WRITE_RENAME_FILE_TEMPFILE_NOT_FOUND"
 
-    const-string v9, "WRITE_RENAME_FILE_TEMPFILE_NOT_FOUND"
+    const/4 v14, 0x7
 
-    invoke-direct {v0, v9, v8}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v13, v15, v14}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
 
-    sput-object v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->WRITE_RENAME_FILE_TEMPFILE_NOT_FOUND:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+    sput-object v13, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->WRITE_RENAME_FILE_TEMPFILE_NOT_FOUND:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
 
     .line 30
-    new-instance v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+    new-instance v15, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
 
-    const/16 v9, 0x8
+    const-string v14, "WRITE_RENAME_FILE_TEMPFILE_PARENT_NOT_FOUND"
 
-    const-string v10, "WRITE_RENAME_FILE_TEMPFILE_PARENT_NOT_FOUND"
+    const/16 v12, 0x8
 
-    invoke-direct {v0, v10, v9}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v15, v14, v12}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
 
-    sput-object v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->WRITE_RENAME_FILE_TEMPFILE_PARENT_NOT_FOUND:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+    sput-object v15, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->WRITE_RENAME_FILE_TEMPFILE_PARENT_NOT_FOUND:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
 
     .line 31
-    new-instance v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+    new-instance v14, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+
+    const-string v12, "WRITE_RENAME_FILE_OTHER"
 
     const/16 v10, 0x9
 
-    const-string v11, "WRITE_RENAME_FILE_OTHER"
+    invoke-direct {v14, v12, v10}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
 
-    invoke-direct {v0, v11, v10}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
-
-    sput-object v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->WRITE_RENAME_FILE_OTHER:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+    sput-object v14, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->WRITE_RENAME_FILE_OTHER:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
 
     .line 32
-    new-instance v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+    new-instance v12, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
 
-    const/16 v11, 0xa
+    const-string v10, "WRITE_CREATE_DIR"
 
-    const-string v12, "WRITE_CREATE_DIR"
+    const/16 v8, 0xa
 
-    invoke-direct {v0, v12, v11}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v12, v10, v8}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
 
-    sput-object v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->WRITE_CREATE_DIR:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+    sput-object v12, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->WRITE_CREATE_DIR:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
 
     .line 33
-    new-instance v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+    new-instance v10, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
 
-    const/16 v12, 0xb
+    const-string v8, "WRITE_CALLBACK_ERROR"
 
-    const-string v13, "WRITE_CALLBACK_ERROR"
+    const/16 v6, 0xb
 
-    invoke-direct {v0, v13, v12}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v10, v8, v6}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
 
-    sput-object v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->WRITE_CALLBACK_ERROR:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+    sput-object v10, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->WRITE_CALLBACK_ERROR:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
 
     .line 34
-    new-instance v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+    new-instance v8, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
 
-    const/16 v13, 0xc
+    const-string v6, "WRITE_INVALID_ENTRY"
 
-    const-string v14, "WRITE_INVALID_ENTRY"
+    const/16 v4, 0xc
 
-    invoke-direct {v0, v14, v13}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v8, v6, v4}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
 
-    sput-object v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->WRITE_INVALID_ENTRY:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+    sput-object v8, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->WRITE_INVALID_ENTRY:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
 
     .line 36
-    new-instance v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+    new-instance v6, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
 
-    const/16 v14, 0xd
-
-    const-string v15, "DELETE_FILE"
-
-    invoke-direct {v0, v15, v14}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
-
-    sput-object v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->DELETE_FILE:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
-
-    .line 38
-    new-instance v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
-
-    const/16 v15, 0xe
-
-    const-string v14, "EVICTION"
-
-    invoke-direct {v0, v14, v15}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
-
-    sput-object v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->EVICTION:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
-
-    .line 39
-    new-instance v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
-
-    const-string v14, "GENERIC_IO"
-
-    const/16 v15, 0xf
-
-    invoke-direct {v0, v14, v15}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
-
-    sput-object v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->GENERIC_IO:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
-
-    .line 40
-    new-instance v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
-
-    const-string v14, "OTHER"
-
-    const/16 v15, 0x10
-
-    invoke-direct {v0, v14, v15}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
-
-    sput-object v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->OTHER:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
-
-    const/16 v0, 0x11
-
-    .line 20
-    new-array v0, v0, [Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
-
-    sget-object v14, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->READ_DECODE:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
-
-    aput-object v14, v0, v1
-
-    sget-object v1, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->READ_FILE:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
-
-    aput-object v1, v0, v2
-
-    sget-object v1, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->READ_FILE_NOT_FOUND:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
-
-    aput-object v1, v0, v3
-
-    sget-object v1, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->READ_INVALID_ENTRY:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
-
-    aput-object v1, v0, v4
-
-    sget-object v1, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->WRITE_ENCODE:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
-
-    aput-object v1, v0, v5
-
-    sget-object v1, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->WRITE_CREATE_TEMPFILE:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
-
-    aput-object v1, v0, v6
-
-    sget-object v1, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->WRITE_UPDATE_FILE_NOT_FOUND:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
-
-    aput-object v1, v0, v7
-
-    sget-object v1, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->WRITE_RENAME_FILE_TEMPFILE_NOT_FOUND:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
-
-    aput-object v1, v0, v8
-
-    sget-object v1, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->WRITE_RENAME_FILE_TEMPFILE_PARENT_NOT_FOUND:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
-
-    aput-object v1, v0, v9
-
-    sget-object v1, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->WRITE_RENAME_FILE_OTHER:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
-
-    aput-object v1, v0, v10
-
-    sget-object v1, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->WRITE_CREATE_DIR:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
-
-    aput-object v1, v0, v11
-
-    sget-object v1, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->WRITE_CALLBACK_ERROR:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
-
-    aput-object v1, v0, v12
-
-    sget-object v1, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->WRITE_INVALID_ENTRY:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
-
-    aput-object v1, v0, v13
-
-    sget-object v1, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->DELETE_FILE:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+    const-string v4, "DELETE_FILE"
 
     const/16 v2, 0xd
 
-    aput-object v1, v0, v2
+    invoke-direct {v6, v4, v2}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
 
-    sget-object v1, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->EVICTION:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+    sput-object v6, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->DELETE_FILE:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
 
-    const/16 v2, 0xe
+    .line 38
+    new-instance v4, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
 
-    aput-object v1, v0, v2
+    const-string v2, "EVICTION"
 
-    sget-object v1, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->GENERIC_IO:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+    move-object/from16 v17, v6
 
-    const/16 v2, 0xf
+    const/16 v6, 0xe
 
-    aput-object v1, v0, v2
+    invoke-direct {v4, v2, v6}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
 
-    sget-object v1, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->OTHER:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+    sput-object v4, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->EVICTION:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+
+    .line 39
+    new-instance v2, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+
+    const-string v6, "GENERIC_IO"
+
+    move-object/from16 v18, v4
+
+    const/16 v4, 0xf
+
+    invoke-direct {v2, v6, v4}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
+
+    sput-object v2, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->GENERIC_IO:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+
+    .line 40
+    new-instance v6, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+
+    const-string v4, "OTHER"
+
+    move-object/from16 v19, v2
 
     const/16 v2, 0x10
 
-    aput-object v1, v0, v2
+    invoke-direct {v6, v4, v2}, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;-><init>(Ljava/lang/String;I)V
 
-    sput-object v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->$VALUES:[Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+    sput-object v6, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->OTHER:Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+
+    .line 20
+    const/16 v4, 0x11
+
+    new-array v4, v4, [Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+
+    const/16 v16, 0x0
+
+    aput-object v0, v4, v16
+
+    const/4 v0, 0x1
+
+    aput-object v1, v4, v0
+
+    const/4 v0, 0x2
+
+    aput-object v3, v4, v0
+
+    const/4 v0, 0x3
+
+    aput-object v5, v4, v0
+
+    const/4 v0, 0x4
+
+    aput-object v7, v4, v0
+
+    const/4 v0, 0x5
+
+    aput-object v9, v4, v0
+
+    const/4 v0, 0x6
+
+    aput-object v11, v4, v0
+
+    const/4 v0, 0x7
+
+    aput-object v13, v4, v0
+
+    const/16 v0, 0x8
+
+    aput-object v15, v4, v0
+
+    const/16 v0, 0x9
+
+    aput-object v14, v4, v0
+
+    const/16 v0, 0xa
+
+    aput-object v12, v4, v0
+
+    const/16 v0, 0xb
+
+    aput-object v10, v4, v0
+
+    const/16 v0, 0xc
+
+    aput-object v8, v4, v0
+
+    const/16 v0, 0xd
+
+    aput-object v17, v4, v0
+
+    const/16 v0, 0xe
+
+    aput-object v18, v4, v0
+
+    const/16 v0, 0xf
+
+    aput-object v19, v4, v0
+
+    aput-object v6, v4, v2
+
+    sput-object v4, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;->$VALUES:[Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
 
     return-void
 .end method
@@ -353,17 +349,18 @@
 
 .method public static valueOf(Ljava/lang/String;)Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
     .locals 1
+    .param p0, "name"    # Ljava/lang/String;
 
     .line 20
     const-class v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
 
     invoke-static {v0, p0}, Ljava/lang/Enum;->valueOf(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
 
-    move-result-object p0
+    move-result-object v0
 
-    check-cast p0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
+    check-cast v0, Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method public static values()[Lcom/facebook/cache/common/CacheErrorLogger$CacheErrorCategory;

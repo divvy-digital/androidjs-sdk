@@ -63,8 +63,10 @@
 
 # direct methods
 .method protected constructor <init>(Landroid/content/Context;Lcom/facebook/react/devsupport/interfaces/DevSupportManager;Lcom/facebook/react/devsupport/RedBoxHandler;)V
-    .locals 1
-    .param p3    # Lcom/facebook/react/devsupport/RedBoxHandler;
+    .locals 3
+    .param p1, "context"    # Landroid/content/Context;
+    .param p2, "devSupportManager"    # Lcom/facebook/react/devsupport/interfaces/DevSupportManager;
+    .param p3, "redBoxHandler"    # Lcom/facebook/react/devsupport/RedBoxHandler;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -74,213 +76,203 @@
 
     invoke-direct {p0, p1, v0}, Landroid/app/Dialog;-><init>(Landroid/content/Context;I)V
 
-    const/4 p1, 0x0
-
     .line 63
-    iput-boolean p1, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->isReporting:Z
+    const/4 v0, 0x0
+
+    iput-boolean v0, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->isReporting:Z
 
     .line 65
-    new-instance v0, Lcom/facebook/react/devsupport/RedBoxDialog$1;
+    new-instance v1, Lcom/facebook/react/devsupport/RedBoxDialog$1;
 
-    invoke-direct {v0, p0}, Lcom/facebook/react/devsupport/RedBoxDialog$1;-><init>(Lcom/facebook/react/devsupport/RedBoxDialog;)V
+    invoke-direct {v1, p0}, Lcom/facebook/react/devsupport/RedBoxDialog$1;-><init>(Lcom/facebook/react/devsupport/RedBoxDialog;)V
 
-    iput-object v0, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mReportCompletedListener:Lcom/facebook/react/devsupport/RedBoxHandler$ReportCompletedListener;
+    iput-object v1, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mReportCompletedListener:Lcom/facebook/react/devsupport/RedBoxHandler$ReportCompletedListener;
 
     .line 82
-    new-instance v0, Lcom/facebook/react/devsupport/RedBoxDialog$2;
+    new-instance v1, Lcom/facebook/react/devsupport/RedBoxDialog$2;
 
-    invoke-direct {v0, p0}, Lcom/facebook/react/devsupport/RedBoxDialog$2;-><init>(Lcom/facebook/react/devsupport/RedBoxDialog;)V
+    invoke-direct {v1, p0}, Lcom/facebook/react/devsupport/RedBoxDialog$2;-><init>(Lcom/facebook/react/devsupport/RedBoxDialog;)V
 
-    iput-object v0, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mReportButtonOnClickListener:Landroid/view/View$OnClickListener;
-
-    const/4 v0, 0x1
+    iput-object v1, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mReportButtonOnClickListener:Landroid/view/View$OnClickListener;
 
     .line 267
-    invoke-virtual {p0, v0}, Lcom/facebook/react/devsupport/RedBoxDialog;->requestWindowFeature(I)Z
+    const/4 v1, 0x1
+
+    invoke-virtual {p0, v1}, Lcom/facebook/react/devsupport/RedBoxDialog;->requestWindowFeature(I)Z
 
     .line 269
-    sget v0, Lcom/facebook/react/R$layout;->redbox_view:I
+    sget v1, Lcom/facebook/react/R$layout;->redbox_view:I
 
-    invoke-virtual {p0, v0}, Lcom/facebook/react/devsupport/RedBoxDialog;->setContentView(I)V
+    invoke-virtual {p0, v1}, Lcom/facebook/react/devsupport/RedBoxDialog;->setContentView(I)V
 
     .line 271
     iput-object p2, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mDevSupportManager:Lcom/facebook/react/devsupport/interfaces/DevSupportManager;
 
     .line 272
-    new-instance p2, Lcom/facebook/react/devsupport/DoubleTapReloadRecognizer;
+    new-instance v1, Lcom/facebook/react/devsupport/DoubleTapReloadRecognizer;
 
-    invoke-direct {p2}, Lcom/facebook/react/devsupport/DoubleTapReloadRecognizer;-><init>()V
+    invoke-direct {v1}, Lcom/facebook/react/devsupport/DoubleTapReloadRecognizer;-><init>()V
 
-    iput-object p2, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mDoubleTapReloadRecognizer:Lcom/facebook/react/devsupport/DoubleTapReloadRecognizer;
+    iput-object v1, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mDoubleTapReloadRecognizer:Lcom/facebook/react/devsupport/DoubleTapReloadRecognizer;
 
     .line 273
     iput-object p3, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mRedBoxHandler:Lcom/facebook/react/devsupport/RedBoxHandler;
 
     .line 275
-    sget p2, Lcom/facebook/react/R$id;->rn_redbox_stack:I
+    sget v1, Lcom/facebook/react/R$id;->rn_redbox_stack:I
 
-    invoke-virtual {p0, p2}, Lcom/facebook/react/devsupport/RedBoxDialog;->findViewById(I)Landroid/view/View;
+    invoke-virtual {p0, v1}, Lcom/facebook/react/devsupport/RedBoxDialog;->findViewById(I)Landroid/view/View;
 
-    move-result-object p2
+    move-result-object v1
 
-    check-cast p2, Landroid/widget/ListView;
+    check-cast v1, Landroid/widget/ListView;
 
-    iput-object p2, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mStackView:Landroid/widget/ListView;
+    iput-object v1, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mStackView:Landroid/widget/ListView;
 
     .line 276
-    iget-object p2, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mStackView:Landroid/widget/ListView;
-
-    invoke-virtual {p2, p0}, Landroid/widget/ListView;->setOnItemClickListener(Landroid/widget/AdapterView$OnItemClickListener;)V
+    invoke-virtual {v1, p0}, Landroid/widget/ListView;->setOnItemClickListener(Landroid/widget/AdapterView$OnItemClickListener;)V
 
     .line 278
-    sget p2, Lcom/facebook/react/R$id;->rn_redbox_reload_button:I
+    sget v1, Lcom/facebook/react/R$id;->rn_redbox_reload_button:I
 
-    invoke-virtual {p0, p2}, Lcom/facebook/react/devsupport/RedBoxDialog;->findViewById(I)Landroid/view/View;
+    invoke-virtual {p0, v1}, Lcom/facebook/react/devsupport/RedBoxDialog;->findViewById(I)Landroid/view/View;
 
-    move-result-object p2
+    move-result-object v1
 
-    check-cast p2, Landroid/widget/Button;
+    check-cast v1, Landroid/widget/Button;
 
-    iput-object p2, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mReloadJsButton:Landroid/widget/Button;
+    iput-object v1, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mReloadJsButton:Landroid/widget/Button;
 
     .line 279
-    iget-object p2, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mReloadJsButton:Landroid/widget/Button;
+    new-instance v2, Lcom/facebook/react/devsupport/RedBoxDialog$3;
 
-    new-instance p3, Lcom/facebook/react/devsupport/RedBoxDialog$3;
+    invoke-direct {v2, p0}, Lcom/facebook/react/devsupport/RedBoxDialog$3;-><init>(Lcom/facebook/react/devsupport/RedBoxDialog;)V
 
-    invoke-direct {p3, p0}, Lcom/facebook/react/devsupport/RedBoxDialog$3;-><init>(Lcom/facebook/react/devsupport/RedBoxDialog;)V
-
-    invoke-virtual {p2, p3}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+    invoke-virtual {v1, v2}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
     .line 285
-    sget p2, Lcom/facebook/react/R$id;->rn_redbox_dismiss_button:I
+    sget v1, Lcom/facebook/react/R$id;->rn_redbox_dismiss_button:I
 
-    invoke-virtual {p0, p2}, Lcom/facebook/react/devsupport/RedBoxDialog;->findViewById(I)Landroid/view/View;
+    invoke-virtual {p0, v1}, Lcom/facebook/react/devsupport/RedBoxDialog;->findViewById(I)Landroid/view/View;
 
-    move-result-object p2
+    move-result-object v1
 
-    check-cast p2, Landroid/widget/Button;
+    check-cast v1, Landroid/widget/Button;
 
-    iput-object p2, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mDismissButton:Landroid/widget/Button;
+    iput-object v1, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mDismissButton:Landroid/widget/Button;
 
     .line 286
-    iget-object p2, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mDismissButton:Landroid/widget/Button;
+    new-instance v2, Lcom/facebook/react/devsupport/RedBoxDialog$4;
 
-    new-instance p3, Lcom/facebook/react/devsupport/RedBoxDialog$4;
+    invoke-direct {v2, p0}, Lcom/facebook/react/devsupport/RedBoxDialog$4;-><init>(Lcom/facebook/react/devsupport/RedBoxDialog;)V
 
-    invoke-direct {p3, p0}, Lcom/facebook/react/devsupport/RedBoxDialog$4;-><init>(Lcom/facebook/react/devsupport/RedBoxDialog;)V
-
-    invoke-virtual {p2, p3}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+    invoke-virtual {v1, v2}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
     .line 292
-    sget p2, Lcom/facebook/react/R$id;->rn_redbox_copy_button:I
+    sget v1, Lcom/facebook/react/R$id;->rn_redbox_copy_button:I
 
-    invoke-virtual {p0, p2}, Lcom/facebook/react/devsupport/RedBoxDialog;->findViewById(I)Landroid/view/View;
+    invoke-virtual {p0, v1}, Lcom/facebook/react/devsupport/RedBoxDialog;->findViewById(I)Landroid/view/View;
 
-    move-result-object p2
+    move-result-object v1
 
-    check-cast p2, Landroid/widget/Button;
+    check-cast v1, Landroid/widget/Button;
 
-    iput-object p2, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mCopyToClipboardButton:Landroid/widget/Button;
+    iput-object v1, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mCopyToClipboardButton:Landroid/widget/Button;
 
     .line 293
-    iget-object p2, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mCopyToClipboardButton:Landroid/widget/Button;
+    new-instance v2, Lcom/facebook/react/devsupport/RedBoxDialog$5;
 
-    new-instance p3, Lcom/facebook/react/devsupport/RedBoxDialog$5;
+    invoke-direct {v2, p0}, Lcom/facebook/react/devsupport/RedBoxDialog$5;-><init>(Lcom/facebook/react/devsupport/RedBoxDialog;)V
 
-    invoke-direct {p3, p0}, Lcom/facebook/react/devsupport/RedBoxDialog$5;-><init>(Lcom/facebook/react/devsupport/RedBoxDialog;)V
-
-    invoke-virtual {p2, p3}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+    invoke-virtual {v1, v2}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
     .line 306
-    iget-object p2, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mRedBoxHandler:Lcom/facebook/react/devsupport/RedBoxHandler;
+    if-eqz p3, :cond_0
 
-    if-eqz p2, :cond_0
+    invoke-interface {p3}, Lcom/facebook/react/devsupport/RedBoxHandler;->isReportEnabled()Z
 
-    invoke-interface {p2}, Lcom/facebook/react/devsupport/RedBoxHandler;->isReportEnabled()Z
+    move-result v1
 
-    move-result p2
-
-    if-eqz p2, :cond_0
+    if-eqz v1, :cond_0
 
     .line 307
-    sget p2, Lcom/facebook/react/R$id;->rn_redbox_loading_indicator:I
+    sget v1, Lcom/facebook/react/R$id;->rn_redbox_loading_indicator:I
 
-    invoke-virtual {p0, p2}, Lcom/facebook/react/devsupport/RedBoxDialog;->findViewById(I)Landroid/view/View;
+    invoke-virtual {p0, v1}, Lcom/facebook/react/devsupport/RedBoxDialog;->findViewById(I)Landroid/view/View;
 
-    move-result-object p2
+    move-result-object v1
 
-    check-cast p2, Landroid/widget/ProgressBar;
+    check-cast v1, Landroid/widget/ProgressBar;
 
-    iput-object p2, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mLoadingIndicator:Landroid/widget/ProgressBar;
+    iput-object v1, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mLoadingIndicator:Landroid/widget/ProgressBar;
 
     .line 308
-    sget p2, Lcom/facebook/react/R$id;->rn_redbox_line_separator:I
+    sget v1, Lcom/facebook/react/R$id;->rn_redbox_line_separator:I
 
-    invoke-virtual {p0, p2}, Lcom/facebook/react/devsupport/RedBoxDialog;->findViewById(I)Landroid/view/View;
+    invoke-virtual {p0, v1}, Lcom/facebook/react/devsupport/RedBoxDialog;->findViewById(I)Landroid/view/View;
 
-    move-result-object p2
+    move-result-object v1
 
-    iput-object p2, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mLineSeparator:Landroid/view/View;
+    iput-object v1, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mLineSeparator:Landroid/view/View;
 
     .line 309
-    sget p2, Lcom/facebook/react/R$id;->rn_redbox_report_label:I
+    sget v1, Lcom/facebook/react/R$id;->rn_redbox_report_label:I
 
-    invoke-virtual {p0, p2}, Lcom/facebook/react/devsupport/RedBoxDialog;->findViewById(I)Landroid/view/View;
+    invoke-virtual {p0, v1}, Lcom/facebook/react/devsupport/RedBoxDialog;->findViewById(I)Landroid/view/View;
 
-    move-result-object p2
+    move-result-object v1
 
-    check-cast p2, Landroid/widget/TextView;
+    check-cast v1, Landroid/widget/TextView;
 
-    iput-object p2, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mReportTextView:Landroid/widget/TextView;
+    iput-object v1, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mReportTextView:Landroid/widget/TextView;
 
     .line 310
-    iget-object p2, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mReportTextView:Landroid/widget/TextView;
-
     invoke-static {}, Landroid/text/method/LinkMovementMethod;->getInstance()Landroid/text/method/MovementMethod;
 
-    move-result-object p3
+    move-result-object v2
 
-    invoke-virtual {p2, p3}, Landroid/widget/TextView;->setMovementMethod(Landroid/text/method/MovementMethod;)V
+    invoke-virtual {v1, v2}, Landroid/widget/TextView;->setMovementMethod(Landroid/text/method/MovementMethod;)V
 
     .line 311
-    iget-object p2, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mReportTextView:Landroid/widget/TextView;
+    iget-object v1, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mReportTextView:Landroid/widget/TextView;
 
-    invoke-virtual {p2, p1}, Landroid/widget/TextView;->setHighlightColor(I)V
+    invoke-virtual {v1, v0}, Landroid/widget/TextView;->setHighlightColor(I)V
 
     .line 312
-    sget p1, Lcom/facebook/react/R$id;->rn_redbox_report_button:I
+    sget v0, Lcom/facebook/react/R$id;->rn_redbox_report_button:I
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/devsupport/RedBoxDialog;->findViewById(I)Landroid/view/View;
+    invoke-virtual {p0, v0}, Lcom/facebook/react/devsupport/RedBoxDialog;->findViewById(I)Landroid/view/View;
 
-    move-result-object p1
+    move-result-object v0
 
-    check-cast p1, Landroid/widget/Button;
+    check-cast v0, Landroid/widget/Button;
 
-    iput-object p1, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mReportButton:Landroid/widget/Button;
+    iput-object v0, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mReportButton:Landroid/widget/Button;
 
     .line 313
-    iget-object p1, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mReportButton:Landroid/widget/Button;
+    iget-object v1, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mReportButtonOnClickListener:Landroid/view/View$OnClickListener;
 
-    iget-object p2, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mReportButtonOnClickListener:Landroid/view/View$OnClickListener;
+    invoke-virtual {v0, v1}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
-    invoke-virtual {p1, p2}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
-
+    .line 315
     :cond_0
     return-void
 .end method
 
 .method static synthetic access$000(Lcom/facebook/react/devsupport/RedBoxDialog;)Z
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/devsupport/RedBoxDialog;
 
     .line 49
-    iget-boolean p0, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->isReporting:Z
+    iget-boolean v0, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->isReporting:Z
 
-    return p0
+    return v0
 .end method
 
 .method static synthetic access$002(Lcom/facebook/react/devsupport/RedBoxDialog;Z)Z
     .locals 0
+    .param p0, "x0"    # Lcom/facebook/react/devsupport/RedBoxDialog;
+    .param p1, "x1"    # Z
 
     .line 49
     iput-boolean p1, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->isReporting:Z
@@ -289,72 +281,82 @@
 .end method
 
 .method static synthetic access$100(Lcom/facebook/react/devsupport/RedBoxDialog;)Landroid/widget/Button;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/devsupport/RedBoxDialog;
 
     .line 49
-    iget-object p0, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mReportButton:Landroid/widget/Button;
+    iget-object v0, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mReportButton:Landroid/widget/Button;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$200(Lcom/facebook/react/devsupport/RedBoxDialog;)Landroid/widget/ProgressBar;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/devsupport/RedBoxDialog;
 
     .line 49
-    iget-object p0, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mLoadingIndicator:Landroid/widget/ProgressBar;
+    iget-object v0, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mLoadingIndicator:Landroid/widget/ProgressBar;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$300(Lcom/facebook/react/devsupport/RedBoxDialog;)Landroid/widget/TextView;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/devsupport/RedBoxDialog;
 
     .line 49
-    iget-object p0, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mReportTextView:Landroid/widget/TextView;
+    iget-object v0, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mReportTextView:Landroid/widget/TextView;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$400(Lcom/facebook/react/devsupport/RedBoxDialog;)Lcom/facebook/react/devsupport/RedBoxHandler;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/devsupport/RedBoxDialog;
 
     .line 49
-    iget-object p0, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mRedBoxHandler:Lcom/facebook/react/devsupport/RedBoxHandler;
+    iget-object v0, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mRedBoxHandler:Lcom/facebook/react/devsupport/RedBoxHandler;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$500(Lcom/facebook/react/devsupport/RedBoxDialog;)Landroid/view/View;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/devsupport/RedBoxDialog;
 
     .line 49
-    iget-object p0, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mLineSeparator:Landroid/view/View;
+    iget-object v0, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mLineSeparator:Landroid/view/View;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$600(Lcom/facebook/react/devsupport/RedBoxDialog;)Lcom/facebook/react/devsupport/interfaces/DevSupportManager;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/devsupport/RedBoxDialog;
 
     .line 49
-    iget-object p0, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mDevSupportManager:Lcom/facebook/react/devsupport/interfaces/DevSupportManager;
+    iget-object v0, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mDevSupportManager:Lcom/facebook/react/devsupport/interfaces/DevSupportManager;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$700(Lcom/facebook/react/devsupport/RedBoxDialog;)Lcom/facebook/react/devsupport/RedBoxHandler$ReportCompletedListener;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/devsupport/RedBoxDialog;
 
     .line 49
-    iget-object p0, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mReportCompletedListener:Lcom/facebook/react/devsupport/RedBoxHandler$ReportCompletedListener;
+    iget-object v0, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mReportCompletedListener:Lcom/facebook/react/devsupport/RedBoxHandler$ReportCompletedListener;
 
-    return-object p0
+    return-object v0
 .end method
 
 
 # virtual methods
 .method public onItemClick(Landroid/widget/AdapterView;Landroid/view/View;IJ)V
-    .locals 0
+    .locals 5
+    .param p2, "view"    # Landroid/view/View;
+    .param p3, "position"    # I
+    .param p4, "id"    # J
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -366,58 +368,64 @@
     .end annotation
 
     .line 338
-    new-instance p1, Lcom/facebook/react/devsupport/RedBoxDialog$OpenStackFrameTask;
+    .local p1, "parent":Landroid/widget/AdapterView;, "Landroid/widget/AdapterView<*>;"
+    new-instance v0, Lcom/facebook/react/devsupport/RedBoxDialog$OpenStackFrameTask;
 
-    iget-object p2, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mDevSupportManager:Lcom/facebook/react/devsupport/interfaces/DevSupportManager;
+    iget-object v1, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mDevSupportManager:Lcom/facebook/react/devsupport/interfaces/DevSupportManager;
 
-    const/4 p4, 0x0
+    const/4 v2, 0x0
 
-    invoke-direct {p1, p2, p4}, Lcom/facebook/react/devsupport/RedBoxDialog$OpenStackFrameTask;-><init>(Lcom/facebook/react/devsupport/interfaces/DevSupportManager;Lcom/facebook/react/devsupport/RedBoxDialog$1;)V
+    invoke-direct {v0, v1, v2}, Lcom/facebook/react/devsupport/RedBoxDialog$OpenStackFrameTask;-><init>(Lcom/facebook/react/devsupport/interfaces/DevSupportManager;Lcom/facebook/react/devsupport/RedBoxDialog$1;)V
 
-    sget-object p2, Landroid/os/AsyncTask;->THREAD_POOL_EXECUTOR:Ljava/util/concurrent/Executor;
+    sget-object v1, Landroid/os/AsyncTask;->THREAD_POOL_EXECUTOR:Ljava/util/concurrent/Executor;
 
-    const/4 p4, 0x1
+    const/4 v2, 0x1
 
-    new-array p4, p4, [Lcom/facebook/react/devsupport/interfaces/StackFrame;
+    new-array v2, v2, [Lcom/facebook/react/devsupport/interfaces/StackFrame;
 
-    iget-object p5, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mStackView:Landroid/widget/ListView;
+    iget-object v3, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mStackView:Landroid/widget/ListView;
 
     .line 340
-    invoke-virtual {p5}, Landroid/widget/ListView;->getAdapter()Landroid/widget/ListAdapter;
+    invoke-virtual {v3}, Landroid/widget/ListView;->getAdapter()Landroid/widget/ListAdapter;
 
-    move-result-object p5
+    move-result-object v3
 
-    invoke-interface {p5, p3}, Landroid/widget/ListAdapter;->getItem(I)Ljava/lang/Object;
+    invoke-interface {v3, p3}, Landroid/widget/ListAdapter;->getItem(I)Ljava/lang/Object;
 
-    move-result-object p3
+    move-result-object v3
 
-    check-cast p3, Lcom/facebook/react/devsupport/interfaces/StackFrame;
+    check-cast v3, Lcom/facebook/react/devsupport/interfaces/StackFrame;
 
-    const/4 p5, 0x0
+    const/4 v4, 0x0
 
-    aput-object p3, p4, p5
+    aput-object v3, v2, v4
 
     .line 338
-    invoke-virtual {p1, p2, p4}, Lcom/facebook/react/devsupport/RedBoxDialog$OpenStackFrameTask;->executeOnExecutor(Ljava/util/concurrent/Executor;[Ljava/lang/Object;)Landroid/os/AsyncTask;
+    invoke-virtual {v0, v1, v2}, Lcom/facebook/react/devsupport/RedBoxDialog$OpenStackFrameTask;->executeOnExecutor(Ljava/util/concurrent/Executor;[Ljava/lang/Object;)Landroid/os/AsyncTask;
 
+    .line 341
     return-void
 .end method
 
 .method public onKeyUp(ILandroid/view/KeyEvent;)Z
     .locals 2
+    .param p1, "keyCode"    # I
+    .param p2, "event"    # Landroid/view/KeyEvent;
 
+    .line 345
     const/16 v0, 0x52
 
     if-ne p1, v0, :cond_0
 
     .line 346
-    iget-object p1, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mDevSupportManager:Lcom/facebook/react/devsupport/interfaces/DevSupportManager;
+    iget-object v0, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mDevSupportManager:Lcom/facebook/react/devsupport/interfaces/DevSupportManager;
 
-    invoke-interface {p1}, Lcom/facebook/react/devsupport/interfaces/DevSupportManager;->showDevOptionsDialog()V
+    invoke-interface {v0}, Lcom/facebook/react/devsupport/interfaces/DevSupportManager;->showDevOptionsDialog()V
 
-    const/4 p1, 0x1
+    .line 347
+    const/4 v0, 0x1
 
-    return p1
+    return v0
 
     .line 349
     :cond_0
@@ -442,9 +450,9 @@
     :cond_1
     invoke-super {p0, p1, p2}, Landroid/app/Dialog;->onKeyUp(ILandroid/view/KeyEvent;)Z
 
-    move-result p1
+    move-result v0
 
-    return p1
+    return v0
 .end method
 
 .method public resetReporting()V
@@ -463,10 +471,10 @@
 
     goto :goto_0
 
+    .line 328
     :cond_0
     const/4 v0, 0x0
 
-    .line 328
     iput-boolean v0, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->isReporting:Z
 
     .line 329
@@ -528,6 +536,10 @@
 
     invoke-virtual {v0, v1}, Landroid/widget/Button;->setEnabled(Z)V
 
+    .line 334
+    return-void
+
+    .line 326
     :cond_1
     :goto_0
     return-void
@@ -535,6 +547,8 @@
 
 .method public setExceptionDetails(Ljava/lang/String;[Lcom/facebook/react/devsupport/interfaces/StackFrame;)V
     .locals 2
+    .param p1, "title"    # Ljava/lang/String;
+    .param p2, "stack"    # [Lcom/facebook/react/devsupport/interfaces/StackFrame;
 
     .line 318
     iget-object v0, p0, Lcom/facebook/react/devsupport/RedBoxDialog;->mStackView:Landroid/widget/ListView;
@@ -545,5 +559,6 @@
 
     invoke-virtual {v0, v1}, Landroid/widget/ListView;->setAdapter(Landroid/widget/ListAdapter;)V
 
+    .line 319
     return-void
 .end method

@@ -32,6 +32,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/imagepipeline/memory/SharedByteArray;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/imagepipeline/memory/SharedByteArray;
 
     .line 70
     iput-object p1, p0, Lcom/facebook/imagepipeline/memory/SharedByteArray$1;->this$0:Lcom/facebook/imagepipeline/memory/SharedByteArray;
@@ -55,14 +56,16 @@
 .end method
 
 .method public release([B)V
-    .locals 0
+    .locals 1
+    .param p1, "unused"    # [B
 
     .line 73
-    iget-object p1, p0, Lcom/facebook/imagepipeline/memory/SharedByteArray$1;->this$0:Lcom/facebook/imagepipeline/memory/SharedByteArray;
+    iget-object v0, p0, Lcom/facebook/imagepipeline/memory/SharedByteArray$1;->this$0:Lcom/facebook/imagepipeline/memory/SharedByteArray;
 
-    iget-object p1, p1, Lcom/facebook/imagepipeline/memory/SharedByteArray;->mSemaphore:Ljava/util/concurrent/Semaphore;
+    iget-object v0, v0, Lcom/facebook/imagepipeline/memory/SharedByteArray;->mSemaphore:Ljava/util/concurrent/Semaphore;
 
-    invoke-virtual {p1}, Ljava/util/concurrent/Semaphore;->release()V
+    invoke-virtual {v0}, Ljava/util/concurrent/Semaphore;->release()V
 
+    .line 74
     return-void
 .end method

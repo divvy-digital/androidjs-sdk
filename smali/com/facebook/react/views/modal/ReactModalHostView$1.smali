@@ -24,6 +24,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/views/modal/ReactModalHostView;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/views/modal/ReactModalHostView;
 
     .line 233
     iput-object p1, p0, Lcom/facebook/react/views/modal/ReactModalHostView$1;->this$0:Lcom/facebook/react/views/modal/ReactModalHostView;
@@ -36,7 +37,10 @@
 
 # virtual methods
 .method public onKey(Landroid/content/DialogInterface;ILandroid/view/KeyEvent;)Z
-    .locals 2
+    .locals 3
+    .param p1, "dialog"    # Landroid/content/DialogInterface;
+    .param p2, "keyCode"    # I
+    .param p3, "event"    # Landroid/view/KeyEvent;
 
     .line 236
     invoke-virtual {p3}, Landroid/view/KeyEvent;->getAction()I
@@ -47,59 +51,65 @@
 
     if-ne v0, v1, :cond_1
 
+    .line 241
     const/4 v0, 0x4
 
     if-ne p2, v0, :cond_0
 
     .line 242
-    iget-object p2, p0, Lcom/facebook/react/views/modal/ReactModalHostView$1;->this$0:Lcom/facebook/react/views/modal/ReactModalHostView;
+    iget-object v0, p0, Lcom/facebook/react/views/modal/ReactModalHostView$1;->this$0:Lcom/facebook/react/views/modal/ReactModalHostView;
 
     .line 243
-    invoke-static {p2}, Lcom/facebook/react/views/modal/ReactModalHostView;->access$000(Lcom/facebook/react/views/modal/ReactModalHostView;)Lcom/facebook/react/views/modal/ReactModalHostView$OnRequestCloseListener;
+    invoke-static {v0}, Lcom/facebook/react/views/modal/ReactModalHostView;->access$000(Lcom/facebook/react/views/modal/ReactModalHostView;)Lcom/facebook/react/views/modal/ReactModalHostView$OnRequestCloseListener;
 
-    move-result-object p2
-
-    const-string p3, "setOnRequestCloseListener must be called by the manager"
+    move-result-object v0
 
     .line 242
-    invoke-static {p2, p3}, Lcom/facebook/infer/annotation/Assertions;->assertNotNull(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+    const-string v2, "setOnRequestCloseListener must be called by the manager"
+
+    invoke-static {v0, v2}, Lcom/facebook/infer/annotation/Assertions;->assertNotNull(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
 
     .line 245
-    iget-object p2, p0, Lcom/facebook/react/views/modal/ReactModalHostView$1;->this$0:Lcom/facebook/react/views/modal/ReactModalHostView;
+    iget-object v0, p0, Lcom/facebook/react/views/modal/ReactModalHostView$1;->this$0:Lcom/facebook/react/views/modal/ReactModalHostView;
 
-    invoke-static {p2}, Lcom/facebook/react/views/modal/ReactModalHostView;->access$000(Lcom/facebook/react/views/modal/ReactModalHostView;)Lcom/facebook/react/views/modal/ReactModalHostView$OnRequestCloseListener;
+    invoke-static {v0}, Lcom/facebook/react/views/modal/ReactModalHostView;->access$000(Lcom/facebook/react/views/modal/ReactModalHostView;)Lcom/facebook/react/views/modal/ReactModalHostView$OnRequestCloseListener;
 
-    move-result-object p2
+    move-result-object v0
 
-    invoke-interface {p2, p1}, Lcom/facebook/react/views/modal/ReactModalHostView$OnRequestCloseListener;->onRequestClose(Landroid/content/DialogInterface;)V
+    invoke-interface {v0, p1}, Lcom/facebook/react/views/modal/ReactModalHostView$OnRequestCloseListener;->onRequestClose(Landroid/content/DialogInterface;)V
 
+    .line 246
     return v1
 
     .line 250
     :cond_0
-    iget-object p1, p0, Lcom/facebook/react/views/modal/ReactModalHostView$1;->this$0:Lcom/facebook/react/views/modal/ReactModalHostView;
+    iget-object v0, p0, Lcom/facebook/react/views/modal/ReactModalHostView$1;->this$0:Lcom/facebook/react/views/modal/ReactModalHostView;
 
-    invoke-virtual {p1}, Lcom/facebook/react/views/modal/ReactModalHostView;->getContext()Landroid/content/Context;
+    invoke-virtual {v0}, Lcom/facebook/react/views/modal/ReactModalHostView;->getContext()Landroid/content/Context;
 
-    move-result-object p1
+    move-result-object v0
 
-    check-cast p1, Lcom/facebook/react/bridge/ReactContext;
+    check-cast v0, Lcom/facebook/react/bridge/ReactContext;
 
-    invoke-virtual {p1}, Lcom/facebook/react/bridge/ReactContext;->getCurrentActivity()Landroid/app/Activity;
+    invoke-virtual {v0}, Lcom/facebook/react/bridge/ReactContext;->getCurrentActivity()Landroid/app/Activity;
 
-    move-result-object p1
+    move-result-object v0
 
-    if-eqz p1, :cond_1
+    .line 251
+    .local v0, "currentActivity":Landroid/app/Activity;
+    if-eqz v0, :cond_1
 
     .line 252
-    invoke-virtual {p1, p2, p3}, Landroid/app/Activity;->onKeyUp(ILandroid/view/KeyEvent;)Z
+    invoke-virtual {v0, p2, p3}, Landroid/app/Activity;->onKeyUp(ILandroid/view/KeyEvent;)Z
 
-    move-result p1
+    move-result v1
 
-    return p1
+    return v1
 
+    .line 256
+    .end local v0    # "currentActivity":Landroid/app/Activity;
     :cond_1
-    const/4 p1, 0x0
+    const/4 v0, 0x0
 
-    return p1
+    return v0
 .end method

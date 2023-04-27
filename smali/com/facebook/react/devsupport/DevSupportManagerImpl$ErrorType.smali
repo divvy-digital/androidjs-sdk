@@ -32,44 +32,40 @@
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 4
+    .locals 5
 
     .line 108
     new-instance v0, Lcom/facebook/react/devsupport/DevSupportManagerImpl$ErrorType;
 
-    const/4 v1, 0x0
+    const-string v1, "JS"
 
-    const-string v2, "JS"
+    const/4 v2, 0x0
 
-    invoke-direct {v0, v2, v1}, Lcom/facebook/react/devsupport/DevSupportManagerImpl$ErrorType;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v0, v1, v2}, Lcom/facebook/react/devsupport/DevSupportManagerImpl$ErrorType;-><init>(Ljava/lang/String;I)V
 
     sput-object v0, Lcom/facebook/react/devsupport/DevSupportManagerImpl$ErrorType;->JS:Lcom/facebook/react/devsupport/DevSupportManagerImpl$ErrorType;
 
     .line 109
-    new-instance v0, Lcom/facebook/react/devsupport/DevSupportManagerImpl$ErrorType;
-
-    const/4 v2, 0x1
+    new-instance v1, Lcom/facebook/react/devsupport/DevSupportManagerImpl$ErrorType;
 
     const-string v3, "NATIVE"
 
-    invoke-direct {v0, v3, v2}, Lcom/facebook/react/devsupport/DevSupportManagerImpl$ErrorType;-><init>(Ljava/lang/String;I)V
+    const/4 v4, 0x1
 
-    sput-object v0, Lcom/facebook/react/devsupport/DevSupportManagerImpl$ErrorType;->NATIVE:Lcom/facebook/react/devsupport/DevSupportManagerImpl$ErrorType;
+    invoke-direct {v1, v3, v4}, Lcom/facebook/react/devsupport/DevSupportManagerImpl$ErrorType;-><init>(Ljava/lang/String;I)V
 
-    const/4 v0, 0x2
+    sput-object v1, Lcom/facebook/react/devsupport/DevSupportManagerImpl$ErrorType;->NATIVE:Lcom/facebook/react/devsupport/DevSupportManagerImpl$ErrorType;
 
     .line 107
-    new-array v0, v0, [Lcom/facebook/react/devsupport/DevSupportManagerImpl$ErrorType;
+    const/4 v3, 0x2
 
-    sget-object v3, Lcom/facebook/react/devsupport/DevSupportManagerImpl$ErrorType;->JS:Lcom/facebook/react/devsupport/DevSupportManagerImpl$ErrorType;
+    new-array v3, v3, [Lcom/facebook/react/devsupport/DevSupportManagerImpl$ErrorType;
 
-    aput-object v3, v0, v1
+    aput-object v0, v3, v2
 
-    sget-object v1, Lcom/facebook/react/devsupport/DevSupportManagerImpl$ErrorType;->NATIVE:Lcom/facebook/react/devsupport/DevSupportManagerImpl$ErrorType;
+    aput-object v1, v3, v4
 
-    aput-object v1, v0, v2
-
-    sput-object v0, Lcom/facebook/react/devsupport/DevSupportManagerImpl$ErrorType;->$VALUES:[Lcom/facebook/react/devsupport/DevSupportManagerImpl$ErrorType;
+    sput-object v3, Lcom/facebook/react/devsupport/DevSupportManagerImpl$ErrorType;->$VALUES:[Lcom/facebook/react/devsupport/DevSupportManagerImpl$ErrorType;
 
     return-void
 .end method
@@ -90,17 +86,18 @@
 
 .method public static valueOf(Ljava/lang/String;)Lcom/facebook/react/devsupport/DevSupportManagerImpl$ErrorType;
     .locals 1
+    .param p0, "name"    # Ljava/lang/String;
 
     .line 107
     const-class v0, Lcom/facebook/react/devsupport/DevSupportManagerImpl$ErrorType;
 
     invoke-static {v0, p0}, Ljava/lang/Enum;->valueOf(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
 
-    move-result-object p0
+    move-result-object v0
 
-    check-cast p0, Lcom/facebook/react/devsupport/DevSupportManagerImpl$ErrorType;
+    check-cast v0, Lcom/facebook/react/devsupport/DevSupportManagerImpl$ErrorType;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method public static values()[Lcom/facebook/react/devsupport/DevSupportManagerImpl$ErrorType;

@@ -39,6 +39,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/imagepipeline/core/ImagePipeline;Lcom/facebook/imagepipeline/request/ImageRequest;Ljava/lang/Object;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/imagepipeline/core/ImagePipeline;
 
     .line 168
     iput-object p1, p0, Lcom/facebook/imagepipeline/core/ImagePipeline$3;->this$0:Lcom/facebook/imagepipeline/core/ImagePipeline;
@@ -117,5 +118,6 @@
 
     move-result-object v0
 
+    .line 176
     return-object v0
 .end method

@@ -52,18 +52,21 @@
 .end method
 
 .method public forConstantValue(Ljavax/annotation/Nonnull;Ljava/lang/Object;)Ljavax/annotation/meta/When;
-    .locals 0
+    .locals 1
+    .param p1, "qualifierArgument"    # Ljavax/annotation/Nonnull;
+    .param p2, "value"    # Ljava/lang/Object;
 
+    .line 27
     if-nez p2, :cond_0
 
     .line 28
-    sget-object p1, Ljavax/annotation/meta/When;->NEVER:Ljavax/annotation/meta/When;
+    sget-object v0, Ljavax/annotation/meta/When;->NEVER:Ljavax/annotation/meta/When;
 
-    return-object p1
+    return-object v0
 
     .line 29
     :cond_0
-    sget-object p1, Ljavax/annotation/meta/When;->ALWAYS:Ljavax/annotation/meta/When;
+    sget-object v0, Ljavax/annotation/meta/When;->ALWAYS:Ljavax/annotation/meta/When;
 
-    return-object p1
+    return-object v0
 .end method

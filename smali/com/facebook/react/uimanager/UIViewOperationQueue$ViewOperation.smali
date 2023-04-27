@@ -26,6 +26,7 @@
 # direct methods
 .method public constructor <init>(Lcom/facebook/react/uimanager/UIViewOperationQueue;I)V
     .locals 0
+    .param p2, "tag"    # I
 
     .line 67
     iput-object p1, p0, Lcom/facebook/react/uimanager/UIViewOperationQueue$ViewOperation;->this$0:Lcom/facebook/react/uimanager/UIViewOperationQueue;
@@ -35,5 +36,6 @@
     .line 68
     iput p2, p0, Lcom/facebook/react/uimanager/UIViewOperationQueue$ViewOperation;->mTag:I
 
+    .line 69
     return-void
 .end method

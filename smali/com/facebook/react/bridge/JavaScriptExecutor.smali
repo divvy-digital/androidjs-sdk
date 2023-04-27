@@ -3,11 +3,6 @@
 .source "JavaScriptExecutor.java"
 
 
-# annotations
-.annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-.end annotation
-
-
 # instance fields
 .field private final mHybridData:Lcom/facebook/jni/HybridData;
 
@@ -15,6 +10,7 @@
 # direct methods
 .method protected constructor <init>(Lcom/facebook/jni/HybridData;)V
     .locals 0
+    .param p1, "hybridData"    # Lcom/facebook/jni/HybridData;
 
     .line 17
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -22,6 +18,7 @@
     .line 18
     iput-object p1, p0, Lcom/facebook/react/bridge/JavaScriptExecutor;->mHybridData:Lcom/facebook/jni/HybridData;
 
+    .line 19
     return-void
 .end method
 
@@ -35,6 +32,7 @@
 
     invoke-virtual {v0}, Lcom/facebook/jni/HybridData;->resetNative()V
 
+    .line 28
     return-void
 .end method
 

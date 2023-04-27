@@ -24,6 +24,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/bridge/CatalystInstanceImpl;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/bridge/CatalystInstanceImpl;
 
     .line 543
     iput-object p1, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl$5;->this$0:Lcom/facebook/react/bridge/CatalystInstanceImpl;
@@ -43,5 +44,6 @@
 
     invoke-virtual {v0}, Lcom/facebook/react/bridge/CatalystInstanceImpl;->destroy()V
 
+    .line 547
     return-void
 .end method

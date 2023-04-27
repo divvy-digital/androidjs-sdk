@@ -31,6 +31,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/devsupport/DevServerHelper;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/devsupport/DevServerHelper;
 
     .line 243
     iput-object p1, p0, Lcom/facebook/react/devsupport/DevServerHelper$4;->this$0:Lcom/facebook/react/devsupport/DevServerHelper;
@@ -56,33 +57,35 @@
 .end method
 
 .method protected varargs doInBackground([Ljava/lang/Void;)Ljava/lang/Void;
-    .locals 1
+    .locals 2
+    .param p1, "params"    # [Ljava/lang/Void;
 
     .line 246
-    iget-object p1, p0, Lcom/facebook/react/devsupport/DevServerHelper$4;->this$0:Lcom/facebook/react/devsupport/DevServerHelper;
+    iget-object v0, p0, Lcom/facebook/react/devsupport/DevServerHelper$4;->this$0:Lcom/facebook/react/devsupport/DevServerHelper;
 
-    invoke-static {p1}, Lcom/facebook/react/devsupport/DevServerHelper;->access$200(Lcom/facebook/react/devsupport/DevServerHelper;)Lcom/facebook/react/devsupport/InspectorPackagerConnection;
+    invoke-static {v0}, Lcom/facebook/react/devsupport/DevServerHelper;->access$200(Lcom/facebook/react/devsupport/DevServerHelper;)Lcom/facebook/react/devsupport/InspectorPackagerConnection;
 
-    move-result-object p1
+    move-result-object v0
 
-    const/4 v0, 0x0
+    const/4 v1, 0x0
 
-    if-eqz p1, :cond_0
+    if-eqz v0, :cond_0
 
     .line 247
-    iget-object p1, p0, Lcom/facebook/react/devsupport/DevServerHelper$4;->this$0:Lcom/facebook/react/devsupport/DevServerHelper;
+    iget-object v0, p0, Lcom/facebook/react/devsupport/DevServerHelper$4;->this$0:Lcom/facebook/react/devsupport/DevServerHelper;
 
-    invoke-static {p1}, Lcom/facebook/react/devsupport/DevServerHelper;->access$200(Lcom/facebook/react/devsupport/DevServerHelper;)Lcom/facebook/react/devsupport/InspectorPackagerConnection;
+    invoke-static {v0}, Lcom/facebook/react/devsupport/DevServerHelper;->access$200(Lcom/facebook/react/devsupport/DevServerHelper;)Lcom/facebook/react/devsupport/InspectorPackagerConnection;
 
-    move-result-object p1
+    move-result-object v0
 
-    invoke-virtual {p1}, Lcom/facebook/react/devsupport/InspectorPackagerConnection;->closeQuietly()V
+    invoke-virtual {v0}, Lcom/facebook/react/devsupport/InspectorPackagerConnection;->closeQuietly()V
 
     .line 248
-    iget-object p1, p0, Lcom/facebook/react/devsupport/DevServerHelper$4;->this$0:Lcom/facebook/react/devsupport/DevServerHelper;
+    iget-object v0, p0, Lcom/facebook/react/devsupport/DevServerHelper$4;->this$0:Lcom/facebook/react/devsupport/DevServerHelper;
 
-    invoke-static {p1, v0}, Lcom/facebook/react/devsupport/DevServerHelper;->access$202(Lcom/facebook/react/devsupport/DevServerHelper;Lcom/facebook/react/devsupport/InspectorPackagerConnection;)Lcom/facebook/react/devsupport/InspectorPackagerConnection;
+    invoke-static {v0, v1}, Lcom/facebook/react/devsupport/DevServerHelper;->access$202(Lcom/facebook/react/devsupport/DevServerHelper;Lcom/facebook/react/devsupport/InspectorPackagerConnection;)Lcom/facebook/react/devsupport/InspectorPackagerConnection;
 
+    .line 250
     :cond_0
-    return-object v0
+    return-object v1
 .end method

@@ -4,9 +4,6 @@
 
 
 # annotations
-.annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-.end annotation
-
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
         Lcom/facebook/jni/HybridData$Destructor;
@@ -16,20 +13,18 @@
 
 # instance fields
 .field private mDestructor:Lcom/facebook/jni/HybridData$Destructor;
-    .annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-    .end annotation
-.end field
 
 
 # direct methods
 .method static constructor <clinit>()V
     .locals 1
 
+    .line 26
     const-string v0, "fb"
 
-    .line 26
     invoke-static {v0}, Lcom/facebook/soloader/SoLoader;->loadLibrary(Ljava/lang/String;)Z
 
+    .line 27
     return-void
 .end method
 
@@ -96,6 +91,8 @@
 
     return-void
 
+    .line 41
+    .end local p0    # "this":Lcom/facebook/jni/HybridData;
     :catchall_0
     move-exception v0
 

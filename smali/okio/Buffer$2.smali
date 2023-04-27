@@ -21,6 +21,7 @@
 # direct methods
 .method constructor <init>(Lokio/Buffer;)V
     .locals 0
+    .param p1, "this$0"    # Lokio/Buffer;
 
     .line 117
     iput-object p1, p0, Lokio/Buffer$2;->this$0:Lokio/Buffer;
@@ -54,6 +55,7 @@
 .method public close()V
     .locals 0
 
+    .line 132
     return-void
 .end method
 
@@ -81,6 +83,7 @@
 
     return v0
 
+    .line 120
     :cond_0
     const/4 v0, -0x1
 
@@ -89,15 +92,18 @@
 
 .method public read([BII)I
     .locals 1
+    .param p1, "sink"    # [B
+    .param p2, "offset"    # I
+    .param p3, "byteCount"    # I
 
     .line 124
     iget-object v0, p0, Lokio/Buffer$2;->this$0:Lokio/Buffer;
 
     invoke-virtual {v0, p1, p2, p3}, Lokio/Buffer;->read([BII)I
 
-    move-result p1
+    move-result v0
 
-    return p1
+    return v0
 .end method
 
 .method public toString()Ljava/lang/String;
@@ -112,9 +118,13 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     const-string v1, ".inputStream()"
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 

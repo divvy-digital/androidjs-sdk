@@ -12,23 +12,14 @@
 .field private mBorderColor:I
 
 .field final mBorderPath:Landroid/graphics/Path;
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
-.end field
 
 .field final mBorderRadii:[F
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
-.end field
 
 .field private mBorderWidth:F
 
 .field private mColor:I
 
 .field mInsideBorderRadii:[F
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
-
     .annotation runtime Ljavax/annotation/Nullable;
     .end annotation
 .end field
@@ -38,14 +29,8 @@
 .field private mPadding:F
 
 .field final mPaint:Landroid/graphics/Paint;
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
-.end field
 
 .field final mPath:Landroid/graphics/Path;
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
-.end field
 
 .field private final mRadii:[F
 
@@ -57,6 +42,8 @@
 # direct methods
 .method public constructor <init>(FI)V
     .locals 0
+    .param p1, "radius"    # F
+    .param p2, "color"    # I
 
     .line 80
     invoke-direct {p0, p2}, Lcom/facebook/drawee/drawable/RoundedColorDrawable;-><init>(I)V
@@ -64,18 +51,20 @@
     .line 81
     invoke-virtual {p0, p1}, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->setRadius(F)V
 
+    .line 82
     return-void
 .end method
 
 .method public constructor <init>(I)V
     .locals 2
+    .param p1, "color"    # I
 
     .line 47
     invoke-direct {p0}, Landroid/graphics/drawable/Drawable;-><init>()V
 
+    .line 27
     const/16 v0, 0x8
 
-    .line 27
     new-array v1, v0, [F
 
     iput-object v1, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mRadii:[F
@@ -94,14 +83,14 @@
 
     iput-object v0, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mPaint:Landroid/graphics/Paint;
 
+    .line 31
     const/4 v0, 0x0
 
-    .line 31
     iput-boolean v0, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mIsCircle:Z
 
+    .line 32
     const/4 v1, 0x0
 
-    .line 32
     iput v1, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mBorderWidth:F
 
     .line 33
@@ -137,19 +126,22 @@
 
     iput-object v0, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mTempRect:Landroid/graphics/RectF;
 
+    .line 40
     const/16 v0, 0xff
 
-    .line 40
     iput v0, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mAlpha:I
 
     .line 48
     invoke-virtual {p0, p1}, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->setColor(I)V
 
+    .line 49
     return-void
 .end method
 
 .method public constructor <init>([FI)V
     .locals 0
+    .param p1, "radii"    # [F
+    .param p2, "color"    # I
 
     .line 69
     invoke-direct {p0, p2}, Lcom/facebook/drawee/drawable/RoundedColorDrawable;-><init>(I)V
@@ -157,29 +149,28 @@
     .line 70
     invoke-virtual {p0, p1}, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->setRadii([F)V
 
+    .line 71
     return-void
 .end method
 
 .method public static fromColorDrawable(Landroid/graphics/drawable/ColorDrawable;)Lcom/facebook/drawee/drawable/RoundedColorDrawable;
-    .locals 1
-    .annotation build Landroid/annotation/TargetApi;
-        value = 0xb
-    .end annotation
+    .locals 2
+    .param p0, "colorDrawable"    # Landroid/graphics/drawable/ColorDrawable;
 
     .line 58
     new-instance v0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;
 
     invoke-virtual {p0}, Landroid/graphics/drawable/ColorDrawable;->getColor()I
 
-    move-result p0
+    move-result v1
 
-    invoke-direct {v0, p0}, Lcom/facebook/drawee/drawable/RoundedColorDrawable;-><init>(I)V
+    invoke-direct {v0, v1}, Lcom/facebook/drawee/drawable/RoundedColorDrawable;-><init>(I)V
 
     return-object v0
 .end method
 
 .method private updatePath()V
-    .locals 7
+    .locals 6
 
     .line 288
     iget-object v0, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mPath:Landroid/graphics/Path;
@@ -216,8 +207,6 @@
     .line 293
     iget-boolean v0, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mIsCircle:Z
 
-    const/4 v1, 0x0
-
     if-eqz v0, :cond_0
 
     .line 294
@@ -227,123 +216,130 @@
 
     move-result v0
 
-    iget-object v3, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mTempRect:Landroid/graphics/RectF;
+    iget-object v1, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mTempRect:Landroid/graphics/RectF;
 
-    invoke-virtual {v3}, Landroid/graphics/RectF;->height()F
+    invoke-virtual {v1}, Landroid/graphics/RectF;->height()F
 
-    move-result v3
+    move-result v1
 
-    invoke-static {v0, v3}, Ljava/lang/Math;->min(FF)F
+    invoke-static {v0, v1}, Ljava/lang/Math;->min(FF)F
 
     move-result v0
 
     div-float/2addr v0, v2
 
     .line 295
-    iget-object v3, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mBorderPath:Landroid/graphics/Path;
+    .local v0, "radius":F
+    iget-object v1, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mBorderPath:Landroid/graphics/Path;
+
+    iget-object v3, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mTempRect:Landroid/graphics/RectF;
+
+    invoke-virtual {v3}, Landroid/graphics/RectF;->centerX()F
+
+    move-result v3
 
     iget-object v4, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mTempRect:Landroid/graphics/RectF;
 
-    invoke-virtual {v4}, Landroid/graphics/RectF;->centerX()F
+    invoke-virtual {v4}, Landroid/graphics/RectF;->centerY()F
 
     move-result v4
 
-    iget-object v5, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mTempRect:Landroid/graphics/RectF;
+    sget-object v5, Landroid/graphics/Path$Direction;->CW:Landroid/graphics/Path$Direction;
 
-    invoke-virtual {v5}, Landroid/graphics/RectF;->centerY()F
+    invoke-virtual {v1, v3, v4, v0, v5}, Landroid/graphics/Path;->addCircle(FFFLandroid/graphics/Path$Direction;)V
 
-    move-result v5
-
-    sget-object v6, Landroid/graphics/Path$Direction;->CW:Landroid/graphics/Path$Direction;
-
-    invoke-virtual {v3, v4, v5, v0, v6}, Landroid/graphics/Path;->addCircle(FFFLandroid/graphics/Path$Direction;)V
-
+    .line 296
+    .end local v0    # "radius":F
     goto :goto_1
 
+    .line 297
     :cond_0
     const/4 v0, 0x0
 
-    .line 297
+    .local v0, "i":I
     :goto_0
-    iget-object v3, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mBorderRadii:[F
+    iget-object v1, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mBorderRadii:[F
 
-    array-length v4, v3
+    array-length v3, v1
 
-    if-ge v0, v4, :cond_1
+    if-ge v0, v3, :cond_1
 
     .line 298
-    iget-object v4, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mRadii:[F
+    iget-object v3, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mRadii:[F
 
-    aget v4, v4, v0
+    aget v3, v3, v0
 
-    iget v5, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mPadding:F
+    iget v4, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mPadding:F
 
-    add-float/2addr v4, v5
+    add-float/2addr v3, v4
 
-    iget v5, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mBorderWidth:F
+    iget v4, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mBorderWidth:F
 
-    div-float/2addr v5, v2
+    div-float/2addr v4, v2
 
-    sub-float/2addr v4, v5
+    sub-float/2addr v3, v4
 
-    aput v4, v3, v0
+    aput v3, v1, v0
 
+    .line 297
     add-int/lit8 v0, v0, 0x1
 
     goto :goto_0
 
     .line 300
+    .end local v0    # "i":I
     :cond_1
     iget-object v0, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mBorderPath:Landroid/graphics/Path;
 
-    iget-object v4, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mTempRect:Landroid/graphics/RectF;
+    iget-object v3, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mTempRect:Landroid/graphics/RectF;
 
-    sget-object v5, Landroid/graphics/Path$Direction;->CW:Landroid/graphics/Path$Direction;
+    sget-object v4, Landroid/graphics/Path$Direction;->CW:Landroid/graphics/Path$Direction;
 
-    invoke-virtual {v0, v4, v3, v5}, Landroid/graphics/Path;->addRoundRect(Landroid/graphics/RectF;[FLandroid/graphics/Path$Direction;)V
+    invoke-virtual {v0, v3, v1, v4}, Landroid/graphics/Path;->addRoundRect(Landroid/graphics/RectF;[FLandroid/graphics/Path$Direction;)V
 
     .line 302
     :goto_1
     iget-object v0, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mTempRect:Landroid/graphics/RectF;
 
-    iget v3, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mBorderWidth:F
+    iget v1, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mBorderWidth:F
 
-    neg-float v4, v3
-
-    div-float/2addr v4, v2
-
-    neg-float v3, v3
+    neg-float v3, v1
 
     div-float/2addr v3, v2
 
-    invoke-virtual {v0, v4, v3}, Landroid/graphics/RectF;->inset(FF)V
+    neg-float v1, v1
+
+    div-float/2addr v1, v2
+
+    invoke-virtual {v0, v3, v1}, Landroid/graphics/RectF;->inset(FF)V
 
     .line 304
     iget v0, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mPadding:F
 
-    iget-boolean v3, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mScaleDownInsideBorders:Z
+    iget-boolean v1, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mScaleDownInsideBorders:Z
 
-    if-eqz v3, :cond_2
+    if-eqz v1, :cond_2
 
-    iget v3, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mBorderWidth:F
+    iget v1, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mBorderWidth:F
 
     goto :goto_2
 
     :cond_2
-    const/4 v3, 0x0
+    const/4 v1, 0x0
 
     :goto_2
-    add-float/2addr v0, v3
+    add-float/2addr v0, v1
 
     .line 305
-    iget-object v3, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mTempRect:Landroid/graphics/RectF;
+    .local v0, "totalPadding":F
+    iget-object v1, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mTempRect:Landroid/graphics/RectF;
 
-    invoke-virtual {v3, v0, v0}, Landroid/graphics/RectF;->inset(FF)V
+    invoke-virtual {v1, v0, v0}, Landroid/graphics/RectF;->inset(FF)V
 
     .line 306
-    iget-boolean v3, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mIsCircle:Z
+    iget-boolean v1, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mIsCircle:Z
 
-    if-eqz v3, :cond_3
+    if-eqz v1, :cond_3
 
     .line 307
     iget-object v1, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mTempRect:Landroid/graphics/RectF;
@@ -365,6 +361,7 @@
     div-float/2addr v1, v2
 
     .line 308
+    .local v1, "radius":F
     iget-object v2, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mPath:Landroid/graphics/Path;
 
     iget-object v3, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mTempRect:Landroid/graphics/RectF;
@@ -383,28 +380,32 @@
 
     invoke-virtual {v2, v3, v4, v1, v5}, Landroid/graphics/Path;->addCircle(FFFLandroid/graphics/Path$Direction;)V
 
+    .line 309
+    .end local v1    # "radius":F
     goto :goto_4
 
-    .line 309
     :cond_3
-    iget-boolean v2, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mScaleDownInsideBorders:Z
+    iget-boolean v1, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mScaleDownInsideBorders:Z
 
-    if-eqz v2, :cond_6
+    if-eqz v1, :cond_6
 
     .line 310
-    iget-object v2, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mInsideBorderRadii:[F
+    iget-object v1, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mInsideBorderRadii:[F
 
-    if-nez v2, :cond_4
-
-    const/16 v2, 0x8
+    if-nez v1, :cond_4
 
     .line 311
-    new-array v2, v2, [F
+    const/16 v1, 0x8
 
-    iput-object v2, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mInsideBorderRadii:[F
+    new-array v1, v1, [F
+
+    iput-object v1, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mInsideBorderRadii:[F
 
     .line 313
     :cond_4
+    const/4 v1, 0x0
+
+    .local v1, "i":I
     :goto_3
     iget-object v2, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mInsideBorderRadii:[F
 
@@ -423,11 +424,13 @@
 
     aput v3, v2, v1
 
+    .line 313
     add-int/lit8 v1, v1, 0x1
 
     goto :goto_3
 
     .line 316
+    .end local v1    # "i":I
     :cond_5
     iget-object v1, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mPath:Landroid/graphics/Path;
 
@@ -455,10 +458,13 @@
     :goto_4
     iget-object v1, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mTempRect:Landroid/graphics/RectF;
 
-    neg-float v0, v0
+    neg-float v2, v0
 
-    invoke-virtual {v1, v0, v0}, Landroid/graphics/RectF;->inset(FF)V
+    neg-float v3, v0
 
+    invoke-virtual {v1, v2, v3}, Landroid/graphics/RectF;->inset(FF)V
+
+    .line 321
     return-void
 .end method
 
@@ -466,6 +472,7 @@
 # virtual methods
 .method public draw(Landroid/graphics/Canvas;)V
     .locals 3
+    .param p1, "canvas"    # Landroid/graphics/Canvas;
 
     .line 92
     iget-object v0, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mPaint:Landroid/graphics/Paint;
@@ -537,6 +544,7 @@
 
     invoke-virtual {p1, v0, v1}, Landroid/graphics/Canvas;->drawPath(Landroid/graphics/Path;Landroid/graphics/Paint;)V
 
+    .line 101
     :cond_0
     return-void
 .end method
@@ -634,6 +642,7 @@
 
 .method protected onBoundsChange(Landroid/graphics/Rect;)V
     .locals 0
+    .param p1, "bounds"    # Landroid/graphics/Rect;
 
     .line 86
     invoke-super {p0, p1}, Landroid/graphics/drawable/Drawable;->onBoundsChange(Landroid/graphics/Rect;)V
@@ -641,11 +650,13 @@
     .line 87
     invoke-direct {p0}, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->updatePath()V
 
+    .line 88
     return-void
 .end method
 
 .method public setAlpha(I)V
     .locals 1
+    .param p1, "alpha"    # I
 
     .line 250
     iget v0, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mAlpha:I
@@ -658,12 +669,15 @@
     .line 252
     invoke-virtual {p0}, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->invalidateSelf()V
 
+    .line 254
     :cond_0
     return-void
 .end method
 
 .method public setBorder(IF)V
     .locals 1
+    .param p1, "color"    # I
+    .param p2, "width"    # F
 
     .line 184
     iget v0, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mBorderColor:I
@@ -678,11 +692,11 @@
 
     .line 189
     :cond_0
-    iget p1, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mBorderWidth:F
+    iget v0, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mBorderWidth:F
 
-    cmpl-float p1, p1, p2
+    cmpl-float v0, v0, p2
 
-    if-eqz p1, :cond_1
+    if-eqz v0, :cond_1
 
     .line 190
     iput p2, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mBorderWidth:F
@@ -693,12 +707,14 @@
     .line 192
     invoke-virtual {p0}, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->invalidateSelf()V
 
+    .line 194
     :cond_1
     return-void
 .end method
 
 .method public setCircle(Z)V
     .locals 0
+    .param p1, "isCircle"    # Z
 
     .line 110
     iput-boolean p1, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mIsCircle:Z
@@ -709,11 +725,13 @@
     .line 112
     invoke-virtual {p0}, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->invalidateSelf()V
 
+    .line 113
     return-void
 .end method
 
 .method public setColor(I)V
     .locals 1
+    .param p1, "color"    # I
 
     .line 163
     iget v0, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mColor:I
@@ -726,18 +744,22 @@
     .line 165
     invoke-virtual {p0}, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->invalidateSelf()V
 
+    .line 167
     :cond_0
     return-void
 .end method
 
 .method public setColorFilter(Landroid/graphics/ColorFilter;)V
     .locals 0
+    .param p1, "colorFilter"    # Landroid/graphics/ColorFilter;
 
+    .line 274
     return-void
 .end method
 
 .method public setPadding(F)V
     .locals 1
+    .param p1, "padding"    # F
 
     .line 210
     iget v0, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mPadding:F
@@ -755,21 +777,24 @@
     .line 213
     invoke-virtual {p0}, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->invalidateSelf()V
 
+    .line 215
     :cond_0
     return-void
 .end method
 
 .method public setRadii([F)V
     .locals 4
+    .param p1, "radii"    # [F
 
+    .line 129
     if-nez p1, :cond_0
 
     .line 130
-    iget-object p1, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mRadii:[F
+    iget-object v0, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mRadii:[F
 
-    const/4 v0, 0x0
+    const/4 v1, 0x0
 
-    invoke-static {p1, v0}, Ljava/util/Arrays;->fill([FF)V
+    invoke-static {v0, v1}, Ljava/util/Arrays;->fill([FF)V
 
     goto :goto_1
 
@@ -807,12 +832,15 @@
     .line 136
     invoke-virtual {p0}, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->invalidateSelf()V
 
+    .line 137
     return-void
 .end method
 
 .method public setRadius(F)V
     .locals 2
+    .param p1, "radius"    # F
 
+    .line 152
     const/4 v0, 0x0
 
     cmpl-float v0, p1, v0
@@ -829,7 +857,6 @@
     :goto_0
     const-string v1, "radius should be non negative"
 
-    .line 152
     invoke-static {v0, v1}, Lcom/facebook/common/internal/Preconditions;->checkArgument(ZLjava/lang/Object;)V
 
     .line 153
@@ -843,11 +870,13 @@
     .line 155
     invoke-virtual {p0}, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->invalidateSelf()V
 
+    .line 156
     return-void
 .end method
 
 .method public setScaleDownInsideBorders(Z)V
     .locals 1
+    .param p1, "scaleDownInsideBorders"    # Z
 
     .line 230
     iget-boolean v0, p0, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->mScaleDownInsideBorders:Z
@@ -863,6 +892,7 @@
     .line 233
     invoke-virtual {p0}, Lcom/facebook/drawee/drawable/RoundedColorDrawable;->invalidateSelf()V
 
+    .line 235
     :cond_0
     return-void
 .end method

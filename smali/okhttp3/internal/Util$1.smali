@@ -54,12 +54,14 @@
 .end method
 
 .method public compare(Ljava/lang/String;Ljava/lang/String;)I
-    .locals 0
+    .locals 1
+    .param p1, "a"    # Ljava/lang/String;
+    .param p2, "b"    # Ljava/lang/String;
 
     .line 83
     invoke-virtual {p1, p2}, Ljava/lang/String;->compareTo(Ljava/lang/String;)I
 
-    move-result p1
+    move-result v0
 
-    return p1
+    return v0
 .end method

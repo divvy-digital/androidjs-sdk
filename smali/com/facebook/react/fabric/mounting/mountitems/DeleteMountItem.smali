@@ -13,6 +13,7 @@
 # direct methods
 .method public constructor <init>(I)V
     .locals 0
+    .param p1, "reactTag"    # I
 
     .line 15
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -20,6 +21,7 @@
     .line 16
     iput p1, p0, Lcom/facebook/react/fabric/mounting/mountitems/DeleteMountItem;->mReactTag:I
 
+    .line 17
     return-void
 .end method
 
@@ -27,12 +29,14 @@
 # virtual methods
 .method public execute(Lcom/facebook/react/fabric/mounting/MountingManager;)V
     .locals 1
+    .param p1, "mountingManager"    # Lcom/facebook/react/fabric/mounting/MountingManager;
 
     .line 21
     iget v0, p0, Lcom/facebook/react/fabric/mounting/mountitems/DeleteMountItem;->mReactTag:I
 
     invoke-virtual {p1, v0}, Lcom/facebook/react/fabric/mounting/MountingManager;->deleteView(I)V
 
+    .line 22
     return-void
 .end method
 
@@ -48,13 +52,19 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     iget v1, p0, Lcom/facebook/react/fabric/mounting/mountitems/DeleteMountItem;->mReactTag:I
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     const-string v1, "]"
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 

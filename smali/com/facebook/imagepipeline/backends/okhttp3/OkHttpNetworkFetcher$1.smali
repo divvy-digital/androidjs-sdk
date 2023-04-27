@@ -23,6 +23,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/imagepipeline/backends/okhttp3/OkHttpNetworkFetcher;Lokhttp3/Call;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/imagepipeline/backends/okhttp3/OkHttpNetworkFetcher;
 
     .line 133
     iput-object p1, p0, Lcom/facebook/imagepipeline/backends/okhttp3/OkHttpNetworkFetcher$1;->this$0:Lcom/facebook/imagepipeline/backends/okhttp3/OkHttpNetworkFetcher;
@@ -71,6 +72,7 @@
 
     invoke-interface {v0, v1}, Ljava/util/concurrent/Executor;->execute(Ljava/lang/Runnable;)V
 
+    .line 147
     :goto_0
     return-void
 .end method

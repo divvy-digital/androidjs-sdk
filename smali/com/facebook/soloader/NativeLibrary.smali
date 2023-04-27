@@ -4,7 +4,7 @@
 
 
 # static fields
-.field private static final TAG:Ljava/lang/String; = "com.facebook.soloader.NativeLibrary"
+.field private static final TAG:Ljava/lang/String;
 
 
 # instance fields
@@ -35,7 +35,16 @@
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 0
+    .locals 1
+
+    .line 33
+    const-class v0, Lcom/facebook/soloader/NativeLibrary;
+
+    invoke-virtual {v0}, Ljava/lang/Class;->getName()Ljava/lang/String;
+
+    move-result-object v0
+
+    sput-object v0, Lcom/facebook/soloader/NativeLibrary;->TAG:Ljava/lang/String;
 
     return-void
 .end method
@@ -52,6 +61,7 @@
     .end annotation
 
     .line 41
+    .local p1, "libraryNames":Ljava/util/List;, "Ljava/util/List<Ljava/lang/String;>;"
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     .line 42
@@ -61,28 +71,29 @@
 
     iput-object v0, p0, Lcom/facebook/soloader/NativeLibrary;->mLock:Ljava/lang/Object;
 
+    .line 43
     const/4 v0, 0x1
 
-    .line 43
     invoke-static {v0}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
     move-result-object v0
 
     iput-object v0, p0, Lcom/facebook/soloader/NativeLibrary;->mLoadLibraries:Ljava/lang/Boolean;
 
+    .line 44
     const/4 v0, 0x0
 
-    .line 44
     iput-boolean v0, p0, Lcom/facebook/soloader/NativeLibrary;->mLibrariesLoaded:Z
 
+    .line 45
     const/4 v0, 0x0
 
-    .line 45
     iput-object v0, p0, Lcom/facebook/soloader/NativeLibrary;->mLinkError:Ljava/lang/UnsatisfiedLinkError;
 
     .line 46
     iput-object p1, p0, Lcom/facebook/soloader/NativeLibrary;->mLibraryNames:Ljava/util/List;
 
+    .line 47
     return-void
 .end method
 
@@ -103,6 +114,7 @@
 
     if-eqz v0, :cond_0
 
+    .line 92
     return-void
 
     .line 90
@@ -131,6 +143,7 @@
         }
     .end annotation
 
+    .line 103
     return-void
 .end method
 
@@ -159,22 +172,20 @@
 
     monitor-exit v0
     :try_end_0
-    .catchall {:try_start_0 .. :try_end_0} :catchall_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_1
 
     return v1
 
+    .line 60
     :cond_0
     const/4 v1, 0x0
 
-    .line 60
     :try_start_1
     iget-object v2, p0, Lcom/facebook/soloader/NativeLibrary;->mLibraryNames:Ljava/util/List;
 
     if-eqz v2, :cond_1
 
     .line 61
-    iget-object v2, p0, Lcom/facebook/soloader/NativeLibrary;->mLibraryNames:Ljava/util/List;
-
     invoke-interface {v2}, Ljava/util/List;->iterator()Ljava/util/Iterator;
 
     move-result-object v2
@@ -193,34 +204,42 @@
     check-cast v3, Ljava/lang/String;
 
     .line 62
+    .local v3, "name":Ljava/lang/String;
     invoke-static {v3}, Lcom/facebook/soloader/SoLoader;->loadLibrary(Ljava/lang/String;)Z
 
+    .line 63
+    nop
+
+    .end local v3    # "name":Ljava/lang/String;
     goto :goto_0
 
     .line 65
     :cond_1
     invoke-virtual {p0}, Lcom/facebook/soloader/NativeLibrary;->initialNativeCheck()V
 
+    .line 66
     const/4 v2, 0x1
 
-    .line 66
     iput-boolean v2, p0, Lcom/facebook/soloader/NativeLibrary;->mLibrariesLoaded:Z
 
+    .line 67
     const/4 v2, 0x0
 
-    .line 67
     iput-object v2, p0, Lcom/facebook/soloader/NativeLibrary;->mLibraryNames:Ljava/util/List;
     :try_end_1
-    .catch Ljava/lang/UnsatisfiedLinkError; {:try_start_1 .. :try_end_1} :catch_1
-    .catch Ljava/lang/Throwable; {:try_start_1 .. :try_end_1} :catch_0
+    .catch Ljava/lang/UnsatisfiedLinkError; {:try_start_1 .. :try_end_1} :catch_0
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
-    goto :goto_1
+    .line 77
+    :goto_1
+    goto :goto_2
 
-    :catch_0
+    .line 72
+    :catchall_0
     move-exception v2
 
     .line 73
+    .local v2, "other":Ljava/lang/Throwable;
     :try_start_2
     sget-object v3, Lcom/facebook/soloader/NativeLibrary;->TAG:Ljava/lang/String;
 
@@ -245,12 +264,15 @@
     .line 76
     iput-boolean v1, p0, Lcom/facebook/soloader/NativeLibrary;->mLibrariesLoaded:Z
 
-    goto :goto_1
+    goto :goto_2
 
-    :catch_1
+    .line 68
+    .end local v2    # "other":Ljava/lang/Throwable;
+    :catch_0
     move-exception v2
 
     .line 69
+    .local v2, "error":Ljava/lang/UnsatisfiedLinkError;
     sget-object v3, Lcom/facebook/soloader/NativeLibrary;->TAG:Ljava/lang/String;
 
     const-string v4, "Failed to load native lib (initial check): "
@@ -263,8 +285,11 @@
     .line 71
     iput-boolean v1, p0, Lcom/facebook/soloader/NativeLibrary;->mLibrariesLoaded:Z
 
+    .end local v2    # "error":Ljava/lang/UnsatisfiedLinkError;
+    goto :goto_1
+
     .line 78
-    :goto_1
+    :goto_2
     invoke-static {v1}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
 
     move-result-object v1
@@ -278,19 +303,13 @@
 
     return v1
 
-    :catchall_0
+    .line 80
+    :catchall_1
     move-exception v1
 
-    .line 80
     monitor-exit v0
     :try_end_2
-    .catchall {:try_start_2 .. :try_end_2} :catchall_0
+    .catchall {:try_start_2 .. :try_end_2} :catchall_1
 
-    goto :goto_3
-
-    :goto_2
     throw v1
-
-    :goto_3
-    goto :goto_2
 .end method

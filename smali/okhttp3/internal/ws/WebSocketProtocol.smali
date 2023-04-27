@@ -67,7 +67,8 @@
 .end method
 
 .method public static acceptHeader(Ljava/lang/String;)Ljava/lang/String;
-    .locals 1
+    .locals 2
+    .param p0, "key"    # Ljava/lang/String;
 
     .line 123
     new-instance v0, Ljava/lang/StringBuilder;
@@ -76,32 +77,38 @@
 
     invoke-virtual {v0, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    const-string p0, "258EAFA5-E914-47DA-95CA-C5AB0DC85B11"
+    move-result-object v0
 
-    invoke-virtual {v0, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    const-string v1, "258EAFA5-E914-47DA-95CA-C5AB0DC85B11"
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object p0
+    move-result-object v0
 
-    invoke-static {p0}, Lokio/ByteString;->encodeUtf8(Ljava/lang/String;)Lokio/ByteString;
+    invoke-static {v0}, Lokio/ByteString;->encodeUtf8(Ljava/lang/String;)Lokio/ByteString;
 
-    move-result-object p0
+    move-result-object v0
 
-    invoke-virtual {p0}, Lokio/ByteString;->sha1()Lokio/ByteString;
+    invoke-virtual {v0}, Lokio/ByteString;->sha1()Lokio/ByteString;
 
-    move-result-object p0
+    move-result-object v0
 
-    invoke-virtual {p0}, Lokio/ByteString;->base64()Ljava/lang/String;
+    invoke-virtual {v0}, Lokio/ByteString;->base64()Ljava/lang/String;
 
-    move-result-object p0
+    move-result-object v0
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static closeCodeExceptionMessage(I)Ljava/lang/String;
     .locals 2
+    .param p0, "code"    # I
 
+    .line 108
     const/16 v0, 0x3e8
 
     if-lt p0, v0, :cond_4
@@ -112,6 +119,7 @@
 
     goto :goto_0
 
+    .line 110
     :cond_0
     const/16 v0, 0x3ec
 
@@ -140,22 +148,29 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     invoke-virtual {v0, p0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    const-string p0, " is reserved and may not be used."
+    move-result-object v0
 
-    invoke-virtual {v0, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    const-string v1, " is reserved and may not be used."
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object p0
+    move-result-object v0
 
-    return-object p0
+    return-object v0
 
+    .line 113
     :cond_3
-    const/4 p0, 0x0
+    const/4 v0, 0x0
 
-    return-object p0
+    return-object v0
 
     .line 109
     :cond_4
@@ -168,42 +183,54 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     invoke-virtual {v0, p0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object p0
+    move-result-object v0
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static toggleMask(Lokio/Buffer$UnsafeCursor;[B)V
     .locals 7
+    .param p0, "cursor"    # Lokio/Buffer$UnsafeCursor;
+    .param p1, "key"    # [B
+
+    .line 96
+    const/4 v0, 0x0
 
     .line 97
-    array-length v0, p1
-
-    const/4 v1, 0x0
+    .local v0, "keyIndex":I
+    array-length v1, p1
 
     .line 99
+    .local v1, "keyLength":I
     :cond_0
     iget-object v2, p0, Lokio/Buffer$UnsafeCursor;->data:[B
 
     .line 100
+    .local v2, "buffer":[B
     iget v3, p0, Lokio/Buffer$UnsafeCursor;->start:I
 
+    .local v3, "i":I
     iget v4, p0, Lokio/Buffer$UnsafeCursor;->end:I
 
+    .local v4, "end":I
     :goto_0
     if-ge v3, v4, :cond_1
 
     .line 101
-    rem-int/2addr v1, v0
+    rem-int/2addr v0, v1
 
     .line 102
     aget-byte v5, v2, v3
 
-    aget-byte v6, p1, v1
+    aget-byte v6, p1, v0
 
     xor-int/2addr v5, v6
 
@@ -211,13 +238,17 @@
 
     aput-byte v5, v2, v3
 
+    .line 100
     add-int/lit8 v3, v3, 0x1
 
-    add-int/lit8 v1, v1, 0x1
+    add-int/lit8 v0, v0, 0x1
 
     goto :goto_0
 
     .line 104
+    .end local v2    # "buffer":[B
+    .end local v3    # "i":I
+    .end local v4    # "end":I
     :cond_1
     invoke-virtual {p0}, Lokio/Buffer$UnsafeCursor;->next()I
 
@@ -227,26 +258,31 @@
 
     if-ne v2, v3, :cond_0
 
+    .line 105
     return-void
 .end method
 
 .method static validateCloseCode(I)V
-    .locals 1
+    .locals 2
+    .param p0, "code"    # I
 
     .line 118
     invoke-static {p0}, Lokhttp3/internal/ws/WebSocketProtocol;->closeCodeExceptionMessage(I)Ljava/lang/String;
 
-    move-result-object p0
+    move-result-object v0
 
-    if-nez p0, :cond_0
+    .line 119
+    .local v0, "message":Ljava/lang/String;
+    if-nez v0, :cond_0
 
+    .line 120
     return-void
 
     .line 119
     :cond_0
-    new-instance v0, Ljava/lang/IllegalArgumentException;
+    new-instance v1, Ljava/lang/IllegalArgumentException;
 
-    invoke-direct {v0, p0}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v1, v0}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
 
-    throw v0
+    throw v1
 .end method

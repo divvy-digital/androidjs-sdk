@@ -16,7 +16,8 @@
 
 # direct methods
 .method protected constructor <init>(F)V
-    .locals 0
+    .locals 1
+    .param p1, "toValue"    # F
 
     .line 22
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -24,16 +25,19 @@
     .line 23
     iput p1, p0, Lcom/facebook/react/animation/AbstractSingleFloatProperyUpdater;->mToValue:F
 
-    const/4 p1, 0x1
-
     .line 24
-    iput-boolean p1, p0, Lcom/facebook/react/animation/AbstractSingleFloatProperyUpdater;->mFromSource:Z
+    const/4 v0, 0x1
 
+    iput-boolean v0, p0, Lcom/facebook/react/animation/AbstractSingleFloatProperyUpdater;->mFromSource:Z
+
+    .line 25
     return-void
 .end method
 
 .method protected constructor <init>(FF)V
-    .locals 0
+    .locals 1
+    .param p1, "fromValue"    # F
+    .param p2, "toValue"    # F
 
     .line 28
     invoke-direct {p0, p2}, Lcom/facebook/react/animation/AbstractSingleFloatProperyUpdater;-><init>(F)V
@@ -41,11 +45,12 @@
     .line 29
     iput p1, p0, Lcom/facebook/react/animation/AbstractSingleFloatProperyUpdater;->mFromValue:F
 
-    const/4 p1, 0x0
-
     .line 30
-    iput-boolean p1, p0, Lcom/facebook/react/animation/AbstractSingleFloatProperyUpdater;->mFromSource:Z
+    const/4 v0, 0x0
 
+    iput-boolean v0, p0, Lcom/facebook/react/animation/AbstractSingleFloatProperyUpdater;->mFromSource:Z
+
+    .line 31
     return-void
 .end method
 
@@ -56,17 +61,21 @@
 
 .method public onFinish(Landroid/view/View;)V
     .locals 1
+    .param p1, "view"    # Landroid/view/View;
 
     .line 50
     iget v0, p0, Lcom/facebook/react/animation/AbstractSingleFloatProperyUpdater;->mToValue:F
 
     invoke-virtual {p0, p1, v0}, Lcom/facebook/react/animation/AbstractSingleFloatProperyUpdater;->setProperty(Landroid/view/View;F)V
 
+    .line 51
     return-void
 .end method
 
 .method public final onUpdate(Landroid/view/View;F)V
     .locals 2
+    .param p1, "view"    # Landroid/view/View;
+    .param p2, "progress"    # F
 
     .line 45
     iget v0, p0, Lcom/facebook/react/animation/AbstractSingleFloatProperyUpdater;->mFromValue:F
@@ -81,11 +90,13 @@
 
     invoke-virtual {p0, p1, v0}, Lcom/facebook/react/animation/AbstractSingleFloatProperyUpdater;->setProperty(Landroid/view/View;F)V
 
+    .line 46
     return-void
 .end method
 
 .method public final prepare(Landroid/view/View;)V
     .locals 1
+    .param p1, "view"    # Landroid/view/View;
 
     .line 38
     iget-boolean v0, p0, Lcom/facebook/react/animation/AbstractSingleFloatProperyUpdater;->mFromSource:Z
@@ -95,10 +106,11 @@
     .line 39
     invoke-virtual {p0, p1}, Lcom/facebook/react/animation/AbstractSingleFloatProperyUpdater;->getProperty(Landroid/view/View;)F
 
-    move-result p1
+    move-result v0
 
-    iput p1, p0, Lcom/facebook/react/animation/AbstractSingleFloatProperyUpdater;->mFromValue:F
+    iput v0, p0, Lcom/facebook/react/animation/AbstractSingleFloatProperyUpdater;->mFromValue:F
 
+    .line 41
     :cond_0
     return-void
 .end method

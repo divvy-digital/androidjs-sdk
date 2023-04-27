@@ -57,6 +57,7 @@
 
     iput-object v0, p0, Landroid/support/v4/media/MediaBrowserCompat$Subscription;->mOptionsList:Ljava/util/List;
 
+    .line 2040
     return-void
 .end method
 
@@ -64,10 +65,12 @@
 # virtual methods
 .method public getCallback(Landroid/os/Bundle;)Landroid/support/v4/media/MediaBrowserCompat$SubscriptionCallback;
     .locals 2
-
-    const/4 v0, 0x0
+    .param p1, "options"    # Landroid/os/Bundle;
 
     .line 2055
+    const/4 v0, 0x0
+
+    .local v0, "i":I
     :goto_0
     iget-object v1, p0, Landroid/support/v4/media/MediaBrowserCompat$Subscription;->mOptionsList:Ljava/util/List;
 
@@ -86,32 +89,35 @@
 
     check-cast v1, Landroid/os/Bundle;
 
-    invoke-static {v1, p1}, Landroid/support/v4/media/MediaBrowserCompatUtils;->areSameOptions(Landroid/os/Bundle;Landroid/os/Bundle;)Z
+    invoke-static {v1, p1}, Landroidx/media/MediaBrowserCompatUtils;->areSameOptions(Landroid/os/Bundle;Landroid/os/Bundle;)Z
 
     move-result v1
 
     if-eqz v1, :cond_0
 
     .line 2057
-    iget-object p1, p0, Landroid/support/v4/media/MediaBrowserCompat$Subscription;->mCallbacks:Ljava/util/List;
+    iget-object v1, p0, Landroid/support/v4/media/MediaBrowserCompat$Subscription;->mCallbacks:Ljava/util/List;
 
-    invoke-interface {p1, v0}, Ljava/util/List;->get(I)Ljava/lang/Object;
+    invoke-interface {v1, v0}, Ljava/util/List;->get(I)Ljava/lang/Object;
 
-    move-result-object p1
+    move-result-object v1
 
-    check-cast p1, Landroid/support/v4/media/MediaBrowserCompat$SubscriptionCallback;
+    check-cast v1, Landroid/support/v4/media/MediaBrowserCompat$SubscriptionCallback;
 
-    return-object p1
+    return-object v1
 
+    .line 2055
     :cond_0
     add-int/lit8 v0, v0, 0x1
 
     goto :goto_0
 
+    .line 2060
+    .end local v0    # "i":I
     :cond_1
-    const/4 p1, 0x0
+    const/4 v0, 0x0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public getCallbacks()Ljava/util/List;
@@ -163,10 +169,13 @@
 
 .method public putCallback(Landroid/os/Bundle;Landroid/support/v4/media/MediaBrowserCompat$SubscriptionCallback;)V
     .locals 2
-
-    const/4 v0, 0x0
+    .param p1, "options"    # Landroid/os/Bundle;
+    .param p2, "callback"    # Landroid/support/v4/media/MediaBrowserCompat$SubscriptionCallback;
 
     .line 2064
+    const/4 v0, 0x0
+
+    .local v0, "i":I
     :goto_0
     iget-object v1, p0, Landroid/support/v4/media/MediaBrowserCompat$Subscription;->mOptionsList:Ljava/util/List;
 
@@ -185,34 +194,38 @@
 
     check-cast v1, Landroid/os/Bundle;
 
-    invoke-static {v1, p1}, Landroid/support/v4/media/MediaBrowserCompatUtils;->areSameOptions(Landroid/os/Bundle;Landroid/os/Bundle;)Z
+    invoke-static {v1, p1}, Landroidx/media/MediaBrowserCompatUtils;->areSameOptions(Landroid/os/Bundle;Landroid/os/Bundle;)Z
 
     move-result v1
 
     if-eqz v1, :cond_0
 
     .line 2066
-    iget-object p1, p0, Landroid/support/v4/media/MediaBrowserCompat$Subscription;->mCallbacks:Ljava/util/List;
+    iget-object v1, p0, Landroid/support/v4/media/MediaBrowserCompat$Subscription;->mCallbacks:Ljava/util/List;
 
-    invoke-interface {p1, v0, p2}, Ljava/util/List;->set(ILjava/lang/Object;)Ljava/lang/Object;
+    invoke-interface {v1, v0, p2}, Ljava/util/List;->set(ILjava/lang/Object;)Ljava/lang/Object;
 
+    .line 2067
     return-void
 
+    .line 2064
     :cond_0
     add-int/lit8 v0, v0, 0x1
 
     goto :goto_0
 
     .line 2070
+    .end local v0    # "i":I
     :cond_1
     iget-object v0, p0, Landroid/support/v4/media/MediaBrowserCompat$Subscription;->mCallbacks:Ljava/util/List;
 
     invoke-interface {v0, p2}, Ljava/util/List;->add(Ljava/lang/Object;)Z
 
     .line 2071
-    iget-object p2, p0, Landroid/support/v4/media/MediaBrowserCompat$Subscription;->mOptionsList:Ljava/util/List;
+    iget-object v0, p0, Landroid/support/v4/media/MediaBrowserCompat$Subscription;->mOptionsList:Ljava/util/List;
 
-    invoke-interface {p2, p1}, Ljava/util/List;->add(Ljava/lang/Object;)Z
+    invoke-interface {v0, p1}, Ljava/util/List;->add(Ljava/lang/Object;)Z
 
+    .line 2072
     return-void
 .end method

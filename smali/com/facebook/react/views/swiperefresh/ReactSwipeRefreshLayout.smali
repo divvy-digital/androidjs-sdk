@@ -1,5 +1,5 @@
 .class public Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;
-.super Landroid/support/v4/widget/SwipeRefreshLayout;
+.super Landroidx/swiperefreshlayout/widget/SwipeRefreshLayout;
 .source "ReactSwipeRefreshLayout.java"
 
 
@@ -24,39 +24,42 @@
 # direct methods
 .method public constructor <init>(Lcom/facebook/react/bridge/ReactContext;)V
     .locals 1
+    .param p1, "reactContext"    # Lcom/facebook/react/bridge/ReactContext;
 
     .line 33
-    invoke-direct {p0, p1}, Landroid/support/v4/widget/SwipeRefreshLayout;-><init>(Landroid/content/Context;)V
-
-    const/4 v0, 0x0
+    invoke-direct {p0, p1}, Landroidx/swiperefreshlayout/widget/SwipeRefreshLayout;-><init>(Landroid/content/Context;)V
 
     .line 25
+    const/4 v0, 0x0
+
     iput-boolean v0, p0, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->mDidLayout:Z
 
     .line 26
     iput-boolean v0, p0, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->mRefreshing:Z
 
+    .line 27
     const/4 v0, 0x0
 
-    .line 27
     iput v0, p0, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->mProgressViewOffset:F
 
     .line 34
     invoke-static {p1}, Landroid/view/ViewConfiguration;->get(Landroid/content/Context;)Landroid/view/ViewConfiguration;
 
-    move-result-object p1
+    move-result-object v0
 
-    invoke-virtual {p1}, Landroid/view/ViewConfiguration;->getScaledTouchSlop()I
+    invoke-virtual {v0}, Landroid/view/ViewConfiguration;->getScaledTouchSlop()I
 
-    move-result p1
+    move-result v0
 
-    iput p1, p0, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->mTouchSlop:I
+    iput v0, p0, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->mTouchSlop:I
 
+    .line 35
     return-void
 .end method
 
 .method private shouldInterceptTouchEvent(Landroid/view/MotionEvent;)Z
-    .locals 4
+    .locals 5
+    .param p1, "ev"    # Landroid/view/MotionEvent;
 
     .line 112
     invoke-virtual {p1}, Landroid/view/MotionEvent;->getAction()I
@@ -67,68 +70,82 @@
 
     const/4 v2, 0x1
 
-    if-eqz v0, :cond_2
+    packed-switch v0, :pswitch_data_0
 
-    const/4 v3, 0x2
-
-    if-eq v0, v3, :cond_0
-
+    :pswitch_0
     goto :goto_0
 
     .line 119
-    :cond_0
+    :pswitch_1
     invoke-virtual {p1}, Landroid/view/MotionEvent;->getX()F
 
-    move-result p1
+    move-result v0
 
     .line 120
-    iget v0, p0, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->mPrevTouchX:F
+    .local v0, "eventX":F
+    iget v3, p0, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->mPrevTouchX:F
 
-    sub-float/2addr p1, v0
+    sub-float v3, v0, v3
 
-    invoke-static {p1}, Ljava/lang/Math;->abs(F)F
+    invoke-static {v3}, Ljava/lang/Math;->abs(F)F
 
-    move-result p1
+    move-result v3
 
     .line 122
-    iget-boolean v0, p0, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->mIntercepted:Z
+    .local v3, "xDiff":F
+    iget-boolean v4, p0, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->mIntercepted:Z
 
-    if-nez v0, :cond_1
+    if-nez v4, :cond_0
 
-    iget v0, p0, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->mTouchSlop:I
+    iget v4, p0, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->mTouchSlop:I
 
-    int-to-float v0, v0
+    int-to-float v4, v4
 
-    cmpl-float p1, p1, v0
+    cmpl-float v4, v3, v4
 
-    if-lez p1, :cond_3
+    if-lez v4, :cond_1
 
     .line 123
-    :cond_1
+    :cond_0
     iput-boolean v2, p0, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->mIntercepted:Z
 
+    .line 124
     return v1
 
     .line 114
-    :cond_2
+    .end local v0    # "eventX":F
+    .end local v3    # "xDiff":F
+    :pswitch_2
     invoke-virtual {p1}, Landroid/view/MotionEvent;->getX()F
 
-    move-result p1
+    move-result v0
 
-    iput p1, p0, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->mPrevTouchX:F
+    iput v0, p0, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->mPrevTouchX:F
 
     .line 115
     iput-boolean v1, p0, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->mIntercepted:Z
 
-    :cond_3
+    .line 116
+    nop
+
+    .line 127
+    :cond_1
     :goto_0
     return v2
+
+    :pswitch_data_0
+    .packed-switch 0x0
+        :pswitch_2
+        :pswitch_0
+        :pswitch_1
+    .end packed-switch
 .end method
 
 
 # virtual methods
 .method public onInterceptTouchEvent(Landroid/view/MotionEvent;)Z
-    .locals 1
+    .locals 2
+    .param p1, "ev"    # Landroid/view/MotionEvent;
 
     .line 90
     invoke-direct {p0, p1}, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->shouldInterceptTouchEvent(Landroid/view/MotionEvent;)Z
@@ -137,7 +154,7 @@
 
     if-eqz v0, :cond_1
 
-    invoke-super {p0, p1}, Landroid/support/v4/widget/SwipeRefreshLayout;->onInterceptTouchEvent(Landroid/view/MotionEvent;)Z
+    invoke-super {p0, p1}, Landroidx/swiperefreshlayout/widget/SwipeRefreshLayout;->onInterceptTouchEvent(Landroid/view/MotionEvent;)Z
 
     move-result v0
 
@@ -149,60 +166,69 @@
     .line 96
     invoke-virtual {p0}, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->getParent()Landroid/view/ViewParent;
 
-    move-result-object p1
+    move-result-object v0
 
-    const/4 v0, 0x1
+    const/4 v1, 0x1
 
-    if-eqz p1, :cond_0
+    if-eqz v0, :cond_0
 
     .line 97
     invoke-virtual {p0}, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->getParent()Landroid/view/ViewParent;
 
-    move-result-object p1
+    move-result-object v0
 
-    invoke-interface {p1, v0}, Landroid/view/ViewParent;->requestDisallowInterceptTouchEvent(Z)V
+    invoke-interface {v0, v1}, Landroid/view/ViewParent;->requestDisallowInterceptTouchEvent(Z)V
 
+    .line 100
     :cond_0
-    return v0
+    return v1
 
+    .line 102
     :cond_1
-    const/4 p1, 0x0
+    const/4 v0, 0x0
 
-    return p1
+    return v0
 .end method
 
 .method public onLayout(ZIIII)V
-    .locals 0
+    .locals 1
+    .param p1, "changed"    # Z
+    .param p2, "left"    # I
+    .param p3, "top"    # I
+    .param p4, "right"    # I
+    .param p5, "bottom"    # I
 
     .line 64
-    invoke-super/range {p0 .. p5}, Landroid/support/v4/widget/SwipeRefreshLayout;->onLayout(ZIIII)V
+    invoke-super/range {p0 .. p5}, Landroidx/swiperefreshlayout/widget/SwipeRefreshLayout;->onLayout(ZIIII)V
 
     .line 66
-    iget-boolean p1, p0, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->mDidLayout:Z
+    iget-boolean v0, p0, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->mDidLayout:Z
 
-    if-nez p1, :cond_0
-
-    const/4 p1, 0x1
+    if-nez v0, :cond_0
 
     .line 67
-    iput-boolean p1, p0, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->mDidLayout:Z
+    const/4 v0, 0x1
+
+    iput-boolean v0, p0, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->mDidLayout:Z
 
     .line 70
-    iget p1, p0, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->mProgressViewOffset:F
+    iget v0, p0, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->mProgressViewOffset:F
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->setProgressViewOffset(F)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->setProgressViewOffset(F)V
 
     .line 71
-    iget-boolean p1, p0, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->mRefreshing:Z
+    iget-boolean v0, p0, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->mRefreshing:Z
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->setRefreshing(Z)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->setRefreshing(Z)V
 
+    .line 73
     :cond_0
     return-void
 .end method
 
 .method public requestDisallowInterceptTouchEvent(Z)V
     .locals 1
+    .param p1, "disallowIntercept"    # Z
 
     .line 83
     invoke-virtual {p0}, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->getParent()Landroid/view/ViewParent;
@@ -218,12 +244,14 @@
 
     invoke-interface {v0, p1}, Landroid/view/ViewParent;->requestDisallowInterceptTouchEvent(Z)V
 
+    .line 86
     :cond_0
     return-void
 .end method
 
 .method public setProgressViewOffset(F)V
-    .locals 3
+    .locals 4
+    .param p1, "offset"    # F
 
     .line 50
     iput p1, p0, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->mProgressViewOffset:F
@@ -239,6 +267,7 @@
     move-result v0
 
     .line 56
+    .local v0, "diameter":I
     invoke-static {p1}, Lcom/facebook/react/uimanager/PixelUtil;->toPixelFromDIP(F)F
 
     move-result v1
@@ -249,34 +278,41 @@
 
     sub-int/2addr v1, v0
 
+    .line 57
+    .local v1, "start":I
     const/high16 v2, 0x42800000    # 64.0f
 
-    add-float/2addr p1, v2
+    add-float/2addr v2, p1
 
-    .line 57
-    invoke-static {p1}, Lcom/facebook/react/uimanager/PixelUtil;->toPixelFromDIP(F)F
+    invoke-static {v2}, Lcom/facebook/react/uimanager/PixelUtil;->toPixelFromDIP(F)F
 
-    move-result p1
+    move-result v2
 
-    int-to-float v0, v0
+    int-to-float v3, v0
 
-    sub-float/2addr p1, v0
+    sub-float/2addr v2, v3
 
-    invoke-static {p1}, Ljava/lang/Math;->round(F)I
+    invoke-static {v2}, Ljava/lang/Math;->round(F)I
 
-    move-result p1
-
-    const/4 v0, 0x0
+    move-result v2
 
     .line 58
-    invoke-virtual {p0, v0, v1, p1}, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->setProgressViewOffset(ZII)V
+    .local v2, "end":I
+    const/4 v3, 0x0
 
+    invoke-virtual {p0, v3, v1, v2}, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->setProgressViewOffset(ZII)V
+
+    .line 60
+    .end local v0    # "diameter":I
+    .end local v1    # "start":I
+    .end local v2    # "end":I
     :cond_0
     return-void
 .end method
 
 .method public setRefreshing(Z)V
     .locals 1
+    .param p1, "refreshing"    # Z
 
     .line 39
     iput-boolean p1, p0, Lcom/facebook/react/views/swiperefresh/ReactSwipeRefreshLayout;->mRefreshing:Z
@@ -287,8 +323,9 @@
     if-eqz v0, :cond_0
 
     .line 45
-    invoke-super {p0, p1}, Landroid/support/v4/widget/SwipeRefreshLayout;->setRefreshing(Z)V
+    invoke-super {p0, p1}, Landroidx/swiperefreshlayout/widget/SwipeRefreshLayout;->setRefreshing(Z)V
 
+    .line 47
     :cond_0
     return-void
 .end method

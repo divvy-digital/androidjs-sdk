@@ -33,7 +33,8 @@
 
 # direct methods
 .method constructor <init>(Lcom/facebook/react/bridge/JavaOnlyMap;)V
-    .locals 0
+    .locals 1
+    .param p1, "this$0"    # Lcom/facebook/react/bridge/JavaOnlyMap;
 
     .line 152
     iput-object p1, p0, Lcom/facebook/react/bridge/JavaOnlyMap$1;->this$0:Lcom/facebook/react/bridge/JavaOnlyMap;
@@ -41,21 +42,19 @@
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     .line 153
-    iget-object p1, p0, Lcom/facebook/react/bridge/JavaOnlyMap$1;->this$0:Lcom/facebook/react/bridge/JavaOnlyMap;
-
     invoke-static {p1}, Lcom/facebook/react/bridge/JavaOnlyMap;->access$000(Lcom/facebook/react/bridge/JavaOnlyMap;)Ljava/util/Map;
 
-    move-result-object p1
+    move-result-object v0
 
-    invoke-interface {p1}, Ljava/util/Map;->keySet()Ljava/util/Set;
+    invoke-interface {v0}, Ljava/util/Map;->keySet()Ljava/util/Set;
 
-    move-result-object p1
+    move-result-object v0
 
-    invoke-interface {p1}, Ljava/util/Set;->iterator()Ljava/util/Iterator;
+    invoke-interface {v0}, Ljava/util/Set;->iterator()Ljava/util/Iterator;
 
-    move-result-object p1
+    move-result-object v0
 
-    iput-object p1, p0, Lcom/facebook/react/bridge/JavaOnlyMap$1;->mIterator:Ljava/util/Iterator;
+    iput-object v0, p0, Lcom/facebook/react/bridge/JavaOnlyMap$1;->mIterator:Ljava/util/Iterator;
 
     return-void
 .end method

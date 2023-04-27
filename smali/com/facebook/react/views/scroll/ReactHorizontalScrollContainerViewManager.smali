@@ -46,6 +46,7 @@
 
 .method public createViewInstance(Lcom/facebook/react/uimanager/ThemedReactContext;)Lcom/facebook/react/views/scroll/ReactHorizontalScrollContainerView;
     .locals 1
+    .param p1, "context"    # Lcom/facebook/react/uimanager/ThemedReactContext;
 
     .line 28
     new-instance v0, Lcom/facebook/react/views/scroll/ReactHorizontalScrollContainerView;
@@ -58,6 +59,7 @@
 .method public getName()Ljava/lang/String;
     .locals 1
 
+    .line 23
     const-string v0, "AndroidHorizontalScrollContentView"
 
     return-object v0

@@ -19,13 +19,15 @@
 # direct methods
 .method protected constructor <init>(FF)V
     .locals 2
+    .param p1, "toFirst"    # F
+    .param p2, "toSecond"    # F
 
     .line 24
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
+    .line 19
     const/4 v0, 0x2
 
-    .line 19
     new-array v1, v0, [F
 
     iput-object v1, p0, Lcom/facebook/react/animation/AbstractFloatPairPropertyUpdater;->mFromValues:[F
@@ -41,44 +43,48 @@
     iput-object v0, p0, Lcom/facebook/react/animation/AbstractFloatPairPropertyUpdater;->mUpdateValues:[F
 
     .line 25
-    iget-object v0, p0, Lcom/facebook/react/animation/AbstractFloatPairPropertyUpdater;->mToValues:[F
+    const/4 v0, 0x0
 
-    const/4 v1, 0x0
-
-    aput p1, v0, v1
-
-    const/4 p1, 0x1
+    aput p1, v1, v0
 
     .line 26
-    aput p2, v0, p1
+    const/4 v0, 0x1
+
+    aput p2, v1, v0
 
     .line 27
-    iput-boolean p1, p0, Lcom/facebook/react/animation/AbstractFloatPairPropertyUpdater;->mFromSource:Z
+    iput-boolean v0, p0, Lcom/facebook/react/animation/AbstractFloatPairPropertyUpdater;->mFromSource:Z
 
+    .line 28
     return-void
 .end method
 
 .method protected constructor <init>(FFFF)V
-    .locals 0
+    .locals 3
+    .param p1, "fromFirst"    # F
+    .param p2, "fromSecond"    # F
+    .param p3, "toFirst"    # F
+    .param p4, "toSecond"    # F
 
     .line 35
     invoke-direct {p0, p3, p4}, Lcom/facebook/react/animation/AbstractFloatPairPropertyUpdater;-><init>(FF)V
 
     .line 36
-    iget-object p3, p0, Lcom/facebook/react/animation/AbstractFloatPairPropertyUpdater;->mFromValues:[F
+    iget-object v0, p0, Lcom/facebook/react/animation/AbstractFloatPairPropertyUpdater;->mFromValues:[F
 
-    const/4 p4, 0x0
+    const/4 v1, 0x0
 
-    aput p1, p3, p4
-
-    const/4 p1, 0x1
+    aput p1, v0, v1
 
     .line 37
-    aput p2, p3, p1
+    const/4 v2, 0x1
+
+    aput p2, v0, v2
 
     .line 38
-    iput-boolean p4, p0, Lcom/facebook/react/animation/AbstractFloatPairPropertyUpdater;->mFromSource:Z
+    iput-boolean v1, p0, Lcom/facebook/react/animation/AbstractFloatPairPropertyUpdater;->mFromSource:Z
 
+    .line 39
     return-void
 .end method
 
@@ -89,17 +95,21 @@
 
 .method public onFinish(Landroid/view/View;)V
     .locals 1
+    .param p1, "view"    # Landroid/view/View;
 
     .line 60
     iget-object v0, p0, Lcom/facebook/react/animation/AbstractFloatPairPropertyUpdater;->mToValues:[F
 
     invoke-virtual {p0, p1, v0}, Lcom/facebook/react/animation/AbstractFloatPairPropertyUpdater;->setProperty(Landroid/view/View;[F)V
 
+    .line 61
     return-void
 .end method
 
 .method public onUpdate(Landroid/view/View;F)V
-    .locals 7
+    .locals 6
+    .param p1, "view"    # Landroid/view/View;
+    .param p2, "progress"    # F
 
     .line 53
     iget-object v0, p0, Lcom/facebook/react/animation/AbstractFloatPairPropertyUpdater;->mUpdateValues:[F
@@ -114,9 +124,7 @@
 
     aget v5, v4, v2
 
-    aget v6, v1, v2
-
-    sub-float/2addr v5, v6
+    sub-float/2addr v5, v3
 
     mul-float v5, v5, p2
 
@@ -124,31 +132,31 @@
 
     aput v3, v0, v2
 
-    const/4 v2, 0x1
-
     .line 54
-    aget v3, v1, v2
-
-    aget v4, v4, v2
+    const/4 v2, 0x1
 
     aget v1, v1, v2
 
-    sub-float/2addr v4, v1
+    aget v3, v4, v2
 
-    mul-float v4, v4, p2
+    sub-float/2addr v3, v1
 
-    add-float/2addr v3, v4
+    mul-float v3, v3, p2
 
-    aput v3, v0, v2
+    add-float/2addr v1, v3
+
+    aput v1, v0, v2
 
     .line 55
     invoke-virtual {p0, p1, v0}, Lcom/facebook/react/animation/AbstractFloatPairPropertyUpdater;->setProperty(Landroid/view/View;[F)V
 
+    .line 56
     return-void
 .end method
 
 .method public prepare(Landroid/view/View;)V
     .locals 1
+    .param p1, "view"    # Landroid/view/View;
 
     .line 46
     iget-boolean v0, p0, Lcom/facebook/react/animation/AbstractFloatPairPropertyUpdater;->mFromSource:Z
@@ -160,6 +168,7 @@
 
     invoke-virtual {p0, p1, v0}, Lcom/facebook/react/animation/AbstractFloatPairPropertyUpdater;->getProperty(Landroid/view/View;[F)V
 
+    .line 49
     :cond_0
     return-void
 .end method

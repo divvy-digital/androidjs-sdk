@@ -27,74 +27,66 @@
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 6
+    .locals 9
 
     .line 14
     new-instance v0, Lcom/facebook/react/uimanager/events/TouchEventType;
 
-    const/4 v1, 0x0
+    const-string v1, "START"
 
-    const-string v2, "START"
+    const/4 v2, 0x0
 
-    invoke-direct {v0, v2, v1}, Lcom/facebook/react/uimanager/events/TouchEventType;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v0, v1, v2}, Lcom/facebook/react/uimanager/events/TouchEventType;-><init>(Ljava/lang/String;I)V
 
     sput-object v0, Lcom/facebook/react/uimanager/events/TouchEventType;->START:Lcom/facebook/react/uimanager/events/TouchEventType;
 
     .line 15
-    new-instance v0, Lcom/facebook/react/uimanager/events/TouchEventType;
-
-    const/4 v2, 0x1
+    new-instance v1, Lcom/facebook/react/uimanager/events/TouchEventType;
 
     const-string v3, "END"
 
-    invoke-direct {v0, v3, v2}, Lcom/facebook/react/uimanager/events/TouchEventType;-><init>(Ljava/lang/String;I)V
+    const/4 v4, 0x1
 
-    sput-object v0, Lcom/facebook/react/uimanager/events/TouchEventType;->END:Lcom/facebook/react/uimanager/events/TouchEventType;
+    invoke-direct {v1, v3, v4}, Lcom/facebook/react/uimanager/events/TouchEventType;-><init>(Ljava/lang/String;I)V
+
+    sput-object v1, Lcom/facebook/react/uimanager/events/TouchEventType;->END:Lcom/facebook/react/uimanager/events/TouchEventType;
 
     .line 16
-    new-instance v0, Lcom/facebook/react/uimanager/events/TouchEventType;
+    new-instance v3, Lcom/facebook/react/uimanager/events/TouchEventType;
 
-    const/4 v3, 0x2
+    const-string v5, "MOVE"
 
-    const-string v4, "MOVE"
+    const/4 v6, 0x2
 
-    invoke-direct {v0, v4, v3}, Lcom/facebook/react/uimanager/events/TouchEventType;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v3, v5, v6}, Lcom/facebook/react/uimanager/events/TouchEventType;-><init>(Ljava/lang/String;I)V
 
-    sput-object v0, Lcom/facebook/react/uimanager/events/TouchEventType;->MOVE:Lcom/facebook/react/uimanager/events/TouchEventType;
+    sput-object v3, Lcom/facebook/react/uimanager/events/TouchEventType;->MOVE:Lcom/facebook/react/uimanager/events/TouchEventType;
 
     .line 17
-    new-instance v0, Lcom/facebook/react/uimanager/events/TouchEventType;
+    new-instance v5, Lcom/facebook/react/uimanager/events/TouchEventType;
 
-    const/4 v4, 0x3
+    const-string v7, "CANCEL"
 
-    const-string v5, "CANCEL"
+    const/4 v8, 0x3
 
-    invoke-direct {v0, v5, v4}, Lcom/facebook/react/uimanager/events/TouchEventType;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v5, v7, v8}, Lcom/facebook/react/uimanager/events/TouchEventType;-><init>(Ljava/lang/String;I)V
 
-    sput-object v0, Lcom/facebook/react/uimanager/events/TouchEventType;->CANCEL:Lcom/facebook/react/uimanager/events/TouchEventType;
-
-    const/4 v0, 0x4
+    sput-object v5, Lcom/facebook/react/uimanager/events/TouchEventType;->CANCEL:Lcom/facebook/react/uimanager/events/TouchEventType;
 
     .line 13
-    new-array v0, v0, [Lcom/facebook/react/uimanager/events/TouchEventType;
+    const/4 v7, 0x4
 
-    sget-object v5, Lcom/facebook/react/uimanager/events/TouchEventType;->START:Lcom/facebook/react/uimanager/events/TouchEventType;
+    new-array v7, v7, [Lcom/facebook/react/uimanager/events/TouchEventType;
 
-    aput-object v5, v0, v1
+    aput-object v0, v7, v2
 
-    sget-object v1, Lcom/facebook/react/uimanager/events/TouchEventType;->END:Lcom/facebook/react/uimanager/events/TouchEventType;
+    aput-object v1, v7, v4
 
-    aput-object v1, v0, v2
+    aput-object v3, v7, v6
 
-    sget-object v1, Lcom/facebook/react/uimanager/events/TouchEventType;->MOVE:Lcom/facebook/react/uimanager/events/TouchEventType;
+    aput-object v5, v7, v8
 
-    aput-object v1, v0, v3
-
-    sget-object v1, Lcom/facebook/react/uimanager/events/TouchEventType;->CANCEL:Lcom/facebook/react/uimanager/events/TouchEventType;
-
-    aput-object v1, v0, v4
-
-    sput-object v0, Lcom/facebook/react/uimanager/events/TouchEventType;->$VALUES:[Lcom/facebook/react/uimanager/events/TouchEventType;
+    sput-object v7, Lcom/facebook/react/uimanager/events/TouchEventType;->$VALUES:[Lcom/facebook/react/uimanager/events/TouchEventType;
 
     return-void
 .end method
@@ -115,6 +107,7 @@
 
 .method public static getJSEventName(Lcom/facebook/react/uimanager/events/TouchEventType;)Ljava/lang/String;
     .locals 3
+    .param p0, "type"    # Lcom/facebook/react/uimanager/events/TouchEventType;
 
     .line 20
     sget-object v0, Lcom/facebook/react/uimanager/events/TouchEventType$1;->$SwitchMap$com$facebook$react$uimanager$events$TouchEventType:[I
@@ -125,28 +118,9 @@
 
     aget v0, v0, v1
 
-    const/4 v1, 0x1
-
-    if-eq v0, v1, :cond_3
-
-    const/4 v1, 0x2
-
-    if-eq v0, v1, :cond_2
-
-    const/4 v1, 0x3
-
-    if-eq v0, v1, :cond_1
-
-    const/4 v1, 0x4
-
-    if-ne v0, v1, :cond_0
-
-    const-string p0, "topTouchCancel"
-
-    return-object p0
+    packed-switch v0, :pswitch_data_0
 
     .line 30
-    :cond_0
     new-instance v0, Ljava/lang/IllegalArgumentException;
 
     new-instance v1, Ljava/lang/StringBuilder;
@@ -157,45 +131,67 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     invoke-virtual {v1, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object p0
+    move-result-object v1
 
-    invoke-direct {v0, p0}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
 
     throw v0
 
-    :cond_1
-    const-string p0, "topTouchMove"
+    .line 28
+    :pswitch_0
+    const-string v0, "topTouchCancel"
 
-    return-object p0
+    return-object v0
 
-    :cond_2
-    const-string p0, "topTouchEnd"
+    .line 26
+    :pswitch_1
+    const-string v0, "topTouchMove"
 
-    return-object p0
+    return-object v0
 
-    :cond_3
-    const-string p0, "topTouchStart"
+    .line 24
+    :pswitch_2
+    const-string v0, "topTouchEnd"
 
-    return-object p0
+    return-object v0
+
+    .line 22
+    :pswitch_3
+    const-string v0, "topTouchStart"
+
+    return-object v0
+
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_3
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method public static valueOf(Ljava/lang/String;)Lcom/facebook/react/uimanager/events/TouchEventType;
     .locals 1
+    .param p0, "name"    # Ljava/lang/String;
 
     .line 13
     const-class v0, Lcom/facebook/react/uimanager/events/TouchEventType;
 
     invoke-static {v0, p0}, Ljava/lang/Enum;->valueOf(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
 
-    move-result-object p0
+    move-result-object v0
 
-    check-cast p0, Lcom/facebook/react/uimanager/events/TouchEventType;
+    check-cast v0, Lcom/facebook/react/uimanager/events/TouchEventType;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method public static values()[Lcom/facebook/react/uimanager/events/TouchEventType;

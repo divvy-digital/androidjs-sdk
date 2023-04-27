@@ -70,382 +70,489 @@
     .line 61
     invoke-direct {p0}, Lcom/facebook/react/views/art/ARTVirtualNode;-><init>()V
 
+    .line 57
     const/high16 v0, 0x3f800000    # 1.0f
 
-    .line 57
     iput v0, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mStrokeWidth:F
 
+    .line 58
     const/4 v0, 0x1
 
-    .line 58
     iput v0, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mStrokeCap:I
 
     .line 59
     iput v0, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mStrokeJoin:I
 
+    .line 61
     return-void
 .end method
 
 .method private createPath([F)Landroid/graphics/Path;
-    .locals 11
+    .locals 17
+    .param p1, "data"    # [F
 
     .line 267
-    new-instance v7, Landroid/graphics/Path;
+    move-object/from16 v0, p0
 
-    invoke-direct {v7}, Landroid/graphics/Path;-><init>()V
+    move-object/from16 v1, p1
 
-    const/4 v0, 0x0
+    new-instance v2, Landroid/graphics/Path;
+
+    invoke-direct {v2}, Landroid/graphics/Path;-><init>()V
 
     .line 268
-    invoke-virtual {v7, v0, v0}, Landroid/graphics/Path;->moveTo(FF)V
+    .local v2, "path":Landroid/graphics/Path;
+    const/4 v3, 0x0
 
-    const/4 v8, 0x0
+    invoke-virtual {v2, v3, v3}, Landroid/graphics/Path;->moveTo(FF)V
 
-    const/4 v0, 0x0
+    .line 269
+    const/4 v3, 0x0
 
     .line 270
+    .local v3, "i":I
     :goto_0
-    array-length v1, p1
+    array-length v4, v1
 
-    if-ge v0, v1, :cond_9
-
-    add-int/lit8 v1, v0, 0x1
+    if-ge v3, v4, :cond_4
 
     .line 271
-    aget v0, p1, v0
-
-    float-to-int v0, v0
-
-    if-eqz v0, :cond_8
-
-    const/4 v2, 0x1
-
-    if-eq v0, v2, :cond_7
-
-    const/4 v3, 0x2
-
-    if-eq v0, v3, :cond_6
-
-    const/4 v3, 0x3
-
-    if-eq v0, v3, :cond_5
-
-    const/4 v3, 0x4
-
-    if-ne v0, v3, :cond_4
-
-    add-int/lit8 v0, v1, 0x1
-
-    .line 293
-    aget v1, p1, v1
-
-    iget v3, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
-
-    mul-float v1, v1, v3
-
-    add-int/lit8 v3, v0, 0x1
-
-    .line 294
-    aget v0, p1, v0
-
-    iget v4, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
-
-    mul-float v0, v0, v4
-
     add-int/lit8 v4, v3, 0x1
 
+    .end local v3    # "i":I
+    .local v4, "i":I
+    aget v3, v1, v3
+
+    float-to-int v10, v3
+
+    .line 272
+    .local v10, "type":I
+    packed-switch v10, :pswitch_data_0
+
+    .line 316
+    new-instance v3, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
+
+    new-instance v5, Ljava/lang/StringBuilder;
+
+    invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v6, "Unrecognized drawing instruction "
+
+    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v5
+
+    invoke-virtual {v5, v10}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v5
+
+    invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v5
+
+    invoke-direct {v3, v5}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+
+    throw v3
+
+    .line 293
+    :pswitch_0
+    add-int/lit8 v3, v4, 0x1
+
+    .end local v4    # "i":I
+    .restart local v3    # "i":I
+    aget v4, v1, v4
+
+    iget v5, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
+
+    mul-float v4, v4, v5
+
+    .line 294
+    .local v4, "x":F
+    add-int/lit8 v5, v3, 0x1
+
+    .end local v3    # "i":I
+    .local v5, "i":I
+    aget v3, v1, v3
+
+    iget v6, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
+
+    mul-float v3, v3, v6
+
     .line 295
-    aget v3, p1, v3
-
-    iget v5, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
-
-    mul-float v3, v3, v5
-
-    add-int/lit8 v5, v4, 0x1
-
-    .line 296
-    aget v4, p1, v4
-
-    float-to-double v9, v4
-
-    invoke-static {v9, v10}, Ljava/lang/Math;->toDegrees(D)D
-
-    move-result-wide v9
-
-    double-to-float v4, v9
-
+    .local v3, "y":F
     add-int/lit8 v6, v5, 0x1
 
+    .end local v5    # "i":I
+    .local v6, "i":I
+    aget v5, v1, v5
+
+    iget v7, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
+
+    mul-float v5, v5, v7
+
+    .line 296
+    .local v5, "r":F
+    add-int/lit8 v7, v6, 0x1
+
+    .end local v6    # "i":I
+    .local v7, "i":I
+    aget v6, v1, v6
+
+    float-to-double v8, v6
+
+    invoke-static {v8, v9}, Ljava/lang/Math;->toDegrees(D)D
+
+    move-result-wide v8
+
+    double-to-float v6, v8
+
     .line 297
-    aget v5, p1, v5
+    .local v6, "start":F
+    add-int/lit8 v8, v7, 0x1
 
-    float-to-double v9, v5
+    .end local v7    # "i":I
+    .local v8, "i":I
+    aget v7, v1, v7
 
-    invoke-static {v9, v10}, Ljava/lang/Math;->toDegrees(D)D
+    float-to-double v11, v7
 
-    move-result-wide v9
+    invoke-static {v11, v12}, Ljava/lang/Math;->toDegrees(D)D
 
-    double-to-float v5, v9
+    move-result-wide v11
 
-    add-int/lit8 v9, v6, 0x1
+    double-to-float v7, v11
 
     .line 299
-    aget v6, p1, v6
+    .local v7, "end":F
+    add-int/lit8 v9, v8, 0x1
 
-    const/high16 v10, 0x3f800000    # 1.0f
+    .end local v8    # "i":I
+    .local v9, "i":I
+    aget v8, v1, v8
 
-    cmpl-float v6, v6, v10
+    const/high16 v11, 0x3f800000    # 1.0f
 
-    if-eqz v6, :cond_0
+    cmpl-float v8, v8, v11
+
+    if-eqz v8, :cond_0
+
+    const/4 v8, 0x1
 
     goto :goto_1
 
     :cond_0
-    const/4 v2, 0x0
+    const/4 v8, 0x0
 
+    .line 300
+    .local v8, "counterClockwise":Z
     :goto_1
-    sub-float/2addr v5, v4
+    sub-float v11, v7, v6
 
     .line 301
-    invoke-static {v5}, Ljava/lang/Math;->abs(F)F
+    .local v11, "sweep":F
+    invoke-static {v11}, Ljava/lang/Math;->abs(F)F
 
-    move-result v6
+    move-result v12
 
-    const/high16 v10, 0x43b40000    # 360.0f
+    const/high16 v13, 0x43b40000    # 360.0f
 
-    cmpl-float v6, v6, v10
+    cmpl-float v12, v12, v13
 
-    if-ltz v6, :cond_2
-
-    if-eqz v2, :cond_1
+    if-ltz v12, :cond_2
 
     .line 302
-    sget-object v2, Landroid/graphics/Path$Direction;->CCW:Landroid/graphics/Path$Direction;
+    if-eqz v8, :cond_1
+
+    sget-object v12, Landroid/graphics/Path$Direction;->CCW:Landroid/graphics/Path$Direction;
 
     goto :goto_2
 
     :cond_1
-    sget-object v2, Landroid/graphics/Path$Direction;->CW:Landroid/graphics/Path$Direction;
+    sget-object v12, Landroid/graphics/Path$Direction;->CW:Landroid/graphics/Path$Direction;
 
     :goto_2
-    invoke-virtual {v7, v1, v0, v3, v2}, Landroid/graphics/Path;->addCircle(FFFLandroid/graphics/Path$Direction;)V
-
-    goto/16 :goto_3
-
-    .line 304
-    :cond_2
-    invoke-direct {p0, v5, v10}, Lcom/facebook/react/views/art/ARTShapeShadowNode;->modulus(FF)F
-
-    move-result v5
-
-    if-eqz v2, :cond_3
-
-    cmpg-float v2, v5, v10
-
-    if-gez v2, :cond_3
-
-    const/high16 v2, -0x40800000    # -1.0f
-
-    sub-float/2addr v10, v5
-
-    mul-float v5, v10, v2
-
-    .line 310
-    :cond_3
-    new-instance v2, Landroid/graphics/RectF;
-
-    sub-float v6, v1, v3
-
-    sub-float v10, v0, v3
-
-    add-float/2addr v1, v3
-
-    add-float/2addr v0, v3
-
-    invoke-direct {v2, v6, v10, v1, v0}, Landroid/graphics/RectF;-><init>(FFFF)V
-
-    .line 311
-    invoke-virtual {v7, v2, v4, v5}, Landroid/graphics/Path;->arcTo(Landroid/graphics/RectF;FF)V
+    invoke-virtual {v2, v4, v3, v5, v12}, Landroid/graphics/Path;->addCircle(FFFLandroid/graphics/Path$Direction;)V
 
     goto :goto_3
 
-    .line 316
-    :cond_4
-    new-instance p1, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
+    .line 304
+    :cond_2
+    invoke-direct {v0, v11, v13}, Lcom/facebook/react/views/art/ARTShapeShadowNode;->modulus(FF)F
 
-    new-instance v1, Ljava/lang/StringBuilder;
+    move-result v11
 
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+    .line 305
+    if-eqz v8, :cond_3
 
-    const-string v2, "Unrecognized drawing instruction "
+    cmpg-float v12, v11, v13
 
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    if-gez v12, :cond_3
 
-    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+    .line 307
+    const/high16 v12, -0x40800000    # -1.0f
 
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    sub-float/2addr v13, v11
 
-    move-result-object v0
+    mul-float v11, v13, v12
 
-    invoke-direct {p1, v0}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+    .line 310
+    :cond_3
+    new-instance v12, Landroid/graphics/RectF;
 
-    throw p1
+    sub-float v13, v4, v5
 
-    :cond_5
-    add-int/lit8 v0, v1, 0x1
+    sub-float v14, v3, v5
+
+    add-float v15, v4, v5
+
+    move/from16 v16, v4
+
+    .end local v4    # "x":F
+    .local v16, "x":F
+    add-float v4, v3, v5
+
+    invoke-direct {v12, v13, v14, v15, v4}, Landroid/graphics/RectF;-><init>(FFFF)V
+
+    move-object v4, v12
+
+    .line 311
+    .local v4, "oval":Landroid/graphics/RectF;
+    invoke-virtual {v2, v4, v6, v11}, Landroid/graphics/Path;->arcTo(Landroid/graphics/RectF;FF)V
+
+    .line 313
+    .end local v4    # "oval":Landroid/graphics/RectF;
+    nop
+
+    .line 319
+    .end local v3    # "y":F
+    .end local v5    # "r":F
+    .end local v6    # "start":F
+    .end local v7    # "end":F
+    .end local v8    # "counterClockwise":Z
+    .end local v10    # "type":I
+    .end local v11    # "sweep":F
+    .end local v16    # "x":F
+    :goto_3
+    move v3, v9
+
+    goto/16 :goto_4
 
     .line 283
-    aget v1, p1, v1
+    .end local v9    # "i":I
+    .local v4, "i":I
+    .restart local v10    # "type":I
+    :pswitch_1
+    add-int/lit8 v3, v4, 0x1
 
-    iget v2, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
+    .end local v4    # "i":I
+    .local v3, "i":I
+    aget v4, v1, v4
 
-    mul-float v1, v1, v2
+    iget v5, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
 
-    add-int/lit8 v2, v0, 0x1
+    mul-float v4, v4, v5
 
-    aget v0, p1, v0
+    add-int/lit8 v5, v3, 0x1
 
-    iget v3, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
+    .end local v3    # "i":I
+    .local v5, "i":I
+    aget v3, v1, v3
 
-    mul-float v3, v3, v0
+    iget v6, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
 
-    add-int/lit8 v0, v2, 0x1
+    mul-float v6, v6, v3
 
-    aget v2, p1, v2
+    add-int/lit8 v3, v5, 0x1
 
-    iget v4, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
+    .end local v5    # "i":I
+    .restart local v3    # "i":I
+    aget v5, v1, v5
 
-    mul-float v4, v4, v2
+    iget v7, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
 
-    add-int/lit8 v2, v0, 0x1
+    mul-float v7, v7, v5
 
-    aget v0, p1, v0
+    add-int/lit8 v5, v3, 0x1
 
-    iget v5, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
+    .end local v3    # "i":I
+    .restart local v5    # "i":I
+    aget v3, v1, v3
 
-    mul-float v5, v5, v0
+    iget v8, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
 
-    add-int/lit8 v0, v2, 0x1
+    mul-float v8, v8, v3
 
-    aget v2, p1, v2
+    add-int/lit8 v3, v5, 0x1
 
-    iget v6, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
+    .end local v5    # "i":I
+    .restart local v3    # "i":I
+    aget v5, v1, v5
 
-    mul-float v6, v6, v2
+    iget v9, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
 
-    add-int/lit8 v9, v0, 0x1
+    mul-float v9, v9, v5
 
-    aget v0, p1, v0
+    add-int/lit8 v11, v3, 0x1
 
-    iget v2, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
+    .end local v3    # "i":I
+    .local v11, "i":I
+    aget v3, v1, v3
 
-    mul-float v10, v0, v2
+    iget v5, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
 
-    move-object v0, v7
+    mul-float v12, v3, v5
 
-    move v2, v3
-
-    move v3, v4
-
-    move v4, v5
+    move-object v3, v2
 
     move v5, v6
 
-    move v6, v10
+    move v6, v7
 
-    invoke-virtual/range {v0 .. v6}, Landroid/graphics/Path;->cubicTo(FFFFFF)V
+    move v7, v8
 
-    :goto_3
-    move v0, v9
+    move v8, v9
 
-    goto/16 :goto_0
+    move v9, v12
 
-    :cond_6
-    add-int/lit8 v0, v1, 0x1
+    invoke-virtual/range {v3 .. v9}, Landroid/graphics/Path;->cubicTo(FFFFFF)V
+
+    .line 290
+    move v3, v11
+
+    goto :goto_4
 
     .line 280
-    aget v1, p1, v1
+    .end local v11    # "i":I
+    .restart local v4    # "i":I
+    :pswitch_2
+    add-int/lit8 v3, v4, 0x1
 
-    iget v2, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
+    .end local v4    # "i":I
+    .restart local v3    # "i":I
+    aget v4, v1, v4
 
-    mul-float v1, v1, v2
+    iget v5, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
 
-    add-int/lit8 v2, v0, 0x1
+    mul-float v4, v4, v5
 
-    aget v0, p1, v0
+    add-int/lit8 v5, v3, 0x1
 
-    iget v3, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
+    .end local v3    # "i":I
+    .restart local v5    # "i":I
+    aget v3, v1, v3
 
-    mul-float v0, v0, v3
+    iget v6, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
 
-    invoke-virtual {v7, v1, v0}, Landroid/graphics/Path;->lineTo(FF)V
+    mul-float v3, v3, v6
+
+    invoke-virtual {v2, v4, v3}, Landroid/graphics/Path;->lineTo(FF)V
+
+    .line 281
+    move v3, v5
 
     goto :goto_4
 
     .line 277
-    :cond_7
-    invoke-virtual {v7}, Landroid/graphics/Path;->close()V
+    .end local v5    # "i":I
+    .restart local v4    # "i":I
+    :pswitch_3
+    invoke-virtual {v2}, Landroid/graphics/Path;->close()V
 
-    move v0, v1
+    .line 278
+    move v3, v4
 
-    goto/16 :goto_0
-
-    :cond_8
-    add-int/lit8 v0, v1, 0x1
+    goto :goto_4
 
     .line 274
-    aget v1, p1, v1
+    :pswitch_4
+    add-int/lit8 v3, v4, 0x1
 
-    iget v2, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
+    .end local v4    # "i":I
+    .restart local v3    # "i":I
+    aget v4, v1, v4
 
-    mul-float v1, v1, v2
+    iget v5, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
 
-    add-int/lit8 v2, v0, 0x1
+    mul-float v4, v4, v5
 
-    aget v0, p1, v0
+    add-int/lit8 v5, v3, 0x1
 
-    iget v3, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
+    .end local v3    # "i":I
+    .restart local v5    # "i":I
+    aget v3, v1, v3
 
-    mul-float v0, v0, v3
+    iget v6, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
 
-    invoke-virtual {v7, v1, v0}, Landroid/graphics/Path;->moveTo(FF)V
+    mul-float v3, v3, v6
 
+    invoke-virtual {v2, v4, v3}, Landroid/graphics/Path;->moveTo(FF)V
+
+    .line 275
+    move v3, v5
+
+    .line 319
+    .end local v5    # "i":I
+    .end local v10    # "type":I
+    .restart local v3    # "i":I
     :goto_4
-    move v0, v2
-
     goto/16 :goto_0
 
-    :cond_9
-    return-object v7
+    .line 320
+    :cond_4
+    return-object v2
+
+    :pswitch_data_0
+    .packed-switch 0x0
+        :pswitch_4
+        :pswitch_3
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method private modulus(FF)F
-    .locals 1
+    .locals 3
+    .param p1, "x"    # F
+    .param p2, "y"    # F
 
-    rem-float/2addr p1, p2
+    .line 249
+    rem-float v0, p1, p2
 
-    const/4 v0, 0x0
+    .line 250
+    .local v0, "remainder":F
+    move v1, v0
 
-    cmpg-float v0, p1, v0
+    .line 251
+    .local v1, "modulus":F
+    const/4 v2, 0x0
 
-    if-gez v0, :cond_0
+    cmpg-float v2, v0, v2
 
-    add-float/2addr p1, p2
+    if-gez v2, :cond_0
 
+    .line 252
+    add-float/2addr v1, p2
+
+    .line 254
     :cond_0
-    return p1
+    return v1
 .end method
 
 
 # virtual methods
 .method public draw(Landroid/graphics/Canvas;Landroid/graphics/Paint;F)V
-    .locals 1
+    .locals 2
+    .param p1, "canvas"    # Landroid/graphics/Canvas;
+    .param p2, "paint"    # Landroid/graphics/Paint;
+    .param p3, "opacity"    # F
 
     .line 108
     iget v0, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mOpacity:F
 
     mul-float p3, p3, v0
 
+    .line 109
     const v0, 0x3c23d70a    # 0.01f
 
     cmpl-float v0, p3, v0
@@ -476,14 +583,14 @@
     :cond_0
     invoke-virtual {p0, p2, p3}, Lcom/facebook/react/views/art/ARTShapeShadowNode;->setupStrokePaint(Landroid/graphics/Paint;F)Z
 
-    move-result p3
+    move-result v0
 
-    if-eqz p3, :cond_1
+    if-eqz v0, :cond_1
 
     .line 119
-    iget-object p3, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mPath:Landroid/graphics/Path;
+    iget-object v0, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mPath:Landroid/graphics/Path;
 
-    invoke-virtual {p1, p3, p2}, Landroid/graphics/Canvas;->drawPath(Landroid/graphics/Path;Landroid/graphics/Paint;)V
+    invoke-virtual {p1, v0, p2}, Landroid/graphics/Canvas;->drawPath(Landroid/graphics/Path;Landroid/graphics/Paint;)V
 
     .line 121
     :cond_1
@@ -493,25 +600,26 @@
 
     .line 112
     :cond_2
-    new-instance p1, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
+    new-instance v0, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
 
-    const-string p2, "Shapes should have a valid path (d) prop"
+    const-string v1, "Shapes should have a valid path (d) prop"
 
-    invoke-direct {p1, p2}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 
     .line 123
     :cond_3
     :goto_0
     invoke-virtual {p0}, Lcom/facebook/react/views/art/ARTShapeShadowNode;->markUpdateSeen()V
 
+    .line 124
     return-void
 .end method
 
 .method public setFill(Lcom/facebook/react/bridge/ReadableArray;)V
-    .locals 0
-    .param p1    # Lcom/facebook/react/bridge/ReadableArray;
+    .locals 1
+    .param p1, "fillColors"    # Lcom/facebook/react/bridge/ReadableArray;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -522,19 +630,20 @@
     .line 84
     invoke-static {p1}, Lcom/facebook/react/views/art/PropHelper;->toFloatArray(Lcom/facebook/react/bridge/ReadableArray;)[F
 
-    move-result-object p1
+    move-result-object v0
 
-    iput-object p1, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mBrushData:[F
+    iput-object v0, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mBrushData:[F
 
     .line 85
     invoke-virtual {p0}, Lcom/facebook/react/views/art/ARTShapeShadowNode;->markUpdated()V
 
+    .line 86
     return-void
 .end method
 
 .method public setShapePath(Lcom/facebook/react/bridge/ReadableArray;)V
-    .locals 0
-    .param p1    # Lcom/facebook/react/bridge/ReadableArray;
+    .locals 2
+    .param p1, "shapePath"    # Lcom/facebook/react/bridge/ReadableArray;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -545,24 +654,26 @@
     .line 65
     invoke-static {p1}, Lcom/facebook/react/views/art/PropHelper;->toFloatArray(Lcom/facebook/react/bridge/ReadableArray;)[F
 
-    move-result-object p1
+    move-result-object v0
 
     .line 66
-    invoke-direct {p0, p1}, Lcom/facebook/react/views/art/ARTShapeShadowNode;->createPath([F)Landroid/graphics/Path;
+    .local v0, "pathData":[F
+    invoke-direct {p0, v0}, Lcom/facebook/react/views/art/ARTShapeShadowNode;->createPath([F)Landroid/graphics/Path;
 
-    move-result-object p1
+    move-result-object v1
 
-    iput-object p1, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mPath:Landroid/graphics/Path;
+    iput-object v1, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mPath:Landroid/graphics/Path;
 
     .line 67
     invoke-virtual {p0}, Lcom/facebook/react/views/art/ARTShapeShadowNode;->markUpdated()V
 
+    .line 68
     return-void
 .end method
 
 .method public setStroke(Lcom/facebook/react/bridge/ReadableArray;)V
-    .locals 0
-    .param p1    # Lcom/facebook/react/bridge/ReadableArray;
+    .locals 1
+    .param p1, "strokeColors"    # Lcom/facebook/react/bridge/ReadableArray;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -573,18 +684,20 @@
     .line 72
     invoke-static {p1}, Lcom/facebook/react/views/art/PropHelper;->toFloatArray(Lcom/facebook/react/bridge/ReadableArray;)[F
 
-    move-result-object p1
+    move-result-object v0
 
-    iput-object p1, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mStrokeColor:[F
+    iput-object v0, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mStrokeColor:[F
 
     .line 73
     invoke-virtual {p0}, Lcom/facebook/react/views/art/ARTShapeShadowNode;->markUpdated()V
 
+    .line 74
     return-void
 .end method
 
 .method public setStrokeCap(I)V
     .locals 0
+    .param p1, "strokeCap"    # I
     .annotation runtime Lcom/facebook/react/uimanager/annotations/ReactProp;
         defaultInt = 0x1
         name = "strokeCap"
@@ -596,12 +709,13 @@
     .line 97
     invoke-virtual {p0}, Lcom/facebook/react/views/art/ARTShapeShadowNode;->markUpdated()V
 
+    .line 98
     return-void
 .end method
 
 .method public setStrokeDash(Lcom/facebook/react/bridge/ReadableArray;)V
-    .locals 0
-    .param p1    # Lcom/facebook/react/bridge/ReadableArray;
+    .locals 1
+    .param p1, "strokeDash"    # Lcom/facebook/react/bridge/ReadableArray;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -612,18 +726,20 @@
     .line 78
     invoke-static {p1}, Lcom/facebook/react/views/art/PropHelper;->toFloatArray(Lcom/facebook/react/bridge/ReadableArray;)[F
 
-    move-result-object p1
+    move-result-object v0
 
-    iput-object p1, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mStrokeDash:[F
+    iput-object v0, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mStrokeDash:[F
 
     .line 79
     invoke-virtual {p0}, Lcom/facebook/react/views/art/ARTShapeShadowNode;->markUpdated()V
 
+    .line 80
     return-void
 .end method
 
 .method public setStrokeJoin(I)V
     .locals 0
+    .param p1, "strokeJoin"    # I
     .annotation runtime Lcom/facebook/react/uimanager/annotations/ReactProp;
         defaultInt = 0x1
         name = "strokeJoin"
@@ -635,11 +751,13 @@
     .line 103
     invoke-virtual {p0}, Lcom/facebook/react/views/art/ARTShapeShadowNode;->markUpdated()V
 
+    .line 104
     return-void
 .end method
 
 .method public setStrokeWidth(F)V
     .locals 0
+    .param p1, "strokeWidth"    # F
     .annotation runtime Lcom/facebook/react/uimanager/annotations/ReactProp;
         defaultFloat = 1.0f
         name = "strokeWidth"
@@ -651,33 +769,36 @@
     .line 91
     invoke-virtual {p0}, Lcom/facebook/react/views/art/ARTShapeShadowNode;->markUpdated()V
 
+    .line 92
     return-void
 .end method
 
 .method protected setupFillPaint(Landroid/graphics/Paint;F)Z
-    .locals 20
+    .locals 21
+    .param p1, "paint"    # Landroid/graphics/Paint;
+    .param p2, "opacity"    # F
 
+    .line 182
     move-object/from16 v0, p0
 
     move-object/from16 v1, p1
 
-    .line 182
     iget-object v2, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mBrushData:[F
 
     const/4 v3, 0x0
 
-    if-eqz v2, :cond_6
+    if-eqz v2, :cond_4
 
     array-length v2, v2
 
-    if-lez v2, :cond_6
+    if-lez v2, :cond_4
 
     .line 183
     invoke-virtual/range {p1 .. p1}, Landroid/graphics/Paint;->reset()V
 
+    .line 184
     const/4 v2, 0x1
 
-    .line 184
     invoke-virtual {v1, v2}, Landroid/graphics/Paint;->setFlags(I)V
 
     .line 185
@@ -692,281 +813,390 @@
 
     float-to-int v5, v5
 
-    const/4 v6, 0x3
+    .line 187
+    .local v5, "colorType":I
+    const-string v6, "ReactNative"
 
-    const/4 v7, 0x2
+    const/4 v7, 0x3
 
-    const/4 v8, 0x4
+    const/4 v8, 0x2
 
-    const/high16 v9, 0x437f0000    # 255.0f
+    const/4 v9, 0x4
 
-    if-eqz v5, :cond_4
+    const/high16 v10, 0x437f0000    # 255.0f
 
-    const-string v10, "ReactNative"
-
-    if-eq v5, v2, :cond_0
+    packed-switch v5, :pswitch_data_0
 
     .line 236
-    new-instance v1, Ljava/lang/StringBuilder;
+    new-instance v2, Ljava/lang/StringBuilder;
 
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
 
     const-string v3, "ART: Color type "
 
-    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v1, v5}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+    move-result-object v2
+
+    invoke-virtual {v2, v5}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v2
 
     const-string v3, " not supported!"
 
-    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    move-result-object v2
 
-    move-result-object v1
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    invoke-static {v10, v1}, Lcom/facebook/common/logging/FLog;->w(Ljava/lang/String;Ljava/lang/String;)V
+    move-result-object v2
 
-    :goto_0
-    const/4 v4, 0x1
+    invoke-static {v6, v2}, Lcom/facebook/common/logging/FLog;->w(Ljava/lang/String;Ljava/lang/String;)V
 
-    goto/16 :goto_4
+    goto/16 :goto_3
 
     .line 197
-    :cond_0
-    array-length v5, v4
+    :pswitch_0
+    array-length v11, v4
 
-    const/4 v11, 0x5
+    const/4 v12, 0x5
 
-    if-ge v5, v11, :cond_1
+    if-ge v11, v12, :cond_0
 
     .line 198
-    new-instance v1, Ljava/lang/StringBuilder;
+    new-instance v2, Ljava/lang/StringBuilder;
 
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v2, "[ARTShapeShadowNode setupFillPaint] expects 5 elements, received "
+    const-string v4, "[ARTShapeShadowNode setupFillPaint] expects 5 elements, received "
 
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v2, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    iget-object v2, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mBrushData:[F
+    move-result-object v2
 
-    array-length v2, v2
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v1
-
-    invoke-static {v10, v1}, Lcom/facebook/common/logging/FLog;->w(Ljava/lang/String;Ljava/lang/String;)V
-
-    return v3
-
-    .line 203
-    :cond_1
-    aget v4, v4, v2
-
-    iget v5, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
-
-    mul-float v13, v4, v5
-
-    .line 204
-    iget-object v4, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mBrushData:[F
-
-    aget v4, v4, v7
-
-    iget v5, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
-
-    mul-float v14, v4, v5
-
-    .line 205
-    iget-object v4, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mBrushData:[F
-
-    aget v4, v4, v6
-
-    iget v5, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
-
-    mul-float v15, v4, v5
-
-    .line 206
-    iget-object v4, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mBrushData:[F
-
-    aget v4, v4, v8
-
-    iget v5, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
-
-    mul-float v16, v4, v5
-
-    .line 207
     iget-object v4, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mBrushData:[F
 
     array-length v4, v4
 
-    sub-int/2addr v4, v11
+    invoke-virtual {v2, v4}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    div-int/2addr v4, v11
+    move-result-object v2
 
-    const/4 v5, 0x0
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    if-lez v4, :cond_3
+    move-result-object v2
+
+    invoke-static {v6, v2}, Lcom/facebook/common/logging/FLog;->w(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 201
+    return v3
+
+    .line 203
+    :cond_0
+    aget v4, v4, v2
+
+    iget v6, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
+
+    mul-float v4, v4, v6
+
+    .line 204
+    .local v4, "gradientStartX":F
+    iget-object v6, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mBrushData:[F
+
+    aget v6, v6, v8
+
+    iget v11, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
+
+    mul-float v6, v6, v11
+
+    .line 205
+    .local v6, "gradientStartY":F
+    iget-object v11, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mBrushData:[F
+
+    aget v11, v11, v7
+
+    iget v13, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
+
+    mul-float v11, v11, v13
+
+    .line 206
+    .local v11, "gradientEndX":F
+    iget-object v13, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mBrushData:[F
+
+    aget v9, v13, v9
+
+    iget v13, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mScale:F
+
+    mul-float v9, v9, v13
+
+    .line 207
+    .local v9, "gradientEndY":F
+    iget-object v13, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mBrushData:[F
+
+    array-length v13, v13
+
+    sub-int/2addr v13, v12
+
+    div-int/lit8 v15, v13, 0x5
+
+    .line 208
+    .local v15, "stops":I
+    const/4 v13, 0x0
+
+    .line 209
+    .local v13, "colors":[I
+    const/4 v14, 0x0
+
+    .line 210
+    .local v14, "positions":[F
+    if-lez v15, :cond_2
 
     .line 211
-    new-array v5, v4, [I
+    new-array v13, v15, [I
 
     .line 212
-    new-array v7, v4, [F
+    new-array v14, v15, [F
 
-    :goto_1
-    if-ge v3, v4, :cond_2
+    .line 213
+    const/16 v16, 0x0
+
+    move/from16 v7, v16
+
+    .local v7, "i":I
+    :goto_0
+    if-ge v7, v15, :cond_1
 
     .line 214
     iget-object v8, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mBrushData:[F
 
-    mul-int/lit8 v10, v4, 0x4
+    mul-int/lit8 v18, v15, 0x4
 
-    add-int/2addr v10, v11
+    add-int/lit8 v18, v18, 0x5
 
-    add-int/2addr v10, v3
+    add-int v18, v18, v7
 
-    aget v10, v8, v10
+    aget v18, v8, v18
 
-    aput v10, v7, v3
-
-    mul-int/lit8 v10, v3, 0x4
-
-    add-int/2addr v10, v11
-
-    add-int/lit8 v12, v10, 0x0
+    aput v18, v14, v7
 
     .line 215
-    aget v12, v8, v12
+    mul-int/lit8 v18, v7, 0x4
 
-    mul-float v12, v12, v9
+    add-int/lit8 v18, v18, 0x5
 
-    float-to-int v12, v12
+    add-int/lit8 v18, v18, 0x0
 
-    add-int/lit8 v17, v10, 0x1
+    aget v18, v8, v18
+
+    mul-float v3, v18, v10
+
+    float-to-int v3, v3
 
     .line 216
-    aget v17, v8, v17
+    .local v3, "r":I
+    mul-int/lit8 v18, v7, 0x4
 
-    mul-float v11, v17, v9
+    add-int/lit8 v18, v18, 0x5
 
-    float-to-int v11, v11
+    add-int/lit8 v18, v18, 0x1
 
-    add-int/lit8 v17, v10, 0x2
+    aget v18, v8, v18
 
-    .line 217
-    aget v17, v8, v17
-
-    mul-float v2, v17, v9
+    mul-float v2, v18, v10
 
     float-to-int v2, v2
 
-    add-int/2addr v10, v6
+    .line 217
+    .local v2, "g":I
+    mul-int/lit8 v18, v7, 0x4
+
+    add-int/lit8 v18, v18, 0x5
+
+    const/16 v16, 0x2
+
+    add-int/lit8 v18, v18, 0x2
+
+    aget v18, v8, v18
+
+    mul-float v12, v18, v10
+
+    float-to-int v12, v12
 
     .line 218
-    aget v8, v8, v10
+    .local v12, "b":I
+    mul-int/lit8 v18, v7, 0x4
 
-    mul-float v8, v8, v9
+    const/16 v20, 0x5
+
+    add-int/lit8 v18, v18, 0x5
+
+    const/16 v17, 0x3
+
+    add-int/lit8 v18, v18, 0x3
+
+    aget v8, v8, v18
+
+    mul-float v8, v8, v10
 
     float-to-int v8, v8
 
     .line 219
-    invoke-static {v8, v12, v11, v2}, Landroid/graphics/Color;->argb(IIII)I
+    .local v8, "a":I
+    invoke-static {v8, v3, v2, v12}, Landroid/graphics/Color;->argb(IIII)I
 
-    move-result v2
+    move-result v18
 
-    aput v2, v5, v3
+    aput v18, v13, v7
 
-    add-int/lit8 v3, v3, 0x1
+    .line 213
+    .end local v2    # "g":I
+    .end local v3    # "r":I
+    .end local v8    # "a":I
+    .end local v12    # "b":I
+    add-int/lit8 v7, v7, 0x1
 
     const/4 v2, 0x1
 
-    const/4 v11, 0x5
+    const/4 v3, 0x0
+
+    const/4 v8, 0x2
+
+    const/4 v12, 0x5
+
+    goto :goto_0
+
+    :cond_1
+    move-object v2, v13
+
+    move-object v3, v14
 
     goto :goto_1
 
+    .line 210
+    .end local v7    # "i":I
     :cond_2
-    move-object/from16 v17, v5
+    move-object v2, v13
 
-    move-object/from16 v18, v7
+    move-object v3, v14
+
+    .line 222
+    .end local v13    # "colors":[I
+    .end local v14    # "positions":[F
+    .local v2, "colors":[I
+    .local v3, "positions":[F
+    :goto_1
+    new-instance v7, Landroid/graphics/LinearGradient;
+
+    sget-object v20, Landroid/graphics/Shader$TileMode;->CLAMP:Landroid/graphics/Shader$TileMode;
+
+    move-object v13, v7
+
+    move v14, v4
+
+    move v8, v15
+
+    .end local v15    # "stops":I
+    .local v8, "stops":I
+    move v15, v6
+
+    move/from16 v16, v11
+
+    move/from16 v17, v9
+
+    move-object/from16 v18, v2
+
+    move-object/from16 v19, v3
+
+    invoke-direct/range {v13 .. v20}, Landroid/graphics/LinearGradient;-><init>(FFFF[I[FLandroid/graphics/Shader$TileMode;)V
+
+    invoke-virtual {v1, v7}, Landroid/graphics/Paint;->setShader(Landroid/graphics/Shader;)Landroid/graphics/Shader;
+
+    .line 230
+    goto :goto_3
+
+    .line 189
+    .end local v2    # "colors":[I
+    .end local v3    # "positions":[F
+    .end local v4    # "gradientStartX":F
+    .end local v6    # "gradientStartY":F
+    .end local v8    # "stops":I
+    .end local v9    # "gradientEndY":F
+    .end local v11    # "gradientEndX":F
+    :pswitch_1
+    array-length v2, v4
+
+    if-le v2, v9, :cond_3
+
+    aget v2, v4, v9
+
+    mul-float v2, v2, p2
+
+    mul-float v2, v2, v10
 
     goto :goto_2
 
     :cond_3
-    move-object/from16 v17, v5
+    mul-float v2, p2, v10
 
-    move-object/from16 v18, v17
-
-    .line 222
     :goto_2
-    new-instance v2, Landroid/graphics/LinearGradient;
-
-    sget-object v19, Landroid/graphics/Shader$TileMode;->CLAMP:Landroid/graphics/Shader$TileMode;
-
-    move-object v12, v2
-
-    invoke-direct/range {v12 .. v19}, Landroid/graphics/LinearGradient;-><init>(FFFF[I[FLandroid/graphics/Shader$TileMode;)V
-
-    invoke-virtual {v1, v2}, Landroid/graphics/Paint;->setShader(Landroid/graphics/Shader;)Landroid/graphics/Shader;
-
-    goto/16 :goto_0
-
-    .line 189
-    :cond_4
-    array-length v2, v4
-
-    if-le v2, v8, :cond_5
-
-    aget v2, v4, v8
-
-    mul-float v2, v2, p2
-
-    mul-float v2, v2, v9
-
-    goto :goto_3
-
-    :cond_5
-    mul-float v2, p2, v9
-
-    :goto_3
     float-to-int v2, v2
 
-    iget-object v3, v0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mBrushData:[F
+    const/4 v3, 0x1
 
-    const/4 v4, 0x1
+    aget v6, v4, v3
 
-    aget v5, v3, v4
+    mul-float v6, v6, v10
 
-    mul-float v5, v5, v9
+    float-to-int v3, v6
 
-    float-to-int v5, v5
+    const/4 v6, 0x2
 
-    aget v7, v3, v7
+    aget v6, v4, v6
 
-    mul-float v7, v7, v9
+    mul-float v6, v6, v10
 
-    float-to-int v7, v7
+    float-to-int v6, v6
 
-    aget v3, v3, v6
+    const/4 v7, 0x3
 
-    mul-float v3, v3, v9
+    aget v4, v4, v7
 
-    float-to-int v3, v3
+    mul-float v4, v4, v10
 
-    invoke-virtual {v1, v2, v5, v7, v3}, Landroid/graphics/Paint;->setARGB(IIII)V
+    float-to-int v4, v4
 
-    :goto_4
-    return v4
+    invoke-virtual {v1, v2, v3, v6, v4}, Landroid/graphics/Paint;->setARGB(IIII)V
 
-    :cond_6
-    return v3
+    .line 194
+    nop
+
+    .line 238
+    :goto_3
+    const/4 v2, 0x1
+
+    return v2
+
+    .line 240
+    .end local v5    # "colorType":I
+    :cond_4
+    const/4 v2, 0x0
+
+    return v2
+
+    nop
+
+    :pswitch_data_0
+    .packed-switch 0x0
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method protected setupStrokePaint(Landroid/graphics/Paint;F)Z
     .locals 8
+    .param p1, "paint"    # Landroid/graphics/Paint;
+    .param p2, "opacity"    # F
 
     .line 131
     iget v0, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mStrokeWidth:F
@@ -977,11 +1207,11 @@
 
     cmpl-float v0, v0, v2
 
-    if-eqz v0, :cond_9
+    if-eqz v0, :cond_3
 
     iget-object v0, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mStrokeColor:[F
 
-    if-eqz v0, :cond_9
+    if-eqz v0, :cond_3
 
     array-length v0, v0
 
@@ -993,9 +1223,9 @@
     :cond_0
     invoke-virtual {p1}, Landroid/graphics/Paint;->reset()V
 
+    .line 135
     const/4 v0, 0x1
 
-    .line 135
     invoke-virtual {p1, v0}, Landroid/graphics/Paint;->setFlags(I)V
 
     .line 136
@@ -1008,117 +1238,129 @@
 
     const-string v4, " unrecognized"
 
-    const/4 v5, 0x2
+    packed-switch v3, :pswitch_data_0
 
-    if-eqz v3, :cond_3
+    .line 148
+    new-instance v0, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
 
-    if-eq v3, v0, :cond_2
+    new-instance v1, Ljava/lang/StringBuilder;
 
-    if-ne v3, v5, :cond_1
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "strokeCap "
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    iget v2, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mStrokeCap:I
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    invoke-virtual {v1, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-direct {v0, v1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+
+    throw v0
 
     .line 142
+    :pswitch_0
     sget-object v3, Landroid/graphics/Paint$Cap;->SQUARE:Landroid/graphics/Paint$Cap;
 
     invoke-virtual {p1, v3}, Landroid/graphics/Paint;->setStrokeCap(Landroid/graphics/Paint$Cap;)V
 
+    .line 143
     goto :goto_0
 
-    .line 148
-    :cond_1
-    new-instance p1, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
-
-    new-instance p2, Ljava/lang/StringBuilder;
-
-    invoke-direct {p2}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v0, "strokeCap "
-
-    invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    iget v0, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mStrokeCap:I
-
-    invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    invoke-virtual {p2, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {p2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object p2
-
-    invoke-direct {p1, p2}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
-
-    throw p1
-
     .line 145
-    :cond_2
+    :pswitch_1
     sget-object v3, Landroid/graphics/Paint$Cap;->ROUND:Landroid/graphics/Paint$Cap;
 
     invoke-virtual {p1, v3}, Landroid/graphics/Paint;->setStrokeCap(Landroid/graphics/Paint$Cap;)V
 
+    .line 146
     goto :goto_0
 
     .line 139
-    :cond_3
+    :pswitch_2
     sget-object v3, Landroid/graphics/Paint$Cap;->BUTT:Landroid/graphics/Paint$Cap;
 
     invoke-virtual {p1, v3}, Landroid/graphics/Paint;->setStrokeCap(Landroid/graphics/Paint$Cap;)V
+
+    .line 140
+    nop
 
     .line 151
     :goto_0
     iget v3, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mStrokeJoin:I
 
-    if-eqz v3, :cond_6
+    packed-switch v3, :pswitch_data_1
 
-    if-eq v3, v0, :cond_5
+    .line 162
+    new-instance v0, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
 
-    if-ne v3, v5, :cond_4
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "strokeJoin "
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    iget v2, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mStrokeJoin:I
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    invoke-virtual {v1, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-direct {v0, v1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+
+    throw v0
 
     .line 156
+    :pswitch_3
     sget-object v3, Landroid/graphics/Paint$Join;->BEVEL:Landroid/graphics/Paint$Join;
 
     invoke-virtual {p1, v3}, Landroid/graphics/Paint;->setStrokeJoin(Landroid/graphics/Paint$Join;)V
 
+    .line 157
     goto :goto_1
 
-    .line 162
-    :cond_4
-    new-instance p1, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
-
-    new-instance p2, Ljava/lang/StringBuilder;
-
-    invoke-direct {p2}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v0, "strokeJoin "
-
-    invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    iget v0, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mStrokeJoin:I
-
-    invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    invoke-virtual {p2, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {p2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object p2
-
-    invoke-direct {p1, p2}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
-
-    throw p1
-
     .line 159
-    :cond_5
+    :pswitch_4
     sget-object v3, Landroid/graphics/Paint$Join;->ROUND:Landroid/graphics/Paint$Join;
 
     invoke-virtual {p1, v3}, Landroid/graphics/Paint;->setStrokeJoin(Landroid/graphics/Paint$Join;)V
 
+    .line 160
     goto :goto_1
 
     .line 153
-    :cond_6
+    :pswitch_5
     sget-object v3, Landroid/graphics/Paint$Join;->MITER:Landroid/graphics/Paint$Join;
 
     invoke-virtual {p1, v3}, Landroid/graphics/Paint;->setStrokeJoin(Landroid/graphics/Paint$Join;)V
+
+    .line 154
+    nop
 
     .line 165
     :goto_1
@@ -1135,68 +1377,86 @@
 
     array-length v4, v3
 
-    const/4 v6, 0x3
+    const/4 v5, 0x3
 
-    const/high16 v7, 0x437f0000    # 255.0f
+    const/high16 v6, 0x437f0000    # 255.0f
 
-    if-le v4, v6, :cond_7
+    if-le v4, v5, :cond_1
 
-    aget v3, v3, v6
+    aget v4, v3, v5
 
-    mul-float v3, v3, p2
+    mul-float v4, v4, p2
 
-    mul-float v3, v3, v7
+    mul-float v4, v4, v6
 
     goto :goto_2
 
-    :cond_7
-    mul-float v3, p2, v7
+    :cond_1
+    mul-float v4, p2, v6
 
     :goto_2
-    float-to-int p2, v3
-
-    iget-object v3, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mStrokeColor:[F
+    float-to-int v4, v4
 
     aget v1, v3, v1
 
-    mul-float v1, v1, v7
+    mul-float v1, v1, v6
 
     float-to-int v1, v1
 
-    aget v4, v3, v0
+    aget v5, v3, v0
 
-    mul-float v4, v4, v7
+    mul-float v5, v5, v6
 
-    float-to-int v4, v4
+    float-to-int v5, v5
 
-    aget v3, v3, v5
+    const/4 v7, 0x2
 
-    mul-float v3, v3, v7
+    aget v3, v3, v7
+
+    mul-float v3, v3, v6
 
     float-to-int v3, v3
 
-    invoke-virtual {p1, p2, v1, v4, v3}, Landroid/graphics/Paint;->setARGB(IIII)V
+    invoke-virtual {p1, v4, v1, v5, v3}, Landroid/graphics/Paint;->setARGB(IIII)V
 
     .line 171
-    iget-object p2, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mStrokeDash:[F
+    iget-object v1, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mStrokeDash:[F
 
-    if-eqz p2, :cond_8
+    if-eqz v1, :cond_2
 
-    array-length v1, p2
+    array-length v1, v1
 
-    if-lez v1, :cond_8
+    if-lez v1, :cond_2
 
     .line 172
     new-instance v1, Landroid/graphics/DashPathEffect;
 
-    invoke-direct {v1, p2, v2}, Landroid/graphics/DashPathEffect;-><init>([FF)V
+    iget-object v3, p0, Lcom/facebook/react/views/art/ARTShapeShadowNode;->mStrokeDash:[F
+
+    invoke-direct {v1, v3, v2}, Landroid/graphics/DashPathEffect;-><init>([FF)V
 
     invoke-virtual {p1, v1}, Landroid/graphics/Paint;->setPathEffect(Landroid/graphics/PathEffect;)Landroid/graphics/PathEffect;
 
-    :cond_8
+    .line 174
+    :cond_2
     return v0
 
-    :cond_9
+    .line 132
+    :cond_3
     :goto_3
     return v1
+
+    :pswitch_data_0
+    .packed-switch 0x0
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
+
+    :pswitch_data_1
+    .packed-switch 0x0
+        :pswitch_5
+        :pswitch_4
+        :pswitch_3
+    .end packed-switch
 .end method

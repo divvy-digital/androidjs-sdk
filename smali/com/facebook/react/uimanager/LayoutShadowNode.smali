@@ -31,11 +31,13 @@
 
     iput-object v0, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
 
+    .line 76
     return-void
 .end method
 
 .method private maybeTransformLeftRightToStartEnd(I)I
     .locals 2
+    .param p1, "spacingType"    # I
 
     .line 704
     invoke-static {}, Lcom/facebook/react/modules/i18nmanager/I18nUtil;->getInstance()Lcom/facebook/react/modules/i18nmanager/I18nUtil;
@@ -52,33 +54,44 @@
 
     if-nez v0, :cond_0
 
+    .line 705
     return p1
 
+    .line 708
     :cond_0
-    if-eqz p1, :cond_2
+    packed-switch p1, :pswitch_data_0
 
-    const/4 v0, 0x2
-
-    if-eq p1, v0, :cond_1
-
+    .line 714
+    :pswitch_0
     return p1
 
-    :cond_1
-    const/4 p1, 0x5
+    .line 712
+    :pswitch_1
+    const/4 v0, 0x5
 
-    return p1
+    return v0
 
-    :cond_2
-    const/4 p1, 0x4
+    .line 710
+    :pswitch_2
+    const/4 v0, 0x4
 
-    return p1
+    return v0
+
+    nop
+
+    :pswitch_data_0
+    .packed-switch 0x0
+        :pswitch_2
+        :pswitch_0
+        :pswitch_1
+    .end packed-switch
 .end method
 
 
 # virtual methods
 .method public setAlignContent(Ljava/lang/String;)V
     .locals 3
-    .param p1    # Ljava/lang/String;
+    .param p1, "alignContent"    # Ljava/lang/String;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -93,134 +106,140 @@
 
     if-eqz v0, :cond_0
 
+    .line 427
     return-void
 
+    .line 430
     :cond_0
     if-nez p1, :cond_1
 
     .line 431
-    sget-object p1, Lcom/facebook/yoga/YogaAlign;->FLEX_START:Lcom/facebook/yoga/YogaAlign;
+    sget-object v0, Lcom/facebook/yoga/YogaAlign;->FLEX_START:Lcom/facebook/yoga/YogaAlign;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignContent(Lcom/facebook/yoga/YogaAlign;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignContent(Lcom/facebook/yoga/YogaAlign;)V
 
+    .line 432
     return-void
 
-    :cond_1
-    const/4 v0, -0x1
-
     .line 435
+    :cond_1
     invoke-virtual {p1}, Ljava/lang/String;->hashCode()I
 
-    move-result v1
+    move-result v0
 
-    sparse-switch v1, :sswitch_data_0
+    sparse-switch v0, :sswitch_data_0
 
+    :cond_2
     goto :goto_0
 
     :sswitch_0
-    const-string v1, "space-around"
+    const-string v0, "space-around"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x7
 
-    goto :goto_0
+    goto :goto_1
 
     :sswitch_1
-    const-string v1, "flex-end"
+    const-string v0, "flex-end"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x3
 
-    goto :goto_0
+    goto :goto_1
 
     :sswitch_2
-    const-string v1, "space-between"
+    const-string v0, "space-between"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x6
 
-    goto :goto_0
+    goto :goto_1
 
     :sswitch_3
-    const-string v1, "auto"
+    const-string v0, "auto"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x0
 
-    goto :goto_0
+    goto :goto_1
 
     :sswitch_4
-    const-string v1, "flex-start"
+    const-string v0, "flex-start"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x1
 
-    goto :goto_0
+    goto :goto_1
 
     :sswitch_5
-    const-string v1, "center"
+    const-string v0, "center"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x2
 
-    goto :goto_0
+    goto :goto_1
 
     :sswitch_6
-    const-string v1, "baseline"
+    const-string v0, "baseline"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x5
 
-    goto :goto_0
+    goto :goto_1
 
     :sswitch_7
-    const-string v1, "stretch"
+    const-string v0, "stretch"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x4
 
-    :cond_2
+    goto :goto_1
+
     :goto_0
+    const/4 v0, -0x1
+
+    :goto_1
     packed-switch v0, :pswitch_data_0
 
     .line 469
@@ -234,81 +253,91 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v1
 
-    invoke-direct {v0, p1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
 
     throw v0
 
     .line 465
     :pswitch_0
-    sget-object p1, Lcom/facebook/yoga/YogaAlign;->SPACE_AROUND:Lcom/facebook/yoga/YogaAlign;
+    sget-object v0, Lcom/facebook/yoga/YogaAlign;->SPACE_AROUND:Lcom/facebook/yoga/YogaAlign;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignContent(Lcom/facebook/yoga/YogaAlign;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignContent(Lcom/facebook/yoga/YogaAlign;)V
 
+    .line 466
     return-void
 
     .line 461
     :pswitch_1
-    sget-object p1, Lcom/facebook/yoga/YogaAlign;->SPACE_BETWEEN:Lcom/facebook/yoga/YogaAlign;
+    sget-object v0, Lcom/facebook/yoga/YogaAlign;->SPACE_BETWEEN:Lcom/facebook/yoga/YogaAlign;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignContent(Lcom/facebook/yoga/YogaAlign;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignContent(Lcom/facebook/yoga/YogaAlign;)V
 
+    .line 462
     return-void
 
     .line 457
     :pswitch_2
-    sget-object p1, Lcom/facebook/yoga/YogaAlign;->BASELINE:Lcom/facebook/yoga/YogaAlign;
+    sget-object v0, Lcom/facebook/yoga/YogaAlign;->BASELINE:Lcom/facebook/yoga/YogaAlign;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignContent(Lcom/facebook/yoga/YogaAlign;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignContent(Lcom/facebook/yoga/YogaAlign;)V
 
+    .line 458
     return-void
 
     .line 453
     :pswitch_3
-    sget-object p1, Lcom/facebook/yoga/YogaAlign;->STRETCH:Lcom/facebook/yoga/YogaAlign;
+    sget-object v0, Lcom/facebook/yoga/YogaAlign;->STRETCH:Lcom/facebook/yoga/YogaAlign;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignContent(Lcom/facebook/yoga/YogaAlign;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignContent(Lcom/facebook/yoga/YogaAlign;)V
 
+    .line 454
     return-void
 
     .line 449
     :pswitch_4
-    sget-object p1, Lcom/facebook/yoga/YogaAlign;->FLEX_END:Lcom/facebook/yoga/YogaAlign;
+    sget-object v0, Lcom/facebook/yoga/YogaAlign;->FLEX_END:Lcom/facebook/yoga/YogaAlign;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignContent(Lcom/facebook/yoga/YogaAlign;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignContent(Lcom/facebook/yoga/YogaAlign;)V
 
+    .line 450
     return-void
 
     .line 445
     :pswitch_5
-    sget-object p1, Lcom/facebook/yoga/YogaAlign;->CENTER:Lcom/facebook/yoga/YogaAlign;
+    sget-object v0, Lcom/facebook/yoga/YogaAlign;->CENTER:Lcom/facebook/yoga/YogaAlign;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignContent(Lcom/facebook/yoga/YogaAlign;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignContent(Lcom/facebook/yoga/YogaAlign;)V
 
+    .line 446
     return-void
 
     .line 441
     :pswitch_6
-    sget-object p1, Lcom/facebook/yoga/YogaAlign;->FLEX_START:Lcom/facebook/yoga/YogaAlign;
+    sget-object v0, Lcom/facebook/yoga/YogaAlign;->FLEX_START:Lcom/facebook/yoga/YogaAlign;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignContent(Lcom/facebook/yoga/YogaAlign;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignContent(Lcom/facebook/yoga/YogaAlign;)V
 
+    .line 442
     return-void
 
     .line 437
     :pswitch_7
-    sget-object p1, Lcom/facebook/yoga/YogaAlign;->AUTO:Lcom/facebook/yoga/YogaAlign;
+    sget-object v0, Lcom/facebook/yoga/YogaAlign;->AUTO:Lcom/facebook/yoga/YogaAlign;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignContent(Lcom/facebook/yoga/YogaAlign;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignContent(Lcom/facebook/yoga/YogaAlign;)V
 
+    .line 438
     return-void
-
-    nop
 
     :sswitch_data_0
     .sparse-switch
@@ -337,7 +366,7 @@
 
 .method public setAlignItems(Ljava/lang/String;)V
     .locals 3
-    .param p1    # Ljava/lang/String;
+    .param p1, "alignItems"    # Ljava/lang/String;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -352,134 +381,140 @@
 
     if-eqz v0, :cond_0
 
+    .line 376
     return-void
 
+    .line 379
     :cond_0
     if-nez p1, :cond_1
 
     .line 380
-    sget-object p1, Lcom/facebook/yoga/YogaAlign;->STRETCH:Lcom/facebook/yoga/YogaAlign;
+    sget-object v0, Lcom/facebook/yoga/YogaAlign;->STRETCH:Lcom/facebook/yoga/YogaAlign;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignItems(Lcom/facebook/yoga/YogaAlign;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignItems(Lcom/facebook/yoga/YogaAlign;)V
 
+    .line 381
     return-void
 
-    :cond_1
-    const/4 v0, -0x1
-
     .line 384
+    :cond_1
     invoke-virtual {p1}, Ljava/lang/String;->hashCode()I
 
-    move-result v1
+    move-result v0
 
-    sparse-switch v1, :sswitch_data_0
+    sparse-switch v0, :sswitch_data_0
 
+    :cond_2
     goto :goto_0
 
     :sswitch_0
-    const-string v1, "space-around"
+    const-string v0, "space-around"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x7
 
-    goto :goto_0
+    goto :goto_1
 
     :sswitch_1
-    const-string v1, "flex-end"
+    const-string v0, "flex-end"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x3
 
-    goto :goto_0
+    goto :goto_1
 
     :sswitch_2
-    const-string v1, "space-between"
+    const-string v0, "space-between"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x6
 
-    goto :goto_0
+    goto :goto_1
 
     :sswitch_3
-    const-string v1, "auto"
+    const-string v0, "auto"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x0
 
-    goto :goto_0
+    goto :goto_1
 
     :sswitch_4
-    const-string v1, "flex-start"
+    const-string v0, "flex-start"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x1
 
-    goto :goto_0
+    goto :goto_1
 
     :sswitch_5
-    const-string v1, "center"
+    const-string v0, "center"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x2
 
-    goto :goto_0
+    goto :goto_1
 
     :sswitch_6
-    const-string v1, "baseline"
+    const-string v0, "baseline"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x5
 
-    goto :goto_0
+    goto :goto_1
 
     :sswitch_7
-    const-string v1, "stretch"
+    const-string v0, "stretch"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x4
 
-    :cond_2
+    goto :goto_1
+
     :goto_0
+    const/4 v0, -0x1
+
+    :goto_1
     packed-switch v0, :pswitch_data_0
 
     .line 418
@@ -493,81 +528,91 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v1
 
-    invoke-direct {v0, p1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
 
     throw v0
 
     .line 414
     :pswitch_0
-    sget-object p1, Lcom/facebook/yoga/YogaAlign;->SPACE_AROUND:Lcom/facebook/yoga/YogaAlign;
+    sget-object v0, Lcom/facebook/yoga/YogaAlign;->SPACE_AROUND:Lcom/facebook/yoga/YogaAlign;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignItems(Lcom/facebook/yoga/YogaAlign;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignItems(Lcom/facebook/yoga/YogaAlign;)V
 
+    .line 415
     return-void
 
     .line 410
     :pswitch_1
-    sget-object p1, Lcom/facebook/yoga/YogaAlign;->SPACE_BETWEEN:Lcom/facebook/yoga/YogaAlign;
+    sget-object v0, Lcom/facebook/yoga/YogaAlign;->SPACE_BETWEEN:Lcom/facebook/yoga/YogaAlign;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignItems(Lcom/facebook/yoga/YogaAlign;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignItems(Lcom/facebook/yoga/YogaAlign;)V
 
+    .line 411
     return-void
 
     .line 406
     :pswitch_2
-    sget-object p1, Lcom/facebook/yoga/YogaAlign;->BASELINE:Lcom/facebook/yoga/YogaAlign;
+    sget-object v0, Lcom/facebook/yoga/YogaAlign;->BASELINE:Lcom/facebook/yoga/YogaAlign;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignItems(Lcom/facebook/yoga/YogaAlign;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignItems(Lcom/facebook/yoga/YogaAlign;)V
 
+    .line 407
     return-void
 
     .line 402
     :pswitch_3
-    sget-object p1, Lcom/facebook/yoga/YogaAlign;->STRETCH:Lcom/facebook/yoga/YogaAlign;
+    sget-object v0, Lcom/facebook/yoga/YogaAlign;->STRETCH:Lcom/facebook/yoga/YogaAlign;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignItems(Lcom/facebook/yoga/YogaAlign;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignItems(Lcom/facebook/yoga/YogaAlign;)V
 
+    .line 403
     return-void
 
     .line 398
     :pswitch_4
-    sget-object p1, Lcom/facebook/yoga/YogaAlign;->FLEX_END:Lcom/facebook/yoga/YogaAlign;
+    sget-object v0, Lcom/facebook/yoga/YogaAlign;->FLEX_END:Lcom/facebook/yoga/YogaAlign;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignItems(Lcom/facebook/yoga/YogaAlign;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignItems(Lcom/facebook/yoga/YogaAlign;)V
 
+    .line 399
     return-void
 
     .line 394
     :pswitch_5
-    sget-object p1, Lcom/facebook/yoga/YogaAlign;->CENTER:Lcom/facebook/yoga/YogaAlign;
+    sget-object v0, Lcom/facebook/yoga/YogaAlign;->CENTER:Lcom/facebook/yoga/YogaAlign;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignItems(Lcom/facebook/yoga/YogaAlign;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignItems(Lcom/facebook/yoga/YogaAlign;)V
 
+    .line 395
     return-void
 
     .line 390
     :pswitch_6
-    sget-object p1, Lcom/facebook/yoga/YogaAlign;->FLEX_START:Lcom/facebook/yoga/YogaAlign;
+    sget-object v0, Lcom/facebook/yoga/YogaAlign;->FLEX_START:Lcom/facebook/yoga/YogaAlign;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignItems(Lcom/facebook/yoga/YogaAlign;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignItems(Lcom/facebook/yoga/YogaAlign;)V
 
+    .line 391
     return-void
 
     .line 386
     :pswitch_7
-    sget-object p1, Lcom/facebook/yoga/YogaAlign;->AUTO:Lcom/facebook/yoga/YogaAlign;
+    sget-object v0, Lcom/facebook/yoga/YogaAlign;->AUTO:Lcom/facebook/yoga/YogaAlign;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignItems(Lcom/facebook/yoga/YogaAlign;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignItems(Lcom/facebook/yoga/YogaAlign;)V
 
+    .line 387
     return-void
-
-    nop
 
     :sswitch_data_0
     .sparse-switch
@@ -596,7 +641,7 @@
 
 .method public setAlignSelf(Ljava/lang/String;)V
     .locals 3
-    .param p1    # Ljava/lang/String;
+    .param p1, "alignSelf"    # Ljava/lang/String;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -611,134 +656,140 @@
 
     if-eqz v0, :cond_0
 
+    .line 325
     return-void
 
+    .line 328
     :cond_0
     if-nez p1, :cond_1
 
     .line 329
-    sget-object p1, Lcom/facebook/yoga/YogaAlign;->AUTO:Lcom/facebook/yoga/YogaAlign;
+    sget-object v0, Lcom/facebook/yoga/YogaAlign;->AUTO:Lcom/facebook/yoga/YogaAlign;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignSelf(Lcom/facebook/yoga/YogaAlign;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignSelf(Lcom/facebook/yoga/YogaAlign;)V
 
+    .line 330
     return-void
 
-    :cond_1
-    const/4 v0, -0x1
-
     .line 333
+    :cond_1
     invoke-virtual {p1}, Ljava/lang/String;->hashCode()I
 
-    move-result v1
+    move-result v0
 
-    sparse-switch v1, :sswitch_data_0
+    sparse-switch v0, :sswitch_data_0
 
+    :cond_2
     goto :goto_0
 
     :sswitch_0
-    const-string v1, "space-around"
+    const-string v0, "space-around"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x7
 
-    goto :goto_0
+    goto :goto_1
 
     :sswitch_1
-    const-string v1, "flex-end"
+    const-string v0, "flex-end"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x3
 
-    goto :goto_0
+    goto :goto_1
 
     :sswitch_2
-    const-string v1, "space-between"
+    const-string v0, "space-between"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x6
 
-    goto :goto_0
+    goto :goto_1
 
     :sswitch_3
-    const-string v1, "auto"
+    const-string v0, "auto"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x0
 
-    goto :goto_0
+    goto :goto_1
 
     :sswitch_4
-    const-string v1, "flex-start"
+    const-string v0, "flex-start"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x1
 
-    goto :goto_0
+    goto :goto_1
 
     :sswitch_5
-    const-string v1, "center"
+    const-string v0, "center"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x2
 
-    goto :goto_0
+    goto :goto_1
 
     :sswitch_6
-    const-string v1, "baseline"
+    const-string v0, "baseline"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x5
 
-    goto :goto_0
+    goto :goto_1
 
     :sswitch_7
-    const-string v1, "stretch"
+    const-string v0, "stretch"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x4
 
-    :cond_2
+    goto :goto_1
+
     :goto_0
+    const/4 v0, -0x1
+
+    :goto_1
     packed-switch v0, :pswitch_data_0
 
     .line 367
@@ -752,81 +803,91 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v1
 
-    invoke-direct {v0, p1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
 
     throw v0
 
     .line 363
     :pswitch_0
-    sget-object p1, Lcom/facebook/yoga/YogaAlign;->SPACE_AROUND:Lcom/facebook/yoga/YogaAlign;
+    sget-object v0, Lcom/facebook/yoga/YogaAlign;->SPACE_AROUND:Lcom/facebook/yoga/YogaAlign;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignSelf(Lcom/facebook/yoga/YogaAlign;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignSelf(Lcom/facebook/yoga/YogaAlign;)V
 
+    .line 364
     return-void
 
     .line 359
     :pswitch_1
-    sget-object p1, Lcom/facebook/yoga/YogaAlign;->SPACE_BETWEEN:Lcom/facebook/yoga/YogaAlign;
+    sget-object v0, Lcom/facebook/yoga/YogaAlign;->SPACE_BETWEEN:Lcom/facebook/yoga/YogaAlign;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignSelf(Lcom/facebook/yoga/YogaAlign;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignSelf(Lcom/facebook/yoga/YogaAlign;)V
 
+    .line 360
     return-void
 
     .line 355
     :pswitch_2
-    sget-object p1, Lcom/facebook/yoga/YogaAlign;->BASELINE:Lcom/facebook/yoga/YogaAlign;
+    sget-object v0, Lcom/facebook/yoga/YogaAlign;->BASELINE:Lcom/facebook/yoga/YogaAlign;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignSelf(Lcom/facebook/yoga/YogaAlign;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignSelf(Lcom/facebook/yoga/YogaAlign;)V
 
+    .line 356
     return-void
 
     .line 351
     :pswitch_3
-    sget-object p1, Lcom/facebook/yoga/YogaAlign;->STRETCH:Lcom/facebook/yoga/YogaAlign;
+    sget-object v0, Lcom/facebook/yoga/YogaAlign;->STRETCH:Lcom/facebook/yoga/YogaAlign;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignSelf(Lcom/facebook/yoga/YogaAlign;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignSelf(Lcom/facebook/yoga/YogaAlign;)V
 
+    .line 352
     return-void
 
     .line 347
     :pswitch_4
-    sget-object p1, Lcom/facebook/yoga/YogaAlign;->FLEX_END:Lcom/facebook/yoga/YogaAlign;
+    sget-object v0, Lcom/facebook/yoga/YogaAlign;->FLEX_END:Lcom/facebook/yoga/YogaAlign;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignSelf(Lcom/facebook/yoga/YogaAlign;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignSelf(Lcom/facebook/yoga/YogaAlign;)V
 
+    .line 348
     return-void
 
     .line 343
     :pswitch_5
-    sget-object p1, Lcom/facebook/yoga/YogaAlign;->CENTER:Lcom/facebook/yoga/YogaAlign;
+    sget-object v0, Lcom/facebook/yoga/YogaAlign;->CENTER:Lcom/facebook/yoga/YogaAlign;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignSelf(Lcom/facebook/yoga/YogaAlign;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignSelf(Lcom/facebook/yoga/YogaAlign;)V
 
+    .line 344
     return-void
 
     .line 339
     :pswitch_6
-    sget-object p1, Lcom/facebook/yoga/YogaAlign;->FLEX_START:Lcom/facebook/yoga/YogaAlign;
+    sget-object v0, Lcom/facebook/yoga/YogaAlign;->FLEX_START:Lcom/facebook/yoga/YogaAlign;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignSelf(Lcom/facebook/yoga/YogaAlign;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignSelf(Lcom/facebook/yoga/YogaAlign;)V
 
+    .line 340
     return-void
 
     .line 335
     :pswitch_7
-    sget-object p1, Lcom/facebook/yoga/YogaAlign;->AUTO:Lcom/facebook/yoga/YogaAlign;
+    sget-object v0, Lcom/facebook/yoga/YogaAlign;->AUTO:Lcom/facebook/yoga/YogaAlign;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignSelf(Lcom/facebook/yoga/YogaAlign;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setAlignSelf(Lcom/facebook/yoga/YogaAlign;)V
 
+    .line 336
     return-void
-
-    nop
 
     :sswitch_data_0
     .sparse-switch
@@ -855,6 +916,7 @@
 
 .method public setAspectRatio(F)V
     .locals 0
+    .param p1, "aspectRatio"    # F
     .annotation runtime Lcom/facebook/react/uimanager/annotations/ReactProp;
         defaultFloat = NaNf
         name = "aspectRatio"
@@ -863,11 +925,14 @@
     .line 253
     invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setStyleAspectRatio(F)V
 
+    .line 254
     return-void
 .end method
 
 .method public setBorderWidths(IF)V
-    .locals 1
+    .locals 2
+    .param p1, "index"    # I
+    .param p2, "borderWidth"    # F
     .annotation runtime Lcom/facebook/react/uimanager/annotations/ReactPropGroup;
         defaultFloat = NaNf
         names = {
@@ -888,31 +953,34 @@
 
     if-eqz v0, :cond_0
 
+    .line 662
     return-void
 
     .line 664
     :cond_0
     sget-object v0, Lcom/facebook/react/uimanager/ViewProps;->BORDER_SPACING_TYPES:[I
 
-    aget p1, v0, p1
+    aget v0, v0, p1
 
-    invoke-direct {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->maybeTransformLeftRightToStartEnd(I)I
+    invoke-direct {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->maybeTransformLeftRightToStartEnd(I)I
 
-    move-result p1
+    move-result v0
 
     .line 665
+    .local v0, "spacingType":I
     invoke-static {p2}, Lcom/facebook/react/uimanager/PixelUtil;->toPixelFromDIP(F)F
 
-    move-result p2
+    move-result v1
 
-    invoke-virtual {p0, p1, p2}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setBorder(IF)V
+    invoke-virtual {p0, v0, v1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setBorder(IF)V
 
+    .line 666
     return-void
 .end method
 
 .method public setDisplay(Ljava/lang/String;)V
-    .locals 4
-    .param p1    # Ljava/lang/String;
+    .locals 3
+    .param p1, "display"    # Ljava/lang/String;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -927,77 +995,65 @@
 
     if-eqz v0, :cond_0
 
+    .line 551
     return-void
 
+    .line 554
     :cond_0
     if-nez p1, :cond_1
 
     .line 555
-    sget-object p1, Lcom/facebook/yoga/YogaDisplay;->FLEX:Lcom/facebook/yoga/YogaDisplay;
+    sget-object v0, Lcom/facebook/yoga/YogaDisplay;->FLEX:Lcom/facebook/yoga/YogaDisplay;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setDisplay(Lcom/facebook/yoga/YogaDisplay;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setDisplay(Lcom/facebook/yoga/YogaDisplay;)V
 
+    .line 556
     return-void
 
-    :cond_1
-    const/4 v0, -0x1
-
     .line 559
+    :cond_1
     invoke-virtual {p1}, Ljava/lang/String;->hashCode()I
 
-    move-result v1
+    move-result v0
 
-    const v2, 0x2ffff9
-
-    const/4 v3, 0x1
-
-    if-eq v1, v2, :cond_3
-
-    const v2, 0x33af38
-
-    if-eq v1, v2, :cond_2
-
-    goto :goto_0
+    sparse-switch v0, :sswitch_data_0
 
     :cond_2
-    const-string v1, "none"
+    goto :goto_0
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    :sswitch_0
+    const-string v0, "none"
 
-    move-result v1
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    if-eqz v1, :cond_4
+    move-result v0
+
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x1
 
-    goto :goto_0
+    goto :goto_1
 
-    :cond_3
-    const-string v1, "flex"
+    :sswitch_1
+    const-string v0, "flex"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_4
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x0
 
-    :cond_4
-    :goto_0
-    if-eqz v0, :cond_6
-
-    if-ne v0, v3, :cond_5
-
-    .line 565
-    sget-object p1, Lcom/facebook/yoga/YogaDisplay;->NONE:Lcom/facebook/yoga/YogaDisplay;
-
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setDisplay(Lcom/facebook/yoga/YogaDisplay;)V
-
     goto :goto_1
 
+    :goto_0
+    const/4 v0, -0x1
+
+    :goto_1
+    packed-switch v0, :pswitch_data_0
+
     .line 569
-    :cond_5
     new-instance v0, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
 
     new-instance v1, Ljava/lang/StringBuilder;
@@ -1008,28 +1064,60 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v1
 
-    invoke-direct {v0, p1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
 
     throw v0
 
+    .line 565
+    :pswitch_0
+    sget-object v0, Lcom/facebook/yoga/YogaDisplay;->NONE:Lcom/facebook/yoga/YogaDisplay;
+
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setDisplay(Lcom/facebook/yoga/YogaDisplay;)V
+
+    .line 566
+    goto :goto_2
+
     .line 561
-    :cond_6
-    sget-object p1, Lcom/facebook/yoga/YogaDisplay;->FLEX:Lcom/facebook/yoga/YogaDisplay;
+    :pswitch_1
+    sget-object v0, Lcom/facebook/yoga/YogaDisplay;->FLEX:Lcom/facebook/yoga/YogaDisplay;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setDisplay(Lcom/facebook/yoga/YogaDisplay;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setDisplay(Lcom/facebook/yoga/YogaDisplay;)V
 
-    :goto_1
+    .line 562
+    nop
+
+    .line 573
+    :goto_2
     return-void
+
+    nop
+
+    :sswitch_data_0
+    .sparse-switch
+        0x2ffff9 -> :sswitch_1
+        0x33af38 -> :sswitch_0
+    .end sparse-switch
+
+    :pswitch_data_0
+    .packed-switch 0x0
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method public setFlex(F)V
     .locals 1
+    .param p1, "flex"    # F
     .annotation runtime Lcom/facebook/react/uimanager/annotations/ReactProp;
         defaultFloat = 0.0f
         name = "flex"
@@ -1042,17 +1130,20 @@
 
     if-eqz v0, :cond_0
 
+    .line 207
     return-void
 
     .line 209
     :cond_0
     invoke-super {p0, p1}, Lcom/facebook/react/uimanager/ReactShadowNodeImpl;->setFlex(F)V
 
+    .line 210
     return-void
 .end method
 
 .method public setFlexBasis(Lcom/facebook/react/bridge/Dynamic;)V
     .locals 2
+    .param p1, "flexBasis"    # Lcom/facebook/react/bridge/Dynamic;
     .annotation runtime Lcom/facebook/react/uimanager/annotations/ReactProp;
         name = "flexBasis"
     .end annotation
@@ -1064,6 +1155,7 @@
 
     if-eqz v0, :cond_0
 
+    .line 231
     return-void
 
     .line 234
@@ -1085,26 +1177,12 @@
 
     aget v0, v0, v1
 
-    const/4 v1, 0x1
-
-    if-eq v0, v1, :cond_3
-
-    const/4 v1, 0x2
-
-    if-eq v0, v1, :cond_3
-
-    const/4 v1, 0x3
-
-    if-eq v0, v1, :cond_2
-
-    const/4 v1, 0x4
-
-    if-eq v0, v1, :cond_1
+    packed-switch v0, :pswitch_data_0
 
     goto :goto_0
 
     .line 244
-    :cond_1
+    :pswitch_0
     iget-object v0, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
 
     iget v0, v0, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->value:F
@@ -1114,29 +1192,42 @@
     goto :goto_0
 
     .line 241
-    :cond_2
+    :pswitch_1
     invoke-virtual {p0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setFlexBasisAuto()V
 
+    .line 242
     goto :goto_0
 
     .line 238
-    :cond_3
+    :pswitch_2
     iget-object v0, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
 
     iget v0, v0, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->value:F
 
     invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setFlexBasis(F)V
 
+    .line 239
+    nop
+
     .line 248
     :goto_0
     invoke-interface {p1}, Lcom/facebook/react/bridge/Dynamic;->recycle()V
 
+    .line 249
     return-void
+
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_2
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method public setFlexDirection(Ljava/lang/String;)V
-    .locals 5
-    .param p1    # Ljava/lang/String;
+    .locals 3
+    .param p1, "flexDirection"    # Ljava/lang/String;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -1151,105 +1242,91 @@
 
     if-eqz v0, :cond_0
 
+    .line 259
     return-void
 
+    .line 262
     :cond_0
     if-nez p1, :cond_1
 
     .line 263
-    sget-object p1, Lcom/facebook/yoga/YogaFlexDirection;->COLUMN:Lcom/facebook/yoga/YogaFlexDirection;
+    sget-object v0, Lcom/facebook/yoga/YogaFlexDirection;->COLUMN:Lcom/facebook/yoga/YogaFlexDirection;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setFlexDirection(Lcom/facebook/yoga/YogaFlexDirection;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setFlexDirection(Lcom/facebook/yoga/YogaFlexDirection;)V
 
+    .line 264
     return-void
 
-    :cond_1
-    const/4 v0, -0x1
-
     .line 267
+    :cond_1
     invoke-virtual {p1}, Ljava/lang/String;->hashCode()I
 
-    move-result v1
+    move-result v0
 
-    const/4 v2, 0x3
+    sparse-switch v0, :sswitch_data_0
 
-    const/4 v3, 0x2
-
-    const/4 v4, 0x1
-
-    sparse-switch v1, :sswitch_data_0
-
+    :cond_2
     goto :goto_0
 
     :sswitch_0
-    const-string v1, "column-reverse"
+    const-string v0, "column-reverse"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x1
 
-    goto :goto_0
+    goto :goto_1
 
     :sswitch_1
-    const-string v1, "row"
+    const-string v0, "row"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x2
 
-    goto :goto_0
+    goto :goto_1
 
     :sswitch_2
-    const-string v1, "column"
+    const-string v0, "column"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x0
 
-    goto :goto_0
+    goto :goto_1
 
     :sswitch_3
-    const-string v1, "row-reverse"
+    const-string v0, "row-reverse"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x3
 
-    :cond_2
-    :goto_0
-    if-eqz v0, :cond_6
-
-    if-eq v0, v4, :cond_5
-
-    if-eq v0, v3, :cond_4
-
-    if-ne v0, v2, :cond_3
-
-    .line 281
-    sget-object p1, Lcom/facebook/yoga/YogaFlexDirection;->ROW_REVERSE:Lcom/facebook/yoga/YogaFlexDirection;
-
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setFlexDirection(Lcom/facebook/yoga/YogaFlexDirection;)V
-
     goto :goto_1
 
+    :goto_0
+    const/4 v0, -0x1
+
+    :goto_1
+    packed-switch v0, :pswitch_data_0
+
     .line 285
-    :cond_3
     new-instance v0, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
 
     new-instance v1, Ljava/lang/StringBuilder;
@@ -1260,39 +1337,58 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v1
 
-    invoke-direct {v0, p1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
 
     throw v0
 
+    .line 281
+    :pswitch_0
+    sget-object v0, Lcom/facebook/yoga/YogaFlexDirection;->ROW_REVERSE:Lcom/facebook/yoga/YogaFlexDirection;
+
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setFlexDirection(Lcom/facebook/yoga/YogaFlexDirection;)V
+
+    .line 282
+    goto :goto_2
+
     .line 277
-    :cond_4
-    sget-object p1, Lcom/facebook/yoga/YogaFlexDirection;->ROW:Lcom/facebook/yoga/YogaFlexDirection;
+    :pswitch_1
+    sget-object v0, Lcom/facebook/yoga/YogaFlexDirection;->ROW:Lcom/facebook/yoga/YogaFlexDirection;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setFlexDirection(Lcom/facebook/yoga/YogaFlexDirection;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setFlexDirection(Lcom/facebook/yoga/YogaFlexDirection;)V
 
-    goto :goto_1
+    .line 278
+    goto :goto_2
 
     .line 273
-    :cond_5
-    sget-object p1, Lcom/facebook/yoga/YogaFlexDirection;->COLUMN_REVERSE:Lcom/facebook/yoga/YogaFlexDirection;
+    :pswitch_2
+    sget-object v0, Lcom/facebook/yoga/YogaFlexDirection;->COLUMN_REVERSE:Lcom/facebook/yoga/YogaFlexDirection;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setFlexDirection(Lcom/facebook/yoga/YogaFlexDirection;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setFlexDirection(Lcom/facebook/yoga/YogaFlexDirection;)V
 
-    goto :goto_1
+    .line 274
+    goto :goto_2
 
     .line 269
-    :cond_6
-    sget-object p1, Lcom/facebook/yoga/YogaFlexDirection;->COLUMN:Lcom/facebook/yoga/YogaFlexDirection;
+    :pswitch_3
+    sget-object v0, Lcom/facebook/yoga/YogaFlexDirection;->COLUMN:Lcom/facebook/yoga/YogaFlexDirection;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setFlexDirection(Lcom/facebook/yoga/YogaFlexDirection;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setFlexDirection(Lcom/facebook/yoga/YogaFlexDirection;)V
 
-    :goto_1
+    .line 270
+    nop
+
+    .line 289
+    :goto_2
     return-void
 
     nop
@@ -1304,10 +1400,19 @@
         0x1b9da -> :sswitch_1
         0x4bdc536b -> :sswitch_0
     .end sparse-switch
+
+    :pswitch_data_0
+    .packed-switch 0x0
+        :pswitch_3
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method public setFlexGrow(F)V
     .locals 1
+    .param p1, "flexGrow"    # F
     .annotation runtime Lcom/facebook/react/uimanager/annotations/ReactProp;
         defaultFloat = 0.0f
         name = "flexGrow"
@@ -1320,17 +1425,20 @@
 
     if-eqz v0, :cond_0
 
+    .line 215
     return-void
 
     .line 217
     :cond_0
     invoke-super {p0, p1}, Lcom/facebook/react/uimanager/ReactShadowNodeImpl;->setFlexGrow(F)V
 
+    .line 218
     return-void
 .end method
 
 .method public setFlexShrink(F)V
     .locals 1
+    .param p1, "flexShrink"    # F
     .annotation runtime Lcom/facebook/react/uimanager/annotations/ReactProp;
         defaultFloat = 0.0f
         name = "flexShrink"
@@ -1343,18 +1451,20 @@
 
     if-eqz v0, :cond_0
 
+    .line 223
     return-void
 
     .line 225
     :cond_0
     invoke-super {p0, p1}, Lcom/facebook/react/uimanager/ReactShadowNodeImpl;->setFlexShrink(F)V
 
+    .line 226
     return-void
 .end method
 
 .method public setFlexWrap(Ljava/lang/String;)V
-    .locals 5
-    .param p1    # Ljava/lang/String;
+    .locals 3
+    .param p1, "flexWrap"    # Ljava/lang/String;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -1369,98 +1479,78 @@
 
     if-eqz v0, :cond_0
 
+    .line 294
     return-void
 
+    .line 297
     :cond_0
     if-nez p1, :cond_1
 
     .line 298
-    sget-object p1, Lcom/facebook/yoga/YogaWrap;->NO_WRAP:Lcom/facebook/yoga/YogaWrap;
+    sget-object v0, Lcom/facebook/yoga/YogaWrap;->NO_WRAP:Lcom/facebook/yoga/YogaWrap;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setFlexWrap(Lcom/facebook/yoga/YogaWrap;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setFlexWrap(Lcom/facebook/yoga/YogaWrap;)V
 
+    .line 299
     return-void
 
-    :cond_1
-    const/4 v0, -0x1
-
     .line 302
+    :cond_1
     invoke-virtual {p1}, Ljava/lang/String;->hashCode()I
 
-    move-result v1
+    move-result v0
 
-    const v2, -0x3df6ea75
-
-    const/4 v3, 0x2
-
-    const/4 v4, 0x1
-
-    if-eq v1, v2, :cond_4
-
-    const v2, -0x2cace3a1
-
-    if-eq v1, v2, :cond_3
-
-    const v2, 0x37d04a
-
-    if-eq v1, v2, :cond_2
-
-    goto :goto_0
+    sparse-switch v0, :sswitch_data_0
 
     :cond_2
-    const-string v1, "wrap"
+    goto :goto_0
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    :sswitch_0
+    const-string v0, "wrap"
 
-    move-result v1
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    if-eqz v1, :cond_5
+    move-result v0
+
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x1
 
-    goto :goto_0
+    goto :goto_1
 
-    :cond_3
-    const-string v1, "wrap-reverse"
+    :sswitch_1
+    const-string v0, "wrap-reverse"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_5
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x2
 
-    goto :goto_0
+    goto :goto_1
 
-    :cond_4
-    const-string v1, "nowrap"
+    :sswitch_2
+    const-string v0, "nowrap"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_5
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x0
 
-    :cond_5
-    :goto_0
-    if-eqz v0, :cond_8
-
-    if-eq v0, v4, :cond_7
-
-    if-ne v0, v3, :cond_6
-
-    .line 312
-    sget-object p1, Lcom/facebook/yoga/YogaWrap;->WRAP_REVERSE:Lcom/facebook/yoga/YogaWrap;
-
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setFlexWrap(Lcom/facebook/yoga/YogaWrap;)V
-
     goto :goto_1
 
+    :goto_0
+    const/4 v0, -0x1
+
+    :goto_1
+    packed-switch v0, :pswitch_data_0
+
     .line 316
-    :cond_6
     new-instance v0, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
 
     new-instance v1, Ljava/lang/StringBuilder;
@@ -1471,36 +1561,71 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v1
 
-    invoke-direct {v0, p1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
 
     throw v0
 
+    .line 312
+    :pswitch_0
+    sget-object v0, Lcom/facebook/yoga/YogaWrap;->WRAP_REVERSE:Lcom/facebook/yoga/YogaWrap;
+
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setFlexWrap(Lcom/facebook/yoga/YogaWrap;)V
+
+    .line 313
+    goto :goto_2
+
     .line 308
-    :cond_7
-    sget-object p1, Lcom/facebook/yoga/YogaWrap;->WRAP:Lcom/facebook/yoga/YogaWrap;
+    :pswitch_1
+    sget-object v0, Lcom/facebook/yoga/YogaWrap;->WRAP:Lcom/facebook/yoga/YogaWrap;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setFlexWrap(Lcom/facebook/yoga/YogaWrap;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setFlexWrap(Lcom/facebook/yoga/YogaWrap;)V
 
-    goto :goto_1
+    .line 309
+    goto :goto_2
 
     .line 304
-    :cond_8
-    sget-object p1, Lcom/facebook/yoga/YogaWrap;->NO_WRAP:Lcom/facebook/yoga/YogaWrap;
+    :pswitch_2
+    sget-object v0, Lcom/facebook/yoga/YogaWrap;->NO_WRAP:Lcom/facebook/yoga/YogaWrap;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setFlexWrap(Lcom/facebook/yoga/YogaWrap;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setFlexWrap(Lcom/facebook/yoga/YogaWrap;)V
 
-    :goto_1
+    .line 305
+    nop
+
+    .line 320
+    :goto_2
     return-void
+
+    nop
+
+    :sswitch_data_0
+    .sparse-switch
+        -0x3df6ea75 -> :sswitch_2
+        -0x2cace3a1 -> :sswitch_1
+        0x37d04a -> :sswitch_0
+    .end sparse-switch
+
+    :pswitch_data_0
+    .packed-switch 0x0
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method public setHeight(Lcom/facebook/react/bridge/Dynamic;)V
     .locals 2
+    .param p1, "height"    # Lcom/facebook/react/bridge/Dynamic;
     .annotation runtime Lcom/facebook/react/uimanager/annotations/ReactProp;
         name = "height"
     .end annotation
@@ -1512,6 +1637,7 @@
 
     if-eqz v0, :cond_0
 
+    .line 144
     return-void
 
     .line 147
@@ -1533,26 +1659,12 @@
 
     aget v0, v0, v1
 
-    const/4 v1, 0x1
-
-    if-eq v0, v1, :cond_3
-
-    const/4 v1, 0x2
-
-    if-eq v0, v1, :cond_3
-
-    const/4 v1, 0x3
-
-    if-eq v0, v1, :cond_2
-
-    const/4 v1, 0x4
-
-    if-eq v0, v1, :cond_1
+    packed-switch v0, :pswitch_data_0
 
     goto :goto_0
 
     .line 157
-    :cond_1
+    :pswitch_0
     iget-object v0, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
 
     iget v0, v0, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->value:F
@@ -1562,29 +1674,42 @@
     goto :goto_0
 
     .line 154
-    :cond_2
+    :pswitch_1
     invoke-virtual {p0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setStyleHeightAuto()V
 
+    .line 155
     goto :goto_0
 
     .line 151
-    :cond_3
+    :pswitch_2
     iget-object v0, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
 
     iget v0, v0, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->value:F
 
     invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setStyleHeight(F)V
 
+    .line 152
+    nop
+
     .line 161
     :goto_0
     invoke-interface {p1}, Lcom/facebook/react/bridge/Dynamic;->recycle()V
 
+    .line 162
     return-void
+
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_2
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method public setJustifyContent(Ljava/lang/String;)V
-    .locals 7
-    .param p1    # Ljava/lang/String;
+    .locals 3
+    .param p1, "justifyContent"    # Ljava/lang/String;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -1599,139 +1724,117 @@
 
     if-eqz v0, :cond_0
 
+    .line 478
     return-void
 
+    .line 481
     :cond_0
     if-nez p1, :cond_1
 
     .line 482
-    sget-object p1, Lcom/facebook/yoga/YogaJustify;->FLEX_START:Lcom/facebook/yoga/YogaJustify;
+    sget-object v0, Lcom/facebook/yoga/YogaJustify;->FLEX_START:Lcom/facebook/yoga/YogaJustify;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setJustifyContent(Lcom/facebook/yoga/YogaJustify;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setJustifyContent(Lcom/facebook/yoga/YogaJustify;)V
 
+    .line 483
     return-void
 
-    :cond_1
-    const/4 v0, -0x1
-
     .line 486
+    :cond_1
     invoke-virtual {p1}, Ljava/lang/String;->hashCode()I
 
-    move-result v1
+    move-result v0
 
-    const/4 v2, 0x5
+    sparse-switch v0, :sswitch_data_0
 
-    const/4 v3, 0x4
-
-    const/4 v4, 0x3
-
-    const/4 v5, 0x2
-
-    const/4 v6, 0x1
-
-    sparse-switch v1, :sswitch_data_0
-
+    :cond_2
     goto :goto_0
 
     :sswitch_0
-    const-string v1, "space-evenly"
+    const-string v0, "space-evenly"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x5
 
-    goto :goto_0
+    goto :goto_1
 
     :sswitch_1
-    const-string v1, "space-around"
+    const-string v0, "space-around"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x4
 
-    goto :goto_0
+    goto :goto_1
 
     :sswitch_2
-    const-string v1, "flex-end"
+    const-string v0, "flex-end"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x2
 
-    goto :goto_0
+    goto :goto_1
 
     :sswitch_3
-    const-string v1, "space-between"
+    const-string v0, "space-between"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x3
 
-    goto :goto_0
+    goto :goto_1
 
     :sswitch_4
-    const-string v1, "flex-start"
+    const-string v0, "flex-start"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x0
 
-    goto :goto_0
+    goto :goto_1
 
     :sswitch_5
-    const-string v1, "center"
+    const-string v0, "center"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_2
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x1
 
-    :cond_2
-    :goto_0
-    if-eqz v0, :cond_8
-
-    if-eq v0, v6, :cond_7
-
-    if-eq v0, v5, :cond_6
-
-    if-eq v0, v4, :cond_5
-
-    if-eq v0, v3, :cond_4
-
-    if-ne v0, v2, :cond_3
-
-    .line 508
-    sget-object p1, Lcom/facebook/yoga/YogaJustify;->SPACE_EVENLY:Lcom/facebook/yoga/YogaJustify;
-
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setJustifyContent(Lcom/facebook/yoga/YogaJustify;)V
-
     goto :goto_1
 
+    :goto_0
+    const/4 v0, -0x1
+
+    :goto_1
+    packed-switch v0, :pswitch_data_0
+
     .line 512
-    :cond_3
     new-instance v0, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
 
     new-instance v1, Ljava/lang/StringBuilder;
@@ -1742,55 +1845,76 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v1
 
-    invoke-direct {v0, p1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
 
     throw v0
 
+    .line 508
+    :pswitch_0
+    sget-object v0, Lcom/facebook/yoga/YogaJustify;->SPACE_EVENLY:Lcom/facebook/yoga/YogaJustify;
+
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setJustifyContent(Lcom/facebook/yoga/YogaJustify;)V
+
+    .line 509
+    goto :goto_2
+
     .line 504
-    :cond_4
-    sget-object p1, Lcom/facebook/yoga/YogaJustify;->SPACE_AROUND:Lcom/facebook/yoga/YogaJustify;
+    :pswitch_1
+    sget-object v0, Lcom/facebook/yoga/YogaJustify;->SPACE_AROUND:Lcom/facebook/yoga/YogaJustify;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setJustifyContent(Lcom/facebook/yoga/YogaJustify;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setJustifyContent(Lcom/facebook/yoga/YogaJustify;)V
 
-    goto :goto_1
+    .line 505
+    goto :goto_2
 
     .line 500
-    :cond_5
-    sget-object p1, Lcom/facebook/yoga/YogaJustify;->SPACE_BETWEEN:Lcom/facebook/yoga/YogaJustify;
+    :pswitch_2
+    sget-object v0, Lcom/facebook/yoga/YogaJustify;->SPACE_BETWEEN:Lcom/facebook/yoga/YogaJustify;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setJustifyContent(Lcom/facebook/yoga/YogaJustify;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setJustifyContent(Lcom/facebook/yoga/YogaJustify;)V
 
-    goto :goto_1
+    .line 501
+    goto :goto_2
 
     .line 496
-    :cond_6
-    sget-object p1, Lcom/facebook/yoga/YogaJustify;->FLEX_END:Lcom/facebook/yoga/YogaJustify;
+    :pswitch_3
+    sget-object v0, Lcom/facebook/yoga/YogaJustify;->FLEX_END:Lcom/facebook/yoga/YogaJustify;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setJustifyContent(Lcom/facebook/yoga/YogaJustify;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setJustifyContent(Lcom/facebook/yoga/YogaJustify;)V
 
-    goto :goto_1
+    .line 497
+    goto :goto_2
 
     .line 492
-    :cond_7
-    sget-object p1, Lcom/facebook/yoga/YogaJustify;->CENTER:Lcom/facebook/yoga/YogaJustify;
+    :pswitch_4
+    sget-object v0, Lcom/facebook/yoga/YogaJustify;->CENTER:Lcom/facebook/yoga/YogaJustify;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setJustifyContent(Lcom/facebook/yoga/YogaJustify;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setJustifyContent(Lcom/facebook/yoga/YogaJustify;)V
 
-    goto :goto_1
+    .line 493
+    goto :goto_2
 
     .line 488
-    :cond_8
-    sget-object p1, Lcom/facebook/yoga/YogaJustify;->FLEX_START:Lcom/facebook/yoga/YogaJustify;
+    :pswitch_5
+    sget-object v0, Lcom/facebook/yoga/YogaJustify;->FLEX_START:Lcom/facebook/yoga/YogaJustify;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setJustifyContent(Lcom/facebook/yoga/YogaJustify;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setJustifyContent(Lcom/facebook/yoga/YogaJustify;)V
 
-    :goto_1
+    .line 489
+    nop
+
+    .line 516
+    :goto_2
     return-void
 
     nop
@@ -1804,10 +1928,22 @@
         0x73762c74 -> :sswitch_1
         0x7a7d46ce -> :sswitch_0
     .end sparse-switch
+
+    :pswitch_data_0
+    .packed-switch 0x0
+        :pswitch_5
+        :pswitch_4
+        :pswitch_3
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method public setMargins(ILcom/facebook/react/bridge/Dynamic;)V
-    .locals 2
+    .locals 3
+    .param p1, "index"    # I
+    .param p2, "margin"    # Lcom/facebook/react/bridge/Dynamic;
     .annotation runtime Lcom/facebook/react/uimanager/annotations/ReactPropGroup;
         names = {
             "margin",
@@ -1829,88 +1965,90 @@
 
     if-eqz v0, :cond_0
 
+    .line 590
     return-void
 
     .line 593
     :cond_0
     sget-object v0, Lcom/facebook/react/uimanager/ViewProps;->PADDING_MARGIN_SPACING_TYPES:[I
 
-    aget p1, v0, p1
+    aget v0, v0, p1
 
     .line 594
-    invoke-direct {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->maybeTransformLeftRightToStartEnd(I)I
+    invoke-direct {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->maybeTransformLeftRightToStartEnd(I)I
 
-    move-result p1
+    move-result v0
 
     .line 596
-    iget-object v0, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
-
-    invoke-virtual {v0, p2}, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->setFromDynamic(Lcom/facebook/react/bridge/Dynamic;)V
-
-    .line 597
-    sget-object v0, Lcom/facebook/react/uimanager/LayoutShadowNode$1;->$SwitchMap$com$facebook$yoga$YogaUnit:[I
-
+    .local v0, "spacingType":I
     iget-object v1, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
 
-    iget-object v1, v1, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->unit:Lcom/facebook/yoga/YogaUnit;
+    invoke-virtual {v1, p2}, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->setFromDynamic(Lcom/facebook/react/bridge/Dynamic;)V
 
-    invoke-virtual {v1}, Lcom/facebook/yoga/YogaUnit;->ordinal()I
+    .line 597
+    sget-object v1, Lcom/facebook/react/uimanager/LayoutShadowNode$1;->$SwitchMap$com$facebook$yoga$YogaUnit:[I
 
-    move-result v1
+    iget-object v2, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
 
-    aget v0, v0, v1
+    iget-object v2, v2, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->unit:Lcom/facebook/yoga/YogaUnit;
 
-    const/4 v1, 0x1
+    invoke-virtual {v2}, Lcom/facebook/yoga/YogaUnit;->ordinal()I
 
-    if-eq v0, v1, :cond_3
+    move-result v2
 
-    const/4 v1, 0x2
+    aget v1, v1, v2
 
-    if-eq v0, v1, :cond_3
-
-    const/4 v1, 0x3
-
-    if-eq v0, v1, :cond_2
-
-    const/4 v1, 0x4
-
-    if-eq v0, v1, :cond_1
+    packed-switch v1, :pswitch_data_0
 
     goto :goto_0
 
     .line 606
-    :cond_1
-    iget-object v0, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
+    :pswitch_0
+    iget-object v1, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
 
-    iget v0, v0, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->value:F
+    iget v1, v1, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->value:F
 
-    invoke-virtual {p0, p1, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setMarginPercent(IF)V
+    invoke-virtual {p0, v0, v1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setMarginPercent(IF)V
 
     goto :goto_0
 
     .line 603
-    :cond_2
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setMarginAuto(I)V
+    :pswitch_1
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setMarginAuto(I)V
 
+    .line 604
     goto :goto_0
 
     .line 600
-    :cond_3
-    iget-object v0, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
+    :pswitch_2
+    iget-object v1, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
 
-    iget v0, v0, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->value:F
+    iget v1, v1, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->value:F
 
-    invoke-virtual {p0, p1, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setMargin(IF)V
+    invoke-virtual {p0, v0, v1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setMargin(IF)V
+
+    .line 601
+    nop
 
     .line 610
     :goto_0
     invoke-interface {p2}, Lcom/facebook/react/bridge/Dynamic;->recycle()V
 
+    .line 611
     return-void
+
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_2
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method public setMaxHeight(Lcom/facebook/react/bridge/Dynamic;)V
     .locals 2
+    .param p1, "maxHeight"    # Lcom/facebook/react/bridge/Dynamic;
     .annotation runtime Lcom/facebook/react/uimanager/annotations/ReactProp;
         name = "maxHeight"
     .end annotation
@@ -1922,6 +2060,7 @@
 
     if-eqz v0, :cond_0
 
+    .line 187
     return-void
 
     .line 190
@@ -1943,22 +2082,13 @@
 
     aget v0, v0, v1
 
-    const/4 v1, 0x1
+    packed-switch v0, :pswitch_data_0
 
-    if-eq v0, v1, :cond_2
-
-    const/4 v1, 0x2
-
-    if-eq v0, v1, :cond_2
-
-    const/4 v1, 0x4
-
-    if-eq v0, v1, :cond_1
-
+    :pswitch_0
     goto :goto_0
 
     .line 197
-    :cond_1
+    :pswitch_1
     iget-object v0, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
 
     iget v0, v0, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->value:F
@@ -1968,22 +2098,35 @@
     goto :goto_0
 
     .line 194
-    :cond_2
+    :pswitch_2
     iget-object v0, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
 
     iget v0, v0, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->value:F
 
     invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setStyleMaxHeight(F)V
 
+    .line 195
+    nop
+
     .line 201
     :goto_0
     invoke-interface {p1}, Lcom/facebook/react/bridge/Dynamic;->recycle()V
 
+    .line 202
     return-void
+
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_2
+        :pswitch_2
+        :pswitch_0
+        :pswitch_1
+    .end packed-switch
 .end method
 
 .method public setMaxWidth(Lcom/facebook/react/bridge/Dynamic;)V
     .locals 2
+    .param p1, "maxWidth"    # Lcom/facebook/react/bridge/Dynamic;
     .annotation runtime Lcom/facebook/react/uimanager/annotations/ReactProp;
         name = "maxWidth"
     .end annotation
@@ -1995,6 +2138,7 @@
 
     if-eqz v0, :cond_0
 
+    .line 124
     return-void
 
     .line 127
@@ -2016,22 +2160,13 @@
 
     aget v0, v0, v1
 
-    const/4 v1, 0x1
+    packed-switch v0, :pswitch_data_0
 
-    if-eq v0, v1, :cond_2
-
-    const/4 v1, 0x2
-
-    if-eq v0, v1, :cond_2
-
-    const/4 v1, 0x4
-
-    if-eq v0, v1, :cond_1
-
+    :pswitch_0
     goto :goto_0
 
     .line 134
-    :cond_1
+    :pswitch_1
     iget-object v0, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
 
     iget v0, v0, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->value:F
@@ -2041,22 +2176,35 @@
     goto :goto_0
 
     .line 131
-    :cond_2
+    :pswitch_2
     iget-object v0, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
 
     iget v0, v0, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->value:F
 
     invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setStyleMaxWidth(F)V
 
+    .line 132
+    nop
+
     .line 138
     :goto_0
     invoke-interface {p1}, Lcom/facebook/react/bridge/Dynamic;->recycle()V
 
+    .line 139
     return-void
+
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_2
+        :pswitch_2
+        :pswitch_0
+        :pswitch_1
+    .end packed-switch
 .end method
 
 .method public setMinHeight(Lcom/facebook/react/bridge/Dynamic;)V
     .locals 2
+    .param p1, "minHeight"    # Lcom/facebook/react/bridge/Dynamic;
     .annotation runtime Lcom/facebook/react/uimanager/annotations/ReactProp;
         name = "minHeight"
     .end annotation
@@ -2068,6 +2216,7 @@
 
     if-eqz v0, :cond_0
 
+    .line 167
     return-void
 
     .line 170
@@ -2089,22 +2238,13 @@
 
     aget v0, v0, v1
 
-    const/4 v1, 0x1
+    packed-switch v0, :pswitch_data_0
 
-    if-eq v0, v1, :cond_2
-
-    const/4 v1, 0x2
-
-    if-eq v0, v1, :cond_2
-
-    const/4 v1, 0x4
-
-    if-eq v0, v1, :cond_1
-
+    :pswitch_0
     goto :goto_0
 
     .line 177
-    :cond_1
+    :pswitch_1
     iget-object v0, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
 
     iget v0, v0, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->value:F
@@ -2114,22 +2254,35 @@
     goto :goto_0
 
     .line 174
-    :cond_2
+    :pswitch_2
     iget-object v0, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
 
     iget v0, v0, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->value:F
 
     invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setStyleMinHeight(F)V
 
+    .line 175
+    nop
+
     .line 181
     :goto_0
     invoke-interface {p1}, Lcom/facebook/react/bridge/Dynamic;->recycle()V
 
+    .line 182
     return-void
+
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_2
+        :pswitch_2
+        :pswitch_0
+        :pswitch_1
+    .end packed-switch
 .end method
 
 .method public setMinWidth(Lcom/facebook/react/bridge/Dynamic;)V
     .locals 2
+    .param p1, "minWidth"    # Lcom/facebook/react/bridge/Dynamic;
     .annotation runtime Lcom/facebook/react/uimanager/annotations/ReactProp;
         name = "minWidth"
     .end annotation
@@ -2141,6 +2294,7 @@
 
     if-eqz v0, :cond_0
 
+    .line 104
     return-void
 
     .line 107
@@ -2162,22 +2316,13 @@
 
     aget v0, v0, v1
 
-    const/4 v1, 0x1
+    packed-switch v0, :pswitch_data_0
 
-    if-eq v0, v1, :cond_2
-
-    const/4 v1, 0x2
-
-    if-eq v0, v1, :cond_2
-
-    const/4 v1, 0x4
-
-    if-eq v0, v1, :cond_1
-
+    :pswitch_0
     goto :goto_0
 
     .line 114
-    :cond_1
+    :pswitch_1
     iget-object v0, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
 
     iget v0, v0, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->value:F
@@ -2187,23 +2332,35 @@
     goto :goto_0
 
     .line 111
-    :cond_2
+    :pswitch_2
     iget-object v0, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
 
     iget v0, v0, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->value:F
 
     invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setStyleMinWidth(F)V
 
+    .line 112
+    nop
+
     .line 118
     :goto_0
     invoke-interface {p1}, Lcom/facebook/react/bridge/Dynamic;->recycle()V
 
+    .line 119
     return-void
+
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_2
+        :pswitch_2
+        :pswitch_0
+        :pswitch_1
+    .end packed-switch
 .end method
 
 .method public setOverflow(Ljava/lang/String;)V
-    .locals 5
-    .param p1    # Ljava/lang/String;
+    .locals 3
+    .param p1, "overflow"    # Ljava/lang/String;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -2218,98 +2375,78 @@
 
     if-eqz v0, :cond_0
 
+    .line 521
     return-void
 
+    .line 523
     :cond_0
     if-nez p1, :cond_1
 
     .line 524
-    sget-object p1, Lcom/facebook/yoga/YogaOverflow;->VISIBLE:Lcom/facebook/yoga/YogaOverflow;
+    sget-object v0, Lcom/facebook/yoga/YogaOverflow;->VISIBLE:Lcom/facebook/yoga/YogaOverflow;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setOverflow(Lcom/facebook/yoga/YogaOverflow;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setOverflow(Lcom/facebook/yoga/YogaOverflow;)V
 
+    .line 525
     return-void
 
-    :cond_1
-    const/4 v0, -0x1
-
     .line 528
+    :cond_1
     invoke-virtual {p1}, Ljava/lang/String;->hashCode()I
 
-    move-result v1
+    move-result v0
 
-    const v2, -0x48916256
-
-    const/4 v3, 0x2
-
-    const/4 v4, 0x1
-
-    if-eq v1, v2, :cond_4
-
-    const v2, -0x361a1933
-
-    if-eq v1, v2, :cond_3
-
-    const v2, 0x1bd1f072
-
-    if-eq v1, v2, :cond_2
-
-    goto :goto_0
+    sparse-switch v0, :sswitch_data_0
 
     :cond_2
-    const-string v1, "visible"
+    goto :goto_0
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    :sswitch_0
+    const-string v0, "visible"
 
-    move-result v1
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    if-eqz v1, :cond_5
+    move-result v0
+
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x0
 
-    goto :goto_0
+    goto :goto_1
 
-    :cond_3
-    const-string v1, "scroll"
+    :sswitch_1
+    const-string v0, "scroll"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_5
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x2
 
-    goto :goto_0
+    goto :goto_1
 
-    :cond_4
-    const-string v1, "hidden"
+    :sswitch_2
+    const-string v0, "hidden"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_5
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x1
 
-    :cond_5
-    :goto_0
-    if-eqz v0, :cond_8
-
-    if-eq v0, v4, :cond_7
-
-    if-ne v0, v3, :cond_6
-
-    .line 538
-    sget-object p1, Lcom/facebook/yoga/YogaOverflow;->SCROLL:Lcom/facebook/yoga/YogaOverflow;
-
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setOverflow(Lcom/facebook/yoga/YogaOverflow;)V
-
     goto :goto_1
 
+    :goto_0
+    const/4 v0, -0x1
+
+    :goto_1
+    packed-switch v0, :pswitch_data_0
+
     .line 542
-    :cond_6
     new-instance v0, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
 
     new-instance v1, Ljava/lang/StringBuilder;
@@ -2320,36 +2457,72 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v1
 
-    invoke-direct {v0, p1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
 
     throw v0
 
+    .line 538
+    :pswitch_0
+    sget-object v0, Lcom/facebook/yoga/YogaOverflow;->SCROLL:Lcom/facebook/yoga/YogaOverflow;
+
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setOverflow(Lcom/facebook/yoga/YogaOverflow;)V
+
+    .line 539
+    goto :goto_2
+
     .line 534
-    :cond_7
-    sget-object p1, Lcom/facebook/yoga/YogaOverflow;->HIDDEN:Lcom/facebook/yoga/YogaOverflow;
+    :pswitch_1
+    sget-object v0, Lcom/facebook/yoga/YogaOverflow;->HIDDEN:Lcom/facebook/yoga/YogaOverflow;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setOverflow(Lcom/facebook/yoga/YogaOverflow;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setOverflow(Lcom/facebook/yoga/YogaOverflow;)V
 
-    goto :goto_1
+    .line 535
+    goto :goto_2
 
     .line 530
-    :cond_8
-    sget-object p1, Lcom/facebook/yoga/YogaOverflow;->VISIBLE:Lcom/facebook/yoga/YogaOverflow;
+    :pswitch_2
+    sget-object v0, Lcom/facebook/yoga/YogaOverflow;->VISIBLE:Lcom/facebook/yoga/YogaOverflow;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setOverflow(Lcom/facebook/yoga/YogaOverflow;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setOverflow(Lcom/facebook/yoga/YogaOverflow;)V
 
-    :goto_1
+    .line 531
+    nop
+
+    .line 546
+    :goto_2
     return-void
+
+    nop
+
+    :sswitch_data_0
+    .sparse-switch
+        -0x48916256 -> :sswitch_2
+        -0x361a1933 -> :sswitch_1
+        0x1bd1f072 -> :sswitch_0
+    .end sparse-switch
+
+    :pswitch_data_0
+    .packed-switch 0x0
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method public setPaddings(ILcom/facebook/react/bridge/Dynamic;)V
-    .locals 2
+    .locals 3
+    .param p1, "index"    # I
+    .param p2, "padding"    # Lcom/facebook/react/bridge/Dynamic;
     .annotation runtime Lcom/facebook/react/uimanager/annotations/ReactPropGroup;
         names = {
             "padding",
@@ -2371,79 +2544,84 @@
 
     if-eqz v0, :cond_0
 
+    .line 628
     return-void
 
     .line 631
     :cond_0
     sget-object v0, Lcom/facebook/react/uimanager/ViewProps;->PADDING_MARGIN_SPACING_TYPES:[I
 
-    aget p1, v0, p1
+    aget v0, v0, p1
 
     .line 632
-    invoke-direct {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->maybeTransformLeftRightToStartEnd(I)I
+    invoke-direct {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->maybeTransformLeftRightToStartEnd(I)I
 
-    move-result p1
+    move-result v0
 
     .line 634
-    iget-object v0, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
-
-    invoke-virtual {v0, p2}, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->setFromDynamic(Lcom/facebook/react/bridge/Dynamic;)V
-
-    .line 635
-    sget-object v0, Lcom/facebook/react/uimanager/LayoutShadowNode$1;->$SwitchMap$com$facebook$yoga$YogaUnit:[I
-
+    .local v0, "spacingType":I
     iget-object v1, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
 
-    iget-object v1, v1, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->unit:Lcom/facebook/yoga/YogaUnit;
+    invoke-virtual {v1, p2}, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->setFromDynamic(Lcom/facebook/react/bridge/Dynamic;)V
 
-    invoke-virtual {v1}, Lcom/facebook/yoga/YogaUnit;->ordinal()I
+    .line 635
+    sget-object v1, Lcom/facebook/react/uimanager/LayoutShadowNode$1;->$SwitchMap$com$facebook$yoga$YogaUnit:[I
 
-    move-result v1
+    iget-object v2, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
 
-    aget v0, v0, v1
+    iget-object v2, v2, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->unit:Lcom/facebook/yoga/YogaUnit;
 
-    const/4 v1, 0x1
+    invoke-virtual {v2}, Lcom/facebook/yoga/YogaUnit;->ordinal()I
 
-    if-eq v0, v1, :cond_2
+    move-result v2
 
-    const/4 v1, 0x2
+    aget v1, v1, v2
 
-    if-eq v0, v1, :cond_2
+    packed-switch v1, :pswitch_data_0
 
-    const/4 v1, 0x4
-
-    if-eq v0, v1, :cond_1
-
+    :pswitch_0
     goto :goto_0
 
     .line 641
-    :cond_1
-    iget-object v0, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
+    :pswitch_1
+    iget-object v1, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
 
-    iget v0, v0, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->value:F
+    iget v1, v1, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->value:F
 
-    invoke-virtual {p0, p1, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setPaddingPercent(IF)V
+    invoke-virtual {p0, v0, v1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setPaddingPercent(IF)V
 
     goto :goto_0
 
     .line 638
-    :cond_2
-    iget-object v0, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
+    :pswitch_2
+    iget-object v1, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
 
-    iget v0, v0, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->value:F
+    iget v1, v1, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->value:F
 
-    invoke-virtual {p0, p1, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setPadding(IF)V
+    invoke-virtual {p0, v0, v1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setPadding(IF)V
+
+    .line 639
+    nop
 
     .line 645
     :goto_0
     invoke-interface {p2}, Lcom/facebook/react/bridge/Dynamic;->recycle()V
 
+    .line 646
     return-void
+
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_2
+        :pswitch_2
+        :pswitch_0
+        :pswitch_1
+    .end packed-switch
 .end method
 
 .method public setPosition(Ljava/lang/String;)V
-    .locals 4
-    .param p1    # Ljava/lang/String;
+    .locals 3
+    .param p1, "position"    # Ljava/lang/String;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -2458,77 +2636,65 @@
 
     if-eqz v0, :cond_0
 
+    .line 721
     return-void
 
+    .line 724
     :cond_0
     if-nez p1, :cond_1
 
     .line 725
-    sget-object p1, Lcom/facebook/yoga/YogaPositionType;->RELATIVE:Lcom/facebook/yoga/YogaPositionType;
+    sget-object v0, Lcom/facebook/yoga/YogaPositionType;->RELATIVE:Lcom/facebook/yoga/YogaPositionType;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setPositionType(Lcom/facebook/yoga/YogaPositionType;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setPositionType(Lcom/facebook/yoga/YogaPositionType;)V
 
+    .line 726
     return-void
 
-    :cond_1
-    const/4 v0, -0x1
-
     .line 729
+    :cond_1
     invoke-virtual {p1}, Ljava/lang/String;->hashCode()I
 
-    move-result v1
+    move-result v0
 
-    const v2, -0x210c0534
-
-    const/4 v3, 0x1
-
-    if-eq v1, v2, :cond_3
-
-    const v2, 0x67010d77
-
-    if-eq v1, v2, :cond_2
-
-    goto :goto_0
+    sparse-switch v0, :sswitch_data_0
 
     :cond_2
-    const-string v1, "absolute"
+    goto :goto_0
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    :sswitch_0
+    const-string v0, "absolute"
 
-    move-result v1
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    if-eqz v1, :cond_4
+    move-result v0
+
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x1
 
-    goto :goto_0
+    goto :goto_1
 
-    :cond_3
-    const-string v1, "relative"
+    :sswitch_1
+    const-string v0, "relative"
 
-    invoke-virtual {p1, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v1
+    move-result v0
 
-    if-eqz v1, :cond_4
+    if-eqz v0, :cond_2
 
     const/4 v0, 0x0
 
-    :cond_4
-    :goto_0
-    if-eqz v0, :cond_6
-
-    if-ne v0, v3, :cond_5
-
-    .line 735
-    sget-object p1, Lcom/facebook/yoga/YogaPositionType;->ABSOLUTE:Lcom/facebook/yoga/YogaPositionType;
-
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setPositionType(Lcom/facebook/yoga/YogaPositionType;)V
-
     goto :goto_1
 
+    :goto_0
+    const/4 v0, -0x1
+
+    :goto_1
+    packed-switch v0, :pswitch_data_0
+
     .line 739
-    :cond_5
     new-instance v0, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;
 
     new-instance v1, Ljava/lang/StringBuilder;
@@ -2539,28 +2705,61 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v1
 
-    invoke-direct {v0, p1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Lcom/facebook/react/bridge/JSApplicationIllegalArgumentException;-><init>(Ljava/lang/String;)V
 
     throw v0
 
+    .line 735
+    :pswitch_0
+    sget-object v0, Lcom/facebook/yoga/YogaPositionType;->ABSOLUTE:Lcom/facebook/yoga/YogaPositionType;
+
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setPositionType(Lcom/facebook/yoga/YogaPositionType;)V
+
+    .line 736
+    goto :goto_2
+
     .line 731
-    :cond_6
-    sget-object p1, Lcom/facebook/yoga/YogaPositionType;->RELATIVE:Lcom/facebook/yoga/YogaPositionType;
+    :pswitch_1
+    sget-object v0, Lcom/facebook/yoga/YogaPositionType;->RELATIVE:Lcom/facebook/yoga/YogaPositionType;
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setPositionType(Lcom/facebook/yoga/YogaPositionType;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setPositionType(Lcom/facebook/yoga/YogaPositionType;)V
 
-    :goto_1
+    .line 732
+    nop
+
+    .line 743
+    :goto_2
     return-void
+
+    nop
+
+    :sswitch_data_0
+    .sparse-switch
+        -0x210c0534 -> :sswitch_1
+        0x67010d77 -> :sswitch_0
+    .end sparse-switch
+
+    :pswitch_data_0
+    .packed-switch 0x0
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method public setPositionValues(ILcom/facebook/react/bridge/Dynamic;)V
-    .locals 2
+    .locals 4
+    .param p1, "index"    # I
+    .param p2, "position"    # Lcom/facebook/react/bridge/Dynamic;
     .annotation runtime Lcom/facebook/react/uimanager/annotations/ReactPropGroup;
         names = {
             "start",
@@ -2579,80 +2778,84 @@
 
     if-eqz v0, :cond_0
 
+    .line 680
     return-void
 
+    .line 683
     :cond_0
     const/4 v0, 0x6
 
-    .line 683
     new-array v0, v0, [I
 
     fill-array-data v0, :array_0
 
     .line 687
-    aget p1, v0, p1
+    .local v0, "POSITION_SPACING_TYPES":[I
+    aget v1, v0, p1
 
-    invoke-direct {p0, p1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->maybeTransformLeftRightToStartEnd(I)I
-
-    move-result p1
-
-    .line 689
-    iget-object v0, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
-
-    invoke-virtual {v0, p2}, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->setFromDynamic(Lcom/facebook/react/bridge/Dynamic;)V
-
-    .line 690
-    sget-object v0, Lcom/facebook/react/uimanager/LayoutShadowNode$1;->$SwitchMap$com$facebook$yoga$YogaUnit:[I
-
-    iget-object v1, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
-
-    iget-object v1, v1, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->unit:Lcom/facebook/yoga/YogaUnit;
-
-    invoke-virtual {v1}, Lcom/facebook/yoga/YogaUnit;->ordinal()I
+    invoke-direct {p0, v1}, Lcom/facebook/react/uimanager/LayoutShadowNode;->maybeTransformLeftRightToStartEnd(I)I
 
     move-result v1
 
-    aget v0, v0, v1
+    .line 689
+    .local v1, "spacingType":I
+    iget-object v2, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
 
-    const/4 v1, 0x1
+    invoke-virtual {v2, p2}, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->setFromDynamic(Lcom/facebook/react/bridge/Dynamic;)V
 
-    if-eq v0, v1, :cond_2
+    .line 690
+    sget-object v2, Lcom/facebook/react/uimanager/LayoutShadowNode$1;->$SwitchMap$com$facebook$yoga$YogaUnit:[I
 
-    const/4 v1, 0x2
+    iget-object v3, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
 
-    if-eq v0, v1, :cond_2
+    iget-object v3, v3, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->unit:Lcom/facebook/yoga/YogaUnit;
 
-    const/4 v1, 0x4
+    invoke-virtual {v3}, Lcom/facebook/yoga/YogaUnit;->ordinal()I
 
-    if-eq v0, v1, :cond_1
+    move-result v3
 
+    aget v2, v2, v3
+
+    packed-switch v2, :pswitch_data_0
+
+    :pswitch_0
     goto :goto_0
 
     .line 696
-    :cond_1
-    iget-object v0, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
+    :pswitch_1
+    iget-object v2, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
 
-    iget v0, v0, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->value:F
+    iget v2, v2, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->value:F
 
-    invoke-virtual {p0, p1, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setPositionPercent(IF)V
+    invoke-virtual {p0, v1, v2}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setPositionPercent(IF)V
 
     goto :goto_0
 
     .line 693
-    :cond_2
-    iget-object v0, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
+    :pswitch_2
+    iget-object v2, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
 
-    iget v0, v0, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->value:F
+    iget v2, v2, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->value:F
 
-    invoke-virtual {p0, p1, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setPosition(IF)V
+    invoke-virtual {p0, v1, v2}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setPosition(IF)V
+
+    .line 694
+    nop
 
     .line 700
     :goto_0
     invoke-interface {p2}, Lcom/facebook/react/bridge/Dynamic;->recycle()V
 
+    .line 701
     return-void
 
-    nop
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_2
+        :pswitch_2
+        :pswitch_0
+        :pswitch_1
+    .end packed-switch
 
     :array_0
     .array-data 4
@@ -2667,6 +2870,7 @@
 
 .method public setShouldNotifyOnLayout(Z)V
     .locals 0
+    .param p1, "shouldNotifyOnLayout"    # Z
     .annotation runtime Lcom/facebook/react/uimanager/annotations/ReactProp;
         name = "onLayout"
     .end annotation
@@ -2674,11 +2878,13 @@
     .line 748
     invoke-super {p0, p1}, Lcom/facebook/react/uimanager/ReactShadowNodeImpl;->setShouldNotifyOnLayout(Z)V
 
+    .line 749
     return-void
 .end method
 
 .method public setWidth(Lcom/facebook/react/bridge/Dynamic;)V
     .locals 2
+    .param p1, "width"    # Lcom/facebook/react/bridge/Dynamic;
     .annotation runtime Lcom/facebook/react/uimanager/annotations/ReactProp;
         name = "width"
     .end annotation
@@ -2690,6 +2896,7 @@
 
     if-eqz v0, :cond_0
 
+    .line 81
     return-void
 
     .line 84
@@ -2711,26 +2918,12 @@
 
     aget v0, v0, v1
 
-    const/4 v1, 0x1
-
-    if-eq v0, v1, :cond_3
-
-    const/4 v1, 0x2
-
-    if-eq v0, v1, :cond_3
-
-    const/4 v1, 0x3
-
-    if-eq v0, v1, :cond_2
-
-    const/4 v1, 0x4
-
-    if-eq v0, v1, :cond_1
+    packed-switch v0, :pswitch_data_0
 
     goto :goto_0
 
     .line 94
-    :cond_1
+    :pswitch_0
     iget-object v0, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
 
     iget v0, v0, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->value:F
@@ -2740,22 +2933,35 @@
     goto :goto_0
 
     .line 91
-    :cond_2
+    :pswitch_1
     invoke-virtual {p0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setStyleWidthAuto()V
 
+    .line 92
     goto :goto_0
 
     .line 88
-    :cond_3
+    :pswitch_2
     iget-object v0, p0, Lcom/facebook/react/uimanager/LayoutShadowNode;->mTempYogaValue:Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;
 
     iget v0, v0, Lcom/facebook/react/uimanager/LayoutShadowNode$MutableYogaValue;->value:F
 
     invoke-virtual {p0, v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;->setStyleWidth(F)V
 
+    .line 89
+    nop
+
     .line 98
     :goto_0
     invoke-interface {p1}, Lcom/facebook/react/bridge/Dynamic;->recycle()V
 
+    .line 99
     return-void
+
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_2
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method

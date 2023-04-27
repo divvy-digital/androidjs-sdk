@@ -1,5 +1,5 @@
 .class public abstract Lcom/facebook/react/ReactActivity;
-.super Landroid/support/v7/app/AppCompatActivity;
+.super Landroidx/appcompat/app/AppCompatActivity;
 .source "ReactActivity.java"
 
 # interfaces
@@ -16,7 +16,7 @@
     .locals 1
 
     .line 29
-    invoke-direct {p0}, Landroid/support/v7/app/AppCompatActivity;-><init>()V
+    invoke-direct {p0}, Landroidx/appcompat/app/AppCompatActivity;-><init>()V
 
     .line 30
     invoke-virtual {p0}, Lcom/facebook/react/ReactActivity;->createReactActivityDelegate()Lcom/facebook/react/ReactActivityDelegate;
@@ -25,6 +25,7 @@
 
     iput-object v0, p0, Lcom/facebook/react/ReactActivity;->mDelegate:Lcom/facebook/react/ReactActivityDelegate;
 
+    .line 31
     return-void
 .end method
 
@@ -50,6 +51,7 @@
     .annotation runtime Ljavax/annotation/Nullable;
     .end annotation
 
+    .line 39
     const/4 v0, 0x0
 
     return-object v0
@@ -85,30 +87,37 @@
     .locals 0
 
     .line 102
-    invoke-super {p0}, Landroid/support/v7/app/AppCompatActivity;->onBackPressed()V
+    invoke-super {p0}, Landroidx/appcompat/app/AppCompatActivity;->onBackPressed()V
 
+    .line 103
     return-void
 .end method
 
 .method protected final loadApp(Ljava/lang/String;)V
     .locals 1
+    .param p1, "appKey"    # Ljava/lang/String;
 
     .line 137
     iget-object v0, p0, Lcom/facebook/react/ReactActivity;->mDelegate:Lcom/facebook/react/ReactActivityDelegate;
 
     invoke-virtual {v0, p1}, Lcom/facebook/react/ReactActivityDelegate;->loadApp(Ljava/lang/String;)V
 
+    .line 138
     return-void
 .end method
 
 .method public onActivityResult(IILandroid/content/Intent;)V
     .locals 1
+    .param p1, "requestCode"    # I
+    .param p2, "resultCode"    # I
+    .param p3, "data"    # Landroid/content/Intent;
 
     .line 75
     iget-object v0, p0, Lcom/facebook/react/ReactActivity;->mDelegate:Lcom/facebook/react/ReactActivityDelegate;
 
     invoke-virtual {v0, p1, p2, p3}, Lcom/facebook/react/ReactActivityDelegate;->onActivityResult(IILandroid/content/Intent;)V
 
+    .line 76
     return-void
 .end method
 
@@ -125,23 +134,26 @@
     if-nez v0, :cond_0
 
     .line 96
-    invoke-super {p0}, Landroid/support/v7/app/AppCompatActivity;->onBackPressed()V
+    invoke-super {p0}, Landroidx/appcompat/app/AppCompatActivity;->onBackPressed()V
 
+    .line 98
     :cond_0
     return-void
 .end method
 
 .method protected onCreate(Landroid/os/Bundle;)V
     .locals 1
+    .param p1, "savedInstanceState"    # Landroid/os/Bundle;
 
     .line 51
-    invoke-super {p0, p1}, Landroid/support/v7/app/AppCompatActivity;->onCreate(Landroid/os/Bundle;)V
+    invoke-super {p0, p1}, Landroidx/appcompat/app/AppCompatActivity;->onCreate(Landroid/os/Bundle;)V
 
     .line 52
     iget-object v0, p0, Lcom/facebook/react/ReactActivity;->mDelegate:Lcom/facebook/react/ReactActivityDelegate;
 
     invoke-virtual {v0, p1}, Lcom/facebook/react/ReactActivityDelegate;->onCreate(Landroid/os/Bundle;)V
 
+    .line 53
     return-void
 .end method
 
@@ -149,18 +161,21 @@
     .locals 1
 
     .line 69
-    invoke-super {p0}, Landroid/support/v7/app/AppCompatActivity;->onDestroy()V
+    invoke-super {p0}, Landroidx/appcompat/app/AppCompatActivity;->onDestroy()V
 
     .line 70
     iget-object v0, p0, Lcom/facebook/react/ReactActivity;->mDelegate:Lcom/facebook/react/ReactActivityDelegate;
 
     invoke-virtual {v0}, Lcom/facebook/react/ReactActivityDelegate;->onDestroy()V
 
+    .line 71
     return-void
 .end method
 
 .method public onKeyDown(ILandroid/view/KeyEvent;)Z
     .locals 1
+    .param p1, "keyCode"    # I
+    .param p2, "event"    # Landroid/view/KeyEvent;
 
     .line 80
     iget-object v0, p0, Lcom/facebook/react/ReactActivity;->mDelegate:Lcom/facebook/react/ReactActivityDelegate;
@@ -171,29 +186,31 @@
 
     if-nez v0, :cond_1
 
-    invoke-super {p0, p1, p2}, Landroid/support/v7/app/AppCompatActivity;->onKeyDown(ILandroid/view/KeyEvent;)Z
+    invoke-super {p0, p1, p2}, Landroidx/appcompat/app/AppCompatActivity;->onKeyDown(ILandroid/view/KeyEvent;)Z
 
-    move-result p1
+    move-result v0
 
-    if-eqz p1, :cond_0
+    if-eqz v0, :cond_0
 
     goto :goto_0
 
     :cond_0
-    const/4 p1, 0x0
+    const/4 v0, 0x0
 
     goto :goto_1
 
     :cond_1
     :goto_0
-    const/4 p1, 0x1
+    const/4 v0, 0x1
 
     :goto_1
-    return p1
+    return v0
 .end method
 
 .method public onKeyLongPress(ILandroid/view/KeyEvent;)Z
     .locals 1
+    .param p1, "keyCode"    # I
+    .param p2, "event"    # Landroid/view/KeyEvent;
 
     .line 90
     iget-object v0, p0, Lcom/facebook/react/ReactActivity;->mDelegate:Lcom/facebook/react/ReactActivityDelegate;
@@ -204,29 +221,31 @@
 
     if-nez v0, :cond_1
 
-    invoke-super {p0, p1, p2}, Landroid/support/v7/app/AppCompatActivity;->onKeyLongPress(ILandroid/view/KeyEvent;)Z
+    invoke-super {p0, p1, p2}, Landroidx/appcompat/app/AppCompatActivity;->onKeyLongPress(ILandroid/view/KeyEvent;)Z
 
-    move-result p1
+    move-result v0
 
-    if-eqz p1, :cond_0
+    if-eqz v0, :cond_0
 
     goto :goto_0
 
     :cond_0
-    const/4 p1, 0x0
+    const/4 v0, 0x0
 
     goto :goto_1
 
     :cond_1
     :goto_0
-    const/4 p1, 0x1
+    const/4 v0, 0x1
 
     :goto_1
-    return p1
+    return v0
 .end method
 
 .method public onKeyUp(ILandroid/view/KeyEvent;)Z
     .locals 1
+    .param p1, "keyCode"    # I
+    .param p2, "event"    # Landroid/view/KeyEvent;
 
     .line 85
     iget-object v0, p0, Lcom/facebook/react/ReactActivity;->mDelegate:Lcom/facebook/react/ReactActivityDelegate;
@@ -237,29 +256,30 @@
 
     if-nez v0, :cond_1
 
-    invoke-super {p0, p1, p2}, Landroid/support/v7/app/AppCompatActivity;->onKeyUp(ILandroid/view/KeyEvent;)Z
+    invoke-super {p0, p1, p2}, Landroidx/appcompat/app/AppCompatActivity;->onKeyUp(ILandroid/view/KeyEvent;)Z
 
-    move-result p1
+    move-result v0
 
-    if-eqz p1, :cond_0
+    if-eqz v0, :cond_0
 
     goto :goto_0
 
     :cond_0
-    const/4 p1, 0x0
+    const/4 v0, 0x0
 
     goto :goto_1
 
     :cond_1
     :goto_0
-    const/4 p1, 0x1
+    const/4 v0, 0x1
 
     :goto_1
-    return p1
+    return v0
 .end method
 
 .method public onNewIntent(Landroid/content/Intent;)V
     .locals 1
+    .param p1, "intent"    # Landroid/content/Intent;
 
     .line 107
     iget-object v0, p0, Lcom/facebook/react/ReactActivity;->mDelegate:Lcom/facebook/react/ReactActivityDelegate;
@@ -271,8 +291,9 @@
     if-nez v0, :cond_0
 
     .line 108
-    invoke-super {p0, p1}, Landroid/support/v7/app/AppCompatActivity;->onNewIntent(Landroid/content/Intent;)V
+    invoke-super {p0, p1}, Landroidx/appcompat/app/AppCompatActivity;->onNewIntent(Landroid/content/Intent;)V
 
+    .line 110
     :cond_0
     return-void
 .end method
@@ -281,24 +302,29 @@
     .locals 1
 
     .line 57
-    invoke-super {p0}, Landroid/support/v7/app/AppCompatActivity;->onPause()V
+    invoke-super {p0}, Landroidx/appcompat/app/AppCompatActivity;->onPause()V
 
     .line 58
     iget-object v0, p0, Lcom/facebook/react/ReactActivity;->mDelegate:Lcom/facebook/react/ReactActivityDelegate;
 
     invoke-virtual {v0}, Lcom/facebook/react/ReactActivityDelegate;->onPause()V
 
+    .line 59
     return-void
 .end method
 
 .method public onRequestPermissionsResult(I[Ljava/lang/String;[I)V
     .locals 1
+    .param p1, "requestCode"    # I
+    .param p2, "permissions"    # [Ljava/lang/String;
+    .param p3, "grantResults"    # [I
 
     .line 125
     iget-object v0, p0, Lcom/facebook/react/ReactActivity;->mDelegate:Lcom/facebook/react/ReactActivityDelegate;
 
     invoke-virtual {v0, p1, p2, p3}, Lcom/facebook/react/ReactActivityDelegate;->onRequestPermissionsResult(I[Ljava/lang/String;[I)V
 
+    .line 126
     return-void
 .end method
 
@@ -306,23 +332,28 @@
     .locals 1
 
     .line 63
-    invoke-super {p0}, Landroid/support/v7/app/AppCompatActivity;->onResume()V
+    invoke-super {p0}, Landroidx/appcompat/app/AppCompatActivity;->onResume()V
 
     .line 64
     iget-object v0, p0, Lcom/facebook/react/ReactActivity;->mDelegate:Lcom/facebook/react/ReactActivityDelegate;
 
     invoke-virtual {v0}, Lcom/facebook/react/ReactActivityDelegate;->onResume()V
 
+    .line 65
     return-void
 .end method
 
 .method public requestPermissions([Ljava/lang/String;ILcom/facebook/react/modules/core/PermissionListener;)V
     .locals 1
+    .param p1, "permissions"    # [Ljava/lang/String;
+    .param p2, "requestCode"    # I
+    .param p3, "listener"    # Lcom/facebook/react/modules/core/PermissionListener;
 
     .line 117
     iget-object v0, p0, Lcom/facebook/react/ReactActivity;->mDelegate:Lcom/facebook/react/ReactActivityDelegate;
 
     invoke-virtual {v0, p1, p2, p3}, Lcom/facebook/react/ReactActivityDelegate;->requestPermissions([Ljava/lang/String;ILcom/facebook/react/modules/core/PermissionListener;)V
 
+    .line 118
     return-void
 .end method

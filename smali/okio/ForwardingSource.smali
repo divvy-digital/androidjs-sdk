@@ -12,27 +12,30 @@
 
 # direct methods
 .method public constructor <init>(Lokio/Source;)V
-    .locals 1
+    .locals 2
+    .param p1, "delegate"    # Lokio/Source;
 
     .line 24
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
+    .line 25
     if-eqz p1, :cond_0
 
     .line 26
     iput-object p1, p0, Lokio/ForwardingSource;->delegate:Lokio/Source;
 
+    .line 27
     return-void
 
     .line 25
     :cond_0
-    new-instance p1, Ljava/lang/IllegalArgumentException;
+    new-instance v0, Ljava/lang/IllegalArgumentException;
 
-    const-string v0, "delegate == null"
+    const-string v1, "delegate == null"
 
-    invoke-direct {p1, v0}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 
@@ -50,6 +53,7 @@
 
     invoke-interface {v0}, Lokio/Source;->close()V
 
+    .line 44
     return-void
 .end method
 
@@ -63,7 +67,9 @@
 .end method
 
 .method public read(Lokio/Buffer;J)J
-    .locals 1
+    .locals 2
+    .param p1, "sink"    # Lokio/Buffer;
+    .param p2, "byteCount"    # J
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -75,9 +81,9 @@
 
     invoke-interface {v0, p1, p2, p3}, Lokio/Source;->read(Lokio/Buffer;J)J
 
-    move-result-wide p1
+    move-result-wide v0
 
-    return-wide p1
+    return-wide v0
 .end method
 
 .method public timeout()Lokio/Timeout;
@@ -111,9 +117,13 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     const-string v1, "("
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     iget-object v1, p0, Lokio/ForwardingSource;->delegate:Lokio/Source;
 
@@ -123,9 +133,13 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     const-string v1, ")"
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 

@@ -21,6 +21,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/devsupport/DevSupportManagerImpl;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/devsupport/DevSupportManagerImpl;
 
     .line 240
     iput-object p1, p0, Lcom/facebook/react/devsupport/DevSupportManagerImpl$3;->this$0:Lcom/facebook/react/devsupport/DevSupportManagerImpl;
@@ -33,7 +34,9 @@
 
 # virtual methods
 .method public onReceive(Landroid/content/Context;Landroid/content/Intent;)V
-    .locals 1
+    .locals 3
+    .param p1, "context"    # Landroid/content/Context;
+    .param p2, "intent"    # Landroid/content/Intent;
 
     .line 243
     invoke-virtual {p2}, Landroid/content/Intent;->getAction()Ljava/lang/String;
@@ -41,65 +44,67 @@
     move-result-object v0
 
     .line 244
+    .local v0, "action":Ljava/lang/String;
     invoke-static {p1}, Lcom/facebook/react/devsupport/DevSupportManagerImpl;->access$100(Landroid/content/Context;)Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v1
 
-    invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result p1
+    move-result v1
 
-    if-eqz p1, :cond_1
-
-    const/4 p1, 0x0
-
-    const-string v0, "jsproxy"
+    if-eqz v1, :cond_1
 
     .line 245
-    invoke-virtual {p2, v0, p1}, Landroid/content/Intent;->getBooleanExtra(Ljava/lang/String;Z)Z
+    const-string v1, "jsproxy"
 
-    move-result p2
+    const/4 v2, 0x0
 
-    if-eqz p2, :cond_0
+    invoke-virtual {p2, v1, v2}, Landroid/content/Intent;->getBooleanExtra(Ljava/lang/String;Z)Z
+
+    move-result v1
+
+    if-eqz v1, :cond_0
 
     .line 246
-    iget-object p1, p0, Lcom/facebook/react/devsupport/DevSupportManagerImpl$3;->this$0:Lcom/facebook/react/devsupport/DevSupportManagerImpl;
+    iget-object v1, p0, Lcom/facebook/react/devsupport/DevSupportManagerImpl$3;->this$0:Lcom/facebook/react/devsupport/DevSupportManagerImpl;
 
-    invoke-static {p1}, Lcom/facebook/react/devsupport/DevSupportManagerImpl;->access$200(Lcom/facebook/react/devsupport/DevSupportManagerImpl;)Lcom/facebook/react/devsupport/DevInternalSettings;
+    invoke-static {v1}, Lcom/facebook/react/devsupport/DevSupportManagerImpl;->access$200(Lcom/facebook/react/devsupport/DevSupportManagerImpl;)Lcom/facebook/react/devsupport/DevInternalSettings;
 
-    move-result-object p1
+    move-result-object v1
 
-    const/4 p2, 0x1
+    const/4 v2, 0x1
 
-    invoke-virtual {p1, p2}, Lcom/facebook/react/devsupport/DevInternalSettings;->setRemoteJSDebugEnabled(Z)V
+    invoke-virtual {v1, v2}, Lcom/facebook/react/devsupport/DevInternalSettings;->setRemoteJSDebugEnabled(Z)V
 
     .line 247
-    iget-object p1, p0, Lcom/facebook/react/devsupport/DevSupportManagerImpl$3;->this$0:Lcom/facebook/react/devsupport/DevSupportManagerImpl;
+    iget-object v1, p0, Lcom/facebook/react/devsupport/DevSupportManagerImpl$3;->this$0:Lcom/facebook/react/devsupport/DevSupportManagerImpl;
 
-    invoke-static {p1}, Lcom/facebook/react/devsupport/DevSupportManagerImpl;->access$300(Lcom/facebook/react/devsupport/DevSupportManagerImpl;)Lcom/facebook/react/devsupport/DevServerHelper;
+    invoke-static {v1}, Lcom/facebook/react/devsupport/DevSupportManagerImpl;->access$300(Lcom/facebook/react/devsupport/DevSupportManagerImpl;)Lcom/facebook/react/devsupport/DevServerHelper;
 
-    move-result-object p1
+    move-result-object v1
 
-    invoke-virtual {p1}, Lcom/facebook/react/devsupport/DevServerHelper;->launchJSDevtools()V
+    invoke-virtual {v1}, Lcom/facebook/react/devsupport/DevServerHelper;->launchJSDevtools()V
 
     goto :goto_0
 
     .line 249
     :cond_0
-    iget-object p2, p0, Lcom/facebook/react/devsupport/DevSupportManagerImpl$3;->this$0:Lcom/facebook/react/devsupport/DevSupportManagerImpl;
+    iget-object v1, p0, Lcom/facebook/react/devsupport/DevSupportManagerImpl$3;->this$0:Lcom/facebook/react/devsupport/DevSupportManagerImpl;
 
-    invoke-static {p2}, Lcom/facebook/react/devsupport/DevSupportManagerImpl;->access$200(Lcom/facebook/react/devsupport/DevSupportManagerImpl;)Lcom/facebook/react/devsupport/DevInternalSettings;
+    invoke-static {v1}, Lcom/facebook/react/devsupport/DevSupportManagerImpl;->access$200(Lcom/facebook/react/devsupport/DevSupportManagerImpl;)Lcom/facebook/react/devsupport/DevInternalSettings;
 
-    move-result-object p2
+    move-result-object v1
 
-    invoke-virtual {p2, p1}, Lcom/facebook/react/devsupport/DevInternalSettings;->setRemoteJSDebugEnabled(Z)V
+    invoke-virtual {v1, v2}, Lcom/facebook/react/devsupport/DevInternalSettings;->setRemoteJSDebugEnabled(Z)V
 
     .line 251
     :goto_0
-    iget-object p1, p0, Lcom/facebook/react/devsupport/DevSupportManagerImpl$3;->this$0:Lcom/facebook/react/devsupport/DevSupportManagerImpl;
+    iget-object v1, p0, Lcom/facebook/react/devsupport/DevSupportManagerImpl$3;->this$0:Lcom/facebook/react/devsupport/DevSupportManagerImpl;
 
-    invoke-virtual {p1}, Lcom/facebook/react/devsupport/DevSupportManagerImpl;->handleReloadJS()V
+    invoke-virtual {v1}, Lcom/facebook/react/devsupport/DevSupportManagerImpl;->handleReloadJS()V
 
+    .line 253
     :cond_1
     return-void
 .end method

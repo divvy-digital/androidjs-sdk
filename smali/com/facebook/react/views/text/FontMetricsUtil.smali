@@ -22,265 +22,311 @@
 .end method
 
 .method public static getFontMetrics(Ljava/lang/CharSequence;Landroid/text/Layout;Landroid/text/TextPaint;Landroid/content/Context;)Lcom/facebook/react/bridge/WritableArray;
-    .locals 11
+    .locals 17
+    .param p0, "text"    # Ljava/lang/CharSequence;
+    .param p1, "layout"    # Landroid/text/Layout;
+    .param p2, "paint"    # Landroid/text/TextPaint;
+    .param p3, "context"    # Landroid/content/Context;
 
     .line 26
-    invoke-virtual {p3}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+    move-object/from16 v0, p1
 
-    move-result-object p3
+    invoke-virtual/range {p3 .. p3}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
 
-    invoke-virtual {p3}, Landroid/content/res/Resources;->getDisplayMetrics()Landroid/util/DisplayMetrics;
+    move-result-object v1
 
-    move-result-object p3
+    invoke-virtual {v1}, Landroid/content/res/Resources;->getDisplayMetrics()Landroid/util/DisplayMetrics;
+
+    move-result-object v1
 
     .line 27
+    .local v1, "dm":Landroid/util/DisplayMetrics;
     invoke-static {}, Lcom/facebook/react/bridge/Arguments;->createArray()Lcom/facebook/react/bridge/WritableArray;
 
-    move-result-object v0
+    move-result-object v2
 
     .line 31
-    new-instance v1, Landroid/text/TextPaint;
+    .local v2, "lines":Lcom/facebook/react/bridge/WritableArray;
+    new-instance v3, Landroid/text/TextPaint;
 
-    invoke-direct {v1, p2}, Landroid/text/TextPaint;-><init>(Landroid/graphics/Paint;)V
+    move-object/from16 v4, p2
+
+    invoke-direct {v3, v4}, Landroid/text/TextPaint;-><init>(Landroid/graphics/Paint;)V
 
     .line 32
-    invoke-virtual {v1}, Landroid/text/TextPaint;->getTextSize()F
+    .local v3, "paintCopy":Landroid/text/TextPaint;
+    invoke-virtual {v3}, Landroid/text/TextPaint;->getTextSize()F
 
-    move-result p2
+    move-result v5
 
-    const/high16 v2, 0x42c80000    # 100.0f
+    const/high16 v6, 0x42c80000    # 100.0f
 
-    mul-float p2, p2, v2
+    mul-float v5, v5, v6
 
-    invoke-virtual {v1, p2}, Landroid/text/TextPaint;->setTextSize(F)V
+    invoke-virtual {v3, v5}, Landroid/text/TextPaint;->setTextSize(F)V
 
     .line 33
-    new-instance p2, Landroid/graphics/Rect;
+    new-instance v5, Landroid/graphics/Rect;
 
-    invoke-direct {p2}, Landroid/graphics/Rect;-><init>()V
-
-    const/4 v3, 0x1
-
-    const/4 v4, 0x0
-
-    const-string v5, "T"
+    invoke-direct {v5}, Landroid/graphics/Rect;-><init>()V
 
     .line 34
-    invoke-virtual {v1, v5, v4, v3, p2}, Landroid/text/TextPaint;->getTextBounds(Ljava/lang/String;IILandroid/graphics/Rect;)V
+    .local v5, "capHeightBounds":Landroid/graphics/Rect;
+    const-string v7, "T"
+
+    invoke-virtual {v7}, Ljava/lang/String;->length()I
+
+    move-result v8
+
+    const/4 v9, 0x0
+
+    invoke-virtual {v3, v7, v9, v8, v5}, Landroid/text/TextPaint;->getTextBounds(Ljava/lang/String;IILandroid/graphics/Rect;)V
 
     .line 35
-    invoke-virtual {p2}, Landroid/graphics/Rect;->height()I
+    invoke-virtual {v5}, Landroid/graphics/Rect;->height()I
 
-    move-result p2
+    move-result v7
 
-    int-to-float p2, p2
+    int-to-float v7, v7
 
-    div-float/2addr p2, v2
+    div-float/2addr v7, v6
 
-    iget v5, p3, Landroid/util/DisplayMetrics;->density:F
+    iget v8, v1, Landroid/util/DisplayMetrics;->density:F
 
-    div-float/2addr p2, v5
+    div-float/2addr v7, v8
 
-    float-to-double v5, p2
+    float-to-double v7, v7
 
     .line 36
-    new-instance p2, Landroid/graphics/Rect;
+    .local v7, "capHeight":D
+    new-instance v10, Landroid/graphics/Rect;
 
-    invoke-direct {p2}, Landroid/graphics/Rect;-><init>()V
-
-    const-string v7, "x"
+    invoke-direct {v10}, Landroid/graphics/Rect;-><init>()V
 
     .line 37
-    invoke-virtual {v1, v7, v4, v3, p2}, Landroid/text/TextPaint;->getTextBounds(Ljava/lang/String;IILandroid/graphics/Rect;)V
+    .local v10, "xHeightBounds":Landroid/graphics/Rect;
+    const-string v11, "x"
+
+    invoke-virtual {v11}, Ljava/lang/String;->length()I
+
+    move-result v12
+
+    invoke-virtual {v3, v11, v9, v12, v10}, Landroid/text/TextPaint;->getTextBounds(Ljava/lang/String;IILandroid/graphics/Rect;)V
 
     .line 38
-    invoke-virtual {p2}, Landroid/graphics/Rect;->height()I
+    invoke-virtual {v10}, Landroid/graphics/Rect;->height()I
 
-    move-result p2
+    move-result v9
 
-    int-to-float p2, p2
+    int-to-float v9, v9
 
-    div-float/2addr p2, v2
+    div-float/2addr v9, v6
 
-    iget v1, p3, Landroid/util/DisplayMetrics;->density:F
+    iget v6, v1, Landroid/util/DisplayMetrics;->density:F
 
-    div-float/2addr p2, v1
+    div-float/2addr v9, v6
 
-    float-to-double v1, p2
+    float-to-double v12, v9
 
     .line 39
+    .local v12, "xHeight":D
+    const/4 v6, 0x0
+
+    .local v6, "i":I
     :goto_0
-    invoke-virtual {p1}, Landroid/text/Layout;->getLineCount()I
+    invoke-virtual/range {p1 .. p1}, Landroid/text/Layout;->getLineCount()I
 
-    move-result p2
+    move-result v9
 
-    if-ge v4, p2, :cond_0
+    if-ge v6, v9, :cond_0
 
     .line 40
-    new-instance p2, Landroid/graphics/Rect;
+    new-instance v9, Landroid/graphics/Rect;
 
-    invoke-direct {p2}, Landroid/graphics/Rect;-><init>()V
+    invoke-direct {v9}, Landroid/graphics/Rect;-><init>()V
 
     .line 41
-    invoke-virtual {p1, v4, p2}, Landroid/text/Layout;->getLineBounds(ILandroid/graphics/Rect;)I
+    .local v9, "bounds":Landroid/graphics/Rect;
+    invoke-virtual {v0, v6, v9}, Landroid/text/Layout;->getLineBounds(ILandroid/graphics/Rect;)I
 
     .line 42
     invoke-static {}, Lcom/facebook/react/bridge/Arguments;->createMap()Lcom/facebook/react/bridge/WritableMap;
 
-    move-result-object v3
+    move-result-object v14
 
     .line 43
-    invoke-virtual {p1, v4}, Landroid/text/Layout;->getLineLeft(I)F
+    .local v14, "line":Lcom/facebook/react/bridge/WritableMap;
+    invoke-virtual {v0, v6}, Landroid/text/Layout;->getLineLeft(I)F
 
-    move-result v8
+    move-result v15
 
-    iget v9, p3, Landroid/util/DisplayMetrics;->density:F
+    move-object/from16 v16, v3
 
-    div-float/2addr v8, v9
+    .end local v3    # "paintCopy":Landroid/text/TextPaint;
+    .local v16, "paintCopy":Landroid/text/TextPaint;
+    iget v3, v1, Landroid/util/DisplayMetrics;->density:F
 
-    float-to-double v8, v8
+    div-float/2addr v15, v3
 
-    invoke-interface {v3, v7, v8, v9}, Lcom/facebook/react/bridge/WritableMap;->putDouble(Ljava/lang/String;D)V
+    float-to-double v3, v15
+
+    invoke-interface {v14, v11, v3, v4}, Lcom/facebook/react/bridge/WritableMap;->putDouble(Ljava/lang/String;D)V
 
     .line 44
-    iget v8, p2, Landroid/graphics/Rect;->top:I
+    iget v3, v9, Landroid/graphics/Rect;->top:I
 
-    int-to-float v8, v8
+    int-to-float v3, v3
 
-    iget v9, p3, Landroid/util/DisplayMetrics;->density:F
+    iget v4, v1, Landroid/util/DisplayMetrics;->density:F
 
-    div-float/2addr v8, v9
+    div-float/2addr v3, v4
 
-    float-to-double v8, v8
+    float-to-double v3, v3
 
-    const-string v10, "y"
+    const-string v15, "y"
 
-    invoke-interface {v3, v10, v8, v9}, Lcom/facebook/react/bridge/WritableMap;->putDouble(Ljava/lang/String;D)V
+    invoke-interface {v14, v15, v3, v4}, Lcom/facebook/react/bridge/WritableMap;->putDouble(Ljava/lang/String;D)V
 
     .line 45
-    invoke-virtual {p1, v4}, Landroid/text/Layout;->getLineWidth(I)F
+    invoke-virtual {v0, v6}, Landroid/text/Layout;->getLineWidth(I)F
 
-    move-result v8
+    move-result v3
 
-    iget v9, p3, Landroid/util/DisplayMetrics;->density:F
+    iget v4, v1, Landroid/util/DisplayMetrics;->density:F
 
-    div-float/2addr v8, v9
+    div-float/2addr v3, v4
 
-    float-to-double v8, v8
+    float-to-double v3, v3
 
-    const-string v10, "width"
+    const-string v15, "width"
 
-    invoke-interface {v3, v10, v8, v9}, Lcom/facebook/react/bridge/WritableMap;->putDouble(Ljava/lang/String;D)V
+    invoke-interface {v14, v15, v3, v4}, Lcom/facebook/react/bridge/WritableMap;->putDouble(Ljava/lang/String;D)V
 
     .line 46
-    invoke-virtual {p2}, Landroid/graphics/Rect;->height()I
+    invoke-virtual {v9}, Landroid/graphics/Rect;->height()I
 
-    move-result p2
+    move-result v3
 
-    int-to-float p2, p2
+    int-to-float v3, v3
 
-    iget v8, p3, Landroid/util/DisplayMetrics;->density:F
+    iget v4, v1, Landroid/util/DisplayMetrics;->density:F
 
-    div-float/2addr p2, v8
+    div-float/2addr v3, v4
 
-    float-to-double v8, p2
+    float-to-double v3, v3
 
-    const-string p2, "height"
+    const-string v15, "height"
 
-    invoke-interface {v3, p2, v8, v9}, Lcom/facebook/react/bridge/WritableMap;->putDouble(Ljava/lang/String;D)V
+    invoke-interface {v14, v15, v3, v4}, Lcom/facebook/react/bridge/WritableMap;->putDouble(Ljava/lang/String;D)V
 
     .line 47
-    invoke-virtual {p1, v4}, Landroid/text/Layout;->getLineDescent(I)I
+    invoke-virtual {v0, v6}, Landroid/text/Layout;->getLineDescent(I)I
 
-    move-result p2
+    move-result v3
 
-    int-to-float p2, p2
+    int-to-float v3, v3
 
-    iget v8, p3, Landroid/util/DisplayMetrics;->density:F
+    iget v4, v1, Landroid/util/DisplayMetrics;->density:F
 
-    div-float/2addr p2, v8
+    div-float/2addr v3, v4
 
-    float-to-double v8, p2
+    float-to-double v3, v3
 
-    const-string p2, "descender"
+    const-string v15, "descender"
 
-    invoke-interface {v3, p2, v8, v9}, Lcom/facebook/react/bridge/WritableMap;->putDouble(Ljava/lang/String;D)V
+    invoke-interface {v14, v15, v3, v4}, Lcom/facebook/react/bridge/WritableMap;->putDouble(Ljava/lang/String;D)V
 
     .line 48
-    invoke-virtual {p1, v4}, Landroid/text/Layout;->getLineAscent(I)I
+    invoke-virtual {v0, v6}, Landroid/text/Layout;->getLineAscent(I)I
 
-    move-result p2
+    move-result v3
 
-    neg-int p2, p2
+    neg-int v3, v3
 
-    int-to-float p2, p2
+    int-to-float v3, v3
 
-    iget v8, p3, Landroid/util/DisplayMetrics;->density:F
+    iget v4, v1, Landroid/util/DisplayMetrics;->density:F
 
-    div-float/2addr p2, v8
+    div-float/2addr v3, v4
 
-    float-to-double v8, p2
+    float-to-double v3, v3
 
-    const-string p2, "ascender"
+    const-string v15, "ascender"
 
-    invoke-interface {v3, p2, v8, v9}, Lcom/facebook/react/bridge/WritableMap;->putDouble(Ljava/lang/String;D)V
+    invoke-interface {v14, v15, v3, v4}, Lcom/facebook/react/bridge/WritableMap;->putDouble(Ljava/lang/String;D)V
 
     .line 49
-    invoke-virtual {p1, v4}, Landroid/text/Layout;->getLineBaseline(I)I
+    invoke-virtual {v0, v6}, Landroid/text/Layout;->getLineBaseline(I)I
 
-    move-result p2
+    move-result v3
 
-    int-to-float p2, p2
+    int-to-float v3, v3
 
-    iget v8, p3, Landroid/util/DisplayMetrics;->density:F
+    iget v4, v1, Landroid/util/DisplayMetrics;->density:F
 
-    div-float/2addr p2, v8
+    div-float/2addr v3, v4
 
-    float-to-double v8, p2
+    float-to-double v3, v3
 
-    const-string p2, "baseline"
+    const-string v15, "baseline"
 
-    invoke-interface {v3, p2, v8, v9}, Lcom/facebook/react/bridge/WritableMap;->putDouble(Ljava/lang/String;D)V
-
-    const-string p2, "capHeight"
+    invoke-interface {v14, v15, v3, v4}, Lcom/facebook/react/bridge/WritableMap;->putDouble(Ljava/lang/String;D)V
 
     .line 50
-    invoke-interface {v3, p2, v5, v6}, Lcom/facebook/react/bridge/WritableMap;->putDouble(Ljava/lang/String;D)V
+    const-string v3, "capHeight"
 
-    const-string p2, "xHeight"
+    invoke-interface {v14, v3, v7, v8}, Lcom/facebook/react/bridge/WritableMap;->putDouble(Ljava/lang/String;D)V
 
     .line 51
-    invoke-interface {v3, p2, v1, v2}, Lcom/facebook/react/bridge/WritableMap;->putDouble(Ljava/lang/String;D)V
+    const-string v3, "xHeight"
 
-    .line 53
-    invoke-virtual {p1, v4}, Landroid/text/Layout;->getLineStart(I)I
-
-    move-result p2
-
-    invoke-virtual {p1, v4}, Landroid/text/Layout;->getLineEnd(I)I
-
-    move-result v8
-
-    invoke-interface {p0, p2, v8}, Ljava/lang/CharSequence;->subSequence(II)Ljava/lang/CharSequence;
-
-    move-result-object p2
-
-    invoke-interface {p2}, Ljava/lang/CharSequence;->toString()Ljava/lang/String;
-
-    move-result-object p2
-
-    const-string v8, "text"
+    invoke-interface {v14, v3, v12, v13}, Lcom/facebook/react/bridge/WritableMap;->putDouble(Ljava/lang/String;D)V
 
     .line 52
-    invoke-interface {v3, v8, p2}, Lcom/facebook/react/bridge/WritableMap;->putString(Ljava/lang/String;Ljava/lang/String;)V
+    nop
+
+    .line 53
+    invoke-virtual {v0, v6}, Landroid/text/Layout;->getLineStart(I)I
+
+    move-result v3
+
+    invoke-virtual {v0, v6}, Landroid/text/Layout;->getLineEnd(I)I
+
+    move-result v4
+
+    move-object/from16 v15, p0
+
+    invoke-interface {v15, v3, v4}, Ljava/lang/CharSequence;->subSequence(II)Ljava/lang/CharSequence;
+
+    move-result-object v3
+
+    invoke-interface {v3}, Ljava/lang/CharSequence;->toString()Ljava/lang/String;
+
+    move-result-object v3
+
+    .line 52
+    const-string v4, "text"
+
+    invoke-interface {v14, v4, v3}, Lcom/facebook/react/bridge/WritableMap;->putString(Ljava/lang/String;Ljava/lang/String;)V
 
     .line 54
-    invoke-interface {v0, v3}, Lcom/facebook/react/bridge/WritableArray;->pushMap(Lcom/facebook/react/bridge/WritableMap;)V
+    invoke-interface {v2, v14}, Lcom/facebook/react/bridge/WritableArray;->pushMap(Lcom/facebook/react/bridge/WritableMap;)V
 
-    add-int/lit8 v4, v4, 0x1
+    .line 39
+    .end local v9    # "bounds":Landroid/graphics/Rect;
+    .end local v14    # "line":Lcom/facebook/react/bridge/WritableMap;
+    add-int/lit8 v6, v6, 0x1
+
+    move-object/from16 v4, p2
+
+    move-object/from16 v3, v16
 
     goto/16 :goto_0
 
+    .line 56
+    .end local v6    # "i":I
+    .end local v16    # "paintCopy":Landroid/text/TextPaint;
+    .restart local v3    # "paintCopy":Landroid/text/TextPaint;
     :cond_0
-    return-object v0
+    return-object v2
 .end method

@@ -6,11 +6,6 @@
 .implements Ljava/lang/Runnable;
 
 
-# annotations
-.annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-.end annotation
-
-
 # instance fields
 .field private final mHybridData:Lcom/facebook/jni/HybridData;
 
@@ -18,8 +13,7 @@
 # direct methods
 .method private constructor <init>(Lcom/facebook/jni/HybridData;)V
     .locals 0
-    .annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-    .end annotation
+    .param p1, "hybridData"    # Lcom/facebook/jni/HybridData;
 
     .line 22
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -27,6 +21,7 @@
     .line 23
     iput-object p1, p0, Lcom/facebook/react/bridge/queue/NativeRunnable;->mHybridData:Lcom/facebook/jni/HybridData;
 
+    .line 24
     return-void
 .end method
 

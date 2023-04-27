@@ -24,6 +24,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/views/webview/ReactWebViewManager;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/views/webview/ReactWebViewManager;
 
     .line 401
     iput-object p1, p0, Lcom/facebook/react/views/webview/ReactWebViewManager$1;->this$0:Lcom/facebook/react/views/webview/ReactWebViewManager;
@@ -37,6 +38,8 @@
 # virtual methods
 .method public configWebView(Landroid/webkit/WebView;)V
     .locals 0
+    .param p1, "webView"    # Landroid/webkit/WebView;
 
+    .line 402
     return-void
 .end method

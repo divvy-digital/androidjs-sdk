@@ -27,6 +27,10 @@
 # direct methods
 .method public constructor <init>(Lcom/facebook/react/uimanager/UIViewOperationQueue;IIZZ)V
     .locals 0
+    .param p2, "tag"    # I
+    .param p3, "initialTag"    # I
+    .param p4, "clearResponder"    # Z
+    .param p5, "blockNativeResponder"    # Z
 
     .line 279
     iput-object p1, p0, Lcom/facebook/react/uimanager/UIViewOperationQueue$ChangeJSResponderOperation;->this$0:Lcom/facebook/react/uimanager/UIViewOperationQueue;
@@ -43,6 +47,7 @@
     .line 283
     iput-boolean p5, p0, Lcom/facebook/react/uimanager/UIViewOperationQueue$ChangeJSResponderOperation;->mBlockNativeResponder:Z
 
+    .line 284
     return-void
 .end method
 
@@ -83,6 +88,7 @@
 
     invoke-virtual {v0}, Lcom/facebook/react/uimanager/NativeViewHierarchyManager;->clearJSResponder()V
 
+    .line 293
     :goto_0
     return-void
 .end method

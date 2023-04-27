@@ -12,6 +12,7 @@
 # direct methods
 .method public constructor <init>(Ljava/io/IOException;)V
     .locals 0
+    .param p1, "cause"    # Ljava/io/IOException;
 
     .line 31
     invoke-direct {p0, p1}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/Throwable;)V
@@ -22,6 +23,7 @@
     .line 33
     iput-object p1, p0, Lokhttp3/internal/connection/RouteException;->lastException:Ljava/io/IOException;
 
+    .line 34
     return-void
 .end method
 
@@ -29,6 +31,7 @@
 # virtual methods
 .method public addConnectException(Ljava/io/IOException;)V
     .locals 1
+    .param p1, "e"    # Ljava/io/IOException;
 
     .line 45
     iget-object v0, p0, Lokhttp3/internal/connection/RouteException;->firstException:Ljava/io/IOException;
@@ -38,6 +41,7 @@
     .line 46
     iput-object p1, p0, Lokhttp3/internal/connection/RouteException;->lastException:Ljava/io/IOException;
 
+    .line 47
     return-void
 .end method
 

@@ -4,16 +4,31 @@
 
 
 # static fields
-.field public static PERMISSION_DENIED:I = 0x1
+.field public static PERMISSION_DENIED:I
 
-.field public static POSITION_UNAVAILABLE:I = 0x2
+.field public static POSITION_UNAVAILABLE:I
 
-.field public static TIMEOUT:I = 0x3
+.field public static TIMEOUT:I
 
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 0
+    .locals 1
+
+    .line 21
+    const/4 v0, 0x1
+
+    sput v0, Lcom/facebook/react/modules/location/PositionError;->PERMISSION_DENIED:I
+
+    .line 27
+    const/4 v0, 0x2
+
+    sput v0, Lcom/facebook/react/modules/location/PositionError;->POSITION_UNAVAILABLE:I
+
+    .line 33
+    const/4 v0, 0x3
+
+    sput v0, Lcom/facebook/react/modules/location/PositionError;->TIMEOUT:I
 
     return-void
 .end method
@@ -28,46 +43,51 @@
 .end method
 
 .method public static buildError(ILjava/lang/String;)Lcom/facebook/react/bridge/WritableMap;
-    .locals 2
+    .locals 3
+    .param p0, "code"    # I
+    .param p1, "message"    # Ljava/lang/String;
 
     .line 36
     invoke-static {}, Lcom/facebook/react/bridge/Arguments;->createMap()Lcom/facebook/react/bridge/WritableMap;
 
     move-result-object v0
 
+    .line 37
+    .local v0, "error":Lcom/facebook/react/bridge/WritableMap;
     const-string v1, "code"
 
-    .line 37
     invoke-interface {v0, v1, p0}, Lcom/facebook/react/bridge/WritableMap;->putInt(Ljava/lang/String;I)V
 
+    .line 39
     if-eqz p1, :cond_0
 
-    const-string p0, "message"
-
     .line 40
-    invoke-interface {v0, p0, p1}, Lcom/facebook/react/bridge/WritableMap;->putString(Ljava/lang/String;Ljava/lang/String;)V
+    const-string v1, "message"
+
+    invoke-interface {v0, v1, p1}, Lcom/facebook/react/bridge/WritableMap;->putString(Ljava/lang/String;Ljava/lang/String;)V
 
     .line 46
     :cond_0
-    sget p0, Lcom/facebook/react/modules/location/PositionError;->PERMISSION_DENIED:I
+    const-string v1, "PERMISSION_DENIED"
 
-    const-string p1, "PERMISSION_DENIED"
+    sget v2, Lcom/facebook/react/modules/location/PositionError;->PERMISSION_DENIED:I
 
-    invoke-interface {v0, p1, p0}, Lcom/facebook/react/bridge/WritableMap;->putInt(Ljava/lang/String;I)V
+    invoke-interface {v0, v1, v2}, Lcom/facebook/react/bridge/WritableMap;->putInt(Ljava/lang/String;I)V
 
     .line 47
-    sget p0, Lcom/facebook/react/modules/location/PositionError;->POSITION_UNAVAILABLE:I
+    const-string v1, "POSITION_UNAVAILABLE"
 
-    const-string p1, "POSITION_UNAVAILABLE"
+    sget v2, Lcom/facebook/react/modules/location/PositionError;->POSITION_UNAVAILABLE:I
 
-    invoke-interface {v0, p1, p0}, Lcom/facebook/react/bridge/WritableMap;->putInt(Ljava/lang/String;I)V
+    invoke-interface {v0, v1, v2}, Lcom/facebook/react/bridge/WritableMap;->putInt(Ljava/lang/String;I)V
 
     .line 48
-    sget p0, Lcom/facebook/react/modules/location/PositionError;->TIMEOUT:I
+    const-string v1, "TIMEOUT"
 
-    const-string p1, "TIMEOUT"
+    sget v2, Lcom/facebook/react/modules/location/PositionError;->TIMEOUT:I
 
-    invoke-interface {v0, p1, p0}, Lcom/facebook/react/bridge/WritableMap;->putInt(Ljava/lang/String;I)V
+    invoke-interface {v0, v1, v2}, Lcom/facebook/react/bridge/WritableMap;->putInt(Ljava/lang/String;I)V
 
+    .line 49
     return-object v0
 .end method

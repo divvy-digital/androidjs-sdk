@@ -16,10 +16,12 @@
 # direct methods
 .method public constructor <init>(Landroid/content/Context;)V
     .locals 0
+    .param p1, "context"    # Landroid/content/Context;
 
     .line 26
     invoke-direct {p0, p1}, Lcom/facebook/react/bridge/ContextBaseJavaModule;-><init>(Landroid/content/Context;)V
 
+    .line 27
     return-void
 .end method
 
@@ -49,13 +51,15 @@
 .method public getName()Ljava/lang/String;
     .locals 1
 
+    .line 33
     const-string v0, "Clipboard"
 
     return-object v0
 .end method
 
 .method public getString(Lcom/facebook/react/bridge/Promise;)V
-    .locals 4
+    .locals 5
+    .param p1, "promise"    # Lcom/facebook/react/bridge/Promise;
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -66,12 +70,15 @@
     move-result-object v0
 
     .line 44
+    .local v0, "clipboard":Landroid/content/ClipboardManager;
     invoke-virtual {v0}, Landroid/content/ClipboardManager;->getPrimaryClip()Landroid/content/ClipData;
 
     move-result-object v1
     :try_end_0
     .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
 
+    .line 45
+    .local v1, "clipData":Landroid/content/ClipData;
     const-string v2, ""
 
     if-nez v1, :cond_0
@@ -86,42 +93,49 @@
     :cond_0
     invoke-virtual {v1}, Landroid/content/ClipData;->getItemCount()I
 
-    move-result v1
+    move-result v3
 
-    const/4 v3, 0x1
+    const/4 v4, 0x1
 
-    if-lt v1, v3, :cond_1
+    if-lt v3, v4, :cond_1
 
     .line 48
     invoke-virtual {v0}, Landroid/content/ClipboardManager;->getPrimaryClip()Landroid/content/ClipData;
 
-    move-result-object v0
+    move-result-object v3
 
-    const/4 v1, 0x0
+    const/4 v4, 0x0
 
-    invoke-virtual {v0, v1}, Landroid/content/ClipData;->getItemAt(I)Landroid/content/ClipData$Item;
+    invoke-virtual {v3, v4}, Landroid/content/ClipData;->getItemAt(I)Landroid/content/ClipData$Item;
 
-    move-result-object v0
+    move-result-object v3
 
     .line 49
-    new-instance v1, Ljava/lang/StringBuilder;
+    .local v3, "firstItem":Landroid/content/ClipData$Item;
+    new-instance v4, Ljava/lang/StringBuilder;
 
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
 
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v4, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v0}, Landroid/content/ClipData$Item;->getText()Ljava/lang/CharSequence;
+    move-result-object v2
 
-    move-result-object v0
+    invoke-virtual {v3}, Landroid/content/ClipData$Item;->getText()Ljava/lang/CharSequence;
 
-    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    move-result-object v4
 
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual {v2, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
+    move-result-object v2
 
-    invoke-interface {p1, v0}, Lcom/facebook/react/bridge/Promise;->resolve(Ljava/lang/Object;)V
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
+    move-result-object v2
+
+    invoke-interface {p1, v2}, Lcom/facebook/react/bridge/Promise;->resolve(Ljava/lang/Object;)V
+
+    .line 50
+    .end local v3    # "firstItem":Landroid/content/ClipData$Item;
     goto :goto_0
 
     .line 51
@@ -130,37 +144,49 @@
     :try_end_1
     .catch Ljava/lang/Exception; {:try_start_1 .. :try_end_1} :catch_0
 
-    goto :goto_0
+    .line 55
+    .end local v0    # "clipboard":Landroid/content/ClipboardManager;
+    .end local v1    # "clipData":Landroid/content/ClipData;
+    :goto_0
+    goto :goto_1
 
+    .line 53
     :catch_0
     move-exception v0
 
     .line 54
+    .local v0, "e":Ljava/lang/Exception;
     invoke-interface {p1, v0}, Lcom/facebook/react/bridge/Promise;->reject(Ljava/lang/Throwable;)V
 
-    :goto_0
+    .line 56
+    .end local v0    # "e":Ljava/lang/Exception;
+    :goto_1
     return-void
 .end method
 
 .method public setString(Ljava/lang/String;)V
-    .locals 1
+    .locals 2
+    .param p1, "text"    # Ljava/lang/String;
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
+    .line 60
     const/4 v0, 0x0
 
-    .line 60
     invoke-static {v0, p1}, Landroid/content/ClipData;->newPlainText(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Landroid/content/ClipData;
-
-    move-result-object p1
-
-    .line 61
-    invoke-direct {p0}, Lcom/facebook/react/modules/clipboard/ClipboardModule;->getClipboardService()Landroid/content/ClipboardManager;
 
     move-result-object v0
 
-    .line 62
-    invoke-virtual {v0, p1}, Landroid/content/ClipboardManager;->setPrimaryClip(Landroid/content/ClipData;)V
+    .line 61
+    .local v0, "clipdata":Landroid/content/ClipData;
+    invoke-direct {p0}, Lcom/facebook/react/modules/clipboard/ClipboardModule;->getClipboardService()Landroid/content/ClipboardManager;
 
+    move-result-object v1
+
+    .line 62
+    .local v1, "clipboard":Landroid/content/ClipboardManager;
+    invoke-virtual {v1, v0}, Landroid/content/ClipboardManager;->setPrimaryClip(Landroid/content/ClipData;)V
+
+    .line 63
     return-void
 .end method

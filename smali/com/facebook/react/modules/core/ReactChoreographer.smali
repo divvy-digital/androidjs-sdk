@@ -47,39 +47,42 @@
     .line 86
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
+    .line 83
     const/4 v0, 0x0
 
-    .line 83
     iput v0, p0, Lcom/facebook/react/modules/core/ReactChoreographer;->mTotalCallbacks:I
 
     .line 84
     iput-boolean v0, p0, Lcom/facebook/react/modules/core/ReactChoreographer;->mHasPostedCallback:Z
 
     .line 87
-    new-instance v1, Lcom/facebook/react/modules/core/ReactChoreographer$ReactChoreographerDispatcher;
+    new-instance v0, Lcom/facebook/react/modules/core/ReactChoreographer$ReactChoreographerDispatcher;
 
-    const/4 v2, 0x0
+    const/4 v1, 0x0
 
-    invoke-direct {v1, p0, v2}, Lcom/facebook/react/modules/core/ReactChoreographer$ReactChoreographerDispatcher;-><init>(Lcom/facebook/react/modules/core/ReactChoreographer;Lcom/facebook/react/modules/core/ReactChoreographer$1;)V
+    invoke-direct {v0, p0, v1}, Lcom/facebook/react/modules/core/ReactChoreographer$ReactChoreographerDispatcher;-><init>(Lcom/facebook/react/modules/core/ReactChoreographer;Lcom/facebook/react/modules/core/ReactChoreographer$1;)V
 
-    iput-object v1, p0, Lcom/facebook/react/modules/core/ReactChoreographer;->mReactChoreographerDispatcher:Lcom/facebook/react/modules/core/ReactChoreographer$ReactChoreographerDispatcher;
+    iput-object v0, p0, Lcom/facebook/react/modules/core/ReactChoreographer;->mReactChoreographerDispatcher:Lcom/facebook/react/modules/core/ReactChoreographer$ReactChoreographerDispatcher;
 
     .line 88
     invoke-static {}, Lcom/facebook/react/modules/core/ReactChoreographer$CallbackType;->values()[Lcom/facebook/react/modules/core/ReactChoreographer$CallbackType;
 
-    move-result-object v1
+    move-result-object v0
 
-    array-length v1, v1
+    array-length v0, v0
 
-    new-array v1, v1, [Ljava/util/ArrayDeque;
+    new-array v0, v0, [Ljava/util/ArrayDeque;
 
-    iput-object v1, p0, Lcom/facebook/react/modules/core/ReactChoreographer;->mCallbackQueues:[Ljava/util/ArrayDeque;
+    iput-object v0, p0, Lcom/facebook/react/modules/core/ReactChoreographer;->mCallbackQueues:[Ljava/util/ArrayDeque;
 
     .line 89
-    :goto_0
-    iget-object v1, p0, Lcom/facebook/react/modules/core/ReactChoreographer;->mCallbackQueues:[Ljava/util/ArrayDeque;
+    const/4 v0, 0x0
 
-    array-length v3, v1
+    .local v0, "i":I
+    :goto_0
+    iget-object v2, p0, Lcom/facebook/react/modules/core/ReactChoreographer;->mCallbackQueues:[Ljava/util/ArrayDeque;
+
+    array-length v3, v2
 
     if-ge v0, v3, :cond_0
 
@@ -88,30 +91,36 @@
 
     invoke-direct {v3}, Ljava/util/ArrayDeque;-><init>()V
 
-    aput-object v3, v1, v0
+    aput-object v3, v2, v0
 
+    .line 89
     add-int/lit8 v0, v0, 0x1
 
     goto :goto_0
 
     .line 92
+    .end local v0    # "i":I
     :cond_0
-    invoke-virtual {p0, v2}, Lcom/facebook/react/modules/core/ReactChoreographer;->initializeChoreographer(Ljava/lang/Runnable;)V
+    invoke-virtual {p0, v1}, Lcom/facebook/react/modules/core/ReactChoreographer;->initializeChoreographer(Ljava/lang/Runnable;)V
 
+    .line 93
     return-void
 .end method
 
 .method static synthetic access$100(Lcom/facebook/react/modules/core/ReactChoreographer;)Lcom/facebook/react/modules/core/ChoreographerCompat;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/modules/core/ReactChoreographer;
 
     .line 23
-    iget-object p0, p0, Lcom/facebook/react/modules/core/ReactChoreographer;->mChoreographer:Lcom/facebook/react/modules/core/ChoreographerCompat;
+    iget-object v0, p0, Lcom/facebook/react/modules/core/ReactChoreographer;->mChoreographer:Lcom/facebook/react/modules/core/ChoreographerCompat;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$102(Lcom/facebook/react/modules/core/ReactChoreographer;Lcom/facebook/react/modules/core/ChoreographerCompat;)Lcom/facebook/react/modules/core/ChoreographerCompat;
     .locals 0
+    .param p0, "x0"    # Lcom/facebook/react/modules/core/ReactChoreographer;
+    .param p1, "x1"    # Lcom/facebook/react/modules/core/ChoreographerCompat;
 
     .line 23
     iput-object p1, p0, Lcom/facebook/react/modules/core/ReactChoreographer;->mChoreographer:Lcom/facebook/react/modules/core/ChoreographerCompat;
@@ -121,6 +130,8 @@
 
 .method static synthetic access$202(Lcom/facebook/react/modules/core/ReactChoreographer;Z)Z
     .locals 0
+    .param p0, "x0"    # Lcom/facebook/react/modules/core/ReactChoreographer;
+    .param p1, "x1"    # Z
 
     .line 23
     iput-boolean p1, p0, Lcom/facebook/react/modules/core/ReactChoreographer;->mHasPostedCallback:Z
@@ -129,16 +140,18 @@
 .end method
 
 .method static synthetic access$300(Lcom/facebook/react/modules/core/ReactChoreographer;)[Ljava/util/ArrayDeque;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/modules/core/ReactChoreographer;
 
     .line 23
-    iget-object p0, p0, Lcom/facebook/react/modules/core/ReactChoreographer;->mCallbackQueues:[Ljava/util/ArrayDeque;
+    iget-object v0, p0, Lcom/facebook/react/modules/core/ReactChoreographer;->mCallbackQueues:[Ljava/util/ArrayDeque;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$410(Lcom/facebook/react/modules/core/ReactChoreographer;)I
     .locals 2
+    .param p0, "x0"    # Lcom/facebook/react/modules/core/ReactChoreographer;
 
     .line 23
     iget v0, p0, Lcom/facebook/react/modules/core/ReactChoreographer;->mTotalCallbacks:I
@@ -152,6 +165,7 @@
 
 .method static synthetic access$500(Lcom/facebook/react/modules/core/ReactChoreographer;)V
     .locals 0
+    .param p0, "x0"    # Lcom/facebook/react/modules/core/ReactChoreographer;
 
     .line 23
     invoke-direct {p0}, Lcom/facebook/react/modules/core/ReactChoreographer;->maybeRemoveFrameCallback()V
@@ -190,6 +204,7 @@
 
     sput-object v0, Lcom/facebook/react/modules/core/ReactChoreographer;->sInstance:Lcom/facebook/react/modules/core/ReactChoreographer;
 
+    .line 71
     :cond_0
     return-void
 .end method
@@ -239,6 +254,7 @@
     :cond_1
     iput-boolean v1, p0, Lcom/facebook/react/modules/core/ReactChoreographer;->mHasPostedCallback:Z
 
+    .line 155
     :cond_2
     return-void
 .end method
@@ -247,7 +263,7 @@
 # virtual methods
 .method public initializeChoreographer(Ljava/lang/Runnable;)V
     .locals 1
-    .param p1    # Ljava/lang/Runnable;
+    .param p1, "runnable"    # Ljava/lang/Runnable;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -259,11 +275,14 @@
 
     invoke-static {v0}, Lcom/facebook/react/bridge/UiThreadUtil;->runOnUiThread(Ljava/lang/Runnable;)V
 
+    .line 134
     return-void
 .end method
 
 .method public declared-synchronized postFrameCallback(Lcom/facebook/react/modules/core/ReactChoreographer$CallbackType;Lcom/facebook/react/modules/core/ChoreographerCompat$FrameCallback;)V
-    .locals 1
+    .locals 2
+    .param p1, "type"    # Lcom/facebook/react/modules/core/ReactChoreographer$CallbackType;
+    .param p2, "frameCallback"    # Lcom/facebook/react/modules/core/ChoreographerCompat$FrameCallback;
 
     monitor-enter p0
 
@@ -273,54 +292,53 @@
 
     invoke-virtual {p1}, Lcom/facebook/react/modules/core/ReactChoreographer$CallbackType;->getOrder()I
 
-    move-result p1
+    move-result v1
 
-    aget-object p1, v0, p1
+    aget-object v0, v0, v1
 
-    invoke-virtual {p1, p2}, Ljava/util/ArrayDeque;->addLast(Ljava/lang/Object;)V
+    invoke-virtual {v0, p2}, Ljava/util/ArrayDeque;->addLast(Ljava/lang/Object;)V
 
     .line 99
-    iget p1, p0, Lcom/facebook/react/modules/core/ReactChoreographer;->mTotalCallbacks:I
+    iget v0, p0, Lcom/facebook/react/modules/core/ReactChoreographer;->mTotalCallbacks:I
 
-    const/4 p2, 0x1
+    const/4 v1, 0x1
 
-    add-int/2addr p1, p2
+    add-int/2addr v0, v1
 
-    iput p1, p0, Lcom/facebook/react/modules/core/ReactChoreographer;->mTotalCallbacks:I
+    iput v0, p0, Lcom/facebook/react/modules/core/ReactChoreographer;->mTotalCallbacks:I
 
     .line 100
-    iget p1, p0, Lcom/facebook/react/modules/core/ReactChoreographer;->mTotalCallbacks:I
-
-    if-lez p1, :cond_0
+    if-lez v0, :cond_0
 
     goto :goto_0
 
     :cond_0
-    const/4 p2, 0x0
+    const/4 v1, 0x0
 
     :goto_0
-    invoke-static {p2}, Lcom/facebook/infer/annotation/Assertions;->assertCondition(Z)V
+    invoke-static {v1}, Lcom/facebook/infer/annotation/Assertions;->assertCondition(Z)V
 
     .line 101
-    iget-boolean p1, p0, Lcom/facebook/react/modules/core/ReactChoreographer;->mHasPostedCallback:Z
+    iget-boolean v0, p0, Lcom/facebook/react/modules/core/ReactChoreographer;->mHasPostedCallback:Z
 
-    if-nez p1, :cond_2
+    if-nez v0, :cond_2
 
     .line 102
-    iget-object p1, p0, Lcom/facebook/react/modules/core/ReactChoreographer;->mChoreographer:Lcom/facebook/react/modules/core/ChoreographerCompat;
+    iget-object v0, p0, Lcom/facebook/react/modules/core/ReactChoreographer;->mChoreographer:Lcom/facebook/react/modules/core/ChoreographerCompat;
 
-    if-nez p1, :cond_1
+    if-nez v0, :cond_1
 
     .line 103
-    new-instance p1, Lcom/facebook/react/modules/core/ReactChoreographer$1;
+    new-instance v0, Lcom/facebook/react/modules/core/ReactChoreographer$1;
 
-    invoke-direct {p1, p0}, Lcom/facebook/react/modules/core/ReactChoreographer$1;-><init>(Lcom/facebook/react/modules/core/ReactChoreographer;)V
+    invoke-direct {v0, p0}, Lcom/facebook/react/modules/core/ReactChoreographer$1;-><init>(Lcom/facebook/react/modules/core/ReactChoreographer;)V
 
-    invoke-virtual {p0, p1}, Lcom/facebook/react/modules/core/ReactChoreographer;->initializeChoreographer(Ljava/lang/Runnable;)V
+    invoke-virtual {p0, v0}, Lcom/facebook/react/modules/core/ReactChoreographer;->initializeChoreographer(Ljava/lang/Runnable;)V
 
     goto :goto_1
 
     .line 110
+    .end local p0    # "this":Lcom/facebook/react/modules/core/ReactChoreographer;
     :cond_1
     invoke-virtual {p0}, Lcom/facebook/react/modules/core/ReactChoreographer;->postFrameCallbackOnChoreographer()V
     :try_end_0
@@ -333,6 +351,9 @@
 
     return-void
 
+    .line 97
+    .end local p1    # "type":Lcom/facebook/react/modules/core/ReactChoreographer$CallbackType;
+    .end local p2    # "frameCallback":Lcom/facebook/react/modules/core/ChoreographerCompat$FrameCallback;
     :catchall_0
     move-exception p1
 
@@ -351,16 +372,19 @@
 
     invoke-virtual {v0, v1}, Lcom/facebook/react/modules/core/ChoreographerCompat;->postFrameCallback(Lcom/facebook/react/modules/core/ChoreographerCompat$FrameCallback;)V
 
+    .line 117
     const/4 v0, 0x1
 
-    .line 117
     iput-boolean v0, p0, Lcom/facebook/react/modules/core/ReactChoreographer;->mHasPostedCallback:Z
 
+    .line 118
     return-void
 .end method
 
 .method public declared-synchronized removeFrameCallback(Lcom/facebook/react/modules/core/ReactChoreographer$CallbackType;Lcom/facebook/react/modules/core/ChoreographerCompat$FrameCallback;)V
-    .locals 1
+    .locals 2
+    .param p1, "type"    # Lcom/facebook/react/modules/core/ReactChoreographer$CallbackType;
+    .param p2, "frameCallback"    # Lcom/facebook/react/modules/core/ChoreographerCompat$FrameCallback;
 
     monitor-enter p0
 
@@ -370,35 +394,36 @@
 
     invoke-virtual {p1}, Lcom/facebook/react/modules/core/ReactChoreographer$CallbackType;->getOrder()I
 
-    move-result p1
+    move-result v1
 
-    aget-object p1, v0, p1
+    aget-object v0, v0, v1
 
-    invoke-virtual {p1, p2}, Ljava/util/ArrayDeque;->removeFirstOccurrence(Ljava/lang/Object;)Z
+    invoke-virtual {v0, p2}, Ljava/util/ArrayDeque;->removeFirstOccurrence(Ljava/lang/Object;)Z
 
-    move-result p1
+    move-result v0
 
-    if-eqz p1, :cond_0
+    if-eqz v0, :cond_0
 
     .line 140
-    iget p1, p0, Lcom/facebook/react/modules/core/ReactChoreographer;->mTotalCallbacks:I
+    iget v0, p0, Lcom/facebook/react/modules/core/ReactChoreographer;->mTotalCallbacks:I
 
-    add-int/lit8 p1, p1, -0x1
+    add-int/lit8 v0, v0, -0x1
 
-    iput p1, p0, Lcom/facebook/react/modules/core/ReactChoreographer;->mTotalCallbacks:I
+    iput v0, p0, Lcom/facebook/react/modules/core/ReactChoreographer;->mTotalCallbacks:I
 
     .line 141
     invoke-direct {p0}, Lcom/facebook/react/modules/core/ReactChoreographer;->maybeRemoveFrameCallback()V
 
     goto :goto_0
 
-    :cond_0
-    const-string p1, "ReactNative"
-
-    const-string p2, "Tried to remove non-existent frame callback"
-
     .line 143
-    invoke-static {p1, p2}, Lcom/facebook/common/logging/FLog;->e(Ljava/lang/String;Ljava/lang/String;)V
+    .end local p0    # "this":Lcom/facebook/react/modules/core/ReactChoreographer;
+    :cond_0
+    const-string v0, "ReactNative"
+
+    const-string v1, "Tried to remove non-existent frame callback"
+
+    invoke-static {v0, v1}, Lcom/facebook/common/logging/FLog;->e(Ljava/lang/String;Ljava/lang/String;)V
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
@@ -408,6 +433,9 @@
 
     return-void
 
+    .line 138
+    .end local p1    # "type":Lcom/facebook/react/modules/core/ReactChoreographer$CallbackType;
+    .end local p2    # "frameCallback":Lcom/facebook/react/modules/core/ChoreographerCompat$FrameCallback;
     :catchall_0
     move-exception p1
 

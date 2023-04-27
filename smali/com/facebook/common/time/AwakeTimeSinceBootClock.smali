@@ -6,16 +6,8 @@
 .implements Lcom/facebook/common/time/MonotonicClock;
 
 
-# annotations
-.annotation build Lcom/facebook/common/internal/DoNotStrip;
-.end annotation
-
-
 # static fields
 .field private static final INSTANCE:Lcom/facebook/common/time/AwakeTimeSinceBootClock;
-    .annotation build Lcom/facebook/common/internal/DoNotStrip;
-    .end annotation
-.end field
 
 
 # direct methods
@@ -38,13 +30,12 @@
     .line 20
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
+    .line 21
     return-void
 .end method
 
 .method public static get()Lcom/facebook/common/time/AwakeTimeSinceBootClock;
     .locals 1
-    .annotation build Lcom/facebook/common/internal/DoNotStrip;
-    .end annotation
 
     .line 29
     sget-object v0, Lcom/facebook/common/time/AwakeTimeSinceBootClock;->INSTANCE:Lcom/facebook/common/time/AwakeTimeSinceBootClock;
@@ -56,8 +47,6 @@
 # virtual methods
 .method public now()J
     .locals 2
-    .annotation build Lcom/facebook/common/internal/DoNotStrip;
-    .end annotation
 
     .line 36
     invoke-static {}, Landroid/os/SystemClock;->uptimeMillis()J

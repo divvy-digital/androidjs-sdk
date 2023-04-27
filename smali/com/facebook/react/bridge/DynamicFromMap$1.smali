@@ -16,7 +16,7 @@
 .annotation system Ldalvik/annotation/Signature;
     value = {
         "Ljava/lang/ThreadLocal<",
-        "Landroid/support/v4/util/Pools$SimplePool<",
+        "Landroidx/core/util/Pools$SimplePool<",
         "Lcom/facebook/react/bridge/DynamicFromMap;",
         ">;>;"
     }
@@ -35,23 +35,23 @@
 
 
 # virtual methods
-.method protected initialValue()Landroid/support/v4/util/Pools$SimplePool;
+.method protected initialValue()Landroidx/core/util/Pools$SimplePool;
     .locals 2
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "()",
-            "Landroid/support/v4/util/Pools$SimplePool<",
+            "Landroidx/core/util/Pools$SimplePool<",
             "Lcom/facebook/react/bridge/DynamicFromMap;",
             ">;"
         }
     .end annotation
 
     .line 21
-    new-instance v0, Landroid/support/v4/util/Pools$SimplePool;
+    new-instance v0, Landroidx/core/util/Pools$SimplePool;
 
     const/16 v1, 0xa
 
-    invoke-direct {v0, v1}, Landroid/support/v4/util/Pools$SimplePool;-><init>(I)V
+    invoke-direct {v0, v1}, Landroidx/core/util/Pools$SimplePool;-><init>(I)V
 
     return-object v0
 .end method
@@ -60,7 +60,7 @@
     .locals 1
 
     .line 18
-    invoke-virtual {p0}, Lcom/facebook/react/bridge/DynamicFromMap$1;->initialValue()Landroid/support/v4/util/Pools$SimplePool;
+    invoke-virtual {p0}, Lcom/facebook/react/bridge/DynamicFromMap$1;->initialValue()Landroidx/core/util/Pools$SimplePool;
 
     move-result-object v0
 

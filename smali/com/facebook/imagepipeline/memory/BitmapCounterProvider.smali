@@ -40,9 +40,9 @@
 
     sput v0, Lcom/facebook/imagepipeline/memory/BitmapCounterProvider;->MAX_BITMAP_TOTAL_SIZE:I
 
+    .line 28
     const/16 v0, 0x180
 
-    .line 28
     sput v0, Lcom/facebook/imagepipeline/memory/BitmapCounterProvider;->sMaxBitmapCount:I
 
     return-void
@@ -59,8 +59,6 @@
 
 .method public static get()Lcom/facebook/imagepipeline/memory/BitmapCounter;
     .locals 4
-    .annotation build Lcom/facebook/infer/annotation/ThreadSafe;
-    .end annotation
 
     .line 51
     sget-object v0, Lcom/facebook/imagepipeline/memory/BitmapCounterProvider;->sBitmapCounter:Lcom/facebook/imagepipeline/memory/BitmapCounter;
@@ -132,6 +130,8 @@
 
     long-to-int v1, v0
 
+    .line 34
+    .local v1, "maxMemory":I
     int-to-long v2, v1
 
     const-wide/32 v4, 0x1000000
@@ -141,21 +141,22 @@
     if-lez v0, :cond_0
 
     .line 35
-    div-int/lit8 v1, v1, 0x4
+    div-int/lit8 v0, v1, 0x4
 
-    mul-int/lit8 v1, v1, 0x3
+    mul-int/lit8 v0, v0, 0x3
 
-    return v1
+    return v0
 
     .line 37
     :cond_0
-    div-int/lit8 v1, v1, 0x2
+    div-int/lit8 v0, v1, 0x2
 
-    return v1
+    return v0
 .end method
 
 .method public static initialize(Lcom/facebook/imagepipeline/memory/BitmapCounterConfig;)V
-    .locals 1
+    .locals 2
+    .param p0, "bitmapCounterConfig"    # Lcom/facebook/imagepipeline/memory/BitmapCounterConfig;
 
     .line 42
     sget-object v0, Lcom/facebook/imagepipeline/memory/BitmapCounterProvider;->sBitmapCounter:Lcom/facebook/imagepipeline/memory/BitmapCounter;
@@ -165,19 +166,20 @@
     .line 45
     invoke-virtual {p0}, Lcom/facebook/imagepipeline/memory/BitmapCounterConfig;->getMaxBitmapCount()I
 
-    move-result p0
+    move-result v0
 
-    sput p0, Lcom/facebook/imagepipeline/memory/BitmapCounterProvider;->sMaxBitmapCount:I
+    sput v0, Lcom/facebook/imagepipeline/memory/BitmapCounterProvider;->sMaxBitmapCount:I
 
+    .line 47
     return-void
 
     .line 43
     :cond_0
-    new-instance p0, Ljava/lang/IllegalStateException;
+    new-instance v0, Ljava/lang/IllegalStateException;
 
-    const-string v0, "BitmapCounter has already been created! `BitmapCounterProvider.initialize(...)` should only be called before `BitmapCounterProvider.get()` or not at all!"
+    const-string v1, "BitmapCounter has already been created! `BitmapCounterProvider.initialize(...)` should only be called before `BitmapCounterProvider.get()` or not at all!"
 
-    invoke-direct {p0, v0}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 
-    throw p0
+    throw v0
 .end method

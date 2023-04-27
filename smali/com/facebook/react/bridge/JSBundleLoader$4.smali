@@ -38,6 +38,7 @@
 # virtual methods
 .method public loadScript(Lcom/facebook/react/bridge/JSBundleLoaderDelegate;)Ljava/lang/String;
     .locals 3
+    .param p1, "delegate"    # Lcom/facebook/react/bridge/JSBundleLoaderDelegate;
 
     .line 94
     :try_start_0
@@ -50,23 +51,25 @@
     invoke-interface {p1, v0, v1, v2}, Lcom/facebook/react/bridge/JSBundleLoaderDelegate;->loadScriptFromDeltaBundle(Ljava/lang/String;Lcom/facebook/react/bridge/NativeDeltaClient;Z)V
 
     .line 95
-    iget-object p1, p0, Lcom/facebook/react/bridge/JSBundleLoader$4;->val$sourceURL:Ljava/lang/String;
+    iget-object v0, p0, Lcom/facebook/react/bridge/JSBundleLoader$4;->val$sourceURL:Ljava/lang/String;
     :try_end_0
     .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
 
-    return-object p1
+    return-object v0
 
+    .line 96
     :catch_0
-    move-exception p1
+    move-exception v0
 
     .line 97
-    invoke-virtual {p1}, Ljava/lang/Exception;->getMessage()Ljava/lang/String;
+    .local v0, "e":Ljava/lang/Exception;
+    invoke-virtual {v0}, Ljava/lang/Exception;->getMessage()Ljava/lang/String;
 
-    move-result-object v0
+    move-result-object v1
 
-    invoke-static {v0, p1}, Lcom/facebook/react/common/DebugServerException;->makeGeneric(Ljava/lang/String;Ljava/lang/Throwable;)Lcom/facebook/react/common/DebugServerException;
+    invoke-static {v1, v0}, Lcom/facebook/react/common/DebugServerException;->makeGeneric(Ljava/lang/String;Ljava/lang/Throwable;)Lcom/facebook/react/common/DebugServerException;
 
-    move-result-object p1
+    move-result-object v1
 
-    throw p1
+    throw v1
 .end method

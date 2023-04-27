@@ -22,6 +22,7 @@
     .locals 0
 
     .line 20
+    .local p0, "this":Lcom/facebook/react/uimanager/SimpleViewManager;, "Lcom/facebook/react/uimanager/SimpleViewManager<TT;>;"
     invoke-direct {p0}, Lcom/facebook/react/uimanager/BaseViewManager;-><init>()V
 
     return-void
@@ -33,6 +34,7 @@
     .locals 1
 
     .line 25
+    .local p0, "this":Lcom/facebook/react/uimanager/SimpleViewManager;, "Lcom/facebook/react/uimanager/SimpleViewManager<TT;>;"
     new-instance v0, Lcom/facebook/react/uimanager/LayoutShadowNode;
 
     invoke-direct {v0}, Lcom/facebook/react/uimanager/LayoutShadowNode;-><init>()V
@@ -44,6 +46,7 @@
     .locals 1
 
     .line 20
+    .local p0, "this":Lcom/facebook/react/uimanager/SimpleViewManager;, "Lcom/facebook/react/uimanager/SimpleViewManager<TT;>;"
     invoke-virtual {p0}, Lcom/facebook/react/uimanager/SimpleViewManager;->createShadowNodeInstance()Lcom/facebook/react/uimanager/LayoutShadowNode;
 
     move-result-object v0
@@ -63,6 +66,7 @@
     .end annotation
 
     .line 30
+    .local p0, "this":Lcom/facebook/react/uimanager/SimpleViewManager;, "Lcom/facebook/react/uimanager/SimpleViewManager<TT;>;"
     const-class v0, Lcom/facebook/react/uimanager/LayoutShadowNode;
 
     return-object v0
@@ -70,6 +74,7 @@
 
 .method public updateExtraData(Landroid/view/View;Ljava/lang/Object;)V
     .locals 0
+    .param p2, "extraData"    # Ljava/lang/Object;
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(TT;",
@@ -78,5 +83,8 @@
         }
     .end annotation
 
+    .line 35
+    .local p0, "this":Lcom/facebook/react/uimanager/SimpleViewManager;, "Lcom/facebook/react/uimanager/SimpleViewManager<TT;>;"
+    .local p1, "root":Landroid/view/View;, "TT;"
     return-void
 .end method

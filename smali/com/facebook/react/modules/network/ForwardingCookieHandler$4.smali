@@ -32,6 +32,8 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/modules/network/ForwardingCookieHandler;Lcom/facebook/react/bridge/ReactContext;Ljava/lang/Runnable;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/modules/network/ForwardingCookieHandler;
+    .param p2, "reactContext"    # Lcom/facebook/react/bridge/ReactContext;
 
     .line 165
     iput-object p1, p0, Lcom/facebook/react/modules/network/ForwardingCookieHandler$4;->this$0:Lcom/facebook/react/modules/network/ForwardingCookieHandler;
@@ -57,12 +59,14 @@
 .end method
 
 .method protected varargs doInBackgroundGuarded([Ljava/lang/Void;)V
-    .locals 0
+    .locals 1
+    .param p1, "params"    # [Ljava/lang/Void;
 
     .line 168
-    iget-object p1, p0, Lcom/facebook/react/modules/network/ForwardingCookieHandler$4;->val$runnable:Ljava/lang/Runnable;
+    iget-object v0, p0, Lcom/facebook/react/modules/network/ForwardingCookieHandler$4;->val$runnable:Ljava/lang/Runnable;
 
-    invoke-interface {p1}, Ljava/lang/Runnable;->run()V
+    invoke-interface {v0}, Ljava/lang/Runnable;->run()V
 
+    .line 169
     return-void
 .end method

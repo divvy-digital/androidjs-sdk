@@ -10,6 +10,8 @@
 # direct methods
 .method public constructor <init>(Ljava/net/URL;Lokhttp3/OkHttpClient;)V
     .locals 1
+    .param p1, "url"    # Ljava/net/URL;
+    .param p2, "client"    # Lokhttp3/OkHttpClient;
 
     .line 30
     new-instance v0, Lokhttp3/internal/huc/OkHttpURLConnection;
@@ -18,11 +20,15 @@
 
     invoke-direct {p0, v0}, Lokhttp3/internal/huc/OkHttpsURLConnection;-><init>(Lokhttp3/internal/huc/OkHttpURLConnection;)V
 
+    .line 31
     return-void
 .end method
 
 .method public constructor <init>(Ljava/net/URL;Lokhttp3/OkHttpClient;Lokhttp3/internal/URLFilter;)V
     .locals 1
+    .param p1, "url"    # Ljava/net/URL;
+    .param p2, "client"    # Lokhttp3/OkHttpClient;
+    .param p3, "filter"    # Lokhttp3/internal/URLFilter;
 
     .line 34
     new-instance v0, Lokhttp3/internal/huc/OkHttpURLConnection;
@@ -31,11 +37,13 @@
 
     invoke-direct {p0, v0}, Lokhttp3/internal/huc/OkHttpsURLConnection;-><init>(Lokhttp3/internal/huc/OkHttpURLConnection;)V
 
+    .line 35
     return-void
 .end method
 
 .method public constructor <init>(Lokhttp3/internal/huc/OkHttpURLConnection;)V
     .locals 0
+    .param p1, "delegate"    # Lokhttp3/internal/huc/OkHttpURLConnection;
 
     .line 38
     invoke-direct {p0, p1}, Lokhttp3/internal/huc/DelegatingHttpsURLConnection;-><init>(Ljava/net/HttpURLConnection;)V
@@ -43,6 +51,7 @@
     .line 39
     iput-object p1, p0, Lokhttp3/internal/huc/OkHttpsURLConnection;->delegate:Lokhttp3/internal/huc/OkHttpURLConnection;
 
+    .line 40
     return-void
 .end method
 
@@ -169,8 +178,6 @@
 
 .method public bridge synthetic getContentLengthLong()J
     .locals 2
-    .annotation build Lorg/codehaus/mojo/animal_sniffer/IgnoreJRERequirement;
-    .end annotation
 
     .line 26
     invoke-super {p0}, Lokhttp3/internal/huc/DelegatingHttpsURLConnection;->getContentLengthLong()J
@@ -314,8 +321,6 @@
 
 .method public bridge synthetic getHeaderFieldLong(Ljava/lang/String;J)J
     .locals 0
-    .annotation build Lorg/codehaus/mojo/animal_sniffer/IgnoreJRERequirement;
-    .end annotation
 
     .line 26
     invoke-super {p0, p1, p2, p3}, Lokhttp3/internal/huc/DelegatingHttpsURLConnection;->getHeaderFieldLong(Ljava/lang/String;J)J
@@ -692,8 +697,6 @@
 
 .method public bridge synthetic setFixedLengthStreamingMode(J)V
     .locals 0
-    .annotation build Lorg/codehaus/mojo/animal_sniffer/IgnoreJRERequirement;
-    .end annotation
 
     .line 26
     invoke-super {p0, p1, p2}, Lokhttp3/internal/huc/DelegatingHttpsURLConnection;->setFixedLengthStreamingMode(J)V
@@ -703,6 +706,7 @@
 
 .method public setHostnameVerifier(Ljavax/net/ssl/HostnameVerifier;)V
     .locals 2
+    .param p1, "hostnameVerifier"    # Ljavax/net/ssl/HostnameVerifier;
 
     .line 51
     iget-object v0, p0, Lokhttp3/internal/huc/OkHttpsURLConnection;->delegate:Lokhttp3/internal/huc/OkHttpURLConnection;
@@ -716,15 +720,16 @@
     .line 52
     invoke-virtual {v1, p1}, Lokhttp3/OkHttpClient$Builder;->hostnameVerifier(Ljavax/net/ssl/HostnameVerifier;)Lokhttp3/OkHttpClient$Builder;
 
-    move-result-object p1
+    move-result-object v1
 
     .line 53
-    invoke-virtual {p1}, Lokhttp3/OkHttpClient$Builder;->build()Lokhttp3/OkHttpClient;
+    invoke-virtual {v1}, Lokhttp3/OkHttpClient$Builder;->build()Lokhttp3/OkHttpClient;
 
-    move-result-object p1
+    move-result-object v1
 
-    iput-object p1, v0, Lokhttp3/internal/huc/OkHttpURLConnection;->client:Lokhttp3/OkHttpClient;
+    iput-object v1, v0, Lokhttp3/internal/huc/OkHttpURLConnection;->client:Lokhttp3/OkHttpClient;
 
+    .line 54
     return-void
 .end method
 
@@ -780,7 +785,9 @@
 
 .method public setSSLSocketFactory(Ljavax/net/ssl/SSLSocketFactory;)V
     .locals 2
+    .param p1, "sslSocketFactory"    # Ljavax/net/ssl/SSLSocketFactory;
 
+    .line 61
     if-eqz p1, :cond_0
 
     .line 65
@@ -795,26 +802,27 @@
     .line 66
     invoke-virtual {v1, p1}, Lokhttp3/OkHttpClient$Builder;->sslSocketFactory(Ljavax/net/ssl/SSLSocketFactory;)Lokhttp3/OkHttpClient$Builder;
 
-    move-result-object p1
+    move-result-object v1
 
     .line 67
-    invoke-virtual {p1}, Lokhttp3/OkHttpClient$Builder;->build()Lokhttp3/OkHttpClient;
+    invoke-virtual {v1}, Lokhttp3/OkHttpClient$Builder;->build()Lokhttp3/OkHttpClient;
 
-    move-result-object p1
+    move-result-object v1
 
-    iput-object p1, v0, Lokhttp3/internal/huc/OkHttpURLConnection;->client:Lokhttp3/OkHttpClient;
+    iput-object v1, v0, Lokhttp3/internal/huc/OkHttpURLConnection;->client:Lokhttp3/OkHttpClient;
 
+    .line 68
     return-void
 
     .line 62
     :cond_0
-    new-instance p1, Ljava/lang/IllegalArgumentException;
+    new-instance v0, Ljava/lang/IllegalArgumentException;
 
-    const-string v0, "sslSocketFactory == null"
+    const-string v1, "sslSocketFactory == null"
 
-    invoke-direct {p1, v0}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 .method public bridge synthetic setUseCaches(Z)V

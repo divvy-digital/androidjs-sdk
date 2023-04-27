@@ -4,9 +4,6 @@
 
 
 # annotations
-.annotation build Lcom/facebook/react/uimanager/annotations/ReactPropertyHolder;
-.end annotation
-
 .annotation system Ldalvik/annotation/Signature;
     value = {
         "<T:",
@@ -24,6 +21,7 @@
     .locals 0
 
     .line 33
+    .local p0, "this":Lcom/facebook/react/uimanager/ViewManager;, "Lcom/facebook/react/uimanager/ViewManager<TT;TC;>;"
     invoke-direct {p0}, Lcom/facebook/react/bridge/BaseJavaModule;-><init>()V
 
     return-void
@@ -33,7 +31,7 @@
 # virtual methods
 .method protected addEventEmitters(Lcom/facebook/react/uimanager/ThemedReactContext;Landroid/view/View;)V
     .locals 0
-    .param p1    # Lcom/facebook/react/uimanager/ThemedReactContext;
+    .param p1, "reactContext"    # Lcom/facebook/react/uimanager/ThemedReactContext;
         .annotation runtime Ljavax/annotation/Nonnull;
         .end annotation
     .end param
@@ -49,6 +47,9 @@
         }
     .end annotation
 
+    .line 105
+    .local p0, "this":Lcom/facebook/react/uimanager/ViewManager;, "Lcom/facebook/react/uimanager/ViewManager<TT;TC;>;"
+    .local p2, "view":Landroid/view/View;, "TT;"
     return-void
 .end method
 
@@ -61,6 +62,7 @@
     .end annotation
 
     .line 67
+    .local p0, "this":Lcom/facebook/react/uimanager/ViewManager;, "Lcom/facebook/react/uimanager/ViewManager<TT;TC;>;"
     new-instance v0, Ljava/lang/RuntimeException;
 
     const-string v1, "ViewManager subclasses must implement createShadowNodeInstance()"
@@ -71,8 +73,8 @@
 .end method
 
 .method public createShadowNodeInstance(Lcom/facebook/react/bridge/ReactApplicationContext;)Lcom/facebook/react/uimanager/ReactShadowNode;
-    .locals 0
-    .param p1    # Lcom/facebook/react/bridge/ReactApplicationContext;
+    .locals 1
+    .param p1, "context"    # Lcom/facebook/react/bridge/ReactApplicationContext;
         .annotation runtime Ljavax/annotation/Nonnull;
         .end annotation
     .end param
@@ -88,19 +90,21 @@
     .end annotation
 
     .line 71
+    .local p0, "this":Lcom/facebook/react/uimanager/ViewManager;, "Lcom/facebook/react/uimanager/ViewManager<TT;TC;>;"
     invoke-virtual {p0}, Lcom/facebook/react/uimanager/ViewManager;->createShadowNodeInstance()Lcom/facebook/react/uimanager/ReactShadowNode;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public final createView(Lcom/facebook/react/uimanager/ThemedReactContext;Lcom/facebook/react/touch/JSResponderHandler;)Landroid/view/View;
-    .locals 1
-    .param p1    # Lcom/facebook/react/uimanager/ThemedReactContext;
+    .locals 2
+    .param p1, "reactContext"    # Lcom/facebook/react/uimanager/ThemedReactContext;
         .annotation runtime Ljavax/annotation/Nonnull;
         .end annotation
     .end param
+    .param p2, "jsResponderHandler"    # Lcom/facebook/react/touch/JSResponderHandler;
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -114,25 +118,28 @@
     .end annotation
 
     .line 47
+    .local p0, "this":Lcom/facebook/react/uimanager/ViewManager;, "Lcom/facebook/react/uimanager/ViewManager<TT;TC;>;"
     invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/ViewManager;->createViewInstance(Lcom/facebook/react/uimanager/ThemedReactContext;)Landroid/view/View;
 
     move-result-object v0
 
     .line 48
+    .local v0, "view":Landroid/view/View;, "TT;"
     invoke-virtual {p0, p1, v0}, Lcom/facebook/react/uimanager/ViewManager;->addEventEmitters(Lcom/facebook/react/uimanager/ThemedReactContext;Landroid/view/View;)V
 
     .line 49
-    instance-of p1, v0, Lcom/facebook/react/touch/ReactInterceptingViewGroup;
+    instance-of v1, v0, Lcom/facebook/react/touch/ReactInterceptingViewGroup;
 
-    if-eqz p1, :cond_0
+    if-eqz v1, :cond_0
 
     .line 50
-    move-object p1, v0
+    move-object v1, v0
 
-    check-cast p1, Lcom/facebook/react/touch/ReactInterceptingViewGroup;
+    check-cast v1, Lcom/facebook/react/touch/ReactInterceptingViewGroup;
 
-    invoke-interface {p1, p2}, Lcom/facebook/react/touch/ReactInterceptingViewGroup;->setOnInterceptTouchEventListener(Lcom/facebook/react/touch/OnInterceptTouchEventListener;)V
+    invoke-interface {v1, p2}, Lcom/facebook/react/touch/ReactInterceptingViewGroup;->setOnInterceptTouchEventListener(Lcom/facebook/react/touch/OnInterceptTouchEventListener;)V
 
+    .line 52
     :cond_0
     return-object v0
 .end method
@@ -169,6 +176,8 @@
     .annotation runtime Ljavax/annotation/Nullable;
     .end annotation
 
+    .line 162
+    .local p0, "this":Lcom/facebook/react/uimanager/ViewManager;, "Lcom/facebook/react/uimanager/ViewManager<TT;TC;>;"
     const/4 v0, 0x0
 
     return-object v0
@@ -189,6 +198,8 @@
     .annotation runtime Ljavax/annotation/Nullable;
     .end annotation
 
+    .line 181
+    .local p0, "this":Lcom/facebook/react/uimanager/ViewManager;, "Lcom/facebook/react/uimanager/ViewManager<TT;TC;>;"
     const/4 v0, 0x0
 
     return-object v0
@@ -209,6 +220,8 @@
     .annotation runtime Ljavax/annotation/Nullable;
     .end annotation
 
+    .line 196
+    .local p0, "this":Lcom/facebook/react/uimanager/ViewManager;, "Lcom/facebook/react/uimanager/ViewManager<TT;TC;>;"
     const/4 v0, 0x0
 
     return-object v0
@@ -229,6 +242,8 @@
     .annotation runtime Ljavax/annotation/Nullable;
     .end annotation
 
+    .line 204
+    .local p0, "this":Lcom/facebook/react/uimanager/ViewManager;, "Lcom/facebook/react/uimanager/ViewManager<TT;TC;>;"
     const/4 v0, 0x0
 
     return-object v0
@@ -252,6 +267,7 @@
     .end annotation
 
     .line 208
+    .local p0, "this":Lcom/facebook/react/uimanager/ViewManager;, "Lcom/facebook/react/uimanager/ViewManager<TT;TC;>;"
     invoke-virtual {p0}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
 
     move-result-object v0
@@ -278,11 +294,20 @@
 .end method
 
 .method public measure(Lcom/facebook/react/bridge/ReactContext;Lcom/facebook/react/bridge/ReadableNativeMap;Lcom/facebook/react/bridge/ReadableNativeMap;FLcom/facebook/yoga/YogaMeasureMode;FLcom/facebook/yoga/YogaMeasureMode;)J
-    .locals 0
+    .locals 2
+    .param p1, "context"    # Lcom/facebook/react/bridge/ReactContext;
+    .param p2, "localData"    # Lcom/facebook/react/bridge/ReadableNativeMap;
+    .param p3, "props"    # Lcom/facebook/react/bridge/ReadableNativeMap;
+    .param p4, "width"    # F
+    .param p5, "widthMode"    # Lcom/facebook/yoga/YogaMeasureMode;
+    .param p6, "height"    # F
+    .param p7, "heightMode"    # Lcom/facebook/yoga/YogaMeasureMode;
 
-    const-wide/16 p1, 0x0
+    .line 226
+    .local p0, "this":Lcom/facebook/react/uimanager/ViewManager;, "Lcom/facebook/react/uimanager/ViewManager<TT;TC;>;"
+    const-wide/16 v0, 0x0
 
-    return-wide p1
+    return-wide v0
 .end method
 
 .method protected onAfterUpdateTransaction(Landroid/view/View;)V
@@ -297,6 +322,9 @@
         }
     .end annotation
 
+    .line 114
+    .local p0, "this":Lcom/facebook/react/uimanager/ViewManager;, "Lcom/facebook/react/uimanager/ViewManager<TT;TC;>;"
+    .local p1, "view":Landroid/view/View;, "TT;"
     return-void
 .end method
 
@@ -312,6 +340,9 @@
         }
     .end annotation
 
+    .line 97
+    .local p0, "this":Lcom/facebook/react/uimanager/ViewManager;, "Lcom/facebook/react/uimanager/ViewManager<TT;TC;>;"
+    .local p1, "view":Landroid/view/View;, "TT;"
     return-void
 .end method
 
@@ -321,7 +352,8 @@
         .annotation runtime Ljavax/annotation/Nonnull;
         .end annotation
     .end param
-    .param p3    # Lcom/facebook/react/bridge/ReadableArray;
+    .param p2, "commandId"    # I
+    .param p3, "args"    # Lcom/facebook/react/bridge/ReadableArray;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -333,6 +365,9 @@
         }
     .end annotation
 
+    .line 139
+    .local p0, "this":Lcom/facebook/react/uimanager/ViewManager;, "Lcom/facebook/react/uimanager/ViewManager<TT;TC;>;"
+    .local p1, "root":Landroid/view/View;, "TT;"
     return-void
 .end method
 
@@ -351,11 +386,13 @@
 .end method
 
 .method public updateLocalData(Landroid/view/View;Lcom/facebook/react/uimanager/ReactStylesDiffMap;Lcom/facebook/react/uimanager/ReactStylesDiffMap;)Ljava/lang/Object;
-    .locals 0
+    .locals 1
     .param p1    # Landroid/view/View;
         .annotation runtime Ljavax/annotation/Nonnull;
         .end annotation
     .end param
+    .param p2, "props"    # Lcom/facebook/react/uimanager/ReactStylesDiffMap;
+    .param p3, "localData"    # Lcom/facebook/react/uimanager/ReactStylesDiffMap;
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(TT;",
@@ -369,9 +406,12 @@
     .annotation runtime Ljavax/annotation/Nullable;
     .end annotation
 
-    const/4 p1, 0x0
+    .line 215
+    .local p0, "this":Lcom/facebook/react/uimanager/ViewManager;, "Lcom/facebook/react/uimanager/ViewManager<TT;TC;>;"
+    .local p1, "view":Landroid/view/View;, "TT;"
+    const/4 v0, 0x0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public final updateProperties(Landroid/view/View;Lcom/facebook/react/uimanager/ReactStylesDiffMap;)V
@@ -380,6 +420,7 @@
         .annotation runtime Ljavax/annotation/Nonnull;
         .end annotation
     .end param
+    .param p2, "props"    # Lcom/facebook/react/uimanager/ReactStylesDiffMap;
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(TT;",
@@ -389,10 +430,13 @@
     .end annotation
 
     .line 37
+    .local p0, "this":Lcom/facebook/react/uimanager/ViewManager;, "Lcom/facebook/react/uimanager/ViewManager<TT;TC;>;"
+    .local p1, "viewToUpdate":Landroid/view/View;, "TT;"
     invoke-static {p0, p1, p2}, Lcom/facebook/react/uimanager/ViewManagerPropertyUpdater;->updateProps(Lcom/facebook/react/uimanager/ViewManager;Landroid/view/View;Lcom/facebook/react/uimanager/ReactStylesDiffMap;)V
 
     .line 38
     invoke-virtual {p0, p1}, Lcom/facebook/react/uimanager/ViewManager;->onAfterUpdateTransaction(Landroid/view/View;)V
 
+    .line 39
     return-void
 .end method

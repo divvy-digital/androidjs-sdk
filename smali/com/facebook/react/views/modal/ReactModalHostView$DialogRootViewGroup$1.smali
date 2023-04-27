@@ -27,6 +27,8 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/views/modal/ReactModalHostView$DialogRootViewGroup;Lcom/facebook/react/bridge/ReactContext;III)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/views/modal/ReactModalHostView$DialogRootViewGroup;
+    .param p2, "reactContext"    # Lcom/facebook/react/bridge/ReactContext;
 
     .line 337
     iput-object p1, p0, Lcom/facebook/react/views/modal/ReactModalHostView$DialogRootViewGroup$1;->this$0:Lcom/facebook/react/views/modal/ReactModalHostView$DialogRootViewGroup;
@@ -71,5 +73,6 @@
     .line 341
     invoke-virtual {v0, v1, v2, v3}, Lcom/facebook/react/uimanager/UIManagerModule;->updateNodeSize(III)V
 
+    .line 342
     return-void
 .end method

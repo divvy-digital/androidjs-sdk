@@ -25,18 +25,21 @@
 
 # direct methods
 .method public constructor <init>(Lcom/facebook/react/bridge/ReactApplicationContext;Lcom/facebook/react/modules/core/DefaultHardwareBackBtnHandler;)V
-    .locals 0
+    .locals 1
+    .param p1, "reactContext"    # Lcom/facebook/react/bridge/ReactApplicationContext;
+    .param p2, "backBtnHandler"    # Lcom/facebook/react/modules/core/DefaultHardwareBackBtnHandler;
 
     .line 39
     invoke-direct {p0, p1}, Lcom/facebook/react/bridge/ReactContextBaseJavaModule;-><init>(Lcom/facebook/react/bridge/ReactApplicationContext;)V
 
     .line 40
-    new-instance p1, Lcom/facebook/react/modules/core/DeviceEventManagerModule$1;
+    new-instance v0, Lcom/facebook/react/modules/core/DeviceEventManagerModule$1;
 
-    invoke-direct {p1, p0, p2}, Lcom/facebook/react/modules/core/DeviceEventManagerModule$1;-><init>(Lcom/facebook/react/modules/core/DeviceEventManagerModule;Lcom/facebook/react/modules/core/DefaultHardwareBackBtnHandler;)V
+    invoke-direct {v0, p0, p2}, Lcom/facebook/react/modules/core/DeviceEventManagerModule$1;-><init>(Lcom/facebook/react/modules/core/DeviceEventManagerModule;Lcom/facebook/react/modules/core/DefaultHardwareBackBtnHandler;)V
 
-    iput-object p1, p0, Lcom/facebook/react/modules/core/DeviceEventManagerModule;->mInvokeDefaultBackPressRunnable:Ljava/lang/Runnable;
+    iput-object v0, p0, Lcom/facebook/react/modules/core/DeviceEventManagerModule;->mInvokeDefaultBackPressRunnable:Ljava/lang/Runnable;
 
+    .line 47
     return-void
 .end method
 
@@ -59,18 +62,20 @@
 
     check-cast v0, Lcom/facebook/react/modules/core/DeviceEventManagerModule$RCTDeviceEventEmitter;
 
+    .line 55
     const-string v1, "hardwareBackPress"
 
     const/4 v2, 0x0
 
-    .line 55
     invoke-interface {v0, v1, v2}, Lcom/facebook/react/modules/core/DeviceEventManagerModule$RCTDeviceEventEmitter;->emit(Ljava/lang/String;Ljava/lang/Object;)V
 
+    .line 56
     return-void
 .end method
 
 .method public emitNewIntentReceived(Landroid/net/Uri;)V
-    .locals 3
+    .locals 4
+    .param p1, "uri"    # Landroid/net/Uri;
 
     .line 62
     invoke-static {}, Lcom/facebook/react/bridge/Arguments;->createMap()Lcom/facebook/react/bridge/WritableMap;
@@ -78,37 +83,40 @@
     move-result-object v0
 
     .line 63
+    .local v0, "map":Lcom/facebook/react/bridge/WritableMap;
     invoke-virtual {p1}, Landroid/net/Uri;->toString()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v1
 
-    const-string v1, "url"
+    const-string v2, "url"
 
-    invoke-interface {v0, v1, p1}, Lcom/facebook/react/bridge/WritableMap;->putString(Ljava/lang/String;Ljava/lang/String;)V
+    invoke-interface {v0, v2, v1}, Lcom/facebook/react/bridge/WritableMap;->putString(Ljava/lang/String;Ljava/lang/String;)V
 
     .line 64
     invoke-virtual {p0}, Lcom/facebook/react/modules/core/DeviceEventManagerModule;->getReactApplicationContext()Lcom/facebook/react/bridge/ReactApplicationContext;
 
-    move-result-object p1
+    move-result-object v1
 
-    const-class v2, Lcom/facebook/react/modules/core/DeviceEventManagerModule$RCTDeviceEventEmitter;
+    const-class v3, Lcom/facebook/react/modules/core/DeviceEventManagerModule$RCTDeviceEventEmitter;
 
     .line 65
-    invoke-virtual {p1, v2}, Lcom/facebook/react/bridge/ReactApplicationContext;->getJSModule(Ljava/lang/Class;)Lcom/facebook/react/bridge/JavaScriptModule;
+    invoke-virtual {v1, v3}, Lcom/facebook/react/bridge/ReactApplicationContext;->getJSModule(Ljava/lang/Class;)Lcom/facebook/react/bridge/JavaScriptModule;
 
-    move-result-object p1
+    move-result-object v1
 
-    check-cast p1, Lcom/facebook/react/modules/core/DeviceEventManagerModule$RCTDeviceEventEmitter;
+    check-cast v1, Lcom/facebook/react/modules/core/DeviceEventManagerModule$RCTDeviceEventEmitter;
 
     .line 66
-    invoke-interface {p1, v1, v0}, Lcom/facebook/react/modules/core/DeviceEventManagerModule$RCTDeviceEventEmitter;->emit(Ljava/lang/String;Ljava/lang/Object;)V
+    invoke-interface {v1, v2, v0}, Lcom/facebook/react/modules/core/DeviceEventManagerModule$RCTDeviceEventEmitter;->emit(Ljava/lang/String;Ljava/lang/Object;)V
 
+    .line 67
     return-void
 .end method
 
 .method public getName()Ljava/lang/String;
     .locals 1
 
+    .line 80
     const-string v0, "DeviceEventManager"
 
     return-object v0
@@ -128,5 +136,6 @@
 
     invoke-virtual {v0, v1}, Lcom/facebook/react/bridge/ReactApplicationContext;->runOnUiQueueThread(Ljava/lang/Runnable;)V
 
+    .line 76
     return-void
 .end method

@@ -30,14 +30,19 @@
 
 # virtual methods
 .method public measure(Lcom/facebook/yoga/YogaNode;FLcom/facebook/yoga/YogaMeasureMode;FLcom/facebook/yoga/YogaMeasureMode;)J
-    .locals 0
+    .locals 2
+    .param p1, "node"    # Lcom/facebook/yoga/YogaNode;
+    .param p2, "width"    # F
+    .param p3, "widthMode"    # Lcom/facebook/yoga/YogaMeasureMode;
+    .param p4, "height"    # F
+    .param p5, "heightMode"    # Lcom/facebook/yoga/YogaMeasureMode;
 
     .line 35
-    new-instance p1, Ljava/lang/IllegalStateException;
+    new-instance v0, Ljava/lang/IllegalStateException;
 
-    const-string p2, "SurfaceView should have explicit width and height set"
+    const-string v1, "SurfaceView should have explicit width and height set"
 
-    invoke-direct {p1, p2}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method

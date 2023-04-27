@@ -23,6 +23,8 @@
 
 .method public static getBestSourceForSize(IILjava/util/List;)Lcom/facebook/react/views/imagehelper/MultiSourceHelper$MultiSourceResult;
     .locals 2
+    .param p0, "width"    # I
+    .param p1, "height"    # I
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(II",
@@ -33,18 +35,22 @@
         }
     .end annotation
 
+    .line 56
+    .local p2, "sources":Ljava/util/List;, "Ljava/util/List<Lcom/facebook/react/views/imagehelper/ImageSource;>;"
     const-wide/high16 v0, 0x3ff0000000000000L    # 1.0
 
-    .line 56
     invoke-static {p0, p1, p2, v0, v1}, Lcom/facebook/react/views/imagehelper/MultiSourceHelper;->getBestSourceForSize(IILjava/util/List;D)Lcom/facebook/react/views/imagehelper/MultiSourceHelper$MultiSourceResult;
 
-    move-result-object p0
+    move-result-object v0
 
-    return-object p0
+    return-object v0
 .end method
 
 .method public static getBestSourceForSize(IILjava/util/List;D)Lcom/facebook/react/views/imagehelper/MultiSourceHelper$MultiSourceResult;
-    .locals 11
+    .locals 17
+    .param p0, "width"    # I
+    .param p1, "height"    # I
+    .param p3, "multiplier"    # D
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(II",
@@ -56,7 +62,8 @@
     .end annotation
 
     .line 75
-    invoke-interface {p2}, Ljava/util/List;->isEmpty()Z
+    .local p2, "sources":Ljava/util/List;, "Ljava/util/List<Lcom/facebook/react/views/imagehelper/ImageSource;>;"
+    invoke-interface/range {p2 .. p2}, Ljava/util/List;->isEmpty()Z
 
     move-result v0
 
@@ -65,15 +72,15 @@
     if-eqz v0, :cond_0
 
     .line 76
-    new-instance p0, Lcom/facebook/react/views/imagehelper/MultiSourceHelper$MultiSourceResult;
+    new-instance v0, Lcom/facebook/react/views/imagehelper/MultiSourceHelper$MultiSourceResult;
 
-    invoke-direct {p0, v1, v1, v1}, Lcom/facebook/react/views/imagehelper/MultiSourceHelper$MultiSourceResult;-><init>(Lcom/facebook/react/views/imagehelper/ImageSource;Lcom/facebook/react/views/imagehelper/ImageSource;Lcom/facebook/react/views/imagehelper/MultiSourceHelper$1;)V
+    invoke-direct {v0, v1, v1, v1}, Lcom/facebook/react/views/imagehelper/MultiSourceHelper$MultiSourceResult;-><init>(Lcom/facebook/react/views/imagehelper/ImageSource;Lcom/facebook/react/views/imagehelper/ImageSource;Lcom/facebook/react/views/imagehelper/MultiSourceHelper$1;)V
 
-    return-object p0
+    return-object v0
 
     .line 80
     :cond_0
-    invoke-interface {p2}, Ljava/util/List;->size()I
+    invoke-interface/range {p2 .. p2}, Ljava/util/List;->size()I
 
     move-result v0
 
@@ -82,21 +89,26 @@
     if-ne v0, v2, :cond_1
 
     .line 81
-    new-instance p0, Lcom/facebook/react/views/imagehelper/MultiSourceHelper$MultiSourceResult;
+    new-instance v0, Lcom/facebook/react/views/imagehelper/MultiSourceHelper$MultiSourceResult;
 
-    const/4 p1, 0x0
+    const/4 v2, 0x0
 
-    invoke-interface {p2, p1}, Ljava/util/List;->get(I)Ljava/lang/Object;
+    move-object/from16 v3, p2
 
-    move-result-object p1
+    invoke-interface {v3, v2}, Ljava/util/List;->get(I)Ljava/lang/Object;
 
-    check-cast p1, Lcom/facebook/react/views/imagehelper/ImageSource;
+    move-result-object v2
 
-    invoke-direct {p0, p1, v1, v1}, Lcom/facebook/react/views/imagehelper/MultiSourceHelper$MultiSourceResult;-><init>(Lcom/facebook/react/views/imagehelper/ImageSource;Lcom/facebook/react/views/imagehelper/ImageSource;Lcom/facebook/react/views/imagehelper/MultiSourceHelper$1;)V
+    check-cast v2, Lcom/facebook/react/views/imagehelper/ImageSource;
 
-    return-object p0
+    invoke-direct {v0, v2, v1, v1}, Lcom/facebook/react/views/imagehelper/MultiSourceHelper$MultiSourceResult;-><init>(Lcom/facebook/react/views/imagehelper/ImageSource;Lcom/facebook/react/views/imagehelper/ImageSource;Lcom/facebook/react/views/imagehelper/MultiSourceHelper$1;)V
 
+    return-object v0
+
+    .line 86
     :cond_1
+    move-object/from16 v3, p2
+
     if-lez p0, :cond_8
 
     if-gtz p1, :cond_2
@@ -113,137 +125,161 @@
 
     move-result-object v0
 
-    mul-int p0, p0, p1
+    .line 91
+    .local v0, "imagePipeline":Lcom/facebook/imagepipeline/core/ImagePipeline;
+    const/4 v2, 0x0
 
-    int-to-double p0, p0
+    .line 92
+    .local v2, "best":Lcom/facebook/react/views/imagehelper/ImageSource;
+    const/4 v4, 0x0
 
     .line 93
-    invoke-static {p0, p1}, Ljava/lang/Double;->isNaN(D)Z
+    .local v4, "bestCached":Lcom/facebook/react/views/imagehelper/ImageSource;
+    mul-int v5, p0, p1
 
-    mul-double p0, p0, p3
+    int-to-double v5, v5
+
+    mul-double v5, v5, p3
+
+    .line 94
+    .local v5, "viewArea":D
+    const-wide v7, 0x7fefffffffffffffL    # Double.MAX_VALUE
+
+    .line 95
+    .local v7, "bestPrecision":D
+    const-wide v9, 0x7fefffffffffffffL    # Double.MAX_VALUE
 
     .line 96
-    invoke-interface {p2}, Ljava/util/List;->iterator()Ljava/util/Iterator;
+    .local v9, "bestCachePrecision":D
+    invoke-interface/range {p2 .. p2}, Ljava/util/List;->iterator()Ljava/util/Iterator;
 
-    move-result-object p2
+    move-result-object v11
 
-    const-wide p3, 0x7fefffffffffffffL    # Double.MAX_VALUE
-
-    move-wide v2, p3
-
-    move-wide v4, v2
-
-    move-object p3, v1
-
-    move-object p4, p3
-
-    :cond_3
     :goto_0
-    invoke-interface {p2}, Ljava/util/Iterator;->hasNext()Z
+    invoke-interface {v11}, Ljava/util/Iterator;->hasNext()Z
 
-    move-result v6
+    move-result v12
 
-    if-eqz v6, :cond_6
+    if-eqz v12, :cond_6
 
-    invoke-interface {p2}, Ljava/util/Iterator;->next()Ljava/lang/Object;
+    invoke-interface {v11}, Ljava/util/Iterator;->next()Ljava/lang/Object;
 
-    move-result-object v6
+    move-result-object v12
 
-    check-cast v6, Lcom/facebook/react/views/imagehelper/ImageSource;
-
-    const-wide/high16 v7, 0x3ff0000000000000L    # 1.0
+    check-cast v12, Lcom/facebook/react/views/imagehelper/ImageSource;
 
     .line 97
-    invoke-virtual {v6}, Lcom/facebook/react/views/imagehelper/ImageSource;->getSize()D
+    .local v12, "source":Lcom/facebook/react/views/imagehelper/ImageSource;
+    invoke-virtual {v12}, Lcom/facebook/react/views/imagehelper/ImageSource;->getSize()D
 
-    move-result-wide v9
+    move-result-wide v13
 
-    div-double/2addr v9, p0
+    div-double/2addr v13, v5
 
-    sub-double/2addr v7, v9
+    const-wide/high16 v15, 0x3ff0000000000000L    # 1.0
 
-    invoke-static {v7, v8}, Ljava/lang/Math;->abs(D)D
+    sub-double/2addr v15, v13
 
-    move-result-wide v7
+    invoke-static/range {v15 .. v16}, Ljava/lang/Math;->abs(D)D
 
-    cmpg-double v9, v7, v2
+    move-result-wide v13
 
-    if-gez v9, :cond_4
+    .line 98
+    .local v13, "precision":D
+    cmpg-double v15, v13, v7
 
-    move-object p4, v6
+    if-gez v15, :cond_3
 
-    move-wide v2, v7
+    .line 99
+    move-wide v7, v13
 
-    :cond_4
-    cmpg-double v9, v7, v4
+    .line 100
+    move-object v2, v12
 
-    if-gez v9, :cond_3
+    .line 102
+    :cond_3
+    cmpg-double v15, v13, v9
+
+    if-gez v15, :cond_5
 
     .line 103
-    invoke-virtual {v6}, Lcom/facebook/react/views/imagehelper/ImageSource;->getUri()Landroid/net/Uri;
+    invoke-virtual {v12}, Lcom/facebook/react/views/imagehelper/ImageSource;->getUri()Landroid/net/Uri;
 
-    move-result-object v9
+    move-result-object v15
 
-    invoke-virtual {v0, v9}, Lcom/facebook/imagepipeline/core/ImagePipeline;->isInBitmapMemoryCache(Landroid/net/Uri;)Z
+    invoke-virtual {v0, v15}, Lcom/facebook/imagepipeline/core/ImagePipeline;->isInBitmapMemoryCache(Landroid/net/Uri;)Z
 
-    move-result v9
+    move-result v15
 
-    if-nez v9, :cond_5
+    if-nez v15, :cond_4
 
     .line 104
-    invoke-virtual {v6}, Lcom/facebook/react/views/imagehelper/ImageSource;->getUri()Landroid/net/Uri;
+    invoke-virtual {v12}, Lcom/facebook/react/views/imagehelper/ImageSource;->getUri()Landroid/net/Uri;
 
-    move-result-object v9
+    move-result-object v15
 
-    invoke-virtual {v0, v9}, Lcom/facebook/imagepipeline/core/ImagePipeline;->isInDiskCacheSync(Landroid/net/Uri;)Z
+    invoke-virtual {v0, v15}, Lcom/facebook/imagepipeline/core/ImagePipeline;->isInDiskCacheSync(Landroid/net/Uri;)Z
 
-    move-result v9
+    move-result v15
 
-    if-eqz v9, :cond_3
+    if-eqz v15, :cond_5
 
+    .line 105
+    :cond_4
+    move-wide v9, v13
+
+    .line 106
+    move-object v4, v12
+
+    .line 108
+    .end local v12    # "source":Lcom/facebook/react/views/imagehelper/ImageSource;
+    .end local v13    # "precision":D
     :cond_5
-    move-object p3, v6
-
-    move-wide v4, v7
-
     goto :goto_0
 
-    :cond_6
-    if-eqz p3, :cond_7
-
-    if-eqz p4, :cond_7
-
     .line 109
-    invoke-virtual {p3}, Lcom/facebook/react/views/imagehelper/ImageSource;->getSource()Ljava/lang/String;
+    :cond_6
+    if-eqz v4, :cond_7
 
-    move-result-object p0
+    if-eqz v2, :cond_7
 
-    invoke-virtual {p4}, Lcom/facebook/react/views/imagehelper/ImageSource;->getSource()Ljava/lang/String;
+    invoke-virtual {v4}, Lcom/facebook/react/views/imagehelper/ImageSource;->getSource()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v11
 
-    invoke-virtual {p0, p1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v2}, Lcom/facebook/react/views/imagehelper/ImageSource;->getSource()Ljava/lang/String;
 
-    move-result p0
+    move-result-object v12
 
-    if-eqz p0, :cond_7
+    invoke-virtual {v11, v12}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-object p3, v1
+    move-result v11
+
+    if-eqz v11, :cond_7
+
+    .line 110
+    const/4 v4, 0x0
 
     .line 112
     :cond_7
-    new-instance p0, Lcom/facebook/react/views/imagehelper/MultiSourceHelper$MultiSourceResult;
+    new-instance v11, Lcom/facebook/react/views/imagehelper/MultiSourceHelper$MultiSourceResult;
 
-    invoke-direct {p0, p4, p3, v1}, Lcom/facebook/react/views/imagehelper/MultiSourceHelper$MultiSourceResult;-><init>(Lcom/facebook/react/views/imagehelper/ImageSource;Lcom/facebook/react/views/imagehelper/ImageSource;Lcom/facebook/react/views/imagehelper/MultiSourceHelper$1;)V
+    invoke-direct {v11, v2, v4, v1}, Lcom/facebook/react/views/imagehelper/MultiSourceHelper$MultiSourceResult;-><init>(Lcom/facebook/react/views/imagehelper/ImageSource;Lcom/facebook/react/views/imagehelper/ImageSource;Lcom/facebook/react/views/imagehelper/MultiSourceHelper$1;)V
 
-    return-object p0
+    return-object v11
 
     .line 87
+    .end local v0    # "imagePipeline":Lcom/facebook/imagepipeline/core/ImagePipeline;
+    .end local v2    # "best":Lcom/facebook/react/views/imagehelper/ImageSource;
+    .end local v4    # "bestCached":Lcom/facebook/react/views/imagehelper/ImageSource;
+    .end local v5    # "viewArea":D
+    .end local v7    # "bestPrecision":D
+    .end local v9    # "bestCachePrecision":D
     :cond_8
     :goto_1
-    new-instance p0, Lcom/facebook/react/views/imagehelper/MultiSourceHelper$MultiSourceResult;
+    new-instance v0, Lcom/facebook/react/views/imagehelper/MultiSourceHelper$MultiSourceResult;
 
-    invoke-direct {p0, v1, v1, v1}, Lcom/facebook/react/views/imagehelper/MultiSourceHelper$MultiSourceResult;-><init>(Lcom/facebook/react/views/imagehelper/ImageSource;Lcom/facebook/react/views/imagehelper/ImageSource;Lcom/facebook/react/views/imagehelper/MultiSourceHelper$1;)V
+    invoke-direct {v0, v1, v1, v1}, Lcom/facebook/react/views/imagehelper/MultiSourceHelper$MultiSourceResult;-><init>(Lcom/facebook/react/views/imagehelper/ImageSource;Lcom/facebook/react/views/imagehelper/ImageSource;Lcom/facebook/react/views/imagehelper/MultiSourceHelper$1;)V
 
-    return-object p0
+    return-object v0
 .end method

@@ -31,8 +31,13 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/imagepipeline/producers/LocalExifThumbnailProducer;Lcom/facebook/imagepipeline/producers/Consumer;Lcom/facebook/imagepipeline/producers/ProducerListener;Ljava/lang/String;Ljava/lang/String;Lcom/facebook/imagepipeline/request/ImageRequest;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/imagepipeline/producers/LocalExifThumbnailProducer;
+    .param p3, "producerListener"    # Lcom/facebook/imagepipeline/producers/ProducerListener;
+    .param p4, "producerName"    # Ljava/lang/String;
+    .param p5, "requestId"    # Ljava/lang/String;
 
     .line 93
+    .local p2, "consumer":Lcom/facebook/imagepipeline/producers/Consumer;, "Lcom/facebook/imagepipeline/producers/Consumer<Lcom/facebook/imagepipeline/image/EncodedImage;>;"
     iput-object p1, p0, Lcom/facebook/imagepipeline/producers/LocalExifThumbnailProducer$1;->this$0:Lcom/facebook/imagepipeline/producers/LocalExifThumbnailProducer;
 
     iput-object p6, p0, Lcom/facebook/imagepipeline/producers/LocalExifThumbnailProducer$1;->val$imageRequest:Lcom/facebook/imagepipeline/request/ImageRequest;
@@ -46,10 +51,12 @@
 # virtual methods
 .method protected disposeResult(Lcom/facebook/imagepipeline/image/EncodedImage;)V
     .locals 0
+    .param p1, "result"    # Lcom/facebook/imagepipeline/image/EncodedImage;
 
     .line 111
     invoke-static {p1}, Lcom/facebook/imagepipeline/image/EncodedImage;->closeSafely(Lcom/facebook/imagepipeline/image/EncodedImage;)V
 
+    .line 112
     return-void
 .end method
 
@@ -65,7 +72,8 @@
 .end method
 
 .method protected getExtraMapOnSuccess(Lcom/facebook/imagepipeline/image/EncodedImage;)Ljava/util/Map;
-    .locals 1
+    .locals 2
+    .param p1, "result"    # Lcom/facebook/imagepipeline/image/EncodedImage;
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -78,28 +86,28 @@
         }
     .end annotation
 
+    .line 116
     if-eqz p1, :cond_0
 
-    const/4 p1, 0x1
+    const/4 v0, 0x1
 
     goto :goto_0
 
     :cond_0
-    const/4 p1, 0x0
+    const/4 v0, 0x0
 
-    .line 116
     :goto_0
-    invoke-static {p1}, Ljava/lang/Boolean;->toString(Z)Ljava/lang/String;
+    invoke-static {v0}, Ljava/lang/Boolean;->toString(Z)Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v0
 
-    const-string v0, "createdThumbnail"
+    const-string v1, "createdThumbnail"
 
-    invoke-static {v0, p1}, Lcom/facebook/common/internal/ImmutableMap;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+    invoke-static {v1, v0}, Lcom/facebook/common/internal/ImmutableMap;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method protected bridge synthetic getExtraMapOnSuccess(Ljava/lang/Object;)Ljava/util/Map;
@@ -116,7 +124,7 @@
 .end method
 
 .method protected getResult()Lcom/facebook/imagepipeline/image/EncodedImage;
-    .locals 3
+    .locals 5
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/lang/Exception;
@@ -131,54 +139,61 @@
     move-result-object v0
 
     .line 99
+    .local v0, "sourceUri":Landroid/net/Uri;
     iget-object v1, p0, Lcom/facebook/imagepipeline/producers/LocalExifThumbnailProducer$1;->this$0:Lcom/facebook/imagepipeline/producers/LocalExifThumbnailProducer;
 
     invoke-virtual {v1, v0}, Lcom/facebook/imagepipeline/producers/LocalExifThumbnailProducer;->getExifInterface(Landroid/net/Uri;)Landroid/media/ExifInterface;
 
-    move-result-object v0
-
-    if-eqz v0, :cond_1
+    move-result-object v1
 
     .line 100
-    invoke-virtual {v0}, Landroid/media/ExifInterface;->hasThumbnail()Z
+    .local v1, "exifInterface":Landroid/media/ExifInterface;
+    if-eqz v1, :cond_1
 
-    move-result v1
+    invoke-virtual {v1}, Landroid/media/ExifInterface;->hasThumbnail()Z
 
-    if-nez v1, :cond_0
+    move-result v2
+
+    if-nez v2, :cond_0
 
     goto :goto_0
 
     .line 104
     :cond_0
-    invoke-virtual {v0}, Landroid/media/ExifInterface;->getThumbnail()[B
-
-    move-result-object v1
-
-    .line 105
-    iget-object v2, p0, Lcom/facebook/imagepipeline/producers/LocalExifThumbnailProducer$1;->this$0:Lcom/facebook/imagepipeline/producers/LocalExifThumbnailProducer;
-
-    invoke-static {v2}, Lcom/facebook/imagepipeline/producers/LocalExifThumbnailProducer;->access$000(Lcom/facebook/imagepipeline/producers/LocalExifThumbnailProducer;)Lcom/facebook/common/memory/PooledByteBufferFactory;
+    invoke-virtual {v1}, Landroid/media/ExifInterface;->getThumbnail()[B
 
     move-result-object v2
 
-    invoke-interface {v2, v1}, Lcom/facebook/common/memory/PooledByteBufferFactory;->newByteBuffer([B)Lcom/facebook/common/memory/PooledByteBuffer;
+    .line 105
+    .local v2, "bytes":[B
+    iget-object v3, p0, Lcom/facebook/imagepipeline/producers/LocalExifThumbnailProducer$1;->this$0:Lcom/facebook/imagepipeline/producers/LocalExifThumbnailProducer;
 
-    move-result-object v1
+    invoke-static {v3}, Lcom/facebook/imagepipeline/producers/LocalExifThumbnailProducer;->access$000(Lcom/facebook/imagepipeline/producers/LocalExifThumbnailProducer;)Lcom/facebook/common/memory/PooledByteBufferFactory;
+
+    move-result-object v3
+
+    invoke-interface {v3, v2}, Lcom/facebook/common/memory/PooledByteBufferFactory;->newByteBuffer([B)Lcom/facebook/common/memory/PooledByteBuffer;
+
+    move-result-object v3
 
     .line 106
-    iget-object v2, p0, Lcom/facebook/imagepipeline/producers/LocalExifThumbnailProducer$1;->this$0:Lcom/facebook/imagepipeline/producers/LocalExifThumbnailProducer;
+    .local v3, "pooledByteBuffer":Lcom/facebook/common/memory/PooledByteBuffer;
+    iget-object v4, p0, Lcom/facebook/imagepipeline/producers/LocalExifThumbnailProducer$1;->this$0:Lcom/facebook/imagepipeline/producers/LocalExifThumbnailProducer;
 
-    invoke-static {v2, v1, v0}, Lcom/facebook/imagepipeline/producers/LocalExifThumbnailProducer;->access$100(Lcom/facebook/imagepipeline/producers/LocalExifThumbnailProducer;Lcom/facebook/common/memory/PooledByteBuffer;Landroid/media/ExifInterface;)Lcom/facebook/imagepipeline/image/EncodedImage;
+    invoke-static {v4, v3, v1}, Lcom/facebook/imagepipeline/producers/LocalExifThumbnailProducer;->access$100(Lcom/facebook/imagepipeline/producers/LocalExifThumbnailProducer;Lcom/facebook/common/memory/PooledByteBuffer;Landroid/media/ExifInterface;)Lcom/facebook/imagepipeline/image/EncodedImage;
 
-    move-result-object v0
+    move-result-object v4
 
-    return-object v0
+    return-object v4
 
+    .line 101
+    .end local v2    # "bytes":[B
+    .end local v3    # "pooledByteBuffer":Lcom/facebook/common/memory/PooledByteBuffer;
     :cond_1
     :goto_0
-    const/4 v0, 0x0
+    const/4 v2, 0x0
 
-    return-object v0
+    return-object v2
 .end method
 
 .method protected bridge synthetic getResult()Ljava/lang/Object;

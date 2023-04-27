@@ -37,6 +37,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/imagepipeline/cache/BufferedDiskCache;Ljava/util/concurrent/atomic/AtomicBoolean;Lcom/facebook/cache/common/CacheKey;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/imagepipeline/cache/BufferedDiskCache;
 
     .line 164
     iput-object p1, p0, Lcom/facebook/imagepipeline/cache/BufferedDiskCache$2;->this$0:Lcom/facebook/imagepipeline/cache/BufferedDiskCache;
@@ -82,6 +83,8 @@
 
     move-result-object v0
 
+    .line 172
+    .local v0, "result":Lcom/facebook/imagepipeline/image/EncodedImage;
     if-eqz v0, :cond_0
 
     .line 173
@@ -116,59 +119,69 @@
     :cond_0
     invoke-static {}, Lcom/facebook/imagepipeline/cache/BufferedDiskCache;->access$200()Ljava/lang/Class;
 
-    move-result-object v0
+    move-result-object v1
 
-    iget-object v1, p0, Lcom/facebook/imagepipeline/cache/BufferedDiskCache$2;->val$key:Lcom/facebook/cache/common/CacheKey;
+    iget-object v2, p0, Lcom/facebook/imagepipeline/cache/BufferedDiskCache$2;->val$key:Lcom/facebook/cache/common/CacheKey;
 
-    invoke-interface {v1}, Lcom/facebook/cache/common/CacheKey;->getUriString()Ljava/lang/String;
+    invoke-interface {v2}, Lcom/facebook/cache/common/CacheKey;->getUriString()Ljava/lang/String;
+
+    move-result-object v2
+
+    const-string v3, "Did not find image for %s in staging area"
+
+    invoke-static {v1, v3, v2}, Lcom/facebook/common/logging/FLog;->v(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/Object;)V
+
+    .line 177
+    iget-object v1, p0, Lcom/facebook/imagepipeline/cache/BufferedDiskCache$2;->this$0:Lcom/facebook/imagepipeline/cache/BufferedDiskCache;
+
+    invoke-static {v1}, Lcom/facebook/imagepipeline/cache/BufferedDiskCache;->access$300(Lcom/facebook/imagepipeline/cache/BufferedDiskCache;)Lcom/facebook/imagepipeline/cache/ImageCacheStatsTracker;
 
     move-result-object v1
 
-    const-string v2, "Did not find image for %s in staging area"
-
-    invoke-static {v0, v2, v1}, Lcom/facebook/common/logging/FLog;->v(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/Object;)V
-
-    .line 177
-    iget-object v0, p0, Lcom/facebook/imagepipeline/cache/BufferedDiskCache$2;->this$0:Lcom/facebook/imagepipeline/cache/BufferedDiskCache;
-
-    invoke-static {v0}, Lcom/facebook/imagepipeline/cache/BufferedDiskCache;->access$300(Lcom/facebook/imagepipeline/cache/BufferedDiskCache;)Lcom/facebook/imagepipeline/cache/ImageCacheStatsTracker;
-
-    move-result-object v0
-
-    invoke-interface {v0}, Lcom/facebook/imagepipeline/cache/ImageCacheStatsTracker;->onStagingAreaMiss()V
+    invoke-interface {v1}, Lcom/facebook/imagepipeline/cache/ImageCacheStatsTracker;->onStagingAreaMiss()V
 
     .line 180
     :try_start_0
-    iget-object v0, p0, Lcom/facebook/imagepipeline/cache/BufferedDiskCache$2;->this$0:Lcom/facebook/imagepipeline/cache/BufferedDiskCache;
+    iget-object v1, p0, Lcom/facebook/imagepipeline/cache/BufferedDiskCache$2;->this$0:Lcom/facebook/imagepipeline/cache/BufferedDiskCache;
 
-    iget-object v1, p0, Lcom/facebook/imagepipeline/cache/BufferedDiskCache$2;->val$key:Lcom/facebook/cache/common/CacheKey;
+    iget-object v2, p0, Lcom/facebook/imagepipeline/cache/BufferedDiskCache$2;->val$key:Lcom/facebook/cache/common/CacheKey;
 
-    invoke-static {v0, v1}, Lcom/facebook/imagepipeline/cache/BufferedDiskCache;->access$400(Lcom/facebook/imagepipeline/cache/BufferedDiskCache;Lcom/facebook/cache/common/CacheKey;)Lcom/facebook/common/memory/PooledByteBuffer;
+    invoke-static {v1, v2}, Lcom/facebook/imagepipeline/cache/BufferedDiskCache;->access$400(Lcom/facebook/imagepipeline/cache/BufferedDiskCache;Lcom/facebook/cache/common/CacheKey;)Lcom/facebook/common/memory/PooledByteBuffer;
 
-    move-result-object v0
+    move-result-object v1
 
     .line 181
-    invoke-static {v0}, Lcom/facebook/common/references/CloseableReference;->of(Ljava/io/Closeable;)Lcom/facebook/common/references/CloseableReference;
+    .local v1, "buffer":Lcom/facebook/common/memory/PooledByteBuffer;
+    invoke-static {v1}, Lcom/facebook/common/references/CloseableReference;->of(Ljava/io/Closeable;)Lcom/facebook/common/references/CloseableReference;
 
-    move-result-object v0
+    move-result-object v2
     :try_end_0
     .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
 
     .line 183
+    .local v2, "ref":Lcom/facebook/common/references/CloseableReference;, "Lcom/facebook/common/references/CloseableReference<Lcom/facebook/common/memory/PooledByteBuffer;>;"
     :try_start_1
-    new-instance v1, Lcom/facebook/imagepipeline/image/EncodedImage;
+    new-instance v3, Lcom/facebook/imagepipeline/image/EncodedImage;
 
-    invoke-direct {v1, v0}, Lcom/facebook/imagepipeline/image/EncodedImage;-><init>(Lcom/facebook/common/references/CloseableReference;)V
+    invoke-direct {v3, v2}, Lcom/facebook/imagepipeline/image/EncodedImage;-><init>(Lcom/facebook/common/references/CloseableReference;)V
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
+    move-object v0, v3
+
     .line 185
     :try_start_2
-    invoke-static {v0}, Lcom/facebook/common/references/CloseableReference;->closeSafely(Lcom/facebook/common/references/CloseableReference;)V
+    invoke-static {v2}, Lcom/facebook/common/references/CloseableReference;->closeSafely(Lcom/facebook/common/references/CloseableReference;)V
     :try_end_2
     .catch Ljava/lang/Exception; {:try_start_2 .. :try_end_2} :catch_0
 
-    move-object v0, v1
+    .line 186
+    nop
+
+    .line 189
+    .end local v1    # "buffer":Lcom/facebook/common/memory/PooledByteBuffer;
+    .end local v2    # "ref":Lcom/facebook/common/references/CloseableReference;, "Lcom/facebook/common/references/CloseableReference<Lcom/facebook/common/memory/PooledByteBuffer;>;"
+    nop
 
     .line 192
     :goto_0
@@ -187,6 +200,7 @@
 
     invoke-static {v1, v2}, Lcom/facebook/common/logging/FLog;->v(Ljava/lang/Class;Ljava/lang/String;)V
 
+    .line 194
     if-eqz v0, :cond_1
 
     .line 195
@@ -194,33 +208,49 @@
 
     .line 197
     :cond_1
-    new-instance v0, Ljava/lang/InterruptedException;
+    new-instance v1, Ljava/lang/InterruptedException;
 
-    invoke-direct {v0}, Ljava/lang/InterruptedException;-><init>()V
+    invoke-direct {v1}, Ljava/lang/InterruptedException;-><init>()V
 
-    throw v0
+    throw v1
 
+    .line 199
     :cond_2
     return-object v0
 
-    :catchall_0
-    move-exception v1
-
     .line 185
+    .restart local v1    # "buffer":Lcom/facebook/common/memory/PooledByteBuffer;
+    .restart local v2    # "ref":Lcom/facebook/common/references/CloseableReference;, "Lcom/facebook/common/references/CloseableReference<Lcom/facebook/common/memory/PooledByteBuffer;>;"
+    :catchall_0
+    move-exception v3
+
     :try_start_3
-    invoke-static {v0}, Lcom/facebook/common/references/CloseableReference;->closeSafely(Lcom/facebook/common/references/CloseableReference;)V
+    invoke-static {v2}, Lcom/facebook/common/references/CloseableReference;->closeSafely(Lcom/facebook/common/references/CloseableReference;)V
 
     .line 186
-    throw v1
+    nop
+
+    .end local v0    # "result":Lcom/facebook/imagepipeline/image/EncodedImage;
+    throw v3
     :try_end_3
     .catch Ljava/lang/Exception; {:try_start_3 .. :try_end_3} :catch_0
 
+    .line 187
+    .end local v1    # "buffer":Lcom/facebook/common/memory/PooledByteBuffer;
+    .end local v2    # "ref":Lcom/facebook/common/references/CloseableReference;, "Lcom/facebook/common/references/CloseableReference<Lcom/facebook/common/memory/PooledByteBuffer;>;"
+    .restart local v0    # "result":Lcom/facebook/imagepipeline/image/EncodedImage;
     :catch_0
-    const/4 v0, 0x0
+    move-exception v1
 
-    return-object v0
+    .line 188
+    .local v1, "exception":Ljava/lang/Exception;
+    const/4 v2, 0x0
+
+    return-object v2
 
     .line 169
+    .end local v0    # "result":Lcom/facebook/imagepipeline/image/EncodedImage;
+    .end local v1    # "exception":Ljava/lang/Exception;
     :cond_3
     new-instance v0, Ljava/util/concurrent/CancellationException;
 

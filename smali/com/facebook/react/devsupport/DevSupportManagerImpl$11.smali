@@ -24,6 +24,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/devsupport/DevSupportManagerImpl;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/devsupport/DevSupportManagerImpl;
 
     .line 518
     iput-object p1, p0, Lcom/facebook/react/devsupport/DevSupportManagerImpl$11;->this$0:Lcom/facebook/react/devsupport/DevSupportManagerImpl;
@@ -68,5 +69,6 @@
 
     invoke-interface {v0}, Lcom/facebook/react/devsupport/ReactInstanceManagerDevHelper;->toggleElementInspector()V
 
+    .line 523
     return-void
 .end method

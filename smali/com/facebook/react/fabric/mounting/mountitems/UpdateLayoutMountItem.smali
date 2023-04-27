@@ -21,6 +21,11 @@
 # direct methods
 .method public constructor <init>(IIIII)V
     .locals 0
+    .param p1, "reactTag"    # I
+    .param p2, "x"    # I
+    .param p3, "y"    # I
+    .param p4, "width"    # I
+    .param p5, "height"    # I
 
     .line 19
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -40,6 +45,7 @@
     .line 24
     iput p5, p0, Lcom/facebook/react/fabric/mounting/mountitems/UpdateLayoutMountItem;->mHeight:I
 
+    .line 25
     return-void
 .end method
 
@@ -47,6 +53,7 @@
 # virtual methods
 .method public execute(Lcom/facebook/react/fabric/mounting/MountingManager;)V
     .locals 6
+    .param p1, "mountingManager"    # Lcom/facebook/react/fabric/mounting/MountingManager;
 
     .line 29
     iget v1, p0, Lcom/facebook/react/fabric/mounting/mountitems/UpdateLayoutMountItem;->mReactTag:I
@@ -63,6 +70,7 @@
 
     invoke-virtual/range {v0 .. v5}, Lcom/facebook/react/fabric/mounting/MountingManager;->updateLayout(IIIII)V
 
+    .line 30
     return-void
 .end method
 
@@ -114,41 +122,61 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     iget v1, p0, Lcom/facebook/react/fabric/mounting/mountitems/UpdateLayoutMountItem;->mReactTag:I
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     const-string v1, "] - x: "
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     iget v1, p0, Lcom/facebook/react/fabric/mounting/mountitems/UpdateLayoutMountItem;->mX:I
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     const-string v1, " - y: "
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     iget v1, p0, Lcom/facebook/react/fabric/mounting/mountitems/UpdateLayoutMountItem;->mY:I
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     const-string v1, " - height: "
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     iget v1, p0, Lcom/facebook/react/fabric/mounting/mountitems/UpdateLayoutMountItem;->mHeight:I
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     const-string v1, " - width: "
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     iget v1, p0, Lcom/facebook/react/fabric/mounting/mountitems/UpdateLayoutMountItem;->mWidth:I
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 

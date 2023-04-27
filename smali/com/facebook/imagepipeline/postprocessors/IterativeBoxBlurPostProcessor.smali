@@ -18,21 +18,26 @@
 # direct methods
 .method public constructor <init>(I)V
     .locals 1
-
-    const/4 v0, 0x3
+    .param p1, "blurRadius"    # I
 
     .line 33
+    const/4 v0, 0x3
+
     invoke-direct {p0, v0, p1}, Lcom/facebook/imagepipeline/postprocessors/IterativeBoxBlurPostProcessor;-><init>(II)V
 
+    .line 34
     return-void
 .end method
 
 .method public constructor <init>(II)V
     .locals 3
+    .param p1, "iterations"    # I
+    .param p2, "blurRadius"    # I
 
     .line 36
     invoke-direct {p0}, Lcom/facebook/imagepipeline/request/BasePostprocessor;-><init>()V
 
+    .line 37
     const/4 v0, 0x1
 
     const/4 v1, 0x0
@@ -46,10 +51,10 @@
     :cond_0
     const/4 v2, 0x0
 
-    .line 37
     :goto_0
     invoke-static {v2}, Lcom/facebook/common/internal/Preconditions;->checkArgument(Z)V
 
+    .line 38
     if-lez p2, :cond_1
 
     goto :goto_1
@@ -57,7 +62,6 @@
     :cond_1
     const/4 v0, 0x0
 
-    .line 38
     :goto_1
     invoke-static {v0}, Lcom/facebook/common/internal/Preconditions;->checkArgument(Z)V
 
@@ -67,6 +71,7 @@
     .line 40
     iput p2, p0, Lcom/facebook/imagepipeline/postprocessors/IterativeBoxBlurPostProcessor;->mBlurRadius:I
 
+    .line 41
     return-void
 .end method
 
@@ -82,34 +87,36 @@
 
     if-nez v0, :cond_0
 
+    .line 52
     const/4 v0, 0x0
 
-    .line 52
-    check-cast v0, Ljava/util/Locale;
+    move-object v1, v0
+
+    check-cast v1, Ljava/util/Locale;
 
     const/4 v1, 0x2
 
     new-array v1, v1, [Ljava/lang/Object;
 
-    const/4 v2, 0x0
+    iget v2, p0, Lcom/facebook/imagepipeline/postprocessors/IterativeBoxBlurPostProcessor;->mIterations:I
 
-    iget v3, p0, Lcom/facebook/imagepipeline/postprocessors/IterativeBoxBlurPostProcessor;->mIterations:I
+    invoke-static {v2}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    invoke-static {v3}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    move-result-object v2
 
-    move-result-object v3
+    const/4 v3, 0x0
 
-    aput-object v3, v1, v2
+    aput-object v2, v1, v3
 
-    const/4 v2, 0x1
+    iget v2, p0, Lcom/facebook/imagepipeline/postprocessors/IterativeBoxBlurPostProcessor;->mBlurRadius:I
 
-    iget v3, p0, Lcom/facebook/imagepipeline/postprocessors/IterativeBoxBlurPostProcessor;->mBlurRadius:I
+    invoke-static {v2}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    invoke-static {v3}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    move-result-object v2
 
-    move-result-object v3
+    const/4 v3, 0x1
 
-    aput-object v3, v1, v2
+    aput-object v2, v1, v3
 
     const-string v2, "i%dr%d"
 
@@ -118,6 +125,7 @@
     move-result-object v0
 
     .line 53
+    .local v0, "key":Ljava/lang/String;
     new-instance v1, Lcom/facebook/cache/common/SimpleCacheKey;
 
     invoke-direct {v1, v0}, Lcom/facebook/cache/common/SimpleCacheKey;-><init>(Ljava/lang/String;)V
@@ -125,6 +133,7 @@
     iput-object v1, p0, Lcom/facebook/imagepipeline/postprocessors/IterativeBoxBlurPostProcessor;->mCacheKey:Lcom/facebook/cache/common/CacheKey;
 
     .line 55
+    .end local v0    # "key":Ljava/lang/String;
     :cond_0
     iget-object v0, p0, Lcom/facebook/imagepipeline/postprocessors/IterativeBoxBlurPostProcessor;->mCacheKey:Lcom/facebook/cache/common/CacheKey;
 
@@ -133,6 +142,7 @@
 
 .method public process(Landroid/graphics/Bitmap;)V
     .locals 2
+    .param p1, "bitmap"    # Landroid/graphics/Bitmap;
 
     .line 45
     iget v0, p0, Lcom/facebook/imagepipeline/postprocessors/IterativeBoxBlurPostProcessor;->mIterations:I
@@ -141,5 +151,6 @@
 
     invoke-static {p1, v0, v1}, Lcom/facebook/imagepipeline/nativecode/NativeBlurFilter;->iterativeBoxBlur(Landroid/graphics/Bitmap;II)V
 
+    .line 46
     return-void
 .end method

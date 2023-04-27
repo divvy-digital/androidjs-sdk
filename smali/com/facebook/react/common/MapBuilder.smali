@@ -104,13 +104,17 @@
     .end annotation
 
     .line 36
+    .local p0, "k1":Ljava/lang/Object;, "TK;"
+    .local p1, "v1":Ljava/lang/Object;, "TV;"
     invoke-static {}, Lcom/facebook/react/common/MapBuilder;->of()Ljava/util/Map;
 
     move-result-object v0
 
     .line 37
+    .local v0, "map":Ljava/util/Map;
     invoke-interface {v0, p0, p1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
+    .line 38
     return-object v0
 .end method
 
@@ -129,16 +133,22 @@
     .end annotation
 
     .line 45
+    .local p0, "k1":Ljava/lang/Object;, "TK;"
+    .local p1, "v1":Ljava/lang/Object;, "TV;"
+    .local p2, "k2":Ljava/lang/Object;, "TK;"
+    .local p3, "v2":Ljava/lang/Object;, "TV;"
     invoke-static {}, Lcom/facebook/react/common/MapBuilder;->of()Ljava/util/Map;
 
     move-result-object v0
 
     .line 46
+    .local v0, "map":Ljava/util/Map;
     invoke-interface {v0, p0, p1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
     .line 47
     invoke-interface {v0, p2, p3}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
+    .line 48
     return-object v0
 .end method
 
@@ -157,11 +167,18 @@
     .end annotation
 
     .line 55
+    .local p0, "k1":Ljava/lang/Object;, "TK;"
+    .local p1, "v1":Ljava/lang/Object;, "TV;"
+    .local p2, "k2":Ljava/lang/Object;, "TK;"
+    .local p3, "v2":Ljava/lang/Object;, "TV;"
+    .local p4, "k3":Ljava/lang/Object;, "TK;"
+    .local p5, "v3":Ljava/lang/Object;, "TV;"
     invoke-static {}, Lcom/facebook/react/common/MapBuilder;->of()Ljava/util/Map;
 
     move-result-object v0
 
     .line 56
+    .local v0, "map":Ljava/util/Map;
     invoke-interface {v0, p0, p1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
     .line 57
@@ -170,6 +187,7 @@
     .line 58
     invoke-interface {v0, p4, p5}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
+    .line 59
     return-object v0
 .end method
 
@@ -188,11 +206,20 @@
     .end annotation
 
     .line 66
+    .local p0, "k1":Ljava/lang/Object;, "TK;"
+    .local p1, "v1":Ljava/lang/Object;, "TV;"
+    .local p2, "k2":Ljava/lang/Object;, "TK;"
+    .local p3, "v2":Ljava/lang/Object;, "TV;"
+    .local p4, "k3":Ljava/lang/Object;, "TK;"
+    .local p5, "v3":Ljava/lang/Object;, "TV;"
+    .local p6, "k4":Ljava/lang/Object;, "TK;"
+    .local p7, "v4":Ljava/lang/Object;, "TV;"
     invoke-static {}, Lcom/facebook/react/common/MapBuilder;->of()Ljava/util/Map;
 
     move-result-object v0
 
     .line 67
+    .local v0, "map":Ljava/util/Map;
     invoke-interface {v0, p0, p1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
     .line 68
@@ -204,6 +231,7 @@
     .line 70
     invoke-interface {v0, p6, p7}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
+    .line 71
     return-object v0
 .end method
 
@@ -222,11 +250,22 @@
     .end annotation
 
     .line 78
+    .local p0, "k1":Ljava/lang/Object;, "TK;"
+    .local p1, "v1":Ljava/lang/Object;, "TV;"
+    .local p2, "k2":Ljava/lang/Object;, "TK;"
+    .local p3, "v2":Ljava/lang/Object;, "TV;"
+    .local p4, "k3":Ljava/lang/Object;, "TK;"
+    .local p5, "v3":Ljava/lang/Object;, "TV;"
+    .local p6, "k4":Ljava/lang/Object;, "TK;"
+    .local p7, "v4":Ljava/lang/Object;, "TV;"
+    .local p8, "k5":Ljava/lang/Object;, "TK;"
+    .local p9, "v5":Ljava/lang/Object;, "TV;"
     invoke-static {}, Lcom/facebook/react/common/MapBuilder;->of()Ljava/util/Map;
 
     move-result-object v0
 
     .line 79
+    .local v0, "map":Ljava/util/Map;
     invoke-interface {v0, p0, p1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
     .line 80
@@ -241,6 +280,7 @@
     .line 83
     invoke-interface {v0, p8, p9}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
+    .line 84
     return-object v0
 .end method
 
@@ -259,11 +299,24 @@
     .end annotation
 
     .line 92
+    .local p0, "k1":Ljava/lang/Object;, "TK;"
+    .local p1, "v1":Ljava/lang/Object;, "TV;"
+    .local p2, "k2":Ljava/lang/Object;, "TK;"
+    .local p3, "v2":Ljava/lang/Object;, "TV;"
+    .local p4, "k3":Ljava/lang/Object;, "TK;"
+    .local p5, "v3":Ljava/lang/Object;, "TV;"
+    .local p6, "k4":Ljava/lang/Object;, "TK;"
+    .local p7, "v4":Ljava/lang/Object;, "TV;"
+    .local p8, "k5":Ljava/lang/Object;, "TK;"
+    .local p9, "v5":Ljava/lang/Object;, "TV;"
+    .local p10, "k6":Ljava/lang/Object;, "TK;"
+    .local p11, "v6":Ljava/lang/Object;, "TV;"
     invoke-static {}, Lcom/facebook/react/common/MapBuilder;->of()Ljava/util/Map;
 
     move-result-object v0
 
     .line 93
+    .local v0, "map":Ljava/util/Map;
     invoke-interface {v0, p0, p1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
     .line 94
@@ -281,6 +334,7 @@
     .line 98
     invoke-interface {v0, p10, p11}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
+    .line 99
     return-object v0
 .end method
 
@@ -299,11 +353,26 @@
     .end annotation
 
     .line 107
+    .local p0, "k1":Ljava/lang/Object;, "TK;"
+    .local p1, "v1":Ljava/lang/Object;, "TV;"
+    .local p2, "k2":Ljava/lang/Object;, "TK;"
+    .local p3, "v2":Ljava/lang/Object;, "TV;"
+    .local p4, "k3":Ljava/lang/Object;, "TK;"
+    .local p5, "v3":Ljava/lang/Object;, "TV;"
+    .local p6, "k4":Ljava/lang/Object;, "TK;"
+    .local p7, "v4":Ljava/lang/Object;, "TV;"
+    .local p8, "k5":Ljava/lang/Object;, "TK;"
+    .local p9, "v5":Ljava/lang/Object;, "TV;"
+    .local p10, "k6":Ljava/lang/Object;, "TK;"
+    .local p11, "v6":Ljava/lang/Object;, "TV;"
+    .local p12, "k7":Ljava/lang/Object;, "TK;"
+    .local p13, "v7":Ljava/lang/Object;, "TV;"
     invoke-static {}, Lcom/facebook/react/common/MapBuilder;->of()Ljava/util/Map;
 
     move-result-object v0
 
     .line 108
+    .local v0, "map":Ljava/util/Map;
     invoke-interface {v0, p0, p1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
     .line 109
@@ -324,5 +393,6 @@
     .line 114
     invoke-interface {v0, p12, p13}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
+    .line 115
     return-object v0
 .end method

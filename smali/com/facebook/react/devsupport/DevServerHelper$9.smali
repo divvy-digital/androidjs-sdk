@@ -24,6 +24,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/devsupport/DevServerHelper;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/devsupport/DevServerHelper;
 
     .line 552
     iput-object p1, p0, Lcom/facebook/react/devsupport/DevServerHelper$9;->this$0:Lcom/facebook/react/devsupport/DevServerHelper;
@@ -56,6 +57,7 @@
 
     invoke-interface {v0}, Lcom/facebook/react/devsupport/DevServerHelper$OnServerContentChangeListener;->onServerContentChanged()V
 
+    .line 558
     :cond_0
     return-void
 .end method

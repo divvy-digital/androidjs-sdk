@@ -17,17 +17,20 @@
 # direct methods
 .method constructor <init>(Landroid/support/v4/media/session/MediaControllerCompat$Callback;)V
     .locals 0
+    .param p1, "callback"    # Landroid/support/v4/media/session/MediaControllerCompat$Callback;
 
     .line 2249
     invoke-direct {p0, p1}, Landroid/support/v4/media/session/MediaControllerCompat$Callback$StubCompat;-><init>(Landroid/support/v4/media/session/MediaControllerCompat$Callback;)V
 
+    .line 2250
     return-void
 .end method
 
 
 # virtual methods
 .method public onExtrasChanged(Landroid/os/Bundle;)V
-    .locals 0
+    .locals 1
+    .param p1, "extras"    # Landroid/os/Bundle;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Landroid/os/RemoteException;
@@ -35,15 +38,16 @@
     .end annotation
 
     .line 2279
-    new-instance p1, Ljava/lang/AssertionError;
+    new-instance v0, Ljava/lang/AssertionError;
 
-    invoke-direct {p1}, Ljava/lang/AssertionError;-><init>()V
+    invoke-direct {v0}, Ljava/lang/AssertionError;-><init>()V
 
-    throw p1
+    throw v0
 .end method
 
 .method public onMetadataChanged(Landroid/support/v4/media/MediaMetadataCompat;)V
-    .locals 0
+    .locals 1
+    .param p1, "metadata"    # Landroid/support/v4/media/MediaMetadataCompat;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Landroid/os/RemoteException;
@@ -51,15 +55,15 @@
     .end annotation
 
     .line 2261
-    new-instance p1, Ljava/lang/AssertionError;
+    new-instance v0, Ljava/lang/AssertionError;
 
-    invoke-direct {p1}, Ljava/lang/AssertionError;-><init>()V
+    invoke-direct {v0}, Ljava/lang/AssertionError;-><init>()V
 
-    throw p1
+    throw v0
 .end method
 
 .method public onQueueChanged(Ljava/util/List;)V
-    .locals 0
+    .locals 1
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -76,15 +80,17 @@
     .end annotation
 
     .line 2267
-    new-instance p1, Ljava/lang/AssertionError;
+    .local p1, "queue":Ljava/util/List;, "Ljava/util/List<Landroid/support/v4/media/session/MediaSessionCompat$QueueItem;>;"
+    new-instance v0, Ljava/lang/AssertionError;
 
-    invoke-direct {p1}, Ljava/lang/AssertionError;-><init>()V
+    invoke-direct {v0}, Ljava/lang/AssertionError;-><init>()V
 
-    throw p1
+    throw v0
 .end method
 
 .method public onQueueTitleChanged(Ljava/lang/CharSequence;)V
-    .locals 0
+    .locals 1
+    .param p1, "title"    # Ljava/lang/CharSequence;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Landroid/os/RemoteException;
@@ -92,11 +98,11 @@
     .end annotation
 
     .line 2273
-    new-instance p1, Ljava/lang/AssertionError;
+    new-instance v0, Ljava/lang/AssertionError;
 
-    invoke-direct {p1}, Ljava/lang/AssertionError;-><init>()V
+    invoke-direct {v0}, Ljava/lang/AssertionError;-><init>()V
 
-    throw p1
+    throw v0
 .end method
 
 .method public onSessionDestroyed()V
@@ -116,7 +122,8 @@
 .end method
 
 .method public onVolumeInfoChanged(Landroid/support/v4/media/session/ParcelableVolumeInfo;)V
-    .locals 0
+    .locals 1
+    .param p1, "info"    # Landroid/support/v4/media/session/ParcelableVolumeInfo;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Landroid/os/RemoteException;
@@ -124,9 +131,9 @@
     .end annotation
 
     .line 2285
-    new-instance p1, Ljava/lang/AssertionError;
+    new-instance v0, Ljava/lang/AssertionError;
 
-    invoke-direct {p1}, Ljava/lang/AssertionError;-><init>()V
+    invoke-direct {v0}, Ljava/lang/AssertionError;-><init>()V
 
-    throw p1
+    throw v0
 .end method

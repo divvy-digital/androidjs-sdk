@@ -7,9 +7,6 @@
 
 
 # annotations
-.annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-.end annotation
-
 .annotation system Ldalvik/annotation/EnclosingClass;
     value = Lcom/facebook/react/bridge/ReadableNativeMap;
 .end annotation
@@ -22,19 +19,14 @@
 
 # instance fields
 .field private final mHybridData:Lcom/facebook/jni/HybridData;
-    .annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-    .end annotation
-.end field
 
 .field private final mMap:Lcom/facebook/react/bridge/ReadableNativeMap;
-    .annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-    .end annotation
-.end field
 
 
 # direct methods
 .method public constructor <init>(Lcom/facebook/react/bridge/ReadableNativeMap;)V
-    .locals 0
+    .locals 1
+    .param p1, "readableNativeMap"    # Lcom/facebook/react/bridge/ReadableNativeMap;
 
     .line 315
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -45,10 +37,11 @@
     .line 317
     invoke-static {p1}, Lcom/facebook/react/bridge/ReadableNativeMap$ReadableNativeMapKeySetIterator;->initHybrid(Lcom/facebook/react/bridge/ReadableNativeMap;)Lcom/facebook/jni/HybridData;
 
-    move-result-object p1
+    move-result-object v0
 
-    iput-object p1, p0, Lcom/facebook/react/bridge/ReadableNativeMap$ReadableNativeMapKeySetIterator;->mHybridData:Lcom/facebook/jni/HybridData;
+    iput-object v0, p0, Lcom/facebook/react/bridge/ReadableNativeMap$ReadableNativeMapKeySetIterator;->mHybridData:Lcom/facebook/jni/HybridData;
 
+    .line 318
     return-void
 .end method
 

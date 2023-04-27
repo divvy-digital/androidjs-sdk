@@ -26,6 +26,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/devsupport/DevSupportManagerImpl;Lcom/facebook/react/devsupport/BundleDownloader$BundleInfo;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/devsupport/DevSupportManagerImpl;
 
     .line 961
     iput-object p1, p0, Lcom/facebook/react/devsupport/DevSupportManagerImpl$24;->this$0:Lcom/facebook/react/devsupport/DevSupportManagerImpl;
@@ -41,6 +42,7 @@
 # virtual methods
 .method public onFailure(Ljava/lang/Exception;)V
     .locals 3
+    .param p1, "cause"    # Ljava/lang/Exception;
 
     .line 993
     iget-object v0, p0, Lcom/facebook/react/devsupport/DevSupportManagerImpl$24;->this$0:Lcom/facebook/react/devsupport/DevSupportManagerImpl;
@@ -100,12 +102,12 @@
 
     invoke-interface {v0, p1}, Lcom/facebook/react/devsupport/interfaces/DevBundleDownloadListener;->onFailure(Ljava/lang/Exception;)V
 
+    .line 1001
     :cond_0
     const-string v0, "ReactNative"
 
     const-string v1, "Unable to download JS bundle"
 
-    .line 1001
     invoke-static {v0, v1, p1}, Lcom/facebook/common/logging/FLog;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V
 
     .line 1002
@@ -115,34 +117,26 @@
 
     invoke-static {v0}, Lcom/facebook/react/bridge/UiThreadUtil;->runOnUiThread(Ljava/lang/Runnable;)V
 
+    .line 1016
     return-void
 
-    :catchall_0
-    move-exception p1
-
     .line 997
+    :catchall_0
+    move-exception v1
+
     :try_start_1
     monitor-exit v0
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
-    throw p1
+    throw v1
 .end method
 
 .method public onProgress(Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;)V
     .locals 1
-    .param p1    # Ljava/lang/String;
-        .annotation build Landroid/support/annotation/Nullable;
-        .end annotation
-    .end param
-    .param p2    # Ljava/lang/Integer;
-        .annotation build Landroid/support/annotation/Nullable;
-        .end annotation
-    .end param
-    .param p3    # Ljava/lang/Integer;
-        .annotation build Landroid/support/annotation/Nullable;
-        .end annotation
-    .end param
+    .param p1, "status"    # Ljava/lang/String;
+    .param p2, "done"    # Ljava/lang/Integer;
+    .param p3, "total"    # Ljava/lang/Integer;
 
     .line 985
     iget-object v0, p0, Lcom/facebook/react/devsupport/DevSupportManagerImpl$24;->this$0:Lcom/facebook/react/devsupport/DevSupportManagerImpl;
@@ -171,16 +165,14 @@
 
     invoke-interface {v0, p1, p2, p3}, Lcom/facebook/react/devsupport/interfaces/DevBundleDownloadListener;->onProgress(Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;)V
 
+    .line 989
     :cond_0
     return-void
 .end method
 
 .method public onSuccess(Lcom/facebook/react/bridge/NativeDeltaClient;)V
     .locals 4
-    .param p1    # Lcom/facebook/react/bridge/NativeDeltaClient;
-        .annotation build Landroid/support/annotation/Nullable;
-        .end annotation
-    .end param
+    .param p1, "nativeDeltaClient"    # Lcom/facebook/react/bridge/NativeDeltaClient;
 
     .line 964
     iget-object v0, p0, Lcom/facebook/react/devsupport/DevSupportManagerImpl$24;->this$0:Lcom/facebook/react/devsupport/DevSupportManagerImpl;
@@ -263,16 +255,17 @@
 
     invoke-static {v0}, Lcom/facebook/react/bridge/UiThreadUtil;->runOnUiThread(Ljava/lang/Runnable;)V
 
+    .line 981
     return-void
 
-    :catchall_0
-    move-exception p1
-
     .line 969
+    :catchall_0
+    move-exception v1
+
     :try_start_1
     monitor-exit v0
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
-    throw p1
+    throw v1
 .end method

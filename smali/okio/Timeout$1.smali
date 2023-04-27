@@ -28,7 +28,9 @@
 # virtual methods
 .method public deadlineNanoTime(J)Lokio/Timeout;
     .locals 0
+    .param p1, "deadlineNanoTime"    # J
 
+    .line 54
     return-object p0
 .end method
 
@@ -40,11 +42,15 @@
         }
     .end annotation
 
+    .line 58
     return-void
 .end method
 
 .method public timeout(JLjava/util/concurrent/TimeUnit;)Lokio/Timeout;
     .locals 0
+    .param p1, "timeout"    # J
+    .param p3, "unit"    # Ljava/util/concurrent/TimeUnit;
 
+    .line 50
     return-object p0
 .end method

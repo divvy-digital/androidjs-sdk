@@ -52,6 +52,7 @@
 
 .method synthetic constructor <init>(Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor$1;)V
     .locals 0
+    .param p1, "x0"    # Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor$1;
 
     .line 38
     invoke-direct {p0}, Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor$JSExecutorCallbackFuture;-><init>()V
@@ -93,22 +94,24 @@
 .end method
 
 .method public onFailure(Ljava/lang/Throwable;)V
-    .locals 0
+    .locals 1
+    .param p1, "cause"    # Ljava/lang/Throwable;
 
     .line 53
     iput-object p1, p0, Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor$JSExecutorCallbackFuture;->mCause:Ljava/lang/Throwable;
 
     .line 54
-    iget-object p1, p0, Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor$JSExecutorCallbackFuture;->mSemaphore:Ljava/util/concurrent/Semaphore;
+    iget-object v0, p0, Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor$JSExecutorCallbackFuture;->mSemaphore:Ljava/util/concurrent/Semaphore;
 
-    invoke-virtual {p1}, Ljava/util/concurrent/Semaphore;->release()V
+    invoke-virtual {v0}, Ljava/util/concurrent/Semaphore;->release()V
 
+    .line 55
     return-void
 .end method
 
 .method public onSuccess(Ljava/lang/String;)V
-    .locals 0
-    .param p1    # Ljava/lang/String;
+    .locals 1
+    .param p1, "response"    # Ljava/lang/String;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -117,9 +120,10 @@
     iput-object p1, p0, Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor$JSExecutorCallbackFuture;->mResponse:Ljava/lang/String;
 
     .line 48
-    iget-object p1, p0, Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor$JSExecutorCallbackFuture;->mSemaphore:Ljava/util/concurrent/Semaphore;
+    iget-object v0, p0, Lcom/facebook/react/devsupport/WebsocketJavaScriptExecutor$JSExecutorCallbackFuture;->mSemaphore:Ljava/util/concurrent/Semaphore;
 
-    invoke-virtual {p1}, Ljava/util/concurrent/Semaphore;->release()V
+    invoke-virtual {v0}, Ljava/util/concurrent/Semaphore;->release()V
 
+    .line 49
     return-void
 .end method

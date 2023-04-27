@@ -34,8 +34,6 @@
     sput-object v0, Lcom/facebook/imagepipeline/cache/BitmapMemoryCacheTrimStrategy$1;->$SwitchMap$com$facebook$common$memory$MemoryTrimType:[I
 
     :try_start_0
-    sget-object v0, Lcom/facebook/imagepipeline/cache/BitmapMemoryCacheTrimStrategy$1;->$SwitchMap$com$facebook$common$memory$MemoryTrimType:[I
-
     sget-object v1, Lcom/facebook/common/memory/MemoryTrimType;->OnCloseToDalvikHeapLimit:Lcom/facebook/common/memory/MemoryTrimType;
 
     invoke-virtual {v1}, Lcom/facebook/common/memory/MemoryTrimType;->ordinal()I
@@ -48,7 +46,12 @@
     :try_end_0
     .catch Ljava/lang/NoSuchFieldError; {:try_start_0 .. :try_end_0} :catch_0
 
+    goto :goto_0
+
     :catch_0
+    move-exception v0
+
+    :goto_0
     :try_start_1
     sget-object v0, Lcom/facebook/imagepipeline/cache/BitmapMemoryCacheTrimStrategy$1;->$SwitchMap$com$facebook$common$memory$MemoryTrimType:[I
 
@@ -64,7 +67,12 @@
     :try_end_1
     .catch Ljava/lang/NoSuchFieldError; {:try_start_1 .. :try_end_1} :catch_1
 
+    goto :goto_1
+
     :catch_1
+    move-exception v0
+
+    :goto_1
     :try_start_2
     sget-object v0, Lcom/facebook/imagepipeline/cache/BitmapMemoryCacheTrimStrategy$1;->$SwitchMap$com$facebook$common$memory$MemoryTrimType:[I
 
@@ -80,7 +88,12 @@
     :try_end_2
     .catch Ljava/lang/NoSuchFieldError; {:try_start_2 .. :try_end_2} :catch_2
 
+    goto :goto_2
+
     :catch_2
+    move-exception v0
+
+    :goto_2
     :try_start_3
     sget-object v0, Lcom/facebook/imagepipeline/cache/BitmapMemoryCacheTrimStrategy$1;->$SwitchMap$com$facebook$common$memory$MemoryTrimType:[I
 
@@ -96,6 +109,11 @@
     :try_end_3
     .catch Ljava/lang/NoSuchFieldError; {:try_start_3 .. :try_end_3} :catch_3
 
+    goto :goto_3
+
     :catch_3
+    move-exception v0
+
+    :goto_3
     return-void
 .end method

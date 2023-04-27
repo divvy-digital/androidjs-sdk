@@ -32,44 +32,40 @@
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 4
+    .locals 5
 
     .line 267
     new-instance v0, Lcom/facebook/imagepipeline/request/ImageRequest$CacheChoice;
 
-    const/4 v1, 0x0
+    const-string v1, "SMALL"
 
-    const-string v2, "SMALL"
+    const/4 v2, 0x0
 
-    invoke-direct {v0, v2, v1}, Lcom/facebook/imagepipeline/request/ImageRequest$CacheChoice;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v0, v1, v2}, Lcom/facebook/imagepipeline/request/ImageRequest$CacheChoice;-><init>(Ljava/lang/String;I)V
 
     sput-object v0, Lcom/facebook/imagepipeline/request/ImageRequest$CacheChoice;->SMALL:Lcom/facebook/imagepipeline/request/ImageRequest$CacheChoice;
 
     .line 270
-    new-instance v0, Lcom/facebook/imagepipeline/request/ImageRequest$CacheChoice;
-
-    const/4 v2, 0x1
+    new-instance v1, Lcom/facebook/imagepipeline/request/ImageRequest$CacheChoice;
 
     const-string v3, "DEFAULT"
 
-    invoke-direct {v0, v3, v2}, Lcom/facebook/imagepipeline/request/ImageRequest$CacheChoice;-><init>(Ljava/lang/String;I)V
+    const/4 v4, 0x1
 
-    sput-object v0, Lcom/facebook/imagepipeline/request/ImageRequest$CacheChoice;->DEFAULT:Lcom/facebook/imagepipeline/request/ImageRequest$CacheChoice;
+    invoke-direct {v1, v3, v4}, Lcom/facebook/imagepipeline/request/ImageRequest$CacheChoice;-><init>(Ljava/lang/String;I)V
 
-    const/4 v0, 0x2
+    sput-object v1, Lcom/facebook/imagepipeline/request/ImageRequest$CacheChoice;->DEFAULT:Lcom/facebook/imagepipeline/request/ImageRequest$CacheChoice;
 
     .line 264
-    new-array v0, v0, [Lcom/facebook/imagepipeline/request/ImageRequest$CacheChoice;
+    const/4 v3, 0x2
 
-    sget-object v3, Lcom/facebook/imagepipeline/request/ImageRequest$CacheChoice;->SMALL:Lcom/facebook/imagepipeline/request/ImageRequest$CacheChoice;
+    new-array v3, v3, [Lcom/facebook/imagepipeline/request/ImageRequest$CacheChoice;
 
-    aput-object v3, v0, v1
+    aput-object v0, v3, v2
 
-    sget-object v1, Lcom/facebook/imagepipeline/request/ImageRequest$CacheChoice;->DEFAULT:Lcom/facebook/imagepipeline/request/ImageRequest$CacheChoice;
+    aput-object v1, v3, v4
 
-    aput-object v1, v0, v2
-
-    sput-object v0, Lcom/facebook/imagepipeline/request/ImageRequest$CacheChoice;->$VALUES:[Lcom/facebook/imagepipeline/request/ImageRequest$CacheChoice;
+    sput-object v3, Lcom/facebook/imagepipeline/request/ImageRequest$CacheChoice;->$VALUES:[Lcom/facebook/imagepipeline/request/ImageRequest$CacheChoice;
 
     return-void
 .end method
@@ -90,17 +86,18 @@
 
 .method public static valueOf(Ljava/lang/String;)Lcom/facebook/imagepipeline/request/ImageRequest$CacheChoice;
     .locals 1
+    .param p0, "name"    # Ljava/lang/String;
 
     .line 264
     const-class v0, Lcom/facebook/imagepipeline/request/ImageRequest$CacheChoice;
 
     invoke-static {v0, p0}, Ljava/lang/Enum;->valueOf(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
 
-    move-result-object p0
+    move-result-object v0
 
-    check-cast p0, Lcom/facebook/imagepipeline/request/ImageRequest$CacheChoice;
+    check-cast v0, Lcom/facebook/imagepipeline/request/ImageRequest$CacheChoice;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method public static values()[Lcom/facebook/imagepipeline/request/ImageRequest$CacheChoice;

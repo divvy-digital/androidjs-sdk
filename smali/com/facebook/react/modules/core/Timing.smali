@@ -81,139 +81,148 @@
 
 # direct methods
 .method public constructor <init>(Lcom/facebook/react/bridge/ReactApplicationContext;Lcom/facebook/react/devsupport/interfaces/DevSupportManager;)V
-    .locals 2
+    .locals 3
+    .param p1, "reactContext"    # Lcom/facebook/react/bridge/ReactApplicationContext;
+    .param p2, "devSupportManager"    # Lcom/facebook/react/devsupport/interfaces/DevSupportManager;
 
     .line 185
     invoke-direct {p0, p1}, Lcom/facebook/react/bridge/ReactContextBaseJavaModule;-><init>(Lcom/facebook/react/bridge/ReactApplicationContext;)V
 
     .line 170
-    new-instance p1, Ljava/lang/Object;
+    new-instance v0, Ljava/lang/Object;
 
-    invoke-direct {p1}, Ljava/lang/Object;-><init>()V
+    invoke-direct {v0}, Ljava/lang/Object;-><init>()V
 
-    iput-object p1, p0, Lcom/facebook/react/modules/core/Timing;->mTimerGuard:Ljava/lang/Object;
+    iput-object v0, p0, Lcom/facebook/react/modules/core/Timing;->mTimerGuard:Ljava/lang/Object;
 
     .line 171
-    new-instance p1, Ljava/lang/Object;
+    new-instance v0, Ljava/lang/Object;
 
-    invoke-direct {p1}, Ljava/lang/Object;-><init>()V
+    invoke-direct {v0}, Ljava/lang/Object;-><init>()V
 
-    iput-object p1, p0, Lcom/facebook/react/modules/core/Timing;->mIdleCallbackGuard:Ljava/lang/Object;
+    iput-object v0, p0, Lcom/facebook/react/modules/core/Timing;->mIdleCallbackGuard:Ljava/lang/Object;
 
     .line 174
-    new-instance p1, Ljava/util/concurrent/atomic/AtomicBoolean;
+    new-instance v0, Ljava/util/concurrent/atomic/AtomicBoolean;
 
-    const/4 v0, 0x1
+    const/4 v1, 0x1
 
-    invoke-direct {p1, v0}, Ljava/util/concurrent/atomic/AtomicBoolean;-><init>(Z)V
+    invoke-direct {v0, v1}, Ljava/util/concurrent/atomic/AtomicBoolean;-><init>(Z)V
 
-    iput-object p1, p0, Lcom/facebook/react/modules/core/Timing;->isPaused:Ljava/util/concurrent/atomic/AtomicBoolean;
+    iput-object v0, p0, Lcom/facebook/react/modules/core/Timing;->isPaused:Ljava/util/concurrent/atomic/AtomicBoolean;
 
     .line 175
-    new-instance p1, Ljava/util/concurrent/atomic/AtomicBoolean;
-
-    const/4 v0, 0x0
-
-    invoke-direct {p1, v0}, Ljava/util/concurrent/atomic/AtomicBoolean;-><init>(Z)V
-
-    iput-object p1, p0, Lcom/facebook/react/modules/core/Timing;->isRunningTasks:Ljava/util/concurrent/atomic/AtomicBoolean;
-
-    .line 176
-    new-instance p1, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;
+    new-instance v0, Ljava/util/concurrent/atomic/AtomicBoolean;
 
     const/4 v1, 0x0
 
-    invoke-direct {p1, p0, v1}, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;-><init>(Lcom/facebook/react/modules/core/Timing;Lcom/facebook/react/modules/core/Timing$1;)V
+    invoke-direct {v0, v1}, Ljava/util/concurrent/atomic/AtomicBoolean;-><init>(Z)V
 
-    iput-object p1, p0, Lcom/facebook/react/modules/core/Timing;->mTimerFrameCallback:Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;
+    iput-object v0, p0, Lcom/facebook/react/modules/core/Timing;->isRunningTasks:Ljava/util/concurrent/atomic/AtomicBoolean;
+
+    .line 176
+    new-instance v0, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;
+
+    const/4 v2, 0x0
+
+    invoke-direct {v0, p0, v2}, Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;-><init>(Lcom/facebook/react/modules/core/Timing;Lcom/facebook/react/modules/core/Timing$1;)V
+
+    iput-object v0, p0, Lcom/facebook/react/modules/core/Timing;->mTimerFrameCallback:Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;
 
     .line 177
-    new-instance p1, Lcom/facebook/react/modules/core/Timing$IdleFrameCallback;
+    new-instance v0, Lcom/facebook/react/modules/core/Timing$IdleFrameCallback;
 
-    invoke-direct {p1, p0, v1}, Lcom/facebook/react/modules/core/Timing$IdleFrameCallback;-><init>(Lcom/facebook/react/modules/core/Timing;Lcom/facebook/react/modules/core/Timing$1;)V
+    invoke-direct {v0, p0, v2}, Lcom/facebook/react/modules/core/Timing$IdleFrameCallback;-><init>(Lcom/facebook/react/modules/core/Timing;Lcom/facebook/react/modules/core/Timing$1;)V
 
-    iput-object p1, p0, Lcom/facebook/react/modules/core/Timing;->mIdleFrameCallback:Lcom/facebook/react/modules/core/Timing$IdleFrameCallback;
+    iput-object v0, p0, Lcom/facebook/react/modules/core/Timing;->mIdleFrameCallback:Lcom/facebook/react/modules/core/Timing$IdleFrameCallback;
 
     .line 180
-    iput-boolean v0, p0, Lcom/facebook/react/modules/core/Timing;->mFrameCallbackPosted:Z
+    iput-boolean v1, p0, Lcom/facebook/react/modules/core/Timing;->mFrameCallbackPosted:Z
 
     .line 181
-    iput-boolean v0, p0, Lcom/facebook/react/modules/core/Timing;->mFrameIdleCallbackPosted:Z
+    iput-boolean v1, p0, Lcom/facebook/react/modules/core/Timing;->mFrameIdleCallbackPosted:Z
 
     .line 182
-    iput-boolean v0, p0, Lcom/facebook/react/modules/core/Timing;->mSendIdleEvents:Z
+    iput-boolean v1, p0, Lcom/facebook/react/modules/core/Timing;->mSendIdleEvents:Z
 
     .line 186
     iput-object p2, p0, Lcom/facebook/react/modules/core/Timing;->mDevSupportManager:Lcom/facebook/react/devsupport/interfaces/DevSupportManager;
 
     .line 188
-    new-instance p1, Ljava/util/PriorityQueue;
+    new-instance v0, Ljava/util/PriorityQueue;
 
-    new-instance p2, Lcom/facebook/react/modules/core/Timing$1;
+    new-instance v1, Lcom/facebook/react/modules/core/Timing$1;
 
-    invoke-direct {p2, p0}, Lcom/facebook/react/modules/core/Timing$1;-><init>(Lcom/facebook/react/modules/core/Timing;)V
+    invoke-direct {v1, p0}, Lcom/facebook/react/modules/core/Timing$1;-><init>(Lcom/facebook/react/modules/core/Timing;)V
 
-    const/16 v0, 0xb
+    const/16 v2, 0xb
 
-    invoke-direct {p1, v0, p2}, Ljava/util/PriorityQueue;-><init>(ILjava/util/Comparator;)V
+    invoke-direct {v0, v2, v1}, Ljava/util/PriorityQueue;-><init>(ILjava/util/Comparator;)V
 
-    iput-object p1, p0, Lcom/facebook/react/modules/core/Timing;->mTimers:Ljava/util/PriorityQueue;
+    iput-object v0, p0, Lcom/facebook/react/modules/core/Timing;->mTimers:Ljava/util/PriorityQueue;
 
     .line 203
-    new-instance p1, Landroid/util/SparseArray;
+    new-instance v0, Landroid/util/SparseArray;
 
-    invoke-direct {p1}, Landroid/util/SparseArray;-><init>()V
+    invoke-direct {v0}, Landroid/util/SparseArray;-><init>()V
 
-    iput-object p1, p0, Lcom/facebook/react/modules/core/Timing;->mTimerIdsToTimers:Landroid/util/SparseArray;
+    iput-object v0, p0, Lcom/facebook/react/modules/core/Timing;->mTimerIdsToTimers:Landroid/util/SparseArray;
 
     .line 204
     invoke-static {}, Lcom/facebook/react/modules/core/ReactChoreographer;->getInstance()Lcom/facebook/react/modules/core/ReactChoreographer;
 
-    move-result-object p1
+    move-result-object v0
 
-    iput-object p1, p0, Lcom/facebook/react/modules/core/Timing;->mReactChoreographer:Lcom/facebook/react/modules/core/ReactChoreographer;
+    iput-object v0, p0, Lcom/facebook/react/modules/core/Timing;->mReactChoreographer:Lcom/facebook/react/modules/core/ReactChoreographer;
 
+    .line 205
     return-void
 .end method
 
 .method static synthetic access$000(Lcom/facebook/react/modules/core/Timing;)Ljava/util/concurrent/atomic/AtomicBoolean;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/modules/core/Timing;
 
     .line 35
-    iget-object p0, p0, Lcom/facebook/react/modules/core/Timing;->isPaused:Ljava/util/concurrent/atomic/AtomicBoolean;
+    iget-object v0, p0, Lcom/facebook/react/modules/core/Timing;->isPaused:Ljava/util/concurrent/atomic/AtomicBoolean;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$100(Lcom/facebook/react/modules/core/Timing;)Ljava/util/concurrent/atomic/AtomicBoolean;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/modules/core/Timing;
 
     .line 35
-    iget-object p0, p0, Lcom/facebook/react/modules/core/Timing;->isRunningTasks:Ljava/util/concurrent/atomic/AtomicBoolean;
+    iget-object v0, p0, Lcom/facebook/react/modules/core/Timing;->isRunningTasks:Ljava/util/concurrent/atomic/AtomicBoolean;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$1000(Lcom/facebook/react/modules/core/Timing;)Lcom/facebook/react/modules/core/ReactChoreographer;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/modules/core/Timing;
 
     .line 35
-    iget-object p0, p0, Lcom/facebook/react/modules/core/Timing;->mReactChoreographer:Lcom/facebook/react/modules/core/ReactChoreographer;
+    iget-object v0, p0, Lcom/facebook/react/modules/core/Timing;->mReactChoreographer:Lcom/facebook/react/modules/core/ReactChoreographer;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$1100(Lcom/facebook/react/modules/core/Timing;)Lcom/facebook/react/modules/core/Timing$IdleCallbackRunnable;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/modules/core/Timing;
 
     .line 35
-    iget-object p0, p0, Lcom/facebook/react/modules/core/Timing;->mCurrentIdleCallbackRunnable:Lcom/facebook/react/modules/core/Timing$IdleCallbackRunnable;
+    iget-object v0, p0, Lcom/facebook/react/modules/core/Timing;->mCurrentIdleCallbackRunnable:Lcom/facebook/react/modules/core/Timing$IdleCallbackRunnable;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$1102(Lcom/facebook/react/modules/core/Timing;Lcom/facebook/react/modules/core/Timing$IdleCallbackRunnable;)Lcom/facebook/react/modules/core/Timing$IdleCallbackRunnable;
     .locals 0
+    .param p0, "x0"    # Lcom/facebook/react/modules/core/Timing;
+    .param p1, "x1"    # Lcom/facebook/react/modules/core/Timing$IdleCallbackRunnable;
 
     .line 35
     iput-object p1, p0, Lcom/facebook/react/modules/core/Timing;->mCurrentIdleCallbackRunnable:Lcom/facebook/react/modules/core/Timing$IdleCallbackRunnable;
@@ -222,47 +231,52 @@
 .end method
 
 .method static synthetic access$1200(Lcom/facebook/react/modules/core/Timing;)Lcom/facebook/react/bridge/ReactApplicationContext;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/modules/core/Timing;
 
     .line 35
     invoke-virtual {p0}, Lcom/facebook/react/modules/core/Timing;->getReactApplicationContext()Lcom/facebook/react/bridge/ReactApplicationContext;
 
-    move-result-object p0
+    move-result-object v0
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$1300(Lcom/facebook/react/modules/core/Timing;)Ljava/lang/Object;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/modules/core/Timing;
 
     .line 35
-    iget-object p0, p0, Lcom/facebook/react/modules/core/Timing;->mIdleCallbackGuard:Ljava/lang/Object;
+    iget-object v0, p0, Lcom/facebook/react/modules/core/Timing;->mIdleCallbackGuard:Ljava/lang/Object;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$1400(Lcom/facebook/react/modules/core/Timing;)Z
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/modules/core/Timing;
 
     .line 35
-    iget-boolean p0, p0, Lcom/facebook/react/modules/core/Timing;->mSendIdleEvents:Z
+    iget-boolean v0, p0, Lcom/facebook/react/modules/core/Timing;->mSendIdleEvents:Z
 
-    return p0
+    return v0
 .end method
 
 .method static synthetic access$1500(Lcom/facebook/react/modules/core/Timing;)Lcom/facebook/react/bridge/ReactApplicationContext;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/modules/core/Timing;
 
     .line 35
     invoke-virtual {p0}, Lcom/facebook/react/modules/core/Timing;->getReactApplicationContext()Lcom/facebook/react/bridge/ReactApplicationContext;
 
-    move-result-object p0
+    move-result-object v0
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$1900(Lcom/facebook/react/modules/core/Timing;)V
     .locals 0
+    .param p0, "x0"    # Lcom/facebook/react/modules/core/Timing;
 
     .line 35
     invoke-direct {p0}, Lcom/facebook/react/modules/core/Timing;->setChoreographerIdleCallback()V
@@ -271,16 +285,18 @@
 .end method
 
 .method static synthetic access$200(Lcom/facebook/react/modules/core/Timing;)Ljava/lang/Object;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/modules/core/Timing;
 
     .line 35
-    iget-object p0, p0, Lcom/facebook/react/modules/core/Timing;->mTimerGuard:Ljava/lang/Object;
+    iget-object v0, p0, Lcom/facebook/react/modules/core/Timing;->mTimerGuard:Ljava/lang/Object;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$2000(Lcom/facebook/react/modules/core/Timing;)V
     .locals 0
+    .param p0, "x0"    # Lcom/facebook/react/modules/core/Timing;
 
     .line 35
     invoke-direct {p0}, Lcom/facebook/react/modules/core/Timing;->clearChoreographerIdleCallback()V
@@ -289,32 +305,35 @@
 .end method
 
 .method static synthetic access$300(Lcom/facebook/react/modules/core/Timing;)Ljava/util/PriorityQueue;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/modules/core/Timing;
 
     .line 35
-    iget-object p0, p0, Lcom/facebook/react/modules/core/Timing;->mTimers:Ljava/util/PriorityQueue;
+    iget-object v0, p0, Lcom/facebook/react/modules/core/Timing;->mTimers:Ljava/util/PriorityQueue;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$800(Lcom/facebook/react/modules/core/Timing;)Landroid/util/SparseArray;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/modules/core/Timing;
 
     .line 35
-    iget-object p0, p0, Lcom/facebook/react/modules/core/Timing;->mTimerIdsToTimers:Landroid/util/SparseArray;
+    iget-object v0, p0, Lcom/facebook/react/modules/core/Timing;->mTimerIdsToTimers:Landroid/util/SparseArray;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$900(Lcom/facebook/react/modules/core/Timing;)Lcom/facebook/react/bridge/ReactApplicationContext;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/modules/core/Timing;
 
     .line 35
     invoke-virtual {p0}, Lcom/facebook/react/modules/core/Timing;->getReactApplicationContext()Lcom/facebook/react/bridge/ReactApplicationContext;
 
-    move-result-object p0
+    move-result-object v0
 
-    return-object p0
+    return-object v0
 .end method
 
 .method private clearChoreographerIdleCallback()V
@@ -334,17 +353,21 @@
 
     invoke-virtual {v0, v1, v2}, Lcom/facebook/react/modules/core/ReactChoreographer;->removeFrameCallback(Lcom/facebook/react/modules/core/ReactChoreographer$CallbackType;Lcom/facebook/react/modules/core/ChoreographerCompat$FrameCallback;)V
 
+    .line 314
     const/4 v0, 0x0
 
-    .line 314
     iput-boolean v0, p0, Lcom/facebook/react/modules/core/Timing;->mFrameIdleCallbackPosted:Z
 
+    .line 316
     :cond_0
     return-void
 .end method
 
 .method private clearFrameCallback()V
-    .locals 3
+    .locals 4
+
+    .line 289
+    nop
 
     .line 290
     invoke-virtual {p0}, Lcom/facebook/react/modules/core/Timing;->getReactApplicationContext()Lcom/facebook/react/bridge/ReactApplicationContext;
@@ -356,6 +379,7 @@
     move-result-object v0
 
     .line 291
+    .local v0, "headlessJsTaskContext":Lcom/facebook/react/jstasks/HeadlessJsTaskContext;
     iget-boolean v1, p0, Lcom/facebook/react/modules/core/Timing;->mFrameCallbackPosted:Z
 
     if-eqz v1, :cond_0
@@ -371,24 +395,25 @@
     .line 292
     invoke-virtual {v0}, Lcom/facebook/react/jstasks/HeadlessJsTaskContext;->hasActiveTasks()Z
 
-    move-result v0
+    move-result v1
 
-    if-nez v0, :cond_0
+    if-nez v1, :cond_0
 
     .line 293
-    iget-object v0, p0, Lcom/facebook/react/modules/core/Timing;->mReactChoreographer:Lcom/facebook/react/modules/core/ReactChoreographer;
+    iget-object v1, p0, Lcom/facebook/react/modules/core/Timing;->mReactChoreographer:Lcom/facebook/react/modules/core/ReactChoreographer;
 
-    sget-object v1, Lcom/facebook/react/modules/core/ReactChoreographer$CallbackType;->TIMERS_EVENTS:Lcom/facebook/react/modules/core/ReactChoreographer$CallbackType;
+    sget-object v2, Lcom/facebook/react/modules/core/ReactChoreographer$CallbackType;->TIMERS_EVENTS:Lcom/facebook/react/modules/core/ReactChoreographer$CallbackType;
 
-    iget-object v2, p0, Lcom/facebook/react/modules/core/Timing;->mTimerFrameCallback:Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;
+    iget-object v3, p0, Lcom/facebook/react/modules/core/Timing;->mTimerFrameCallback:Lcom/facebook/react/modules/core/Timing$TimerFrameCallback;
 
-    invoke-virtual {v0, v1, v2}, Lcom/facebook/react/modules/core/ReactChoreographer;->removeFrameCallback(Lcom/facebook/react/modules/core/ReactChoreographer$CallbackType;Lcom/facebook/react/modules/core/ChoreographerCompat$FrameCallback;)V
-
-    const/4 v0, 0x0
+    invoke-virtual {v1, v2, v3}, Lcom/facebook/react/modules/core/ReactChoreographer;->removeFrameCallback(Lcom/facebook/react/modules/core/ReactChoreographer$CallbackType;Lcom/facebook/react/modules/core/ChoreographerCompat$FrameCallback;)V
 
     .line 296
-    iput-boolean v0, p0, Lcom/facebook/react/modules/core/Timing;->mFrameCallbackPosted:Z
+    const/4 v1, 0x0
 
+    iput-boolean v1, p0, Lcom/facebook/react/modules/core/Timing;->mFrameCallbackPosted:Z
+
+    .line 298
     :cond_0
     return-void
 .end method
@@ -416,6 +441,7 @@
     .line 275
     invoke-direct {p0}, Lcom/facebook/react/modules/core/Timing;->clearFrameCallback()V
 
+    .line 277
     :cond_0
     return-void
 .end method
@@ -441,8 +467,10 @@
     :cond_0
     monitor-exit v0
 
+    .line 271
     return-void
 
+    .line 270
     :catchall_0
     move-exception v1
 
@@ -470,11 +498,12 @@
 
     invoke-virtual {v0, v1, v2}, Lcom/facebook/react/modules/core/ReactChoreographer;->postFrameCallback(Lcom/facebook/react/modules/core/ReactChoreographer$CallbackType;Lcom/facebook/react/modules/core/ChoreographerCompat$FrameCallback;)V
 
+    .line 284
     const/4 v0, 0x1
 
-    .line 284
     iput-boolean v0, p0, Lcom/facebook/react/modules/core/Timing;->mFrameCallbackPosted:Z
 
+    .line 286
     :cond_0
     return-void
 .end method
@@ -496,11 +525,12 @@
 
     invoke-virtual {v0, v1, v2}, Lcom/facebook/react/modules/core/ReactChoreographer;->postFrameCallback(Lcom/facebook/react/modules/core/ReactChoreographer$CallbackType;Lcom/facebook/react/modules/core/ChoreographerCompat$FrameCallback;)V
 
+    .line 305
     const/4 v0, 0x1
 
-    .line 305
     iput-boolean v0, p0, Lcom/facebook/react/modules/core/Timing;->mFrameIdleCallbackPosted:Z
 
+    .line 307
     :cond_0
     return-void
 .end method
@@ -508,41 +538,106 @@
 
 # virtual methods
 .method public createTimer(IIDZ)V
-    .locals 9
+    .locals 22
+    .param p1, "callbackID"    # I
+    .param p2, "duration"    # I
+    .param p3, "jsSchedulingTime"    # D
+    .param p5, "repeat"    # Z
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
     .line 329
+    move-object/from16 v1, p0
+
+    move/from16 v9, p1
+
+    move/from16 v10, p2
+
     invoke-static {}, Lcom/facebook/react/common/SystemClock;->currentTimeMillis()J
 
-    move-result-wide v0
+    move-result-wide v11
 
-    double-to-long p3, p3
+    .line 330
+    .local v11, "deviceTime":J
+    move-wide/from16 v13, p3
+
+    double-to-long v7, v13
 
     .line 335
-    iget-object v2, p0, Lcom/facebook/react/modules/core/Timing;->mDevSupportManager:Lcom/facebook/react/devsupport/interfaces/DevSupportManager;
+    .local v7, "remoteTime":J
+    iget-object v0, v1, Lcom/facebook/react/modules/core/Timing;->mDevSupportManager:Lcom/facebook/react/devsupport/interfaces/DevSupportManager;
 
-    invoke-interface {v2}, Lcom/facebook/react/devsupport/interfaces/DevSupportManager;->getDevSupportEnabled()Z
+    invoke-interface {v0}, Lcom/facebook/react/devsupport/interfaces/DevSupportManager;->getDevSupportEnabled()Z
 
-    move-result v2
+    move-result v0
 
-    if-eqz v2, :cond_0
-
-    sub-long v2, p3, v0
+    if-eqz v0, :cond_0
 
     .line 336
+    sub-long v2, v7, v11
+
     invoke-static {v2, v3}, Ljava/lang/Math;->abs(J)J
 
     move-result-wide v2
 
+    .line 337
+    .local v2, "driftTime":J
     const-wide/32 v4, 0xea60
 
-    cmp-long v6, v2, v4
+    cmp-long v0, v2, v4
 
-    if-lez v6, :cond_0
+    if-lez v0, :cond_0
 
     .line 338
-    invoke-virtual {p0}, Lcom/facebook/react/modules/core/Timing;->getReactApplicationContext()Lcom/facebook/react/bridge/ReactApplicationContext;
+    invoke-virtual/range {p0 .. p0}, Lcom/facebook/react/modules/core/Timing;->getReactApplicationContext()Lcom/facebook/react/bridge/ReactApplicationContext;
+
+    move-result-object v0
+
+    const-class v4, Lcom/facebook/react/modules/core/JSTimers;
+
+    invoke-virtual {v0, v4}, Lcom/facebook/react/bridge/ReactApplicationContext;->getJSModule(Ljava/lang/Class;)Lcom/facebook/react/bridge/JavaScriptModule;
+
+    move-result-object v0
+
+    check-cast v0, Lcom/facebook/react/modules/core/JSTimers;
+
+    const-string v4, "Debugger and device times have drifted by more than 60s. Please correct this by running adb shell \"date `date +%m%d%H%M%Y.%S`\" on your debugger machine."
+
+    .line 339
+    invoke-interface {v0, v4}, Lcom/facebook/react/modules/core/JSTimers;->emitTimeDriftWarning(Ljava/lang/String;)V
+
+    .line 346
+    .end local v2    # "driftTime":J
+    :cond_0
+    sub-long v2, v7, v11
+
+    int-to-long v4, v10
+
+    add-long/2addr v2, v4
+
+    const-wide/16 v4, 0x0
+
+    invoke-static {v4, v5, v2, v3}, Ljava/lang/Math;->max(JJ)J
+
+    move-result-wide v15
+
+    .line 347
+    .local v15, "adjustedDuration":J
+    if-nez v10, :cond_1
+
+    if-nez p5, :cond_1
+
+    .line 348
+    invoke-static {}, Lcom/facebook/react/bridge/Arguments;->createArray()Lcom/facebook/react/bridge/WritableArray;
+
+    move-result-object v0
+
+    .line 349
+    .local v0, "timerToCall":Lcom/facebook/react/bridge/WritableArray;
+    invoke-interface {v0, v9}, Lcom/facebook/react/bridge/WritableArray;->pushInt(I)V
+
+    .line 350
+    invoke-virtual/range {p0 .. p0}, Lcom/facebook/react/modules/core/Timing;->getReactApplicationContext()Lcom/facebook/react/bridge/ReactApplicationContext;
 
     move-result-object v2
 
@@ -554,115 +649,86 @@
 
     check-cast v2, Lcom/facebook/react/modules/core/JSTimers;
 
-    const-string v3, "Debugger and device times have drifted by more than 60s. Please correct this by running adb shell \"date `date +%m%d%H%M%Y.%S`\" on your debugger machine."
-
-    .line 339
-    invoke-interface {v2, v3}, Lcom/facebook/react/modules/core/JSTimers;->emitTimeDriftWarning(Ljava/lang/String;)V
-
-    :cond_0
-    const-wide/16 v2, 0x0
-
-    sub-long/2addr p3, v0
-
-    int-to-long v0, p2
-
-    add-long/2addr p3, v0
-
-    .line 346
-    invoke-static {v2, v3, p3, p4}, Ljava/lang/Math;->max(JJ)J
-
-    move-result-wide p3
-
-    if-nez p2, :cond_1
-
-    if-nez p5, :cond_1
-
-    .line 348
-    invoke-static {}, Lcom/facebook/react/bridge/Arguments;->createArray()Lcom/facebook/react/bridge/WritableArray;
-
-    move-result-object p2
-
-    .line 349
-    invoke-interface {p2, p1}, Lcom/facebook/react/bridge/WritableArray;->pushInt(I)V
-
-    .line 350
-    invoke-virtual {p0}, Lcom/facebook/react/modules/core/Timing;->getReactApplicationContext()Lcom/facebook/react/bridge/ReactApplicationContext;
-
-    move-result-object p1
-
-    const-class p3, Lcom/facebook/react/modules/core/JSTimers;
-
-    invoke-virtual {p1, p3}, Lcom/facebook/react/bridge/ReactApplicationContext;->getJSModule(Ljava/lang/Class;)Lcom/facebook/react/bridge/JavaScriptModule;
-
-    move-result-object p1
-
-    check-cast p1, Lcom/facebook/react/modules/core/JSTimers;
-
     .line 351
-    invoke-interface {p1, p2}, Lcom/facebook/react/modules/core/JSTimers;->callTimers(Lcom/facebook/react/bridge/WritableArray;)V
+    invoke-interface {v2, v0}, Lcom/facebook/react/modules/core/JSTimers;->callTimers(Lcom/facebook/react/bridge/WritableArray;)V
 
+    .line 352
     return-void
 
     .line 355
+    .end local v0    # "timerToCall":Lcom/facebook/react/bridge/WritableArray;
     :cond_1
     invoke-static {}, Lcom/facebook/react/common/SystemClock;->nanoTime()J
 
-    move-result-wide v0
+    move-result-wide v2
 
-    const-wide/32 v2, 0xf4240
+    const-wide/32 v4, 0xf4240
 
-    div-long/2addr v0, v2
+    div-long/2addr v2, v4
 
-    add-long v4, v0, p3
+    add-long v17, v2, v15
 
     .line 356
-    new-instance p3, Lcom/facebook/react/modules/core/Timing$Timer;
+    .local v17, "initialTargetTime":J
+    new-instance v0, Lcom/facebook/react/modules/core/Timing$Timer;
 
-    const/4 v8, 0x0
+    const/16 v19, 0x0
 
-    move-object v2, p3
+    move-object v2, v0
 
-    move v3, p1
+    move/from16 v3, p1
 
-    move v6, p2
+    move-wide/from16 v4, v17
 
-    move v7, p5
+    move/from16 v6, p2
+
+    move-wide/from16 v20, v7
+
+    .end local v7    # "remoteTime":J
+    .local v20, "remoteTime":J
+    move/from16 v7, p5
+
+    move-object/from16 v8, v19
 
     invoke-direct/range {v2 .. v8}, Lcom/facebook/react/modules/core/Timing$Timer;-><init>(IJIZLcom/facebook/react/modules/core/Timing$1;)V
 
     .line 357
-    iget-object p2, p0, Lcom/facebook/react/modules/core/Timing;->mTimerGuard:Ljava/lang/Object;
+    .local v2, "timer":Lcom/facebook/react/modules/core/Timing$Timer;
+    iget-object v3, v1, Lcom/facebook/react/modules/core/Timing;->mTimerGuard:Ljava/lang/Object;
 
-    monitor-enter p2
+    monitor-enter v3
 
     .line 358
     :try_start_0
-    iget-object p4, p0, Lcom/facebook/react/modules/core/Timing;->mTimers:Ljava/util/PriorityQueue;
+    iget-object v0, v1, Lcom/facebook/react/modules/core/Timing;->mTimers:Ljava/util/PriorityQueue;
 
-    invoke-virtual {p4, p3}, Ljava/util/PriorityQueue;->add(Ljava/lang/Object;)Z
+    invoke-virtual {v0, v2}, Ljava/util/PriorityQueue;->add(Ljava/lang/Object;)Z
 
     .line 359
-    iget-object p4, p0, Lcom/facebook/react/modules/core/Timing;->mTimerIdsToTimers:Landroid/util/SparseArray;
+    iget-object v0, v1, Lcom/facebook/react/modules/core/Timing;->mTimerIdsToTimers:Landroid/util/SparseArray;
 
-    invoke-virtual {p4, p1, p3}, Landroid/util/SparseArray;->put(ILjava/lang/Object;)V
+    invoke-virtual {v0, v9, v2}, Landroid/util/SparseArray;->put(ILjava/lang/Object;)V
 
     .line 360
-    monitor-exit p2
+    monitor-exit v3
 
+    .line 361
     return-void
 
+    .line 360
     :catchall_0
-    move-exception p1
+    move-exception v0
 
-    monitor-exit p2
+    monitor-exit v3
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    throw p1
+    throw v0
 .end method
 
 .method public deleteTimer(I)V
     .locals 3
+    .param p1, "timerId"    # I
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -681,6 +747,8 @@
 
     check-cast v1, Lcom/facebook/react/modules/core/Timing$Timer;
 
+    .line 367
+    .local v1, "timer":Lcom/facebook/react/modules/core/Timing$Timer;
     if-nez v1, :cond_0
 
     .line 368
@@ -695,28 +763,34 @@
     invoke-virtual {v2, p1}, Landroid/util/SparseArray;->remove(I)V
 
     .line 371
-    iget-object p1, p0, Lcom/facebook/react/modules/core/Timing;->mTimers:Ljava/util/PriorityQueue;
+    iget-object v2, p0, Lcom/facebook/react/modules/core/Timing;->mTimers:Ljava/util/PriorityQueue;
 
-    invoke-virtual {p1, v1}, Ljava/util/PriorityQueue;->remove(Ljava/lang/Object;)Z
+    invoke-virtual {v2, v1}, Ljava/util/PriorityQueue;->remove(Ljava/lang/Object;)Z
 
     .line 372
+    nop
+
+    .end local v1    # "timer":Lcom/facebook/react/modules/core/Timing$Timer;
     monitor-exit v0
 
+    .line 373
     return-void
 
+    .line 372
     :catchall_0
-    move-exception p1
+    move-exception v1
 
     monitor-exit v0
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    throw p1
+    throw v1
 .end method
 
 .method public getName()Ljava/lang/String;
     .locals 1
 
+    .line 320
     const-string v0, "Timing"
 
     return-object v0
@@ -732,6 +806,9 @@
 
     invoke-virtual {v0, p0}, Lcom/facebook/react/bridge/ReactApplicationContext;->addLifecycleEventListener(Lcom/facebook/react/bridge/LifecycleEventListener;)V
 
+    .line 210
+    nop
+
     .line 211
     invoke-virtual {p0}, Lcom/facebook/react/modules/core/Timing;->getReactApplicationContext()Lcom/facebook/react/bridge/ReactApplicationContext;
 
@@ -742,8 +819,10 @@
     move-result-object v0
 
     .line 212
+    .local v0, "headlessJsTaskContext":Lcom/facebook/react/jstasks/HeadlessJsTaskContext;
     invoke-virtual {v0, p0}, Lcom/facebook/react/jstasks/HeadlessJsTaskContext;->addTaskEventListener(Lcom/facebook/react/jstasks/HeadlessJsTaskEventListener;)V
 
+    .line 213
     return-void
 .end method
 
@@ -756,6 +835,9 @@
     .line 259
     invoke-direct {p0}, Lcom/facebook/react/modules/core/Timing;->clearChoreographerIdleCallback()V
 
+    .line 260
+    nop
+
     .line 261
     invoke-virtual {p0}, Lcom/facebook/react/modules/core/Timing;->getReactApplicationContext()Lcom/facebook/react/bridge/ReactApplicationContext;
 
@@ -766,36 +848,43 @@
     move-result-object v0
 
     .line 262
+    .local v0, "headlessJsTaskContext":Lcom/facebook/react/jstasks/HeadlessJsTaskContext;
     invoke-virtual {v0, p0}, Lcom/facebook/react/jstasks/HeadlessJsTaskContext;->removeTaskEventListener(Lcom/facebook/react/jstasks/HeadlessJsTaskEventListener;)V
 
+    .line 263
     return-void
 .end method
 
 .method public onHeadlessJsTaskFinish(I)V
-    .locals 1
+    .locals 3
+    .param p1, "taskId"    # I
+
+    .line 247
+    nop
 
     .line 248
     invoke-virtual {p0}, Lcom/facebook/react/modules/core/Timing;->getReactApplicationContext()Lcom/facebook/react/bridge/ReactApplicationContext;
 
-    move-result-object p1
+    move-result-object v0
 
-    invoke-static {p1}, Lcom/facebook/react/jstasks/HeadlessJsTaskContext;->getInstance(Lcom/facebook/react/bridge/ReactContext;)Lcom/facebook/react/jstasks/HeadlessJsTaskContext;
+    invoke-static {v0}, Lcom/facebook/react/jstasks/HeadlessJsTaskContext;->getInstance(Lcom/facebook/react/bridge/ReactContext;)Lcom/facebook/react/jstasks/HeadlessJsTaskContext;
 
-    move-result-object p1
+    move-result-object v0
 
     .line 249
-    invoke-virtual {p1}, Lcom/facebook/react/jstasks/HeadlessJsTaskContext;->hasActiveTasks()Z
+    .local v0, "headlessJsTaskContext":Lcom/facebook/react/jstasks/HeadlessJsTaskContext;
+    invoke-virtual {v0}, Lcom/facebook/react/jstasks/HeadlessJsTaskContext;->hasActiveTasks()Z
 
-    move-result p1
+    move-result v1
 
-    if-nez p1, :cond_0
+    if-nez v1, :cond_0
 
     .line 250
-    iget-object p1, p0, Lcom/facebook/react/modules/core/Timing;->isRunningTasks:Ljava/util/concurrent/atomic/AtomicBoolean;
+    iget-object v1, p0, Lcom/facebook/react/modules/core/Timing;->isRunningTasks:Ljava/util/concurrent/atomic/AtomicBoolean;
 
-    const/4 v0, 0x0
+    const/4 v2, 0x0
 
-    invoke-virtual {p1, v0}, Ljava/util/concurrent/atomic/AtomicBoolean;->set(Z)V
+    invoke-virtual {v1, v2}, Ljava/util/concurrent/atomic/AtomicBoolean;->set(Z)V
 
     .line 251
     invoke-direct {p0}, Lcom/facebook/react/modules/core/Timing;->clearFrameCallback()V
@@ -803,23 +892,25 @@
     .line 252
     invoke-direct {p0}, Lcom/facebook/react/modules/core/Timing;->maybeIdleCallback()V
 
+    .line 254
     :cond_0
     return-void
 .end method
 
 .method public onHeadlessJsTaskStart(I)V
-    .locals 1
+    .locals 2
+    .param p1, "taskId"    # I
 
     .line 239
-    iget-object p1, p0, Lcom/facebook/react/modules/core/Timing;->isRunningTasks:Ljava/util/concurrent/atomic/AtomicBoolean;
+    iget-object v0, p0, Lcom/facebook/react/modules/core/Timing;->isRunningTasks:Ljava/util/concurrent/atomic/AtomicBoolean;
 
-    const/4 v0, 0x1
+    const/4 v1, 0x1
 
-    invoke-virtual {p1, v0}, Ljava/util/concurrent/atomic/AtomicBoolean;->getAndSet(Z)Z
+    invoke-virtual {v0, v1}, Ljava/util/concurrent/atomic/AtomicBoolean;->getAndSet(Z)Z
 
-    move-result p1
+    move-result v0
 
-    if-nez p1, :cond_0
+    if-nez v0, :cond_0
 
     .line 240
     invoke-direct {p0}, Lcom/facebook/react/modules/core/Timing;->setChoreographerCallback()V
@@ -827,6 +918,7 @@
     .line 241
     invoke-direct {p0}, Lcom/facebook/react/modules/core/Timing;->maybeSetChoreographerIdleCallback()V
 
+    .line 243
     :cond_0
     return-void
 .end method
@@ -840,6 +932,7 @@
     .line 225
     invoke-direct {p0}, Lcom/facebook/react/modules/core/Timing;->maybeIdleCallback()V
 
+    .line 226
     return-void
 .end method
 
@@ -859,6 +952,7 @@
     .line 219
     invoke-direct {p0}, Lcom/facebook/react/modules/core/Timing;->maybeIdleCallback()V
 
+    .line 220
     return-void
 .end method
 
@@ -878,11 +972,13 @@
     .line 234
     invoke-direct {p0}, Lcom/facebook/react/modules/core/Timing;->maybeSetChoreographerIdleCallback()V
 
+    .line 235
     return-void
 .end method
 
 .method public setSendIdleEvents(Z)V
-    .locals 1
+    .locals 2
+    .param p1, "sendIdleEvents"    # Z
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -907,16 +1003,17 @@
 
     invoke-static {v0}, Lcom/facebook/react/bridge/UiThreadUtil;->runOnUiThread(Ljava/lang/Runnable;)V
 
+    .line 393
     return-void
 
-    :catchall_0
-    move-exception p1
-
     .line 379
+    :catchall_0
+    move-exception v1
+
     :try_start_1
     monitor-exit v0
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
-    throw p1
+    throw v1
 .end method

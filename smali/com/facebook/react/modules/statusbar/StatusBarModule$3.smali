@@ -28,6 +28,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/modules/statusbar/StatusBarModule;ZLandroid/app/Activity;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/modules/statusbar/StatusBarModule;
 
     .line 163
     iput-object p1, p0, Lcom/facebook/react/modules/statusbar/StatusBarModule$3;->this$0:Lcom/facebook/react/modules/statusbar/StatusBarModule;
@@ -94,6 +95,7 @@
 
     invoke-virtual {v0, v1}, Landroid/view/Window;->clearFlags(I)V
 
+    .line 173
     :goto_0
     return-void
 .end method

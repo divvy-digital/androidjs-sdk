@@ -29,6 +29,7 @@
 # direct methods
 .method public constructor <init>(J)V
     .locals 3
+    .param p1, "maxBufferSize"    # J
 
     .line 44
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -54,6 +55,7 @@
 
     iput-object v0, p0, Lokio/Pipe;->source:Lokio/Source;
 
+    .line 45
     const-wide/16 v0, 0x1
 
     cmp-long v2, p1, v0
@@ -63,6 +65,7 @@
     .line 48
     iput-wide p1, p0, Lokio/Pipe;->maxBufferSize:J
 
+    .line 49
     return-void
 
     .line 46
@@ -77,13 +80,17 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     invoke-virtual {v1, p1, p2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v1
 
-    invoke-direct {v0, p1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
 
     throw v0
 .end method

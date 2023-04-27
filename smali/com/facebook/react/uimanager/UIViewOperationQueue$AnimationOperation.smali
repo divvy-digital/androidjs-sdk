@@ -24,6 +24,7 @@
 # direct methods
 .method public constructor <init>(I)V
     .locals 0
+    .param p1, "animationID"    # I
 
     .line 350
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -31,5 +32,6 @@
     .line 351
     iput p1, p0, Lcom/facebook/react/uimanager/UIViewOperationQueue$AnimationOperation;->mAnimationID:I
 
+    .line 352
     return-void
 .end method

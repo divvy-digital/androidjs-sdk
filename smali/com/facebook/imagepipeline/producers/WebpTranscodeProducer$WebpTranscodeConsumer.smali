@@ -34,6 +34,7 @@
 # direct methods
 .method public constructor <init>(Lcom/facebook/imagepipeline/producers/WebpTranscodeProducer;Lcom/facebook/imagepipeline/producers/Consumer;Lcom/facebook/imagepipeline/producers/ProducerContext;)V
     .locals 0
+    .param p3, "context"    # Lcom/facebook/imagepipeline/producers/ProducerContext;
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -46,6 +47,7 @@
     .end annotation
 
     .line 63
+    .local p2, "consumer":Lcom/facebook/imagepipeline/producers/Consumer;, "Lcom/facebook/imagepipeline/producers/Consumer<Lcom/facebook/imagepipeline/image/EncodedImage;>;"
     iput-object p1, p0, Lcom/facebook/imagepipeline/producers/WebpTranscodeProducer$WebpTranscodeConsumer;->this$0:Lcom/facebook/imagepipeline/producers/WebpTranscodeProducer;
 
     .line 64
@@ -59,17 +61,19 @@
 
     iput-object p1, p0, Lcom/facebook/imagepipeline/producers/WebpTranscodeProducer$WebpTranscodeConsumer;->mShouldTranscodeWhenFinished:Lcom/facebook/common/util/TriState;
 
+    .line 67
     return-void
 .end method
 
 
 # virtual methods
 .method protected onNewResultImpl(Lcom/facebook/imagepipeline/image/EncodedImage;I)V
-    .locals 2
-    .param p1    # Lcom/facebook/imagepipeline/image/EncodedImage;
+    .locals 3
+    .param p1, "newResult"    # Lcom/facebook/imagepipeline/image/EncodedImage;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
+    .param p2, "status"    # I
 
     .line 72
     iget-object v0, p0, Lcom/facebook/imagepipeline/producers/WebpTranscodeProducer$WebpTranscodeConsumer;->mShouldTranscodeWhenFinished:Lcom/facebook/common/util/TriState;
@@ -102,6 +106,7 @@
 
     invoke-interface {v0, p1, p2}, Lcom/facebook/imagepipeline/producers/Consumer;->onNewResult(Ljava/lang/Object;I)V
 
+    .line 79
     return-void
 
     .line 82
@@ -122,15 +127,15 @@
     if-eqz p1, :cond_2
 
     .line 84
-    iget-object p2, p0, Lcom/facebook/imagepipeline/producers/WebpTranscodeProducer$WebpTranscodeConsumer;->this$0:Lcom/facebook/imagepipeline/producers/WebpTranscodeProducer;
+    iget-object v0, p0, Lcom/facebook/imagepipeline/producers/WebpTranscodeProducer$WebpTranscodeConsumer;->this$0:Lcom/facebook/imagepipeline/producers/WebpTranscodeProducer;
 
     invoke-virtual {p0}, Lcom/facebook/imagepipeline/producers/WebpTranscodeProducer$WebpTranscodeConsumer;->getConsumer()Lcom/facebook/imagepipeline/producers/Consumer;
 
-    move-result-object v0
+    move-result-object v1
 
-    iget-object v1, p0, Lcom/facebook/imagepipeline/producers/WebpTranscodeProducer$WebpTranscodeConsumer;->mContext:Lcom/facebook/imagepipeline/producers/ProducerContext;
+    iget-object v2, p0, Lcom/facebook/imagepipeline/producers/WebpTranscodeProducer$WebpTranscodeConsumer;->mContext:Lcom/facebook/imagepipeline/producers/ProducerContext;
 
-    invoke-static {p2, p1, v0, v1}, Lcom/facebook/imagepipeline/producers/WebpTranscodeProducer;->access$100(Lcom/facebook/imagepipeline/producers/WebpTranscodeProducer;Lcom/facebook/imagepipeline/image/EncodedImage;Lcom/facebook/imagepipeline/producers/Consumer;Lcom/facebook/imagepipeline/producers/ProducerContext;)V
+    invoke-static {v0, p1, v1, v2}, Lcom/facebook/imagepipeline/producers/WebpTranscodeProducer;->access$100(Lcom/facebook/imagepipeline/producers/WebpTranscodeProducer;Lcom/facebook/imagepipeline/image/EncodedImage;Lcom/facebook/imagepipeline/producers/Consumer;Lcom/facebook/imagepipeline/producers/ProducerContext;)V
 
     goto :goto_0
 
@@ -142,6 +147,7 @@
 
     invoke-interface {v0, p1, p2}, Lcom/facebook/imagepipeline/producers/Consumer;->onNewResult(Ljava/lang/Object;I)V
 
+    .line 89
     :cond_3
     :goto_0
     return-void

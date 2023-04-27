@@ -32,11 +32,13 @@
 
     invoke-direct {p0, v0}, Lcom/facebook/imagepipeline/decoder/SimpleProgressiveJpegConfig;-><init>(Lcom/facebook/imagepipeline/decoder/SimpleProgressiveJpegConfig$DynamicValueConfig;)V
 
+    .line 41
     return-void
 .end method
 
 .method public constructor <init>(Lcom/facebook/imagepipeline/decoder/SimpleProgressiveJpegConfig$DynamicValueConfig;)V
-    .locals 0
+    .locals 1
+    .param p1, "dynamicValueConfig"    # Lcom/facebook/imagepipeline/decoder/SimpleProgressiveJpegConfig$DynamicValueConfig;
 
     .line 45
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -44,12 +46,13 @@
     .line 46
     invoke-static {p1}, Lcom/facebook/common/internal/Preconditions;->checkNotNull(Ljava/lang/Object;)Ljava/lang/Object;
 
-    move-result-object p1
+    move-result-object v0
 
-    check-cast p1, Lcom/facebook/imagepipeline/decoder/SimpleProgressiveJpegConfig$DynamicValueConfig;
+    check-cast v0, Lcom/facebook/imagepipeline/decoder/SimpleProgressiveJpegConfig$DynamicValueConfig;
 
-    iput-object p1, p0, Lcom/facebook/imagepipeline/decoder/SimpleProgressiveJpegConfig;->mDynamicValueConfig:Lcom/facebook/imagepipeline/decoder/SimpleProgressiveJpegConfig$DynamicValueConfig;
+    iput-object v0, p0, Lcom/facebook/imagepipeline/decoder/SimpleProgressiveJpegConfig;->mDynamicValueConfig:Lcom/facebook/imagepipeline/decoder/SimpleProgressiveJpegConfig$DynamicValueConfig;
 
+    .line 47
     return-void
 .end method
 
@@ -57,6 +60,7 @@
 # virtual methods
 .method public getNextScanNumberToDecode(I)I
     .locals 3
+    .param p1, "scanNumber"    # I
 
     .line 51
     iget-object v0, p0, Lcom/facebook/imagepipeline/decoder/SimpleProgressiveJpegConfig;->mDynamicValueConfig:Lcom/facebook/imagepipeline/decoder/SimpleProgressiveJpegConfig$DynamicValueConfig;
@@ -65,9 +69,10 @@
 
     move-result-object v0
 
+    .line 52
+    .local v0, "scansToDecode":Ljava/util/List;, "Ljava/util/List<Ljava/lang/Integer;>;"
     if-eqz v0, :cond_3
 
-    .line 52
     invoke-interface {v0}, Ljava/util/List;->isEmpty()Z
 
     move-result v1
@@ -76,10 +81,11 @@
 
     goto :goto_1
 
+    .line 56
     :cond_0
     const/4 v1, 0x0
 
-    .line 56
+    .local v1, "i":I
     :goto_0
     invoke-interface {v0}, Ljava/util/List;->size()I
 
@@ -103,35 +109,40 @@
     .line 58
     invoke-interface {v0, v1}, Ljava/util/List;->get(I)Ljava/lang/Object;
 
-    move-result-object p1
+    move-result-object v2
 
-    check-cast p1, Ljava/lang/Integer;
+    check-cast v2, Ljava/lang/Integer;
 
-    invoke-virtual {p1}, Ljava/lang/Integer;->intValue()I
+    invoke-virtual {v2}, Ljava/lang/Integer;->intValue()I
 
-    move-result p1
+    move-result v2
 
-    return p1
+    return v2
 
+    .line 56
     :cond_1
     add-int/lit8 v1, v1, 0x1
 
     goto :goto_0
 
+    .line 61
+    .end local v1    # "i":I
     :cond_2
-    const p1, 0x7fffffff
+    const v1, 0x7fffffff
 
-    return p1
+    return v1
 
+    .line 53
     :cond_3
     :goto_1
-    add-int/lit8 p1, p1, 0x1
+    add-int/lit8 v1, p1, 0x1
 
-    return p1
+    return v1
 .end method
 
 .method public getQualityInfo(I)Lcom/facebook/imagepipeline/image/QualityInfo;
     .locals 2
+    .param p1, "scanNumber"    # I
 
     .line 66
     iget-object v0, p0, Lcom/facebook/imagepipeline/decoder/SimpleProgressiveJpegConfig;->mDynamicValueConfig:Lcom/facebook/imagepipeline/decoder/SimpleProgressiveJpegConfig$DynamicValueConfig;
@@ -156,7 +167,7 @@
     :goto_0
     invoke-static {p1, v0, v1}, Lcom/facebook/imagepipeline/image/ImmutableQualityInfo;->of(IZZ)Lcom/facebook/imagepipeline/image/QualityInfo;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method

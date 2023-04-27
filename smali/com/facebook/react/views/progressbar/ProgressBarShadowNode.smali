@@ -31,9 +31,9 @@
     .line 37
     invoke-direct {p0}, Lcom/facebook/react/uimanager/LayoutShadowNode;-><init>()V
 
+    .line 31
     const-string v0, "Normal"
 
-    .line 31
     iput-object v0, p0, Lcom/facebook/react/views/progressbar/ProgressBarShadowNode;->mStyle:Ljava/lang/String;
 
     .line 38
@@ -60,6 +60,7 @@
     .line 41
     invoke-direct {p0}, Lcom/facebook/react/views/progressbar/ProgressBarShadowNode;->initMeasureFunction()V
 
+    .line 42
     return-void
 .end method
 
@@ -69,6 +70,7 @@
     .line 45
     invoke-virtual {p0, p0}, Lcom/facebook/react/views/progressbar/ProgressBarShadowNode;->setMeasureFunction(Lcom/facebook/yoga/YogaMeasureFunction;)V
 
+    .line 46
     return-void
 .end method
 
@@ -86,102 +88,112 @@
 .end method
 
 .method public measure(Lcom/facebook/yoga/YogaNode;FLcom/facebook/yoga/YogaMeasureMode;FLcom/facebook/yoga/YogaMeasureMode;)J
-    .locals 0
+    .locals 5
+    .param p1, "node"    # Lcom/facebook/yoga/YogaNode;
+    .param p2, "width"    # F
+    .param p3, "widthMode"    # Lcom/facebook/yoga/YogaMeasureMode;
+    .param p4, "height"    # F
+    .param p5, "heightMode"    # Lcom/facebook/yoga/YogaMeasureMode;
 
     .line 64
     invoke-virtual {p0}, Lcom/facebook/react/views/progressbar/ProgressBarShadowNode;->getStyle()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v0
 
-    invoke-static {p1}, Lcom/facebook/react/views/progressbar/ReactProgressBarViewManager;->getStyleFromString(Ljava/lang/String;)I
+    invoke-static {v0}, Lcom/facebook/react/views/progressbar/ReactProgressBarViewManager;->getStyleFromString(Ljava/lang/String;)I
 
-    move-result p1
+    move-result v0
 
     .line 65
-    iget-object p2, p0, Lcom/facebook/react/views/progressbar/ProgressBarShadowNode;->mMeasured:Ljava/util/Set;
+    .local v0, "style":I
+    iget-object v1, p0, Lcom/facebook/react/views/progressbar/ProgressBarShadowNode;->mMeasured:Ljava/util/Set;
 
-    invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    invoke-static {v0}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object p3
+    move-result-object v2
 
-    invoke-interface {p2, p3}, Ljava/util/Set;->contains(Ljava/lang/Object;)Z
+    invoke-interface {v1, v2}, Ljava/util/Set;->contains(Ljava/lang/Object;)Z
 
-    move-result p2
+    move-result v1
 
-    if-nez p2, :cond_0
+    if-nez v1, :cond_0
 
     .line 66
     invoke-virtual {p0}, Lcom/facebook/react/views/progressbar/ProgressBarShadowNode;->getThemedContext()Lcom/facebook/react/uimanager/ThemedReactContext;
 
-    move-result-object p2
+    move-result-object v1
 
-    invoke-static {p2, p1}, Lcom/facebook/react/views/progressbar/ReactProgressBarViewManager;->createProgressBar(Landroid/content/Context;I)Landroid/widget/ProgressBar;
+    invoke-static {v1, v0}, Lcom/facebook/react/views/progressbar/ReactProgressBarViewManager;->createProgressBar(Landroid/content/Context;I)Landroid/widget/ProgressBar;
 
-    move-result-object p2
-
-    const/4 p3, -0x2
-
-    const/4 p4, 0x0
+    move-result-object v1
 
     .line 67
-    invoke-static {p3, p4}, Landroid/view/View$MeasureSpec;->makeMeasureSpec(II)I
+    .local v1, "progressBar":Landroid/widget/ProgressBar;
+    const/4 v2, -0x2
 
-    move-result p3
+    const/4 v3, 0x0
+
+    invoke-static {v2, v3}, Landroid/view/View$MeasureSpec;->makeMeasureSpec(II)I
+
+    move-result v2
 
     .line 70
-    invoke-virtual {p2, p3, p3}, Landroid/widget/ProgressBar;->measure(II)V
+    .local v2, "spec":I
+    invoke-virtual {v1, v2, v2}, Landroid/widget/ProgressBar;->measure(II)V
 
     .line 71
-    iget-object p3, p0, Lcom/facebook/react/views/progressbar/ProgressBarShadowNode;->mHeight:Landroid/util/SparseIntArray;
+    iget-object v3, p0, Lcom/facebook/react/views/progressbar/ProgressBarShadowNode;->mHeight:Landroid/util/SparseIntArray;
 
-    invoke-virtual {p2}, Landroid/widget/ProgressBar;->getMeasuredHeight()I
+    invoke-virtual {v1}, Landroid/widget/ProgressBar;->getMeasuredHeight()I
 
-    move-result p4
+    move-result v4
 
-    invoke-virtual {p3, p1, p4}, Landroid/util/SparseIntArray;->put(II)V
+    invoke-virtual {v3, v0, v4}, Landroid/util/SparseIntArray;->put(II)V
 
     .line 72
-    iget-object p3, p0, Lcom/facebook/react/views/progressbar/ProgressBarShadowNode;->mWidth:Landroid/util/SparseIntArray;
+    iget-object v3, p0, Lcom/facebook/react/views/progressbar/ProgressBarShadowNode;->mWidth:Landroid/util/SparseIntArray;
 
-    invoke-virtual {p2}, Landroid/widget/ProgressBar;->getMeasuredWidth()I
+    invoke-virtual {v1}, Landroid/widget/ProgressBar;->getMeasuredWidth()I
 
-    move-result p2
+    move-result v4
 
-    invoke-virtual {p3, p1, p2}, Landroid/util/SparseIntArray;->put(II)V
+    invoke-virtual {v3, v0, v4}, Landroid/util/SparseIntArray;->put(II)V
 
     .line 73
-    iget-object p2, p0, Lcom/facebook/react/views/progressbar/ProgressBarShadowNode;->mMeasured:Ljava/util/Set;
+    iget-object v3, p0, Lcom/facebook/react/views/progressbar/ProgressBarShadowNode;->mMeasured:Ljava/util/Set;
 
-    invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    invoke-static {v0}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object p3
+    move-result-object v4
 
-    invoke-interface {p2, p3}, Ljava/util/Set;->add(Ljava/lang/Object;)Z
+    invoke-interface {v3, v4}, Ljava/util/Set;->add(Ljava/lang/Object;)Z
 
     .line 76
+    .end local v1    # "progressBar":Landroid/widget/ProgressBar;
+    .end local v2    # "spec":I
     :cond_0
-    iget-object p2, p0, Lcom/facebook/react/views/progressbar/ProgressBarShadowNode;->mWidth:Landroid/util/SparseIntArray;
+    iget-object v1, p0, Lcom/facebook/react/views/progressbar/ProgressBarShadowNode;->mWidth:Landroid/util/SparseIntArray;
 
-    invoke-virtual {p2, p1}, Landroid/util/SparseIntArray;->get(I)I
+    invoke-virtual {v1, v0}, Landroid/util/SparseIntArray;->get(I)I
 
-    move-result p2
+    move-result v1
 
-    iget-object p3, p0, Lcom/facebook/react/views/progressbar/ProgressBarShadowNode;->mHeight:Landroid/util/SparseIntArray;
+    iget-object v2, p0, Lcom/facebook/react/views/progressbar/ProgressBarShadowNode;->mHeight:Landroid/util/SparseIntArray;
 
-    invoke-virtual {p3, p1}, Landroid/util/SparseIntArray;->get(I)I
+    invoke-virtual {v2, v0}, Landroid/util/SparseIntArray;->get(I)I
 
-    move-result p1
+    move-result v2
 
-    invoke-static {p2, p1}, Lcom/facebook/yoga/YogaMeasureOutput;->make(II)J
+    invoke-static {v1, v2}, Lcom/facebook/yoga/YogaMeasureOutput;->make(II)J
 
-    move-result-wide p1
+    move-result-wide v1
 
-    return-wide p1
+    return-wide v1
 .end method
 
 .method public setStyle(Ljava/lang/String;)V
-    .locals 0
-    .param p1    # Ljava/lang/String;
+    .locals 1
+    .param p1, "style"    # Ljava/lang/String;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -189,13 +201,19 @@
         name = "styleAttr"
     .end annotation
 
+    .line 54
     if-nez p1, :cond_0
 
-    const-string p1, "Normal"
+    const-string v0, "Normal"
 
-    .line 54
+    goto :goto_0
+
     :cond_0
-    iput-object p1, p0, Lcom/facebook/react/views/progressbar/ProgressBarShadowNode;->mStyle:Ljava/lang/String;
+    move-object v0, p1
 
+    :goto_0
+    iput-object v0, p0, Lcom/facebook/react/views/progressbar/ProgressBarShadowNode;->mStyle:Ljava/lang/String;
+
+    .line 55
     return-void
 .end method

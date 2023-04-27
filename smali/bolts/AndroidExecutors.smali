@@ -50,17 +50,15 @@
     sput v0, Lbolts/AndroidExecutors;->CPU_COUNT:I
 
     .line 59
-    sget v0, Lbolts/AndroidExecutors;->CPU_COUNT:I
-
     add-int/lit8 v1, v0, 0x1
 
     sput v1, Lbolts/AndroidExecutors;->CORE_POOL_SIZE:I
 
+    .line 60
     mul-int/lit8 v0, v0, 0x2
 
     add-int/lit8 v0, v0, 0x1
 
-    .line 60
     sput v0, Lbolts/AndroidExecutors;->MAX_POOL_SIZE:I
 
     return-void
@@ -81,28 +79,22 @@
 
     iput-object v0, p0, Lbolts/AndroidExecutors;->uiThread:Ljava/util/concurrent/Executor;
 
+    .line 46
     return-void
 .end method
 
 .method public static allowCoreThreadTimeout(Ljava/util/concurrent/ThreadPoolExecutor;Z)V
-    .locals 2
-    .annotation build Landroid/annotation/SuppressLint;
-        value = {
-            "NewApi"
-        }
-    .end annotation
+    .locals 0
+    .param p0, "executor"    # Ljava/util/concurrent/ThreadPoolExecutor;
+    .param p1, "value"    # Z
 
     .line 120
-    sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    const/16 v1, 0x9
-
-    if-lt v0, v1, :cond_0
+    nop
 
     .line 121
     invoke-virtual {p0, p1}, Ljava/util/concurrent/ThreadPoolExecutor;->allowCoreThreadTimeOut(Z)V
 
-    :cond_0
+    .line 123
     return-void
 .end method
 
@@ -116,28 +108,31 @@
 
     sget v2, Lbolts/AndroidExecutors;->MAX_POOL_SIZE:I
 
+    const-wide/16 v3, 0x1
+
     sget-object v5, Ljava/util/concurrent/TimeUnit;->SECONDS:Ljava/util/concurrent/TimeUnit;
 
     new-instance v6, Ljava/util/concurrent/LinkedBlockingQueue;
 
     invoke-direct {v6}, Ljava/util/concurrent/LinkedBlockingQueue;-><init>()V
 
-    const-wide/16 v3, 0x1
-
     move-object v0, v7
 
     invoke-direct/range {v0 .. v6}, Ljava/util/concurrent/ThreadPoolExecutor;-><init>(IIJLjava/util/concurrent/TimeUnit;Ljava/util/concurrent/BlockingQueue;)V
 
-    const/4 v0, 0x1
-
     .line 80
-    invoke-static {v7, v0}, Lbolts/AndroidExecutors;->allowCoreThreadTimeout(Ljava/util/concurrent/ThreadPoolExecutor;Z)V
+    .local v0, "executor":Ljava/util/concurrent/ThreadPoolExecutor;
+    const/4 v1, 0x1
 
-    return-object v7
+    invoke-static {v0, v1}, Lbolts/AndroidExecutors;->allowCoreThreadTimeout(Ljava/util/concurrent/ThreadPoolExecutor;Z)V
+
+    .line 82
+    return-object v0
 .end method
 
 .method public static newCachedThreadPool(Ljava/util/concurrent/ThreadFactory;)Ljava/util/concurrent/ExecutorService;
     .locals 9
+    .param p0, "threadFactory"    # Ljava/util/concurrent/ThreadFactory;
 
     .line 97
     new-instance v8, Ljava/util/concurrent/ThreadPoolExecutor;
@@ -146,13 +141,13 @@
 
     sget v2, Lbolts/AndroidExecutors;->MAX_POOL_SIZE:I
 
+    const-wide/16 v3, 0x1
+
     sget-object v5, Ljava/util/concurrent/TimeUnit;->SECONDS:Ljava/util/concurrent/TimeUnit;
 
     new-instance v6, Ljava/util/concurrent/LinkedBlockingQueue;
 
     invoke-direct {v6}, Ljava/util/concurrent/LinkedBlockingQueue;-><init>()V
-
-    const-wide/16 v3, 0x1
 
     move-object v0, v8
 
@@ -160,12 +155,14 @@
 
     invoke-direct/range {v0 .. v7}, Ljava/util/concurrent/ThreadPoolExecutor;-><init>(IIJLjava/util/concurrent/TimeUnit;Ljava/util/concurrent/BlockingQueue;Ljava/util/concurrent/ThreadFactory;)V
 
-    const/4 p0, 0x1
-
     .line 104
-    invoke-static {v8, p0}, Lbolts/AndroidExecutors;->allowCoreThreadTimeout(Ljava/util/concurrent/ThreadPoolExecutor;Z)V
+    .local v0, "executor":Ljava/util/concurrent/ThreadPoolExecutor;
+    const/4 v1, 0x1
 
-    return-object v8
+    invoke-static {v0, v1}, Lbolts/AndroidExecutors;->allowCoreThreadTimeout(Ljava/util/concurrent/ThreadPoolExecutor;Z)V
+
+    .line 106
+    return-object v0
 .end method
 
 .method public static uiThread()Ljava/util/concurrent/Executor;

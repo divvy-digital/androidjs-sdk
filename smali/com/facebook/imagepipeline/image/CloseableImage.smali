@@ -41,45 +41,46 @@
 
     if-eqz v0, :cond_0
 
+    .line 59
     return-void
 
+    .line 61
     :cond_0
     const/4 v0, 0x2
 
-    .line 61
     new-array v0, v0, [Ljava/lang/Object;
-
-    const/4 v1, 0x0
 
     .line 64
     invoke-virtual {p0}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
 
-    move-result-object v2
+    move-result-object v1
 
-    invoke-virtual {v2}, Ljava/lang/Class;->getSimpleName()Ljava/lang/String;
+    invoke-virtual {v1}, Ljava/lang/Class;->getSimpleName()Ljava/lang/String;
 
-    move-result-object v2
+    move-result-object v1
 
-    aput-object v2, v0, v1
+    const/4 v2, 0x0
 
-    const/4 v1, 0x1
+    aput-object v1, v0, v2
 
     .line 65
     invoke-static {p0}, Ljava/lang/System;->identityHashCode(Ljava/lang/Object;)I
 
-    move-result v2
+    move-result v1
 
-    invoke-static {v2}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object v2
+    move-result-object v1
 
-    aput-object v2, v0, v1
+    const/4 v2, 0x1
 
+    aput-object v1, v0, v2
+
+    .line 61
     const-string v1, "CloseableImage"
 
     const-string v2, "finalize: %s %x still open."
 
-    .line 61
     invoke-static {v1, v2, v0}, Lcom/facebook/common/logging/FLog;->w(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V
 
     .line 67
@@ -91,8 +92,13 @@
     .line 69
     invoke-super {p0}, Ljava/lang/Object;->finalize()V
 
+    .line 70
+    nop
+
+    .line 71
     return-void
 
+    .line 69
     :catchall_0
     move-exception v0
 
@@ -120,6 +126,7 @@
 .method public isStateful()Z
     .locals 1
 
+    .line 50
     const/4 v0, 0x0
 
     return v0

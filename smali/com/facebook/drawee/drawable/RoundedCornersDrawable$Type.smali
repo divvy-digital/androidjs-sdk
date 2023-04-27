@@ -32,44 +32,40 @@
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 4
+    .locals 5
 
     .line 34
     new-instance v0, Lcom/facebook/drawee/drawable/RoundedCornersDrawable$Type;
 
-    const/4 v1, 0x0
+    const-string v1, "OVERLAY_COLOR"
 
-    const-string v2, "OVERLAY_COLOR"
+    const/4 v2, 0x0
 
-    invoke-direct {v0, v2, v1}, Lcom/facebook/drawee/drawable/RoundedCornersDrawable$Type;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v0, v1, v2}, Lcom/facebook/drawee/drawable/RoundedCornersDrawable$Type;-><init>(Ljava/lang/String;I)V
 
     sput-object v0, Lcom/facebook/drawee/drawable/RoundedCornersDrawable$Type;->OVERLAY_COLOR:Lcom/facebook/drawee/drawable/RoundedCornersDrawable$Type;
 
     .line 40
-    new-instance v0, Lcom/facebook/drawee/drawable/RoundedCornersDrawable$Type;
-
-    const/4 v2, 0x1
+    new-instance v1, Lcom/facebook/drawee/drawable/RoundedCornersDrawable$Type;
 
     const-string v3, "CLIPPING"
 
-    invoke-direct {v0, v3, v2}, Lcom/facebook/drawee/drawable/RoundedCornersDrawable$Type;-><init>(Ljava/lang/String;I)V
+    const/4 v4, 0x1
 
-    sput-object v0, Lcom/facebook/drawee/drawable/RoundedCornersDrawable$Type;->CLIPPING:Lcom/facebook/drawee/drawable/RoundedCornersDrawable$Type;
+    invoke-direct {v1, v3, v4}, Lcom/facebook/drawee/drawable/RoundedCornersDrawable$Type;-><init>(Ljava/lang/String;I)V
 
-    const/4 v0, 0x2
+    sput-object v1, Lcom/facebook/drawee/drawable/RoundedCornersDrawable$Type;->CLIPPING:Lcom/facebook/drawee/drawable/RoundedCornersDrawable$Type;
 
     .line 28
-    new-array v0, v0, [Lcom/facebook/drawee/drawable/RoundedCornersDrawable$Type;
+    const/4 v3, 0x2
 
-    sget-object v3, Lcom/facebook/drawee/drawable/RoundedCornersDrawable$Type;->OVERLAY_COLOR:Lcom/facebook/drawee/drawable/RoundedCornersDrawable$Type;
+    new-array v3, v3, [Lcom/facebook/drawee/drawable/RoundedCornersDrawable$Type;
 
-    aput-object v3, v0, v1
+    aput-object v0, v3, v2
 
-    sget-object v1, Lcom/facebook/drawee/drawable/RoundedCornersDrawable$Type;->CLIPPING:Lcom/facebook/drawee/drawable/RoundedCornersDrawable$Type;
+    aput-object v1, v3, v4
 
-    aput-object v1, v0, v2
-
-    sput-object v0, Lcom/facebook/drawee/drawable/RoundedCornersDrawable$Type;->$VALUES:[Lcom/facebook/drawee/drawable/RoundedCornersDrawable$Type;
+    sput-object v3, Lcom/facebook/drawee/drawable/RoundedCornersDrawable$Type;->$VALUES:[Lcom/facebook/drawee/drawable/RoundedCornersDrawable$Type;
 
     return-void
 .end method
@@ -90,17 +86,18 @@
 
 .method public static valueOf(Ljava/lang/String;)Lcom/facebook/drawee/drawable/RoundedCornersDrawable$Type;
     .locals 1
+    .param p0, "name"    # Ljava/lang/String;
 
     .line 28
     const-class v0, Lcom/facebook/drawee/drawable/RoundedCornersDrawable$Type;
 
     invoke-static {v0, p0}, Ljava/lang/Enum;->valueOf(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
 
-    move-result-object p0
+    move-result-object v0
 
-    check-cast p0, Lcom/facebook/drawee/drawable/RoundedCornersDrawable$Type;
+    check-cast v0, Lcom/facebook/drawee/drawable/RoundedCornersDrawable$Type;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method public static values()[Lcom/facebook/drawee/drawable/RoundedCornersDrawable$Type;

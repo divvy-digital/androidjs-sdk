@@ -8,11 +8,6 @@
 .implements Lcom/facebook/react/bridge/JSBundleLoaderDelegate;
 
 
-# annotations
-.annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-.end annotation
-
-
 # virtual methods
 .method public abstract addBridgeIdleDebugListener(Lcom/facebook/react/bridge/NotThreadSafeBridgeIdleDebugListener;)V
 .end method
@@ -29,8 +24,6 @@
 .end method
 
 .method public abstract callFunction(Ljava/lang/String;Ljava/lang/String;Lcom/facebook/react/bridge/NativeArray;)V
-    .annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-    .end annotation
 .end method
 
 .method public abstract destroy()V
@@ -116,13 +109,9 @@
 .end method
 
 .method public abstract initialize()V
-    .annotation build Lcom/facebook/react/common/annotations/VisibleForTesting;
-    .end annotation
 .end method
 
 .method public abstract invokeCallback(ILcom/facebook/react/bridge/NativeArrayInterface;)V
-    .annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-    .end annotation
 .end method
 
 .method public abstract isDestroyed()Z
@@ -138,6 +127,4 @@
 .end method
 
 .method public abstract setGlobalVariable(Ljava/lang/String;Ljava/lang/String;)V
-    .annotation build Lcom/facebook/react/common/annotations/VisibleForTesting;
-    .end annotation
 .end method

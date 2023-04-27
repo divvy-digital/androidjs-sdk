@@ -23,7 +23,9 @@
 
 .method private static shouldAdjust(I)Z
     .locals 1
+    .param p0, "layoutDimension"    # I
 
+    .line 74
     if-eqz p0, :cond_1
 
     const/4 v0, -0x2
@@ -33,34 +35,39 @@
     goto :goto_0
 
     :cond_0
-    const/4 p0, 0x0
+    const/4 v0, 0x0
 
     goto :goto_1
 
     :cond_1
     :goto_0
-    const/4 p0, 0x1
+    const/4 v0, 0x1
 
     :goto_1
-    return p0
+    return v0
 .end method
 
 .method public static updateMeasureSpec(Lcom/facebook/drawee/view/AspectRatioMeasure$Spec;FLandroid/view/ViewGroup$LayoutParams;II)V
-    .locals 2
-    .param p2    # Landroid/view/ViewGroup$LayoutParams;
+    .locals 4
+    .param p0, "spec"    # Lcom/facebook/drawee/view/AspectRatioMeasure$Spec;
+    .param p1, "aspectRatio"    # F
+    .param p2, "layoutParams"    # Landroid/view/ViewGroup$LayoutParams;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
+    .param p3, "widthPadding"    # I
+    .param p4, "heightPadding"    # I
 
+    .line 56
     const/4 v0, 0x0
 
     cmpg-float v0, p1, v0
 
-    if-lez v0, :cond_2
+    if-lez v0, :cond_3
 
     if-nez p2, :cond_0
 
-    goto :goto_0
+    goto :goto_2
 
     .line 59
     :cond_0
@@ -75,84 +82,110 @@
     if-eqz v0, :cond_1
 
     .line 60
-    iget p2, p0, Lcom/facebook/drawee/view/AspectRatioMeasure$Spec;->width:I
+    iget v0, p0, Lcom/facebook/drawee/view/AspectRatioMeasure$Spec;->width:I
 
-    invoke-static {p2}, Landroid/view/View$MeasureSpec;->getSize(I)I
+    invoke-static {v0}, Landroid/view/View$MeasureSpec;->getSize(I)I
 
-    move-result p2
+    move-result v0
 
-    sub-int/2addr p2, p3
+    .line 61
+    .local v0, "widthSpecSize":I
+    sub-int v2, v0, p3
 
-    int-to-float p2, p2
+    int-to-float v2, v2
 
-    div-float/2addr p2, p1
+    div-float/2addr v2, p1
 
-    int-to-float p1, p4
+    int-to-float v3, p4
 
-    add-float/2addr p2, p1
+    add-float/2addr v2, v3
 
-    float-to-int p1, p2
+    float-to-int v2, v2
 
     .line 62
-    iget p2, p0, Lcom/facebook/drawee/view/AspectRatioMeasure$Spec;->height:I
+    .local v2, "desiredHeight":I
+    iget v3, p0, Lcom/facebook/drawee/view/AspectRatioMeasure$Spec;->height:I
 
-    invoke-static {p1, p2}, Landroid/view/View;->resolveSize(II)I
+    invoke-static {v2, v3}, Landroid/view/View;->resolveSize(II)I
 
-    move-result p1
+    move-result v3
 
     .line 63
-    invoke-static {p1, v1}, Landroid/view/View$MeasureSpec;->makeMeasureSpec(II)I
+    .local v3, "resolvedHeight":I
+    invoke-static {v3, v1}, Landroid/view/View$MeasureSpec;->makeMeasureSpec(II)I
 
-    move-result p1
+    move-result v1
 
-    iput p1, p0, Lcom/facebook/drawee/view/AspectRatioMeasure$Spec;->height:I
+    iput v1, p0, Lcom/facebook/drawee/view/AspectRatioMeasure$Spec;->height:I
 
+    .end local v0    # "widthSpecSize":I
+    .end local v2    # "desiredHeight":I
+    .end local v3    # "resolvedHeight":I
     goto :goto_0
 
     .line 64
     :cond_1
-    iget p2, p2, Landroid/view/ViewGroup$LayoutParams;->width:I
+    iget v0, p2, Landroid/view/ViewGroup$LayoutParams;->width:I
 
-    invoke-static {p2}, Lcom/facebook/drawee/view/AspectRatioMeasure;->shouldAdjust(I)Z
+    invoke-static {v0}, Lcom/facebook/drawee/view/AspectRatioMeasure;->shouldAdjust(I)Z
 
-    move-result p2
+    move-result v0
 
-    if-eqz p2, :cond_2
+    if-eqz v0, :cond_2
 
     .line 65
-    iget p2, p0, Lcom/facebook/drawee/view/AspectRatioMeasure$Spec;->height:I
+    iget v0, p0, Lcom/facebook/drawee/view/AspectRatioMeasure$Spec;->height:I
 
-    invoke-static {p2}, Landroid/view/View$MeasureSpec;->getSize(I)I
+    invoke-static {v0}, Landroid/view/View$MeasureSpec;->getSize(I)I
 
-    move-result p2
+    move-result v0
 
-    sub-int/2addr p2, p4
+    .line 66
+    .local v0, "heightSpecSize":I
+    sub-int v2, v0, p4
 
-    int-to-float p2, p2
+    int-to-float v2, v2
 
-    mul-float p2, p2, p1
+    mul-float v2, v2, p1
 
-    int-to-float p1, p3
+    int-to-float v3, p3
 
-    add-float/2addr p2, p1
+    add-float/2addr v2, v3
 
-    float-to-int p1, p2
+    float-to-int v2, v2
 
     .line 67
-    iget p2, p0, Lcom/facebook/drawee/view/AspectRatioMeasure$Spec;->width:I
+    .local v2, "desiredWidth":I
+    iget v3, p0, Lcom/facebook/drawee/view/AspectRatioMeasure$Spec;->width:I
 
-    invoke-static {p1, p2}, Landroid/view/View;->resolveSize(II)I
+    invoke-static {v2, v3}, Landroid/view/View;->resolveSize(II)I
 
-    move-result p1
+    move-result v3
 
     .line 68
-    invoke-static {p1, v1}, Landroid/view/View$MeasureSpec;->makeMeasureSpec(II)I
+    .local v3, "resolvedWidth":I
+    invoke-static {v3, v1}, Landroid/view/View$MeasureSpec;->makeMeasureSpec(II)I
 
-    move-result p1
+    move-result v1
 
-    iput p1, p0, Lcom/facebook/drawee/view/AspectRatioMeasure$Spec;->width:I
+    iput v1, p0, Lcom/facebook/drawee/view/AspectRatioMeasure$Spec;->width:I
 
+    goto :goto_1
+
+    .line 64
+    .end local v0    # "heightSpecSize":I
+    .end local v2    # "desiredWidth":I
+    .end local v3    # "resolvedWidth":I
     :cond_2
     :goto_0
+    nop
+
+    .line 70
+    :goto_1
+    return-void
+
+    .line 57
+    :cond_3
+    :goto_2
     return-void
 .end method

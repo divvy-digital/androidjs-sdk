@@ -30,6 +30,8 @@
 # direct methods
 .method public constructor <init>(Lcom/facebook/react/views/textinput/ReactTextInputManager;Lcom/facebook/react/bridge/ReactContext;Lcom/facebook/react/views/textinput/ReactEditText;)V
     .locals 0
+    .param p2, "reactContext"    # Lcom/facebook/react/bridge/ReactContext;
+    .param p3, "editText"    # Lcom/facebook/react/views/textinput/ReactEditText;
 
     .line 788
     iput-object p1, p0, Lcom/facebook/react/views/textinput/ReactTextInputManager$ReactTextInputTextWatcher;->this$0:Lcom/facebook/react/views/textinput/ReactTextInputManager;
@@ -54,11 +56,12 @@
     .line 790
     iput-object p3, p0, Lcom/facebook/react/views/textinput/ReactTextInputManager$ReactTextInputTextWatcher;->mEditText:Lcom/facebook/react/views/textinput/ReactEditText;
 
+    .line 791
     const/4 p1, 0x0
 
-    .line 791
     iput-object p1, p0, Lcom/facebook/react/views/textinput/ReactTextInputManager$ReactTextInputTextWatcher;->mPreviousText:Ljava/lang/String;
 
+    .line 792
     return-void
 .end method
 
@@ -66,30 +69,43 @@
 # virtual methods
 .method public afterTextChanged(Landroid/text/Editable;)V
     .locals 0
+    .param p1, "s"    # Landroid/text/Editable;
 
+    .line 835
     return-void
 .end method
 
 .method public beforeTextChanged(Ljava/lang/CharSequence;III)V
-    .locals 0
+    .locals 1
+    .param p1, "s"    # Ljava/lang/CharSequence;
+    .param p2, "start"    # I
+    .param p3, "count"    # I
+    .param p4, "after"    # I
 
     .line 797
     invoke-interface {p1}, Ljava/lang/CharSequence;->toString()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v0
 
-    iput-object p1, p0, Lcom/facebook/react/views/textinput/ReactTextInputManager$ReactTextInputTextWatcher;->mPreviousText:Ljava/lang/String;
+    iput-object v0, p0, Lcom/facebook/react/views/textinput/ReactTextInputManager$ReactTextInputTextWatcher;->mPreviousText:Ljava/lang/String;
 
+    .line 798
     return-void
 .end method
 
 .method public onTextChanged(Ljava/lang/CharSequence;III)V
-    .locals 8
+    .locals 10
+    .param p1, "s"    # Ljava/lang/CharSequence;
+    .param p2, "start"    # I
+    .param p3, "before"    # I
+    .param p4, "count"    # I
 
+    .line 804
     if-nez p4, :cond_0
 
     if-nez p3, :cond_0
 
+    .line 805
     return-void
 
     .line 808
@@ -107,78 +123,88 @@
 
     invoke-virtual {v0, p2, v1}, Ljava/lang/String;->substring(II)Ljava/lang/String;
 
-    move-result-object v4
+    move-result-object v0
 
     .line 810
-    iget-object v0, p0, Lcom/facebook/react/views/textinput/ReactTextInputManager$ReactTextInputTextWatcher;->mPreviousText:Ljava/lang/String;
+    .local v0, "newText":Ljava/lang/String;
+    iget-object v1, p0, Lcom/facebook/react/views/textinput/ReactTextInputManager$ReactTextInputTextWatcher;->mPreviousText:Ljava/lang/String;
 
-    add-int v7, p2, p3
+    add-int v2, p2, p3
 
-    invoke-virtual {v0, p2, v7}, Ljava/lang/String;->substring(II)Ljava/lang/String;
+    invoke-virtual {v1, p2, v2}, Ljava/lang/String;->substring(II)Ljava/lang/String;
 
-    move-result-object v5
-
-    if-ne p4, p3, :cond_1
+    move-result-object v1
 
     .line 812
-    invoke-virtual {v4, v5}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    .local v1, "oldText":Ljava/lang/String;
+    if-ne p4, p3, :cond_1
 
-    move-result p3
+    invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    if-eqz p3, :cond_1
+    move-result v2
 
+    if-eqz v2, :cond_1
+
+    .line 813
     return-void
 
     .line 818
     :cond_1
-    iget-object p3, p0, Lcom/facebook/react/views/textinput/ReactTextInputManager$ReactTextInputTextWatcher;->mEventDispatcher:Lcom/facebook/react/uimanager/events/EventDispatcher;
+    iget-object v2, p0, Lcom/facebook/react/views/textinput/ReactTextInputManager$ReactTextInputTextWatcher;->mEventDispatcher:Lcom/facebook/react/uimanager/events/EventDispatcher;
 
-    new-instance p4, Lcom/facebook/react/views/textinput/ReactTextChangedEvent;
+    new-instance v3, Lcom/facebook/react/views/textinput/ReactTextChangedEvent;
 
-    iget-object v0, p0, Lcom/facebook/react/views/textinput/ReactTextInputManager$ReactTextInputTextWatcher;->mEditText:Lcom/facebook/react/views/textinput/ReactEditText;
+    iget-object v4, p0, Lcom/facebook/react/views/textinput/ReactTextInputManager$ReactTextInputTextWatcher;->mEditText:Lcom/facebook/react/views/textinput/ReactEditText;
 
     .line 820
-    invoke-virtual {v0}, Lcom/facebook/react/views/textinput/ReactEditText;->getId()I
+    invoke-virtual {v4}, Lcom/facebook/react/views/textinput/ReactEditText;->getId()I
 
-    move-result v0
+    move-result v4
 
     .line 821
     invoke-interface {p1}, Ljava/lang/CharSequence;->toString()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v5
 
-    iget-object v1, p0, Lcom/facebook/react/views/textinput/ReactTextInputManager$ReactTextInputTextWatcher;->mEditText:Lcom/facebook/react/views/textinput/ReactEditText;
+    iget-object v6, p0, Lcom/facebook/react/views/textinput/ReactTextInputManager$ReactTextInputTextWatcher;->mEditText:Lcom/facebook/react/views/textinput/ReactEditText;
 
     .line 822
-    invoke-virtual {v1}, Lcom/facebook/react/views/textinput/ReactEditText;->incrementAndGetEventCounter()I
+    invoke-virtual {v6}, Lcom/facebook/react/views/textinput/ReactEditText;->incrementAndGetEventCounter()I
 
-    move-result v1
+    move-result v6
 
-    invoke-direct {p4, v0, p1, v1}, Lcom/facebook/react/views/textinput/ReactTextChangedEvent;-><init>(ILjava/lang/String;I)V
+    invoke-direct {v3, v4, v5, v6}, Lcom/facebook/react/views/textinput/ReactTextChangedEvent;-><init>(ILjava/lang/String;I)V
 
     .line 818
-    invoke-virtual {p3, p4}, Lcom/facebook/react/uimanager/events/EventDispatcher;->dispatchEvent(Lcom/facebook/react/uimanager/events/Event;)V
+    invoke-virtual {v2, v3}, Lcom/facebook/react/uimanager/events/EventDispatcher;->dispatchEvent(Lcom/facebook/react/uimanager/events/Event;)V
 
     .line 824
-    iget-object p1, p0, Lcom/facebook/react/views/textinput/ReactTextInputManager$ReactTextInputTextWatcher;->mEventDispatcher:Lcom/facebook/react/uimanager/events/EventDispatcher;
+    iget-object v8, p0, Lcom/facebook/react/views/textinput/ReactTextInputManager$ReactTextInputTextWatcher;->mEventDispatcher:Lcom/facebook/react/uimanager/events/EventDispatcher;
 
-    new-instance p3, Lcom/facebook/react/views/textinput/ReactTextInputEvent;
+    new-instance v9, Lcom/facebook/react/views/textinput/ReactTextInputEvent;
 
-    iget-object p4, p0, Lcom/facebook/react/views/textinput/ReactTextInputManager$ReactTextInputTextWatcher;->mEditText:Lcom/facebook/react/views/textinput/ReactEditText;
+    iget-object v2, p0, Lcom/facebook/react/views/textinput/ReactTextInputManager$ReactTextInputTextWatcher;->mEditText:Lcom/facebook/react/views/textinput/ReactEditText;
 
     .line 826
-    invoke-virtual {p4}, Lcom/facebook/react/views/textinput/ReactEditText;->getId()I
+    invoke-virtual {v2}, Lcom/facebook/react/views/textinput/ReactEditText;->getId()I
 
     move-result v3
 
-    move-object v2, p3
+    add-int v7, p2, p3
+
+    move-object v2, v9
+
+    move-object v4, v0
+
+    move-object v5, v1
 
     move v6, p2
 
     invoke-direct/range {v2 .. v7}, Lcom/facebook/react/views/textinput/ReactTextInputEvent;-><init>(ILjava/lang/String;Ljava/lang/String;II)V
 
     .line 824
-    invoke-virtual {p1, p3}, Lcom/facebook/react/uimanager/events/EventDispatcher;->dispatchEvent(Lcom/facebook/react/uimanager/events/Event;)V
+    invoke-virtual {v8, v9}, Lcom/facebook/react/uimanager/events/EventDispatcher;->dispatchEvent(Lcom/facebook/react/uimanager/events/Event;)V
 
+    .line 831
     return-void
 .end method

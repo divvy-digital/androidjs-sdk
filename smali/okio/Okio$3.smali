@@ -37,6 +37,7 @@
         }
     .end annotation
 
+    .line 212
     return-void
 .end method
 
@@ -48,6 +49,7 @@
         }
     .end annotation
 
+    .line 205
     return-void
 .end method
 
@@ -62,6 +64,8 @@
 
 .method public write(Lokio/Buffer;J)V
     .locals 0
+    .param p1, "source"    # Lokio/Buffer;
+    .param p2, "byteCount"    # J
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -71,5 +75,6 @@
     .line 201
     invoke-virtual {p1, p2, p3}, Lokio/Buffer;->skip(J)V
 
+    .line 202
     return-void
 .end method

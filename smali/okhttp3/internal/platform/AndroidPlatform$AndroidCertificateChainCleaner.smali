@@ -23,6 +23,8 @@
 # direct methods
 .method constructor <init>(Ljava/lang/Object;Ljava/lang/reflect/Method;)V
     .locals 0
+    .param p1, "x509TrustManagerExtensions"    # Ljava/lang/Object;
+    .param p2, "checkServerTrusted"    # Ljava/lang/reflect/Method;
 
     .line 293
     invoke-direct {p0}, Lokhttp3/internal/tls/CertificateChainCleaner;-><init>()V
@@ -33,13 +35,15 @@
     .line 295
     iput-object p2, p0, Lokhttp3/internal/platform/AndroidPlatform$AndroidCertificateChainCleaner;->checkServerTrusted:Ljava/lang/reflect/Method;
 
+    .line 296
     return-void
 .end method
 
 
 # virtual methods
 .method public clean(Ljava/util/List;Ljava/lang/String;)Ljava/util/List;
-    .locals 4
+    .locals 6
+    .param p2, "hostname"    # Ljava/lang/String;
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -61,6 +65,7 @@
     .end annotation
 
     .line 302
+    .local p1, "chain":Ljava/util/List;, "Ljava/util/List<Ljava/security/cert/Certificate;>;"
     :try_start_0
     invoke-interface {p1}, Ljava/util/List;->size()I
 
@@ -70,85 +75,95 @@
 
     invoke-interface {p1, v0}, Ljava/util/List;->toArray([Ljava/lang/Object;)[Ljava/lang/Object;
 
-    move-result-object p1
+    move-result-object v0
 
-    check-cast p1, [Ljava/security/cert/X509Certificate;
+    check-cast v0, [Ljava/security/cert/X509Certificate;
 
     .line 303
-    iget-object v0, p0, Lokhttp3/internal/platform/AndroidPlatform$AndroidCertificateChainCleaner;->checkServerTrusted:Ljava/lang/reflect/Method;
+    .local v0, "certificates":[Ljava/security/cert/X509Certificate;
+    iget-object v1, p0, Lokhttp3/internal/platform/AndroidPlatform$AndroidCertificateChainCleaner;->checkServerTrusted:Ljava/lang/reflect/Method;
 
-    iget-object v1, p0, Lokhttp3/internal/platform/AndroidPlatform$AndroidCertificateChainCleaner;->x509TrustManagerExtensions:Ljava/lang/Object;
+    iget-object v2, p0, Lokhttp3/internal/platform/AndroidPlatform$AndroidCertificateChainCleaner;->x509TrustManagerExtensions:Ljava/lang/Object;
 
-    const/4 v2, 0x3
+    const/4 v3, 0x3
 
-    new-array v2, v2, [Ljava/lang/Object;
+    new-array v3, v3, [Ljava/lang/Object;
 
-    const/4 v3, 0x0
+    const/4 v4, 0x0
 
-    aput-object p1, v2, v3
+    aput-object v0, v3, v4
 
-    const/4 p1, 0x1
+    const-string v4, "RSA"
 
-    const-string v3, "RSA"
+    const/4 v5, 0x1
 
-    aput-object v3, v2, p1
+    aput-object v4, v3, v5
 
-    const/4 p1, 0x2
+    const/4 v4, 0x2
 
-    aput-object p2, v2, p1
+    aput-object p2, v3, v4
 
-    invoke-virtual {v0, v1, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-virtual {v1, v2, v3}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
 
-    move-result-object p1
+    move-result-object v1
 
-    check-cast p1, Ljava/util/List;
+    check-cast v1, Ljava/util/List;
     :try_end_0
     .catch Ljava/lang/reflect/InvocationTargetException; {:try_start_0 .. :try_end_0} :catch_1
     .catch Ljava/lang/IllegalAccessException; {:try_start_0 .. :try_end_0} :catch_0
 
-    return-object p1
+    return-object v1
 
+    .line 309
+    .end local v0    # "certificates":[Ljava/security/cert/X509Certificate;
     :catch_0
-    move-exception p1
+    move-exception v0
 
     .line 310
-    new-instance p2, Ljava/lang/AssertionError;
+    .local v0, "e":Ljava/lang/IllegalAccessException;
+    new-instance v1, Ljava/lang/AssertionError;
 
-    invoke-direct {p2, p1}, Ljava/lang/AssertionError;-><init>(Ljava/lang/Object;)V
+    invoke-direct {v1, v0}, Ljava/lang/AssertionError;-><init>(Ljava/lang/Object;)V
 
-    throw p2
+    throw v1
 
+    .line 305
+    .end local v0    # "e":Ljava/lang/IllegalAccessException;
     :catch_1
-    move-exception p1
+    move-exception v0
 
     .line 306
-    new-instance p2, Ljavax/net/ssl/SSLPeerUnverifiedException;
+    .local v0, "e":Ljava/lang/reflect/InvocationTargetException;
+    new-instance v1, Ljavax/net/ssl/SSLPeerUnverifiedException;
 
-    invoke-virtual {p1}, Ljava/lang/reflect/InvocationTargetException;->getMessage()Ljava/lang/String;
+    invoke-virtual {v0}, Ljava/lang/reflect/InvocationTargetException;->getMessage()Ljava/lang/String;
 
-    move-result-object v0
+    move-result-object v2
 
-    invoke-direct {p2, v0}, Ljavax/net/ssl/SSLPeerUnverifiedException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v1, v2}, Ljavax/net/ssl/SSLPeerUnverifiedException;-><init>(Ljava/lang/String;)V
 
     .line 307
-    invoke-virtual {p2, p1}, Ljavax/net/ssl/SSLPeerUnverifiedException;->initCause(Ljava/lang/Throwable;)Ljava/lang/Throwable;
+    .local v1, "exception":Ljavax/net/ssl/SSLPeerUnverifiedException;
+    invoke-virtual {v1, v0}, Ljavax/net/ssl/SSLPeerUnverifiedException;->initCause(Ljava/lang/Throwable;)Ljava/lang/Throwable;
 
     .line 308
-    throw p2
+    throw v1
 .end method
 
 .method public equals(Ljava/lang/Object;)Z
-    .locals 0
+    .locals 1
+    .param p1, "other"    # Ljava/lang/Object;
 
     .line 315
-    instance-of p1, p1, Lokhttp3/internal/platform/AndroidPlatform$AndroidCertificateChainCleaner;
+    instance-of v0, p1, Lokhttp3/internal/platform/AndroidPlatform$AndroidCertificateChainCleaner;
 
-    return p1
+    return v0
 .end method
 
 .method public hashCode()I
     .locals 1
 
+    .line 319
     const/4 v0, 0x0
 
     return v0

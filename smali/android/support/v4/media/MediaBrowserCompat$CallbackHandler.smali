@@ -39,6 +39,7 @@
 # direct methods
 .method constructor <init>(Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserServiceCallbackImpl;)V
     .locals 1
+    .param p1, "callbackImpl"    # Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserServiceCallbackImpl;
 
     .line 2080
     invoke-direct {p0}, Landroid/os/Handler;-><init>()V
@@ -50,6 +51,7 @@
 
     iput-object v0, p0, Landroid/support/v4/media/MediaBrowserCompat$CallbackHandler;->mCallbackImplRef:Ljava/lang/ref/WeakReference;
 
+    .line 2082
     return-void
 .end method
 
@@ -57,19 +59,20 @@
 # virtual methods
 .method public handleMessage(Landroid/os/Message;)V
     .locals 11
-
-    const-string v0, "MediaBrowserCompat"
+    .param p1, "msg"    # Landroid/os/Message;
 
     .line 2086
+    const-string v0, "MediaBrowserCompat"
+
     iget-object v1, p0, Landroid/support/v4/media/MediaBrowserCompat$CallbackHandler;->mCallbacksMessengerRef:Ljava/lang/ref/WeakReference;
 
-    if-eqz v1, :cond_4
+    if-eqz v1, :cond_2
 
     invoke-virtual {v1}, Ljava/lang/ref/WeakReference;->get()Ljava/lang/Object;
 
     move-result-object v1
 
-    if-eqz v1, :cond_4
+    if-eqz v1, :cond_2
 
     iget-object v1, p0, Landroid/support/v4/media/MediaBrowserCompat$CallbackHandler;->mCallbackImplRef:Ljava/lang/ref/WeakReference;
 
@@ -80,7 +83,7 @@
 
     if-nez v1, :cond_0
 
-    goto/16 :goto_0
+    goto/16 :goto_3
 
     .line 2090
     :cond_0
@@ -89,6 +92,7 @@
     move-result-object v1
 
     .line 2091
+    .local v1, "data":Landroid/os/Bundle;
     invoke-static {v1}, Landroid/support/v4/media/session/MediaSessionCompat;->ensureClassLoader(Landroid/os/Bundle;)V
 
     .line 2092
@@ -101,6 +105,7 @@
     check-cast v2, Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserServiceCallbackImpl;
 
     .line 2093
+    .local v2, "serviceCallback":Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserServiceCallbackImpl;
     iget-object v3, p0, Landroid/support/v4/media/MediaBrowserCompat$CallbackHandler;->mCallbacksMessengerRef:Ljava/lang/ref/WeakReference;
 
     invoke-virtual {v3}, Ljava/lang/ref/WeakReference;->get()Ljava/lang/Object;
@@ -111,9 +116,10 @@
 
     check-cast v9, Landroid/os/Messenger;
 
+    .line 2095
+    .local v9, "callbacksMessenger":Landroid/os/Messenger;
     const/4 v10, 0x1
 
-    .line 2095
     :try_start_0
     iget v3, p1, Landroid/os/Message;->what:I
     :try_end_0
@@ -121,61 +127,25 @@
 
     const-string v4, "data_media_item_id"
 
-    if-eq v3, v10, :cond_3
-
-    const/4 v5, 0x2
-
-    if-eq v3, v5, :cond_2
-
-    const/4 v5, 0x3
-
-    if-eq v3, v5, :cond_1
+    packed-switch v3, :pswitch_data_0
 
     .line 2126
-    :try_start_1
-    new-instance v1, Ljava/lang/StringBuilder;
-
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v3, "Unhandled message: "
-
-    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    const-string v3, "\n  Client version: "
-
-    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1, v10}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    const-string v3, "\n  Service version: "
-
-    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    iget v3, p1, Landroid/os/Message;->arg1:I
-
-    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v1
-
-    invoke-static {v0, v1}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I
-
     goto :goto_0
 
-    :cond_1
+    .line 2111
+    :pswitch_0
+    :try_start_1
     const-string v3, "data_options"
 
-    .line 2111
     invoke-virtual {v1, v3}, Landroid/os/Bundle;->getBundle(Ljava/lang/String;)Landroid/os/Bundle;
 
     move-result-object v7
 
     .line 2112
+    .local v7, "options":Landroid/os/Bundle;
     invoke-static {v7}, Landroid/support/v4/media/session/MediaSessionCompat;->ensureClassLoader(Landroid/os/Bundle;)V
 
+    .line 2114
     const-string v3, "data_notify_children_changed_options"
 
     .line 2115
@@ -184,7 +154,11 @@
     move-result-object v8
 
     .line 2116
+    .local v8, "notifyChildrenChangedOptions":Landroid/os/Bundle;
     invoke-static {v8}, Landroid/support/v4/media/session/MediaSessionCompat;->ensureClassLoader(Landroid/os/Bundle;)V
+
+    .line 2118
+    nop
 
     .line 2119
     invoke-virtual {v1, v4}, Landroid/os/Bundle;->getString(Ljava/lang/String;)Ljava/lang/String;
@@ -198,31 +172,39 @@
 
     move-result-object v6
 
+    .line 2118
     move-object v3, v2
 
     move-object v4, v9
 
-    .line 2118
     invoke-interface/range {v3 .. v8}, Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserServiceCallbackImpl;->onLoadChildren(Landroid/os/Messenger;Ljava/lang/String;Ljava/util/List;Landroid/os/Bundle;Landroid/os/Bundle;)V
 
-    goto :goto_0
+    .line 2123
+    goto :goto_1
 
     .line 2108
-    :cond_2
+    .end local v7    # "options":Landroid/os/Bundle;
+    .end local v8    # "notifyChildrenChangedOptions":Landroid/os/Bundle;
+    :pswitch_1
     invoke-interface {v2, v9}, Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserServiceCallbackImpl;->onConnectionFailed(Landroid/os/Messenger;)V
 
-    goto :goto_0
-
-    :cond_3
-    const-string v3, "data_root_hints"
+    .line 2109
+    goto :goto_1
 
     .line 2097
+    :pswitch_2
+    const-string v3, "data_root_hints"
+
     invoke-virtual {v1, v3}, Landroid/os/Bundle;->getBundle(Ljava/lang/String;)Landroid/os/Bundle;
 
     move-result-object v3
 
     .line 2098
+    .local v3, "rootHints":Landroid/os/Bundle;
     invoke-static {v3}, Landroid/support/v4/media/session/MediaSessionCompat;->ensureClassLoader(Landroid/os/Bundle;)V
+
+    .line 2100
+    nop
 
     .line 2101
     invoke-virtual {v1, v4}, Landroid/os/Bundle;->getString(Ljava/lang/String;)Ljava/lang/String;
@@ -234,40 +216,110 @@
     .line 2102
     invoke-virtual {v1, v5}, Landroid/os/Bundle;->getParcelable(Ljava/lang/String;)Landroid/os/Parcelable;
 
-    move-result-object v1
+    move-result-object v5
 
-    check-cast v1, Landroid/support/v4/media/session/MediaSessionCompat$Token;
+    check-cast v5, Landroid/support/v4/media/session/MediaSessionCompat$Token;
 
     .line 2100
-    invoke-interface {v2, v9, v4, v1, v3}, Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserServiceCallbackImpl;->onServiceConnected(Landroid/os/Messenger;Ljava/lang/String;Landroid/support/v4/media/session/MediaSessionCompat$Token;Landroid/os/Bundle;)V
+    invoke-interface {v2, v9, v4, v5, v3}, Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserServiceCallbackImpl;->onServiceConnected(Landroid/os/Messenger;Ljava/lang/String;Landroid/support/v4/media/session/MediaSessionCompat$Token;Landroid/os/Bundle;)V
+
+    .line 2105
+    goto :goto_1
+
+    .line 2126
+    .end local v3    # "rootHints":Landroid/os/Bundle;
+    :goto_0
+    new-instance v3, Ljava/lang/StringBuilder;
+
+    invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v4, "Unhandled message: "
+
+    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v3
+
+    invoke-virtual {v3, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v3
+
+    const-string v4, "\n  Client version: "
+
+    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v3
+
+    invoke-virtual {v3, v10}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v3
+
+    const-string v4, "\n  Service version: "
+
+    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v3
+
+    iget v4, p1, Landroid/os/Message;->arg1:I
+
+    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v3
+
+    invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v3
+
+    invoke-static {v0, v3}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I
     :try_end_1
     .catch Landroid/os/BadParcelableException; {:try_start_1 .. :try_end_1} :catch_0
 
-    goto :goto_0
+    .line 2137
+    :goto_1
+    goto :goto_2
 
+    .line 2130
     :catch_0
-    nop
-
-    const-string v1, "Could not unparcel the data."
+    move-exception v3
 
     .line 2132
-    invoke-static {v0, v1}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;)I
+    .local v3, "e":Landroid/os/BadParcelableException;
+    const-string v4, "Could not unparcel the data."
+
+    invoke-static {v0, v4}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;)I
 
     .line 2134
-    iget p1, p1, Landroid/os/Message;->what:I
+    iget v0, p1, Landroid/os/Message;->what:I
 
-    if-ne p1, v10, :cond_4
+    if-ne v0, v10, :cond_1
 
     .line 2135
     invoke-interface {v2, v9}, Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserServiceCallbackImpl;->onConnectionFailed(Landroid/os/Messenger;)V
 
-    :cond_4
-    :goto_0
+    .line 2138
+    .end local v3    # "e":Landroid/os/BadParcelableException;
+    :cond_1
+    :goto_2
     return-void
+
+    .line 2088
+    .end local v1    # "data":Landroid/os/Bundle;
+    .end local v2    # "serviceCallback":Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserServiceCallbackImpl;
+    .end local v9    # "callbacksMessenger":Landroid/os/Messenger;
+    :cond_2
+    :goto_3
+    return-void
+
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method setCallbacksMessenger(Landroid/os/Messenger;)V
     .locals 1
+    .param p1, "callbacksMessenger"    # Landroid/os/Messenger;
 
     .line 2141
     new-instance v0, Ljava/lang/ref/WeakReference;
@@ -276,5 +328,6 @@
 
     iput-object v0, p0, Landroid/support/v4/media/MediaBrowserCompat$CallbackHandler;->mCallbacksMessengerRef:Ljava/lang/ref/WeakReference;
 
+    .line 2142
     return-void
 .end method

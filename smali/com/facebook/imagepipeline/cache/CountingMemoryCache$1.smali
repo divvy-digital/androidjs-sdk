@@ -35,8 +35,10 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/imagepipeline/cache/CountingMemoryCache;Lcom/facebook/imagepipeline/cache/ValueDescriptor;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/imagepipeline/cache/CountingMemoryCache;
 
     .line 140
+    .local p0, "this":Lcom/facebook/imagepipeline/cache/CountingMemoryCache$1;, "Lcom/facebook/imagepipeline/cache/CountingMemoryCache$1;"
     iput-object p1, p0, Lcom/facebook/imagepipeline/cache/CountingMemoryCache$1;->this$0:Lcom/facebook/imagepipeline/cache/CountingMemoryCache;
 
     iput-object p2, p0, Lcom/facebook/imagepipeline/cache/CountingMemoryCache$1;->val$evictableValueDescriptor:Lcom/facebook/imagepipeline/cache/ValueDescriptor;
@@ -49,7 +51,7 @@
 
 # virtual methods
 .method public getSizeInBytes(Lcom/facebook/imagepipeline/cache/CountingMemoryCache$Entry;)I
-    .locals 1
+    .locals 2
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -59,25 +61,28 @@
     .end annotation
 
     .line 143
+    .local p0, "this":Lcom/facebook/imagepipeline/cache/CountingMemoryCache$1;, "Lcom/facebook/imagepipeline/cache/CountingMemoryCache$1;"
+    .local p1, "entry":Lcom/facebook/imagepipeline/cache/CountingMemoryCache$Entry;, "Lcom/facebook/imagepipeline/cache/CountingMemoryCache$Entry<TK;TV;>;"
     iget-object v0, p0, Lcom/facebook/imagepipeline/cache/CountingMemoryCache$1;->val$evictableValueDescriptor:Lcom/facebook/imagepipeline/cache/ValueDescriptor;
 
-    iget-object p1, p1, Lcom/facebook/imagepipeline/cache/CountingMemoryCache$Entry;->valueRef:Lcom/facebook/common/references/CloseableReference;
+    iget-object v1, p1, Lcom/facebook/imagepipeline/cache/CountingMemoryCache$Entry;->valueRef:Lcom/facebook/common/references/CloseableReference;
 
-    invoke-virtual {p1}, Lcom/facebook/common/references/CloseableReference;->get()Ljava/lang/Object;
+    invoke-virtual {v1}, Lcom/facebook/common/references/CloseableReference;->get()Ljava/lang/Object;
 
-    move-result-object p1
+    move-result-object v1
 
-    invoke-interface {v0, p1}, Lcom/facebook/imagepipeline/cache/ValueDescriptor;->getSizeInBytes(Ljava/lang/Object;)I
+    invoke-interface {v0, v1}, Lcom/facebook/imagepipeline/cache/ValueDescriptor;->getSizeInBytes(Ljava/lang/Object;)I
 
-    move-result p1
+    move-result v0
 
-    return p1
+    return v0
 .end method
 
 .method public bridge synthetic getSizeInBytes(Ljava/lang/Object;)I
     .locals 0
 
     .line 140
+    .local p0, "this":Lcom/facebook/imagepipeline/cache/CountingMemoryCache$1;, "Lcom/facebook/imagepipeline/cache/CountingMemoryCache$1;"
     check-cast p1, Lcom/facebook/imagepipeline/cache/CountingMemoryCache$Entry;
 
     invoke-virtual {p0, p1}, Lcom/facebook/imagepipeline/cache/CountingMemoryCache$1;->getSizeInBytes(Lcom/facebook/imagepipeline/cache/CountingMemoryCache$Entry;)I

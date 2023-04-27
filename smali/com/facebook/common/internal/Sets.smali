@@ -54,7 +54,7 @@
 .end method
 
 .method public static newHashSet(Ljava/lang/Iterable;)Ljava/util/HashSet;
-    .locals 1
+    .locals 2
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "<E:",
@@ -68,15 +68,18 @@
     .end annotation
 
     .line 82
+    .local p0, "elements":Ljava/lang/Iterable;, "Ljava/lang/Iterable<+TE;>;"
     instance-of v0, p0, Ljava/util/Collection;
 
     if-eqz v0, :cond_0
 
     new-instance v0, Ljava/util/HashSet;
 
-    check-cast p0, Ljava/util/Collection;
+    move-object v1, p0
 
-    invoke-direct {v0, p0}, Ljava/util/HashSet;-><init>(Ljava/util/Collection;)V
+    check-cast v1, Ljava/util/Collection;
+
+    invoke-direct {v0, v1}, Ljava/util/HashSet;-><init>(Ljava/util/Collection;)V
 
     goto :goto_0
 
@@ -84,12 +87,13 @@
     :cond_0
     invoke-interface {p0}, Ljava/lang/Iterable;->iterator()Ljava/util/Iterator;
 
-    move-result-object p0
+    move-result-object v0
 
-    invoke-static {p0}, Lcom/facebook/common/internal/Sets;->newHashSet(Ljava/util/Iterator;)Ljava/util/HashSet;
+    invoke-static {v0}, Lcom/facebook/common/internal/Sets;->newHashSet(Ljava/util/Iterator;)Ljava/util/HashSet;
 
     move-result-object v0
 
+    .line 82
     :goto_0
     return-object v0
 .end method
@@ -109,11 +113,13 @@
     .end annotation
 
     .line 95
+    .local p0, "elements":Ljava/util/Iterator;, "Ljava/util/Iterator<+TE;>;"
     invoke-static {}, Lcom/facebook/common/internal/Sets;->newHashSet()Ljava/util/HashSet;
 
     move-result-object v0
 
     .line 96
+    .local v0, "set":Ljava/util/HashSet;, "Ljava/util/HashSet<TE;>;"
     :goto_0
     invoke-interface {p0}, Ljava/util/Iterator;->hasNext()Z
 
@@ -130,6 +136,7 @@
 
     goto :goto_0
 
+    .line 99
     :cond_0
     return-object v0
 .end method
@@ -147,6 +154,7 @@
     .end annotation
 
     .line 52
+    .local p0, "elements":[Ljava/lang/Object;, "[TE;"
     array-length v0, p0
 
     invoke-static {v0}, Lcom/facebook/common/internal/Sets;->newHashSetWithCapacity(I)Ljava/util/HashSet;
@@ -154,13 +162,16 @@
     move-result-object v0
 
     .line 53
+    .local v0, "set":Ljava/util/HashSet;, "Ljava/util/HashSet<TE;>;"
     invoke-static {v0, p0}, Ljava/util/Collections;->addAll(Ljava/util/Collection;[Ljava/lang/Object;)Z
 
+    .line 54
     return-object v0
 .end method
 
 .method public static newHashSetWithCapacity(I)Ljava/util/HashSet;
     .locals 1
+    .param p0, "capacity"    # I
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "<E:",
@@ -224,7 +235,7 @@
 .end method
 
 .method public static newSetFromMap(Ljava/util/Map;)Ljava/util/Set;
-    .locals 0
+    .locals 1
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "<E:",
@@ -240,9 +251,10 @@
     .end annotation
 
     .line 146
+    .local p0, "map":Ljava/util/Map;, "Ljava/util/Map<TE;Ljava/lang/Boolean;>;"
     invoke-static {p0}, Ljava/util/Collections;->newSetFromMap(Ljava/util/Map;)Ljava/util/Set;
 
-    move-result-object p0
+    move-result-object v0
 
-    return-object p0
+    return-object v0
 .end method

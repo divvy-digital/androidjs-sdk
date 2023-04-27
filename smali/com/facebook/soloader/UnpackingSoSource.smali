@@ -61,52 +61,60 @@
 # direct methods
 .method protected constructor <init>(Landroid/content/Context;Ljava/io/File;)V
     .locals 1
-
-    const/4 v0, 0x1
+    .param p1, "context"    # Landroid/content/Context;
+    .param p2, "storePath"    # Ljava/io/File;
 
     .line 66
+    const/4 v0, 0x1
+
     invoke-direct {p0, p2, v0}, Lcom/facebook/soloader/DirectorySoSource;-><init>(Ljava/io/File;I)V
 
     .line 58
-    new-instance p2, Ljava/util/HashMap;
+    new-instance v0, Ljava/util/HashMap;
 
-    invoke-direct {p2}, Ljava/util/HashMap;-><init>()V
+    invoke-direct {v0}, Ljava/util/HashMap;-><init>()V
 
-    iput-object p2, p0, Lcom/facebook/soloader/UnpackingSoSource;->mLibsBeingLoaded:Ljava/util/Map;
+    iput-object v0, p0, Lcom/facebook/soloader/UnpackingSoSource;->mLibsBeingLoaded:Ljava/util/Map;
 
     .line 67
     iput-object p1, p0, Lcom/facebook/soloader/UnpackingSoSource;->mContext:Landroid/content/Context;
 
+    .line 68
     return-void
 .end method
 
 .method protected constructor <init>(Landroid/content/Context;Ljava/lang/String;)V
-    .locals 1
+    .locals 2
+    .param p1, "context"    # Landroid/content/Context;
+    .param p2, "name"    # Ljava/lang/String;
 
     .line 61
     invoke-static {p1, p2}, Lcom/facebook/soloader/UnpackingSoSource;->getSoStorePath(Landroid/content/Context;Ljava/lang/String;)Ljava/io/File;
 
-    move-result-object p2
+    move-result-object v0
 
-    const/4 v0, 0x1
+    const/4 v1, 0x1
 
-    invoke-direct {p0, p2, v0}, Lcom/facebook/soloader/DirectorySoSource;-><init>(Ljava/io/File;I)V
+    invoke-direct {p0, v0, v1}, Lcom/facebook/soloader/DirectorySoSource;-><init>(Ljava/io/File;I)V
 
     .line 58
-    new-instance p2, Ljava/util/HashMap;
+    new-instance v0, Ljava/util/HashMap;
 
-    invoke-direct {p2}, Ljava/util/HashMap;-><init>()V
+    invoke-direct {v0}, Ljava/util/HashMap;-><init>()V
 
-    iput-object p2, p0, Lcom/facebook/soloader/UnpackingSoSource;->mLibsBeingLoaded:Ljava/util/Map;
+    iput-object v0, p0, Lcom/facebook/soloader/UnpackingSoSource;->mLibsBeingLoaded:Ljava/util/Map;
 
     .line 62
     iput-object p1, p0, Lcom/facebook/soloader/UnpackingSoSource;->mContext:Landroid/content/Context;
 
+    .line 63
     return-void
 .end method
 
 .method static synthetic access$000(Ljava/io/File;B)V
     .locals 0
+    .param p0, "x0"    # Ljava/io/File;
+    .param p1, "x1"    # B
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -121,6 +129,7 @@
 
 .method private deleteUnmentionedFiles([Lcom/facebook/soloader/UnpackingSoSource$Dso;)V
     .locals 7
+    .param p1, "dsos"    # [Lcom/facebook/soloader/UnpackingSoSource$Dso;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -134,173 +143,194 @@
 
     move-result-object v0
 
+    .line 185
+    .local v0, "existingFiles":[Ljava/lang/String;
     if-eqz v0, :cond_5
 
+    .line 189
     const/4 v1, 0x0
 
-    const/4 v2, 0x0
-
-    .line 189
+    .local v1, "i":I
     :goto_0
-    array-length v3, v0
+    array-length v2, v0
 
-    if-ge v2, v3, :cond_4
+    if-ge v1, v2, :cond_4
 
     .line 190
-    aget-object v3, v0, v2
-
-    const-string v4, "dso_state"
+    aget-object v2, v0, v1
 
     .line 191
-    invoke-virtual {v3, v4}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    .local v2, "fileName":Ljava/lang/String;
+    const-string v3, "dso_state"
 
-    move-result v4
+    invoke-virtual {v2, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    if-nez v4, :cond_3
+    move-result v3
 
-    const-string v4, "dso_lock"
+    if-nez v3, :cond_3
 
     .line 192
-    invoke-virtual {v3, v4}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    const-string v3, "dso_lock"
 
-    move-result v4
+    invoke-virtual {v2, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    if-nez v4, :cond_3
+    move-result v3
 
-    const-string v4, "dso_deps"
+    if-nez v3, :cond_3
 
     .line 193
-    invoke-virtual {v3, v4}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    const-string v3, "dso_deps"
 
-    move-result v4
+    invoke-virtual {v2, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    if-nez v4, :cond_3
+    move-result v3
 
-    const-string v4, "dso_manifest"
+    if-nez v3, :cond_3
 
     .line 194
-    invoke-virtual {v3, v4}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    const-string v3, "dso_manifest"
 
-    move-result v4
+    invoke-virtual {v2, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    if-eqz v4, :cond_0
+    move-result v3
 
+    if-eqz v3, :cond_0
+
+    .line 195
     goto :goto_2
 
+    .line 198
     :cond_0
-    const/4 v4, 0x0
-
-    const/4 v5, 0x0
-
-    :goto_1
-    if-nez v4, :cond_2
+    const/4 v3, 0x0
 
     .line 199
-    array-length v6, p1
+    .local v3, "found":Z
+    const/4 v4, 0x0
 
-    if-ge v5, v6, :cond_2
+    .local v4, "j":I
+    :goto_1
+    if-nez v3, :cond_2
+
+    array-length v5, p1
+
+    if-ge v4, v5, :cond_2
 
     .line 200
-    aget-object v6, p1, v5
+    aget-object v5, p1, v4
 
-    iget-object v6, v6, Lcom/facebook/soloader/UnpackingSoSource$Dso;->name:Ljava/lang/String;
+    iget-object v5, v5, Lcom/facebook/soloader/UnpackingSoSource$Dso;->name:Ljava/lang/String;
 
-    invoke-virtual {v6, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v5, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v6
+    move-result v5
 
-    if-eqz v6, :cond_1
+    if-eqz v5, :cond_1
 
-    const/4 v4, 0x1
+    .line 201
+    const/4 v3, 0x1
 
+    .line 199
     :cond_1
-    add-int/lit8 v5, v5, 0x1
+    add-int/lit8 v4, v4, 0x1
 
     goto :goto_1
 
+    .line 205
+    .end local v4    # "j":I
     :cond_2
-    if-nez v4, :cond_3
+    if-nez v3, :cond_3
 
     .line 206
     new-instance v4, Ljava/io/File;
 
     iget-object v5, p0, Lcom/facebook/soloader/UnpackingSoSource;->soDirectory:Ljava/io/File;
 
-    invoke-direct {v4, v5, v3}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
+    invoke-direct {v4, v5, v2}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
 
     .line 207
-    new-instance v3, Ljava/lang/StringBuilder;
+    .local v4, "fileNameToDelete":Ljava/io/File;
+    new-instance v5, Ljava/lang/StringBuilder;
 
-    invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v5, "deleting unaccounted-for file "
+    const-string v6, "deleting unaccounted-for file "
 
-    invoke-virtual {v3, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    move-result-object v5
 
-    invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual {v5, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
 
-    move-result-object v3
+    move-result-object v5
 
-    const-string v5, "fb-UnpackingSoSource"
+    invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    invoke-static {v5, v3}, Landroid/util/Log;->v(Ljava/lang/String;Ljava/lang/String;)I
+    move-result-object v5
+
+    const-string v6, "fb-UnpackingSoSource"
+
+    invoke-static {v6, v5}, Landroid/util/Log;->v(Ljava/lang/String;Ljava/lang/String;)I
 
     .line 208
     invoke-static {v4}, Lcom/facebook/soloader/SysUtil;->dumbDeleteRecursive(Ljava/io/File;)V
 
+    .line 189
+    .end local v2    # "fileName":Ljava/lang/String;
+    .end local v3    # "found":Z
+    .end local v4    # "fileNameToDelete":Ljava/io/File;
     :cond_3
     :goto_2
-    add-int/lit8 v2, v2, 0x1
+    add-int/lit8 v1, v1, 0x1
 
     goto :goto_0
 
+    .line 211
+    .end local v1    # "i":I
     :cond_4
     return-void
 
     .line 186
     :cond_5
-    new-instance p1, Ljava/io/IOException;
+    new-instance v1, Ljava/io/IOException;
 
-    new-instance v0, Ljava/lang/StringBuilder;
+    new-instance v2, Ljava/lang/StringBuilder;
 
-    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v1, "unable to list directory "
+    const-string v3, "unable to list directory "
 
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    iget-object v1, p0, Lcom/facebook/soloader/UnpackingSoSource;->soDirectory:Ljava/io/File;
+    move-result-object v2
 
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    iget-object v3, p0, Lcom/facebook/soloader/UnpackingSoSource;->soDirectory:Ljava/io/File;
 
-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
+    move-result-object v2
 
-    invoke-direct {p1, v0}, Ljava/io/IOException;-><init>(Ljava/lang/String;)V
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    goto :goto_4
+    move-result-object v2
 
-    :goto_3
-    throw p1
+    invoke-direct {v1, v2}, Ljava/io/IOException;-><init>(Ljava/lang/String;)V
 
-    :goto_4
-    goto :goto_3
+    throw v1
 .end method
 
 .method private extractDso(Lcom/facebook/soloader/UnpackingSoSource$InputDso;[B)V
-    .locals 7
+    .locals 8
+    .param p1, "iDso"    # Lcom/facebook/soloader/UnpackingSoSource$InputDso;
+    .param p2, "ioBuffer"    # [B
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
         }
     .end annotation
 
+    .line 214
     const-string v0, "rw"
 
-    .line 214
     new-instance v1, Ljava/lang/StringBuilder;
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
@@ -309,11 +339,15 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     iget-object v2, p1, Lcom/facebook/soloader/UnpackingSoSource$InputDso;->dso:Lcom/facebook/soloader/UnpackingSoSource$Dso;
 
     iget-object v2, v2, Lcom/facebook/soloader/UnpackingSoSource$Dso;->name:Ljava/lang/String;
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -345,178 +379,249 @@
 
     invoke-direct {v1, v4, v5}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
 
-    .line 221
-    :try_start_0
-    new-instance v4, Ljava/io/RandomAccessFile;
+    .line 219
+    .local v1, "dsoFileName":Ljava/io/File;
+    const/4 v4, 0x0
 
-    invoke-direct {v4, v1, v0}, Ljava/io/RandomAccessFile;-><init>(Ljava/io/File;Ljava/lang/String;)V
+    .line 221
+    .local v4, "dsoFile":Ljava/io/RandomAccessFile;
+    :try_start_0
+    new-instance v5, Ljava/io/RandomAccessFile;
+
+    invoke-direct {v5, v1, v0}, Ljava/io/RandomAccessFile;-><init>(Ljava/io/File;Ljava/lang/String;)V
     :try_end_0
     .catch Ljava/io/IOException; {:try_start_0 .. :try_end_0} :catch_0
 
+    move-object v0, v5
+
+    .line 226
+    .end local v4    # "dsoFile":Ljava/io/RandomAccessFile;
+    .local v0, "dsoFile":Ljava/io/RandomAccessFile;
     goto :goto_0
 
+    .line 222
+    .end local v0    # "dsoFile":Ljava/io/RandomAccessFile;
+    .restart local v4    # "dsoFile":Ljava/io/RandomAccessFile;
     :catch_0
-    move-exception v4
+    move-exception v5
 
     .line 223
-    new-instance v5, Ljava/lang/StringBuilder;
+    .local v5, "ex":Ljava/io/IOException;
+    new-instance v6, Ljava/lang/StringBuilder;
 
-    invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v6, "error overwriting "
+    const-string v7, "error overwriting "
 
-    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v5, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    move-result-object v6
 
-    const-string v6, " trying to delete and start over"
+    invoke-virtual {v6, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v6
 
-    invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    const-string v7, " trying to delete and start over"
 
-    move-result-object v5
+    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-static {v2, v5, v4}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
+    move-result-object v6
+
+    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v6
+
+    invoke-static {v2, v6, v5}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
 
     .line 224
     invoke-static {v1}, Lcom/facebook/soloader/SysUtil;->dumbDeleteRecursive(Ljava/io/File;)V
 
     .line 225
-    new-instance v4, Ljava/io/RandomAccessFile;
+    new-instance v2, Ljava/io/RandomAccessFile;
 
-    invoke-direct {v4, v1, v0}, Ljava/io/RandomAccessFile;-><init>(Ljava/io/File;Ljava/lang/String;)V
+    invoke-direct {v2, v1, v0}, Ljava/io/RandomAccessFile;-><init>(Ljava/io/File;Ljava/lang/String;)V
+
+    move-object v0, v2
 
     .line 229
+    .end local v4    # "dsoFile":Ljava/io/RandomAccessFile;
+    .end local v5    # "ex":Ljava/io/IOException;
+    .restart local v0    # "dsoFile":Ljava/io/RandomAccessFile;
     :goto_0
     :try_start_1
-    iget-object v0, p1, Lcom/facebook/soloader/UnpackingSoSource$InputDso;->content:Ljava/io/InputStream;
+    iget-object v2, p1, Lcom/facebook/soloader/UnpackingSoSource$InputDso;->content:Ljava/io/InputStream;
 
     .line 230
-    invoke-virtual {v0}, Ljava/io/InputStream;->available()I
+    .local v2, "dsoContent":Ljava/io/InputStream;
+    invoke-virtual {v2}, Ljava/io/InputStream;->available()I
 
-    move-result v0
+    move-result v4
 
-    if-le v0, v3, :cond_0
+    .line 231
+    .local v4, "sizeHint":I
+    if-le v4, v3, :cond_0
 
     .line 232
-    invoke-virtual {v4}, Ljava/io/RandomAccessFile;->getFD()Ljava/io/FileDescriptor;
+    invoke-virtual {v0}, Ljava/io/RandomAccessFile;->getFD()Ljava/io/FileDescriptor;
 
-    move-result-object v2
+    move-result-object v5
 
-    int-to-long v5, v0
+    int-to-long v6, v4
 
-    invoke-static {v2, v5, v6}, Lcom/facebook/soloader/SysUtil;->fallocateIfSupported(Ljava/io/FileDescriptor;J)V
+    invoke-static {v5, v6, v7}, Lcom/facebook/soloader/SysUtil;->fallocateIfSupported(Ljava/io/FileDescriptor;J)V
 
     .line 234
     :cond_0
-    iget-object p1, p1, Lcom/facebook/soloader/UnpackingSoSource$InputDso;->content:Ljava/io/InputStream;
+    iget-object v5, p1, Lcom/facebook/soloader/UnpackingSoSource$InputDso;->content:Ljava/io/InputStream;
 
-    const v0, 0x7fffffff
+    const v6, 0x7fffffff
 
-    invoke-static {v4, p1, v0, p2}, Lcom/facebook/soloader/SysUtil;->copyBytes(Ljava/io/RandomAccessFile;Ljava/io/InputStream;I[B)I
+    invoke-static {v0, v5, v6, p2}, Lcom/facebook/soloader/SysUtil;->copyBytes(Ljava/io/RandomAccessFile;Ljava/io/InputStream;I[B)I
 
     .line 235
-    invoke-virtual {v4}, Ljava/io/RandomAccessFile;->getFilePointer()J
+    invoke-virtual {v0}, Ljava/io/RandomAccessFile;->getFilePointer()J
 
-    move-result-wide p1
+    move-result-wide v5
 
-    invoke-virtual {v4, p1, p2}, Ljava/io/RandomAccessFile;->setLength(J)V
-
-    const/4 p1, 0x0
+    invoke-virtual {v0, v5, v6}, Ljava/io/RandomAccessFile;->setLength(J)V
 
     .line 236
-    invoke-virtual {v1, v3, p1}, Ljava/io/File;->setExecutable(ZZ)Z
+    const/4 v5, 0x0
 
-    move-result p1
+    invoke-virtual {v1, v3, v5}, Ljava/io/File;->setExecutable(ZZ)Z
+
+    move-result v3
     :try_end_1
     .catch Ljava/io/IOException; {:try_start_1 .. :try_end_1} :catch_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
-    if-eqz p1, :cond_1
+    if-eqz v3, :cond_1
 
     .line 243
-    invoke-virtual {v4}, Ljava/io/RandomAccessFile;->close()V
+    .end local v2    # "dsoContent":Ljava/io/InputStream;
+    .end local v4    # "sizeHint":I
+    invoke-virtual {v0}, Ljava/io/RandomAccessFile;->close()V
 
+    .line 244
+    nop
+
+    .line 245
     return-void
 
     .line 237
+    .restart local v2    # "dsoContent":Ljava/io/InputStream;
+    .restart local v4    # "sizeHint":I
     :cond_1
     :try_start_2
-    new-instance p1, Ljava/io/IOException;
+    new-instance v3, Ljava/io/IOException;
 
-    new-instance p2, Ljava/lang/StringBuilder;
+    new-instance v5, Ljava/lang/StringBuilder;
 
-    invoke-direct {p2}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v0, "cannot make file executable: "
+    const-string v6, "cannot make file executable: "
 
-    invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {p2, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    move-result-object v5
 
-    invoke-virtual {p2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual {v5, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
 
-    move-result-object p2
+    move-result-object v5
 
-    invoke-direct {p1, p2}, Ljava/io/IOException;-><init>(Ljava/lang/String;)V
+    invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    throw p1
+    move-result-object v5
+
+    invoke-direct {v3, v5}, Ljava/io/IOException;-><init>(Ljava/lang/String;)V
+
+    .end local v0    # "dsoFile":Ljava/io/RandomAccessFile;
+    .end local v1    # "dsoFileName":Ljava/io/File;
+    .end local p1    # "iDso":Lcom/facebook/soloader/UnpackingSoSource$InputDso;
+    .end local p2    # "ioBuffer":[B
+    throw v3
     :try_end_2
     .catch Ljava/io/IOException; {:try_start_2 .. :try_end_2} :catch_1
     .catchall {:try_start_2 .. :try_end_2} :catchall_0
 
+    .line 243
+    .end local v2    # "dsoContent":Ljava/io/InputStream;
+    .end local v4    # "sizeHint":I
+    .restart local v0    # "dsoFile":Ljava/io/RandomAccessFile;
+    .restart local v1    # "dsoFileName":Ljava/io/File;
+    .restart local p1    # "iDso":Lcom/facebook/soloader/UnpackingSoSource$InputDso;
+    .restart local p2    # "ioBuffer":[B
     :catchall_0
-    move-exception p1
+    move-exception v2
 
     goto :goto_1
 
+    .line 239
     :catch_1
-    move-exception p1
+    move-exception v2
 
     .line 240
+    .local v2, "e":Ljava/io/IOException;
     :try_start_3
     invoke-static {v1}, Lcom/facebook/soloader/SysUtil;->dumbDeleteRecursive(Ljava/io/File;)V
 
     .line 241
-    throw p1
+    nop
+
+    .end local v0    # "dsoFile":Ljava/io/RandomAccessFile;
+    .end local v1    # "dsoFileName":Ljava/io/File;
+    .end local p1    # "iDso":Lcom/facebook/soloader/UnpackingSoSource$InputDso;
+    .end local p2    # "ioBuffer":[B
+    throw v2
     :try_end_3
     .catchall {:try_start_3 .. :try_end_3} :catchall_0
 
     .line 243
+    .end local v2    # "e":Ljava/io/IOException;
+    .restart local v0    # "dsoFile":Ljava/io/RandomAccessFile;
+    .restart local v1    # "dsoFileName":Ljava/io/File;
+    .restart local p1    # "iDso":Lcom/facebook/soloader/UnpackingSoSource$InputDso;
+    .restart local p2    # "ioBuffer":[B
     :goto_1
-    invoke-virtual {v4}, Ljava/io/RandomAccessFile;->close()V
+    invoke-virtual {v0}, Ljava/io/RandomAccessFile;->close()V
 
     .line 244
-    throw p1
+    throw v2
 
     .line 216
+    .end local v0    # "dsoFile":Ljava/io/RandomAccessFile;
+    .end local v1    # "dsoFileName":Ljava/io/File;
     :cond_2
-    new-instance p1, Ljava/io/IOException;
+    new-instance v0, Ljava/io/IOException;
 
-    new-instance p2, Ljava/lang/StringBuilder;
+    new-instance v1, Ljava/lang/StringBuilder;
 
-    invoke-direct {p2}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v0, "cannot make directory writable for us: "
+    const-string v2, "cannot make directory writable for us: "
 
-    invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    iget-object v0, p0, Lcom/facebook/soloader/UnpackingSoSource;->soDirectory:Ljava/io/File;
+    move-result-object v1
 
-    invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    iget-object v2, p0, Lcom/facebook/soloader/UnpackingSoSource;->soDirectory:Ljava/io/File;
 
-    invoke-virtual {p2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
 
-    move-result-object p2
+    move-result-object v1
 
-    invoke-direct {p1, p2}, Ljava/io/IOException;-><init>(Ljava/lang/String;)V
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    throw p1
+    move-result-object v1
+
+    invoke-direct {v0, v1}, Ljava/io/IOException;-><init>(Ljava/lang/String;)V
+
+    throw v0
 .end method
 
 .method private getLibraryLock(Ljava/lang/String;)Ljava/lang/Object;
     .locals 3
+    .param p1, "soName"    # Ljava/lang/String;
 
     .line 437
     iget-object v0, p0, Lcom/facebook/soloader/UnpackingSoSource;->mLibsBeingLoaded:Ljava/util/Map;
@@ -531,12 +636,16 @@
 
     move-result-object v1
 
+    .line 439
+    .local v1, "lock":Ljava/lang/Object;
     if-nez v1, :cond_0
 
     .line 440
-    new-instance v1, Ljava/lang/Object;
+    new-instance v2, Ljava/lang/Object;
 
-    invoke-direct {v1}, Ljava/lang/Object;-><init>()V
+    invoke-direct {v2}, Ljava/lang/Object;-><init>()V
+
+    move-object v1, v2
 
     .line 441
     iget-object v2, p0, Lcom/facebook/soloader/UnpackingSoSource;->mLibsBeingLoaded:Ljava/util/Map;
@@ -549,19 +658,22 @@
 
     return-object v1
 
-    :catchall_0
-    move-exception p1
-
     .line 444
+    .end local v1    # "lock":Ljava/lang/Object;
+    :catchall_0
+    move-exception v1
+
     monitor-exit v0
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    throw p1
+    throw v1
 .end method
 
 .method public static getSoStorePath(Landroid/content/Context;Ljava/lang/String;)Ljava/io/File;
-    .locals 2
+    .locals 3
+    .param p0, "context"    # Landroid/content/Context;
+    .param p1, "name"    # Ljava/lang/String;
 
     .line 71
     new-instance v0, Ljava/io/File;
@@ -572,494 +684,681 @@
 
     invoke-virtual {p0}, Landroid/content/Context;->getApplicationInfo()Landroid/content/pm/ApplicationInfo;
 
-    move-result-object p0
+    move-result-object v2
 
-    iget-object p0, p0, Landroid/content/pm/ApplicationInfo;->dataDir:Ljava/lang/String;
+    iget-object v2, v2, Landroid/content/pm/ApplicationInfo;->dataDir:Ljava/lang/String;
 
-    invoke-virtual {v1, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    const-string p0, "/"
+    move-result-object v1
 
-    invoke-virtual {v1, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    const-string v2, "/"
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object p0
+    move-result-object v1
 
-    invoke-direct {v0, p0}, Ljava/io/File;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/io/File;-><init>(Ljava/lang/String;)V
 
     return-object v0
 .end method
 
 .method private refreshLocked(Lcom/facebook/soloader/FileLocker;I[B)Z
-    .locals 12
+    .locals 15
+    .param p1, "lock"    # Lcom/facebook/soloader/FileLocker;
+    .param p2, "flags"    # I
+    .param p3, "deps"    # [B
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
         }
     .end annotation
 
-    const-string v0, "fb-UnpackingSoSource"
-
     .line 291
-    new-instance v6, Ljava/io/File;
+    move-object v8, p0
 
-    iget-object v1, p0, Lcom/facebook/soloader/UnpackingSoSource;->soDirectory:Ljava/io/File;
+    const-string v1, "fb-UnpackingSoSource"
 
-    const-string v2, "dso_state"
+    new-instance v0, Ljava/io/File;
 
-    invoke-direct {v6, v1, v2}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
+    iget-object v2, v8, Lcom/facebook/soloader/UnpackingSoSource;->soDirectory:Ljava/io/File;
+
+    const-string v3, "dso_state"
+
+    invoke-direct {v0, v2, v3}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
+
+    move-object v9, v0
 
     .line 293
-    new-instance v1, Ljava/io/RandomAccessFile;
+    .local v9, "stateFileName":Ljava/io/File;
+    new-instance v0, Ljava/io/RandomAccessFile;
 
     const-string v2, "rw"
 
-    invoke-direct {v1, v6, v2}, Ljava/io/RandomAccessFile;-><init>(Ljava/io/File;Ljava/lang/String;)V
+    invoke-direct {v0, v9, v2}, Ljava/io/RandomAccessFile;-><init>(Ljava/io/File;Ljava/lang/String;)V
 
-    const/4 v8, 0x1
-
-    const/4 v3, 0x0
-
-    const/4 v4, 0x0
+    move-object v3, v0
 
     .line 295
+    .local v3, "stateFile":Ljava/io/RandomAccessFile;
+    const/4 v10, 0x1
+
     :try_start_0
-    invoke-virtual {v1}, Ljava/io/RandomAccessFile;->readByte()B
+    invoke-virtual {v3}, Ljava/io/RandomAccessFile;->readByte()B
 
-    move-result v5
+    move-result v0
 
-    if-eq v5, v8, :cond_1
+    .line 296
+    .local v0, "state":B
+    if-eq v0, v10, :cond_0
 
     .line 297
-    new-instance v5, Ljava/lang/StringBuilder;
+    new-instance v4, Ljava/lang/StringBuilder;
 
-    invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v7, "dso store "
+    const-string v5, "dso store "
 
-    invoke-virtual {v5, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    iget-object v7, p0, Lcom/facebook/soloader/UnpackingSoSource;->soDirectory:Ljava/io/File;
+    move-result-object v4
 
-    invoke-virtual {v5, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    iget-object v5, v8, Lcom/facebook/soloader/UnpackingSoSource;->soDirectory:Ljava/io/File;
 
-    const-string v7, " regeneration interrupted: wiping clean"
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v5, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v4
 
-    invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    const-string v5, " regeneration interrupted: wiping clean"
 
-    move-result-object v5
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-static {v0, v5}, Landroid/util/Log;->v(Ljava/lang/String;Ljava/lang/String;)I
+    move-result-object v4
+
+    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v4
+
+    invoke-static {v1, v4}, Landroid/util/Log;->v(Ljava/lang/String;Ljava/lang/String;)I
     :try_end_0
     .catch Ljava/io/EOFException; {:try_start_0 .. :try_end_0} :catch_0
-    .catch Ljava/lang/Throwable; {:try_start_0 .. :try_end_0} :catch_1
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    :catch_0
-    const/4 v5, 0x0
+    .line 298
+    const/4 v0, 0x0
 
-    goto :goto_2
+    .line 302
+    :cond_0
+    move v4, v0
 
+    goto :goto_1
+
+    .line 293
+    .end local v0    # "state":B
     :catchall_0
-    move-exception p1
+    move-exception v0
+
+    move-object v1, v0
+
+    .end local v3    # "stateFile":Ljava/io/RandomAccessFile;
+    .end local v9    # "stateFileName":Ljava/io/File;
+    .end local p1    # "lock":Lcom/facebook/soloader/FileLocker;
+    .end local p2    # "flags":I
+    .end local p3    # "deps":[B
+    :try_start_1
+    throw v1
+    :try_end_1
+    .catchall {:try_start_1 .. :try_end_1} :catchall_1
+
+    .line 303
+    .restart local v3    # "stateFile":Ljava/io/RandomAccessFile;
+    .restart local v9    # "stateFileName":Ljava/io/File;
+    .restart local p1    # "lock":Lcom/facebook/soloader/FileLocker;
+    .restart local p2    # "flags":I
+    .restart local p3    # "deps":[B
+    :catchall_1
+    move-exception v0
+
+    move-object v2, v0
+
+    :try_start_2
+    invoke-virtual {v3}, Ljava/io/RandomAccessFile;->close()V
+    :try_end_2
+    .catchall {:try_start_2 .. :try_end_2} :catchall_2
 
     goto :goto_0
 
-    :catch_1
-    move-exception p1
+    :catchall_2
+    move-exception v0
 
-    move-object v3, p1
+    move-object v4, v0
 
-    .line 293
-    :try_start_1
-    throw v3
-    :try_end_1
-    .catchall {:try_start_1 .. :try_end_1} :catchall_0
+    invoke-virtual {v1, v4}, Ljava/lang/Throwable;->addSuppressed(Ljava/lang/Throwable;)V
 
     :goto_0
-    if-eqz v3, :cond_0
+    throw v2
+
+    .line 300
+    :catch_0
+    move-exception v0
+
+    .line 301
+    .local v0, "ex":Ljava/io/EOFException;
+    const/4 v4, 0x0
 
     .line 303
-    :try_start_2
-    invoke-virtual {v1}, Ljava/io/RandomAccessFile;->close()V
-    :try_end_2
-    .catch Ljava/lang/Throwable; {:try_start_2 .. :try_end_2} :catch_2
-
-    goto :goto_1
-
-    :catch_2
-    move-exception p2
-
-    invoke-virtual {v3, p2}, Ljava/lang/Throwable;->addSuppressed(Ljava/lang/Throwable;)V
-
-    goto :goto_1
-
-    :cond_0
-    invoke-virtual {v1}, Ljava/io/RandomAccessFile;->close()V
-
+    .end local v0    # "ex":Ljava/io/EOFException;
+    .local v4, "state":B
     :goto_1
-    throw p1
-
-    :cond_1
-    :goto_2
-    invoke-virtual {v1}, Ljava/io/RandomAccessFile;->close()V
+    invoke-virtual {v3}, Ljava/io/RandomAccessFile;->close()V
 
     .line 305
-    new-instance v7, Ljava/io/File;
+    .end local v3    # "stateFile":Ljava/io/RandomAccessFile;
+    new-instance v0, Ljava/io/File;
 
-    iget-object v1, p0, Lcom/facebook/soloader/UnpackingSoSource;->soDirectory:Ljava/io/File;
+    iget-object v3, v8, Lcom/facebook/soloader/UnpackingSoSource;->soDirectory:Ljava/io/File;
 
-    const-string v9, "dso_deps"
+    const-string v5, "dso_deps"
 
-    invoke-direct {v7, v1, v9}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
+    invoke-direct {v0, v3, v5}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
+
+    move-object v11, v0
+
+    .line 306
+    .local v11, "depsFileName":Ljava/io/File;
+    const/4 v3, 0x0
 
     .line 307
-    new-instance v1, Ljava/io/RandomAccessFile;
+    .local v3, "desiredManifest":Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
+    new-instance v0, Ljava/io/RandomAccessFile;
 
-    invoke-direct {v1, v7, v2}, Ljava/io/RandomAccessFile;-><init>(Ljava/io/File;Ljava/lang/String;)V
+    invoke-direct {v0, v11, v2}, Ljava/io/RandomAccessFile;-><init>(Ljava/io/File;Ljava/lang/String;)V
+
+    move-object v2, v0
 
     .line 308
+    .local v2, "depsFile":Ljava/io/RandomAccessFile;
     :try_start_3
-    invoke-virtual {v1}, Ljava/io/RandomAccessFile;->length()J
+    invoke-virtual {v2}, Ljava/io/RandomAccessFile;->length()J
 
-    move-result-wide v9
+    move-result-wide v5
 
-    long-to-int v2, v9
+    long-to-int v0, v5
 
-    new-array v2, v2, [B
+    new-array v0, v0, [B
+
+    move-object v5, v0
 
     .line 309
-    invoke-virtual {v1, v2}, Ljava/io/RandomAccessFile;->read([B)I
+    .local v5, "existingDeps":[B
+    invoke-virtual {v2, v5}, Ljava/io/RandomAccessFile;->read([B)I
 
-    move-result v9
+    move-result v0
 
-    array-length v10, v2
+    array-length v6, v5
 
-    if-eq v9, v10, :cond_2
-
-    const-string v5, "short read of so store deps file: marking unclean"
+    if-eq v0, v6, :cond_1
 
     .line 310
-    invoke-static {v0, v5}, Landroid/util/Log;->v(Ljava/lang/String;Ljava/lang/String;)I
+    const-string v0, "short read of so store deps file: marking unclean"
 
-    const/4 v5, 0x0
+    invoke-static {v1, v0}, Landroid/util/Log;->v(Ljava/lang/String;Ljava/lang/String;)I
+    :try_end_3
+    .catchall {:try_start_3 .. :try_end_3} :catchall_b
+
+    .line 311
+    const/4 v4, 0x0
 
     .line 314
-    :cond_2
-    invoke-static {v2, p3}, Ljava/util/Arrays;->equals([B[B)Z
+    :cond_1
+    move-object/from16 v12, p3
 
-    move-result v2
+    :try_start_4
+    invoke-static {v5, v12}, Ljava/util/Arrays;->equals([B[B)Z
 
-    if-nez v2, :cond_3
+    move-result v0
 
-    const-string v2, "deps mismatch on deps store: regenerating"
+    if-nez v0, :cond_2
 
     .line 315
-    invoke-static {v0, v2}, Landroid/util/Log;->v(Ljava/lang/String;Ljava/lang/String;)I
+    const-string v0, "deps mismatch on deps store: regenerating"
 
-    const/4 v5, 0x0
+    invoke-static {v1, v0}, Landroid/util/Log;->v(Ljava/lang/String;Ljava/lang/String;)I
+    :try_end_4
+    .catchall {:try_start_4 .. :try_end_4} :catchall_a
 
-    :cond_3
-    if-eqz v5, :cond_5
+    .line 316
+    const/4 v0, 0x0
 
-    and-int/lit8 v2, p2, 0x2
+    move v13, v0
 
-    if-eqz v2, :cond_4
+    .end local v4    # "state":B
+    .local v0, "state":B
+    goto :goto_2
+
+    .line 314
+    .end local v0    # "state":B
+    .restart local v4    # "state":B
+    :cond_2
+    move v13, v4
+
+    .line 319
+    .end local v4    # "state":B
+    .local v13, "state":B
+    :goto_2
+    const/4 v0, 0x0
+
+    if-eqz v13, :cond_4
+
+    and-int/lit8 v4, p2, 0x2
+
+    if-eqz v4, :cond_3
 
     goto :goto_3
 
-    :cond_4
-    move-object v5, v3
+    :cond_3
+    move-object v14, v3
 
     goto :goto_4
 
-    :cond_5
-    :goto_3
-    const-string v2, "so store dirty: regenerating"
-
     .line 320
-    invoke-static {v0, v2}, Landroid/util/Log;->v(Ljava/lang/String;Ljava/lang/String;)I
+    :cond_4
+    :goto_3
+    :try_start_5
+    const-string v4, "so store dirty: regenerating"
+
+    invoke-static {v1, v4}, Landroid/util/Log;->v(Ljava/lang/String;Ljava/lang/String;)I
 
     .line 321
-    invoke-static {v6, v4}, Lcom/facebook/soloader/UnpackingSoSource;->writeState(Ljava/io/File;B)V
+    invoke-static {v9, v0}, Lcom/facebook/soloader/UnpackingSoSource;->writeState(Ljava/io/File;B)V
 
     .line 323
     invoke-virtual {p0}, Lcom/facebook/soloader/UnpackingSoSource;->makeUnpacker()Lcom/facebook/soloader/UnpackingSoSource$Unpacker;
 
-    move-result-object v0
-    :try_end_3
-    .catch Ljava/lang/Throwable; {:try_start_3 .. :try_end_3} :catch_7
-    .catchall {:try_start_3 .. :try_end_3} :catchall_5
+    move-result-object v1
+    :try_end_5
+    .catchall {:try_start_5 .. :try_end_5} :catchall_9
 
     .line 324
-    :try_start_4
-    invoke-virtual {v0}, Lcom/facebook/soloader/UnpackingSoSource$Unpacker;->getDsoManifest()Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
+    .local v1, "u":Lcom/facebook/soloader/UnpackingSoSource$Unpacker;
+    :try_start_6
+    invoke-virtual {v1}, Lcom/facebook/soloader/UnpackingSoSource$Unpacker;->getDsoManifest()Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
 
-    move-result-object v2
+    move-result-object v4
+
+    move-object v3, v4
 
     .line 325
-    invoke-virtual {v0}, Lcom/facebook/soloader/UnpackingSoSource$Unpacker;->openDsoIterator()Lcom/facebook/soloader/UnpackingSoSource$InputDsoIterator;
+    invoke-virtual {v1}, Lcom/facebook/soloader/UnpackingSoSource$Unpacker;->openDsoIterator()Lcom/facebook/soloader/UnpackingSoSource$InputDsoIterator;
 
-    move-result-object v9
-    :try_end_4
-    .catch Ljava/lang/Throwable; {:try_start_4 .. :try_end_4} :catch_5
-    .catchall {:try_start_4 .. :try_end_4} :catchall_3
+    move-result-object v4
+    :try_end_6
+    .catchall {:try_start_6 .. :try_end_6} :catchall_6
 
     .line 326
-    :try_start_5
-    invoke-direct {p0, v5, v2, v9}, Lcom/facebook/soloader/UnpackingSoSource;->regenerate(BLcom/facebook/soloader/UnpackingSoSource$DsoManifest;Lcom/facebook/soloader/UnpackingSoSource$InputDsoIterator;)V
-    :try_end_5
-    .catch Ljava/lang/Throwable; {:try_start_5 .. :try_end_5} :catch_3
-    .catchall {:try_start_5 .. :try_end_5} :catchall_1
-
-    if-eqz v9, :cond_6
+    .local v4, "idi":Lcom/facebook/soloader/UnpackingSoSource$InputDsoIterator;
+    :try_start_7
+    invoke-direct {p0, v13, v3, v4}, Lcom/facebook/soloader/UnpackingSoSource;->regenerate(BLcom/facebook/soloader/UnpackingSoSource$DsoManifest;Lcom/facebook/soloader/UnpackingSoSource$InputDsoIterator;)V
+    :try_end_7
+    .catchall {:try_start_7 .. :try_end_7} :catchall_3
 
     .line 327
-    :try_start_6
-    invoke-virtual {v9}, Lcom/facebook/soloader/UnpackingSoSource$InputDsoIterator;->close()V
-    :try_end_6
-    .catch Ljava/lang/Throwable; {:try_start_6 .. :try_end_6} :catch_5
-    .catchall {:try_start_6 .. :try_end_6} :catchall_3
+    if-eqz v4, :cond_5
 
-    :cond_6
-    if-eqz v0, :cond_7
+    :try_start_8
+    invoke-virtual {v4}, Lcom/facebook/soloader/UnpackingSoSource$InputDsoIterator;->close()V
+    :try_end_8
+    .catchall {:try_start_8 .. :try_end_8} :catchall_6
 
     .line 328
-    :try_start_7
-    invoke-virtual {v0}, Lcom/facebook/soloader/UnpackingSoSource$Unpacker;->close()V
-    :try_end_7
-    .catch Ljava/lang/Throwable; {:try_start_7 .. :try_end_7} :catch_7
-    .catchall {:try_start_7 .. :try_end_7} :catchall_5
+    .end local v4    # "idi":Lcom/facebook/soloader/UnpackingSoSource$InputDsoIterator;
+    :cond_5
+    if-eqz v1, :cond_6
 
-    :cond_7
-    move-object v5, v2
+    :try_start_9
+    invoke-virtual {v1}, Lcom/facebook/soloader/UnpackingSoSource$Unpacker;->close()V
+    :try_end_9
+    .catchall {:try_start_9 .. :try_end_9} :catchall_9
 
     .line 330
+    .end local v1    # "u":Lcom/facebook/soloader/UnpackingSoSource$Unpacker;
+    .end local v5    # "existingDeps":[B
+    :cond_6
+    move-object v14, v3
+
+    .end local v3    # "desiredManifest":Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
+    .local v14, "desiredManifest":Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
     :goto_4
-    invoke-virtual {v1}, Ljava/io/RandomAccessFile;->close()V
+    invoke-virtual {v2}, Ljava/io/RandomAccessFile;->close()V
 
-    if-nez v5, :cond_8
+    .line 332
+    .end local v2    # "depsFile":Ljava/io/RandomAccessFile;
+    if-nez v14, :cond_7
 
-    return v4
+    .line 333
+    return v0
+
+    .line 336
+    :cond_7
+    move-object v5, v14
 
     .line 338
-    :cond_8
+    .local v5, "manifest":Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
     new-instance v0, Lcom/facebook/soloader/UnpackingSoSource$1;
 
     move-object v1, v0
 
     move-object v2, p0
 
-    move-object v3, v7
+    move-object v3, v11
 
-    move-object v4, p3
+    move-object/from16 v4, p3
 
-    move-object v7, p1
+    move-object v6, v9
+
+    move-object/from16 v7, p1
 
     invoke-direct/range {v1 .. v7}, Lcom/facebook/soloader/UnpackingSoSource$1;-><init>(Lcom/facebook/soloader/UnpackingSoSource;Ljava/io/File;[BLcom/facebook/soloader/UnpackingSoSource$DsoManifest;Ljava/io/File;Lcom/facebook/soloader/FileLocker;)V
 
-    and-int/lit8 p1, p2, 0x1
+    .line 374
+    .local v0, "syncer":Ljava/lang/Runnable;
+    and-int/lit8 v1, p2, 0x1
 
-    if-eqz p1, :cond_9
+    if-eqz v1, :cond_8
 
     .line 375
-    new-instance p1, Ljava/lang/Thread;
+    new-instance v1, Ljava/lang/Thread;
 
-    new-instance p2, Ljava/lang/StringBuilder;
+    new-instance v2, Ljava/lang/StringBuilder;
 
-    invoke-direct {p2}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string p3, "SoSync:"
+    const-string v3, "SoSync:"
 
-    invoke-virtual {p2, p3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    iget-object p3, p0, Lcom/facebook/soloader/UnpackingSoSource;->soDirectory:Ljava/io/File;
+    move-result-object v2
 
-    invoke-virtual {p3}, Ljava/io/File;->getName()Ljava/lang/String;
+    iget-object v3, v8, Lcom/facebook/soloader/UnpackingSoSource;->soDirectory:Ljava/io/File;
 
-    move-result-object p3
+    invoke-virtual {v3}, Ljava/io/File;->getName()Ljava/lang/String;
 
-    invoke-virtual {p2, p3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v3
 
-    invoke-virtual {p2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object p2
+    move-result-object v2
 
-    invoke-direct {p1, v0, p2}, Ljava/lang/Thread;-><init>(Ljava/lang/Runnable;Ljava/lang/String;)V
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    invoke-virtual {p1}, Ljava/lang/Thread;->start()V
+    move-result-object v2
+
+    invoke-direct {v1, v0, v2}, Ljava/lang/Thread;-><init>(Ljava/lang/Runnable;Ljava/lang/String;)V
+
+    invoke-virtual {v1}, Ljava/lang/Thread;->start()V
 
     goto :goto_5
 
     .line 377
-    :cond_9
+    :cond_8
     invoke-interface {v0}, Ljava/lang/Runnable;->run()V
 
+    .line 380
     :goto_5
-    return v8
+    return v10
 
-    :catchall_1
-    move-exception p1
+    .line 325
+    .end local v0    # "syncer":Ljava/lang/Runnable;
+    .end local v14    # "desiredManifest":Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
+    .restart local v1    # "u":Lcom/facebook/soloader/UnpackingSoSource$Unpacker;
+    .restart local v2    # "depsFile":Ljava/io/RandomAccessFile;
+    .restart local v3    # "desiredManifest":Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
+    .restart local v4    # "idi":Lcom/facebook/soloader/UnpackingSoSource$InputDsoIterator;
+    .local v5, "existingDeps":[B
+    :catchall_3
+    move-exception v0
 
-    move-object p2, v3
+    move-object v6, v0
+
+    .end local v1    # "u":Lcom/facebook/soloader/UnpackingSoSource$Unpacker;
+    .end local v2    # "depsFile":Ljava/io/RandomAccessFile;
+    .end local v3    # "desiredManifest":Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
+    .end local v4    # "idi":Lcom/facebook/soloader/UnpackingSoSource$InputDsoIterator;
+    .end local v5    # "existingDeps":[B
+    .end local v9    # "stateFileName":Ljava/io/File;
+    .end local v11    # "depsFileName":Ljava/io/File;
+    .end local v13    # "state":B
+    .end local p1    # "lock":Lcom/facebook/soloader/FileLocker;
+    .end local p2    # "flags":I
+    .end local p3    # "deps":[B
+    :try_start_a
+    throw v6
+    :try_end_a
+    .catchall {:try_start_a .. :try_end_a} :catchall_4
+
+    .line 327
+    .restart local v1    # "u":Lcom/facebook/soloader/UnpackingSoSource$Unpacker;
+    .restart local v2    # "depsFile":Ljava/io/RandomAccessFile;
+    .restart local v3    # "desiredManifest":Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
+    .restart local v4    # "idi":Lcom/facebook/soloader/UnpackingSoSource$InputDsoIterator;
+    .restart local v5    # "existingDeps":[B
+    .restart local v9    # "stateFileName":Ljava/io/File;
+    .restart local v11    # "depsFileName":Ljava/io/File;
+    .restart local v13    # "state":B
+    .restart local p1    # "lock":Lcom/facebook/soloader/FileLocker;
+    .restart local p2    # "flags":I
+    .restart local p3    # "deps":[B
+    :catchall_4
+    move-exception v0
+
+    move-object v7, v0
+
+    if-eqz v4, :cond_9
+
+    :try_start_b
+    invoke-virtual {v4}, Lcom/facebook/soloader/UnpackingSoSource$InputDsoIterator;->close()V
+    :try_end_b
+    .catchall {:try_start_b .. :try_end_b} :catchall_5
 
     goto :goto_6
 
-    :catch_3
-    move-exception p1
+    :catchall_5
+    move-exception v0
 
-    .line 325
-    :try_start_8
-    throw p1
-    :try_end_8
-    .catchall {:try_start_8 .. :try_end_8} :catchall_2
+    move-object v10, v0
 
-    :catchall_2
-    move-exception p2
+    :try_start_c
+    invoke-virtual {v6, v10}, Ljava/lang/Throwable;->addSuppressed(Ljava/lang/Throwable;)V
 
-    move-object v11, p2
-
-    move-object p2, p1
-
-    move-object p1, v11
-
+    .end local v1    # "u":Lcom/facebook/soloader/UnpackingSoSource$Unpacker;
+    .end local v2    # "depsFile":Ljava/io/RandomAccessFile;
+    .end local v3    # "desiredManifest":Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
+    .end local v5    # "existingDeps":[B
+    .end local v9    # "stateFileName":Ljava/io/File;
+    .end local v11    # "depsFileName":Ljava/io/File;
+    .end local v13    # "state":B
+    .end local p1    # "lock":Lcom/facebook/soloader/FileLocker;
+    .end local p2    # "flags":I
+    .end local p3    # "deps":[B
+    :cond_9
     :goto_6
-    if-eqz v9, :cond_b
+    throw v7
+    :try_end_c
+    .catchall {:try_start_c .. :try_end_c} :catchall_6
 
-    if-eqz p2, :cond_a
+    .line 323
+    .end local v4    # "idi":Lcom/facebook/soloader/UnpackingSoSource$InputDsoIterator;
+    .restart local v1    # "u":Lcom/facebook/soloader/UnpackingSoSource$Unpacker;
+    .restart local v2    # "depsFile":Ljava/io/RandomAccessFile;
+    .restart local v3    # "desiredManifest":Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
+    .restart local v5    # "existingDeps":[B
+    .restart local v9    # "stateFileName":Ljava/io/File;
+    .restart local v11    # "depsFileName":Ljava/io/File;
+    .restart local v13    # "state":B
+    .restart local p1    # "lock":Lcom/facebook/soloader/FileLocker;
+    .restart local p2    # "flags":I
+    .restart local p3    # "deps":[B
+    :catchall_6
+    move-exception v0
 
-    .line 327
-    :try_start_9
-    invoke-virtual {v9}, Lcom/facebook/soloader/UnpackingSoSource$InputDsoIterator;->close()V
-    :try_end_9
-    .catch Ljava/lang/Throwable; {:try_start_9 .. :try_end_9} :catch_4
-    .catchall {:try_start_9 .. :try_end_9} :catchall_3
+    move-object v4, v0
+
+    .end local v1    # "u":Lcom/facebook/soloader/UnpackingSoSource$Unpacker;
+    .end local v2    # "depsFile":Ljava/io/RandomAccessFile;
+    .end local v3    # "desiredManifest":Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
+    .end local v5    # "existingDeps":[B
+    .end local v9    # "stateFileName":Ljava/io/File;
+    .end local v11    # "depsFileName":Ljava/io/File;
+    .end local v13    # "state":B
+    .end local p1    # "lock":Lcom/facebook/soloader/FileLocker;
+    .end local p2    # "flags":I
+    .end local p3    # "deps":[B
+    :try_start_d
+    throw v4
+    :try_end_d
+    .catchall {:try_start_d .. :try_end_d} :catchall_7
+
+    .line 328
+    .restart local v1    # "u":Lcom/facebook/soloader/UnpackingSoSource$Unpacker;
+    .restart local v2    # "depsFile":Ljava/io/RandomAccessFile;
+    .restart local v3    # "desiredManifest":Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
+    .restart local v5    # "existingDeps":[B
+    .restart local v9    # "stateFileName":Ljava/io/File;
+    .restart local v11    # "depsFileName":Ljava/io/File;
+    .restart local v13    # "state":B
+    .restart local p1    # "lock":Lcom/facebook/soloader/FileLocker;
+    .restart local p2    # "flags":I
+    .restart local p3    # "deps":[B
+    :catchall_7
+    move-exception v0
+
+    move-object v6, v0
+
+    if-eqz v1, :cond_a
+
+    :try_start_e
+    invoke-virtual {v1}, Lcom/facebook/soloader/UnpackingSoSource$Unpacker;->close()V
+    :try_end_e
+    .catchall {:try_start_e .. :try_end_e} :catchall_8
 
     goto :goto_7
 
-    :catch_4
-    move-exception p3
+    :catchall_8
+    move-exception v0
 
-    :try_start_a
-    invoke-virtual {p2, p3}, Ljava/lang/Throwable;->addSuppressed(Ljava/lang/Throwable;)V
+    move-object v7, v0
 
-    goto :goto_7
+    :try_start_f
+    invoke-virtual {v4, v7}, Ljava/lang/Throwable;->addSuppressed(Ljava/lang/Throwable;)V
 
+    .end local v2    # "depsFile":Ljava/io/RandomAccessFile;
+    .end local v3    # "desiredManifest":Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
+    .end local v9    # "stateFileName":Ljava/io/File;
+    .end local v11    # "depsFileName":Ljava/io/File;
+    .end local v13    # "state":B
+    .end local p1    # "lock":Lcom/facebook/soloader/FileLocker;
+    .end local p2    # "flags":I
+    .end local p3    # "deps":[B
     :cond_a
-    invoke-virtual {v9}, Lcom/facebook/soloader/UnpackingSoSource$InputDsoIterator;->close()V
-
-    :cond_b
     :goto_7
-    throw p1
-    :try_end_a
-    .catch Ljava/lang/Throwable; {:try_start_a .. :try_end_a} :catch_5
-    .catchall {:try_start_a .. :try_end_a} :catchall_3
+    throw v6
+    :try_end_f
+    .catchall {:try_start_f .. :try_end_f} :catchall_9
 
-    :catchall_3
-    move-exception p1
+    .line 307
+    .end local v1    # "u":Lcom/facebook/soloader/UnpackingSoSource$Unpacker;
+    .end local v5    # "existingDeps":[B
+    .restart local v2    # "depsFile":Ljava/io/RandomAccessFile;
+    .restart local v3    # "desiredManifest":Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
+    .restart local v9    # "stateFileName":Ljava/io/File;
+    .restart local v11    # "depsFileName":Ljava/io/File;
+    .restart local v13    # "state":B
+    .restart local p1    # "lock":Lcom/facebook/soloader/FileLocker;
+    .restart local p2    # "flags":I
+    .restart local p3    # "deps":[B
+    :catchall_9
+    move-exception v0
 
-    move-object p2, v3
+    move-object v1, v0
+
+    move v4, v13
+
+    goto :goto_9
+
+    .end local v13    # "state":B
+    .local v4, "state":B
+    :catchall_a
+    move-exception v0
 
     goto :goto_8
 
-    :catch_5
-    move-exception p1
+    :catchall_b
+    move-exception v0
 
-    .line 323
-    :try_start_b
-    throw p1
-    :try_end_b
-    .catchall {:try_start_b .. :try_end_b} :catchall_4
-
-    :catchall_4
-    move-exception p2
-
-    move-object v11, p2
-
-    move-object p2, p1
-
-    move-object p1, v11
+    move-object/from16 v12, p3
 
     :goto_8
-    if-eqz v0, :cond_d
+    move-object v1, v0
 
-    if-eqz p2, :cond_c
-
-    .line 328
-    :try_start_c
-    invoke-virtual {v0}, Lcom/facebook/soloader/UnpackingSoSource$Unpacker;->close()V
-    :try_end_c
-    .catch Ljava/lang/Throwable; {:try_start_c .. :try_end_c} :catch_6
-    .catchall {:try_start_c .. :try_end_c} :catchall_5
-
-    goto :goto_9
-
-    :catch_6
-    move-exception p3
-
-    :try_start_d
-    invoke-virtual {p2, p3}, Ljava/lang/Throwable;->addSuppressed(Ljava/lang/Throwable;)V
-
-    goto :goto_9
-
-    :cond_c
-    invoke-virtual {v0}, Lcom/facebook/soloader/UnpackingSoSource$Unpacker;->close()V
-
-    :cond_d
+    .end local v2    # "depsFile":Ljava/io/RandomAccessFile;
+    .end local v3    # "desiredManifest":Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
+    .end local v4    # "state":B
+    .end local v9    # "stateFileName":Ljava/io/File;
+    .end local v11    # "depsFileName":Ljava/io/File;
+    .end local p1    # "lock":Lcom/facebook/soloader/FileLocker;
+    .end local p2    # "flags":I
+    .end local p3    # "deps":[B
     :goto_9
-    throw p1
-    :try_end_d
-    .catch Ljava/lang/Throwable; {:try_start_d .. :try_end_d} :catch_7
-    .catchall {:try_start_d .. :try_end_d} :catchall_5
+    :try_start_10
+    throw v1
+    :try_end_10
+    .catchall {:try_start_10 .. :try_end_10} :catchall_c
 
-    :catchall_5
-    move-exception p1
+    .line 330
+    .restart local v2    # "depsFile":Ljava/io/RandomAccessFile;
+    .restart local v3    # "desiredManifest":Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
+    .restart local v4    # "state":B
+    .restart local v9    # "stateFileName":Ljava/io/File;
+    .restart local v11    # "depsFileName":Ljava/io/File;
+    .restart local p1    # "lock":Lcom/facebook/soloader/FileLocker;
+    .restart local p2    # "flags":I
+    .restart local p3    # "deps":[B
+    :catchall_c
+    move-exception v0
+
+    move-object v5, v0
+
+    :try_start_11
+    invoke-virtual {v2}, Ljava/io/RandomAccessFile;->close()V
+    :try_end_11
+    .catchall {:try_start_11 .. :try_end_11} :catchall_d
 
     goto :goto_a
 
-    :catch_7
-    move-exception p1
+    :catchall_d
+    move-exception v0
 
-    move-object v3, p1
+    move-object v6, v0
 
-    .line 307
-    :try_start_e
-    throw v3
-    :try_end_e
-    .catchall {:try_start_e .. :try_end_e} :catchall_5
+    invoke-virtual {v1, v6}, Ljava/lang/Throwable;->addSuppressed(Ljava/lang/Throwable;)V
 
     :goto_a
-    if-eqz v3, :cond_e
-
-    .line 330
-    :try_start_f
-    invoke-virtual {v1}, Ljava/io/RandomAccessFile;->close()V
-    :try_end_f
-    .catch Ljava/lang/Throwable; {:try_start_f .. :try_end_f} :catch_8
-
-    goto :goto_b
-
-    :catch_8
-    move-exception p2
-
-    invoke-virtual {v3, p2}, Ljava/lang/Throwable;->addSuppressed(Ljava/lang/Throwable;)V
-
-    goto :goto_b
-
-    :cond_e
-    invoke-virtual {v1}, Ljava/io/RandomAccessFile;->close()V
-
-    :goto_b
-    throw p1
+    throw v5
 .end method
 
 .method private regenerate(BLcom/facebook/soloader/UnpackingSoSource$DsoManifest;Lcom/facebook/soloader/UnpackingSoSource$InputDsoIterator;)V
-    .locals 11
+    .locals 10
+    .param p1, "state"    # B
+    .param p2, "desiredManifest"    # Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
+    .param p3, "dsoIterator"    # Lcom/facebook/soloader/UnpackingSoSource$InputDsoIterator;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -1075,6 +1374,8 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     invoke-virtual {p0}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
 
     move-result-object v1
@@ -1084,6 +1385,8 @@
     move-result-object v1
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -1103,111 +1406,122 @@
     invoke-direct {v0, v2, v3}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
 
     .line 253
+    .local v0, "manifestFileName":Ljava/io/File;
     new-instance v2, Ljava/io/RandomAccessFile;
 
     const-string v3, "rw"
 
     invoke-direct {v2, v0, v3}, Ljava/io/RandomAccessFile;-><init>(Ljava/io/File;Ljava/lang/String;)V
 
-    const/4 v0, 0x1
-
+    .line 254
+    .local v2, "manifestFile":Ljava/io/RandomAccessFile;
     const/4 v3, 0x0
 
-    if-ne p1, v0, :cond_0
+    .line 255
+    .local v3, "existingManifest":Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
+    const/4 v4, 0x1
+
+    if-ne p1, v4, :cond_0
 
     .line 257
     :try_start_0
     invoke-static {v2}, Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;->read(Ljava/io/DataInput;)Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
 
-    move-result-object p1
+    move-result-object v4
     :try_end_0
-    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_1
-    .catch Ljava/lang/Throwable; {:try_start_0 .. :try_end_0} :catch_0
+    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
+    move-object v3, v4
+
+    .line 260
     goto :goto_0
 
+    .line 253
+    .end local v3    # "existingManifest":Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
     :catchall_0
-    move-exception p1
+    move-exception v1
 
-    goto/16 :goto_8
+    goto/16 :goto_6
 
+    .line 258
+    .restart local v3    # "existingManifest":Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
     :catch_0
-    move-exception p1
-
-    move-object v3, p1
-
-    goto/16 :goto_7
-
-    :catch_1
-    move-exception p1
-
-    :try_start_1
-    const-string v4, "error reading existing DSO manifest"
+    move-exception v4
 
     .line 259
-    invoke-static {v1, v4, p1}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
+    .local v4, "ex":Ljava/lang/Exception;
+    :try_start_1
+    const-string v5, "error reading existing DSO manifest"
 
+    invoke-static {v1, v5, v4}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
+
+    .line 263
+    .end local v4    # "ex":Ljava/lang/Exception;
     :cond_0
-    move-object p1, v3
-
     :goto_0
-    const/4 v4, 0x0
-
-    if-nez p1, :cond_1
+    if-nez v3, :cond_1
 
     .line 264
-    new-instance p1, Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
+    new-instance v4, Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
 
-    new-array v5, v4, [Lcom/facebook/soloader/UnpackingSoSource$Dso;
+    const/4 v5, 0x0
 
-    invoke-direct {p1, v5}, Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;-><init>([Lcom/facebook/soloader/UnpackingSoSource$Dso;)V
+    new-array v5, v5, [Lcom/facebook/soloader/UnpackingSoSource$Dso;
+
+    invoke-direct {v4, v5}, Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;-><init>([Lcom/facebook/soloader/UnpackingSoSource$Dso;)V
+
+    move-object v3, v4
 
     .line 267
     :cond_1
-    iget-object p2, p2, Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;->dsos:[Lcom/facebook/soloader/UnpackingSoSource$Dso;
+    iget-object v4, p2, Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;->dsos:[Lcom/facebook/soloader/UnpackingSoSource$Dso;
 
-    invoke-direct {p0, p2}, Lcom/facebook/soloader/UnpackingSoSource;->deleteUnmentionedFiles([Lcom/facebook/soloader/UnpackingSoSource$Dso;)V
-
-    const p2, 0x8000
+    invoke-direct {p0, v4}, Lcom/facebook/soloader/UnpackingSoSource;->deleteUnmentionedFiles([Lcom/facebook/soloader/UnpackingSoSource$Dso;)V
 
     .line 268
-    new-array p2, p2, [B
+    const v4, 0x8000
+
+    new-array v4, v4, [B
 
     .line 269
+    .local v4, "ioBuffer":[B
     :cond_2
     :goto_1
     invoke-virtual {p3}, Lcom/facebook/soloader/UnpackingSoSource$InputDsoIterator;->hasNext()Z
 
     move-result v5
 
-    if-eqz v5, :cond_8
+    if-eqz v5, :cond_7
 
     .line 270
     invoke-virtual {p3}, Lcom/facebook/soloader/UnpackingSoSource$InputDsoIterator;->next()Lcom/facebook/soloader/UnpackingSoSource$InputDso;
 
     move-result-object v5
     :try_end_1
-    .catch Ljava/lang/Throwable; {:try_start_1 .. :try_end_1} :catch_0
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
+    .line 271
+    .local v5, "iDso":Lcom/facebook/soloader/UnpackingSoSource$InputDso;
     const/4 v6, 0x1
 
+    .line 272
+    .local v6, "obsolete":Z
     const/4 v7, 0x0
 
+    .local v7, "i":I
     :goto_2
     if-eqz v6, :cond_4
 
-    .line 272
     :try_start_2
-    iget-object v8, p1, Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;->dsos:[Lcom/facebook/soloader/UnpackingSoSource$Dso;
+    iget-object v8, v3, Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;->dsos:[Lcom/facebook/soloader/UnpackingSoSource$Dso;
 
     array-length v8, v8
 
     if-ge v7, v8, :cond_4
 
     .line 273
-    iget-object v8, p1, Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;->dsos:[Lcom/facebook/soloader/UnpackingSoSource$Dso;
+    iget-object v8, v3, Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;->dsos:[Lcom/facebook/soloader/UnpackingSoSource$Dso;
 
     aget-object v8, v8, v7
 
@@ -1223,7 +1537,7 @@
 
     if-eqz v8, :cond_3
 
-    iget-object v8, p1, Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;->dsos:[Lcom/facebook/soloader/UnpackingSoSource$Dso;
+    iget-object v8, v3, Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;->dsos:[Lcom/facebook/soloader/UnpackingSoSource$Dso;
 
     aget-object v8, v8, v7
 
@@ -1240,163 +1554,182 @@
 
     if-eqz v8, :cond_3
 
+    .line 275
     const/4 v6, 0x0
 
+    .line 272
     :cond_3
     add-int/lit8 v7, v7, 0x1
 
     goto :goto_2
 
+    .line 270
+    .end local v6    # "obsolete":Z
+    .end local v7    # "i":I
     :catchall_1
-    move-exception p1
-
-    move-object p2, v3
-
-    goto :goto_4
-
-    :catch_2
-    move-exception p1
+    move-exception v1
 
     goto :goto_3
 
+    .line 278
+    .restart local v6    # "obsolete":Z
     :cond_4
-    if-eqz v6, :cond_7
+    if-eqz v6, :cond_6
 
     .line 279
-    invoke-direct {p0, v5, p2}, Lcom/facebook/soloader/UnpackingSoSource;->extractDso(Lcom/facebook/soloader/UnpackingSoSource$InputDso;[B)V
+    invoke-direct {p0, v5, v4}, Lcom/facebook/soloader/UnpackingSoSource;->extractDso(Lcom/facebook/soloader/UnpackingSoSource$InputDso;[B)V
     :try_end_2
-    .catch Ljava/lang/Throwable; {:try_start_2 .. :try_end_2} :catch_2
     .catchall {:try_start_2 .. :try_end_2} :catchall_1
 
-    goto :goto_6
+    goto :goto_5
 
     .line 270
+    .end local v0    # "manifestFileName":Ljava/io/File;
+    .end local v2    # "manifestFile":Ljava/io/RandomAccessFile;
+    .end local v3    # "existingManifest":Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
+    .end local v4    # "ioBuffer":[B
+    .end local v5    # "iDso":Lcom/facebook/soloader/UnpackingSoSource$InputDso;
+    .end local v6    # "obsolete":Z
+    .end local p1    # "state":B
+    .end local p2    # "desiredManifest":Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
+    .end local p3    # "dsoIterator":Lcom/facebook/soloader/UnpackingSoSource$InputDsoIterator;
     :goto_3
     :try_start_3
-    throw p1
+    throw v1
     :try_end_3
     .catchall {:try_start_3 .. :try_end_3} :catchall_2
 
-    :catchall_2
-    move-exception p2
-
-    move-object v10, p2
-
-    move-object p2, p1
-
-    move-object p1, v10
-
-    :goto_4
-    if-eqz v5, :cond_6
-
-    if-eqz p2, :cond_5
-
     .line 281
+    .restart local v0    # "manifestFileName":Ljava/io/File;
+    .restart local v2    # "manifestFile":Ljava/io/RandomAccessFile;
+    .restart local v3    # "existingManifest":Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
+    .restart local v4    # "ioBuffer":[B
+    .restart local v5    # "iDso":Lcom/facebook/soloader/UnpackingSoSource$InputDso;
+    .restart local p1    # "state":B
+    .restart local p2    # "desiredManifest":Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
+    .restart local p3    # "dsoIterator":Lcom/facebook/soloader/UnpackingSoSource$InputDsoIterator;
+    :catchall_2
+    move-exception v6
+
+    if-eqz v5, :cond_5
+
     :try_start_4
     invoke-virtual {v5}, Lcom/facebook/soloader/UnpackingSoSource$InputDso;->close()V
     :try_end_4
-    .catch Ljava/lang/Throwable; {:try_start_4 .. :try_end_4} :catch_3
-    .catchall {:try_start_4 .. :try_end_4} :catchall_0
+    .catchall {:try_start_4 .. :try_end_4} :catchall_3
 
-    goto :goto_5
+    goto :goto_4
 
-    :catch_3
-    move-exception p3
+    :catchall_3
+    move-exception v7
 
     :try_start_5
-    invoke-virtual {p2, p3}, Ljava/lang/Throwable;->addSuppressed(Ljava/lang/Throwable;)V
+    invoke-virtual {v1, v7}, Ljava/lang/Throwable;->addSuppressed(Ljava/lang/Throwable;)V
 
-    goto :goto_5
-
+    .end local v0    # "manifestFileName":Ljava/io/File;
+    .end local v2    # "manifestFile":Ljava/io/RandomAccessFile;
+    .end local p1    # "state":B
+    .end local p2    # "desiredManifest":Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
+    .end local p3    # "dsoIterator":Lcom/facebook/soloader/UnpackingSoSource$InputDsoIterator;
     :cond_5
-    invoke-virtual {v5}, Lcom/facebook/soloader/UnpackingSoSource$InputDso;->close()V
+    :goto_4
+    throw v6
 
+    .restart local v0    # "manifestFileName":Ljava/io/File;
+    .restart local v2    # "manifestFile":Ljava/io/RandomAccessFile;
+    .restart local p1    # "state":B
+    .restart local p2    # "desiredManifest":Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
+    .restart local p3    # "dsoIterator":Lcom/facebook/soloader/UnpackingSoSource$InputDsoIterator;
     :cond_6
     :goto_5
-    throw p1
-
-    :cond_7
-    :goto_6
     if-eqz v5, :cond_2
 
     invoke-virtual {v5}, Lcom/facebook/soloader/UnpackingSoSource$InputDso;->close()V
     :try_end_5
-    .catch Ljava/lang/Throwable; {:try_start_5 .. :try_end_5} :catch_0
     .catchall {:try_start_5 .. :try_end_5} :catchall_0
 
     goto :goto_1
 
     .line 283
-    :cond_8
+    .end local v3    # "existingManifest":Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
+    .end local v4    # "ioBuffer":[B
+    .end local v5    # "iDso":Lcom/facebook/soloader/UnpackingSoSource$InputDso;
+    :cond_7
     invoke-virtual {v2}, Ljava/io/RandomAccessFile;->close()V
 
     .line 284
-    new-instance p1, Ljava/lang/StringBuilder;
+    .end local v2    # "manifestFile":Ljava/io/RandomAccessFile;
+    new-instance v2, Ljava/lang/StringBuilder;
 
-    invoke-direct {p1}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string p2, "Finished regenerating DSO store "
+    const-string v3, "Finished regenerating DSO store "
 
-    invoke-virtual {p1, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v2
 
     invoke-virtual {p0}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
 
-    move-result-object p2
+    move-result-object v3
 
-    invoke-virtual {p2}, Ljava/lang/Class;->getName()Ljava/lang/String;
+    invoke-virtual {v3}, Ljava/lang/Class;->getName()Ljava/lang/String;
 
-    move-result-object p2
+    move-result-object v3
 
-    invoke-virtual {p1, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {p1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    move-result-object v2
 
-    move-result-object p1
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    invoke-static {v1, p1}, Landroid/util/Log;->v(Ljava/lang/String;Ljava/lang/String;)I
+    move-result-object v2
 
+    invoke-static {v1, v2}, Landroid/util/Log;->v(Ljava/lang/String;Ljava/lang/String;)I
+
+    .line 285
     return-void
 
     .line 253
-    :goto_7
+    .end local v0    # "manifestFileName":Ljava/io/File;
+    .end local p1    # "state":B
+    .end local p2    # "desiredManifest":Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
+    .end local p3    # "dsoIterator":Lcom/facebook/soloader/UnpackingSoSource$InputDsoIterator;
+    :goto_6
     :try_start_6
-    throw v3
+    throw v1
     :try_end_6
-    .catchall {:try_start_6 .. :try_end_6} :catchall_0
-
-    :goto_8
-    if-eqz v3, :cond_9
+    .catchall {:try_start_6 .. :try_end_6} :catchall_4
 
     .line 283
+    .restart local v0    # "manifestFileName":Ljava/io/File;
+    .restart local v2    # "manifestFile":Ljava/io/RandomAccessFile;
+    .restart local p1    # "state":B
+    .restart local p2    # "desiredManifest":Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
+    .restart local p3    # "dsoIterator":Lcom/facebook/soloader/UnpackingSoSource$InputDsoIterator;
+    :catchall_4
+    move-exception v3
+
     :try_start_7
     invoke-virtual {v2}, Ljava/io/RandomAccessFile;->close()V
     :try_end_7
-    .catch Ljava/lang/Throwable; {:try_start_7 .. :try_end_7} :catch_4
+    .catchall {:try_start_7 .. :try_end_7} :catchall_5
 
-    goto :goto_9
+    goto :goto_7
 
-    :catch_4
-    move-exception p2
+    :catchall_5
+    move-exception v4
 
-    invoke-virtual {v3, p2}, Ljava/lang/Throwable;->addSuppressed(Ljava/lang/Throwable;)V
+    invoke-virtual {v1, v4}, Ljava/lang/Throwable;->addSuppressed(Ljava/lang/Throwable;)V
 
-    goto :goto_9
-
-    :cond_9
-    invoke-virtual {v2}, Ljava/io/RandomAccessFile;->close()V
-
-    :goto_9
-    goto :goto_b
-
-    :goto_a
-    throw p1
-
-    :goto_b
-    goto :goto_a
+    :goto_7
+    throw v3
 .end method
 
 .method private static writeState(Ljava/io/File;B)V
-    .locals 3
+    .locals 4
+    .param p0, "stateFileName"    # Ljava/io/File;
+    .param p1, "state"    # B
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -1410,11 +1743,10 @@
 
     invoke-direct {v0, p0, v1}, Ljava/io/RandomAccessFile;-><init>(Ljava/io/File;Ljava/lang/String;)V
 
+    .line 173
+    .local v0, "stateFile":Ljava/io/RandomAccessFile;
     const-wide/16 v1, 0x0
 
-    const/4 p0, 0x0
-
-    .line 173
     :try_start_0
     invoke-virtual {v0, v1, v2}, Ljava/io/RandomAccessFile;->seek(J)V
 
@@ -1431,61 +1763,59 @@
     .line 176
     invoke-virtual {v0}, Ljava/io/RandomAccessFile;->getFD()Ljava/io/FileDescriptor;
 
-    move-result-object p1
+    move-result-object v1
 
-    invoke-virtual {p1}, Ljava/io/FileDescriptor;->sync()V
+    invoke-virtual {v1}, Ljava/io/FileDescriptor;->sync()V
     :try_end_0
-    .catch Ljava/lang/Throwable; {:try_start_0 .. :try_end_0} :catch_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
     .line 177
     invoke-virtual {v0}, Ljava/io/RandomAccessFile;->close()V
 
+    .line 178
+    .end local v0    # "stateFile":Ljava/io/RandomAccessFile;
     return-void
 
-    :catchall_0
-    move-exception p1
-
-    goto :goto_0
-
-    :catch_0
-    move-exception p0
-
     .line 172
-    :try_start_1
-    throw p0
-    :try_end_1
-    .catchall {:try_start_1 .. :try_end_1} :catchall_0
+    .restart local v0    # "stateFile":Ljava/io/RandomAccessFile;
+    :catchall_0
+    move-exception v1
 
-    :goto_0
-    if-eqz p0, :cond_0
+    .end local v0    # "stateFile":Ljava/io/RandomAccessFile;
+    .end local p0    # "stateFileName":Ljava/io/File;
+    .end local p1    # "state":B
+    :try_start_1
+    throw v1
+    :try_end_1
+    .catchall {:try_start_1 .. :try_end_1} :catchall_1
 
     .line 177
+    .restart local v0    # "stateFile":Ljava/io/RandomAccessFile;
+    .restart local p0    # "stateFileName":Ljava/io/File;
+    .restart local p1    # "state":B
+    :catchall_1
+    move-exception v2
+
     :try_start_2
     invoke-virtual {v0}, Ljava/io/RandomAccessFile;->close()V
     :try_end_2
-    .catch Ljava/lang/Throwable; {:try_start_2 .. :try_end_2} :catch_1
+    .catchall {:try_start_2 .. :try_end_2} :catchall_2
 
-    goto :goto_1
+    goto :goto_0
 
-    :catch_1
-    move-exception v0
+    :catchall_2
+    move-exception v3
 
-    invoke-virtual {p0, v0}, Ljava/lang/Throwable;->addSuppressed(Ljava/lang/Throwable;)V
+    invoke-virtual {v1, v3}, Ljava/lang/Throwable;->addSuppressed(Ljava/lang/Throwable;)V
 
-    goto :goto_1
-
-    :cond_0
-    invoke-virtual {v0}, Ljava/io/RandomAccessFile;->close()V
-
-    :goto_1
-    throw p1
+    :goto_0
+    throw v2
 .end method
 
 
 # virtual methods
 .method protected getDepsBlock()[B
-    .locals 6
+    .locals 5
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -1498,124 +1828,118 @@
     move-result-object v0
 
     .line 396
+    .local v0, "parcel":Landroid/os/Parcel;
     invoke-virtual {p0}, Lcom/facebook/soloader/UnpackingSoSource;->makeUnpacker()Lcom/facebook/soloader/UnpackingSoSource$Unpacker;
 
     move-result-object v1
 
-    const/4 v2, 0x0
-
     .line 397
+    .local v1, "u":Lcom/facebook/soloader/UnpackingSoSource$Unpacker;
     :try_start_0
     invoke-virtual {v1}, Lcom/facebook/soloader/UnpackingSoSource$Unpacker;->getDsoManifest()Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;
 
-    move-result-object v3
+    move-result-object v2
 
-    iget-object v3, v3, Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;->dsos:[Lcom/facebook/soloader/UnpackingSoSource$Dso;
-
-    const/4 v4, 0x1
+    iget-object v2, v2, Lcom/facebook/soloader/UnpackingSoSource$DsoManifest;->dsos:[Lcom/facebook/soloader/UnpackingSoSource$Dso;
 
     .line 398
-    invoke-virtual {v0, v4}, Landroid/os/Parcel;->writeByte(B)V
+    .local v2, "dsos":[Lcom/facebook/soloader/UnpackingSoSource$Dso;
+    const/4 v3, 0x1
+
+    invoke-virtual {v0, v3}, Landroid/os/Parcel;->writeByte(B)V
 
     .line 399
-    array-length v4, v3
+    array-length v3, v2
 
-    invoke-virtual {v0, v4}, Landroid/os/Parcel;->writeInt(I)V
-
-    const/4 v4, 0x0
+    invoke-virtual {v0, v3}, Landroid/os/Parcel;->writeInt(I)V
 
     .line 400
-    :goto_0
-    array-length v5, v3
+    const/4 v3, 0x0
 
-    if-ge v4, v5, :cond_0
+    .local v3, "i":I
+    :goto_0
+    array-length v4, v2
+
+    if-ge v3, v4, :cond_0
 
     .line 401
-    aget-object v5, v3, v4
+    aget-object v4, v2, v3
 
-    iget-object v5, v5, Lcom/facebook/soloader/UnpackingSoSource$Dso;->name:Ljava/lang/String;
+    iget-object v4, v4, Lcom/facebook/soloader/UnpackingSoSource$Dso;->name:Ljava/lang/String;
 
-    invoke-virtual {v0, v5}, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+    invoke-virtual {v0, v4}, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
 
     .line 402
-    aget-object v5, v3, v4
+    aget-object v4, v2, v3
 
-    iget-object v5, v5, Lcom/facebook/soloader/UnpackingSoSource$Dso;->hash:Ljava/lang/String;
+    iget-object v4, v4, Lcom/facebook/soloader/UnpackingSoSource$Dso;->hash:Ljava/lang/String;
 
-    invoke-virtual {v0, v5}, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+    invoke-virtual {v0, v4}, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
     :try_end_0
-    .catch Ljava/lang/Throwable; {:try_start_0 .. :try_end_0} :catch_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    add-int/lit8 v4, v4, 0x1
+    .line 400
+    add-int/lit8 v3, v3, 0x1
 
     goto :goto_0
 
+    .line 404
+    .end local v2    # "dsos":[Lcom/facebook/soloader/UnpackingSoSource$Dso;
+    .end local v3    # "i":I
     :cond_0
     if-eqz v1, :cond_1
 
-    .line 404
     invoke-virtual {v1}, Lcom/facebook/soloader/UnpackingSoSource$Unpacker;->close()V
 
     .line 405
+    .end local v1    # "u":Lcom/facebook/soloader/UnpackingSoSource$Unpacker;
     :cond_1
     invoke-virtual {v0}, Landroid/os/Parcel;->marshall()[B
 
     move-result-object v1
 
     .line 406
+    .local v1, "depsBlock":[B
     invoke-virtual {v0}, Landroid/os/Parcel;->recycle()V
 
+    .line 407
     return-object v1
 
-    :catchall_0
-    move-exception v0
-
-    goto :goto_1
-
-    :catch_0
-    move-exception v0
-
-    move-object v2, v0
-
     .line 396
+    .local v1, "u":Lcom/facebook/soloader/UnpackingSoSource$Unpacker;
+    :catchall_0
+    move-exception v2
+
+    .end local v0    # "parcel":Landroid/os/Parcel;
+    .end local v1    # "u":Lcom/facebook/soloader/UnpackingSoSource$Unpacker;
     :try_start_1
     throw v2
     :try_end_1
-    .catchall {:try_start_1 .. :try_end_1} :catchall_0
-
-    :goto_1
-    if-eqz v1, :cond_3
-
-    if-eqz v2, :cond_2
+    .catchall {:try_start_1 .. :try_end_1} :catchall_1
 
     .line 404
+    .restart local v0    # "parcel":Landroid/os/Parcel;
+    .restart local v1    # "u":Lcom/facebook/soloader/UnpackingSoSource$Unpacker;
+    :catchall_1
+    move-exception v3
+
+    if-eqz v1, :cond_2
+
     :try_start_2
     invoke-virtual {v1}, Lcom/facebook/soloader/UnpackingSoSource$Unpacker;->close()V
     :try_end_2
-    .catch Ljava/lang/Throwable; {:try_start_2 .. :try_end_2} :catch_1
+    .catchall {:try_start_2 .. :try_end_2} :catchall_2
 
-    goto :goto_2
+    goto :goto_1
 
-    :catch_1
-    move-exception v1
+    :catchall_2
+    move-exception v4
 
-    invoke-virtual {v2, v1}, Ljava/lang/Throwable;->addSuppressed(Ljava/lang/Throwable;)V
-
-    goto :goto_2
+    invoke-virtual {v2, v4}, Ljava/lang/Throwable;->addSuppressed(Ljava/lang/Throwable;)V
 
     :cond_2
-    invoke-virtual {v1}, Lcom/facebook/soloader/UnpackingSoSource$Unpacker;->close()V
-
-    :cond_3
-    :goto_2
-    goto :goto_4
-
-    :goto_3
-    throw v0
-
-    :goto_4
-    goto :goto_3
+    :goto_1
+    throw v3
 .end method
 
 .method public getSoSourceAbis()[Ljava/lang/String;
@@ -1631,12 +1955,18 @@
 
     move-result-object v0
 
+    return-object v0
+
+    .line 82
     :cond_0
     return-object v0
 .end method
 
 .method public loadLibrary(Ljava/lang/String;ILandroid/os/StrictMode$ThreadPolicy;)I
     .locals 2
+    .param p1, "soName"    # Ljava/lang/String;
+    .param p2, "loadFlags"    # I
+    .param p3, "threadPolicy"    # Landroid/os/StrictMode$ThreadPolicy;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -1649,6 +1979,7 @@
     move-result-object v0
 
     .line 462
+    .local v0, "lock":Ljava/lang/Object;
     monitor-enter v0
 
     .line 465
@@ -1657,21 +1988,21 @@
 
     invoke-virtual {p0, p1, p2, v1, p3}, Lcom/facebook/soloader/UnpackingSoSource;->loadLibraryFrom(Ljava/lang/String;ILjava/io/File;Landroid/os/StrictMode$ThreadPolicy;)I
 
-    move-result p1
+    move-result v1
 
     monitor-exit v0
 
-    return p1
-
-    :catchall_0
-    move-exception p1
+    return v1
 
     .line 466
+    :catchall_0
+    move-exception v1
+
     monitor-exit v0
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    throw p1
+    throw v1
 .end method
 
 .method protected abstract makeUnpacker()Lcom/facebook/soloader/UnpackingSoSource$Unpacker;
@@ -1683,13 +2014,15 @@
 .end method
 
 .method protected prepare(I)V
-    .locals 7
+    .locals 8
+    .param p1, "flags"    # I
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
         }
     .end annotation
 
+    .line 415
     const-string v0, "releasing dso store lock for "
 
     const-string v1, " (syncer thread started)"
@@ -1698,7 +2031,6 @@
 
     const-string v3, "fb-UnpackingSoSource"
 
-    .line 415
     iget-object v4, p0, Lcom/facebook/soloader/UnpackingSoSource;->soDirectory:Ljava/io/File;
 
     invoke-static {v4}, Lcom/facebook/soloader/SysUtil;->mkdirOrThrow(Ljava/io/File;)V
@@ -1713,119 +2045,81 @@
     invoke-direct {v4, v5, v6}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
 
     .line 417
+    .local v4, "lockFileName":Ljava/io/File;
     invoke-static {v4}, Lcom/facebook/soloader/FileLocker;->lock(Ljava/io/File;)Lcom/facebook/soloader/FileLocker;
-
-    move-result-object v4
-
-    .line 419
-    :try_start_0
-    new-instance v5, Ljava/lang/StringBuilder;
-
-    invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v6, "locked dso store "
-
-    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    iget-object v6, p0, Lcom/facebook/soloader/UnpackingSoSource;->soDirectory:Ljava/io/File;
-
-    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
     move-result-object v5
 
-    invoke-static {v3, v5}, Landroid/util/Log;->v(Ljava/lang/String;Ljava/lang/String;)I
+    .line 419
+    .local v5, "lock":Lcom/facebook/soloader/FileLocker;
+    :try_start_0
+    new-instance v6, Ljava/lang/StringBuilder;
+
+    invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v7, "locked dso store "
+
+    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v6
+
+    iget-object v7, p0, Lcom/facebook/soloader/UnpackingSoSource;->soDirectory:Ljava/io/File;
+
+    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v6
+
+    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v6
+
+    invoke-static {v3, v6}, Landroid/util/Log;->v(Ljava/lang/String;Ljava/lang/String;)I
 
     .line 420
     invoke-virtual {p0}, Lcom/facebook/soloader/UnpackingSoSource;->getDepsBlock()[B
 
-    move-result-object v5
+    move-result-object v6
 
-    invoke-direct {p0, v4, p1, v5}, Lcom/facebook/soloader/UnpackingSoSource;->refreshLocked(Lcom/facebook/soloader/FileLocker;I[B)Z
+    invoke-direct {p0, v5, p1, v6}, Lcom/facebook/soloader/UnpackingSoSource;->refreshLocked(Lcom/facebook/soloader/FileLocker;I[B)Z
 
-    move-result p1
+    move-result v6
 
-    if-eqz p1, :cond_0
+    if-eqz v6, :cond_0
 
-    const/4 v4, 0x0
+    .line 421
+    const/4 v5, 0x0
 
     goto :goto_0
 
     .line 423
     :cond_0
-    new-instance p1, Ljava/lang/StringBuilder;
+    new-instance v6, Ljava/lang/StringBuilder;
 
-    invoke-direct {p1}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v5, "dso store is up-to-date: "
+    const-string v7, "dso store is up-to-date: "
 
-    invoke-virtual {p1, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    iget-object v5, p0, Lcom/facebook/soloader/UnpackingSoSource;->soDirectory:Ljava/io/File;
+    move-result-object v6
 
-    invoke-virtual {p1, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    iget-object v7, p0, Lcom/facebook/soloader/UnpackingSoSource;->soDirectory:Ljava/io/File;
 
-    invoke-virtual {p1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
 
-    move-result-object p1
+    move-result-object v6
 
-    invoke-static {v3, p1}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
+    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v6
+
+    invoke-static {v3, v6}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
+    .line 426
     :goto_0
-    if-eqz v4, :cond_1
-
-    .line 427
-    new-instance p1, Ljava/lang/StringBuilder;
-
-    invoke-direct {p1}, Ljava/lang/StringBuilder;-><init>()V
-
-    invoke-virtual {p1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    iget-object v0, p0, Lcom/facebook/soloader/UnpackingSoSource;->soDirectory:Ljava/io/File;
-
-    invoke-virtual {p1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {p1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object p1
-
-    invoke-static {v3, p1}, Landroid/util/Log;->v(Ljava/lang/String;Ljava/lang/String;)I
-
-    .line 428
-    invoke-virtual {v4}, Lcom/facebook/soloader/FileLocker;->close()V
-
-    goto :goto_1
-
-    .line 430
-    :cond_1
-    new-instance p1, Ljava/lang/StringBuilder;
-
-    invoke-direct {p1}, Ljava/lang/StringBuilder;-><init>()V
-
-    invoke-virtual {p1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    iget-object v0, p0, Lcom/facebook/soloader/UnpackingSoSource;->soDirectory:Ljava/io/File;
-
-    invoke-virtual {p1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {p1, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    invoke-virtual {p1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object p1
-
-    invoke-static {v3, p1}, Landroid/util/Log;->v(Ljava/lang/String;Ljava/lang/String;)I
-
-    :goto_1
-    return-void
-
-    :catchall_0
-    move-exception p1
-
-    if-eqz v4, :cond_2
+    if-eqz v5, :cond_1
 
     .line 427
     new-instance v1, Ljava/lang/StringBuilder;
@@ -1834,18 +2128,87 @@
 
     invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    iget-object v0, p0, Lcom/facebook/soloader/UnpackingSoSource;->soDirectory:Ljava/io/File;
+    move-result-object v0
 
-    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    iget-object v1, p0, Lcom/facebook/soloader/UnpackingSoSource;->soDirectory:Ljava/io/File;
 
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
     move-result-object v0
 
     invoke-static {v3, v0}, Landroid/util/Log;->v(Ljava/lang/String;Ljava/lang/String;)I
 
     .line 428
-    invoke-virtual {v4}, Lcom/facebook/soloader/FileLocker;->close()V
+    invoke-virtual {v5}, Lcom/facebook/soloader/FileLocker;->close()V
+
+    goto :goto_1
+
+    .line 430
+    :cond_1
+    new-instance v0, Ljava/lang/StringBuilder;
+
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+
+    invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    iget-object v2, p0, Lcom/facebook/soloader/UnpackingSoSource;->soDirectory:Ljava/io/File;
+
+    invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {v3, v0}, Landroid/util/Log;->v(Ljava/lang/String;Ljava/lang/String;)I
+
+    .line 433
+    nop
+
+    .line 434
+    :goto_1
+    return-void
+
+    .line 426
+    :catchall_0
+    move-exception v6
+
+    if-eqz v5, :cond_2
+
+    .line 427
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    iget-object v1, p0, Lcom/facebook/soloader/UnpackingSoSource;->soDirectory:Ljava/io/File;
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {v3, v0}, Landroid/util/Log;->v(Ljava/lang/String;Ljava/lang/String;)I
+
+    .line 428
+    invoke-virtual {v5}, Lcom/facebook/soloader/FileLocker;->close()V
 
     goto :goto_2
 
@@ -1857,11 +2220,17 @@
 
     invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     iget-object v2, p0, Lcom/facebook/soloader/UnpackingSoSource;->soDirectory:Ljava/io/File;
 
     invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -1871,11 +2240,12 @@
 
     .line 433
     :goto_2
-    throw p1
+    throw v6
 .end method
 
 .method protected declared-synchronized prepare(Ljava/lang/String;)V
-    .locals 1
+    .locals 2
+    .param p1, "soName"    # Ljava/lang/String;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -1891,18 +2261,19 @@
     move-result-object v0
 
     .line 451
+    .local v0, "lock":Ljava/lang/Object;
     monitor-enter v0
     :try_end_0
-    .catchall {:try_start_0 .. :try_end_0} :catchall_1
+    .catchall {:try_start_0 .. :try_end_0} :catchall_2
 
     .line 453
     :try_start_1
     iput-object p1, p0, Lcom/facebook/soloader/UnpackingSoSource;->mCorruptedLib:Ljava/lang/String;
 
-    const/4 p1, 0x2
-
     .line 454
-    invoke-virtual {p0, p1}, Lcom/facebook/soloader/UnpackingSoSource;->prepare(I)V
+    const/4 v1, 0x2
+
+    invoke-virtual {p0, v1}, Lcom/facebook/soloader/UnpackingSoSource;->prepare(I)V
 
     .line 455
     monitor-exit v0
@@ -1914,21 +2285,31 @@
 
     return-void
 
-    :catchall_0
-    move-exception p1
-
     .line 455
+    :catchall_0
+    move-exception v1
+
+    :goto_0
     :try_start_2
     monitor-exit v0
     :try_end_2
-    .catchall {:try_start_2 .. :try_end_2} :catchall_0
+    .catchall {:try_start_2 .. :try_end_2} :catchall_1
 
     :try_start_3
-    throw p1
+    throw v1
     :try_end_3
-    .catchall {:try_start_3 .. :try_end_3} :catchall_1
+    .catchall {:try_start_3 .. :try_end_3} :catchall_2
 
+    .end local p0    # "this":Lcom/facebook/soloader/UnpackingSoSource;
     :catchall_1
+    move-exception v1
+
+    goto :goto_0
+
+    .line 449
+    .end local v0    # "lock":Ljava/lang/Object;
+    .end local p1    # "soName":Ljava/lang/String;
+    :catchall_2
     move-exception p1
 
     monitor-exit p0
@@ -1938,9 +2319,11 @@
 
 .method public setSoSourceAbis([Ljava/lang/String;)V
     .locals 0
+    .param p1, "abis"    # [Ljava/lang/String;
 
     .line 86
     iput-object p1, p0, Lcom/facebook/soloader/UnpackingSoSource;->mAbis:[Ljava/lang/String;
 
+    .line 87
     return-void
 .end method

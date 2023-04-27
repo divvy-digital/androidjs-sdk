@@ -30,25 +30,32 @@
 
 # virtual methods
 .method public onData(ILokio/BufferedSource;IZ)Z
-    .locals 0
+    .locals 2
+    .param p1, "streamId"    # I
+    .param p2, "source"    # Lokio/BufferedSource;
+    .param p3, "byteCount"    # I
+    .param p4, "last"    # Z
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
         }
     .end annotation
 
-    int-to-long p3, p3
-
     .line 88
-    invoke-interface {p2, p3, p4}, Lokio/BufferedSource;->skip(J)V
+    int-to-long v0, p3
 
-    const/4 p1, 0x1
+    invoke-interface {p2, v0, v1}, Lokio/BufferedSource;->skip(J)V
 
-    return p1
+    .line 89
+    const/4 v0, 0x1
+
+    return v0
 .end method
 
 .method public onHeaders(ILjava/util/List;Z)Z
-    .locals 0
+    .locals 1
+    .param p1, "streamId"    # I
+    .param p3, "last"    # Z
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(I",
@@ -58,13 +65,16 @@
         }
     .end annotation
 
-    const/4 p1, 0x1
+    .line 83
+    .local p2, "responseHeaders":Ljava/util/List;, "Ljava/util/List<Lokhttp3/internal/http2/Header;>;"
+    const/4 v0, 0x1
 
-    return p1
+    return v0
 .end method
 
 .method public onRequest(ILjava/util/List;)Z
-    .locals 0
+    .locals 1
+    .param p1, "streamId"    # I
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(I",
@@ -74,13 +84,18 @@
         }
     .end annotation
 
-    const/4 p1, 0x1
+    .line 79
+    .local p2, "requestHeaders":Ljava/util/List;, "Ljava/util/List<Lokhttp3/internal/http2/Header;>;"
+    const/4 v0, 0x1
 
-    return p1
+    return v0
 .end method
 
 .method public onReset(ILokhttp3/internal/http2/ErrorCode;)V
     .locals 0
+    .param p1, "streamId"    # I
+    .param p2, "errorCode"    # Lokhttp3/internal/http2/ErrorCode;
 
+    .line 93
     return-void
 .end method

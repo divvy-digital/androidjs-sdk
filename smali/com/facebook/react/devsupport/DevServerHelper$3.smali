@@ -31,6 +31,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/devsupport/DevServerHelper;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/devsupport/DevServerHelper;
 
     .line 222
     iput-object p1, p0, Lcom/facebook/react/devsupport/DevServerHelper$3;->this$0:Lcom/facebook/react/devsupport/DevServerHelper;
@@ -56,47 +57,49 @@
 .end method
 
 .method protected varargs doInBackground([Ljava/lang/Void;)Ljava/lang/Void;
-    .locals 4
+    .locals 5
+    .param p1, "params"    # [Ljava/lang/Void;
 
     .line 225
-    iget-object p1, p0, Lcom/facebook/react/devsupport/DevServerHelper$3;->this$0:Lcom/facebook/react/devsupport/DevServerHelper;
+    iget-object v0, p0, Lcom/facebook/react/devsupport/DevServerHelper$3;->this$0:Lcom/facebook/react/devsupport/DevServerHelper;
 
-    new-instance v0, Lcom/facebook/react/devsupport/InspectorPackagerConnection;
+    new-instance v1, Lcom/facebook/react/devsupport/InspectorPackagerConnection;
 
     .line 226
-    invoke-static {p1}, Lcom/facebook/react/devsupport/DevServerHelper;->access$300(Lcom/facebook/react/devsupport/DevServerHelper;)Ljava/lang/String;
-
-    move-result-object v1
-
-    iget-object v2, p0, Lcom/facebook/react/devsupport/DevServerHelper$3;->this$0:Lcom/facebook/react/devsupport/DevServerHelper;
-
-    .line 227
-    invoke-static {v2}, Lcom/facebook/react/devsupport/DevServerHelper;->access$400(Lcom/facebook/react/devsupport/DevServerHelper;)Ljava/lang/String;
+    invoke-static {v0}, Lcom/facebook/react/devsupport/DevServerHelper;->access$300(Lcom/facebook/react/devsupport/DevServerHelper;)Ljava/lang/String;
 
     move-result-object v2
 
     iget-object v3, p0, Lcom/facebook/react/devsupport/DevServerHelper$3;->this$0:Lcom/facebook/react/devsupport/DevServerHelper;
 
-    .line 228
-    invoke-static {v3}, Lcom/facebook/react/devsupport/DevServerHelper;->access$500(Lcom/facebook/react/devsupport/DevServerHelper;)Lcom/facebook/react/devsupport/InspectorPackagerConnection$BundleStatusProvider;
+    .line 227
+    invoke-static {v3}, Lcom/facebook/react/devsupport/DevServerHelper;->access$400(Lcom/facebook/react/devsupport/DevServerHelper;)Ljava/lang/String;
 
     move-result-object v3
 
-    invoke-direct {v0, v1, v2, v3}, Lcom/facebook/react/devsupport/InspectorPackagerConnection;-><init>(Ljava/lang/String;Ljava/lang/String;Lcom/facebook/react/devsupport/InspectorPackagerConnection$BundleStatusProvider;)V
+    iget-object v4, p0, Lcom/facebook/react/devsupport/DevServerHelper$3;->this$0:Lcom/facebook/react/devsupport/DevServerHelper;
+
+    .line 228
+    invoke-static {v4}, Lcom/facebook/react/devsupport/DevServerHelper;->access$500(Lcom/facebook/react/devsupport/DevServerHelper;)Lcom/facebook/react/devsupport/InspectorPackagerConnection$BundleStatusProvider;
+
+    move-result-object v4
+
+    invoke-direct {v1, v2, v3, v4}, Lcom/facebook/react/devsupport/InspectorPackagerConnection;-><init>(Ljava/lang/String;Ljava/lang/String;Lcom/facebook/react/devsupport/InspectorPackagerConnection$BundleStatusProvider;)V
 
     .line 225
-    invoke-static {p1, v0}, Lcom/facebook/react/devsupport/DevServerHelper;->access$202(Lcom/facebook/react/devsupport/DevServerHelper;Lcom/facebook/react/devsupport/InspectorPackagerConnection;)Lcom/facebook/react/devsupport/InspectorPackagerConnection;
+    invoke-static {v0, v1}, Lcom/facebook/react/devsupport/DevServerHelper;->access$202(Lcom/facebook/react/devsupport/DevServerHelper;Lcom/facebook/react/devsupport/InspectorPackagerConnection;)Lcom/facebook/react/devsupport/InspectorPackagerConnection;
 
     .line 230
-    iget-object p1, p0, Lcom/facebook/react/devsupport/DevServerHelper$3;->this$0:Lcom/facebook/react/devsupport/DevServerHelper;
+    iget-object v0, p0, Lcom/facebook/react/devsupport/DevServerHelper$3;->this$0:Lcom/facebook/react/devsupport/DevServerHelper;
 
-    invoke-static {p1}, Lcom/facebook/react/devsupport/DevServerHelper;->access$200(Lcom/facebook/react/devsupport/DevServerHelper;)Lcom/facebook/react/devsupport/InspectorPackagerConnection;
+    invoke-static {v0}, Lcom/facebook/react/devsupport/DevServerHelper;->access$200(Lcom/facebook/react/devsupport/DevServerHelper;)Lcom/facebook/react/devsupport/InspectorPackagerConnection;
 
-    move-result-object p1
+    move-result-object v0
 
-    invoke-virtual {p1}, Lcom/facebook/react/devsupport/InspectorPackagerConnection;->connect()V
+    invoke-virtual {v0}, Lcom/facebook/react/devsupport/InspectorPackagerConnection;->connect()V
 
-    const/4 p1, 0x0
+    .line 231
+    const/4 v0, 0x0
 
-    return-object p1
+    return-object v0
 .end method

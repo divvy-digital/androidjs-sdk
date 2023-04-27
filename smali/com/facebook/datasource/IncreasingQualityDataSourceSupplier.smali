@@ -25,9 +25,6 @@
     }
 .end annotation
 
-.annotation build Ljavax/annotation/concurrent/ThreadSafe;
-.end annotation
-
 
 # instance fields
 .field private final mDataSourceLazy:Z
@@ -47,6 +44,7 @@
 # direct methods
 .method private constructor <init>(Ljava/util/List;Z)V
     .locals 2
+    .param p2, "dataSourceLazy"    # Z
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -58,6 +56,8 @@
     .end annotation
 
     .line 41
+    .local p0, "this":Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;, "Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier<TT;>;"
+    .local p1, "dataSourceSuppliers":Ljava/util/List;, "Ljava/util/List<Lcom/facebook/common/internal/Supplier<Lcom/facebook/datasource/DataSource<TT;>;>;>;"
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     .line 42
@@ -77,25 +77,28 @@
     .line 44
     iput-boolean p2, p0, Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;->mDataSourceLazy:Z
 
+    .line 45
     return-void
 .end method
 
 .method static synthetic access$000(Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;)Z
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;
 
     .line 35
-    iget-boolean p0, p0, Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;->mDataSourceLazy:Z
+    iget-boolean v0, p0, Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;->mDataSourceLazy:Z
 
-    return p0
+    return v0
 .end method
 
 .method static synthetic access$100(Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;)Ljava/util/List;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;
 
     .line 35
-    iget-object p0, p0, Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;->mDataSourceSuppliers:Ljava/util/List;
+    iget-object v0, p0, Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;->mDataSourceSuppliers:Ljava/util/List;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method public static create(Ljava/util/List;)Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;
@@ -114,18 +117,20 @@
         }
     .end annotation
 
+    .line 57
+    .local p0, "dataSourceSuppliers":Ljava/util/List;, "Ljava/util/List<Lcom/facebook/common/internal/Supplier<Lcom/facebook/datasource/DataSource<TT;>;>;>;"
     const/4 v0, 0x0
 
-    .line 57
     invoke-static {p0, v0}, Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;->create(Ljava/util/List;Z)Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;
 
-    move-result-object p0
+    move-result-object v0
 
-    return-object p0
+    return-object v0
 .end method
 
 .method public static create(Ljava/util/List;Z)Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;
     .locals 1
+    .param p1, "dataSourceLazy"    # Z
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "<T:",
@@ -141,6 +146,7 @@
     .end annotation
 
     .line 72
+    .local p0, "dataSourceSuppliers":Ljava/util/List;, "Ljava/util/List<Lcom/facebook/common/internal/Supplier<Lcom/facebook/datasource/DataSource<TT;>;>;>;"
     new-instance v0, Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;
 
     invoke-direct {v0, p0, p1}, Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;-><init>(Ljava/util/List;Z)V
@@ -151,13 +157,17 @@
 
 # virtual methods
 .method public equals(Ljava/lang/Object;)Z
-    .locals 1
+    .locals 3
+    .param p1, "other"    # Ljava/lang/Object;
 
+    .line 87
+    .local p0, "this":Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;, "Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier<TT;>;"
     if-ne p1, p0, :cond_0
 
-    const/4 p1, 0x1
+    .line 88
+    const/4 v0, 0x1
 
-    return p1
+    return v0
 
     .line 90
     :cond_0
@@ -165,24 +175,28 @@
 
     if-nez v0, :cond_1
 
-    const/4 p1, 0x0
+    .line 91
+    const/4 v0, 0x0
 
-    return p1
+    return v0
 
     .line 93
     :cond_1
-    check-cast p1, Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;
+    move-object v0, p1
+
+    check-cast v0, Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;
 
     .line 94
-    iget-object v0, p0, Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;->mDataSourceSuppliers:Ljava/util/List;
+    .local v0, "that":Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;
+    iget-object v1, p0, Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;->mDataSourceSuppliers:Ljava/util/List;
 
-    iget-object p1, p1, Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;->mDataSourceSuppliers:Ljava/util/List;
+    iget-object v2, v0, Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;->mDataSourceSuppliers:Ljava/util/List;
 
-    invoke-static {v0, p1}, Lcom/facebook/common/internal/Objects;->equal(Ljava/lang/Object;Ljava/lang/Object;)Z
+    invoke-static {v1, v2}, Lcom/facebook/common/internal/Objects;->equal(Ljava/lang/Object;Ljava/lang/Object;)Z
 
-    move-result p1
+    move-result v1
 
-    return p1
+    return v1
 .end method
 
 .method public get()Lcom/facebook/datasource/DataSource;
@@ -196,6 +210,7 @@
     .end annotation
 
     .line 77
+    .local p0, "this":Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;, "Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier<TT;>;"
     new-instance v0, Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier$IncreasingQualityDataSource;
 
     invoke-direct {v0, p0}, Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier$IncreasingQualityDataSource;-><init>(Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;)V
@@ -207,6 +222,7 @@
     .locals 1
 
     .line 34
+    .local p0, "this":Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;, "Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier<TT;>;"
     invoke-virtual {p0}, Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;->get()Lcom/facebook/datasource/DataSource;
 
     move-result-object v0
@@ -218,6 +234,7 @@
     .locals 1
 
     .line 82
+    .local p0, "this":Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;, "Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier<TT;>;"
     iget-object v0, p0, Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;->mDataSourceSuppliers:Ljava/util/List;
 
     invoke-interface {v0}, Ljava/util/List;->hashCode()I
@@ -231,15 +248,16 @@
     .locals 3
 
     .line 99
+    .local p0, "this":Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;, "Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier<TT;>;"
     invoke-static {p0}, Lcom/facebook/common/internal/Objects;->toStringHelper(Ljava/lang/Object;)Lcom/facebook/common/internal/Objects$ToStringHelper;
 
     move-result-object v0
 
     iget-object v1, p0, Lcom/facebook/datasource/IncreasingQualityDataSourceSupplier;->mDataSourceSuppliers:Ljava/util/List;
 
+    .line 100
     const-string v2, "list"
 
-    .line 100
     invoke-virtual {v0, v2, v1}, Lcom/facebook/common/internal/Objects$ToStringHelper;->add(Ljava/lang/String;Ljava/lang/Object;)Lcom/facebook/common/internal/Objects$ToStringHelper;
 
     move-result-object v0
@@ -249,5 +267,6 @@
 
     move-result-object v0
 
+    .line 99
     return-object v0
 .end method

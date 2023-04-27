@@ -26,6 +26,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/drawee/drawable/ArrayDrawable;I)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/drawee/drawable/ArrayDrawable;
 
     .line 303
     iput-object p1, p0, Lcom/facebook/drawee/drawable/ArrayDrawable$1;->this$0:Lcom/facebook/drawee/drawable/ArrayDrawable;
@@ -56,6 +57,7 @@
 
 .method public setDrawable(Landroid/graphics/drawable/Drawable;)Landroid/graphics/drawable/Drawable;
     .locals 2
+    .param p1, "newDrawable"    # Landroid/graphics/drawable/Drawable;
 
     .line 306
     iget-object v0, p0, Lcom/facebook/drawee/drawable/ArrayDrawable$1;->this$0:Lcom/facebook/drawee/drawable/ArrayDrawable;
@@ -64,7 +66,7 @@
 
     invoke-virtual {v0, v1, p1}, Lcom/facebook/drawee/drawable/ArrayDrawable;->setDrawable(ILandroid/graphics/drawable/Drawable;)Landroid/graphics/drawable/Drawable;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method

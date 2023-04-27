@@ -43,19 +43,22 @@
 .end method
 
 .method public static beginSection(JLjava/lang/String;)Lcom/facebook/systrace/SystraceMessage$Builder;
-    .locals 0
+    .locals 1
+    .param p0, "tag"    # J
+    .param p2, "sectionName"    # Ljava/lang/String;
 
     .line 18
-    sget-object p0, Lcom/facebook/systrace/SystraceMessage;->NOOP_BUILDER:Lcom/facebook/systrace/SystraceMessage$Builder;
+    sget-object v0, Lcom/facebook/systrace/SystraceMessage;->NOOP_BUILDER:Lcom/facebook/systrace/SystraceMessage$Builder;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method public static endSection(J)Lcom/facebook/systrace/SystraceMessage$Builder;
-    .locals 0
+    .locals 1
+    .param p0, "tag"    # J
 
     .line 22
-    sget-object p0, Lcom/facebook/systrace/SystraceMessage;->NOOP_BUILDER:Lcom/facebook/systrace/SystraceMessage$Builder;
+    sget-object v0, Lcom/facebook/systrace/SystraceMessage;->NOOP_BUILDER:Lcom/facebook/systrace/SystraceMessage$Builder;
 
-    return-object p0
+    return-object v0
 .end method

@@ -30,7 +30,13 @@
 
 # direct methods
 .method public constructor <init>(Lcom/facebook/react/uimanager/UIViewOperationQueue;IIIIII)V
-    .locals 0
+    .locals 3
+    .param p2, "parentTag"    # I
+    .param p3, "tag"    # I
+    .param p4, "x"    # I
+    .param p5, "y"    # I
+    .param p6, "width"    # I
+    .param p7, "height"    # I
 
     .line 162
     iput-object p1, p0, Lcom/facebook/react/uimanager/UIViewOperationQueue$UpdateLayoutOperation;->this$0:Lcom/facebook/react/uimanager/UIViewOperationQueue;
@@ -54,14 +60,15 @@
     iput p7, p0, Lcom/facebook/react/uimanager/UIViewOperationQueue$UpdateLayoutOperation;->mHeight:I
 
     .line 169
-    iget p1, p0, Lcom/facebook/react/uimanager/UIViewOperationQueue$UpdateLayoutOperation;->mTag:I
+    const-string p1, "updateLayout"
 
-    const-wide/16 p2, 0x0
+    iget v0, p0, Lcom/facebook/react/uimanager/UIViewOperationQueue$UpdateLayoutOperation;->mTag:I
 
-    const-string p4, "updateLayout"
+    const-wide/16 v1, 0x0
 
-    invoke-static {p2, p3, p4, p1}, Lcom/facebook/systrace/Systrace;->startAsyncFlow(JLjava/lang/String;I)V
+    invoke-static {v1, v2, p1, v0}, Lcom/facebook/systrace/Systrace;->startAsyncFlow(JLjava/lang/String;I)V
 
+    .line 170
     return-void
 .end method
 
@@ -71,13 +78,13 @@
     .locals 8
 
     .line 174
-    iget v0, p0, Lcom/facebook/react/uimanager/UIViewOperationQueue$UpdateLayoutOperation;->mTag:I
+    const-string v0, "updateLayout"
 
-    const-wide/16 v1, 0x0
+    iget v1, p0, Lcom/facebook/react/uimanager/UIViewOperationQueue$UpdateLayoutOperation;->mTag:I
 
-    const-string v3, "updateLayout"
+    const-wide/16 v2, 0x0
 
-    invoke-static {v1, v2, v3, v0}, Lcom/facebook/systrace/Systrace;->endAsyncFlow(JLjava/lang/String;I)V
+    invoke-static {v2, v3, v0, v1}, Lcom/facebook/systrace/Systrace;->endAsyncFlow(JLjava/lang/String;I)V
 
     .line 175
     iget-object v0, p0, Lcom/facebook/react/uimanager/UIViewOperationQueue$UpdateLayoutOperation;->this$0:Lcom/facebook/react/uimanager/UIViewOperationQueue;
@@ -100,5 +107,6 @@
 
     invoke-virtual/range {v1 .. v7}, Lcom/facebook/react/uimanager/NativeViewHierarchyManager;->updateLayout(IIIIII)V
 
+    .line 176
     return-void
 .end method

@@ -47,7 +47,10 @@
 # virtual methods
 .method public varargs add(Ljava/lang/String;[Ljava/lang/String;)Lokhttp3/CertificatePinner$Builder;
     .locals 5
+    .param p1, "pattern"    # Ljava/lang/String;
+    .param p2, "pins"    # [Ljava/lang/String;
 
+    .line 331
     if-eqz p1, :cond_1
 
     .line 333
@@ -61,6 +64,7 @@
     aget-object v2, p2, v1
 
     .line 334
+    .local v2, "pin":Ljava/lang/String;
     iget-object v3, p0, Lokhttp3/CertificatePinner$Builder;->pins:Ljava/util/List;
 
     new-instance v4, Lokhttp3/CertificatePinner$Pin;
@@ -69,28 +73,25 @@
 
     invoke-interface {v3, v4}, Ljava/util/List;->add(Ljava/lang/Object;)Z
 
+    .line 333
+    .end local v2    # "pin":Ljava/lang/String;
     add-int/lit8 v1, v1, 0x1
 
     goto :goto_0
 
+    .line 337
     :cond_0
     return-object p0
 
     .line 331
     :cond_1
-    new-instance p1, Ljava/lang/NullPointerException;
+    new-instance v0, Ljava/lang/NullPointerException;
 
-    const-string p2, "pattern == null"
+    const-string v1, "pattern == null"
 
-    invoke-direct {p1, p2}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
 
-    goto :goto_2
-
-    :goto_1
-    throw p1
-
-    :goto_2
-    goto :goto_1
+    throw v0
 .end method
 
 .method public build()Lokhttp3/CertificatePinner;

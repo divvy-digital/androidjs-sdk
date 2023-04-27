@@ -26,13 +26,15 @@
 # direct methods
 .method public constructor <init>(ILcom/facebook/react/animation/AnimationPropertyUpdater;)V
     .locals 1
+    .param p1, "animationID"    # I
+    .param p2, "propertyUpdater"    # Lcom/facebook/react/animation/AnimationPropertyUpdater;
 
     .line 35
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
+    .line 30
     const/4 v0, 0x0
 
-    .line 30
     iput-boolean v0, p0, Lcom/facebook/react/animation/Animation;->mCancelled:Z
 
     .line 31
@@ -44,6 +46,7 @@
     .line 37
     iput-object p2, p0, Lcom/facebook/react/animation/Animation;->mPropertyUpdater:Lcom/facebook/react/animation/AnimationPropertyUpdater;
 
+    .line 38
     return-void
 .end method
 
@@ -55,7 +58,7 @@
     .line 91
     iget-boolean v0, p0, Lcom/facebook/react/animation/Animation;->mIsFinished:Z
 
-    if-nez v0, :cond_1
+    if-nez v0, :cond_2
 
     iget-boolean v0, p0, Lcom/facebook/react/animation/Animation;->mCancelled:Z
 
@@ -63,10 +66,10 @@
 
     goto :goto_0
 
+    .line 96
     :cond_0
     const/4 v0, 0x1
 
-    .line 96
     iput-boolean v0, p0, Lcom/facebook/react/animation/Animation;->mCancelled:Z
 
     .line 97
@@ -77,7 +80,12 @@
     .line 98
     invoke-interface {v0}, Lcom/facebook/react/animation/AnimationListener;->onCancel()V
 
+    .line 100
     :cond_1
+    return-void
+
+    .line 93
+    :cond_2
     :goto_0
     return-void
 .end method
@@ -123,6 +131,7 @@
     .line 80
     invoke-interface {v0}, Lcom/facebook/react/animation/AnimationListener;->onFinished()V
 
+    .line 83
     :cond_1
     return-void
 .end method
@@ -138,6 +147,7 @@
 
 .method protected final onUpdate(F)Z
     .locals 2
+    .param p1, "value"    # F
 
     .line 61
     iget-boolean v0, p0, Lcom/facebook/react/animation/Animation;->mIsFinished:Z
@@ -168,11 +178,11 @@
 
     .line 65
     :cond_0
-    iget-boolean p1, p0, Lcom/facebook/react/animation/Animation;->mCancelled:Z
+    iget-boolean v0, p0, Lcom/facebook/react/animation/Animation;->mCancelled:Z
 
-    xor-int/lit8 p1, p1, 0x1
+    xor-int/lit8 v0, v0, 0x1
 
-    return p1
+    return v0
 .end method
 
 .method public abstract run()V
@@ -180,15 +190,18 @@
 
 .method public setAnimationListener(Lcom/facebook/react/animation/AnimationListener;)V
     .locals 0
+    .param p1, "animationListener"    # Lcom/facebook/react/animation/AnimationListener;
 
     .line 41
     iput-object p1, p0, Lcom/facebook/react/animation/Animation;->mAnimationListener:Lcom/facebook/react/animation/AnimationListener;
 
+    .line 42
     return-void
 .end method
 
 .method public final start(Landroid/view/View;)V
     .locals 1
+    .param p1, "view"    # Landroid/view/View;
 
     .line 45
     iput-object p1, p0, Lcom/facebook/react/animation/Animation;->mAnimatedView:Landroid/view/View;
@@ -201,5 +214,6 @@
     .line 47
     invoke-virtual {p0}, Lcom/facebook/react/animation/Animation;->run()V
 
+    .line 48
     return-void
 .end method

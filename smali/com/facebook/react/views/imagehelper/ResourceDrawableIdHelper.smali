@@ -3,11 +3,6 @@
 .source "ResourceDrawableIdHelper.java"
 
 
-# annotations
-.annotation build Ljavax/annotation/concurrent/ThreadSafe;
-.end annotation
-
-
 # static fields
 .field private static final LOCAL_RESOURCE_SCHEME:Ljava/lang/String; = "res"
 
@@ -41,6 +36,7 @@
 
     iput-object v0, p0, Lcom/facebook/react/views/imagehelper/ResourceDrawableIdHelper;->mResourceDrawableIdMap:Ljava/util/Map;
 
+    .line 33
     return-void
 .end method
 
@@ -113,6 +109,8 @@
 
     return-void
 
+    .line 46
+    .end local p0    # "this":Lcom/facebook/react/views/imagehelper/ResourceDrawableIdHelper;
     :catchall_0
     move-exception v0
 
@@ -122,8 +120,9 @@
 .end method
 
 .method public getResourceDrawable(Landroid/content/Context;Ljava/lang/String;)Landroid/graphics/drawable/Drawable;
-    .locals 0
-    .param p2    # Ljava/lang/String;
+    .locals 2
+    .param p1, "context"    # Landroid/content/Context;
+    .param p2, "name"    # Ljava/lang/String;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -133,38 +132,40 @@
     .line 77
     invoke-virtual {p0, p1, p2}, Lcom/facebook/react/views/imagehelper/ResourceDrawableIdHelper;->getResourceDrawableId(Landroid/content/Context;Ljava/lang/String;)I
 
-    move-result p2
-
-    if-lez p2, :cond_0
+    move-result v0
 
     .line 78
+    .local v0, "resId":I
+    if-lez v0, :cond_0
+
     invoke-virtual {p1}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
 
-    move-result-object p1
+    move-result-object v1
 
-    invoke-virtual {p1, p2}, Landroid/content/res/Resources;->getDrawable(I)Landroid/graphics/drawable/Drawable;
+    invoke-virtual {v1, v0}, Landroid/content/res/Resources;->getDrawable(I)Landroid/graphics/drawable/Drawable;
 
-    move-result-object p1
+    move-result-object v1
 
     goto :goto_0
 
     :cond_0
-    const/4 p1, 0x0
+    const/4 v1, 0x0
 
     :goto_0
-    return-object p1
+    return-object v1
 .end method
 
 .method public getResourceDrawableId(Landroid/content/Context;Ljava/lang/String;)I
-    .locals 2
-    .param p2    # Ljava/lang/String;
+    .locals 3
+    .param p1, "context"    # Landroid/content/Context;
+    .param p2, "name"    # Ljava/lang/String;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
 
+    .line 51
     if-eqz p2, :cond_2
 
-    .line 51
     invoke-virtual {p2}, Ljava/lang/String;->isEmpty()Z
 
     move-result v0
@@ -177,109 +178,120 @@
     :cond_0
     invoke-virtual {p2}, Ljava/lang/String;->toLowerCase()Ljava/lang/String;
 
-    move-result-object p2
+    move-result-object v0
 
-    const-string v0, "-"
+    const-string v1, "-"
 
-    const-string v1, "_"
+    const-string v2, "_"
 
-    invoke-virtual {p2, v0, v1}, Ljava/lang/String;->replace(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String;
+    invoke-virtual {v0, v1, v2}, Ljava/lang/String;->replace(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String;
 
-    move-result-object p2
+    move-result-object v0
 
     .line 58
+    .end local p2    # "name":Ljava/lang/String;
+    .local v0, "name":Ljava/lang/String;
     :try_start_0
-    invoke-static {p2}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+    invoke-static {v0}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
 
-    move-result p1
+    move-result p2
     :try_end_0
     .catch Ljava/lang/NumberFormatException; {:try_start_0 .. :try_end_0} :catch_0
 
-    return p1
+    return p2
+
+    .line 59
+    :catch_0
+    move-exception p2
 
     .line 63
-    :catch_0
     monitor-enter p0
 
     .line 64
     :try_start_1
-    iget-object v0, p0, Lcom/facebook/react/views/imagehelper/ResourceDrawableIdHelper;->mResourceDrawableIdMap:Ljava/util/Map;
+    iget-object p2, p0, Lcom/facebook/react/views/imagehelper/ResourceDrawableIdHelper;->mResourceDrawableIdMap:Ljava/util/Map;
 
-    invoke-interface {v0, p2}, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z
+    invoke-interface {p2, v0}, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z
 
-    move-result v0
+    move-result p2
 
-    if-eqz v0, :cond_1
+    if-eqz p2, :cond_1
 
     .line 65
-    iget-object p1, p0, Lcom/facebook/react/views/imagehelper/ResourceDrawableIdHelper;->mResourceDrawableIdMap:Ljava/util/Map;
+    iget-object p2, p0, Lcom/facebook/react/views/imagehelper/ResourceDrawableIdHelper;->mResourceDrawableIdMap:Ljava/util/Map;
 
-    invoke-interface {p1, p2}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-interface {p2, v0}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
 
-    move-result-object p1
+    move-result-object p2
 
-    check-cast p1, Ljava/lang/Integer;
+    check-cast p2, Ljava/lang/Integer;
 
-    invoke-virtual {p1}, Ljava/lang/Integer;->intValue()I
+    invoke-virtual {p2}, Ljava/lang/Integer;->intValue()I
 
-    move-result p1
+    move-result p2
 
     monitor-exit p0
 
-    return p1
+    return p2
 
     .line 67
     :cond_1
     invoke-virtual {p1}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
 
-    move-result-object v0
+    move-result-object p2
 
     const-string v1, "drawable"
 
     .line 70
     invoke-virtual {p1}, Landroid/content/Context;->getPackageName()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v2
 
     .line 67
-    invoke-virtual {v0, p2, v1, p1}, Landroid/content/res/Resources;->getIdentifier(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I
+    invoke-virtual {p2, v0, v1, v2}, Landroid/content/res/Resources;->getIdentifier(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I
 
-    move-result p1
+    move-result p2
 
     .line 71
-    iget-object v0, p0, Lcom/facebook/react/views/imagehelper/ResourceDrawableIdHelper;->mResourceDrawableIdMap:Ljava/util/Map;
+    .local p2, "id":I
+    iget-object v1, p0, Lcom/facebook/react/views/imagehelper/ResourceDrawableIdHelper;->mResourceDrawableIdMap:Ljava/util/Map;
 
-    invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    invoke-static {p2}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object v1
+    move-result-object v2
 
-    invoke-interface {v0, p2, v1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-interface {v1, v0, v2}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
     .line 72
     monitor-exit p0
 
-    return p1
-
-    :catchall_0
-    move-exception p1
+    return p2
 
     .line 73
+    .end local p2    # "id":I
+    :catchall_0
+    move-exception p2
+
     monitor-exit p0
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
-    throw p1
+    throw p2
 
+    .line 52
+    .end local v0    # "name":Ljava/lang/String;
+    .local p2, "name":Ljava/lang/String;
     :cond_2
     :goto_0
-    const/4 p1, 0x0
+    const/4 v0, 0x0
 
-    return p1
+    return v0
 .end method
 
 .method public getResourceDrawableUri(Landroid/content/Context;Ljava/lang/String;)Landroid/net/Uri;
-    .locals 1
-    .param p2    # Ljava/lang/String;
+    .locals 3
+    .param p1, "context"    # Landroid/content/Context;
+    .param p2, "name"    # Ljava/lang/String;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -287,41 +299,43 @@
     .line 82
     invoke-virtual {p0, p1, p2}, Lcom/facebook/react/views/imagehelper/ResourceDrawableIdHelper;->getResourceDrawableId(Landroid/content/Context;Ljava/lang/String;)I
 
-    move-result p1
-
-    if-lez p1, :cond_0
+    move-result v0
 
     .line 83
-    new-instance p2, Landroid/net/Uri$Builder;
+    .local v0, "resId":I
+    if-lez v0, :cond_0
 
-    invoke-direct {p2}, Landroid/net/Uri$Builder;-><init>()V
+    new-instance v1, Landroid/net/Uri$Builder;
 
-    const-string v0, "res"
+    invoke-direct {v1}, Landroid/net/Uri$Builder;-><init>()V
 
     .line 84
-    invoke-virtual {p2, v0}, Landroid/net/Uri$Builder;->scheme(Ljava/lang/String;)Landroid/net/Uri$Builder;
+    const-string v2, "res"
 
-    move-result-object p2
+    invoke-virtual {v1, v2}, Landroid/net/Uri$Builder;->scheme(Ljava/lang/String;)Landroid/net/Uri$Builder;
+
+    move-result-object v1
 
     .line 85
-    invoke-static {p1}, Ljava/lang/String;->valueOf(I)Ljava/lang/String;
+    invoke-static {v0}, Ljava/lang/String;->valueOf(I)Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v2
 
-    invoke-virtual {p2, p1}, Landroid/net/Uri$Builder;->path(Ljava/lang/String;)Landroid/net/Uri$Builder;
+    invoke-virtual {v1, v2}, Landroid/net/Uri$Builder;->path(Ljava/lang/String;)Landroid/net/Uri$Builder;
 
-    move-result-object p1
+    move-result-object v1
 
     .line 86
-    invoke-virtual {p1}, Landroid/net/Uri$Builder;->build()Landroid/net/Uri;
+    invoke-virtual {v1}, Landroid/net/Uri$Builder;->build()Landroid/net/Uri;
 
-    move-result-object p1
+    move-result-object v1
 
     goto :goto_0
 
     :cond_0
-    sget-object p1, Landroid/net/Uri;->EMPTY:Landroid/net/Uri;
+    sget-object v1, Landroid/net/Uri;->EMPTY:Landroid/net/Uri;
 
+    .line 83
     :goto_0
-    return-object p1
+    return-object v1
 .end method

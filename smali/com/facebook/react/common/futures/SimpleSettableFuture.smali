@@ -44,6 +44,7 @@
     .locals 2
 
     .line 22
+    .local p0, "this":Lcom/facebook/react/common/futures/SimpleSettableFuture;, "Lcom/facebook/react/common/futures/SimpleSettableFuture<TT;>;"
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     .line 23
@@ -62,6 +63,7 @@
     .locals 5
 
     .line 117
+    .local p0, "this":Lcom/facebook/react/common/futures/SimpleSettableFuture;, "Lcom/facebook/react/common/futures/SimpleSettableFuture<TT;>;"
     iget-object v0, p0, Lcom/facebook/react/common/futures/SimpleSettableFuture;->mReadyLatch:Ljava/util/concurrent/CountDownLatch;
 
     invoke-virtual {v0}, Ljava/util/concurrent/CountDownLatch;->getCount()J
@@ -74,6 +76,7 @@
 
     if-eqz v4, :cond_0
 
+    .line 120
     return-void
 
     .line 118
@@ -90,14 +93,16 @@
 
 # virtual methods
 .method public cancel(Z)Z
-    .locals 0
+    .locals 1
+    .param p1, "mayInterruptIfRunning"    # Z
 
     .line 49
-    new-instance p1, Ljava/lang/UnsupportedOperationException;
+    .local p0, "this":Lcom/facebook/react/common/futures/SimpleSettableFuture;, "Lcom/facebook/react/common/futures/SimpleSettableFuture<TT;>;"
+    new-instance v0, Ljava/lang/UnsupportedOperationException;
 
-    invoke-direct {p1}, Ljava/lang/UnsupportedOperationException;-><init>()V
+    invoke-direct {v0}, Ljava/lang/UnsupportedOperationException;-><init>()V
 
-    throw p1
+    throw v0
 .end method
 
 .method public get()Ljava/lang/Object;
@@ -119,6 +124,7 @@
     .end annotation
 
     .line 64
+    .local p0, "this":Lcom/facebook/react/common/futures/SimpleSettableFuture;, "Lcom/facebook/react/common/futures/SimpleSettableFuture<TT;>;"
     iget-object v0, p0, Lcom/facebook/react/common/futures/SimpleSettableFuture;->mReadyLatch:Ljava/util/concurrent/CountDownLatch;
 
     invoke-virtual {v0}, Ljava/util/concurrent/CountDownLatch;->await()V
@@ -135,15 +141,19 @@
 
     .line 66
     :cond_0
-    new-instance v1, Ljava/util/concurrent/ExecutionException;
+    new-instance v0, Ljava/util/concurrent/ExecutionException;
 
-    invoke-direct {v1, v0}, Ljava/util/concurrent/ExecutionException;-><init>(Ljava/lang/Throwable;)V
+    iget-object v1, p0, Lcom/facebook/react/common/futures/SimpleSettableFuture;->mException:Ljava/lang/Exception;
 
-    throw v1
+    invoke-direct {v0, v1}, Ljava/util/concurrent/ExecutionException;-><init>(Ljava/lang/Throwable;)V
+
+    throw v0
 .end method
 
 .method public get(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object;
-    .locals 1
+    .locals 2
+    .param p1, "timeout"    # J
+    .param p3, "unit"    # Ljava/util/concurrent/TimeUnit;
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(J",
@@ -164,41 +174,44 @@
     .end annotation
 
     .line 82
+    .local p0, "this":Lcom/facebook/react/common/futures/SimpleSettableFuture;, "Lcom/facebook/react/common/futures/SimpleSettableFuture<TT;>;"
     iget-object v0, p0, Lcom/facebook/react/common/futures/SimpleSettableFuture;->mReadyLatch:Ljava/util/concurrent/CountDownLatch;
 
     invoke-virtual {v0, p1, p2, p3}, Ljava/util/concurrent/CountDownLatch;->await(JLjava/util/concurrent/TimeUnit;)Z
 
-    move-result p1
+    move-result v0
 
-    if-eqz p1, :cond_1
+    if-eqz v0, :cond_1
 
     .line 85
-    iget-object p1, p0, Lcom/facebook/react/common/futures/SimpleSettableFuture;->mException:Ljava/lang/Exception;
+    iget-object v0, p0, Lcom/facebook/react/common/futures/SimpleSettableFuture;->mException:Ljava/lang/Exception;
 
-    if-nez p1, :cond_0
+    if-nez v0, :cond_0
 
     .line 89
-    iget-object p1, p0, Lcom/facebook/react/common/futures/SimpleSettableFuture;->mResult:Ljava/lang/Object;
+    iget-object v0, p0, Lcom/facebook/react/common/futures/SimpleSettableFuture;->mResult:Ljava/lang/Object;
 
-    return-object p1
+    return-object v0
 
     .line 86
     :cond_0
-    new-instance p2, Ljava/util/concurrent/ExecutionException;
+    new-instance v0, Ljava/util/concurrent/ExecutionException;
 
-    invoke-direct {p2, p1}, Ljava/util/concurrent/ExecutionException;-><init>(Ljava/lang/Throwable;)V
+    iget-object v1, p0, Lcom/facebook/react/common/futures/SimpleSettableFuture;->mException:Ljava/lang/Exception;
 
-    throw p2
+    invoke-direct {v0, v1}, Ljava/util/concurrent/ExecutionException;-><init>(Ljava/lang/Throwable;)V
+
+    throw v0
 
     .line 83
     :cond_1
-    new-instance p1, Ljava/util/concurrent/TimeoutException;
+    new-instance v0, Ljava/util/concurrent/TimeoutException;
 
-    const-string p2, "Timed out waiting for result"
+    const-string v1, "Timed out waiting for result"
 
-    invoke-direct {p1, p2}, Ljava/util/concurrent/TimeoutException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/util/concurrent/TimeoutException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 .method public getOrThrow()Ljava/lang/Object;
@@ -213,6 +226,7 @@
     .end annotation
 
     .line 98
+    .local p0, "this":Lcom/facebook/react/common/futures/SimpleSettableFuture;, "Lcom/facebook/react/common/futures/SimpleSettableFuture<TT;>;"
     :try_start_0
     invoke-virtual {p0}, Lcom/facebook/react/common/futures/SimpleSettableFuture;->get()Ljava/lang/Object;
 
@@ -223,6 +237,7 @@
 
     return-object v0
 
+    .line 99
     :catch_0
     move-exception v0
 
@@ -232,6 +247,7 @@
     move-exception v0
 
     .line 100
+    .local v0, "e":Ljava/lang/Exception;
     :goto_0
     new-instance v1, Ljava/lang/RuntimeException;
 
@@ -241,7 +257,9 @@
 .end method
 
 .method public getOrThrow(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object;
-    .locals 0
+    .locals 2
+    .param p1, "timeout"    # J
+    .param p3, "unit"    # Ljava/util/concurrent/TimeUnit;
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(J",
@@ -254,42 +272,47 @@
     .end annotation
 
     .line 110
+    .local p0, "this":Lcom/facebook/react/common/futures/SimpleSettableFuture;, "Lcom/facebook/react/common/futures/SimpleSettableFuture<TT;>;"
     :try_start_0
     invoke-virtual {p0, p1, p2, p3}, Lcom/facebook/react/common/futures/SimpleSettableFuture;->get(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object;
 
-    move-result-object p1
+    move-result-object v0
     :try_end_0
     .catch Ljava/lang/InterruptedException; {:try_start_0 .. :try_end_0} :catch_2
     .catch Ljava/util/concurrent/ExecutionException; {:try_start_0 .. :try_end_0} :catch_1
     .catch Ljava/util/concurrent/TimeoutException; {:try_start_0 .. :try_end_0} :catch_0
 
-    return-object p1
+    return-object v0
 
+    .line 111
     :catch_0
-    move-exception p1
+    move-exception v0
 
     goto :goto_0
 
     :catch_1
-    move-exception p1
+    move-exception v0
 
     goto :goto_0
 
     :catch_2
-    move-exception p1
+    move-exception v0
 
     .line 112
+    .local v0, "e":Ljava/lang/Exception;
     :goto_0
-    new-instance p2, Ljava/lang/RuntimeException;
+    new-instance v1, Ljava/lang/RuntimeException;
 
-    invoke-direct {p2, p1}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/Throwable;)V
+    invoke-direct {v1, v0}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/Throwable;)V
 
-    throw p2
+    throw v1
 .end method
 
 .method public isCancelled()Z
     .locals 1
 
+    .line 54
+    .local p0, "this":Lcom/facebook/react/common/futures/SimpleSettableFuture;, "Lcom/facebook/react/common/futures/SimpleSettableFuture<TT;>;"
     const/4 v0, 0x0
 
     return v0
@@ -299,6 +322,7 @@
     .locals 5
 
     .line 59
+    .local p0, "this":Lcom/facebook/react/common/futures/SimpleSettableFuture;, "Lcom/facebook/react/common/futures/SimpleSettableFuture<TT;>;"
     iget-object v0, p0, Lcom/facebook/react/common/futures/SimpleSettableFuture;->mReadyLatch:Ljava/util/concurrent/CountDownLatch;
 
     invoke-virtual {v0}, Ljava/util/concurrent/CountDownLatch;->getCount()J
@@ -323,7 +347,7 @@
 .end method
 
 .method public set(Ljava/lang/Object;)V
-    .locals 0
+    .locals 1
     .param p1    # Ljava/lang/Object;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
@@ -335,32 +359,38 @@
     .end annotation
 
     .line 32
+    .local p0, "this":Lcom/facebook/react/common/futures/SimpleSettableFuture;, "Lcom/facebook/react/common/futures/SimpleSettableFuture<TT;>;"
+    .local p1, "result":Ljava/lang/Object;, "TT;"
     invoke-direct {p0}, Lcom/facebook/react/common/futures/SimpleSettableFuture;->checkNotSet()V
 
     .line 33
     iput-object p1, p0, Lcom/facebook/react/common/futures/SimpleSettableFuture;->mResult:Ljava/lang/Object;
 
     .line 34
-    iget-object p1, p0, Lcom/facebook/react/common/futures/SimpleSettableFuture;->mReadyLatch:Ljava/util/concurrent/CountDownLatch;
+    iget-object v0, p0, Lcom/facebook/react/common/futures/SimpleSettableFuture;->mReadyLatch:Ljava/util/concurrent/CountDownLatch;
 
-    invoke-virtual {p1}, Ljava/util/concurrent/CountDownLatch;->countDown()V
+    invoke-virtual {v0}, Ljava/util/concurrent/CountDownLatch;->countDown()V
 
+    .line 35
     return-void
 .end method
 
 .method public setException(Ljava/lang/Exception;)V
-    .locals 0
+    .locals 1
+    .param p1, "exception"    # Ljava/lang/Exception;
 
     .line 42
+    .local p0, "this":Lcom/facebook/react/common/futures/SimpleSettableFuture;, "Lcom/facebook/react/common/futures/SimpleSettableFuture<TT;>;"
     invoke-direct {p0}, Lcom/facebook/react/common/futures/SimpleSettableFuture;->checkNotSet()V
 
     .line 43
     iput-object p1, p0, Lcom/facebook/react/common/futures/SimpleSettableFuture;->mException:Ljava/lang/Exception;
 
     .line 44
-    iget-object p1, p0, Lcom/facebook/react/common/futures/SimpleSettableFuture;->mReadyLatch:Ljava/util/concurrent/CountDownLatch;
+    iget-object v0, p0, Lcom/facebook/react/common/futures/SimpleSettableFuture;->mReadyLatch:Ljava/util/concurrent/CountDownLatch;
 
-    invoke-virtual {p1}, Ljava/util/concurrent/CountDownLatch;->countDown()V
+    invoke-virtual {v0}, Ljava/util/concurrent/CountDownLatch;->countDown()V
 
+    .line 45
     return-void
 .end method

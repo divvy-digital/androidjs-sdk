@@ -26,6 +26,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/imagepipeline/cache/BufferedDiskCache;Lcom/facebook/imagepipeline/image/EncodedImage;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/imagepipeline/cache/BufferedDiskCache;
 
     .line 361
     iput-object p1, p0, Lcom/facebook/imagepipeline/cache/BufferedDiskCache$6;->this$0:Lcom/facebook/imagepipeline/cache/BufferedDiskCache;
@@ -41,6 +42,7 @@
 # virtual methods
 .method public write(Ljava/io/OutputStream;)V
     .locals 2
+    .param p1, "os"    # Ljava/io/OutputStream;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -62,5 +64,6 @@
 
     invoke-virtual {v0, v1, p1}, Lcom/facebook/common/memory/PooledByteStreams;->copy(Ljava/io/InputStream;Ljava/io/OutputStream;)J
 
+    .line 365
     return-void
 .end method

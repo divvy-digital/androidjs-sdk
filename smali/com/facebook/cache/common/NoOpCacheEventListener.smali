@@ -12,7 +12,12 @@
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 0
+    .locals 1
+
+    .line 14
+    const/4 v0, 0x0
+
+    sput-object v0, Lcom/facebook/cache/common/NoOpCacheEventListener;->sInstance:Lcom/facebook/cache/common/NoOpCacheEventListener;
 
     return-void
 .end method
@@ -23,6 +28,7 @@
     .line 16
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
+    .line 17
     return-void
 .end method
 
@@ -56,6 +62,7 @@
 
     return-object v1
 
+    .line 19
     :catchall_0
     move-exception v1
 
@@ -69,47 +76,62 @@
 .method public onCleared()V
     .locals 0
 
+    .line 57
     return-void
 .end method
 
 .method public onEviction(Lcom/facebook/cache/common/CacheEvent;)V
     .locals 0
+    .param p1, "cacheEvent"    # Lcom/facebook/cache/common/CacheEvent;
 
+    .line 53
     return-void
 .end method
 
 .method public onHit(Lcom/facebook/cache/common/CacheEvent;)V
     .locals 0
+    .param p1, "cacheEvent"    # Lcom/facebook/cache/common/CacheEvent;
 
+    .line 29
     return-void
 .end method
 
 .method public onMiss(Lcom/facebook/cache/common/CacheEvent;)V
     .locals 0
+    .param p1, "cacheEvent"    # Lcom/facebook/cache/common/CacheEvent;
 
+    .line 33
     return-void
 .end method
 
 .method public onReadException(Lcom/facebook/cache/common/CacheEvent;)V
     .locals 0
+    .param p1, "cacheEvent"    # Lcom/facebook/cache/common/CacheEvent;
 
+    .line 45
     return-void
 .end method
 
 .method public onWriteAttempt(Lcom/facebook/cache/common/CacheEvent;)V
     .locals 0
+    .param p1, "cacheEvent"    # Lcom/facebook/cache/common/CacheEvent;
 
+    .line 37
     return-void
 .end method
 
 .method public onWriteException(Lcom/facebook/cache/common/CacheEvent;)V
     .locals 0
+    .param p1, "cacheEvent"    # Lcom/facebook/cache/common/CacheEvent;
 
+    .line 49
     return-void
 .end method
 
 .method public onWriteSuccess(Lcom/facebook/cache/common/CacheEvent;)V
     .locals 0
+    .param p1, "cacheEvent"    # Lcom/facebook/cache/common/CacheEvent;
 
+    .line 41
     return-void
 .end method

@@ -6,11 +6,6 @@
 .implements Lcom/facebook/common/time/MonotonicClock;
 
 
-# annotations
-.annotation build Lcom/facebook/common/internal/DoNotStrip;
-.end annotation
-
-
 # static fields
 .field private static final INSTANCE:Lcom/facebook/common/time/RealtimeSinceBootClock;
 
@@ -35,13 +30,12 @@
     .line 21
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
+    .line 22
     return-void
 .end method
 
 .method public static get()Lcom/facebook/common/time/RealtimeSinceBootClock;
     .locals 1
-    .annotation build Lcom/facebook/common/internal/DoNotStrip;
-    .end annotation
 
     .line 30
     sget-object v0, Lcom/facebook/common/time/RealtimeSinceBootClock;->INSTANCE:Lcom/facebook/common/time/RealtimeSinceBootClock;

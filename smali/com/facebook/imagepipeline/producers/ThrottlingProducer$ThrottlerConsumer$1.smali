@@ -26,8 +26,10 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/imagepipeline/producers/ThrottlingProducer$ThrottlerConsumer;Landroid/util/Pair;)V
     .locals 0
+    .param p1, "this$1"    # Lcom/facebook/imagepipeline/producers/ThrottlingProducer$ThrottlerConsumer;
 
     .line 108
+    .local p0, "this":Lcom/facebook/imagepipeline/producers/ThrottlingProducer$ThrottlerConsumer$1;, "Lcom/facebook/imagepipeline/producers/ThrottlingProducer$ThrottlerConsumer$1;"
     iput-object p1, p0, Lcom/facebook/imagepipeline/producers/ThrottlingProducer$ThrottlerConsumer$1;->this$1:Lcom/facebook/imagepipeline/producers/ThrottlingProducer$ThrottlerConsumer;
 
     iput-object p2, p0, Lcom/facebook/imagepipeline/producers/ThrottlingProducer$ThrottlerConsumer$1;->val$nextRequestPair:Landroid/util/Pair;
@@ -43,6 +45,7 @@
     .locals 3
 
     .line 111
+    .local p0, "this":Lcom/facebook/imagepipeline/producers/ThrottlingProducer$ThrottlerConsumer$1;, "Lcom/facebook/imagepipeline/producers/ThrottlingProducer$ThrottlerConsumer$1;"
     iget-object v0, p0, Lcom/facebook/imagepipeline/producers/ThrottlingProducer$ThrottlerConsumer$1;->this$1:Lcom/facebook/imagepipeline/producers/ThrottlingProducer$ThrottlerConsumer;
 
     iget-object v0, v0, Lcom/facebook/imagepipeline/producers/ThrottlingProducer$ThrottlerConsumer;->this$0:Lcom/facebook/imagepipeline/producers/ThrottlingProducer;
@@ -61,5 +64,6 @@
 
     invoke-virtual {v0, v1, v2}, Lcom/facebook/imagepipeline/producers/ThrottlingProducer;->produceResultsInternal(Lcom/facebook/imagepipeline/producers/Consumer;Lcom/facebook/imagepipeline/producers/ProducerContext;)V
 
+    .line 112
     return-void
 .end method

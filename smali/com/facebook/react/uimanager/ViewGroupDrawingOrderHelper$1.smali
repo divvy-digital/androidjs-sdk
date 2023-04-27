@@ -33,6 +33,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/uimanager/ViewGroupDrawingOrderHelper;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/uimanager/ViewGroupDrawingOrderHelper;
 
     .line 76
     iput-object p1, p0, Lcom/facebook/react/uimanager/ViewGroupDrawingOrderHelper$1;->this$0:Lcom/facebook/react/uimanager/ViewGroupDrawingOrderHelper;
@@ -45,47 +46,54 @@
 
 # virtual methods
 .method public compare(Landroid/view/View;Landroid/view/View;)I
-    .locals 1
+    .locals 4
+    .param p1, "view1"    # Landroid/view/View;
+    .param p2, "view2"    # Landroid/view/View;
 
     .line 79
     invoke-static {p1}, Lcom/facebook/react/uimanager/ViewGroupManager;->getViewZIndex(Landroid/view/View;)Ljava/lang/Integer;
 
-    move-result-object p1
-
-    const/4 v0, 0x0
-
-    .line 80
-    invoke-static {v0}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
-
     move-result-object v0
 
-    if-nez p1, :cond_0
+    .line 80
+    .local v0, "view1ZIndex":Ljava/lang/Integer;
+    const/4 v1, 0x0
 
-    move-object p1, v0
+    if-nez v0, :cond_0
+
+    .line 81
+    invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+
+    move-result-object v0
 
     .line 84
     :cond_0
     invoke-static {p2}, Lcom/facebook/react/uimanager/ViewGroupManager;->getViewZIndex(Landroid/view/View;)Ljava/lang/Integer;
 
-    move-result-object p2
+    move-result-object v2
 
-    if-nez p2, :cond_1
+    .line 85
+    .local v2, "view2ZIndex":Ljava/lang/Integer;
+    if-nez v2, :cond_1
 
-    move-object p2, v0
+    .line 86
+    invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+
+    move-result-object v2
 
     .line 89
     :cond_1
-    invoke-virtual {p1}, Ljava/lang/Integer;->intValue()I
+    invoke-virtual {v0}, Ljava/lang/Integer;->intValue()I
 
-    move-result p1
+    move-result v1
 
-    invoke-virtual {p2}, Ljava/lang/Integer;->intValue()I
+    invoke-virtual {v2}, Ljava/lang/Integer;->intValue()I
 
-    move-result p2
+    move-result v3
 
-    sub-int/2addr p1, p2
+    sub-int/2addr v1, v3
 
-    return p1
+    return v1
 .end method
 
 .method public bridge synthetic compare(Ljava/lang/Object;Ljava/lang/Object;)I

@@ -61,10 +61,9 @@
     sput-object v0, Lcom/facebook/jni/DestructorThread;->sThread:Ljava/lang/Thread;
 
     .line 80
-    sget-object v0, Lcom/facebook/jni/DestructorThread;->sThread:Ljava/lang/Thread;
-
     invoke-virtual {v0}, Ljava/lang/Thread;->start()V
 
+    .line 81
     return-void
 .end method
 

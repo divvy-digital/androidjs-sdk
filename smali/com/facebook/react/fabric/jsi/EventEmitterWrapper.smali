@@ -3,19 +3,8 @@
 .source "EventEmitterWrapper.java"
 
 
-# annotations
-.annotation build Landroid/annotation/SuppressLint;
-    value = {
-        "MissingNativeLoadLibrary"
-    }
-.end annotation
-
-
 # instance fields
 .field private final mHybridData:Lcom/facebook/jni/HybridData;
-    .annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-    .end annotation
-.end field
 
 
 # direct methods
@@ -25,6 +14,7 @@
     .line 26
     invoke-static {}, Lcom/facebook/react/fabric/jsi/FabricSoLoader;->staticInit()V
 
+    .line 27
     return-void
 .end method
 
@@ -41,6 +31,7 @@
 
     iput-object v0, p0, Lcom/facebook/react/fabric/jsi/EventEmitterWrapper;->mHybridData:Lcom/facebook/jni/HybridData;
 
+    .line 35
     return-void
 .end method
 
@@ -53,27 +44,29 @@
 
 # virtual methods
 .method public invoke(Ljava/lang/String;Lcom/facebook/react/bridge/WritableMap;)V
-    .locals 0
-    .param p2    # Lcom/facebook/react/bridge/WritableMap;
-        .annotation build Landroid/support/annotation/Nullable;
-        .end annotation
-    .end param
-
-    if-nez p2, :cond_0
+    .locals 1
+    .param p1, "eventName"    # Ljava/lang/String;
+    .param p2, "params"    # Lcom/facebook/react/bridge/WritableMap;
 
     .line 46
-    new-instance p2, Lcom/facebook/react/bridge/WritableNativeMap;
+    if-nez p2, :cond_0
 
-    invoke-direct {p2}, Lcom/facebook/react/bridge/WritableNativeMap;-><init>()V
+    new-instance v0, Lcom/facebook/react/bridge/WritableNativeMap;
+
+    invoke-direct {v0}, Lcom/facebook/react/bridge/WritableNativeMap;-><init>()V
 
     goto :goto_0
 
     :cond_0
-    check-cast p2, Lcom/facebook/react/bridge/NativeMap;
+    move-object v0, p2
+
+    check-cast v0, Lcom/facebook/react/bridge/NativeMap;
 
     .line 47
+    .local v0, "payload":Lcom/facebook/react/bridge/NativeMap;
     :goto_0
-    invoke-direct {p0, p1, p2}, Lcom/facebook/react/fabric/jsi/EventEmitterWrapper;->invokeEvent(Ljava/lang/String;Lcom/facebook/react/bridge/NativeMap;)V
+    invoke-direct {p0, p1, v0}, Lcom/facebook/react/fabric/jsi/EventEmitterWrapper;->invokeEvent(Ljava/lang/String;Lcom/facebook/react/bridge/NativeMap;)V
 
+    .line 48
     return-void
 .end method

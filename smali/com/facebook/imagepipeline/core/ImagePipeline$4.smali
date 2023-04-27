@@ -33,6 +33,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/imagepipeline/core/ImagePipeline;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/imagepipeline/core/ImagePipeline;
 
     .line 463
     iput-object p1, p0, Lcom/facebook/imagepipeline/core/ImagePipeline$4;->this$0:Lcom/facebook/imagepipeline/core/ImagePipeline;
@@ -45,11 +46,13 @@
 
 # virtual methods
 .method public apply(Lcom/facebook/cache/common/CacheKey;)Z
-    .locals 0
+    .locals 1
+    .param p1, "key"    # Lcom/facebook/cache/common/CacheKey;
 
-    const/4 p1, 0x1
+    .line 466
+    const/4 v0, 0x1
 
-    return p1
+    return v0
 .end method
 
 .method public bridge synthetic apply(Ljava/lang/Object;)Z

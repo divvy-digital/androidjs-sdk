@@ -23,7 +23,8 @@
 
 # virtual methods
 .method public getTrimRatio(Lcom/facebook/common/memory/MemoryTrimType;)D
-    .locals 5
+    .locals 3
+    .param p1, "trimType"    # Lcom/facebook/common/memory/MemoryTrimType;
 
     .line 27
     sget-object v0, Lcom/facebook/imagepipeline/cache/BitmapMemoryCacheTrimStrategy$1;->$SwitchMap$com$facebook$common$memory$MemoryTrimType:[I
@@ -34,61 +35,52 @@
 
     aget v0, v0, v1
 
-    const-wide/16 v1, 0x0
-
-    const/4 v3, 0x1
-
-    if-eq v0, v3, :cond_1
-
-    const/4 v4, 0x2
-
-    if-eq v0, v4, :cond_0
-
-    const/4 v4, 0x3
-
-    if-eq v0, v4, :cond_0
-
-    const/4 v4, 0x4
-
-    if-eq v0, v4, :cond_0
+    packed-switch v0, :pswitch_data_0
 
     .line 41
-    new-array v0, v3, [Ljava/lang/Object;
+    const/4 v0, 0x1
 
-    const/4 v3, 0x0
+    new-array v0, v0, [Ljava/lang/Object;
 
-    aput-object p1, v0, v3
+    const/4 v1, 0x0
 
-    const-string p1, "BitmapMemoryCacheTrimStrategy"
+    aput-object p1, v0, v1
 
-    const-string v3, "unknown trim type: %s"
+    const-string v1, "BitmapMemoryCacheTrimStrategy"
 
-    invoke-static {p1, v3, v0}, Lcom/facebook/common/logging/FLog;->wtf(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V
+    const-string v2, "unknown trim type: %s"
 
-    return-wide v1
+    invoke-static {v1, v2, v0}, Lcom/facebook/common/logging/FLog;->wtf(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V
 
-    :cond_0
+    .line 42
+    const-wide/16 v0, 0x0
+
+    return-wide v0
+
+    .line 39
+    :pswitch_0
     const-wide/high16 v0, 0x3ff0000000000000L    # 1.0
 
     return-wide v0
 
     .line 29
-    :cond_1
-    sget p1, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    const/16 v0, 0x15
-
-    if-lt p1, v0, :cond_2
+    :pswitch_1
+    nop
 
     .line 30
-    sget-object p1, Lcom/facebook/common/memory/MemoryTrimType;->OnCloseToDalvikHeapLimit:Lcom/facebook/common/memory/MemoryTrimType;
+    sget-object v0, Lcom/facebook/common/memory/MemoryTrimType;->OnCloseToDalvikHeapLimit:Lcom/facebook/common/memory/MemoryTrimType;
 
-    invoke-virtual {p1}, Lcom/facebook/common/memory/MemoryTrimType;->getSuggestedTrimRatio()D
+    invoke-virtual {v0}, Lcom/facebook/common/memory/MemoryTrimType;->getSuggestedTrimRatio()D
 
     move-result-wide v0
 
     return-wide v0
 
-    :cond_2
-    return-wide v1
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_1
+        :pswitch_0
+        :pswitch_0
+        :pswitch_0
+    .end packed-switch
 .end method

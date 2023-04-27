@@ -25,6 +25,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/imagepipeline/producers/DecodeProducer$ProgressiveDecoder;Lcom/facebook/imagepipeline/producers/DecodeProducer;Z)V
     .locals 0
+    .param p1, "this$1"    # Lcom/facebook/imagepipeline/producers/DecodeProducer$ProgressiveDecoder;
 
     .line 152
     iput-object p1, p0, Lcom/facebook/imagepipeline/producers/DecodeProducer$ProgressiveDecoder$2;->this$1:Lcom/facebook/imagepipeline/producers/DecodeProducer$ProgressiveDecoder;
@@ -53,6 +54,7 @@
 
     invoke-static {v0}, Lcom/facebook/imagepipeline/producers/DecodeProducer$ProgressiveDecoder;->access$600(Lcom/facebook/imagepipeline/producers/DecodeProducer$ProgressiveDecoder;)V
 
+    .line 165
     :cond_0
     return-void
 .end method
@@ -82,6 +84,7 @@
 
     invoke-virtual {v0}, Lcom/facebook/imagepipeline/producers/JobScheduler;->scheduleJob()Z
 
+    .line 158
     :cond_0
     return-void
 .end method

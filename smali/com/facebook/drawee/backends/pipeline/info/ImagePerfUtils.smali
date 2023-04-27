@@ -15,60 +15,59 @@
 
 .method public static toString(I)Ljava/lang/String;
     .locals 1
+    .param p0, "imageLoadStatus"    # I
 
-    if-eqz p0, :cond_5
+    .line 12
+    packed-switch p0, :pswitch_data_0
 
-    const/4 v0, 0x1
+    .line 26
+    const-string v0, "unknown"
 
-    if-eq p0, v0, :cond_4
+    return-object v0
 
-    const/4 v0, 0x2
+    .line 24
+    :pswitch_0
+    const-string v0, "error"
 
-    if-eq p0, v0, :cond_3
+    return-object v0
 
-    const/4 v0, 0x3
+    .line 20
+    :pswitch_1
+    const-string v0, "canceled"
 
-    if-eq p0, v0, :cond_2
+    return-object v0
 
-    const/4 v0, 0x4
+    .line 18
+    :pswitch_2
+    const-string v0, "success"
 
-    if-eq p0, v0, :cond_1
+    return-object v0
 
-    const/4 v0, 0x5
+    .line 22
+    :pswitch_3
+    const-string v0, "intermediate_available"
 
-    if-eq p0, v0, :cond_0
+    return-object v0
 
-    const-string p0, "unknown"
+    .line 16
+    :pswitch_4
+    const-string v0, "origin_available"
 
-    return-object p0
+    return-object v0
 
-    :cond_0
-    const-string p0, "error"
+    .line 14
+    :pswitch_5
+    const-string v0, "requested"
 
-    return-object p0
+    return-object v0
 
-    :cond_1
-    const-string p0, "canceled"
-
-    return-object p0
-
-    :cond_2
-    const-string p0, "success"
-
-    return-object p0
-
-    :cond_3
-    const-string p0, "intermediate_available"
-
-    return-object p0
-
-    :cond_4
-    const-string p0, "origin_available"
-
-    return-object p0
-
-    :cond_5
-    const-string p0, "requested"
-
-    return-object p0
+    :pswitch_data_0
+    .packed-switch 0x0
+        :pswitch_5
+        :pswitch_4
+        :pswitch_3
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method

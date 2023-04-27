@@ -24,6 +24,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/bridge/CatalystInstanceImpl;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/bridge/CatalystInstanceImpl;
 
     .line 402
     iput-object p1, p0, Lcom/facebook/react/bridge/CatalystInstanceImpl$2;->this$0:Lcom/facebook/react/bridge/CatalystInstanceImpl;
@@ -47,5 +48,6 @@
 
     invoke-virtual {v0}, Lcom/facebook/react/bridge/NativeModuleRegistry;->notifyJSInstanceInitialized()V
 
+    .line 406
     return-void
 .end method

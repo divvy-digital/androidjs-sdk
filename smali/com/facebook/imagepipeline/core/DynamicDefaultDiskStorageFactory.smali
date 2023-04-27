@@ -19,7 +19,8 @@
 
 # virtual methods
 .method public get(Lcom/facebook/cache/disk/DiskCacheConfig;)Lcom/facebook/cache/disk/DiskStorage;
-    .locals 4
+    .locals 5
+    .param p1, "diskCacheConfig"    # Lcom/facebook/cache/disk/DiskCacheConfig;
 
     .line 20
     new-instance v0, Lcom/facebook/cache/disk/DynamicDefaultDiskStorage;
@@ -42,9 +43,10 @@
     .line 24
     invoke-virtual {p1}, Lcom/facebook/cache/disk/DiskCacheConfig;->getCacheErrorLogger()Lcom/facebook/cache/common/CacheErrorLogger;
 
-    move-result-object p1
+    move-result-object v4
 
-    invoke-direct {v0, v1, v2, v3, p1}, Lcom/facebook/cache/disk/DynamicDefaultDiskStorage;-><init>(ILcom/facebook/common/internal/Supplier;Ljava/lang/String;Lcom/facebook/cache/common/CacheErrorLogger;)V
+    invoke-direct {v0, v1, v2, v3, v4}, Lcom/facebook/cache/disk/DynamicDefaultDiskStorage;-><init>(ILcom/facebook/common/internal/Supplier;Ljava/lang/String;Lcom/facebook/cache/common/CacheErrorLogger;)V
 
+    .line 20
     return-object v0
 .end method

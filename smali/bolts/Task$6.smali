@@ -50,7 +50,8 @@
 
 # virtual methods
 .method public bridge synthetic then(Lbolts/Task;)Ljava/lang/Object;
-    .locals 0
+    .locals 1
+    .param p1, "x0"    # Lbolts/Task;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/lang/Exception;
@@ -60,9 +61,9 @@
     .line 447
     invoke-virtual {p0, p1}, Lbolts/Task$6;->then(Lbolts/Task;)Ljava/lang/Void;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public then(Lbolts/Task;)Ljava/lang/Void;
@@ -78,6 +79,7 @@
     .end annotation
 
     .line 450
+    .local p1, "task":Lbolts/Task;, "Lbolts/Task<Ljava/lang/Object;>;"
     iget-object v0, p0, Lbolts/Task$6;->val$isAnyTaskComplete:Ljava/util/concurrent/atomic/AtomicBoolean;
 
     const/4 v1, 0x0
@@ -101,8 +103,9 @@
     :cond_0
     invoke-virtual {p1}, Lbolts/Task;->getError()Ljava/lang/Exception;
 
+    .line 455
     :goto_0
-    const/4 p1, 0x0
+    const/4 v0, 0x0
 
-    return-object p1
+    return-object v0
 .end method

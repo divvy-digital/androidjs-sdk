@@ -5,68 +5,36 @@
 
 # static fields
 .field public static final TRANSITION_NONE:I = 0x2
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
-.end field
 
 .field public static final TRANSITION_RUNNING:I = 0x1
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
-.end field
 
 .field public static final TRANSITION_STARTING:I
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
-.end field
 
 
 # instance fields
 .field mAlpha:I
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
-.end field
 
 .field mAlphas:[I
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
-.end field
 
 .field mDurationMs:I
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
-.end field
 
 .field mIsLayerOn:[Z
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
-.end field
 
 .field private final mLayers:[Landroid/graphics/drawable/Drawable;
 
 .field mPreventInvalidateCount:I
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
-.end field
 
 .field mStartAlphas:[I
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
-.end field
 
 .field mStartTimeMs:J
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
-.end field
 
 .field mTransitionState:I
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
-.end field
 
 
 # direct methods
 .method public constructor <init>([Landroid/graphics/drawable/Drawable;)V
     .locals 3
+    .param p1, "layers"    # [Landroid/graphics/drawable/Drawable;
 
     .line 82
     invoke-direct {p0, p1}, Lcom/facebook/drawee/drawable/ArrayDrawable;-><init>([Landroid/graphics/drawable/Drawable;)V
@@ -107,17 +75,17 @@
 
     iput-object v0, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mAlphas:[I
 
+    .line 87
     const/16 v0, 0xff
 
-    .line 87
     iput v0, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mAlpha:I
 
     .line 88
-    array-length p1, p1
+    array-length v0, p1
 
-    new-array p1, p1, [Z
+    new-array v0, v0, [Z
 
-    iput-object p1, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mIsLayerOn:[Z
+    iput-object v0, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mIsLayerOn:[Z
 
     .line 89
     iput v1, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mPreventInvalidateCount:I
@@ -125,12 +93,17 @@
     .line 90
     invoke-direct {p0}, Lcom/facebook/drawee/drawable/FadeDrawable;->resetInternal()V
 
+    .line 91
     return-void
 .end method
 
 .method private drawDrawableWithAlpha(Landroid/graphics/Canvas;Landroid/graphics/drawable/Drawable;I)V
     .locals 1
+    .param p1, "canvas"    # Landroid/graphics/Canvas;
+    .param p2, "drawable"    # Landroid/graphics/drawable/Drawable;
+    .param p3, "alpha"    # I
 
+    .line 298
     if-eqz p2, :cond_0
 
     if-lez p3, :cond_0
@@ -150,15 +123,16 @@
     invoke-virtual {v0, p3}, Landroid/graphics/drawable/Drawable;->setAlpha(I)V
 
     .line 301
-    iget p3, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mPreventInvalidateCount:I
+    iget v0, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mPreventInvalidateCount:I
 
-    add-int/lit8 p3, p3, -0x1
+    add-int/lit8 v0, v0, -0x1
 
-    iput p3, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mPreventInvalidateCount:I
+    iput v0, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mPreventInvalidateCount:I
 
     .line 302
     invoke-virtual {p2, p1}, Landroid/graphics/drawable/Drawable;->draw(Landroid/graphics/Canvas;)V
 
+    .line 304
     :cond_0
     return-void
 .end method
@@ -166,9 +140,9 @@
 .method private resetInternal()V
     .locals 3
 
+    .line 138
     const/4 v0, 0x2
 
-    .line 138
     iput v0, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mTransitionState:I
 
     .line 139
@@ -207,124 +181,118 @@
 
     aput-boolean v2, v0, v1
 
+    .line 145
     return-void
 .end method
 
 .method private updateAlphas(F)Z
-    .locals 8
+    .locals 7
+    .param p1, "ratio"    # F
 
+    .line 234
     const/4 v0, 0x1
 
+    .line 235
+    .local v0, "done":Z
     const/4 v1, 0x0
 
-    const/4 v2, 0x0
-
-    const/4 v3, 0x1
-
-    .line 235
+    .local v1, "i":I
     :goto_0
-    iget-object v4, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mLayers:[Landroid/graphics/drawable/Drawable;
+    iget-object v2, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mLayers:[Landroid/graphics/drawable/Drawable;
 
-    array-length v4, v4
+    array-length v2, v2
 
-    if-ge v2, v4, :cond_5
+    if-ge v1, v2, :cond_5
 
     .line 236
-    iget-object v4, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mIsLayerOn:[Z
+    iget-object v2, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mIsLayerOn:[Z
 
-    aget-boolean v4, v4, v2
+    aget-boolean v2, v2, v1
 
-    if-eqz v4, :cond_0
+    if-eqz v2, :cond_0
 
-    const/4 v4, 0x1
+    const/4 v3, 0x1
 
     goto :goto_1
 
     :cond_0
-    const/4 v4, -0x1
+    const/4 v3, -0x1
 
     .line 238
+    .local v3, "dir":I
     :goto_1
-    iget-object v5, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mAlphas:[I
+    iget-object v4, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mAlphas:[I
 
-    iget-object v6, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mStartAlphas:[I
+    iget-object v5, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mStartAlphas:[I
 
-    aget v6, v6, v2
+    aget v5, v5, v1
+
+    int-to-float v5, v5
+
+    mul-int/lit16 v6, v3, 0xff
 
     int-to-float v6, v6
 
-    const/16 v7, 0xff
+    mul-float v6, v6, p1
 
-    mul-int/lit16 v4, v4, 0xff
+    add-float/2addr v5, v6
 
-    int-to-float v4, v4
+    float-to-int v5, v5
 
-    mul-float v4, v4, p1
-
-    add-float/2addr v6, v4
-
-    float-to-int v4, v6
-
-    aput v4, v5, v2
+    aput v5, v4, v1
 
     .line 239
-    aget v4, v5, v2
-
-    if-gez v4, :cond_1
+    if-gez v5, :cond_1
 
     .line 240
-    aput v1, v5, v2
+    const/4 v5, 0x0
+
+    aput v5, v4, v1
 
     .line 242
     :cond_1
-    iget-object v4, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mAlphas:[I
+    aget v5, v4, v1
 
-    aget v5, v4, v2
+    const/16 v6, 0xff
 
-    if-le v5, v7, :cond_2
+    if-le v5, v6, :cond_2
 
     .line 243
-    aput v7, v4, v2
+    aput v6, v4, v1
 
     .line 246
     :cond_2
-    iget-object v4, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mIsLayerOn:[Z
+    if-eqz v2, :cond_3
 
-    aget-boolean v4, v4, v2
+    aget v5, v4, v1
 
-    if-eqz v4, :cond_3
+    if-ge v5, v6, :cond_3
 
-    iget-object v4, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mAlphas:[I
-
-    aget v4, v4, v2
-
-    if-ge v4, v7, :cond_3
-
-    const/4 v3, 0x0
+    .line 247
+    const/4 v0, 0x0
 
     .line 249
     :cond_3
-    iget-object v4, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mIsLayerOn:[Z
+    if-nez v2, :cond_4
 
-    aget-boolean v4, v4, v2
+    aget v2, v4, v1
 
-    if-nez v4, :cond_4
+    if-lez v2, :cond_4
 
-    iget-object v4, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mAlphas:[I
+    .line 250
+    const/4 v0, 0x0
 
-    aget v4, v4, v2
-
-    if-lez v4, :cond_4
-
-    const/4 v3, 0x0
-
+    .line 235
+    .end local v3    # "dir":I
     :cond_4
-    add-int/lit8 v2, v2, 0x1
+    add-int/lit8 v1, v1, 0x1
 
     goto :goto_0
 
+    .line 253
+    .end local v1    # "i":I
     :cond_5
-    return v3
+    return v0
 .end method
 
 
@@ -339,142 +307,157 @@
 
     iput v0, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mPreventInvalidateCount:I
 
+    .line 105
     return-void
 .end method
 
 .method public draw(Landroid/graphics/Canvas;)V
-    .locals 8
+    .locals 9
+    .param p1, "canvas"    # Landroid/graphics/Canvas;
+
+    .line 258
+    const/4 v0, 0x1
 
     .line 261
-    iget v0, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mTransitionState:I
+    .local v0, "done":Z
+    iget v1, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mTransitionState:I
 
-    const/4 v1, 0x2
+    const/4 v2, 0x2
 
-    const/4 v2, 0x0
+    const/4 v3, 0x0
+
+    const/4 v4, 0x1
+
+    packed-switch v1, :pswitch_data_0
+
+    goto :goto_3
+
+    .line 284
+    :pswitch_0
+    const/4 v0, 0x1
+
+    goto :goto_3
+
+    .line 274
+    :pswitch_1
+    iget v1, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mDurationMs:I
+
+    if-lez v1, :cond_0
 
     const/4 v3, 0x1
 
-    if-eqz v0, :cond_3
-
-    if-eq v0, v3, :cond_0
-
-    const/4 v0, 0x1
-
-    goto :goto_4
-
-    .line 274
     :cond_0
-    iget v0, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mDurationMs:I
-
-    if-lez v0, :cond_1
-
-    const/4 v0, 0x1
-
-    goto :goto_0
-
-    :cond_1
-    const/4 v0, 0x0
-
-    :goto_0
-    invoke-static {v0}, Lcom/facebook/common/internal/Preconditions;->checkState(Z)V
+    invoke-static {v3}, Lcom/facebook/common/internal/Preconditions;->checkState(Z)V
 
     .line 276
     invoke-virtual {p0}, Lcom/facebook/drawee/drawable/FadeDrawable;->getCurrentTimeMs()J
 
-    move-result-wide v4
+    move-result-wide v5
 
-    iget-wide v6, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mStartTimeMs:J
+    iget-wide v7, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mStartTimeMs:J
 
-    sub-long/2addr v4, v6
+    sub-long/2addr v5, v7
 
-    long-to-float v0, v4
+    long-to-float v1, v5
 
-    iget v4, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mDurationMs:I
+    iget v3, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mDurationMs:I
 
-    int-to-float v4, v4
+    int-to-float v3, v3
 
-    div-float/2addr v0, v4
+    div-float/2addr v1, v3
 
     .line 278
-    invoke-direct {p0, v0}, Lcom/facebook/drawee/drawable/FadeDrawable;->updateAlphas(F)Z
+    .local v1, "ratio":F
+    invoke-direct {p0, v1}, Lcom/facebook/drawee/drawable/FadeDrawable;->updateAlphas(F)Z
 
     move-result v0
 
-    if-eqz v0, :cond_2
-
-    goto :goto_1
-
-    :cond_2
-    const/4 v1, 0x1
-
     .line 279
-    :goto_1
-    iput v1, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mTransitionState:I
+    if-eqz v0, :cond_1
 
-    goto :goto_4
+    goto :goto_0
+
+    :cond_1
+    const/4 v2, 0x1
+
+    :goto_0
+    iput v2, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mTransitionState:I
+
+    .line 280
+    goto :goto_3
 
     .line 264
-    :cond_3
-    iget-object v0, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mAlphas:[I
+    .end local v1    # "ratio":F
+    :pswitch_2
+    iget-object v1, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mAlphas:[I
 
-    iget-object v4, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mStartAlphas:[I
+    iget-object v5, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mStartAlphas:[I
 
-    iget-object v5, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mLayers:[Landroid/graphics/drawable/Drawable;
+    iget-object v6, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mLayers:[Landroid/graphics/drawable/Drawable;
 
-    array-length v5, v5
+    array-length v6, v6
 
-    invoke-static {v0, v2, v4, v2, v5}, Ljava/lang/System;->arraycopy(Ljava/lang/Object;ILjava/lang/Object;II)V
+    invoke-static {v1, v3, v5, v3, v6}, Ljava/lang/System;->arraycopy(Ljava/lang/Object;ILjava/lang/Object;II)V
 
     .line 265
     invoke-virtual {p0}, Lcom/facebook/drawee/drawable/FadeDrawable;->getCurrentTimeMs()J
 
-    move-result-wide v4
+    move-result-wide v5
 
-    iput-wide v4, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mStartTimeMs:J
+    iput-wide v5, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mStartTimeMs:J
 
     .line 267
-    iget v0, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mDurationMs:I
+    iget v1, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mDurationMs:I
 
-    if-nez v0, :cond_4
+    if-nez v1, :cond_2
 
-    const/high16 v0, 0x3f800000    # 1.0f
+    const/high16 v1, 0x3f800000    # 1.0f
 
-    goto :goto_2
+    goto :goto_1
 
-    :cond_4
-    const/4 v0, 0x0
+    :cond_2
+    const/4 v1, 0x0
 
     .line 269
-    :goto_2
-    invoke-direct {p0, v0}, Lcom/facebook/drawee/drawable/FadeDrawable;->updateAlphas(F)Z
+    .restart local v1    # "ratio":F
+    :goto_1
+    invoke-direct {p0, v1}, Lcom/facebook/drawee/drawable/FadeDrawable;->updateAlphas(F)Z
 
     move-result v0
 
-    if-eqz v0, :cond_5
-
-    goto :goto_3
-
-    :cond_5
-    const/4 v1, 0x1
-
     .line 270
-    :goto_3
-    iput v1, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mTransitionState:I
+    if-eqz v0, :cond_3
+
+    goto :goto_2
+
+    :cond_3
+    const/4 v2, 0x1
+
+    :goto_2
+    iput v2, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mTransitionState:I
+
+    .line 271
+    nop
 
     .line 288
+    .end local v1    # "ratio":F
+    :goto_3
+    const/4 v1, 0x0
+
+    .local v1, "i":I
     :goto_4
-    iget-object v1, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mLayers:[Landroid/graphics/drawable/Drawable;
+    iget-object v2, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mLayers:[Landroid/graphics/drawable/Drawable;
 
-    array-length v3, v1
+    array-length v3, v2
 
-    if-ge v2, v3, :cond_6
+    if-ge v1, v3, :cond_4
 
     .line 289
-    aget-object v1, v1, v2
+    aget-object v2, v2, v1
 
     iget-object v3, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mAlphas:[I
 
-    aget v3, v3, v2
+    aget v3, v3, v1
 
     iget v4, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mAlpha:I
 
@@ -482,20 +465,31 @@
 
     div-int/lit16 v3, v3, 0xff
 
-    invoke-direct {p0, p1, v1, v3}, Lcom/facebook/drawee/drawable/FadeDrawable;->drawDrawableWithAlpha(Landroid/graphics/Canvas;Landroid/graphics/drawable/Drawable;I)V
+    invoke-direct {p0, p1, v2, v3}, Lcom/facebook/drawee/drawable/FadeDrawable;->drawDrawableWithAlpha(Landroid/graphics/Canvas;Landroid/graphics/drawable/Drawable;I)V
 
-    add-int/lit8 v2, v2, 0x1
+    .line 288
+    add-int/lit8 v1, v1, 0x1
 
     goto :goto_4
 
-    :cond_6
-    if-nez v0, :cond_7
+    .line 292
+    .end local v1    # "i":I
+    :cond_4
+    if-nez v0, :cond_5
 
     .line 293
     invoke-virtual {p0}, Lcom/facebook/drawee/drawable/FadeDrawable;->invalidateSelf()V
 
-    :cond_7
+    .line 295
+    :cond_5
     return-void
+
+    :pswitch_data_0
+    .packed-switch 0x0
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method public endBatchMode()V
@@ -511,15 +505,16 @@
     .line 112
     invoke-virtual {p0}, Lcom/facebook/drawee/drawable/FadeDrawable;->invalidateSelf()V
 
+    .line 113
     return-void
 .end method
 
 .method public fadeInAllLayers()V
     .locals 2
 
+    .line 179
     const/4 v0, 0x0
 
-    .line 179
     iput v0, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mTransitionState:I
 
     .line 180
@@ -532,15 +527,17 @@
     .line 181
     invoke-virtual {p0}, Lcom/facebook/drawee/drawable/FadeDrawable;->invalidateSelf()V
 
+    .line 182
     return-void
 .end method
 
 .method public fadeInLayer(I)V
     .locals 2
-
-    const/4 v0, 0x0
+    .param p1, "index"    # I
 
     .line 160
+    const/4 v0, 0x0
+
     iput v0, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mTransitionState:I
 
     .line 161
@@ -553,15 +550,16 @@
     .line 162
     invoke-virtual {p0}, Lcom/facebook/drawee/drawable/FadeDrawable;->invalidateSelf()V
 
+    .line 163
     return-void
 .end method
 
 .method public fadeOutAllLayers()V
     .locals 2
 
+    .line 188
     const/4 v0, 0x0
 
-    .line 188
     iput v0, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mTransitionState:I
 
     .line 189
@@ -572,15 +570,17 @@
     .line 190
     invoke-virtual {p0}, Lcom/facebook/drawee/drawable/FadeDrawable;->invalidateSelf()V
 
+    .line 191
     return-void
 .end method
 
 .method public fadeOutLayer(I)V
     .locals 2
-
-    const/4 v0, 0x0
+    .param p1, "index"    # I
 
     .line 170
+    const/4 v0, 0x0
+
     iput v0, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mTransitionState:I
 
     .line 171
@@ -591,15 +591,17 @@
     .line 172
     invoke-virtual {p0}, Lcom/facebook/drawee/drawable/FadeDrawable;->invalidateSelf()V
 
+    .line 173
     return-void
 .end method
 
 .method public fadeToLayer(I)V
     .locals 2
-
-    const/4 v0, 0x0
+    .param p1, "index"    # I
 
     .line 198
+    const/4 v0, 0x0
+
     iput v0, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mTransitionState:I
 
     .line 199
@@ -617,88 +619,95 @@
     .line 201
     invoke-virtual {p0}, Lcom/facebook/drawee/drawable/FadeDrawable;->invalidateSelf()V
 
+    .line 202
     return-void
 .end method
 
 .method public fadeUpToLayer(I)V
-    .locals 3
-
-    const/4 v0, 0x0
+    .locals 4
+    .param p1, "index"    # I
 
     .line 211
+    const/4 v0, 0x0
+
     iput v0, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mTransitionState:I
 
     .line 212
     iget-object v1, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mIsLayerOn:[Z
 
-    const/4 v2, 0x1
+    add-int/lit8 v2, p1, 0x1
 
-    add-int/2addr p1, v2
+    const/4 v3, 0x1
 
-    invoke-static {v1, v0, p1, v2}, Ljava/util/Arrays;->fill([ZIIZ)V
+    invoke-static {v1, v0, v2, v3}, Ljava/util/Arrays;->fill([ZIIZ)V
 
     .line 213
     iget-object v1, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mIsLayerOn:[Z
 
-    iget-object v2, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mLayers:[Landroid/graphics/drawable/Drawable;
+    add-int/lit8 v2, p1, 0x1
 
-    array-length v2, v2
+    iget-object v3, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mLayers:[Landroid/graphics/drawable/Drawable;
 
-    invoke-static {v1, p1, v2, v0}, Ljava/util/Arrays;->fill([ZIIZ)V
+    array-length v3, v3
+
+    invoke-static {v1, v2, v3, v0}, Ljava/util/Arrays;->fill([ZIIZ)V
 
     .line 214
     invoke-virtual {p0}, Lcom/facebook/drawee/drawable/FadeDrawable;->invalidateSelf()V
 
+    .line 215
     return-void
 .end method
 
 .method public finishTransitionImmediately()V
-    .locals 4
-
-    const/4 v0, 0x2
+    .locals 3
 
     .line 221
+    const/4 v0, 0x2
+
     iput v0, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mTransitionState:I
 
+    .line 222
     const/4 v0, 0x0
 
-    const/4 v1, 0x0
-
-    .line 222
+    .local v0, "i":I
     :goto_0
-    iget-object v2, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mLayers:[Landroid/graphics/drawable/Drawable;
+    iget-object v1, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mLayers:[Landroid/graphics/drawable/Drawable;
 
-    array-length v2, v2
+    array-length v1, v1
 
-    if-ge v1, v2, :cond_1
+    if-ge v0, v1, :cond_1
 
     .line 223
-    iget-object v2, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mAlphas:[I
+    iget-object v1, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mAlphas:[I
 
-    iget-object v3, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mIsLayerOn:[Z
+    iget-object v2, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mIsLayerOn:[Z
 
-    aget-boolean v3, v3, v1
+    aget-boolean v2, v2, v0
 
-    if-eqz v3, :cond_0
+    if-eqz v2, :cond_0
 
-    const/16 v3, 0xff
+    const/16 v2, 0xff
 
     goto :goto_1
 
     :cond_0
-    const/4 v3, 0x0
+    const/4 v2, 0x0
 
     :goto_1
-    aput v3, v2, v1
+    aput v2, v1, v0
 
-    add-int/lit8 v1, v1, 0x1
+    .line 222
+    add-int/lit8 v0, v0, 0x1
 
     goto :goto_0
 
     .line 225
+    .end local v0    # "i":I
     :cond_1
     invoke-virtual {p0}, Lcom/facebook/drawee/drawable/FadeDrawable;->invalidateSelf()V
 
+    .line 226
     return-void
 .end method
 
@@ -733,8 +742,6 @@
 
 .method public getTransitionState()I
     .locals 1
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
 
     .line 334
     iget v0, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mTransitionState:I
@@ -753,19 +760,21 @@
     .line 96
     invoke-super {p0}, Lcom/facebook/drawee/drawable/ArrayDrawable;->invalidateSelf()V
 
+    .line 98
     :cond_0
     return-void
 .end method
 
 .method public isLayerOn(I)Z
     .locals 1
+    .param p1, "index"    # I
 
     .line 338
     iget-object v0, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mIsLayerOn:[Z
 
-    aget-boolean p1, v0, p1
+    aget-boolean v0, v0, p1
 
-    return p1
+    return v0
 .end method
 
 .method public reset()V
@@ -777,11 +786,13 @@
     .line 152
     invoke-virtual {p0}, Lcom/facebook/drawee/drawable/FadeDrawable;->invalidateSelf()V
 
+    .line 153
     return-void
 .end method
 
 .method public setAlpha(I)V
     .locals 1
+    .param p1, "alpha"    # I
 
     .line 308
     iget v0, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mAlpha:I
@@ -794,28 +805,31 @@
     .line 310
     invoke-virtual {p0}, Lcom/facebook/drawee/drawable/FadeDrawable;->invalidateSelf()V
 
+    .line 312
     :cond_0
     return-void
 .end method
 
 .method public setTransitionDuration(I)V
-    .locals 1
+    .locals 2
+    .param p1, "durationMs"    # I
 
     .line 119
     iput p1, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mDurationMs:I
 
     .line 121
-    iget p1, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mTransitionState:I
+    iget v0, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mTransitionState:I
 
-    const/4 v0, 0x1
+    const/4 v1, 0x1
 
-    if-ne p1, v0, :cond_0
-
-    const/4 p1, 0x0
+    if-ne v0, v1, :cond_0
 
     .line 122
-    iput p1, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mTransitionState:I
+    const/4 v0, 0x0
 
+    iput v0, p0, Lcom/facebook/drawee/drawable/FadeDrawable;->mTransitionState:I
+
+    .line 124
     :cond_0
     return-void
 .end method

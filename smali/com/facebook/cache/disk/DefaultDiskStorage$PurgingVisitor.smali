@@ -37,6 +37,8 @@
 
 .method synthetic constructor <init>(Lcom/facebook/cache/disk/DefaultDiskStorage;Lcom/facebook/cache/disk/DefaultDiskStorage$1;)V
     .locals 0
+    .param p1, "x0"    # Lcom/facebook/cache/disk/DefaultDiskStorage;
+    .param p2, "x1"    # Lcom/facebook/cache/disk/DefaultDiskStorage$1;
 
     .line 279
     invoke-direct {p0, p1}, Lcom/facebook/cache/disk/DefaultDiskStorage$PurgingVisitor;-><init>(Lcom/facebook/cache/disk/DefaultDiskStorage;)V
@@ -45,7 +47,8 @@
 .end method
 
 .method private isExpectedFile(Ljava/io/File;)Z
-    .locals 4
+    .locals 5
+    .param p1, "file"    # Ljava/io/File;
 
     .line 312
     iget-object v0, p0, Lcom/facebook/cache/disk/DefaultDiskStorage$PurgingVisitor;->this$0:Lcom/facebook/cache/disk/DefaultDiskStorage;
@@ -54,10 +57,13 @@
 
     move-result-object v0
 
+    .line 313
+    .local v0, "info":Lcom/facebook/cache/disk/DefaultDiskStorage$FileInfo;
     const/4 v1, 0x0
 
     if-nez v0, :cond_0
 
+    .line 314
     return v1
 
     .line 316
@@ -71,43 +77,45 @@
     .line 317
     invoke-direct {p0, p1}, Lcom/facebook/cache/disk/DefaultDiskStorage$PurgingVisitor;->isRecentFile(Ljava/io/File;)Z
 
-    move-result p1
+    move-result v1
 
-    return p1
+    return v1
 
     .line 319
     :cond_1
-    iget-object p1, v0, Lcom/facebook/cache/disk/DefaultDiskStorage$FileInfo;->type:Ljava/lang/String;
+    iget-object v2, v0, Lcom/facebook/cache/disk/DefaultDiskStorage$FileInfo;->type:Ljava/lang/String;
 
-    const/4 v0, 0x1
+    const-string v3, ".cnt"
 
-    const-string v2, ".cnt"
+    const/4 v4, 0x1
 
-    if-ne p1, v2, :cond_2
+    if-ne v2, v3, :cond_2
 
     const/4 v1, 0x1
 
     :cond_2
     invoke-static {v1}, Lcom/facebook/common/internal/Preconditions;->checkState(Z)V
 
-    return v0
+    .line 320
+    return v4
 .end method
 
 .method private isRecentFile(Ljava/io/File;)Z
     .locals 6
+    .param p1, "file"    # Ljava/io/File;
 
     .line 327
     invoke-virtual {p1}, Ljava/io/File;->lastModified()J
 
     move-result-wide v0
 
-    iget-object p1, p0, Lcom/facebook/cache/disk/DefaultDiskStorage$PurgingVisitor;->this$0:Lcom/facebook/cache/disk/DefaultDiskStorage;
+    iget-object v2, p0, Lcom/facebook/cache/disk/DefaultDiskStorage$PurgingVisitor;->this$0:Lcom/facebook/cache/disk/DefaultDiskStorage;
 
-    invoke-static {p1}, Lcom/facebook/cache/disk/DefaultDiskStorage;->access$400(Lcom/facebook/cache/disk/DefaultDiskStorage;)Lcom/facebook/common/time/Clock;
+    invoke-static {v2}, Lcom/facebook/cache/disk/DefaultDiskStorage;->access$400(Lcom/facebook/cache/disk/DefaultDiskStorage;)Lcom/facebook/common/time/Clock;
 
-    move-result-object p1
+    move-result-object v2
 
-    invoke-interface {p1}, Lcom/facebook/common/time/Clock;->now()J
+    invoke-interface {v2}, Lcom/facebook/common/time/Clock;->now()J
 
     move-result-wide v2
 
@@ -115,25 +123,26 @@
 
     sub-long/2addr v2, v4
 
-    cmp-long p1, v0, v2
+    cmp-long v4, v0, v2
 
-    if-lez p1, :cond_0
+    if-lez v4, :cond_0
 
-    const/4 p1, 0x1
+    const/4 v0, 0x1
 
     goto :goto_0
 
     :cond_0
-    const/4 p1, 0x0
+    const/4 v0, 0x0
 
     :goto_0
-    return p1
+    return v0
 .end method
 
 
 # virtual methods
 .method public postVisitDirectory(Ljava/io/File;)V
     .locals 1
+    .param p1, "directory"    # Ljava/io/File;
 
     .line 299
     iget-object v0, p0, Lcom/facebook/cache/disk/DefaultDiskStorage$PurgingVisitor;->this$0:Lcom/facebook/cache/disk/DefaultDiskStorage;
@@ -170,21 +179,23 @@
 
     invoke-virtual {p1, v0}, Ljava/io/File;->equals(Ljava/lang/Object;)Z
 
-    move-result p1
+    move-result v0
 
-    if-eqz p1, :cond_1
-
-    const/4 p1, 0x0
+    if-eqz v0, :cond_1
 
     .line 307
-    iput-boolean p1, p0, Lcom/facebook/cache/disk/DefaultDiskStorage$PurgingVisitor;->insideBaseDirectory:Z
+    const/4 v0, 0x0
 
+    iput-boolean v0, p0, Lcom/facebook/cache/disk/DefaultDiskStorage$PurgingVisitor;->insideBaseDirectory:Z
+
+    .line 309
     :cond_1
     return-void
 .end method
 
 .method public preVisitDirectory(Ljava/io/File;)V
     .locals 1
+    .param p1, "directory"    # Ljava/io/File;
 
     .line 284
     iget-boolean v0, p0, Lcom/facebook/cache/disk/DefaultDiskStorage$PurgingVisitor;->insideBaseDirectory:Z
@@ -199,21 +210,23 @@
 
     invoke-virtual {p1, v0}, Ljava/io/File;->equals(Ljava/lang/Object;)Z
 
-    move-result p1
+    move-result v0
 
-    if-eqz p1, :cond_0
-
-    const/4 p1, 0x1
+    if-eqz v0, :cond_0
 
     .line 286
-    iput-boolean p1, p0, Lcom/facebook/cache/disk/DefaultDiskStorage$PurgingVisitor;->insideBaseDirectory:Z
+    const/4 v0, 0x1
 
+    iput-boolean v0, p0, Lcom/facebook/cache/disk/DefaultDiskStorage$PurgingVisitor;->insideBaseDirectory:Z
+
+    .line 288
     :cond_0
     return-void
 .end method
 
 .method public visitFile(Ljava/io/File;)V
     .locals 1
+    .param p1, "file"    # Ljava/io/File;
 
     .line 292
     iget-boolean v0, p0, Lcom/facebook/cache/disk/DefaultDiskStorage$PurgingVisitor;->insideBaseDirectory:Z
@@ -230,6 +243,7 @@
     :cond_0
     invoke-virtual {p1}, Ljava/io/File;->delete()Z
 
+    .line 295
     :cond_1
     return-void
 .end method

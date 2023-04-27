@@ -6,16 +6,8 @@
 .implements Lcom/facebook/common/memory/MemoryTrimmable;
 
 
-# annotations
-.annotation build Ljavax/annotation/concurrent/ThreadSafe;
-.end annotation
-
-
 # instance fields
 .field final mByteArraySoftRef:Lcom/facebook/common/references/OOMSoftReference;
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
-
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "Lcom/facebook/common/references/OOMSoftReference<",
@@ -25,14 +17,8 @@
 .end field
 
 .field final mMaxByteArraySize:I
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
-.end field
 
 .field final mMinByteArraySize:I
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
-.end field
 
 .field private final mResourceReleaser:Lcom/facebook/common/references/ResourceReleaser;
     .annotation system Ldalvik/annotation/Signature;
@@ -44,14 +30,13 @@
 .end field
 
 .field final mSemaphore:Ljava/util/concurrent/Semaphore;
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
-.end field
 
 
 # direct methods
 .method public constructor <init>(Lcom/facebook/common/memory/MemoryTrimmableRegistry;Lcom/facebook/imagepipeline/memory/PoolParams;)V
     .locals 4
+    .param p1, "memoryTrimmableRegistry"    # Lcom/facebook/common/memory/MemoryTrimmableRegistry;
+    .param p2, "params"    # Lcom/facebook/imagepipeline/memory/PoolParams;
 
     .line 61
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -96,39 +81,41 @@
     iput v0, p0, Lcom/facebook/imagepipeline/memory/SharedByteArray;->mMaxByteArraySize:I
 
     .line 67
-    iget p2, p2, Lcom/facebook/imagepipeline/memory/PoolParams;->minBucketSize:I
+    iget v0, p2, Lcom/facebook/imagepipeline/memory/PoolParams;->minBucketSize:I
 
-    iput p2, p0, Lcom/facebook/imagepipeline/memory/SharedByteArray;->mMinByteArraySize:I
+    iput v0, p0, Lcom/facebook/imagepipeline/memory/SharedByteArray;->mMinByteArraySize:I
 
     .line 68
-    new-instance p2, Lcom/facebook/common/references/OOMSoftReference;
+    new-instance v0, Lcom/facebook/common/references/OOMSoftReference;
 
-    invoke-direct {p2}, Lcom/facebook/common/references/OOMSoftReference;-><init>()V
+    invoke-direct {v0}, Lcom/facebook/common/references/OOMSoftReference;-><init>()V
 
-    iput-object p2, p0, Lcom/facebook/imagepipeline/memory/SharedByteArray;->mByteArraySoftRef:Lcom/facebook/common/references/OOMSoftReference;
+    iput-object v0, p0, Lcom/facebook/imagepipeline/memory/SharedByteArray;->mByteArraySoftRef:Lcom/facebook/common/references/OOMSoftReference;
 
     .line 69
-    new-instance p2, Ljava/util/concurrent/Semaphore;
+    new-instance v0, Ljava/util/concurrent/Semaphore;
 
-    invoke-direct {p2, v2}, Ljava/util/concurrent/Semaphore;-><init>(I)V
+    invoke-direct {v0, v2}, Ljava/util/concurrent/Semaphore;-><init>(I)V
 
-    iput-object p2, p0, Lcom/facebook/imagepipeline/memory/SharedByteArray;->mSemaphore:Ljava/util/concurrent/Semaphore;
+    iput-object v0, p0, Lcom/facebook/imagepipeline/memory/SharedByteArray;->mSemaphore:Ljava/util/concurrent/Semaphore;
 
     .line 70
-    new-instance p2, Lcom/facebook/imagepipeline/memory/SharedByteArray$1;
+    new-instance v0, Lcom/facebook/imagepipeline/memory/SharedByteArray$1;
 
-    invoke-direct {p2, p0}, Lcom/facebook/imagepipeline/memory/SharedByteArray$1;-><init>(Lcom/facebook/imagepipeline/memory/SharedByteArray;)V
+    invoke-direct {v0, p0}, Lcom/facebook/imagepipeline/memory/SharedByteArray$1;-><init>(Lcom/facebook/imagepipeline/memory/SharedByteArray;)V
 
-    iput-object p2, p0, Lcom/facebook/imagepipeline/memory/SharedByteArray;->mResourceReleaser:Lcom/facebook/common/references/ResourceReleaser;
+    iput-object v0, p0, Lcom/facebook/imagepipeline/memory/SharedByteArray;->mResourceReleaser:Lcom/facebook/common/references/ResourceReleaser;
 
     .line 77
     invoke-interface {p1, p0}, Lcom/facebook/common/memory/MemoryTrimmableRegistry;->registerMemoryTrimmable(Lcom/facebook/common/memory/MemoryTrimmable;)V
 
+    .line 78
     return-void
 .end method
 
 .method private declared-synchronized allocateByteArray(I)[B
-    .locals 1
+    .locals 2
+    .param p1, "size"    # I
 
     monitor-enter p0
 
@@ -139,20 +126,25 @@
     invoke-virtual {v0}, Lcom/facebook/common/references/OOMSoftReference;->clear()V
 
     .line 135
-    new-array p1, p1, [B
+    new-array v0, p1, [B
 
     .line 136
-    iget-object v0, p0, Lcom/facebook/imagepipeline/memory/SharedByteArray;->mByteArraySoftRef:Lcom/facebook/common/references/OOMSoftReference;
+    .local v0, "byteArray":[B
+    iget-object v1, p0, Lcom/facebook/imagepipeline/memory/SharedByteArray;->mByteArraySoftRef:Lcom/facebook/common/references/OOMSoftReference;
 
-    invoke-virtual {v0, p1}, Lcom/facebook/common/references/OOMSoftReference;->set(Ljava/lang/Object;)V
+    invoke-virtual {v1, v0}, Lcom/facebook/common/references/OOMSoftReference;->set(Ljava/lang/Object;)V
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
     .line 137
     monitor-exit p0
 
-    return-object p1
+    return-object v0
 
+    .line 133
+    .end local v0    # "byteArray":[B
+    .end local p0    # "this":Lcom/facebook/imagepipeline/memory/SharedByteArray;
+    .end local p1    # "size":I
     :catchall_0
     move-exception p1
 
@@ -162,43 +154,48 @@
 .end method
 
 .method private getByteArray(I)[B
-    .locals 2
+    .locals 3
+    .param p1, "requestedSize"    # I
 
     .line 100
     invoke-virtual {p0, p1}, Lcom/facebook/imagepipeline/memory/SharedByteArray;->getBucketedSize(I)I
 
-    move-result p1
+    move-result v0
 
     .line 101
-    iget-object v0, p0, Lcom/facebook/imagepipeline/memory/SharedByteArray;->mByteArraySoftRef:Lcom/facebook/common/references/OOMSoftReference;
+    .local v0, "bucketedSize":I
+    iget-object v1, p0, Lcom/facebook/imagepipeline/memory/SharedByteArray;->mByteArraySoftRef:Lcom/facebook/common/references/OOMSoftReference;
 
-    invoke-virtual {v0}, Lcom/facebook/common/references/OOMSoftReference;->get()Ljava/lang/Object;
+    invoke-virtual {v1}, Lcom/facebook/common/references/OOMSoftReference;->get()Ljava/lang/Object;
 
-    move-result-object v0
+    move-result-object v1
 
-    check-cast v0, [B
-
-    if-eqz v0, :cond_0
+    check-cast v1, [B
 
     .line 102
-    array-length v1, v0
+    .local v1, "byteArray":[B
+    if-eqz v1, :cond_0
 
-    if-ge v1, p1, :cond_1
+    array-length v2, v1
+
+    if-ge v2, v0, :cond_1
 
     .line 103
     :cond_0
-    invoke-direct {p0, p1}, Lcom/facebook/imagepipeline/memory/SharedByteArray;->allocateByteArray(I)[B
+    invoke-direct {p0, v0}, Lcom/facebook/imagepipeline/memory/SharedByteArray;->allocateByteArray(I)[B
 
-    move-result-object v0
+    move-result-object v1
 
+    .line 105
     :cond_1
-    return-object v0
+    return-object v1
 .end method
 
 
 # virtual methods
 .method public get(I)Lcom/facebook/common/references/CloseableReference;
     .locals 4
+    .param p1, "size"    # I
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(I)",
@@ -207,6 +204,7 @@
         }
     .end annotation
 
+    .line 87
     const/4 v0, 0x1
 
     const/4 v1, 0x0
@@ -223,7 +221,6 @@
     :goto_0
     const-string v3, "Size must be greater than zero"
 
-    .line 87
     invoke-static {v2, v3}, Lcom/facebook/common/internal/Preconditions;->checkArgument(ZLjava/lang/Object;)V
 
     .line 88
@@ -250,39 +247,42 @@
     :try_start_0
     invoke-direct {p0, p1}, Lcom/facebook/imagepipeline/memory/SharedByteArray;->getByteArray(I)[B
 
-    move-result-object p1
+    move-result-object v0
 
     .line 92
-    iget-object v0, p0, Lcom/facebook/imagepipeline/memory/SharedByteArray;->mResourceReleaser:Lcom/facebook/common/references/ResourceReleaser;
+    .local v0, "byteArray":[B
+    iget-object v1, p0, Lcom/facebook/imagepipeline/memory/SharedByteArray;->mResourceReleaser:Lcom/facebook/common/references/ResourceReleaser;
 
-    invoke-static {p1, v0}, Lcom/facebook/common/references/CloseableReference;->of(Ljava/lang/Object;Lcom/facebook/common/references/ResourceReleaser;)Lcom/facebook/common/references/CloseableReference;
+    invoke-static {v0, v1}, Lcom/facebook/common/references/CloseableReference;->of(Ljava/lang/Object;Lcom/facebook/common/references/ResourceReleaser;)Lcom/facebook/common/references/CloseableReference;
 
-    move-result-object p1
+    move-result-object v1
     :try_end_0
-    .catch Ljava/lang/Throwable; {:try_start_0 .. :try_end_0} :catch_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    return-object p1
+    return-object v1
 
-    :catch_0
-    move-exception p1
+    .line 93
+    .end local v0    # "byteArray":[B
+    :catchall_0
+    move-exception v0
 
     .line 94
-    iget-object v0, p0, Lcom/facebook/imagepipeline/memory/SharedByteArray;->mSemaphore:Ljava/util/concurrent/Semaphore;
+    .local v0, "t":Ljava/lang/Throwable;
+    iget-object v1, p0, Lcom/facebook/imagepipeline/memory/SharedByteArray;->mSemaphore:Ljava/util/concurrent/Semaphore;
 
-    invoke-virtual {v0}, Ljava/util/concurrent/Semaphore;->release()V
+    invoke-virtual {v1}, Ljava/util/concurrent/Semaphore;->release()V
 
     .line 95
-    invoke-static {p1}, Lcom/facebook/common/internal/Throwables;->propagate(Ljava/lang/Throwable;)Ljava/lang/RuntimeException;
+    invoke-static {v0}, Lcom/facebook/common/internal/Throwables;->propagate(Ljava/lang/Throwable;)Ljava/lang/RuntimeException;
 
-    move-result-object p1
+    move-result-object v1
 
-    throw p1
+    throw v1
 .end method
 
 .method getBucketedSize(I)I
     .locals 1
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
+    .param p1, "size"    # I
 
     .line 128
     iget v0, p0, Lcom/facebook/imagepipeline/memory/SharedByteArray;->mMinByteArraySize:I
@@ -291,55 +291,62 @@
 
     move-result p1
 
-    add-int/lit8 p1, p1, -0x1
-
     .line 129
-    invoke-static {p1}, Ljava/lang/Integer;->highestOneBit(I)I
+    add-int/lit8 v0, p1, -0x1
 
-    move-result p1
+    invoke-static {v0}, Ljava/lang/Integer;->highestOneBit(I)I
 
-    mul-int/lit8 p1, p1, 0x2
+    move-result v0
 
-    return p1
+    mul-int/lit8 v0, v0, 0x2
+
+    return v0
 .end method
 
 .method public trim(Lcom/facebook/common/memory/MemoryTrimType;)V
-    .locals 1
+    .locals 2
+    .param p1, "trimType"    # Lcom/facebook/common/memory/MemoryTrimType;
 
     .line 116
-    iget-object p1, p0, Lcom/facebook/imagepipeline/memory/SharedByteArray;->mSemaphore:Ljava/util/concurrent/Semaphore;
+    iget-object v0, p0, Lcom/facebook/imagepipeline/memory/SharedByteArray;->mSemaphore:Ljava/util/concurrent/Semaphore;
 
-    invoke-virtual {p1}, Ljava/util/concurrent/Semaphore;->tryAcquire()Z
+    invoke-virtual {v0}, Ljava/util/concurrent/Semaphore;->tryAcquire()Z
 
-    move-result p1
+    move-result v0
 
-    if-nez p1, :cond_0
+    if-nez v0, :cond_0
 
+    .line 117
     return-void
 
     .line 120
     :cond_0
     :try_start_0
-    iget-object p1, p0, Lcom/facebook/imagepipeline/memory/SharedByteArray;->mByteArraySoftRef:Lcom/facebook/common/references/OOMSoftReference;
+    iget-object v0, p0, Lcom/facebook/imagepipeline/memory/SharedByteArray;->mByteArraySoftRef:Lcom/facebook/common/references/OOMSoftReference;
 
-    invoke-virtual {p1}, Lcom/facebook/common/references/OOMSoftReference;->clear()V
+    invoke-virtual {v0}, Lcom/facebook/common/references/OOMSoftReference;->clear()V
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
     .line 122
-    iget-object p1, p0, Lcom/facebook/imagepipeline/memory/SharedByteArray;->mSemaphore:Ljava/util/concurrent/Semaphore;
-
-    invoke-virtual {p1}, Ljava/util/concurrent/Semaphore;->release()V
-
-    return-void
-
-    :catchall_0
-    move-exception p1
-
     iget-object v0, p0, Lcom/facebook/imagepipeline/memory/SharedByteArray;->mSemaphore:Ljava/util/concurrent/Semaphore;
 
     invoke-virtual {v0}, Ljava/util/concurrent/Semaphore;->release()V
 
     .line 123
-    throw p1
+    nop
+
+    .line 124
+    return-void
+
+    .line 122
+    :catchall_0
+    move-exception v0
+
+    iget-object v1, p0, Lcom/facebook/imagepipeline/memory/SharedByteArray;->mSemaphore:Ljava/util/concurrent/Semaphore;
+
+    invoke-virtual {v1}, Ljava/util/concurrent/Semaphore;->release()V
+
+    .line 123
+    throw v0
 .end method

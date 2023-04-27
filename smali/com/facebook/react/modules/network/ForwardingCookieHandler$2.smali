@@ -35,6 +35,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/modules/network/ForwardingCookieHandler;Lcom/facebook/react/bridge/Callback;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/modules/network/ForwardingCookieHandler;
 
     .line 108
     iput-object p1, p0, Lcom/facebook/react/modules/network/ForwardingCookieHandler$2;->this$0:Lcom/facebook/react/modules/network/ForwardingCookieHandler;
@@ -50,6 +51,7 @@
 # virtual methods
 .method public onReceiveValue(Ljava/lang/Boolean;)V
     .locals 3
+    .param p1, "value"    # Ljava/lang/Boolean;
 
     .line 111
     iget-object v0, p0, Lcom/facebook/react/modules/network/ForwardingCookieHandler$2;->this$0:Lcom/facebook/react/modules/network/ForwardingCookieHandler;
@@ -73,6 +75,7 @@
 
     invoke-interface {v0, v1}, Lcom/facebook/react/bridge/Callback;->invoke([Ljava/lang/Object;)V
 
+    .line 113
     return-void
 .end method
 

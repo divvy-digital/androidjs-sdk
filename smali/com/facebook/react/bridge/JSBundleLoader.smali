@@ -15,6 +15,9 @@
 
 .method public static createAssetLoader(Landroid/content/Context;Ljava/lang/String;Z)Lcom/facebook/react/bridge/JSBundleLoader;
     .locals 1
+    .param p0, "context"    # Landroid/content/Context;
+    .param p1, "assetUrl"    # Ljava/lang/String;
+    .param p2, "loadSynchronously"    # Z
 
     .line 28
     new-instance v0, Lcom/facebook/react/bridge/JSBundleLoader$1;
@@ -26,6 +29,8 @@
 
 .method public static createCachedBundleFromNetworkLoader(Ljava/lang/String;Ljava/lang/String;)Lcom/facebook/react/bridge/JSBundleLoader;
     .locals 1
+    .param p0, "sourceURL"    # Ljava/lang/String;
+    .param p1, "cachedFileLocation"    # Ljava/lang/String;
 
     .line 68
     new-instance v0, Lcom/facebook/react/bridge/JSBundleLoader$3;
@@ -37,6 +42,8 @@
 
 .method public static createDeltaFromNetworkLoader(Ljava/lang/String;Lcom/facebook/react/bridge/NativeDeltaClient;)Lcom/facebook/react/bridge/JSBundleLoader;
     .locals 1
+    .param p0, "sourceURL"    # Ljava/lang/String;
+    .param p1, "nativeDeltaClient"    # Lcom/facebook/react/bridge/NativeDeltaClient;
 
     .line 90
     new-instance v0, Lcom/facebook/react/bridge/JSBundleLoader$4;
@@ -48,19 +55,23 @@
 
 .method public static createFileLoader(Ljava/lang/String;)Lcom/facebook/react/bridge/JSBundleLoader;
     .locals 1
-
-    const/4 v0, 0x0
+    .param p0, "fileName"    # Ljava/lang/String;
 
     .line 42
+    const/4 v0, 0x0
+
     invoke-static {p0, p0, v0}, Lcom/facebook/react/bridge/JSBundleLoader;->createFileLoader(Ljava/lang/String;Ljava/lang/String;Z)Lcom/facebook/react/bridge/JSBundleLoader;
 
-    move-result-object p0
+    move-result-object v0
 
-    return-object p0
+    return-object v0
 .end method
 
 .method public static createFileLoader(Ljava/lang/String;Ljava/lang/String;Z)Lcom/facebook/react/bridge/JSBundleLoader;
     .locals 1
+    .param p0, "fileName"    # Ljava/lang/String;
+    .param p1, "assetUrl"    # Ljava/lang/String;
+    .param p2, "loadSynchronously"    # Z
 
     .line 49
     new-instance v0, Lcom/facebook/react/bridge/JSBundleLoader$2;
@@ -72,6 +83,8 @@
 
 .method public static createRemoteDebuggerBundleLoader(Ljava/lang/String;Ljava/lang/String;)Lcom/facebook/react/bridge/JSBundleLoader;
     .locals 1
+    .param p0, "proxySourceURL"    # Ljava/lang/String;
+    .param p1, "realSourceURL"    # Ljava/lang/String;
 
     .line 110
     new-instance v0, Lcom/facebook/react/bridge/JSBundleLoader$5;

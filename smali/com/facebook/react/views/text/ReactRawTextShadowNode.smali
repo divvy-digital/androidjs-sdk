@@ -5,9 +5,6 @@
 
 # static fields
 .field public static final PROP_TEXT:Ljava/lang/String; = "text"
-    .annotation build Lcom/facebook/react/common/annotations/VisibleForTesting;
-    .end annotation
-.end field
 
 
 # instance fields
@@ -24,11 +21,12 @@
     .line 25
     invoke-direct {p0}, Lcom/facebook/react/uimanager/ReactShadowNodeImpl;-><init>()V
 
+    .line 23
     const/4 v0, 0x0
 
-    .line 23
     iput-object v0, p0, Lcom/facebook/react/views/text/ReactRawTextShadowNode;->mText:Ljava/lang/String;
 
+    .line 25
     return-void
 .end method
 
@@ -48,6 +46,7 @@
 .method public isVirtual()Z
     .locals 1
 
+    .line 39
     const/4 v0, 0x1
 
     return v0
@@ -55,7 +54,7 @@
 
 .method public setText(Ljava/lang/String;)V
     .locals 0
-    .param p1    # Ljava/lang/String;
+    .param p1, "text"    # Ljava/lang/String;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -69,6 +68,7 @@
     .line 30
     invoke-virtual {p0}, Lcom/facebook/react/views/text/ReactRawTextShadowNode;->markUpdated()V
 
+    .line 31
     return-void
 .end method
 
@@ -86,17 +86,25 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     const-string v1, " [text: "
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     iget-object v1, p0, Lcom/facebook/react/views/text/ReactRawTextShadowNode;->mText:Ljava/lang/String;
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     const-string v1, "]"
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 

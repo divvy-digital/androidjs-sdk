@@ -25,6 +25,7 @@
 # direct methods
 .method public constructor <init>(Lcom/facebook/imagepipeline/producers/Consumer;Lcom/facebook/imagepipeline/producers/ProducerContext;)V
     .locals 0
+    .param p2, "producerContext"    # Lcom/facebook/imagepipeline/producers/ProducerContext;
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -37,7 +38,9 @@
     .end annotation
 
     .line 47
+    .local p1, "consumer":Lcom/facebook/imagepipeline/producers/Consumer;, "Lcom/facebook/imagepipeline/producers/Consumer<Lcom/facebook/imagepipeline/image/EncodedImage;>;"
     invoke-direct {p0, p1, p2}, Lcom/facebook/imagepipeline/producers/FetchState;-><init>(Lcom/facebook/imagepipeline/producers/Consumer;Lcom/facebook/imagepipeline/producers/ProducerContext;)V
 
+    .line 48
     return-void
 .end method

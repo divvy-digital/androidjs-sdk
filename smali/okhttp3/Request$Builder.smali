@@ -56,9 +56,9 @@
 
     iput-object v0, p0, Lokhttp3/Request$Builder;->tags:Ljava/util/Map;
 
+    .line 129
     const-string v0, "GET"
 
-    .line 129
     iput-object v0, p0, Lokhttp3/Request$Builder;->method:Ljava/lang/String;
 
     .line 130
@@ -68,11 +68,13 @@
 
     iput-object v0, p0, Lokhttp3/Request$Builder;->headers:Lokhttp3/Headers$Builder;
 
+    .line 131
     return-void
 .end method
 
 .method constructor <init>(Lokhttp3/Request;)V
     .locals 2
+    .param p1, "request"    # Lokhttp3/Request;
 
     .line 133
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -127,14 +129,15 @@
     iput-object v0, p0, Lokhttp3/Request$Builder;->tags:Ljava/util/Map;
 
     .line 140
-    iget-object p1, p1, Lokhttp3/Request;->headers:Lokhttp3/Headers;
+    iget-object v0, p1, Lokhttp3/Request;->headers:Lokhttp3/Headers;
 
-    invoke-virtual {p1}, Lokhttp3/Headers;->newBuilder()Lokhttp3/Headers$Builder;
+    invoke-virtual {v0}, Lokhttp3/Headers;->newBuilder()Lokhttp3/Headers$Builder;
 
-    move-result-object p1
+    move-result-object v0
 
-    iput-object p1, p0, Lokhttp3/Request$Builder;->headers:Lokhttp3/Headers$Builder;
+    iput-object v0, p0, Lokhttp3/Request$Builder;->headers:Lokhttp3/Headers$Builder;
 
+    .line 141
     return-void
 .end method
 
@@ -142,12 +145,15 @@
 # virtual methods
 .method public addHeader(Ljava/lang/String;Ljava/lang/String;)Lokhttp3/Request$Builder;
     .locals 1
+    .param p1, "name"    # Ljava/lang/String;
+    .param p2, "value"    # Ljava/lang/String;
 
     .line 196
     iget-object v0, p0, Lokhttp3/Request$Builder;->headers:Lokhttp3/Headers$Builder;
 
     invoke-virtual {v0, p1, p2}, Lokhttp3/Headers$Builder;->add(Ljava/lang/String;Ljava/lang/String;)Lokhttp3/Headers$Builder;
 
+    .line 197
     return-object p0
 .end method
 
@@ -178,35 +184,37 @@
 .end method
 
 .method public cacheControl(Lokhttp3/CacheControl;)Lokhttp3/Request$Builder;
-    .locals 2
+    .locals 3
+    .param p1, "cacheControl"    # Lokhttp3/CacheControl;
 
     .line 218
     invoke-virtual {p1}, Lokhttp3/CacheControl;->toString()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v0
 
     .line 219
-    invoke-virtual {p1}, Ljava/lang/String;->isEmpty()Z
+    .local v0, "value":Ljava/lang/String;
+    invoke-virtual {v0}, Ljava/lang/String;->isEmpty()Z
 
-    move-result v0
+    move-result v1
 
-    const-string v1, "Cache-Control"
+    const-string v2, "Cache-Control"
 
-    if-eqz v0, :cond_0
+    if-eqz v1, :cond_0
 
-    invoke-virtual {p0, v1}, Lokhttp3/Request$Builder;->removeHeader(Ljava/lang/String;)Lokhttp3/Request$Builder;
+    invoke-virtual {p0, v2}, Lokhttp3/Request$Builder;->removeHeader(Ljava/lang/String;)Lokhttp3/Request$Builder;
 
-    move-result-object p1
+    move-result-object v1
 
-    return-object p1
+    return-object v1
 
     .line 220
     :cond_0
-    invoke-virtual {p0, v1, p1}, Lokhttp3/Request$Builder;->header(Ljava/lang/String;Ljava/lang/String;)Lokhttp3/Request$Builder;
+    invoke-virtual {p0, v2, v0}, Lokhttp3/Request$Builder;->header(Ljava/lang/String;Ljava/lang/String;)Lokhttp3/Request$Builder;
 
-    move-result-object p1
+    move-result-object v1
 
-    return-object p1
+    return-object v1
 .end method
 
 .method public delete()Lokhttp3/Request$Builder;
@@ -224,29 +232,29 @@
 
 .method public delete(Lokhttp3/RequestBody;)Lokhttp3/Request$Builder;
     .locals 1
-    .param p1    # Lokhttp3/RequestBody;
+    .param p1, "body"    # Lokhttp3/RequestBody;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
 
+    .line 236
     const-string v0, "DELETE"
 
-    .line 236
     invoke-virtual {p0, v0, p1}, Lokhttp3/Request$Builder;->method(Ljava/lang/String;Lokhttp3/RequestBody;)Lokhttp3/Request$Builder;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public get()Lokhttp3/Request$Builder;
     .locals 2
 
+    .line 224
     const-string v0, "GET"
 
     const/4 v1, 0x0
 
-    .line 224
     invoke-virtual {p0, v0, v1}, Lokhttp3/Request$Builder;->method(Ljava/lang/String;Lokhttp3/RequestBody;)Lokhttp3/Request$Builder;
 
     move-result-object v0
@@ -257,11 +265,11 @@
 .method public head()Lokhttp3/Request$Builder;
     .locals 2
 
+    .line 228
     const-string v0, "HEAD"
 
     const/4 v1, 0x0
 
-    .line 228
     invoke-virtual {p0, v0, v1}, Lokhttp3/Request$Builder;->method(Ljava/lang/String;Lokhttp3/RequestBody;)Lokhttp3/Request$Builder;
 
     move-result-object v0
@@ -271,35 +279,42 @@
 
 .method public header(Ljava/lang/String;Ljava/lang/String;)Lokhttp3/Request$Builder;
     .locals 1
+    .param p1, "name"    # Ljava/lang/String;
+    .param p2, "value"    # Ljava/lang/String;
 
     .line 184
     iget-object v0, p0, Lokhttp3/Request$Builder;->headers:Lokhttp3/Headers$Builder;
 
     invoke-virtual {v0, p1, p2}, Lokhttp3/Headers$Builder;->set(Ljava/lang/String;Ljava/lang/String;)Lokhttp3/Headers$Builder;
 
+    .line 185
     return-object p0
 .end method
 
 .method public headers(Lokhttp3/Headers;)Lokhttp3/Request$Builder;
-    .locals 0
+    .locals 1
+    .param p1, "headers"    # Lokhttp3/Headers;
 
     .line 208
     invoke-virtual {p1}, Lokhttp3/Headers;->newBuilder()Lokhttp3/Headers$Builder;
 
-    move-result-object p1
+    move-result-object v0
 
-    iput-object p1, p0, Lokhttp3/Request$Builder;->headers:Lokhttp3/Headers$Builder;
+    iput-object v0, p0, Lokhttp3/Request$Builder;->headers:Lokhttp3/Headers$Builder;
 
+    .line 209
     return-object p0
 .end method
 
 .method public method(Ljava/lang/String;Lokhttp3/RequestBody;)Lokhttp3/Request$Builder;
-    .locals 2
-    .param p2    # Lokhttp3/RequestBody;
+    .locals 3
+    .param p1, "method"    # Ljava/lang/String;
+    .param p2, "body"    # Lokhttp3/RequestBody;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
 
+    .line 252
     if-eqz p1, :cond_5
 
     .line 253
@@ -309,11 +324,11 @@
 
     if-eqz v0, :cond_4
 
+    .line 254
     const-string v0, "method "
 
     if-eqz p2, :cond_1
 
-    .line 254
     invoke-static {p1}, Lokhttp3/internal/http/HttpMethod;->permitsRequestBody(Ljava/lang/String;)Z
 
     move-result v1
@@ -324,33 +339,39 @@
 
     .line 255
     :cond_0
-    new-instance p2, Ljava/lang/IllegalArgumentException;
+    new-instance v1, Ljava/lang/IllegalArgumentException;
 
-    new-instance v1, Ljava/lang/StringBuilder;
+    new-instance v2, Ljava/lang/StringBuilder;
 
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
 
-    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v0
 
-    const-string p1, " must not have a request body."
+    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v0
 
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    const-string v2, " must not have a request body."
 
-    move-result-object p1
+    invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-direct {p2, p1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+    move-result-object v0
 
-    throw p2
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
+    move-result-object v0
+
+    invoke-direct {v1, v0}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+
+    throw v1
+
+    .line 257
     :cond_1
     :goto_0
     if-nez p2, :cond_3
 
-    .line 257
     invoke-static {p1}, Lokhttp3/internal/http/HttpMethod;->requiresRequestBody(Ljava/lang/String;)Z
 
     move-result v1
@@ -361,27 +382,33 @@
 
     .line 258
     :cond_2
-    new-instance p2, Ljava/lang/IllegalArgumentException;
+    new-instance v1, Ljava/lang/IllegalArgumentException;
 
-    new-instance v1, Ljava/lang/StringBuilder;
+    new-instance v2, Ljava/lang/StringBuilder;
 
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
 
-    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v0
 
-    const-string p1, " must have a request body."
+    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v0
 
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    const-string v2, " must have a request body."
 
-    move-result-object p1
+    invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-direct {p2, p1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+    move-result-object v0
 
-    throw p2
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-direct {v1, v0}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+
+    throw v1
 
     .line 260
     :cond_3
@@ -391,81 +418,87 @@
     .line 261
     iput-object p2, p0, Lokhttp3/Request$Builder;->body:Lokhttp3/RequestBody;
 
+    .line 262
     return-object p0
 
     .line 253
     :cond_4
-    new-instance p1, Ljava/lang/IllegalArgumentException;
+    new-instance v0, Ljava/lang/IllegalArgumentException;
 
-    const-string p2, "method.length() == 0"
+    const-string v1, "method.length() == 0"
 
-    invoke-direct {p1, p2}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 
     .line 252
     :cond_5
-    new-instance p1, Ljava/lang/NullPointerException;
+    new-instance v0, Ljava/lang/NullPointerException;
 
-    const-string p2, "method == null"
+    const-string v1, "method == null"
 
-    invoke-direct {p1, p2}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 .method public patch(Lokhttp3/RequestBody;)Lokhttp3/Request$Builder;
     .locals 1
-
-    const-string v0, "PATCH"
+    .param p1, "body"    # Lokhttp3/RequestBody;
 
     .line 248
+    const-string v0, "PATCH"
+
     invoke-virtual {p0, v0, p1}, Lokhttp3/Request$Builder;->method(Ljava/lang/String;Lokhttp3/RequestBody;)Lokhttp3/Request$Builder;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public post(Lokhttp3/RequestBody;)Lokhttp3/Request$Builder;
     .locals 1
-
-    const-string v0, "POST"
+    .param p1, "body"    # Lokhttp3/RequestBody;
 
     .line 232
+    const-string v0, "POST"
+
     invoke-virtual {p0, v0, p1}, Lokhttp3/Request$Builder;->method(Ljava/lang/String;Lokhttp3/RequestBody;)Lokhttp3/Request$Builder;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public put(Lokhttp3/RequestBody;)Lokhttp3/Request$Builder;
     .locals 1
-
-    const-string v0, "PUT"
+    .param p1, "body"    # Lokhttp3/RequestBody;
 
     .line 244
+    const-string v0, "PUT"
+
     invoke-virtual {p0, v0, p1}, Lokhttp3/Request$Builder;->method(Ljava/lang/String;Lokhttp3/RequestBody;)Lokhttp3/Request$Builder;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public removeHeader(Ljava/lang/String;)Lokhttp3/Request$Builder;
     .locals 1
+    .param p1, "name"    # Ljava/lang/String;
 
     .line 202
     iget-object v0, p0, Lokhttp3/Request$Builder;->headers:Lokhttp3/Headers$Builder;
 
     invoke-virtual {v0, p1}, Lokhttp3/Headers$Builder;->removeAll(Ljava/lang/String;)Lokhttp3/Headers$Builder;
 
+    .line 203
     return-object p0
 .end method
 
 .method public tag(Ljava/lang/Class;Ljava/lang/Object;)Lokhttp3/Request$Builder;
-    .locals 1
+    .locals 2
     .param p2    # Ljava/lang/Object;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
@@ -481,14 +514,18 @@
         }
     .end annotation
 
+    .line 279
+    .local p1, "type":Ljava/lang/Class;, "Ljava/lang/Class<-TT;>;"
+    .local p2, "tag":Ljava/lang/Object;, "TT;"
     if-eqz p1, :cond_2
 
+    .line 281
     if-nez p2, :cond_0
 
     .line 282
-    iget-object p2, p0, Lokhttp3/Request$Builder;->tags:Ljava/util/Map;
+    iget-object v0, p0, Lokhttp3/Request$Builder;->tags:Ljava/util/Map;
 
-    invoke-interface {p2, p1}, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-interface {v0, p1}, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;
 
     goto :goto_0
 
@@ -514,27 +551,28 @@
 
     invoke-virtual {p1, p2}, Ljava/lang/Class;->cast(Ljava/lang/Object;)Ljava/lang/Object;
 
-    move-result-object p2
+    move-result-object v1
 
-    invoke-interface {v0, p1, p2}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-interface {v0, p1, v1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
+    .line 288
     :goto_0
     return-object p0
 
     .line 279
     :cond_2
-    new-instance p1, Ljava/lang/NullPointerException;
+    new-instance v0, Ljava/lang/NullPointerException;
 
-    const-string p2, "type == null"
+    const-string v1, "type == null"
 
-    invoke-direct {p1, p2}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 .method public tag(Ljava/lang/Object;)Lokhttp3/Request$Builder;
     .locals 1
-    .param p1    # Ljava/lang/Object;
+    .param p1, "tag"    # Ljava/lang/Object;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -544,29 +582,31 @@
 
     invoke-virtual {p0, v0, p1}, Lokhttp3/Request$Builder;->tag(Ljava/lang/Class;Ljava/lang/Object;)Lokhttp3/Request$Builder;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 .end method
 
 .method public url(Ljava/lang/String;)Lokhttp3/Request$Builder;
     .locals 6
+    .param p1, "url"    # Ljava/lang/String;
 
+    .line 156
     if-eqz p1, :cond_2
 
+    .line 159
     const/4 v1, 0x1
 
     const/4 v2, 0x0
+
+    const-string v3, "ws:"
 
     const/4 v4, 0x0
 
     const/4 v5, 0x3
 
-    const-string v3, "ws:"
-
     move-object v0, p1
 
-    .line 159
     invoke-virtual/range {v0 .. v5}, Ljava/lang/String;->regionMatches(ZILjava/lang/String;II)Z
 
     move-result v0
@@ -582,13 +622,17 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     const/4 v1, 0x3
 
     invoke-virtual {p1, v1}, Ljava/lang/String;->substring(I)Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v1
 
-    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -596,20 +640,20 @@
 
     goto :goto_0
 
+    .line 161
     :cond_0
     const/4 v1, 0x1
 
     const/4 v2, 0x0
 
+    const-string v3, "wss:"
+
     const/4 v4, 0x0
 
     const/4 v5, 0x4
 
-    const-string v3, "wss:"
-
     move-object v0, p1
 
-    .line 161
     invoke-virtual/range {v0 .. v5}, Ljava/lang/String;->regionMatches(ZILjava/lang/String;II)Z
 
     move-result v0
@@ -625,13 +669,17 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v0
+
     const/4 v1, 0x4
 
     invoke-virtual {p1, v1}, Ljava/lang/String;->substring(I)Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v1
 
-    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -642,73 +690,78 @@
     :goto_0
     invoke-static {p1}, Lokhttp3/HttpUrl;->get(Ljava/lang/String;)Lokhttp3/HttpUrl;
 
-    move-result-object p1
+    move-result-object v0
 
-    invoke-virtual {p0, p1}, Lokhttp3/Request$Builder;->url(Lokhttp3/HttpUrl;)Lokhttp3/Request$Builder;
+    invoke-virtual {p0, v0}, Lokhttp3/Request$Builder;->url(Lokhttp3/HttpUrl;)Lokhttp3/Request$Builder;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 
     .line 156
     :cond_2
-    new-instance p1, Ljava/lang/NullPointerException;
+    new-instance v0, Ljava/lang/NullPointerException;
 
-    const-string v0, "url == null"
+    const-string v1, "url == null"
 
-    invoke-direct {p1, v0}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 .method public url(Ljava/net/URL;)Lokhttp3/Request$Builder;
-    .locals 1
+    .locals 2
+    .param p1, "url"    # Ljava/net/URL;
 
+    .line 175
     if-eqz p1, :cond_0
 
     .line 176
     invoke-virtual {p1}, Ljava/net/URL;->toString()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v0
 
-    invoke-static {p1}, Lokhttp3/HttpUrl;->get(Ljava/lang/String;)Lokhttp3/HttpUrl;
+    invoke-static {v0}, Lokhttp3/HttpUrl;->get(Ljava/lang/String;)Lokhttp3/HttpUrl;
 
-    move-result-object p1
+    move-result-object v0
 
-    invoke-virtual {p0, p1}, Lokhttp3/Request$Builder;->url(Lokhttp3/HttpUrl;)Lokhttp3/Request$Builder;
+    invoke-virtual {p0, v0}, Lokhttp3/Request$Builder;->url(Lokhttp3/HttpUrl;)Lokhttp3/Request$Builder;
 
-    move-result-object p1
+    move-result-object v0
 
-    return-object p1
+    return-object v0
 
     .line 175
     :cond_0
-    new-instance p1, Ljava/lang/NullPointerException;
+    new-instance v0, Ljava/lang/NullPointerException;
 
-    const-string v0, "url == null"
+    const-string v1, "url == null"
 
-    invoke-direct {p1, v0}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method
 
 .method public url(Lokhttp3/HttpUrl;)Lokhttp3/Request$Builder;
-    .locals 1
+    .locals 2
+    .param p1, "url"    # Lokhttp3/HttpUrl;
 
+    .line 144
     if-eqz p1, :cond_0
 
     .line 145
     iput-object p1, p0, Lokhttp3/Request$Builder;->url:Lokhttp3/HttpUrl;
 
+    .line 146
     return-object p0
 
     .line 144
     :cond_0
-    new-instance p1, Ljava/lang/NullPointerException;
+    new-instance v0, Ljava/lang/NullPointerException;
 
-    const-string v0, "url == null"
+    const-string v1, "url == null"
 
-    invoke-direct {p1, v0}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
 
-    throw p1
+    throw v0
 .end method

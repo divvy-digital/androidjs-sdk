@@ -18,9 +18,9 @@
     .line 19
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
+    .line 20
     const/4 v0, 0x0
 
-    .line 20
     iput-boolean v0, p0, Lcom/facebook/react/devsupport/DoubleTapReloadRecognizer;->mDoRefresh:Z
 
     return-void
@@ -28,6 +28,8 @@
 
 .method static synthetic access$002(Lcom/facebook/react/devsupport/DoubleTapReloadRecognizer;Z)Z
     .locals 0
+    .param p0, "x0"    # Lcom/facebook/react/devsupport/DoubleTapReloadRecognizer;
+    .param p1, "x1"    # Z
 
     .line 19
     iput-boolean p1, p0, Lcom/facebook/react/devsupport/DoubleTapReloadRecognizer;->mDoRefresh:Z
@@ -38,48 +40,52 @@
 
 # virtual methods
 .method public didDoubleTapR(ILandroid/view/View;)Z
-    .locals 3
-
-    const/4 v0, 0x0
-
-    const/16 v1, 0x2e
-
-    if-ne p1, v1, :cond_1
+    .locals 5
+    .param p1, "keyCode"    # I
+    .param p2, "view"    # Landroid/view/View;
 
     .line 24
-    instance-of p1, p2, Landroid/widget/EditText;
+    const/16 v0, 0x2e
 
-    if-nez p1, :cond_1
+    const/4 v1, 0x0
+
+    if-ne p1, v0, :cond_1
+
+    instance-of v0, p2, Landroid/widget/EditText;
+
+    if-nez v0, :cond_1
 
     .line 25
-    iget-boolean p1, p0, Lcom/facebook/react/devsupport/DoubleTapReloadRecognizer;->mDoRefresh:Z
+    iget-boolean v0, p0, Lcom/facebook/react/devsupport/DoubleTapReloadRecognizer;->mDoRefresh:Z
 
-    const/4 p2, 0x1
+    const/4 v2, 0x1
 
-    if-eqz p1, :cond_0
+    if-eqz v0, :cond_0
 
     .line 26
-    iput-boolean v0, p0, Lcom/facebook/react/devsupport/DoubleTapReloadRecognizer;->mDoRefresh:Z
+    iput-boolean v1, p0, Lcom/facebook/react/devsupport/DoubleTapReloadRecognizer;->mDoRefresh:Z
 
-    return p2
+    .line 27
+    return v2
 
     .line 29
     :cond_0
-    iput-boolean p2, p0, Lcom/facebook/react/devsupport/DoubleTapReloadRecognizer;->mDoRefresh:Z
+    iput-boolean v2, p0, Lcom/facebook/react/devsupport/DoubleTapReloadRecognizer;->mDoRefresh:Z
 
     .line 30
-    new-instance p1, Landroid/os/Handler;
+    new-instance v0, Landroid/os/Handler;
 
-    invoke-direct {p1}, Landroid/os/Handler;-><init>()V
+    invoke-direct {v0}, Landroid/os/Handler;-><init>()V
 
-    new-instance p2, Lcom/facebook/react/devsupport/DoubleTapReloadRecognizer$1;
+    new-instance v2, Lcom/facebook/react/devsupport/DoubleTapReloadRecognizer$1;
 
-    invoke-direct {p2, p0}, Lcom/facebook/react/devsupport/DoubleTapReloadRecognizer$1;-><init>(Lcom/facebook/react/devsupport/DoubleTapReloadRecognizer;)V
+    invoke-direct {v2, p0}, Lcom/facebook/react/devsupport/DoubleTapReloadRecognizer$1;-><init>(Lcom/facebook/react/devsupport/DoubleTapReloadRecognizer;)V
 
-    const-wide/16 v1, 0xc8
+    const-wide/16 v3, 0xc8
 
-    invoke-virtual {p1, p2, v1, v2}, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable;J)Z
+    invoke-virtual {v0, v2, v3, v4}, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable;J)Z
 
+    .line 40
     :cond_1
-    return v0
+    return v1
 .end method

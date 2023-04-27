@@ -28,6 +28,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/modules/statusbar/StatusBarModule;Landroid/app/Activity;Ljava/lang/String;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/modules/statusbar/StatusBarModule;
 
     .line 187
     iput-object p1, p0, Lcom/facebook/react/modules/statusbar/StatusBarModule$4;->this$0:Lcom/facebook/react/modules/statusbar/StatusBarModule;
@@ -45,9 +46,6 @@
 # virtual methods
 .method public run()V
     .locals 4
-    .annotation build Landroid/annotation/TargetApi;
-        value = 0x17
-    .end annotation
 
     .line 191
     iget-object v0, p0, Lcom/facebook/react/modules/statusbar/StatusBarModule$4;->val$activity:Landroid/app/Activity;
@@ -61,25 +59,29 @@
     move-result-object v0
 
     .line 192
+    .local v0, "decorView":Landroid/view/View;
     invoke-virtual {v0}, Landroid/view/View;->getSystemUiVisibility()I
 
     move-result v1
 
     .line 193
-    iget-object v2, p0, Lcom/facebook/react/modules/statusbar/StatusBarModule$4;->val$style:Ljava/lang/String;
+    .local v1, "systemUiVisibilityFlags":I
+    const-string v2, "dark-content"
 
-    const-string v3, "dark-content"
+    iget-object v3, p0, Lcom/facebook/react/modules/statusbar/StatusBarModule$4;->val$style:Ljava/lang/String;
 
-    invoke-virtual {v3, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v2, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
     move-result v2
 
     if-eqz v2, :cond_0
 
+    .line 194
     or-int/lit16 v1, v1, 0x2000
 
     goto :goto_0
 
+    .line 196
     :cond_0
     and-int/lit16 v1, v1, -0x2001
 
@@ -87,5 +89,6 @@
     :goto_0
     invoke-virtual {v0, v1}, Landroid/view/View;->setSystemUiVisibility(I)V
 
+    .line 199
     return-void
 .end method

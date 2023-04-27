@@ -21,62 +21,30 @@
 .field private final mDoJobRunnable:Ljava/lang/Runnable;
 
 .field mEncodedImage:Lcom/facebook/imagepipeline/image/EncodedImage;
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
-
-    .annotation build Ljavax/annotation/concurrent/GuardedBy;
-        value = "this"
-    .end annotation
-.end field
 
 .field private final mExecutor:Ljava/util/concurrent/Executor;
 
 .field private final mJobRunnable:Lcom/facebook/imagepipeline/producers/JobScheduler$JobRunnable;
 
 .field mJobStartTime:J
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
-
-    .annotation build Ljavax/annotation/concurrent/GuardedBy;
-        value = "this"
-    .end annotation
-.end field
 
 .field mJobState:Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
-
-    .annotation build Ljavax/annotation/concurrent/GuardedBy;
-        value = "this"
-    .end annotation
-.end field
 
 .field mJobSubmitTime:J
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
-
-    .annotation build Ljavax/annotation/concurrent/GuardedBy;
-        value = "this"
-    .end annotation
-.end field
 
 .field private final mMinimumJobIntervalMs:I
 
 .field mStatus:I
-    .annotation build Lcom/facebook/common/internal/VisibleForTesting;
-    .end annotation
-
-    .annotation build Ljavax/annotation/concurrent/GuardedBy;
-        value = "this"
-    .end annotation
-.end field
 
 .field private final mSubmitJobRunnable:Ljava/lang/Runnable;
 
 
 # direct methods
 .method public constructor <init>(Ljava/util/concurrent/Executor;Lcom/facebook/imagepipeline/producers/JobScheduler$JobRunnable;I)V
-    .locals 0
+    .locals 2
+    .param p1, "executor"    # Ljava/util/concurrent/Executor;
+    .param p2, "jobRunnable"    # Lcom/facebook/imagepipeline/producers/JobScheduler$JobRunnable;
+    .param p3, "minimumJobIntervalMs"    # I
 
     .line 66
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -91,47 +59,49 @@
     iput p3, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mMinimumJobIntervalMs:I
 
     .line 70
-    new-instance p1, Lcom/facebook/imagepipeline/producers/JobScheduler$1;
+    new-instance v0, Lcom/facebook/imagepipeline/producers/JobScheduler$1;
 
-    invoke-direct {p1, p0}, Lcom/facebook/imagepipeline/producers/JobScheduler$1;-><init>(Lcom/facebook/imagepipeline/producers/JobScheduler;)V
+    invoke-direct {v0, p0}, Lcom/facebook/imagepipeline/producers/JobScheduler$1;-><init>(Lcom/facebook/imagepipeline/producers/JobScheduler;)V
 
-    iput-object p1, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mDoJobRunnable:Ljava/lang/Runnable;
+    iput-object v0, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mDoJobRunnable:Ljava/lang/Runnable;
 
     .line 76
-    new-instance p1, Lcom/facebook/imagepipeline/producers/JobScheduler$2;
+    new-instance v0, Lcom/facebook/imagepipeline/producers/JobScheduler$2;
 
-    invoke-direct {p1, p0}, Lcom/facebook/imagepipeline/producers/JobScheduler$2;-><init>(Lcom/facebook/imagepipeline/producers/JobScheduler;)V
+    invoke-direct {v0, p0}, Lcom/facebook/imagepipeline/producers/JobScheduler$2;-><init>(Lcom/facebook/imagepipeline/producers/JobScheduler;)V
 
-    iput-object p1, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mSubmitJobRunnable:Ljava/lang/Runnable;
-
-    const/4 p1, 0x0
+    iput-object v0, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mSubmitJobRunnable:Ljava/lang/Runnable;
 
     .line 82
-    iput-object p1, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mEncodedImage:Lcom/facebook/imagepipeline/image/EncodedImage;
+    const/4 v0, 0x0
 
-    const/4 p1, 0x0
+    iput-object v0, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mEncodedImage:Lcom/facebook/imagepipeline/image/EncodedImage;
 
     .line 83
-    iput p1, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mStatus:I
+    const/4 v0, 0x0
+
+    iput v0, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mStatus:I
 
     .line 84
-    sget-object p1, Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;->IDLE:Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;
+    sget-object v0, Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;->IDLE:Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;
 
-    iput-object p1, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mJobState:Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;
-
-    const-wide/16 p1, 0x0
+    iput-object v0, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mJobState:Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;
 
     .line 85
-    iput-wide p1, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mJobSubmitTime:J
+    const-wide/16 v0, 0x0
+
+    iput-wide v0, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mJobSubmitTime:J
 
     .line 86
-    iput-wide p1, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mJobStartTime:J
+    iput-wide v0, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mJobStartTime:J
 
+    .line 87
     return-void
 .end method
 
 .method static synthetic access$000(Lcom/facebook/imagepipeline/producers/JobScheduler;)V
     .locals 0
+    .param p0, "x0"    # Lcom/facebook/imagepipeline/producers/JobScheduler;
 
     .line 22
     invoke-direct {p0}, Lcom/facebook/imagepipeline/producers/JobScheduler;->doJob()V
@@ -141,6 +111,7 @@
 
 .method static synthetic access$100(Lcom/facebook/imagepipeline/producers/JobScheduler;)V
     .locals 0
+    .param p0, "x0"    # Lcom/facebook/imagepipeline/producers/JobScheduler;
 
     .line 22
     invoke-direct {p0}, Lcom/facebook/imagepipeline/producers/JobScheduler;->submitJob()V
@@ -157,6 +128,7 @@
     move-result-wide v0
 
     .line 190
+    .local v0, "now":J
     monitor-enter p0
 
     .line 191
@@ -164,16 +136,18 @@
     iget-object v2, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mEncodedImage:Lcom/facebook/imagepipeline/image/EncodedImage;
 
     .line 192
+    .local v2, "input":Lcom/facebook/imagepipeline/image/EncodedImage;
     iget v3, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mStatus:I
 
+    .line 193
+    .local v3, "status":I
     const/4 v4, 0x0
 
-    .line 193
     iput-object v4, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mEncodedImage:Lcom/facebook/imagepipeline/image/EncodedImage;
 
+    .line 194
     const/4 v4, 0x0
 
-    .line 194
     iput v4, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mStatus:I
 
     .line 195
@@ -193,14 +167,14 @@
     :try_start_1
     invoke-static {v2, v3}, Lcom/facebook/imagepipeline/producers/JobScheduler;->shouldProcess(Lcom/facebook/imagepipeline/image/EncodedImage;I)Z
 
-    move-result v0
+    move-result v4
 
-    if-eqz v0, :cond_0
+    if-eqz v4, :cond_0
 
     .line 202
-    iget-object v0, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mJobRunnable:Lcom/facebook/imagepipeline/producers/JobScheduler$JobRunnable;
+    iget-object v4, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mJobRunnable:Lcom/facebook/imagepipeline/producers/JobScheduler$JobRunnable;
 
-    invoke-interface {v0, v2, v3}, Lcom/facebook/imagepipeline/producers/JobScheduler$JobRunnable;->run(Lcom/facebook/imagepipeline/image/EncodedImage;I)V
+    invoke-interface {v4, v2, v3}, Lcom/facebook/imagepipeline/producers/JobScheduler$JobRunnable;->run(Lcom/facebook/imagepipeline/image/EncodedImage;I)V
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
@@ -211,35 +185,43 @@
     .line 206
     invoke-direct {p0}, Lcom/facebook/imagepipeline/producers/JobScheduler;->onJobFinished()V
 
+    .line 207
+    nop
+
+    .line 208
     return-void
 
-    :catchall_0
-    move-exception v0
-
     .line 205
+    :catchall_0
+    move-exception v4
+
     invoke-static {v2}, Lcom/facebook/imagepipeline/image/EncodedImage;->closeSafely(Lcom/facebook/imagepipeline/image/EncodedImage;)V
 
     .line 206
     invoke-direct {p0}, Lcom/facebook/imagepipeline/producers/JobScheduler;->onJobFinished()V
 
     .line 207
-    throw v0
-
-    :catchall_1
-    move-exception v0
+    throw v4
 
     .line 197
+    .end local v2    # "input":Lcom/facebook/imagepipeline/image/EncodedImage;
+    .end local v3    # "status":I
+    :catchall_1
+    move-exception v2
+
     :try_start_2
     monitor-exit p0
     :try_end_2
     .catchall {:try_start_2 .. :try_end_2} :catchall_1
 
-    throw v0
+    throw v2
 .end method
 
 .method private enqueueJob(J)V
     .locals 3
+    .param p1, "delay"    # J
 
+    .line 175
     const-wide/16 v0, 0x0
 
     cmp-long v2, p1, v0
@@ -261,46 +243,59 @@
 
     .line 178
     :cond_0
-    iget-object p1, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mSubmitJobRunnable:Ljava/lang/Runnable;
+    iget-object v0, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mSubmitJobRunnable:Ljava/lang/Runnable;
 
-    invoke-interface {p1}, Ljava/lang/Runnable;->run()V
+    invoke-interface {v0}, Ljava/lang/Runnable;->run()V
 
+    .line 180
     :goto_0
     return-void
 .end method
 
 .method private onJobFinished()V
-    .locals 6
+    .locals 9
 
     .line 211
     invoke-static {}, Landroid/os/SystemClock;->uptimeMillis()J
 
     move-result-wide v0
 
+    .line 212
+    .local v0, "now":J
+    const-wide/16 v2, 0x0
+
+    .line 213
+    .local v2, "when":J
+    const/4 v4, 0x0
+
     .line 214
+    .local v4, "shouldEnqueue":Z
     monitor-enter p0
 
     .line 215
     :try_start_0
-    iget-object v2, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mJobState:Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;
+    iget-object v5, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mJobState:Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;
 
-    sget-object v3, Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;->RUNNING_AND_PENDING:Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;
+    sget-object v6, Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;->RUNNING_AND_PENDING:Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;
 
-    if-ne v2, v3, :cond_0
+    if-ne v5, v6, :cond_0
 
     .line 216
-    iget-wide v2, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mJobStartTime:J
+    iget-wide v5, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mJobStartTime:J
 
-    iget v4, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mMinimumJobIntervalMs:I
+    iget v7, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mMinimumJobIntervalMs:I
 
-    int-to-long v4, v4
+    int-to-long v7, v7
 
-    add-long/2addr v2, v4
+    add-long/2addr v5, v7
 
-    invoke-static {v2, v3, v0, v1}, Ljava/lang/Math;->max(JJ)J
+    invoke-static {v5, v6, v0, v1}, Ljava/lang/Math;->max(JJ)J
 
-    move-result-wide v2
+    move-result-wide v5
 
+    move-wide v2, v5
+
+    .line 217
     const/4 v4, 0x1
 
     .line 218
@@ -315,13 +310,9 @@
 
     .line 221
     :cond_0
-    sget-object v2, Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;->IDLE:Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;
+    sget-object v5, Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;->IDLE:Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;
 
-    iput-object v2, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mJobState:Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;
-
-    const-wide/16 v2, 0x0
-
-    const/4 v4, 0x0
+    iput-object v5, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mJobState:Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;
 
     .line 223
     :goto_0
@@ -329,30 +320,34 @@
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
+    .line 224
     if-eqz v4, :cond_1
 
-    sub-long/2addr v2, v0
-
     .line 225
-    invoke-direct {p0, v2, v3}, Lcom/facebook/imagepipeline/producers/JobScheduler;->enqueueJob(J)V
+    sub-long v5, v2, v0
 
+    invoke-direct {p0, v5, v6}, Lcom/facebook/imagepipeline/producers/JobScheduler;->enqueueJob(J)V
+
+    .line 227
     :cond_1
     return-void
 
-    :catchall_0
-    move-exception v0
-
     .line 223
+    :catchall_0
+    move-exception v5
+
     :try_start_1
     monitor-exit p0
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
-    throw v0
+    throw v5
 .end method
 
 .method private static shouldProcess(Lcom/facebook/imagepipeline/image/EncodedImage;I)Z
     .locals 1
+    .param p0, "encodedImage"    # Lcom/facebook/imagepipeline/image/EncodedImage;
+    .param p1, "status"    # I
 
     .line 232
     invoke-static {p1}, Lcom/facebook/imagepipeline/producers/BaseConsumer;->isLast(I)Z
@@ -361,35 +356,36 @@
 
     if-nez v0, :cond_1
 
+    .line 233
     const/4 v0, 0x4
 
-    .line 233
     invoke-static {p1, v0}, Lcom/facebook/imagepipeline/producers/BaseConsumer;->statusHasFlag(II)Z
 
-    move-result p1
+    move-result v0
 
-    if-nez p1, :cond_1
+    if-nez v0, :cond_1
 
     .line 234
     invoke-static {p0}, Lcom/facebook/imagepipeline/image/EncodedImage;->isValid(Lcom/facebook/imagepipeline/image/EncodedImage;)Z
 
-    move-result p0
+    move-result v0
 
-    if-eqz p0, :cond_0
+    if-eqz v0, :cond_0
 
     goto :goto_0
 
     :cond_0
-    const/4 p0, 0x0
+    const/4 v0, 0x0
 
     goto :goto_1
 
     :cond_1
     :goto_0
-    const/4 p0, 0x1
+    const/4 v0, 0x1
 
+    .line 232
     :goto_1
-    return p0
+    return v0
 .end method
 
 .method private submitJob()V
@@ -402,6 +398,7 @@
 
     invoke-interface {v0, v1}, Ljava/util/concurrent/Executor;->execute(Ljava/lang/Runnable;)V
 
+    .line 184
     return-void
 .end method
 
@@ -417,14 +414,15 @@
     :try_start_0
     iget-object v0, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mEncodedImage:Lcom/facebook/imagepipeline/image/EncodedImage;
 
+    .line 99
+    .local v0, "oldEncodedImage":Lcom/facebook/imagepipeline/image/EncodedImage;
     const/4 v1, 0x0
 
-    .line 99
     iput-object v1, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mEncodedImage:Lcom/facebook/imagepipeline/image/EncodedImage;
 
+    .line 100
     const/4 v1, 0x0
 
-    .line 100
     iput v1, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mStatus:I
 
     .line 101
@@ -435,12 +433,14 @@
     .line 102
     invoke-static {v0}, Lcom/facebook/imagepipeline/image/EncodedImage;->closeSafely(Lcom/facebook/imagepipeline/image/EncodedImage;)V
 
+    .line 103
     return-void
 
+    .line 101
+    .end local v0    # "oldEncodedImage":Lcom/facebook/imagepipeline/image/EncodedImage;
     :catchall_0
     move-exception v0
 
-    .line 101
     :try_start_1
     monitor-exit p0
     :try_end_1
@@ -468,6 +468,8 @@
 
     return-wide v0
 
+    .line 243
+    .end local p0    # "this":Lcom/facebook/imagepipeline/producers/JobScheduler;
     :catchall_0
     move-exception v0
 
@@ -477,127 +479,148 @@
 .end method
 
 .method public scheduleJob()Z
-    .locals 7
+    .locals 9
 
     .line 140
     invoke-static {}, Landroid/os/SystemClock;->uptimeMillis()J
 
     move-result-wide v0
 
+    .line 141
+    .local v0, "now":J
+    const-wide/16 v2, 0x0
+
+    .line 142
+    .local v2, "when":J
+    const/4 v4, 0x0
+
     .line 143
+    .local v4, "shouldEnqueue":Z
     monitor-enter p0
 
     .line 144
     :try_start_0
-    iget-object v2, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mEncodedImage:Lcom/facebook/imagepipeline/image/EncodedImage;
+    iget-object v5, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mEncodedImage:Lcom/facebook/imagepipeline/image/EncodedImage;
 
-    iget v3, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mStatus:I
+    iget v6, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mStatus:I
 
-    invoke-static {v2, v3}, Lcom/facebook/imagepipeline/producers/JobScheduler;->shouldProcess(Lcom/facebook/imagepipeline/image/EncodedImage;I)Z
+    invoke-static {v5, v6}, Lcom/facebook/imagepipeline/producers/JobScheduler;->shouldProcess(Lcom/facebook/imagepipeline/image/EncodedImage;I)Z
 
-    move-result v2
+    move-result v5
 
-    const/4 v3, 0x0
-
-    if-nez v2, :cond_0
+    if-nez v5, :cond_0
 
     .line 145
     monitor-exit p0
 
-    return v3
+    const/4 v5, 0x0
+
+    return v5
 
     .line 147
     :cond_0
-    sget-object v2, Lcom/facebook/imagepipeline/producers/JobScheduler$3;->$SwitchMap$com$facebook$imagepipeline$producers$JobScheduler$JobState:[I
+    sget-object v5, Lcom/facebook/imagepipeline/producers/JobScheduler$3;->$SwitchMap$com$facebook$imagepipeline$producers$JobScheduler$JobState:[I
 
-    iget-object v4, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mJobState:Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;
+    iget-object v6, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mJobState:Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;
 
-    invoke-virtual {v4}, Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;->ordinal()I
+    invoke-virtual {v6}, Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;->ordinal()I
 
-    move-result v4
+    move-result v6
 
-    aget v2, v2, v4
+    aget v5, v5, v6
 
-    const/4 v4, 0x1
-
-    if-eq v2, v4, :cond_3
-
-    const/4 v5, 0x2
-
-    if-eq v2, v5, :cond_2
-
-    const/4 v5, 0x3
-
-    if-eq v2, v5, :cond_1
+    packed-switch v5, :pswitch_data_0
 
     goto :goto_0
 
     .line 158
-    :cond_1
-    sget-object v2, Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;->RUNNING_AND_PENDING:Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;
+    :pswitch_0
+    sget-object v5, Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;->RUNNING_AND_PENDING:Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;
 
-    iput-object v2, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mJobState:Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;
+    iput-object v5, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mJobState:Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;
 
-    :cond_2
-    :goto_0
-    const-wide/16 v5, 0x0
+    .line 159
+    goto :goto_0
 
-    goto :goto_1
+    .line 156
+    :pswitch_1
+    goto :goto_0
 
     .line 149
-    :cond_3
-    iget-wide v2, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mJobStartTime:J
+    :pswitch_2
+    iget-wide v5, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mJobStartTime:J
 
-    iget v5, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mMinimumJobIntervalMs:I
+    iget v7, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mMinimumJobIntervalMs:I
 
-    int-to-long v5, v5
+    int-to-long v7, v7
 
-    add-long/2addr v2, v5
+    add-long/2addr v5, v7
 
-    invoke-static {v2, v3, v0, v1}, Ljava/lang/Math;->max(JJ)J
+    invoke-static {v5, v6, v0, v1}, Ljava/lang/Math;->max(JJ)J
 
     move-result-wide v5
+
+    move-wide v2, v5
+
+    .line 150
+    const/4 v4, 0x1
 
     .line 151
     iput-wide v0, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mJobSubmitTime:J
 
     .line 152
-    sget-object v2, Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;->QUEUED:Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;
+    sget-object v5, Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;->QUEUED:Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;
 
-    iput-object v2, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mJobState:Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;
+    iput-object v5, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mJobState:Lcom/facebook/imagepipeline/producers/JobScheduler$JobState;
 
-    const/4 v3, 0x1
+    .line 153
+    nop
 
     .line 164
-    :goto_1
+    :goto_0
     monitor-exit p0
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    if-eqz v3, :cond_4
-
-    sub-long/2addr v5, v0
+    .line 165
+    if-eqz v4, :cond_1
 
     .line 166
+    sub-long v5, v2, v0
+
     invoke-direct {p0, v5, v6}, Lcom/facebook/imagepipeline/producers/JobScheduler;->enqueueJob(J)V
 
-    :cond_4
-    return v4
+    .line 168
+    :cond_1
+    const/4 v5, 0x1
 
-    :catchall_0
-    move-exception v0
+    return v5
 
     .line 164
+    :catchall_0
+    move-exception v5
+
     :try_start_1
     monitor-exit p0
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
-    throw v0
+    throw v5
+
+    nop
+
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method public updateJob(Lcom/facebook/imagepipeline/image/EncodedImage;I)Z
-    .locals 1
+    .locals 2
+    .param p1, "encodedImage"    # Lcom/facebook/imagepipeline/image/EncodedImage;
+    .param p2, "status"    # I
 
     .line 115
     invoke-static {p1, p2}, Lcom/facebook/imagepipeline/producers/JobScheduler;->shouldProcess(Lcom/facebook/imagepipeline/image/EncodedImage;I)Z
@@ -606,9 +629,10 @@
 
     if-nez v0, :cond_0
 
-    const/4 p1, 0x0
+    .line 116
+    const/4 v0, 0x0
 
-    return p1
+    return v0
 
     .line 119
     :cond_0
@@ -619,11 +643,12 @@
     iget-object v0, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mEncodedImage:Lcom/facebook/imagepipeline/image/EncodedImage;
 
     .line 121
+    .local v0, "oldEncodedImage":Lcom/facebook/imagepipeline/image/EncodedImage;
     invoke-static {p1}, Lcom/facebook/imagepipeline/image/EncodedImage;->cloneOrNull(Lcom/facebook/imagepipeline/image/EncodedImage;)Lcom/facebook/imagepipeline/image/EncodedImage;
 
-    move-result-object p1
+    move-result-object v1
 
-    iput-object p1, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mEncodedImage:Lcom/facebook/imagepipeline/image/EncodedImage;
+    iput-object v1, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mEncodedImage:Lcom/facebook/imagepipeline/image/EncodedImage;
 
     .line 122
     iput p2, p0, Lcom/facebook/imagepipeline/producers/JobScheduler;->mStatus:I
@@ -636,18 +661,20 @@
     .line 124
     invoke-static {v0}, Lcom/facebook/imagepipeline/image/EncodedImage;->closeSafely(Lcom/facebook/imagepipeline/image/EncodedImage;)V
 
-    const/4 p1, 0x1
+    .line 125
+    const/4 v1, 0x1
 
-    return p1
-
-    :catchall_0
-    move-exception p1
+    return v1
 
     .line 123
+    .end local v0    # "oldEncodedImage":Lcom/facebook/imagepipeline/image/EncodedImage;
+    :catchall_0
+    move-exception v0
+
     :try_start_1
     monitor-exit p0
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
-    throw p1
+    throw v0
 .end method

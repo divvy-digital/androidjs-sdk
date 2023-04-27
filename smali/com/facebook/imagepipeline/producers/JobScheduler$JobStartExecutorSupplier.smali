@@ -4,9 +4,6 @@
 
 
 # annotations
-.annotation build Lcom/facebook/common/internal/VisibleForTesting;
-.end annotation
-
 .annotation system Ldalvik/annotation/EnclosingClass;
     value = Lcom/facebook/imagepipeline/producers/JobScheduler;
 .end annotation

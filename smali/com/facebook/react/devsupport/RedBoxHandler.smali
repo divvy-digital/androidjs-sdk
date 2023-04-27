@@ -14,10 +14,6 @@
 
 # virtual methods
 .method public abstract handleRedbox(Ljava/lang/String;[Lcom/facebook/react/devsupport/interfaces/StackFrame;Lcom/facebook/react/devsupport/RedBoxHandler$ErrorType;)V
-    .param p1    # Ljava/lang/String;
-        .annotation build Landroid/support/annotation/Nullable;
-        .end annotation
-    .end param
 .end method
 
 .method public abstract isReportEnabled()Z

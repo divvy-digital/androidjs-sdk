@@ -4,9 +4,6 @@
 
 
 # annotations
-.annotation build Lcom/facebook/common/internal/VisibleForTesting;
-.end annotation
-
 .annotation system Ldalvik/annotation/Signature;
     value = {
         "<V:",
@@ -14,9 +11,6 @@
         ">",
         "Ljava/lang/Object;"
     }
-.end annotation
-
-.annotation build Ljavax/annotation/concurrent/NotThreadSafe;
 .end annotation
 
 
@@ -39,10 +33,16 @@
 # direct methods
 .method public constructor <init>(IIIZ)V
     .locals 3
+    .param p1, "itemSize"    # I
+    .param p2, "maxLength"    # I
+    .param p3, "inUseLength"    # I
+    .param p4, "fixBucketsReinitialization"    # Z
 
     .line 61
+    .local p0, "this":Lcom/facebook/imagepipeline/memory/Bucket;, "Lcom/facebook/imagepipeline/memory/Bucket<TV;>;"
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
+    .line 62
     const/4 v0, 0x1
 
     const/4 v1, 0x0
@@ -56,10 +56,10 @@
     :cond_0
     const/4 v2, 0x0
 
-    .line 62
     :goto_0
     invoke-static {v2}, Lcom/facebook/common/internal/Preconditions;->checkState(Z)V
 
+    .line 63
     if-ltz p2, :cond_1
 
     const/4 v2, 0x1
@@ -69,10 +69,10 @@
     :cond_1
     const/4 v2, 0x0
 
-    .line 63
     :goto_1
     invoke-static {v2}, Lcom/facebook/common/internal/Preconditions;->checkState(Z)V
 
+    .line 64
     if-ltz p3, :cond_2
 
     goto :goto_2
@@ -80,7 +80,6 @@
     :cond_2
     const/4 v0, 0x0
 
-    .line 64
     :goto_2
     invoke-static {v0}, Lcom/facebook/common/internal/Preconditions;->checkState(Z)V
 
@@ -91,11 +90,11 @@
     iput p2, p0, Lcom/facebook/imagepipeline/memory/Bucket;->mMaxLength:I
 
     .line 68
-    new-instance p1, Ljava/util/LinkedList;
+    new-instance v0, Ljava/util/LinkedList;
 
-    invoke-direct {p1}, Ljava/util/LinkedList;-><init>()V
+    invoke-direct {v0}, Ljava/util/LinkedList;-><init>()V
 
-    iput-object p1, p0, Lcom/facebook/imagepipeline/memory/Bucket;->mFreeList:Ljava/util/Queue;
+    iput-object v0, p0, Lcom/facebook/imagepipeline/memory/Bucket;->mFreeList:Ljava/util/Queue;
 
     .line 69
     iput p3, p0, Lcom/facebook/imagepipeline/memory/Bucket;->mInUseLength:I
@@ -103,6 +102,7 @@
     .line 71
     iput-boolean p4, p0, Lcom/facebook/imagepipeline/memory/Bucket;->mFixBucketsReinitialization:Z
 
+    .line 72
     return-void
 .end method
 
@@ -117,10 +117,13 @@
     .end annotation
 
     .line 142
+    .local p0, "this":Lcom/facebook/imagepipeline/memory/Bucket;, "Lcom/facebook/imagepipeline/memory/Bucket<TV;>;"
+    .local p1, "value":Ljava/lang/Object;, "TV;"
     iget-object v0, p0, Lcom/facebook/imagepipeline/memory/Bucket;->mFreeList:Ljava/util/Queue;
 
     invoke-interface {v0, p1}, Ljava/util/Queue;->add(Ljava/lang/Object;)Z
 
+    .line 143
     return-void
 .end method
 
@@ -128,6 +131,7 @@
     .locals 2
 
     .line 151
+    .local p0, "this":Lcom/facebook/imagepipeline/memory/Bucket;, "Lcom/facebook/imagepipeline/memory/Bucket<TV;>;"
     iget v0, p0, Lcom/facebook/imagepipeline/memory/Bucket;->mInUseLength:I
 
     const/4 v1, 0x1
@@ -151,6 +155,7 @@
 
     iput v0, p0, Lcom/facebook/imagepipeline/memory/Bucket;->mInUseLength:I
 
+    .line 153
     return-void
 .end method
 
@@ -166,10 +171,13 @@
     .end annotation
 
     .line 93
+    .local p0, "this":Lcom/facebook/imagepipeline/memory/Bucket;, "Lcom/facebook/imagepipeline/memory/Bucket<TV;>;"
     invoke-virtual {p0}, Lcom/facebook/imagepipeline/memory/Bucket;->pop()Ljava/lang/Object;
 
     move-result-object v0
 
+    .line 94
+    .local v0, "value":Ljava/lang/Object;, "TV;"
     if-eqz v0, :cond_0
 
     .line 95
@@ -179,6 +187,7 @@
 
     iput v1, p0, Lcom/facebook/imagepipeline/memory/Bucket;->mInUseLength:I
 
+    .line 97
     :cond_0
     return-object v0
 .end method
@@ -187,6 +196,7 @@
     .locals 1
 
     .line 83
+    .local p0, "this":Lcom/facebook/imagepipeline/memory/Bucket;, "Lcom/facebook/imagepipeline/memory/Bucket<TV;>;"
     iget-object v0, p0, Lcom/facebook/imagepipeline/memory/Bucket;->mFreeList:Ljava/util/Queue;
 
     invoke-interface {v0}, Ljava/util/Queue;->size()I
@@ -200,6 +210,7 @@
     .locals 1
 
     .line 156
+    .local p0, "this":Lcom/facebook/imagepipeline/memory/Bucket;, "Lcom/facebook/imagepipeline/memory/Bucket<TV;>;"
     iget v0, p0, Lcom/facebook/imagepipeline/memory/Bucket;->mInUseLength:I
 
     return v0
@@ -209,12 +220,14 @@
     .locals 1
 
     .line 116
+    .local p0, "this":Lcom/facebook/imagepipeline/memory/Bucket;, "Lcom/facebook/imagepipeline/memory/Bucket<TV;>;"
     iget v0, p0, Lcom/facebook/imagepipeline/memory/Bucket;->mInUseLength:I
 
     add-int/lit8 v0, v0, 0x1
 
     iput v0, p0, Lcom/facebook/imagepipeline/memory/Bucket;->mInUseLength:I
 
+    .line 117
     return-void
 .end method
 
@@ -222,6 +235,7 @@
     .locals 2
 
     .line 79
+    .local p0, "this":Lcom/facebook/imagepipeline/memory/Bucket;, "Lcom/facebook/imagepipeline/memory/Bucket<TV;>;"
     iget v0, p0, Lcom/facebook/imagepipeline/memory/Bucket;->mInUseLength:I
 
     invoke-virtual {p0}, Lcom/facebook/imagepipeline/memory/Bucket;->getFreeListSize()I
@@ -257,6 +271,7 @@
     .end annotation
 
     .line 107
+    .local p0, "this":Lcom/facebook/imagepipeline/memory/Bucket;, "Lcom/facebook/imagepipeline/memory/Bucket<TV;>;"
     iget-object v0, p0, Lcom/facebook/imagepipeline/memory/Bucket;->mFreeList:Ljava/util/Queue;
 
     invoke-interface {v0}, Ljava/util/Queue;->poll()Ljava/lang/Object;
@@ -275,6 +290,8 @@
     .end annotation
 
     .line 124
+    .local p0, "this":Lcom/facebook/imagepipeline/memory/Bucket;, "Lcom/facebook/imagepipeline/memory/Bucket<TV;>;"
+    .local p1, "value":Ljava/lang/Object;, "TV;"
     invoke-static {p1}, Lcom/facebook/common/internal/Preconditions;->checkNotNull(Ljava/lang/Object;)Ljava/lang/Object;
 
     .line 125
@@ -314,9 +331,9 @@
 
     if-lez v0, :cond_2
 
+    .line 133
     sub-int/2addr v0, v2
 
-    .line 133
     iput v0, p0, Lcom/facebook/imagepipeline/memory/Bucket;->mInUseLength:I
 
     .line 134
@@ -330,12 +347,13 @@
 
     aput-object p1, v0, v1
 
-    const-string p1, "BUCKET"
+    const-string v1, "BUCKET"
 
-    const-string v1, "Tried to release value %s from an empty bucket!"
+    const-string v2, "Tried to release value %s from an empty bucket!"
 
-    invoke-static {p1, v1, v0}, Lcom/facebook/common/logging/FLog;->e(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V
+    invoke-static {v1, v2, v0}, Lcom/facebook/common/logging/FLog;->e(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V
 
+    .line 139
     :goto_0
     return-void
 .end method

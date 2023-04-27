@@ -24,6 +24,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/modules/core/ChoreographerCompat$FrameCallback;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/modules/core/ChoreographerCompat$FrameCallback;
 
     .line 93
     iput-object p1, p0, Lcom/facebook/react/modules/core/ChoreographerCompat$FrameCallback$2;->this$0:Lcom/facebook/react/modules/core/ChoreographerCompat$FrameCallback;
@@ -47,5 +48,6 @@
 
     invoke-virtual {v0, v1, v2}, Lcom/facebook/react/modules/core/ChoreographerCompat$FrameCallback;->doFrame(J)V
 
+    .line 97
     return-void
 .end method

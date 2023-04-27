@@ -24,6 +24,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/modules/statusbar/StatusBarModule$1;)V
     .locals 0
+    .param p1, "this$1"    # Lcom/facebook/react/modules/statusbar/StatusBarModule$1;
 
     .line 98
     iput-object p1, p0, Lcom/facebook/react/modules/statusbar/StatusBarModule$1$1;->this$1:Lcom/facebook/react/modules/statusbar/StatusBarModule$1;
@@ -36,7 +37,8 @@
 
 # virtual methods
 .method public onAnimationUpdate(Landroid/animation/ValueAnimator;)V
-    .locals 1
+    .locals 2
+    .param p1, "animator"    # Landroid/animation/ValueAnimator;
 
     .line 101
     iget-object v0, p0, Lcom/facebook/react/modules/statusbar/StatusBarModule$1$1;->this$1:Lcom/facebook/react/modules/statusbar/StatusBarModule$1;
@@ -51,15 +53,16 @@
     .line 103
     invoke-virtual {p1}, Landroid/animation/ValueAnimator;->getAnimatedValue()Ljava/lang/Object;
 
-    move-result-object p1
+    move-result-object v1
 
-    check-cast p1, Ljava/lang/Integer;
+    check-cast v1, Ljava/lang/Integer;
 
-    invoke-virtual {p1}, Ljava/lang/Integer;->intValue()I
+    invoke-virtual {v1}, Ljava/lang/Integer;->intValue()I
 
-    move-result p1
+    move-result v1
 
-    invoke-virtual {v0, p1}, Landroid/view/Window;->setStatusBarColor(I)V
+    invoke-virtual {v0, v1}, Landroid/view/Window;->setStatusBarColor(I)V
 
+    .line 104
     return-void
 .end method

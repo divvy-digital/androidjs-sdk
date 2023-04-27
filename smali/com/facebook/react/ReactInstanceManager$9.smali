@@ -28,6 +28,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/ReactInstanceManager;ILcom/facebook/react/ReactRootView;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/ReactInstanceManager;
 
     .line 1058
     iput-object p1, p0, Lcom/facebook/react/ReactInstanceManager$9;->this$0:Lcom/facebook/react/ReactInstanceManager;
@@ -47,18 +48,19 @@
     .locals 4
 
     .line 1061
-    iget v0, p0, Lcom/facebook/react/ReactInstanceManager$9;->val$rootTag:I
+    const-string v0, "pre_rootView.onAttachedToReactInstance"
 
-    const-wide/16 v1, 0x0
+    iget v1, p0, Lcom/facebook/react/ReactInstanceManager$9;->val$rootTag:I
 
-    const-string v3, "pre_rootView.onAttachedToReactInstance"
+    const-wide/16 v2, 0x0
 
-    invoke-static {v1, v2, v3, v0}, Lcom/facebook/systrace/Systrace;->endAsyncSection(JLjava/lang/String;I)V
+    invoke-static {v2, v3, v0, v1}, Lcom/facebook/systrace/Systrace;->endAsyncSection(JLjava/lang/String;I)V
 
     .line 1065
     iget-object v0, p0, Lcom/facebook/react/ReactInstanceManager$9;->val$rootView:Lcom/facebook/react/ReactRootView;
 
     invoke-virtual {v0}, Lcom/facebook/react/ReactRootView;->onAttachedToReactInstance()V
 
+    .line 1066
     return-void
 .end method

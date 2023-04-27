@@ -22,12 +22,12 @@
 .method static constructor <clinit>()V
     .locals 2
 
-    const/4 v0, 0x1
-
-    const v1, 0x7fffffff
-
     .line 15
-    invoke-static {v1, v0, v0}, Lcom/facebook/imagepipeline/image/ImmutableQualityInfo;->of(IZZ)Lcom/facebook/imagepipeline/image/QualityInfo;
+    const v0, 0x7fffffff
+
+    const/4 v1, 0x1
+
+    invoke-static {v0, v1, v1}, Lcom/facebook/imagepipeline/image/ImmutableQualityInfo;->of(IZZ)Lcom/facebook/imagepipeline/image/QualityInfo;
 
     move-result-object v0
 
@@ -38,6 +38,9 @@
 
 .method private constructor <init>(IZZ)V
     .locals 0
+    .param p1, "quality"    # I
+    .param p2, "isOfGoodEnoughQuality"    # Z
+    .param p3, "isOfFullQuality"    # Z
 
     .line 24
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -51,11 +54,15 @@
     .line 27
     iput-boolean p3, p0, Lcom/facebook/imagepipeline/image/ImmutableQualityInfo;->mIsOfFullQuality:Z
 
+    .line 28
     return-void
 .end method
 
 .method public static of(IZZ)Lcom/facebook/imagepipeline/image/QualityInfo;
     .locals 1
+    .param p0, "quality"    # I
+    .param p1, "isOfGoodEnoughQuality"    # Z
+    .param p2, "isOfFullQuality"    # Z
 
     .line 68
     new-instance v0, Lcom/facebook/imagepipeline/image/ImmutableQualityInfo;
@@ -68,12 +75,15 @@
 
 # virtual methods
 .method public equals(Ljava/lang/Object;)Z
-    .locals 4
+    .locals 5
+    .param p1, "other"    # Ljava/lang/Object;
 
+    .line 52
     const/4 v0, 0x1
 
     if-ne p1, p0, :cond_0
 
+    .line 53
     return v0
 
     .line 55
@@ -84,30 +94,34 @@
 
     if-nez v1, :cond_1
 
+    .line 56
     return v2
 
     .line 58
     :cond_1
-    check-cast p1, Lcom/facebook/imagepipeline/image/ImmutableQualityInfo;
+    move-object v1, p1
+
+    check-cast v1, Lcom/facebook/imagepipeline/image/ImmutableQualityInfo;
 
     .line 59
-    iget v1, p0, Lcom/facebook/imagepipeline/image/ImmutableQualityInfo;->mQuality:I
+    .local v1, "that":Lcom/facebook/imagepipeline/image/ImmutableQualityInfo;
+    iget v3, p0, Lcom/facebook/imagepipeline/image/ImmutableQualityInfo;->mQuality:I
 
-    iget v3, p1, Lcom/facebook/imagepipeline/image/ImmutableQualityInfo;->mQuality:I
+    iget v4, v1, Lcom/facebook/imagepipeline/image/ImmutableQualityInfo;->mQuality:I
 
-    if-ne v1, v3, :cond_2
+    if-ne v3, v4, :cond_2
 
-    iget-boolean v1, p0, Lcom/facebook/imagepipeline/image/ImmutableQualityInfo;->mIsOfGoodEnoughQuality:Z
+    iget-boolean v3, p0, Lcom/facebook/imagepipeline/image/ImmutableQualityInfo;->mIsOfGoodEnoughQuality:Z
 
-    iget-boolean v3, p1, Lcom/facebook/imagepipeline/image/ImmutableQualityInfo;->mIsOfGoodEnoughQuality:Z
+    iget-boolean v4, v1, Lcom/facebook/imagepipeline/image/ImmutableQualityInfo;->mIsOfGoodEnoughQuality:Z
 
-    if-ne v1, v3, :cond_2
+    if-ne v3, v4, :cond_2
 
-    iget-boolean v1, p0, Lcom/facebook/imagepipeline/image/ImmutableQualityInfo;->mIsOfFullQuality:Z
+    iget-boolean v3, p0, Lcom/facebook/imagepipeline/image/ImmutableQualityInfo;->mIsOfFullQuality:Z
 
-    iget-boolean p1, p1, Lcom/facebook/imagepipeline/image/ImmutableQualityInfo;->mIsOfFullQuality:Z
+    iget-boolean v4, v1, Lcom/facebook/imagepipeline/image/ImmutableQualityInfo;->mIsOfFullQuality:Z
 
-    if-ne v1, p1, :cond_2
+    if-ne v3, v4, :cond_2
 
     goto :goto_0
 

@@ -3,11 +3,6 @@
 .source "ImageDecodeOptions.java"
 
 
-# annotations
-.annotation build Ljavax/annotation/concurrent/Immutable;
-.end annotation
-
-
 # static fields
 .field private static final DEFAULTS:Lcom/facebook/imagepipeline/common/ImageDecodeOptions;
 
@@ -51,6 +46,7 @@
 
 .method public constructor <init>(Lcom/facebook/imagepipeline/common/ImageDecodeOptionsBuilder;)V
     .locals 1
+    .param p1, "b"    # Lcom/facebook/imagepipeline/common/ImageDecodeOptionsBuilder;
 
     .line 63
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -100,10 +96,11 @@
     .line 70
     invoke-virtual {p1}, Lcom/facebook/imagepipeline/common/ImageDecodeOptionsBuilder;->getCustomImageDecoder()Lcom/facebook/imagepipeline/decoder/ImageDecoder;
 
-    move-result-object p1
+    move-result-object v0
 
-    iput-object p1, p0, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->customImageDecoder:Lcom/facebook/imagepipeline/decoder/ImageDecoder;
+    iput-object v0, p0, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->customImageDecoder:Lcom/facebook/imagepipeline/decoder/ImageDecoder;
 
+    .line 71
     return-void
 .end method
 
@@ -130,20 +127,22 @@
 
 # virtual methods
 .method public equals(Ljava/lang/Object;)Z
-    .locals 4
+    .locals 5
+    .param p1, "o"    # Ljava/lang/Object;
 
+    .line 93
     const/4 v0, 0x1
 
     if-ne p0, p1, :cond_0
 
     return v0
 
+    .line 94
     :cond_0
     const/4 v1, 0x0
 
     if-eqz p1, :cond_8
 
-    .line 94
     invoke-virtual {p0}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
 
     move-result-object v2
@@ -158,149 +157,171 @@
 
     .line 96
     :cond_1
-    check-cast p1, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;
+    move-object v2, p1
+
+    check-cast v2, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;
 
     .line 98
-    iget-boolean v2, p0, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->decodePreviewFrame:Z
+    .local v2, "that":Lcom/facebook/imagepipeline/common/ImageDecodeOptions;
+    iget-boolean v3, p0, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->decodePreviewFrame:Z
 
-    iget-boolean v3, p1, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->decodePreviewFrame:Z
+    iget-boolean v4, v2, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->decodePreviewFrame:Z
 
-    if-eq v2, v3, :cond_2
+    if-eq v3, v4, :cond_2
 
     return v1
 
     .line 99
     :cond_2
-    iget-boolean v2, p0, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->useLastFrameForPreview:Z
+    iget-boolean v3, p0, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->useLastFrameForPreview:Z
 
-    iget-boolean v3, p1, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->useLastFrameForPreview:Z
+    iget-boolean v4, v2, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->useLastFrameForPreview:Z
 
-    if-eq v2, v3, :cond_3
+    if-eq v3, v4, :cond_3
 
     return v1
 
     .line 100
     :cond_3
-    iget-boolean v2, p0, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->decodeAllFrames:Z
+    iget-boolean v3, p0, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->decodeAllFrames:Z
 
-    iget-boolean v3, p1, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->decodeAllFrames:Z
+    iget-boolean v4, v2, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->decodeAllFrames:Z
 
-    if-eq v2, v3, :cond_4
+    if-eq v3, v4, :cond_4
 
     return v1
 
     .line 101
     :cond_4
-    iget-boolean v2, p0, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->forceStaticImage:Z
+    iget-boolean v3, p0, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->forceStaticImage:Z
 
-    iget-boolean v3, p1, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->forceStaticImage:Z
+    iget-boolean v4, v2, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->forceStaticImage:Z
 
-    if-eq v2, v3, :cond_5
+    if-eq v3, v4, :cond_5
 
     return v1
 
     .line 102
     :cond_5
-    iget-object v2, p0, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->bitmapConfig:Landroid/graphics/Bitmap$Config;
+    iget-object v3, p0, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->bitmapConfig:Landroid/graphics/Bitmap$Config;
 
-    iget-object v3, p1, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->bitmapConfig:Landroid/graphics/Bitmap$Config;
+    iget-object v4, v2, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->bitmapConfig:Landroid/graphics/Bitmap$Config;
 
-    if-eq v2, v3, :cond_6
+    if-eq v3, v4, :cond_6
 
     return v1
 
     .line 103
     :cond_6
-    iget-object v2, p0, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->customImageDecoder:Lcom/facebook/imagepipeline/decoder/ImageDecoder;
+    iget-object v3, p0, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->customImageDecoder:Lcom/facebook/imagepipeline/decoder/ImageDecoder;
 
-    iget-object p1, p1, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->customImageDecoder:Lcom/facebook/imagepipeline/decoder/ImageDecoder;
+    iget-object v4, v2, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->customImageDecoder:Lcom/facebook/imagepipeline/decoder/ImageDecoder;
 
-    if-eq v2, p1, :cond_7
+    if-eq v3, v4, :cond_7
 
     return v1
 
+    .line 104
     :cond_7
     return v0
 
+    .line 94
+    .end local v2    # "that":Lcom/facebook/imagepipeline/common/ImageDecodeOptions;
     :cond_8
     :goto_0
     return v1
 .end method
 
 .method public hashCode()I
-    .locals 2
+    .locals 3
 
     .line 109
     iget v0, p0, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->minDecodeIntervalMs:I
 
-    mul-int/lit8 v0, v0, 0x1f
-
     .line 110
-    iget-boolean v1, p0, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->decodePreviewFrame:Z
+    .local v0, "result":I
+    mul-int/lit8 v1, v0, 0x1f
 
-    add-int/2addr v0, v1
+    iget-boolean v2, p0, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->decodePreviewFrame:Z
 
-    mul-int/lit8 v0, v0, 0x1f
+    add-int/2addr v1, v2
 
     .line 111
-    iget-boolean v1, p0, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->useLastFrameForPreview:Z
+    .end local v0    # "result":I
+    .local v1, "result":I
+    mul-int/lit8 v0, v1, 0x1f
 
-    add-int/2addr v0, v1
+    iget-boolean v2, p0, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->useLastFrameForPreview:Z
 
-    mul-int/lit8 v0, v0, 0x1f
+    add-int/2addr v0, v2
 
     .line 112
-    iget-boolean v1, p0, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->decodeAllFrames:Z
+    .end local v1    # "result":I
+    .restart local v0    # "result":I
+    mul-int/lit8 v1, v0, 0x1f
 
-    add-int/2addr v0, v1
+    iget-boolean v2, p0, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->decodeAllFrames:Z
 
-    mul-int/lit8 v0, v0, 0x1f
+    add-int/2addr v1, v2
 
     .line 113
-    iget-boolean v1, p0, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->forceStaticImage:Z
+    .end local v0    # "result":I
+    .restart local v1    # "result":I
+    mul-int/lit8 v0, v1, 0x1f
 
-    add-int/2addr v0, v1
+    iget-boolean v2, p0, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->forceStaticImage:Z
 
-    mul-int/lit8 v0, v0, 0x1f
+    add-int/2addr v0, v2
 
     .line 114
-    iget-object v1, p0, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->bitmapConfig:Landroid/graphics/Bitmap$Config;
+    .end local v1    # "result":I
+    .restart local v0    # "result":I
+    mul-int/lit8 v1, v0, 0x1f
 
-    invoke-virtual {v1}, Landroid/graphics/Bitmap$Config;->ordinal()I
+    iget-object v2, p0, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->bitmapConfig:Landroid/graphics/Bitmap$Config;
 
-    move-result v1
+    invoke-virtual {v2}, Landroid/graphics/Bitmap$Config;->ordinal()I
 
-    add-int/2addr v0, v1
+    move-result v2
 
-    mul-int/lit8 v0, v0, 0x1f
+    add-int/2addr v1, v2
 
     .line 115
-    iget-object v1, p0, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->customImageDecoder:Lcom/facebook/imagepipeline/decoder/ImageDecoder;
+    .end local v0    # "result":I
+    .restart local v1    # "result":I
+    mul-int/lit8 v0, v1, 0x1f
 
-    if-eqz v1, :cond_0
+    iget-object v2, p0, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->customImageDecoder:Lcom/facebook/imagepipeline/decoder/ImageDecoder;
 
-    invoke-virtual {v1}, Ljava/lang/Object;->hashCode()I
+    if-eqz v2, :cond_0
 
-    move-result v1
+    invoke-virtual {v2}, Ljava/lang/Object;->hashCode()I
+
+    move-result v2
 
     goto :goto_0
 
     :cond_0
-    const/4 v1, 0x0
+    const/4 v2, 0x0
 
     :goto_0
-    add-int/2addr v0, v1
+    add-int/2addr v0, v2
 
+    .line 116
+    .end local v1    # "result":I
+    .restart local v0    # "result":I
     return v0
 .end method
 
 .method public toString()Ljava/lang/String;
     .locals 4
 
+    .line 121
     const/4 v0, 0x0
 
-    .line 121
-    check-cast v0, Ljava/util/Locale;
+    move-object v1, v0
+
+    check-cast v1, Ljava/util/Locale;
 
     const/4 v1, 0x7
 
@@ -372,15 +393,15 @@
 
     aput-object v2, v1, v3
 
-    iget-object v2, p0, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->customImageDecoder:Lcom/facebook/imagepipeline/decoder/ImageDecoder;
+    const/4 v2, 0x6
 
-    const/4 v3, 0x6
+    iget-object v3, p0, Lcom/facebook/imagepipeline/common/ImageDecodeOptions;->customImageDecoder:Lcom/facebook/imagepipeline/decoder/ImageDecoder;
 
-    aput-object v2, v1, v3
-
-    const-string v2, "%d-%b-%b-%b-%b-%s-%s"
+    aput-object v3, v1, v2
 
     .line 121
+    const-string v2, "%d-%b-%b-%b-%b-%s-%s"
+
     invoke-static {v0, v2, v1}, Ljava/lang/String;->format(Ljava/util/Locale;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
 
     move-result-object v0

@@ -37,6 +37,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/LazyReactPackage;Ljava/util/List;Ljava/util/Map;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/LazyReactPackage;
 
     .line 85
     iput-object p1, p0, Lcom/facebook/react/LazyReactPackage$2;->this$0:Lcom/facebook/react/LazyReactPackage;
@@ -54,9 +55,6 @@
 # virtual methods
 .method public iterator()Ljava/util/Iterator;
     .locals 1
-    .annotation build Landroid/support/annotation/NonNull;
-    .end annotation
-
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "()",

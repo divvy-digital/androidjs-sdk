@@ -4,9 +4,6 @@
 
 
 # annotations
-.annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-.end annotation
-
 .annotation system Ldalvik/annotation/Signature;
     value = {
         "Ljava/lang/Enum<",
@@ -32,67 +29,62 @@
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 6
+    .locals 8
 
     .line 14
     new-instance v0, Lcom/facebook/yoga/YogaPrintOptions;
 
-    const/4 v1, 0x0
+    const-string v1, "LAYOUT"
 
-    const/4 v2, 0x1
+    const/4 v2, 0x0
 
-    const-string v3, "LAYOUT"
+    const/4 v3, 0x1
 
-    invoke-direct {v0, v3, v1, v2}, Lcom/facebook/yoga/YogaPrintOptions;-><init>(Ljava/lang/String;II)V
+    invoke-direct {v0, v1, v2, v3}, Lcom/facebook/yoga/YogaPrintOptions;-><init>(Ljava/lang/String;II)V
 
     sput-object v0, Lcom/facebook/yoga/YogaPrintOptions;->LAYOUT:Lcom/facebook/yoga/YogaPrintOptions;
 
     .line 15
-    new-instance v0, Lcom/facebook/yoga/YogaPrintOptions;
-
-    const/4 v3, 0x2
+    new-instance v1, Lcom/facebook/yoga/YogaPrintOptions;
 
     const-string v4, "STYLE"
 
-    invoke-direct {v0, v4, v2, v3}, Lcom/facebook/yoga/YogaPrintOptions;-><init>(Ljava/lang/String;II)V
+    const/4 v5, 0x2
 
-    sput-object v0, Lcom/facebook/yoga/YogaPrintOptions;->STYLE:Lcom/facebook/yoga/YogaPrintOptions;
+    invoke-direct {v1, v4, v3, v5}, Lcom/facebook/yoga/YogaPrintOptions;-><init>(Ljava/lang/String;II)V
+
+    sput-object v1, Lcom/facebook/yoga/YogaPrintOptions;->STYLE:Lcom/facebook/yoga/YogaPrintOptions;
 
     .line 16
-    new-instance v0, Lcom/facebook/yoga/YogaPrintOptions;
+    new-instance v4, Lcom/facebook/yoga/YogaPrintOptions;
 
-    const-string v4, "CHILDREN"
+    const-string v6, "CHILDREN"
 
-    const/4 v5, 0x4
+    const/4 v7, 0x4
 
-    invoke-direct {v0, v4, v3, v5}, Lcom/facebook/yoga/YogaPrintOptions;-><init>(Ljava/lang/String;II)V
+    invoke-direct {v4, v6, v5, v7}, Lcom/facebook/yoga/YogaPrintOptions;-><init>(Ljava/lang/String;II)V
 
-    sput-object v0, Lcom/facebook/yoga/YogaPrintOptions;->CHILDREN:Lcom/facebook/yoga/YogaPrintOptions;
-
-    const/4 v0, 0x3
+    sput-object v4, Lcom/facebook/yoga/YogaPrintOptions;->CHILDREN:Lcom/facebook/yoga/YogaPrintOptions;
 
     .line 12
-    new-array v0, v0, [Lcom/facebook/yoga/YogaPrintOptions;
+    const/4 v6, 0x3
 
-    sget-object v4, Lcom/facebook/yoga/YogaPrintOptions;->LAYOUT:Lcom/facebook/yoga/YogaPrintOptions;
+    new-array v6, v6, [Lcom/facebook/yoga/YogaPrintOptions;
 
-    aput-object v4, v0, v1
+    aput-object v0, v6, v2
 
-    sget-object v1, Lcom/facebook/yoga/YogaPrintOptions;->STYLE:Lcom/facebook/yoga/YogaPrintOptions;
+    aput-object v1, v6, v3
 
-    aput-object v1, v0, v2
+    aput-object v4, v6, v5
 
-    sget-object v1, Lcom/facebook/yoga/YogaPrintOptions;->CHILDREN:Lcom/facebook/yoga/YogaPrintOptions;
-
-    aput-object v1, v0, v3
-
-    sput-object v0, Lcom/facebook/yoga/YogaPrintOptions;->$VALUES:[Lcom/facebook/yoga/YogaPrintOptions;
+    sput-object v6, Lcom/facebook/yoga/YogaPrintOptions;->$VALUES:[Lcom/facebook/yoga/YogaPrintOptions;
 
     return-void
 .end method
 
 .method private constructor <init>(Ljava/lang/String;II)V
     .locals 0
+    .param p3, "intValue"    # I
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(I)V"
@@ -105,31 +97,19 @@
     .line 21
     iput p3, p0, Lcom/facebook/yoga/YogaPrintOptions;->mIntValue:I
 
+    .line 22
     return-void
 .end method
 
 .method public static fromInt(I)Lcom/facebook/yoga/YogaPrintOptions;
     .locals 3
+    .param p0, "value"    # I
 
-    const/4 v0, 0x1
-
-    if-eq p0, v0, :cond_2
-
-    const/4 v0, 0x2
-
-    if-eq p0, v0, :cond_1
-
-    const/4 v0, 0x4
-
-    if-ne p0, v0, :cond_0
-
-    .line 32
-    sget-object p0, Lcom/facebook/yoga/YogaPrintOptions;->CHILDREN:Lcom/facebook/yoga/YogaPrintOptions;
-
-    return-object p0
+    .line 29
+    packed-switch p0, :pswitch_data_0
 
     .line 33
-    :cond_0
+    :pswitch_0
     new-instance v0, Ljava/lang/IllegalArgumentException;
 
     new-instance v1, Ljava/lang/StringBuilder;
@@ -140,42 +120,63 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     invoke-virtual {v1, p0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object p0
+    move-result-object v1
 
-    invoke-direct {v0, p0}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
 
     throw v0
 
-    .line 31
-    :cond_1
-    sget-object p0, Lcom/facebook/yoga/YogaPrintOptions;->STYLE:Lcom/facebook/yoga/YogaPrintOptions;
+    .line 32
+    :pswitch_1
+    sget-object v0, Lcom/facebook/yoga/YogaPrintOptions;->CHILDREN:Lcom/facebook/yoga/YogaPrintOptions;
 
-    return-object p0
+    return-object v0
+
+    .line 31
+    :pswitch_2
+    sget-object v0, Lcom/facebook/yoga/YogaPrintOptions;->STYLE:Lcom/facebook/yoga/YogaPrintOptions;
+
+    return-object v0
 
     .line 30
-    :cond_2
-    sget-object p0, Lcom/facebook/yoga/YogaPrintOptions;->LAYOUT:Lcom/facebook/yoga/YogaPrintOptions;
+    :pswitch_3
+    sget-object v0, Lcom/facebook/yoga/YogaPrintOptions;->LAYOUT:Lcom/facebook/yoga/YogaPrintOptions;
 
-    return-object p0
+    return-object v0
+
+    nop
+
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_3
+        :pswitch_2
+        :pswitch_0
+        :pswitch_1
+    .end packed-switch
 .end method
 
 .method public static valueOf(Ljava/lang/String;)Lcom/facebook/yoga/YogaPrintOptions;
     .locals 1
+    .param p0, "name"    # Ljava/lang/String;
 
     .line 12
     const-class v0, Lcom/facebook/yoga/YogaPrintOptions;
 
     invoke-static {v0, p0}, Ljava/lang/Enum;->valueOf(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
 
-    move-result-object p0
+    move-result-object v0
 
-    check-cast p0, Lcom/facebook/yoga/YogaPrintOptions;
+    check-cast v0, Lcom/facebook/yoga/YogaPrintOptions;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method public static values()[Lcom/facebook/yoga/YogaPrintOptions;

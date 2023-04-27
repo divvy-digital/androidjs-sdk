@@ -29,85 +29,75 @@
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 7
+    .locals 11
 
     .line 16
     new-instance v0, Lcom/facebook/react/views/text/TextTransform;
 
-    const/4 v1, 0x0
+    const-string v1, "NONE"
 
-    const-string v2, "NONE"
+    const/4 v2, 0x0
 
-    invoke-direct {v0, v2, v1}, Lcom/facebook/react/views/text/TextTransform;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v0, v1, v2}, Lcom/facebook/react/views/text/TextTransform;-><init>(Ljava/lang/String;I)V
 
     sput-object v0, Lcom/facebook/react/views/text/TextTransform;->NONE:Lcom/facebook/react/views/text/TextTransform;
 
-    new-instance v0, Lcom/facebook/react/views/text/TextTransform;
-
-    const/4 v2, 0x1
+    new-instance v1, Lcom/facebook/react/views/text/TextTransform;
 
     const-string v3, "UPPERCASE"
 
-    invoke-direct {v0, v3, v2}, Lcom/facebook/react/views/text/TextTransform;-><init>(Ljava/lang/String;I)V
+    const/4 v4, 0x1
 
-    sput-object v0, Lcom/facebook/react/views/text/TextTransform;->UPPERCASE:Lcom/facebook/react/views/text/TextTransform;
+    invoke-direct {v1, v3, v4}, Lcom/facebook/react/views/text/TextTransform;-><init>(Ljava/lang/String;I)V
 
-    new-instance v0, Lcom/facebook/react/views/text/TextTransform;
+    sput-object v1, Lcom/facebook/react/views/text/TextTransform;->UPPERCASE:Lcom/facebook/react/views/text/TextTransform;
 
-    const/4 v3, 0x2
+    new-instance v3, Lcom/facebook/react/views/text/TextTransform;
 
-    const-string v4, "LOWERCASE"
+    const-string v5, "LOWERCASE"
 
-    invoke-direct {v0, v4, v3}, Lcom/facebook/react/views/text/TextTransform;-><init>(Ljava/lang/String;I)V
+    const/4 v6, 0x2
 
-    sput-object v0, Lcom/facebook/react/views/text/TextTransform;->LOWERCASE:Lcom/facebook/react/views/text/TextTransform;
+    invoke-direct {v3, v5, v6}, Lcom/facebook/react/views/text/TextTransform;-><init>(Ljava/lang/String;I)V
 
-    new-instance v0, Lcom/facebook/react/views/text/TextTransform;
+    sput-object v3, Lcom/facebook/react/views/text/TextTransform;->LOWERCASE:Lcom/facebook/react/views/text/TextTransform;
 
-    const/4 v4, 0x3
+    new-instance v5, Lcom/facebook/react/views/text/TextTransform;
 
-    const-string v5, "CAPITALIZE"
+    const-string v7, "CAPITALIZE"
 
-    invoke-direct {v0, v5, v4}, Lcom/facebook/react/views/text/TextTransform;-><init>(Ljava/lang/String;I)V
+    const/4 v8, 0x3
 
-    sput-object v0, Lcom/facebook/react/views/text/TextTransform;->CAPITALIZE:Lcom/facebook/react/views/text/TextTransform;
+    invoke-direct {v5, v7, v8}, Lcom/facebook/react/views/text/TextTransform;-><init>(Ljava/lang/String;I)V
 
-    new-instance v0, Lcom/facebook/react/views/text/TextTransform;
+    sput-object v5, Lcom/facebook/react/views/text/TextTransform;->CAPITALIZE:Lcom/facebook/react/views/text/TextTransform;
 
-    const/4 v5, 0x4
+    new-instance v7, Lcom/facebook/react/views/text/TextTransform;
 
-    const-string v6, "UNSET"
+    const-string v9, "UNSET"
 
-    invoke-direct {v0, v6, v5}, Lcom/facebook/react/views/text/TextTransform;-><init>(Ljava/lang/String;I)V
+    const/4 v10, 0x4
 
-    sput-object v0, Lcom/facebook/react/views/text/TextTransform;->UNSET:Lcom/facebook/react/views/text/TextTransform;
+    invoke-direct {v7, v9, v10}, Lcom/facebook/react/views/text/TextTransform;-><init>(Ljava/lang/String;I)V
 
-    const/4 v0, 0x5
+    sput-object v7, Lcom/facebook/react/views/text/TextTransform;->UNSET:Lcom/facebook/react/views/text/TextTransform;
 
     .line 15
-    new-array v0, v0, [Lcom/facebook/react/views/text/TextTransform;
+    const/4 v9, 0x5
 
-    sget-object v6, Lcom/facebook/react/views/text/TextTransform;->NONE:Lcom/facebook/react/views/text/TextTransform;
+    new-array v9, v9, [Lcom/facebook/react/views/text/TextTransform;
 
-    aput-object v6, v0, v1
+    aput-object v0, v9, v2
 
-    sget-object v1, Lcom/facebook/react/views/text/TextTransform;->UPPERCASE:Lcom/facebook/react/views/text/TextTransform;
+    aput-object v1, v9, v4
 
-    aput-object v1, v0, v2
+    aput-object v3, v9, v6
 
-    sget-object v1, Lcom/facebook/react/views/text/TextTransform;->LOWERCASE:Lcom/facebook/react/views/text/TextTransform;
+    aput-object v5, v9, v8
 
-    aput-object v1, v0, v3
+    aput-object v7, v9, v10
 
-    sget-object v1, Lcom/facebook/react/views/text/TextTransform;->CAPITALIZE:Lcom/facebook/react/views/text/TextTransform;
-
-    aput-object v1, v0, v4
-
-    sget-object v1, Lcom/facebook/react/views/text/TextTransform;->UNSET:Lcom/facebook/react/views/text/TextTransform;
-
-    aput-object v1, v0, v5
-
-    sput-object v0, Lcom/facebook/react/views/text/TextTransform;->$VALUES:[Lcom/facebook/react/views/text/TextTransform;
+    sput-object v9, Lcom/facebook/react/views/text/TextTransform;->$VALUES:[Lcom/facebook/react/views/text/TextTransform;
 
     return-void
 .end method
@@ -127,13 +117,17 @@
 .end method
 
 .method public static apply(Ljava/lang/String;Lcom/facebook/react/views/text/TextTransform;)Ljava/lang/String;
-    .locals 1
+    .locals 2
+    .param p0, "text"    # Ljava/lang/String;
+    .param p1, "textTransform"    # Lcom/facebook/react/views/text/TextTransform;
 
+    .line 19
     if-nez p0, :cond_0
 
-    const/4 p0, 0x0
+    .line 20
+    const/4 v0, 0x0
 
-    return-object p0
+    return-object v0
 
     .line 24
     :cond_0
@@ -141,52 +135,68 @@
 
     invoke-virtual {p1}, Lcom/facebook/react/views/text/TextTransform;->ordinal()I
 
-    move-result p1
+    move-result v1
 
-    aget p1, v0, p1
+    aget v0, v0, v1
 
-    const/4 v0, 0x1
+    packed-switch v0, :pswitch_data_0
 
-    if-eq p1, v0, :cond_3
+    .line 35
+    move-object v0, p0
 
-    const/4 v0, 0x2
-
-    if-eq p1, v0, :cond_2
-
-    const/4 v0, 0x3
-
-    if-eq p1, v0, :cond_1
-
+    .local v0, "transformed":Ljava/lang/String;
     goto :goto_0
 
     .line 32
-    :cond_1
+    .end local v0    # "transformed":Ljava/lang/String;
+    :pswitch_0
     invoke-static {p0}, Lcom/facebook/react/views/text/TextTransform;->capitalize(Ljava/lang/String;)Ljava/lang/String;
 
-    move-result-object p0
+    move-result-object v0
 
+    .line 33
+    .restart local v0    # "transformed":Ljava/lang/String;
     goto :goto_0
 
     .line 29
-    :cond_2
+    .end local v0    # "transformed":Ljava/lang/String;
+    :pswitch_1
     invoke-virtual {p0}, Ljava/lang/String;->toLowerCase()Ljava/lang/String;
 
-    move-result-object p0
+    move-result-object v0
 
+    .line 30
+    .restart local v0    # "transformed":Ljava/lang/String;
     goto :goto_0
 
     .line 26
-    :cond_3
+    .end local v0    # "transformed":Ljava/lang/String;
+    :pswitch_2
     invoke-virtual {p0}, Ljava/lang/String;->toUpperCase()Ljava/lang/String;
 
-    move-result-object p0
+    move-result-object v0
 
+    .line 27
+    .restart local v0    # "transformed":Ljava/lang/String;
+    nop
+
+    .line 38
     :goto_0
-    return-object p0
+    return-object v0
+
+    nop
+
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method private static capitalize(Ljava/lang/String;)Ljava/lang/String;
     .locals 7
+    .param p0, "text"    # Ljava/lang/String;
 
     .line 42
     invoke-static {}, Ljava/text/BreakIterator;->getWordInstance()Ljava/text/BreakIterator;
@@ -194,6 +204,7 @@
     move-result-object v0
 
     .line 43
+    .local v0, "wordIterator":Ljava/text/BreakIterator;
     invoke-virtual {v0, p0}, Ljava/text/BreakIterator;->setText(Ljava/lang/String;)V
 
     .line 45
@@ -206,98 +217,108 @@
     invoke-direct {v1, v2}, Ljava/lang/StringBuilder;-><init>(I)V
 
     .line 46
+    .local v1, "res":Ljava/lang/StringBuilder;
     invoke-virtual {v0}, Ljava/text/BreakIterator;->first()I
 
     move-result v2
 
     .line 47
-    :goto_0
+    .local v2, "start":I
     invoke-virtual {v0}, Ljava/text/BreakIterator;->next()I
 
     move-result v3
 
-    move v6, v3
-
-    move v3, v2
-
-    move v2, v6
-
+    .local v3, "end":I
+    :goto_0
     const/4 v4, -0x1
 
-    if-eq v2, v4, :cond_1
+    if-eq v3, v4, :cond_1
 
     .line 48
-    invoke-virtual {p0, v3, v2}, Ljava/lang/String;->substring(II)Ljava/lang/String;
+    invoke-virtual {p0, v2, v3}, Ljava/lang/String;->substring(II)Ljava/lang/String;
 
-    move-result-object v3
-
-    const/4 v4, 0x0
+    move-result-object v4
 
     .line 49
-    invoke-virtual {v3, v4}, Ljava/lang/String;->charAt(I)C
+    .local v4, "word":Ljava/lang/String;
+    const/4 v5, 0x0
 
-    move-result v5
+    invoke-virtual {v4, v5}, Ljava/lang/String;->charAt(I)C
 
-    invoke-static {v5}, Ljava/lang/Character;->isLetterOrDigit(C)Z
+    move-result v6
 
-    move-result v5
+    invoke-static {v6}, Ljava/lang/Character;->isLetterOrDigit(C)Z
 
-    if-eqz v5, :cond_0
+    move-result v6
+
+    if-eqz v6, :cond_0
 
     .line 50
-    invoke-virtual {v3, v4}, Ljava/lang/String;->charAt(I)C
+    invoke-virtual {v4, v5}, Ljava/lang/String;->charAt(I)C
 
-    move-result v4
+    move-result v5
 
-    invoke-static {v4}, Ljava/lang/Character;->toUpperCase(C)C
+    invoke-static {v5}, Ljava/lang/Character;->toUpperCase(C)C
 
-    move-result v4
+    move-result v5
 
-    invoke-virtual {v1, v4}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
-
-    const/4 v4, 0x1
+    invoke-virtual {v1, v5}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
 
     .line 51
-    invoke-virtual {v3, v4}, Ljava/lang/String;->substring(I)Ljava/lang/String;
+    const/4 v5, 0x1
 
-    move-result-object v3
+    invoke-virtual {v4, v5}, Ljava/lang/String;->substring(I)Ljava/lang/String;
 
-    invoke-virtual {v3}, Ljava/lang/String;->toLowerCase()Ljava/lang/String;
+    move-result-object v5
 
-    move-result-object v3
+    invoke-virtual {v5}, Ljava/lang/String;->toLowerCase()Ljava/lang/String;
 
-    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v5
 
-    goto :goto_0
+    invoke-virtual {v1, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    goto :goto_1
 
     .line 53
     :cond_0
-    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v1, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 55
+    :goto_1
+    move v2, v3
+
+    .line 47
+    .end local v4    # "word":Ljava/lang/String;
+    invoke-virtual {v0}, Ljava/text/BreakIterator;->next()I
+
+    move-result v3
 
     goto :goto_0
 
     .line 58
+    .end local v3    # "end":I
     :cond_1
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object p0
+    move-result-object v3
 
-    return-object p0
+    return-object v3
 .end method
 
 .method public static valueOf(Ljava/lang/String;)Lcom/facebook/react/views/text/TextTransform;
     .locals 1
+    .param p0, "name"    # Ljava/lang/String;
 
     .line 15
     const-class v0, Lcom/facebook/react/views/text/TextTransform;
 
     invoke-static {v0, p0}, Ljava/lang/Enum;->valueOf(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
 
-    move-result-object p0
+    move-result-object v0
 
-    check-cast p0, Lcom/facebook/react/views/text/TextTransform;
+    check-cast v0, Lcom/facebook/react/views/text/TextTransform;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method public static values()[Lcom/facebook/react/views/text/TextTransform;

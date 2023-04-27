@@ -27,6 +27,10 @@
 # direct methods
 .method private constructor <init>(IJIZ)V
     .locals 0
+    .param p1, "callbackID"    # I
+    .param p2, "initialTargetTime"    # J
+    .param p4, "duration"    # I
+    .param p5, "repeat"    # Z
 
     .line 60
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -43,11 +47,17 @@
     .line 64
     iput-boolean p5, p0, Lcom/facebook/react/modules/core/Timing$Timer;->mRepeat:Z
 
+    .line 65
     return-void
 .end method
 
 .method synthetic constructor <init>(IJIZLcom/facebook/react/modules/core/Timing$1;)V
     .locals 0
+    .param p1, "x0"    # I
+    .param p2, "x1"    # J
+    .param p4, "x2"    # I
+    .param p5, "x3"    # Z
+    .param p6, "x4"    # Lcom/facebook/react/modules/core/Timing$1;
 
     .line 50
     invoke-direct/range {p0 .. p5}, Lcom/facebook/react/modules/core/Timing$Timer;-><init>(IJIZ)V
@@ -57,6 +67,7 @@
 
 .method static synthetic access$400(Lcom/facebook/react/modules/core/Timing$Timer;)J
     .locals 2
+    .param p0, "x0"    # Lcom/facebook/react/modules/core/Timing$Timer;
 
     .line 50
     iget-wide v0, p0, Lcom/facebook/react/modules/core/Timing$Timer;->mTargetTime:J
@@ -66,6 +77,8 @@
 
 .method static synthetic access$402(Lcom/facebook/react/modules/core/Timing$Timer;J)J
     .locals 0
+    .param p0, "x0"    # Lcom/facebook/react/modules/core/Timing$Timer;
+    .param p1, "x1"    # J
 
     .line 50
     iput-wide p1, p0, Lcom/facebook/react/modules/core/Timing$Timer;->mTargetTime:J
@@ -74,28 +87,31 @@
 .end method
 
 .method static synthetic access$500(Lcom/facebook/react/modules/core/Timing$Timer;)I
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/modules/core/Timing$Timer;
 
     .line 50
-    iget p0, p0, Lcom/facebook/react/modules/core/Timing$Timer;->mCallbackID:I
+    iget v0, p0, Lcom/facebook/react/modules/core/Timing$Timer;->mCallbackID:I
 
-    return p0
+    return v0
 .end method
 
 .method static synthetic access$600(Lcom/facebook/react/modules/core/Timing$Timer;)Z
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/modules/core/Timing$Timer;
 
     .line 50
-    iget-boolean p0, p0, Lcom/facebook/react/modules/core/Timing$Timer;->mRepeat:Z
+    iget-boolean v0, p0, Lcom/facebook/react/modules/core/Timing$Timer;->mRepeat:Z
 
-    return p0
+    return v0
 .end method
 
 .method static synthetic access$700(Lcom/facebook/react/modules/core/Timing$Timer;)I
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/modules/core/Timing$Timer;
 
     .line 50
-    iget p0, p0, Lcom/facebook/react/modules/core/Timing$Timer;->mInterval:I
+    iget v0, p0, Lcom/facebook/react/modules/core/Timing$Timer;->mInterval:I
 
-    return p0
+    return v0
 .end method

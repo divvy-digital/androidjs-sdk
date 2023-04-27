@@ -4,10 +4,6 @@
 
 
 # annotations
-.annotation build Landroid/support/annotation/RequiresApi;
-    value = 0x15
-.end annotation
-
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
         Landroid/support/v4/media/MediaDescriptionCompatApi21$Builder;
@@ -22,120 +18,149 @@
     .line 107
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
+    .line 108
     return-void
 .end method
 
 .method public static fromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
     .locals 1
+    .param p0, "in"    # Landroid/os/Parcel;
 
     .line 62
     sget-object v0, Landroid/media/MediaDescription;->CREATOR:Landroid/os/Parcelable$Creator;
 
     invoke-interface {v0, p0}, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
 
-    move-result-object p0
+    move-result-object v0
 
-    return-object p0
+    return-object v0
 .end method
 
 .method public static getDescription(Ljava/lang/Object;)Ljava/lang/CharSequence;
-    .locals 0
+    .locals 1
+    .param p0, "descriptionObj"    # Ljava/lang/Object;
 
     .line 42
-    check-cast p0, Landroid/media/MediaDescription;
+    move-object v0, p0
 
-    invoke-virtual {p0}, Landroid/media/MediaDescription;->getDescription()Ljava/lang/CharSequence;
+    check-cast v0, Landroid/media/MediaDescription;
 
-    move-result-object p0
+    invoke-virtual {v0}, Landroid/media/MediaDescription;->getDescription()Ljava/lang/CharSequence;
 
-    return-object p0
+    move-result-object v0
+
+    return-object v0
 .end method
 
 .method public static getExtras(Ljava/lang/Object;)Landroid/os/Bundle;
-    .locals 0
+    .locals 1
+    .param p0, "descriptionObj"    # Ljava/lang/Object;
 
     .line 54
-    check-cast p0, Landroid/media/MediaDescription;
+    move-object v0, p0
 
-    invoke-virtual {p0}, Landroid/media/MediaDescription;->getExtras()Landroid/os/Bundle;
+    check-cast v0, Landroid/media/MediaDescription;
 
-    move-result-object p0
+    invoke-virtual {v0}, Landroid/media/MediaDescription;->getExtras()Landroid/os/Bundle;
 
-    return-object p0
+    move-result-object v0
+
+    return-object v0
 .end method
 
 .method public static getIconBitmap(Ljava/lang/Object;)Landroid/graphics/Bitmap;
-    .locals 0
+    .locals 1
+    .param p0, "descriptionObj"    # Ljava/lang/Object;
 
     .line 46
-    check-cast p0, Landroid/media/MediaDescription;
+    move-object v0, p0
 
-    invoke-virtual {p0}, Landroid/media/MediaDescription;->getIconBitmap()Landroid/graphics/Bitmap;
+    check-cast v0, Landroid/media/MediaDescription;
 
-    move-result-object p0
+    invoke-virtual {v0}, Landroid/media/MediaDescription;->getIconBitmap()Landroid/graphics/Bitmap;
 
-    return-object p0
+    move-result-object v0
+
+    return-object v0
 .end method
 
 .method public static getIconUri(Ljava/lang/Object;)Landroid/net/Uri;
-    .locals 0
+    .locals 1
+    .param p0, "descriptionObj"    # Ljava/lang/Object;
 
     .line 50
-    check-cast p0, Landroid/media/MediaDescription;
+    move-object v0, p0
 
-    invoke-virtual {p0}, Landroid/media/MediaDescription;->getIconUri()Landroid/net/Uri;
+    check-cast v0, Landroid/media/MediaDescription;
 
-    move-result-object p0
+    invoke-virtual {v0}, Landroid/media/MediaDescription;->getIconUri()Landroid/net/Uri;
 
-    return-object p0
+    move-result-object v0
+
+    return-object v0
 .end method
 
 .method public static getMediaId(Ljava/lang/Object;)Ljava/lang/String;
-    .locals 0
+    .locals 1
+    .param p0, "descriptionObj"    # Ljava/lang/Object;
 
     .line 30
-    check-cast p0, Landroid/media/MediaDescription;
+    move-object v0, p0
 
-    invoke-virtual {p0}, Landroid/media/MediaDescription;->getMediaId()Ljava/lang/String;
+    check-cast v0, Landroid/media/MediaDescription;
 
-    move-result-object p0
+    invoke-virtual {v0}, Landroid/media/MediaDescription;->getMediaId()Ljava/lang/String;
 
-    return-object p0
+    move-result-object v0
+
+    return-object v0
 .end method
 
 .method public static getSubtitle(Ljava/lang/Object;)Ljava/lang/CharSequence;
-    .locals 0
+    .locals 1
+    .param p0, "descriptionObj"    # Ljava/lang/Object;
 
     .line 38
-    check-cast p0, Landroid/media/MediaDescription;
+    move-object v0, p0
 
-    invoke-virtual {p0}, Landroid/media/MediaDescription;->getSubtitle()Ljava/lang/CharSequence;
+    check-cast v0, Landroid/media/MediaDescription;
 
-    move-result-object p0
+    invoke-virtual {v0}, Landroid/media/MediaDescription;->getSubtitle()Ljava/lang/CharSequence;
 
-    return-object p0
+    move-result-object v0
+
+    return-object v0
 .end method
 
 .method public static getTitle(Ljava/lang/Object;)Ljava/lang/CharSequence;
-    .locals 0
+    .locals 1
+    .param p0, "descriptionObj"    # Ljava/lang/Object;
 
     .line 34
-    check-cast p0, Landroid/media/MediaDescription;
+    move-object v0, p0
 
-    invoke-virtual {p0}, Landroid/media/MediaDescription;->getTitle()Ljava/lang/CharSequence;
+    check-cast v0, Landroid/media/MediaDescription;
 
-    move-result-object p0
+    invoke-virtual {v0}, Landroid/media/MediaDescription;->getTitle()Ljava/lang/CharSequence;
 
-    return-object p0
+    move-result-object v0
+
+    return-object v0
 .end method
 
 .method public static writeToParcel(Ljava/lang/Object;Landroid/os/Parcel;I)V
-    .locals 0
+    .locals 1
+    .param p0, "descriptionObj"    # Ljava/lang/Object;
+    .param p1, "dest"    # Landroid/os/Parcel;
+    .param p2, "flags"    # I
 
     .line 58
-    check-cast p0, Landroid/media/MediaDescription;
+    move-object v0, p0
 
-    invoke-virtual {p0, p1, p2}, Landroid/media/MediaDescription;->writeToParcel(Landroid/os/Parcel;I)V
+    check-cast v0, Landroid/media/MediaDescription;
 
+    invoke-virtual {v0, p1, p2}, Landroid/media/MediaDescription;->writeToParcel(Landroid/os/Parcel;I)V
+
+    .line 59
     return-void
 .end method

@@ -4,9 +4,6 @@
 
 
 # annotations
-.annotation build Lcom/facebook/proguard/annotations/DoNotStrip;
-.end annotation
-
 .annotation system Ldalvik/annotation/Signature;
     value = {
         "Ljava/lang/Enum<",
@@ -32,65 +29,60 @@
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 5
+    .locals 7
 
     .line 14
     new-instance v0, Lcom/facebook/yoga/YogaMeasureMode;
 
-    const/4 v1, 0x0
+    const-string v1, "UNDEFINED"
 
-    const-string v2, "UNDEFINED"
+    const/4 v2, 0x0
 
-    invoke-direct {v0, v2, v1, v1}, Lcom/facebook/yoga/YogaMeasureMode;-><init>(Ljava/lang/String;II)V
+    invoke-direct {v0, v1, v2, v2}, Lcom/facebook/yoga/YogaMeasureMode;-><init>(Ljava/lang/String;II)V
 
     sput-object v0, Lcom/facebook/yoga/YogaMeasureMode;->UNDEFINED:Lcom/facebook/yoga/YogaMeasureMode;
 
     .line 15
-    new-instance v0, Lcom/facebook/yoga/YogaMeasureMode;
-
-    const/4 v2, 0x1
+    new-instance v1, Lcom/facebook/yoga/YogaMeasureMode;
 
     const-string v3, "EXACTLY"
 
-    invoke-direct {v0, v3, v2, v2}, Lcom/facebook/yoga/YogaMeasureMode;-><init>(Ljava/lang/String;II)V
+    const/4 v4, 0x1
 
-    sput-object v0, Lcom/facebook/yoga/YogaMeasureMode;->EXACTLY:Lcom/facebook/yoga/YogaMeasureMode;
+    invoke-direct {v1, v3, v4, v4}, Lcom/facebook/yoga/YogaMeasureMode;-><init>(Ljava/lang/String;II)V
+
+    sput-object v1, Lcom/facebook/yoga/YogaMeasureMode;->EXACTLY:Lcom/facebook/yoga/YogaMeasureMode;
 
     .line 16
-    new-instance v0, Lcom/facebook/yoga/YogaMeasureMode;
+    new-instance v3, Lcom/facebook/yoga/YogaMeasureMode;
 
-    const/4 v3, 0x2
+    const-string v5, "AT_MOST"
 
-    const-string v4, "AT_MOST"
+    const/4 v6, 0x2
 
-    invoke-direct {v0, v4, v3, v3}, Lcom/facebook/yoga/YogaMeasureMode;-><init>(Ljava/lang/String;II)V
+    invoke-direct {v3, v5, v6, v6}, Lcom/facebook/yoga/YogaMeasureMode;-><init>(Ljava/lang/String;II)V
 
-    sput-object v0, Lcom/facebook/yoga/YogaMeasureMode;->AT_MOST:Lcom/facebook/yoga/YogaMeasureMode;
-
-    const/4 v0, 0x3
+    sput-object v3, Lcom/facebook/yoga/YogaMeasureMode;->AT_MOST:Lcom/facebook/yoga/YogaMeasureMode;
 
     .line 12
-    new-array v0, v0, [Lcom/facebook/yoga/YogaMeasureMode;
+    const/4 v5, 0x3
 
-    sget-object v4, Lcom/facebook/yoga/YogaMeasureMode;->UNDEFINED:Lcom/facebook/yoga/YogaMeasureMode;
+    new-array v5, v5, [Lcom/facebook/yoga/YogaMeasureMode;
 
-    aput-object v4, v0, v1
+    aput-object v0, v5, v2
 
-    sget-object v1, Lcom/facebook/yoga/YogaMeasureMode;->EXACTLY:Lcom/facebook/yoga/YogaMeasureMode;
+    aput-object v1, v5, v4
 
-    aput-object v1, v0, v2
+    aput-object v3, v5, v6
 
-    sget-object v1, Lcom/facebook/yoga/YogaMeasureMode;->AT_MOST:Lcom/facebook/yoga/YogaMeasureMode;
-
-    aput-object v1, v0, v3
-
-    sput-object v0, Lcom/facebook/yoga/YogaMeasureMode;->$VALUES:[Lcom/facebook/yoga/YogaMeasureMode;
+    sput-object v5, Lcom/facebook/yoga/YogaMeasureMode;->$VALUES:[Lcom/facebook/yoga/YogaMeasureMode;
 
     return-void
 .end method
 
 .method private constructor <init>(Ljava/lang/String;II)V
     .locals 0
+    .param p3, "intValue"    # I
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(I)V"
@@ -103,29 +95,18 @@
     .line 21
     iput p3, p0, Lcom/facebook/yoga/YogaMeasureMode;->mIntValue:I
 
+    .line 22
     return-void
 .end method
 
 .method public static fromInt(I)Lcom/facebook/yoga/YogaMeasureMode;
     .locals 3
+    .param p0, "value"    # I
 
-    if-eqz p0, :cond_2
-
-    const/4 v0, 0x1
-
-    if-eq p0, v0, :cond_1
-
-    const/4 v0, 0x2
-
-    if-ne p0, v0, :cond_0
-
-    .line 32
-    sget-object p0, Lcom/facebook/yoga/YogaMeasureMode;->AT_MOST:Lcom/facebook/yoga/YogaMeasureMode;
-
-    return-object p0
+    .line 29
+    packed-switch p0, :pswitch_data_0
 
     .line 33
-    :cond_0
     new-instance v0, Ljava/lang/IllegalArgumentException;
 
     new-instance v1, Ljava/lang/StringBuilder;
@@ -136,42 +117,62 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    move-result-object v1
+
     invoke-virtual {v1, p0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object p0
+    move-result-object v1
 
-    invoke-direct {v0, p0}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
 
     throw v0
 
-    .line 31
-    :cond_1
-    sget-object p0, Lcom/facebook/yoga/YogaMeasureMode;->EXACTLY:Lcom/facebook/yoga/YogaMeasureMode;
+    .line 32
+    :pswitch_0
+    sget-object v0, Lcom/facebook/yoga/YogaMeasureMode;->AT_MOST:Lcom/facebook/yoga/YogaMeasureMode;
 
-    return-object p0
+    return-object v0
+
+    .line 31
+    :pswitch_1
+    sget-object v0, Lcom/facebook/yoga/YogaMeasureMode;->EXACTLY:Lcom/facebook/yoga/YogaMeasureMode;
+
+    return-object v0
 
     .line 30
-    :cond_2
-    sget-object p0, Lcom/facebook/yoga/YogaMeasureMode;->UNDEFINED:Lcom/facebook/yoga/YogaMeasureMode;
+    :pswitch_2
+    sget-object v0, Lcom/facebook/yoga/YogaMeasureMode;->UNDEFINED:Lcom/facebook/yoga/YogaMeasureMode;
 
-    return-object p0
+    return-object v0
+
+    nop
+
+    :pswitch_data_0
+    .packed-switch 0x0
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method public static valueOf(Ljava/lang/String;)Lcom/facebook/yoga/YogaMeasureMode;
     .locals 1
+    .param p0, "name"    # Ljava/lang/String;
 
     .line 12
     const-class v0, Lcom/facebook/yoga/YogaMeasureMode;
 
     invoke-static {v0, p0}, Ljava/lang/Enum;->valueOf(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
 
-    move-result-object p0
+    move-result-object v0
 
-    check-cast p0, Lcom/facebook/yoga/YogaMeasureMode;
+    check-cast v0, Lcom/facebook/yoga/YogaMeasureMode;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method public static values()[Lcom/facebook/yoga/YogaMeasureMode;

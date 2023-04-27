@@ -4,12 +4,6 @@
 
 
 # annotations
-.annotation build Landroid/annotation/SuppressLint;
-    value = {
-        "HardwareIds"
-    }
-.end annotation
-
 .annotation runtime Lcom/facebook/react/module/annotations/ReactModule;
     name = "PlatformConstants"
 .end annotation
@@ -24,10 +18,12 @@
 # direct methods
 .method public constructor <init>(Lcom/facebook/react/bridge/ReactApplicationContext;)V
     .locals 0
+    .param p1, "reactContext"    # Lcom/facebook/react/bridge/ReactApplicationContext;
 
     .line 39
     invoke-direct {p0, p1}, Lcom/facebook/react/bridge/ReactContextBaseJavaModule;-><init>(Lcom/facebook/react/bridge/ReactApplicationContext;)V
 
+    .line 40
     return-void
 .end method
 
@@ -48,58 +44,60 @@
     check-cast v0, Landroid/app/UiModeManager;
 
     .line 47
+    .local v0, "uiModeManager":Landroid/app/UiModeManager;
     invoke-virtual {v0}, Landroid/app/UiModeManager;->getCurrentModeType()I
 
-    move-result v0
+    move-result v1
 
-    const/4 v1, 0x1
+    packed-switch v1, :pswitch_data_0
 
-    if-eq v0, v1, :cond_4
+    .line 59
+    :pswitch_0
+    const-string v1, "unknown"
 
-    const/4 v1, 0x2
+    return-object v1
 
-    if-eq v0, v1, :cond_3
+    .line 55
+    :pswitch_1
+    const-string v1, "watch"
 
-    const/4 v1, 0x3
+    return-object v1
 
-    if-eq v0, v1, :cond_2
+    .line 49
+    :pswitch_2
+    const-string v1, "tv"
 
-    const/4 v1, 0x4
+    return-object v1
 
-    if-eq v0, v1, :cond_1
+    .line 51
+    :pswitch_3
+    const-string v1, "car"
 
-    const/4 v1, 0x6
+    return-object v1
 
-    if-eq v0, v1, :cond_0
+    .line 53
+    :pswitch_4
+    const-string v1, "desk"
 
-    const-string v0, "unknown"
+    return-object v1
 
-    return-object v0
+    .line 57
+    :pswitch_5
+    const-string v1, "normal"
 
-    :cond_0
-    const-string v0, "watch"
+    return-object v1
 
-    return-object v0
+    nop
 
-    :cond_1
-    const-string v0, "tv"
-
-    return-object v0
-
-    :cond_2
-    const-string v0, "car"
-
-    return-object v0
-
-    :cond_3
-    const-string v0, "desk"
-
-    return-object v0
-
-    :cond_4
-    const-string v0, "normal"
-
-    return-object v0
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_5
+        :pswitch_4
+        :pswitch_3
+        :pswitch_2
+        :pswitch_0
+        :pswitch_1
+    .end packed-switch
 .end method
 
 
@@ -149,6 +147,7 @@
     invoke-direct {v0}, Ljava/util/HashMap;-><init>()V
 
     .line 71
+    .local v0, "constants":Ljava/util/HashMap;, "Ljava/util/HashMap<Ljava/lang/String;Ljava/lang/Object;>;"
     sget v1, Landroid/os/Build$VERSION;->SDK_INT:I
 
     invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -160,36 +159,36 @@
     invoke-virtual {v0, v2, v1}, Ljava/util/HashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
     .line 72
-    sget-object v1, Landroid/os/Build$VERSION;->RELEASE:Ljava/lang/String;
+    const-string v1, "Release"
 
-    const-string v2, "Release"
+    sget-object v2, Landroid/os/Build$VERSION;->RELEASE:Ljava/lang/String;
 
-    invoke-virtual {v0, v2, v1}, Ljava/util/HashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-virtual {v0, v1, v2}, Ljava/util/HashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
     .line 73
-    sget-object v1, Landroid/os/Build;->SERIAL:Ljava/lang/String;
+    const-string v1, "Serial"
 
-    const-string v2, "Serial"
+    sget-object v2, Landroid/os/Build;->SERIAL:Ljava/lang/String;
 
-    invoke-virtual {v0, v2, v1}, Ljava/util/HashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-virtual {v0, v1, v2}, Ljava/util/HashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
     .line 74
-    sget-object v1, Landroid/os/Build;->FINGERPRINT:Ljava/lang/String;
+    const-string v1, "Fingerprint"
 
-    const-string v2, "Fingerprint"
+    sget-object v2, Landroid/os/Build;->FINGERPRINT:Ljava/lang/String;
 
-    invoke-virtual {v0, v2, v1}, Ljava/util/HashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-virtual {v0, v1, v2}, Ljava/util/HashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
     .line 75
-    sget-object v1, Landroid/os/Build;->MODEL:Ljava/lang/String;
+    const-string v1, "Model"
 
-    const-string v2, "Model"
+    sget-object v2, Landroid/os/Build;->MODEL:Ljava/lang/String;
 
-    invoke-virtual {v0, v2, v1}, Ljava/util/HashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
-
-    const-string v1, "IS_TESTING"
+    invoke-virtual {v0, v1, v2}, Ljava/util/HashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
     .line 79
+    const-string v1, "IS_TESTING"
+
     invoke-static {v1}, Ljava/lang/System;->getProperty(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v1
@@ -209,27 +208,29 @@
     invoke-virtual {v0, v2, v1}, Ljava/util/HashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
     .line 80
-    sget-object v1, Lcom/facebook/react/modules/systeminfo/ReactNativeVersion;->VERSION:Ljava/util/Map;
+    const-string v1, "reactNativeVersion"
 
-    const-string v2, "reactNativeVersion"
+    sget-object v2, Lcom/facebook/react/modules/systeminfo/ReactNativeVersion;->VERSION:Ljava/util/Map;
 
-    invoke-virtual {v0, v2, v1}, Ljava/util/HashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-virtual {v0, v1, v2}, Ljava/util/HashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
     .line 81
+    const-string v1, "uiMode"
+
     invoke-direct {p0}, Lcom/facebook/react/modules/systeminfo/AndroidInfoModule;->uiMode()Ljava/lang/String;
 
-    move-result-object v1
+    move-result-object v2
 
-    const-string v2, "uiMode"
+    invoke-virtual {v0, v1, v2}, Ljava/util/HashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    invoke-virtual {v0, v2, v1}, Ljava/util/HashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
-
+    .line 82
     return-object v0
 .end method
 
 .method public getName()Ljava/lang/String;
     .locals 1
 
+    .line 65
     const-string v0, "PlatformConstants"
 
     return-object v0

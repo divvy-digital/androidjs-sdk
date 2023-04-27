@@ -41,215 +41,264 @@
     .line 43
     invoke-direct {p0}, Lcom/facebook/react/views/art/ARTShapeShadowNode;-><init>()V
 
+    .line 41
     const/4 v0, 0x0
 
-    .line 41
     iput v0, p0, Lcom/facebook/react/views/art/ARTTextShadowNode;->mTextAlignment:I
 
+    .line 43
     return-void
 .end method
 
 .method private applyTextPropertiesToPaint(Landroid/graphics/Paint;)V
-    .locals 7
+    .locals 8
+    .param p1, "paint"    # Landroid/graphics/Paint;
 
     .line 100
     iget v0, p0, Lcom/facebook/react/views/art/ARTTextShadowNode;->mTextAlignment:I
 
-    const/4 v1, 0x2
-
-    const/4 v2, 0x1
-
-    if-eqz v0, :cond_2
-
-    if-eq v0, v2, :cond_1
-
-    if-eq v0, v1, :cond_0
+    .line 101
+    .local v0, "alignment":I
+    packed-switch v0, :pswitch_data_0
 
     goto :goto_0
 
     .line 109
-    :cond_0
-    sget-object v0, Landroid/graphics/Paint$Align;->CENTER:Landroid/graphics/Paint$Align;
+    :pswitch_0
+    sget-object v1, Landroid/graphics/Paint$Align;->CENTER:Landroid/graphics/Paint$Align;
 
-    invoke-virtual {p1, v0}, Landroid/graphics/Paint;->setTextAlign(Landroid/graphics/Paint$Align;)V
+    invoke-virtual {p1, v1}, Landroid/graphics/Paint;->setTextAlign(Landroid/graphics/Paint$Align;)V
 
     goto :goto_0
 
     .line 106
-    :cond_1
-    sget-object v0, Landroid/graphics/Paint$Align;->RIGHT:Landroid/graphics/Paint$Align;
+    :pswitch_1
+    sget-object v1, Landroid/graphics/Paint$Align;->RIGHT:Landroid/graphics/Paint$Align;
 
-    invoke-virtual {p1, v0}, Landroid/graphics/Paint;->setTextAlign(Landroid/graphics/Paint$Align;)V
+    invoke-virtual {p1, v1}, Landroid/graphics/Paint;->setTextAlign(Landroid/graphics/Paint$Align;)V
 
+    .line 107
     goto :goto_0
 
     .line 103
-    :cond_2
-    sget-object v0, Landroid/graphics/Paint$Align;->LEFT:Landroid/graphics/Paint$Align;
+    :pswitch_2
+    sget-object v1, Landroid/graphics/Paint$Align;->LEFT:Landroid/graphics/Paint$Align;
 
-    invoke-virtual {p1, v0}, Landroid/graphics/Paint;->setTextAlign(Landroid/graphics/Paint$Align;)V
+    invoke-virtual {p1, v1}, Landroid/graphics/Paint;->setTextAlign(Landroid/graphics/Paint$Align;)V
+
+    .line 104
+    nop
 
     .line 112
     :goto_0
-    iget-object v0, p0, Lcom/facebook/react/views/art/ARTTextShadowNode;->mFrame:Lcom/facebook/react/bridge/ReadableMap;
+    iget-object v1, p0, Lcom/facebook/react/views/art/ARTTextShadowNode;->mFrame:Lcom/facebook/react/bridge/ReadableMap;
 
-    if-eqz v0, :cond_9
-
-    const-string v3, "font"
+    if-eqz v1, :cond_6
 
     .line 113
-    invoke-interface {v0, v3}, Lcom/facebook/react/bridge/ReadableMap;->hasKey(Ljava/lang/String;)Z
+    const-string v2, "font"
 
-    move-result v0
+    invoke-interface {v1, v2}, Lcom/facebook/react/bridge/ReadableMap;->hasKey(Ljava/lang/String;)Z
 
-    if-eqz v0, :cond_9
+    move-result v1
+
+    if-eqz v1, :cond_6
 
     .line 114
-    iget-object v0, p0, Lcom/facebook/react/views/art/ARTTextShadowNode;->mFrame:Lcom/facebook/react/bridge/ReadableMap;
+    iget-object v1, p0, Lcom/facebook/react/views/art/ARTTextShadowNode;->mFrame:Lcom/facebook/react/bridge/ReadableMap;
 
-    invoke-interface {v0, v3}, Lcom/facebook/react/bridge/ReadableMap;->getMap(Ljava/lang/String;)Lcom/facebook/react/bridge/ReadableMap;
+    invoke-interface {v1, v2}, Lcom/facebook/react/bridge/ReadableMap;->getMap(Ljava/lang/String;)Lcom/facebook/react/bridge/ReadableMap;
 
-    move-result-object v0
+    move-result-object v1
 
-    if-eqz v0, :cond_9
+    .line 115
+    .local v1, "font":Lcom/facebook/react/bridge/ReadableMap;
+    if-eqz v1, :cond_6
 
-    const/high16 v3, 0x41400000    # 12.0f
-
-    const-string v4, "fontSize"
+    .line 116
+    const/high16 v2, 0x41400000    # 12.0f
 
     .line 117
-    invoke-interface {v0, v4}, Lcom/facebook/react/bridge/ReadableMap;->hasKey(Ljava/lang/String;)Z
+    .local v2, "fontSize":F
+    const-string v3, "fontSize"
 
-    move-result v5
-
-    if-eqz v5, :cond_3
-
-    .line 118
-    invoke-interface {v0, v4}, Lcom/facebook/react/bridge/ReadableMap;->getDouble(Ljava/lang/String;)D
-
-    move-result-wide v3
-
-    double-to-float v3, v3
-
-    .line 120
-    :cond_3
-    iget v4, p0, Lcom/facebook/react/views/art/ARTTextShadowNode;->mScale:F
-
-    mul-float v3, v3, v4
-
-    invoke-virtual {p1, v3}, Landroid/graphics/Paint;->setTextSize(F)V
-
-    const-string v3, "fontWeight"
-
-    .line 122
-    invoke-interface {v0, v3}, Lcom/facebook/react/bridge/ReadableMap;->hasKey(Ljava/lang/String;)Z
+    invoke-interface {v1, v3}, Lcom/facebook/react/bridge/ReadableMap;->hasKey(Ljava/lang/String;)Z
 
     move-result v4
 
-    const/4 v5, 0x0
+    if-eqz v4, :cond_0
 
-    if-eqz v4, :cond_4
+    .line 118
+    invoke-interface {v1, v3}, Lcom/facebook/react/bridge/ReadableMap;->getDouble(Ljava/lang/String;)D
 
-    invoke-interface {v0, v3}, Lcom/facebook/react/bridge/ReadableMap;->getString(Ljava/lang/String;)Ljava/lang/String;
+    move-result-wide v3
 
-    move-result-object v3
+    double-to-float v2, v3
+
+    .line 120
+    :cond_0
+    iget v3, p0, Lcom/facebook/react/views/art/ARTTextShadowNode;->mScale:F
+
+    mul-float v3, v3, v2
+
+    invoke-virtual {p1, v3}, Landroid/graphics/Paint;->setTextSize(F)V
+
+    .line 121
+    nop
+
+    .line 122
+    const-string v3, "fontWeight"
+
+    invoke-interface {v1, v3}, Lcom/facebook/react/bridge/ReadableMap;->hasKey(Ljava/lang/String;)Z
+
+    move-result v4
+
+    const/4 v5, 0x1
+
+    const/4 v6, 0x0
+
+    if-eqz v4, :cond_1
 
     const-string v4, "bold"
+
+    invoke-interface {v1, v3}, Lcom/facebook/react/bridge/ReadableMap;->getString(Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v3
 
     invoke-virtual {v4, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
     move-result v3
 
-    if-eqz v3, :cond_4
+    if-eqz v3, :cond_1
 
     const/4 v3, 0x1
 
     goto :goto_1
 
-    :cond_4
+    :cond_1
     const/4 v3, 0x0
 
+    .line 123
+    .local v3, "isBold":Z
     :goto_1
-    const-string v4, "fontStyle"
+    nop
 
     .line 124
-    invoke-interface {v0, v4}, Lcom/facebook/react/bridge/ReadableMap;->hasKey(Ljava/lang/String;)Z
+    const-string v4, "fontStyle"
 
-    move-result v6
+    invoke-interface {v1, v4}, Lcom/facebook/react/bridge/ReadableMap;->hasKey(Ljava/lang/String;)Z
 
-    if-eqz v6, :cond_5
+    move-result v7
 
-    invoke-interface {v0, v4}, Lcom/facebook/react/bridge/ReadableMap;->getString(Ljava/lang/String;)Ljava/lang/String;
+    if-eqz v7, :cond_2
+
+    const-string v7, "italic"
+
+    invoke-interface {v1, v4}, Lcom/facebook/react/bridge/ReadableMap;->getString(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v4
 
-    const-string v6, "italic"
-
-    invoke-virtual {v6, v4}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v7, v4}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
     move-result v4
 
-    if-eqz v4, :cond_5
-
-    const/4 v4, 0x1
+    if-eqz v4, :cond_2
 
     goto :goto_2
 
-    :cond_5
-    const/4 v4, 0x0
+    :cond_2
+    const/4 v5, 0x0
 
     :goto_2
-    if-eqz v3, :cond_6
+    move v4, v5
 
-    if-eqz v4, :cond_6
+    .line 126
+    .local v4, "isItalic":Z
+    if-eqz v3, :cond_3
 
-    const/4 v1, 0x3
+    if-eqz v4, :cond_3
 
+    .line 127
+    const/4 v5, 0x3
+
+    .local v5, "fontStyle":I
     goto :goto_3
 
-    :cond_6
-    if-eqz v3, :cond_7
+    .line 128
+    .end local v5    # "fontStyle":I
+    :cond_3
+    if-eqz v3, :cond_4
 
-    const/4 v1, 0x1
+    .line 129
+    const/4 v5, 0x1
 
+    .restart local v5    # "fontStyle":I
     goto :goto_3
 
-    :cond_7
-    if-eqz v4, :cond_8
+    .line 130
+    .end local v5    # "fontStyle":I
+    :cond_4
+    if-eqz v4, :cond_5
 
+    .line 131
+    const/4 v5, 0x2
+
+    .restart local v5    # "fontStyle":I
     goto :goto_3
 
-    :cond_8
-    const/4 v1, 0x0
-
-    :goto_3
-    const-string v2, "fontFamily"
+    .line 133
+    .end local v5    # "fontStyle":I
+    :cond_5
+    const/4 v5, 0x0
 
     .line 136
-    invoke-interface {v0, v2}, Lcom/facebook/react/bridge/ReadableMap;->getString(Ljava/lang/String;)Ljava/lang/String;
+    .restart local v5    # "fontStyle":I
+    :goto_3
+    const-string v6, "fontFamily"
 
-    move-result-object v0
+    invoke-interface {v1, v6}, Lcom/facebook/react/bridge/ReadableMap;->getString(Ljava/lang/String;)Ljava/lang/String;
 
-    invoke-static {v0, v1}, Landroid/graphics/Typeface;->create(Ljava/lang/String;I)Landroid/graphics/Typeface;
+    move-result-object v6
 
-    move-result-object v0
+    invoke-static {v6, v5}, Landroid/graphics/Typeface;->create(Ljava/lang/String;I)Landroid/graphics/Typeface;
 
-    invoke-virtual {p1, v0}, Landroid/graphics/Paint;->setTypeface(Landroid/graphics/Typeface;)Landroid/graphics/Typeface;
+    move-result-object v6
 
-    :cond_9
+    invoke-virtual {p1, v6}, Landroid/graphics/Paint;->setTypeface(Landroid/graphics/Typeface;)Landroid/graphics/Typeface;
+
+    .line 140
+    .end local v1    # "font":Lcom/facebook/react/bridge/ReadableMap;
+    .end local v2    # "fontSize":F
+    .end local v3    # "isBold":Z
+    .end local v4    # "isItalic":Z
+    .end local v5    # "fontStyle":I
+    :cond_6
     return-void
+
+    nop
+
+    :pswitch_data_0
+    .packed-switch 0x0
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method
 
 
 # virtual methods
 .method public draw(Landroid/graphics/Canvas;Landroid/graphics/Paint;F)V
-    .locals 9
+    .locals 10
+    .param p1, "canvas"    # Landroid/graphics/Canvas;
+    .param p2, "paint"    # Landroid/graphics/Paint;
+    .param p3, "opacity"    # F
 
     .line 57
     iget-object v0, p0, Lcom/facebook/react/views/art/ARTTextShadowNode;->mFrame:Lcom/facebook/react/bridge/ReadableMap;
 
     if-nez v0, :cond_0
 
+    .line 58
     return-void
 
     .line 60
@@ -258,12 +307,14 @@
 
     mul-float p3, p3, v0
 
+    .line 61
     const v0, 0x3c23d70a    # 0.01f
 
     cmpg-float v0, p3, v0
 
     if-gtz v0, :cond_1
 
+    .line 62
     return-void
 
     .line 64
@@ -278,6 +329,7 @@
 
     if-nez v0, :cond_2
 
+    .line 65
     return-void
 
     .line 67
@@ -288,9 +340,10 @@
 
     move-result-object v0
 
+    .line 68
+    .local v0, "linesProp":Lcom/facebook/react/bridge/ReadableArray;
     if-eqz v0, :cond_9
 
-    .line 68
     invoke-interface {v0}, Lcom/facebook/react/bridge/ReadableArray;->size()I
 
     move-result v1
@@ -310,9 +363,11 @@
 
     new-array v1, v1, [Ljava/lang/String;
 
+    .line 75
+    .local v1, "lines":[Ljava/lang/String;
     const/4 v2, 0x0
 
-    .line 75
+    .local v2, "i":I
     :goto_0
     array-length v3, v1
 
@@ -325,105 +380,108 @@
 
     aput-object v3, v1, v2
 
+    .line 75
     add-int/lit8 v2, v2, 0x1
 
     goto :goto_0
 
-    :cond_4
-    const-string v0, "\n"
-
     .line 78
-    invoke-static {v0, v1}, Landroid/text/TextUtils;->join(Ljava/lang/CharSequence;[Ljava/lang/Object;)Ljava/lang/String;
+    .end local v2    # "i":I
+    :cond_4
+    const-string v2, "\n"
 
-    move-result-object v0
+    invoke-static {v2, v1}, Landroid/text/TextUtils;->join(Ljava/lang/CharSequence;[Ljava/lang/Object;)Ljava/lang/String;
+
+    move-result-object v2
 
     .line 79
+    .local v2, "text":Ljava/lang/String;
     invoke-virtual {p0, p2, p3}, Lcom/facebook/react/views/art/ARTTextShadowNode;->setupStrokePaint(Landroid/graphics/Paint;F)Z
 
-    move-result v1
+    move-result v3
 
-    const/4 v8, 0x0
+    const/4 v9, 0x0
 
-    if-eqz v1, :cond_6
+    if-eqz v3, :cond_6
 
     .line 80
     invoke-direct {p0, p2}, Lcom/facebook/react/views/art/ARTTextShadowNode;->applyTextPropertiesToPaint(Landroid/graphics/Paint;)V
 
     .line 81
-    iget-object v1, p0, Lcom/facebook/react/views/art/ARTTextShadowNode;->mPath:Landroid/graphics/Path;
+    iget-object v3, p0, Lcom/facebook/react/views/art/ARTTextShadowNode;->mPath:Landroid/graphics/Path;
 
-    if-nez v1, :cond_5
+    if-nez v3, :cond_5
 
     .line 82
     invoke-virtual {p2}, Landroid/graphics/Paint;->ascent()F
 
-    move-result v1
+    move-result v3
 
-    neg-float v1, v1
+    neg-float v3, v3
 
-    invoke-virtual {p1, v0, v8, v1, p2}, Landroid/graphics/Canvas;->drawText(Ljava/lang/String;FFLandroid/graphics/Paint;)V
+    invoke-virtual {p1, v2, v9, v3, p2}, Landroid/graphics/Canvas;->drawText(Ljava/lang/String;FFLandroid/graphics/Paint;)V
 
     goto :goto_1
 
     .line 84
     :cond_5
-    iget-object v4, p0, Lcom/facebook/react/views/art/ARTTextShadowNode;->mPath:Landroid/graphics/Path;
-
-    const/4 v5, 0x0
+    iget-object v5, p0, Lcom/facebook/react/views/art/ARTTextShadowNode;->mPath:Landroid/graphics/Path;
 
     const/4 v6, 0x0
 
-    move-object v2, p1
+    const/4 v7, 0x0
 
-    move-object v3, v0
+    move-object v3, p1
 
-    move-object v7, p2
+    move-object v4, v2
 
-    invoke-virtual/range {v2 .. v7}, Landroid/graphics/Canvas;->drawTextOnPath(Ljava/lang/String;Landroid/graphics/Path;FFLandroid/graphics/Paint;)V
+    move-object v8, p2
+
+    invoke-virtual/range {v3 .. v8}, Landroid/graphics/Canvas;->drawTextOnPath(Ljava/lang/String;Landroid/graphics/Path;FFLandroid/graphics/Paint;)V
 
     .line 87
     :cond_6
     :goto_1
     invoke-virtual {p0, p2, p3}, Lcom/facebook/react/views/art/ARTTextShadowNode;->setupFillPaint(Landroid/graphics/Paint;F)Z
 
-    move-result p3
+    move-result v3
 
-    if-eqz p3, :cond_8
+    if-eqz v3, :cond_8
 
     .line 88
     invoke-direct {p0, p2}, Lcom/facebook/react/views/art/ARTTextShadowNode;->applyTextPropertiesToPaint(Landroid/graphics/Paint;)V
 
     .line 89
-    iget-object p3, p0, Lcom/facebook/react/views/art/ARTTextShadowNode;->mPath:Landroid/graphics/Path;
+    iget-object v3, p0, Lcom/facebook/react/views/art/ARTTextShadowNode;->mPath:Landroid/graphics/Path;
 
-    if-nez p3, :cond_7
+    if-nez v3, :cond_7
 
     .line 90
     invoke-virtual {p2}, Landroid/graphics/Paint;->ascent()F
 
-    move-result p3
+    move-result v3
 
-    neg-float p3, p3
+    neg-float v3, v3
 
-    invoke-virtual {p1, v0, v8, p3, p2}, Landroid/graphics/Canvas;->drawText(Ljava/lang/String;FFLandroid/graphics/Paint;)V
+    invoke-virtual {p1, v2, v9, v3, p2}, Landroid/graphics/Canvas;->drawText(Ljava/lang/String;FFLandroid/graphics/Paint;)V
 
     goto :goto_2
 
     .line 92
     :cond_7
-    iget-object v4, p0, Lcom/facebook/react/views/art/ARTTextShadowNode;->mPath:Landroid/graphics/Path;
-
-    const/4 v5, 0x0
+    iget-object v5, p0, Lcom/facebook/react/views/art/ARTTextShadowNode;->mPath:Landroid/graphics/Path;
 
     const/4 v6, 0x0
 
-    move-object v2, p1
+    const/4 v7, 0x0
 
-    move-object v3, v0
+    move-object v3, p1
 
-    move-object v7, p2
+    move-object v4, v2
 
-    invoke-virtual/range {v2 .. v7}, Landroid/graphics/Canvas;->drawTextOnPath(Ljava/lang/String;Landroid/graphics/Path;FFLandroid/graphics/Paint;)V
+    move-object v8, p2
+
+    invoke-virtual/range {v3 .. v8}, Landroid/graphics/Canvas;->drawTextOnPath(Ljava/lang/String;Landroid/graphics/Path;FFLandroid/graphics/Paint;)V
 
     .line 95
     :cond_8
@@ -433,6 +491,12 @@
     .line 96
     invoke-virtual {p0}, Lcom/facebook/react/views/art/ARTTextShadowNode;->markUpdateSeen()V
 
+    .line 97
+    return-void
+
+    .line 69
+    .end local v1    # "lines":[Ljava/lang/String;
+    .end local v2    # "text":Ljava/lang/String;
     :cond_9
     :goto_3
     return-void
@@ -440,6 +504,7 @@
 
 .method public setAlignment(I)V
     .locals 0
+    .param p1, "alignment"    # I
     .annotation runtime Lcom/facebook/react/uimanager/annotations/ReactProp;
         defaultInt = 0x0
         name = "alignment"
@@ -448,12 +513,13 @@
     .line 52
     iput p1, p0, Lcom/facebook/react/views/art/ARTTextShadowNode;->mTextAlignment:I
 
+    .line 53
     return-void
 .end method
 
 .method public setFrame(Lcom/facebook/react/bridge/ReadableMap;)V
     .locals 0
-    .param p1    # Lcom/facebook/react/bridge/ReadableMap;
+    .param p1, "frame"    # Lcom/facebook/react/bridge/ReadableMap;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
@@ -464,5 +530,6 @@
     .line 47
     iput-object p1, p0, Lcom/facebook/react/views/art/ARTTextShadowNode;->mFrame:Lcom/facebook/react/bridge/ReadableMap;
 
+    .line 48
     return-void
 .end method

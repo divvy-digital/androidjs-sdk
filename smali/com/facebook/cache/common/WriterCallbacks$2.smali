@@ -37,6 +37,7 @@
 # virtual methods
 .method public write(Ljava/io/OutputStream;)V
     .locals 1
+    .param p1, "os"    # Ljava/io/OutputStream;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -48,5 +49,6 @@
 
     invoke-virtual {p1, v0}, Ljava/io/OutputStream;->write([B)V
 
+    .line 49
     return-void
 .end method

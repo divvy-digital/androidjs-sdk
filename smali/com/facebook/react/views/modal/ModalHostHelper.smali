@@ -49,11 +49,12 @@
 .end method
 
 .method public static getModalHostSize(Landroid/content/Context;)Landroid/graphics/Point;
-    .locals 5
-
-    const-string v0, "window"
+    .locals 13
+    .param p0, "context"    # Landroid/content/Context;
 
     .line 37
+    const-string v0, "window"
+
     invoke-virtual {p0, v0}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
 
     move-result-object v0
@@ -61,125 +62,126 @@
     check-cast v0, Landroid/view/WindowManager;
 
     .line 38
+    .local v0, "wm":Landroid/view/WindowManager;
     invoke-static {v0}, Lcom/facebook/infer/annotation/Assertions;->assertNotNull(Ljava/lang/Object;)Ljava/lang/Object;
 
-    move-result-object v0
+    move-result-object v1
 
-    check-cast v0, Landroid/view/WindowManager;
+    check-cast v1, Landroid/view/WindowManager;
 
-    invoke-interface {v0}, Landroid/view/WindowManager;->getDefaultDisplay()Landroid/view/Display;
+    invoke-interface {v1}, Landroid/view/WindowManager;->getDefaultDisplay()Landroid/view/Display;
 
-    move-result-object v0
+    move-result-object v1
 
     .line 40
-    sget-object v1, Lcom/facebook/react/views/modal/ModalHostHelper;->MIN_POINT:Landroid/graphics/Point;
+    .local v1, "display":Landroid/view/Display;
+    sget-object v2, Lcom/facebook/react/views/modal/ModalHostHelper;->MIN_POINT:Landroid/graphics/Point;
 
-    sget-object v2, Lcom/facebook/react/views/modal/ModalHostHelper;->MAX_POINT:Landroid/graphics/Point;
+    sget-object v3, Lcom/facebook/react/views/modal/ModalHostHelper;->MAX_POINT:Landroid/graphics/Point;
 
-    invoke-virtual {v0, v1, v2}, Landroid/view/Display;->getCurrentSizeRange(Landroid/graphics/Point;Landroid/graphics/Point;)V
+    invoke-virtual {v1, v2, v3}, Landroid/view/Display;->getCurrentSizeRange(Landroid/graphics/Point;Landroid/graphics/Point;)V
 
     .line 42
-    sget-object v1, Lcom/facebook/react/views/modal/ModalHostHelper;->SIZE_POINT:Landroid/graphics/Point;
+    sget-object v4, Lcom/facebook/react/views/modal/ModalHostHelper;->SIZE_POINT:Landroid/graphics/Point;
 
-    invoke-virtual {v0, v1}, Landroid/view/Display;->getSize(Landroid/graphics/Point;)V
-
-    const/4 v0, 0x1
+    invoke-virtual {v1, v4}, Landroid/view/Display;->getSize(Landroid/graphics/Point;)V
 
     .line 44
-    new-array v0, v0, [I
+    const/4 v5, 0x1
 
-    const/4 v1, 0x0
+    new-array v5, v5, [I
 
-    const v2, 0x101020d
+    const v6, 0x101020d
 
-    aput v2, v0, v1
+    const/4 v7, 0x0
+
+    aput v6, v5, v7
 
     .line 45
+    .local v5, "attrs":[I
     invoke-virtual {p0}, Landroid/content/Context;->getTheme()Landroid/content/res/Resources$Theme;
 
-    move-result-object v2
+    move-result-object v6
 
     .line 46
-    invoke-virtual {v2, v0}, Landroid/content/res/Resources$Theme;->obtainStyledAttributes([I)Landroid/content/res/TypedArray;
+    .local v6, "theme":Landroid/content/res/Resources$Theme;
+    invoke-virtual {v6, v5}, Landroid/content/res/Resources$Theme;->obtainStyledAttributes([I)Landroid/content/res/TypedArray;
 
-    move-result-object v0
+    move-result-object v8
 
     .line 47
-    invoke-virtual {v0, v1, v1}, Landroid/content/res/TypedArray;->getBoolean(IZ)Z
+    .local v8, "ta":Landroid/content/res/TypedArray;
+    invoke-virtual {v8, v7, v7}, Landroid/content/res/TypedArray;->getBoolean(IZ)Z
 
-    move-result v0
+    move-result v7
 
     .line 51
+    .local v7, "windowFullscreen":Z
     invoke-virtual {p0}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
 
-    move-result-object p0
-
-    const-string v2, "status_bar_height"
-
-    const-string v3, "dimen"
-
-    const-string v4, "android"
+    move-result-object v9
 
     .line 52
-    invoke-virtual {p0, v2, v3, v4}, Landroid/content/res/Resources;->getIdentifier(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I
+    .local v9, "resources":Landroid/content/res/Resources;
+    const-string v10, "dimen"
 
-    move-result v2
+    const-string v11, "android"
 
-    if-eqz v0, :cond_0
+    const-string v12, "status_bar_height"
 
-    if-lez v2, :cond_0
+    invoke-virtual {v9, v12, v10, v11}, Landroid/content/res/Resources;->getIdentifier(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I
+
+    move-result v10
+
+    .line 53
+    .local v10, "statusBarId":I
+    const/4 v11, 0x0
+
+    .line 54
+    .local v11, "statusBarHeight":I
+    if-eqz v7, :cond_0
+
+    if-lez v10, :cond_0
 
     .line 55
-    invoke-virtual {p0, v2}, Landroid/content/res/Resources;->getDimension(I)F
+    invoke-virtual {v9, v10}, Landroid/content/res/Resources;->getDimension(I)F
 
-    move-result p0
+    move-result v12
 
-    float-to-int v1, p0
+    float-to-int v11, v12
 
     .line 58
     :cond_0
-    sget-object p0, Lcom/facebook/react/views/modal/ModalHostHelper;->SIZE_POINT:Landroid/graphics/Point;
+    iget v12, v4, Landroid/graphics/Point;->x:I
 
-    iget p0, p0, Landroid/graphics/Point;->x:I
+    iget v4, v4, Landroid/graphics/Point;->y:I
 
-    sget-object v0, Lcom/facebook/react/views/modal/ModalHostHelper;->SIZE_POINT:Landroid/graphics/Point;
-
-    iget v0, v0, Landroid/graphics/Point;->y:I
-
-    if-ge p0, v0, :cond_1
+    if-ge v12, v4, :cond_1
 
     .line 60
-    new-instance p0, Landroid/graphics/Point;
+    new-instance v4, Landroid/graphics/Point;
 
-    sget-object v0, Lcom/facebook/react/views/modal/ModalHostHelper;->MIN_POINT:Landroid/graphics/Point;
+    iget v2, v2, Landroid/graphics/Point;->x:I
 
-    iget v0, v0, Landroid/graphics/Point;->x:I
+    iget v3, v3, Landroid/graphics/Point;->y:I
 
-    sget-object v2, Lcom/facebook/react/views/modal/ModalHostHelper;->MAX_POINT:Landroid/graphics/Point;
+    add-int/2addr v3, v11
 
-    iget v2, v2, Landroid/graphics/Point;->y:I
+    invoke-direct {v4, v2, v3}, Landroid/graphics/Point;-><init>(II)V
 
-    add-int/2addr v2, v1
-
-    invoke-direct {p0, v0, v2}, Landroid/graphics/Point;-><init>(II)V
-
-    return-object p0
+    return-object v4
 
     .line 63
     :cond_1
-    new-instance p0, Landroid/graphics/Point;
+    new-instance v4, Landroid/graphics/Point;
 
-    sget-object v0, Lcom/facebook/react/views/modal/ModalHostHelper;->MAX_POINT:Landroid/graphics/Point;
-
-    iget v0, v0, Landroid/graphics/Point;->x:I
-
-    sget-object v2, Lcom/facebook/react/views/modal/ModalHostHelper;->MIN_POINT:Landroid/graphics/Point;
+    iget v3, v3, Landroid/graphics/Point;->x:I
 
     iget v2, v2, Landroid/graphics/Point;->y:I
 
-    add-int/2addr v2, v1
+    add-int/2addr v2, v11
 
-    invoke-direct {p0, v0, v2}, Landroid/graphics/Point;-><init>(II)V
+    invoke-direct {v4, v3, v2}, Landroid/graphics/Point;-><init>(II)V
 
-    return-object p0
+    return-object v4
 .end method

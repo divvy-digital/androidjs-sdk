@@ -10,9 +10,6 @@
     }
 .end annotation
 
-.annotation build Ljavax/annotation/concurrent/ThreadSafe;
-.end annotation
-
 
 # static fields
 .field private static final RESTAT_INTERVAL_MS:J
@@ -34,10 +31,6 @@
 .field private volatile mInternalStatFs:Landroid/os/StatFs;
 
 .field private mLastRestatTime:J
-    .annotation build Ljavax/annotation/concurrent/GuardedBy;
-        value = "lock"
-    .end annotation
-.end field
 
 
 # direct methods
@@ -64,17 +57,17 @@
     .line 72
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
+    .line 47
     const/4 v0, 0x0
 
-    .line 47
     iput-object v0, p0, Lcom/facebook/common/statfs/StatFsHelper;->mInternalStatFs:Landroid/os/StatFs;
 
     .line 50
     iput-object v0, p0, Lcom/facebook/common/statfs/StatFsHelper;->mExternalStatFs:Landroid/os/StatFs;
 
+    .line 57
     const/4 v0, 0x0
 
-    .line 57
     iput-boolean v0, p0, Lcom/facebook/common/statfs/StatFsHelper;->mInitialized:Z
 
     .line 73
@@ -84,11 +77,13 @@
 
     iput-object v0, p0, Lcom/facebook/common/statfs/StatFsHelper;->lock:Ljava/util/concurrent/locks/Lock;
 
+    .line 74
     return-void
 .end method
 
 .method protected static createStatFs(Ljava/lang/String;)Landroid/os/StatFs;
     .locals 1
+    .param p0, "path"    # Ljava/lang/String;
 
     .line 285
     new-instance v0, Landroid/os/StatFs;
@@ -134,9 +129,9 @@
     .line 86
     invoke-direct {p0}, Lcom/facebook/common/statfs/StatFsHelper;->updateStats()V
 
+    .line 87
     const/4 v0, 0x1
 
-    .line 87
     iput-boolean v0, p0, Lcom/facebook/common/statfs/StatFsHelper;->mInitialized:Z
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
@@ -147,8 +142,10 @@
 
     invoke-interface {v0}, Ljava/util/concurrent/locks/Lock;->unlock()V
 
+    .line 91
     goto :goto_0
 
+    .line 90
     :catchall_0
     move-exception v0
 
@@ -159,6 +156,7 @@
     .line 91
     throw v0
 
+    .line 93
     :cond_1
     :goto_0
     return-void
@@ -194,6 +192,7 @@
 
     return-object v1
 
+    .line 59
     :catchall_0
     move-exception v1
 
@@ -241,8 +240,10 @@
 
     invoke-interface {v0}, Ljava/util/concurrent/locks/Lock;->unlock()V
 
+    .line 213
     goto :goto_0
 
+    .line 212
     :catchall_0
     move-exception v0
 
@@ -253,6 +254,7 @@
     .line 213
     throw v0
 
+    .line 215
     :cond_1
     :goto_0
     return-void
@@ -260,9 +262,6 @@
 
 .method private updateStats()V
     .locals 2
-    .annotation build Ljavax/annotation/concurrent/GuardedBy;
-        value = "lock"
-    .end annotation
 
     .line 243
     iget-object v0, p0, Lcom/facebook/common/statfs/StatFsHelper;->mInternalStatFs:Landroid/os/StatFs;
@@ -293,33 +292,33 @@
 
     iput-wide v0, p0, Lcom/facebook/common/statfs/StatFsHelper;->mLastRestatTime:J
 
+    .line 246
     return-void
 .end method
 
 .method private updateStatsHelper(Landroid/os/StatFs;Ljava/io/File;)Landroid/os/StatFs;
     .locals 2
-    .param p1    # Landroid/os/StatFs;
+    .param p1, "statfs"    # Landroid/os/StatFs;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
-    .param p2    # Ljava/io/File;
+    .param p2, "dir"    # Ljava/io/File;
         .annotation runtime Ljavax/annotation/Nullable;
         .end annotation
     .end param
-
-    const/4 v0, 0x0
-
-    if-eqz p2, :cond_2
 
     .line 254
+    if-eqz p2, :cond_2
+
     invoke-virtual {p2}, Ljava/io/File;->exists()Z
 
-    move-result v1
+    move-result v0
 
-    if-nez v1, :cond_0
+    if-nez v0, :cond_0
 
     goto :goto_1
 
+    .line 260
     :cond_0
     if-nez p1, :cond_1
 
@@ -327,11 +326,13 @@
     :try_start_0
     invoke-virtual {p2}, Ljava/io/File;->getAbsolutePath()Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v0
 
-    invoke-static {p1}, Lcom/facebook/common/statfs/StatFsHelper;->createStatFs(Ljava/lang/String;)Landroid/os/StatFs;
+    invoke-static {v0}, Lcom/facebook/common/statfs/StatFsHelper;->createStatFs(Ljava/lang/String;)Landroid/os/StatFs;
 
-    move-result-object p1
+    move-result-object v0
+
+    move-object p1, v0
 
     goto :goto_0
 
@@ -339,43 +340,57 @@
     :cond_1
     invoke-virtual {p2}, Ljava/io/File;->getAbsolutePath()Ljava/lang/String;
 
-    move-result-object p2
+    move-result-object v0
 
-    invoke-virtual {p1, p2}, Landroid/os/StatFs;->restat(Ljava/lang/String;)V
+    invoke-virtual {p1, v0}, Landroid/os/StatFs;->restat(Ljava/lang/String;)V
     :try_end_0
-    .catch Ljava/lang/IllegalArgumentException; {:try_start_0 .. :try_end_0} :catch_1
-    .catch Ljava/lang/Throwable; {:try_start_0 .. :try_end_0} :catch_0
+    .catch Ljava/lang/IllegalArgumentException; {:try_start_0 .. :try_end_0} :catch_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    :goto_0
-    move-object v0, p1
+    goto :goto_0
 
-    goto :goto_1
-
-    :catch_0
-    move-exception p1
+    .line 276
+    :catchall_0
+    move-exception v0
 
     .line 278
-    invoke-static {p1}, Lcom/facebook/common/internal/Throwables;->propagate(Ljava/lang/Throwable;)Ljava/lang/RuntimeException;
+    .local v0, "ex":Ljava/lang/Throwable;
+    invoke-static {v0}, Lcom/facebook/common/internal/Throwables;->propagate(Ljava/lang/Throwable;)Ljava/lang/RuntimeException;
 
-    move-result-object p1
+    move-result-object v1
 
-    throw p1
+    throw v1
 
-    :catch_1
+    .line 267
+    .end local v0    # "ex":Ljava/lang/Throwable;
+    :catch_0
+    move-exception v0
+
+    .line 275
+    .local v0, "ex":Ljava/lang/IllegalArgumentException;
+    const/4 p1, 0x0
+
+    .line 279
+    .end local v0    # "ex":Ljava/lang/IllegalArgumentException;
+    :goto_0
+    nop
+
+    .line 281
+    return-object p1
+
+    .line 256
     :cond_2
     :goto_1
+    const/4 v0, 0x0
+
     return-object v0
 .end method
 
 
 # virtual methods
 .method public getAvailableStorageSpace(Lcom/facebook/common/statfs/StatFsHelper$StorageType;)J
-    .locals 4
-    .annotation build Landroid/annotation/SuppressLint;
-        value = {
-            "DeprecatedMethod"
-        }
-    .end annotation
+    .locals 7
+    .param p1, "storageType"    # Lcom/facebook/common/statfs/StatFsHelper$StorageType;
 
     .line 178
     invoke-direct {p0}, Lcom/facebook/common/statfs/StatFsHelper;->ensureInitialized()V
@@ -388,68 +403,50 @@
 
     if-ne p1, v0, :cond_0
 
-    iget-object p1, p0, Lcom/facebook/common/statfs/StatFsHelper;->mInternalStatFs:Landroid/os/StatFs;
+    iget-object v0, p0, Lcom/facebook/common/statfs/StatFsHelper;->mInternalStatFs:Landroid/os/StatFs;
 
     goto :goto_0
 
     :cond_0
-    iget-object p1, p0, Lcom/facebook/common/statfs/StatFsHelper;->mExternalStatFs:Landroid/os/StatFs;
+    iget-object v0, p0, Lcom/facebook/common/statfs/StatFsHelper;->mExternalStatFs:Landroid/os/StatFs;
 
+    .line 183
+    .local v0, "statFS":Landroid/os/StatFs;
     :goto_0
-    if-eqz p1, :cond_2
+    if-eqz v0, :cond_1
 
     .line 185
-    sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    const/16 v1, 0x12
-
-    if-lt v0, v1, :cond_1
+    nop
 
     .line 186
-    invoke-virtual {p1}, Landroid/os/StatFs;->getBlockSizeLong()J
+    invoke-virtual {v0}, Landroid/os/StatFs;->getBlockSizeLong()J
 
-    move-result-wide v0
+    move-result-wide v1
 
     .line 187
-    invoke-virtual {p1}, Landroid/os/StatFs;->getAvailableBlocksLong()J
+    .local v1, "blockSize":J
+    invoke-virtual {v0}, Landroid/os/StatFs;->getAvailableBlocksLong()J
 
-    move-result-wide v2
+    move-result-wide v3
 
-    goto :goto_1
+    .line 192
+    .local v3, "availableBlocks":J
+    mul-long v5, v1, v3
 
-    .line 189
+    return-wide v5
+
+    .line 194
+    .end local v1    # "blockSize":J
+    .end local v3    # "availableBlocks":J
     :cond_1
-    invoke-virtual {p1}, Landroid/os/StatFs;->getBlockSize()I
+    const-wide/16 v1, 0x0
 
-    move-result v0
-
-    int-to-long v0, v0
-
-    .line 190
-    invoke-virtual {p1}, Landroid/os/StatFs;->getAvailableBlocks()I
-
-    move-result p1
-
-    int-to-long v2, p1
-
-    :goto_1
-    mul-long v0, v0, v2
-
-    return-wide v0
-
-    :cond_2
-    const-wide/16 v0, 0x0
-
-    return-wide v0
+    return-wide v1
 .end method
 
 .method public getFreeStorageSpace(Lcom/facebook/common/statfs/StatFsHelper$StorageType;)J
-    .locals 4
-    .annotation build Landroid/annotation/SuppressLint;
-        value = {
-            "DeprecatedMethod"
-        }
-    .end annotation
+    .locals 7
+    .param p1, "storageType"    # Lcom/facebook/common/statfs/StatFsHelper$StorageType;
 
     .line 124
     invoke-direct {p0}, Lcom/facebook/common/statfs/StatFsHelper;->ensureInitialized()V
@@ -462,68 +459,50 @@
 
     if-ne p1, v0, :cond_0
 
-    iget-object p1, p0, Lcom/facebook/common/statfs/StatFsHelper;->mInternalStatFs:Landroid/os/StatFs;
+    iget-object v0, p0, Lcom/facebook/common/statfs/StatFsHelper;->mInternalStatFs:Landroid/os/StatFs;
 
     goto :goto_0
 
     :cond_0
-    iget-object p1, p0, Lcom/facebook/common/statfs/StatFsHelper;->mExternalStatFs:Landroid/os/StatFs;
+    iget-object v0, p0, Lcom/facebook/common/statfs/StatFsHelper;->mExternalStatFs:Landroid/os/StatFs;
 
+    .line 129
+    .local v0, "statFS":Landroid/os/StatFs;
     :goto_0
-    if-eqz p1, :cond_2
+    if-eqz v0, :cond_1
 
     .line 131
-    sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    const/16 v1, 0x12
-
-    if-lt v0, v1, :cond_1
+    nop
 
     .line 132
-    invoke-virtual {p1}, Landroid/os/StatFs;->getBlockSizeLong()J
+    invoke-virtual {v0}, Landroid/os/StatFs;->getBlockSizeLong()J
 
-    move-result-wide v0
+    move-result-wide v1
 
     .line 133
-    invoke-virtual {p1}, Landroid/os/StatFs;->getFreeBlocksLong()J
+    .local v1, "blockSize":J
+    invoke-virtual {v0}, Landroid/os/StatFs;->getFreeBlocksLong()J
 
-    move-result-wide v2
+    move-result-wide v3
 
-    goto :goto_1
+    .line 138
+    .local v3, "availableBlocks":J
+    mul-long v5, v1, v3
 
-    .line 135
+    return-wide v5
+
+    .line 140
+    .end local v1    # "blockSize":J
+    .end local v3    # "availableBlocks":J
     :cond_1
-    invoke-virtual {p1}, Landroid/os/StatFs;->getBlockSize()I
+    const-wide/16 v1, -0x1
 
-    move-result v0
-
-    int-to-long v0, v0
-
-    .line 136
-    invoke-virtual {p1}, Landroid/os/StatFs;->getFreeBlocks()I
-
-    move-result p1
-
-    int-to-long v2, p1
-
-    :goto_1
-    mul-long v0, v0, v2
-
-    return-wide v0
-
-    :cond_2
-    const-wide/16 v0, -0x1
-
-    return-wide v0
+    return-wide v1
 .end method
 
 .method public getTotalStorageSpace(Lcom/facebook/common/statfs/StatFsHelper$StorageType;)J
-    .locals 4
-    .annotation build Landroid/annotation/SuppressLint;
-        value = {
-            "DeprecatedMethod"
-        }
-    .end annotation
+    .locals 7
+    .param p1, "storageType"    # Lcom/facebook/common/statfs/StatFsHelper$StorageType;
 
     .line 151
     invoke-direct {p0}, Lcom/facebook/common/statfs/StatFsHelper;->ensureInitialized()V
@@ -536,59 +515,45 @@
 
     if-ne p1, v0, :cond_0
 
-    iget-object p1, p0, Lcom/facebook/common/statfs/StatFsHelper;->mInternalStatFs:Landroid/os/StatFs;
+    iget-object v0, p0, Lcom/facebook/common/statfs/StatFsHelper;->mInternalStatFs:Landroid/os/StatFs;
 
     goto :goto_0
 
     :cond_0
-    iget-object p1, p0, Lcom/facebook/common/statfs/StatFsHelper;->mExternalStatFs:Landroid/os/StatFs;
+    iget-object v0, p0, Lcom/facebook/common/statfs/StatFsHelper;->mExternalStatFs:Landroid/os/StatFs;
 
+    .line 156
+    .local v0, "statFS":Landroid/os/StatFs;
     :goto_0
-    if-eqz p1, :cond_2
+    if-eqz v0, :cond_1
 
     .line 158
-    sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
-
-    const/16 v1, 0x12
-
-    if-lt v0, v1, :cond_1
+    nop
 
     .line 159
-    invoke-virtual {p1}, Landroid/os/StatFs;->getBlockSizeLong()J
+    invoke-virtual {v0}, Landroid/os/StatFs;->getBlockSizeLong()J
 
-    move-result-wide v0
+    move-result-wide v1
 
     .line 160
-    invoke-virtual {p1}, Landroid/os/StatFs;->getBlockCountLong()J
+    .local v1, "blockSize":J
+    invoke-virtual {v0}, Landroid/os/StatFs;->getBlockCountLong()J
 
-    move-result-wide v2
+    move-result-wide v3
 
-    goto :goto_1
+    .line 165
+    .local v3, "totalBlocks":J
+    mul-long v5, v1, v3
 
-    .line 162
+    return-wide v5
+
+    .line 167
+    .end local v1    # "blockSize":J
+    .end local v3    # "totalBlocks":J
     :cond_1
-    invoke-virtual {p1}, Landroid/os/StatFs;->getBlockSize()I
+    const-wide/16 v1, -0x1
 
-    move-result v0
-
-    int-to-long v0, v0
-
-    .line 163
-    invoke-virtual {p1}, Landroid/os/StatFs;->getBlockCount()I
-
-    move-result p1
-
-    int-to-long v2, p1
-
-    :goto_1
-    mul-long v0, v0, v2
-
-    return-wide v0
-
-    :cond_2
-    const-wide/16 v0, -0x1
-
-    return-wide v0
+    return-wide v1
 .end method
 
 .method public resetStats()V
@@ -617,8 +582,10 @@
 
     invoke-interface {v0}, Ljava/util/concurrent/locks/Lock;->unlock()V
 
+    .line 232
     goto :goto_0
 
+    .line 231
     :catchall_0
     move-exception v0
 
@@ -629,13 +596,16 @@
     .line 232
     throw v0
 
+    .line 234
     :cond_0
     :goto_0
     return-void
 .end method
 
 .method public testLowDiskSpace(Lcom/facebook/common/statfs/StatFsHelper$StorageType;J)Z
-    .locals 5
+    .locals 6
+    .param p1, "storageType"    # Lcom/facebook/common/statfs/StatFsHelper$StorageType;
+    .param p2, "freeSpaceThreshold"    # J
 
     .line 107
     invoke-direct {p0}, Lcom/facebook/common/statfs/StatFsHelper;->ensureInitialized()V
@@ -645,14 +615,17 @@
 
     move-result-wide v0
 
-    const/4 p1, 0x1
-
+    .line 110
+    .local v0, "availableStorageSpace":J
     const-wide/16 v2, 0x0
 
-    cmp-long v4, v0, v2
+    const/4 v4, 0x1
 
-    if-lez v4, :cond_1
+    cmp-long v5, v0, v2
 
+    if-lez v5, :cond_1
+
+    .line 111
     cmp-long v2, v0, p2
 
     if-gez v2, :cond_0
@@ -660,9 +633,12 @@
     goto :goto_0
 
     :cond_0
-    const/4 p1, 0x0
+    const/4 v4, 0x0
 
-    :cond_1
     :goto_0
-    return p1
+    return v4
+
+    .line 113
+    :cond_1
+    return v4
 .end method

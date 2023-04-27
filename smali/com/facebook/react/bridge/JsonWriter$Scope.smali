@@ -36,74 +36,66 @@
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 6
+    .locals 9
 
     .line 211
     new-instance v0, Lcom/facebook/react/bridge/JsonWriter$Scope;
 
-    const/4 v1, 0x0
+    const-string v1, "EMPTY_OBJECT"
 
-    const-string v2, "EMPTY_OBJECT"
+    const/4 v2, 0x0
 
-    invoke-direct {v0, v2, v1}, Lcom/facebook/react/bridge/JsonWriter$Scope;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v0, v1, v2}, Lcom/facebook/react/bridge/JsonWriter$Scope;-><init>(Ljava/lang/String;I)V
 
     sput-object v0, Lcom/facebook/react/bridge/JsonWriter$Scope;->EMPTY_OBJECT:Lcom/facebook/react/bridge/JsonWriter$Scope;
 
     .line 212
-    new-instance v0, Lcom/facebook/react/bridge/JsonWriter$Scope;
-
-    const/4 v2, 0x1
+    new-instance v1, Lcom/facebook/react/bridge/JsonWriter$Scope;
 
     const-string v3, "OBJECT"
 
-    invoke-direct {v0, v3, v2}, Lcom/facebook/react/bridge/JsonWriter$Scope;-><init>(Ljava/lang/String;I)V
+    const/4 v4, 0x1
 
-    sput-object v0, Lcom/facebook/react/bridge/JsonWriter$Scope;->OBJECT:Lcom/facebook/react/bridge/JsonWriter$Scope;
+    invoke-direct {v1, v3, v4}, Lcom/facebook/react/bridge/JsonWriter$Scope;-><init>(Ljava/lang/String;I)V
+
+    sput-object v1, Lcom/facebook/react/bridge/JsonWriter$Scope;->OBJECT:Lcom/facebook/react/bridge/JsonWriter$Scope;
 
     .line 213
-    new-instance v0, Lcom/facebook/react/bridge/JsonWriter$Scope;
+    new-instance v3, Lcom/facebook/react/bridge/JsonWriter$Scope;
 
-    const/4 v3, 0x2
+    const-string v5, "EMPTY_ARRAY"
 
-    const-string v4, "EMPTY_ARRAY"
+    const/4 v6, 0x2
 
-    invoke-direct {v0, v4, v3}, Lcom/facebook/react/bridge/JsonWriter$Scope;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v3, v5, v6}, Lcom/facebook/react/bridge/JsonWriter$Scope;-><init>(Ljava/lang/String;I)V
 
-    sput-object v0, Lcom/facebook/react/bridge/JsonWriter$Scope;->EMPTY_ARRAY:Lcom/facebook/react/bridge/JsonWriter$Scope;
+    sput-object v3, Lcom/facebook/react/bridge/JsonWriter$Scope;->EMPTY_ARRAY:Lcom/facebook/react/bridge/JsonWriter$Scope;
 
     .line 214
-    new-instance v0, Lcom/facebook/react/bridge/JsonWriter$Scope;
+    new-instance v5, Lcom/facebook/react/bridge/JsonWriter$Scope;
 
-    const/4 v4, 0x3
+    const-string v7, "ARRAY"
 
-    const-string v5, "ARRAY"
+    const/4 v8, 0x3
 
-    invoke-direct {v0, v5, v4}, Lcom/facebook/react/bridge/JsonWriter$Scope;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v5, v7, v8}, Lcom/facebook/react/bridge/JsonWriter$Scope;-><init>(Ljava/lang/String;I)V
 
-    sput-object v0, Lcom/facebook/react/bridge/JsonWriter$Scope;->ARRAY:Lcom/facebook/react/bridge/JsonWriter$Scope;
-
-    const/4 v0, 0x4
+    sput-object v5, Lcom/facebook/react/bridge/JsonWriter$Scope;->ARRAY:Lcom/facebook/react/bridge/JsonWriter$Scope;
 
     .line 210
-    new-array v0, v0, [Lcom/facebook/react/bridge/JsonWriter$Scope;
+    const/4 v7, 0x4
 
-    sget-object v5, Lcom/facebook/react/bridge/JsonWriter$Scope;->EMPTY_OBJECT:Lcom/facebook/react/bridge/JsonWriter$Scope;
+    new-array v7, v7, [Lcom/facebook/react/bridge/JsonWriter$Scope;
 
-    aput-object v5, v0, v1
+    aput-object v0, v7, v2
 
-    sget-object v1, Lcom/facebook/react/bridge/JsonWriter$Scope;->OBJECT:Lcom/facebook/react/bridge/JsonWriter$Scope;
+    aput-object v1, v7, v4
 
-    aput-object v1, v0, v2
+    aput-object v3, v7, v6
 
-    sget-object v1, Lcom/facebook/react/bridge/JsonWriter$Scope;->EMPTY_ARRAY:Lcom/facebook/react/bridge/JsonWriter$Scope;
+    aput-object v5, v7, v8
 
-    aput-object v1, v0, v3
-
-    sget-object v1, Lcom/facebook/react/bridge/JsonWriter$Scope;->ARRAY:Lcom/facebook/react/bridge/JsonWriter$Scope;
-
-    aput-object v1, v0, v4
-
-    sput-object v0, Lcom/facebook/react/bridge/JsonWriter$Scope;->$VALUES:[Lcom/facebook/react/bridge/JsonWriter$Scope;
+    sput-object v7, Lcom/facebook/react/bridge/JsonWriter$Scope;->$VALUES:[Lcom/facebook/react/bridge/JsonWriter$Scope;
 
     return-void
 .end method
@@ -124,17 +116,18 @@
 
 .method public static valueOf(Ljava/lang/String;)Lcom/facebook/react/bridge/JsonWriter$Scope;
     .locals 1
+    .param p0, "name"    # Ljava/lang/String;
 
     .line 210
     const-class v0, Lcom/facebook/react/bridge/JsonWriter$Scope;
 
     invoke-static {v0, p0}, Ljava/lang/Enum;->valueOf(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
 
-    move-result-object p0
+    move-result-object v0
 
-    check-cast p0, Lcom/facebook/react/bridge/JsonWriter$Scope;
+    check-cast v0, Lcom/facebook/react/bridge/JsonWriter$Scope;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method public static values()[Lcom/facebook/react/bridge/JsonWriter$Scope;

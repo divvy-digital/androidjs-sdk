@@ -27,67 +27,67 @@
 
     move-result-object v0
 
-    const-string v1, "captured"
+    .line 31
+    const-string v1, "bubbled"
 
-    const-string v2, "bubbled"
+    const-string v2, "onChange"
 
-    const-string v3, "onChange"
+    const-string v3, "captured"
 
     const-string v4, "onChangeCapture"
 
-    .line 31
-    invoke-static {v2, v3, v1, v4}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+    invoke-static {v1, v2, v3, v4}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
 
-    move-result-object v3
-
-    const-string v4, "phasedRegistrationNames"
+    move-result-object v2
 
     .line 29
-    invoke-static {v4, v3}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+    const-string v4, "phasedRegistrationNames"
 
-    move-result-object v3
+    invoke-static {v4, v2}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
 
-    const-string v5, "topChange"
+    move-result-object v2
 
     .line 27
-    invoke-virtual {v0, v5, v3}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
+    const-string v5, "topChange"
+
+    invoke-virtual {v0, v5, v2}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
 
     move-result-object v0
 
-    const-string v3, "onSelect"
+    .line 36
+    const-string v2, "onSelect"
 
     const-string v5, "onSelectCapture"
 
-    .line 36
-    invoke-static {v2, v3, v1, v5}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+    invoke-static {v1, v2, v3, v5}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
 
-    move-result-object v3
+    move-result-object v2
 
     .line 34
-    invoke-static {v4, v3}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+    invoke-static {v4, v2}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
 
-    move-result-object v3
-
-    const-string v5, "topSelect"
+    move-result-object v2
 
     .line 32
-    invoke-virtual {v0, v5, v3}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
+    const-string v5, "topSelect"
+
+    invoke-virtual {v0, v5, v2}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
 
     move-result-object v0
 
-    sget-object v3, Lcom/facebook/react/uimanager/events/TouchEventType;->START:Lcom/facebook/react/uimanager/events/TouchEventType;
+    sget-object v2, Lcom/facebook/react/uimanager/events/TouchEventType;->START:Lcom/facebook/react/uimanager/events/TouchEventType;
 
     .line 38
-    invoke-static {v3}, Lcom/facebook/react/uimanager/events/TouchEventType;->getJSEventName(Lcom/facebook/react/uimanager/events/TouchEventType;)Ljava/lang/String;
+    invoke-static {v2}, Lcom/facebook/react/uimanager/events/TouchEventType;->getJSEventName(Lcom/facebook/react/uimanager/events/TouchEventType;)Ljava/lang/String;
 
-    move-result-object v3
+    move-result-object v2
 
+    .line 41
     const-string v5, "onTouchStart"
 
     const-string v6, "onTouchStartCapture"
 
-    .line 41
-    invoke-static {v2, v5, v1, v6}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+    invoke-static {v1, v5, v3, v6}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
 
     move-result-object v5
 
@@ -97,23 +97,23 @@
     move-result-object v5
 
     .line 37
-    invoke-virtual {v0, v3, v5}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
+    invoke-virtual {v0, v2, v5}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
 
     move-result-object v0
 
-    sget-object v3, Lcom/facebook/react/uimanager/events/TouchEventType;->MOVE:Lcom/facebook/react/uimanager/events/TouchEventType;
+    sget-object v2, Lcom/facebook/react/uimanager/events/TouchEventType;->MOVE:Lcom/facebook/react/uimanager/events/TouchEventType;
 
     .line 47
-    invoke-static {v3}, Lcom/facebook/react/uimanager/events/TouchEventType;->getJSEventName(Lcom/facebook/react/uimanager/events/TouchEventType;)Ljava/lang/String;
+    invoke-static {v2}, Lcom/facebook/react/uimanager/events/TouchEventType;->getJSEventName(Lcom/facebook/react/uimanager/events/TouchEventType;)Ljava/lang/String;
 
-    move-result-object v3
+    move-result-object v2
 
+    .line 50
     const-string v5, "onTouchMove"
 
     const-string v6, "onTouchMoveCapture"
 
-    .line 50
-    invoke-static {v2, v5, v1, v6}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+    invoke-static {v1, v5, v3, v6}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
 
     move-result-object v5
 
@@ -123,23 +123,23 @@
     move-result-object v5
 
     .line 46
-    invoke-virtual {v0, v3, v5}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
+    invoke-virtual {v0, v2, v5}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
 
     move-result-object v0
 
-    sget-object v3, Lcom/facebook/react/uimanager/events/TouchEventType;->END:Lcom/facebook/react/uimanager/events/TouchEventType;
+    sget-object v2, Lcom/facebook/react/uimanager/events/TouchEventType;->END:Lcom/facebook/react/uimanager/events/TouchEventType;
 
     .line 56
-    invoke-static {v3}, Lcom/facebook/react/uimanager/events/TouchEventType;->getJSEventName(Lcom/facebook/react/uimanager/events/TouchEventType;)Ljava/lang/String;
+    invoke-static {v2}, Lcom/facebook/react/uimanager/events/TouchEventType;->getJSEventName(Lcom/facebook/react/uimanager/events/TouchEventType;)Ljava/lang/String;
 
-    move-result-object v3
+    move-result-object v2
 
+    .line 59
     const-string v5, "onTouchEnd"
 
     const-string v6, "onTouchEndCapture"
 
-    .line 59
-    invoke-static {v2, v5, v1, v6}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+    invoke-static {v1, v5, v3, v6}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
 
     move-result-object v5
 
@@ -149,23 +149,23 @@
     move-result-object v5
 
     .line 55
-    invoke-virtual {v0, v3, v5}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
+    invoke-virtual {v0, v2, v5}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
 
     move-result-object v0
 
-    sget-object v3, Lcom/facebook/react/uimanager/events/TouchEventType;->CANCEL:Lcom/facebook/react/uimanager/events/TouchEventType;
+    sget-object v2, Lcom/facebook/react/uimanager/events/TouchEventType;->CANCEL:Lcom/facebook/react/uimanager/events/TouchEventType;
 
     .line 65
-    invoke-static {v3}, Lcom/facebook/react/uimanager/events/TouchEventType;->getJSEventName(Lcom/facebook/react/uimanager/events/TouchEventType;)Ljava/lang/String;
+    invoke-static {v2}, Lcom/facebook/react/uimanager/events/TouchEventType;->getJSEventName(Lcom/facebook/react/uimanager/events/TouchEventType;)Ljava/lang/String;
 
-    move-result-object v3
+    move-result-object v2
 
+    .line 68
     const-string v5, "onTouchCancel"
 
     const-string v6, "onTouchCancelCapture"
 
-    .line 68
-    invoke-static {v2, v5, v1, v6}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+    invoke-static {v1, v5, v3, v6}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
 
     move-result-object v1
 
@@ -175,7 +175,7 @@
     move-result-object v1
 
     .line 64
-    invoke-virtual {v0, v3, v1}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
+    invoke-virtual {v0, v2, v1}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
 
     move-result-object v0
 
@@ -184,11 +184,12 @@
 
     move-result-object v0
 
+    .line 26
     return-object v0
 .end method
 
 .method public static getConstants()Ljava/util/Map;
-    .locals 10
+    .locals 11
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "()",
@@ -205,63 +206,66 @@
     move-result-object v0
 
     .line 98
-    sget-object v1, Landroid/widget/ImageView$ScaleType;->FIT_CENTER:Landroid/widget/ImageView$ScaleType;
+    .local v0, "constants":Ljava/util/Map;, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;"
+    const-string v1, "ScaleAspectFit"
+
+    sget-object v2, Landroid/widget/ImageView$ScaleType;->FIT_CENTER:Landroid/widget/ImageView$ScaleType;
 
     .line 104
-    invoke-virtual {v1}, Landroid/widget/ImageView$ScaleType;->ordinal()I
+    invoke-virtual {v2}, Landroid/widget/ImageView$ScaleType;->ordinal()I
 
-    move-result v1
+    move-result v2
 
-    invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    invoke-static {v2}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object v3
+    move-result-object v2
 
-    sget-object v1, Landroid/widget/ImageView$ScaleType;->CENTER_CROP:Landroid/widget/ImageView$ScaleType;
+    const-string v3, "ScaleAspectFill"
+
+    sget-object v4, Landroid/widget/ImageView$ScaleType;->CENTER_CROP:Landroid/widget/ImageView$ScaleType;
 
     .line 106
-    invoke-virtual {v1}, Landroid/widget/ImageView$ScaleType;->ordinal()I
+    invoke-virtual {v4}, Landroid/widget/ImageView$ScaleType;->ordinal()I
 
-    move-result v1
+    move-result v4
 
-    invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    invoke-static {v4}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object v5
+    move-result-object v4
 
-    sget-object v1, Landroid/widget/ImageView$ScaleType;->CENTER_INSIDE:Landroid/widget/ImageView$ScaleType;
+    const-string v5, "ScaleAspectCenter"
+
+    sget-object v6, Landroid/widget/ImageView$ScaleType;->CENTER_INSIDE:Landroid/widget/ImageView$ScaleType;
 
     .line 108
-    invoke-virtual {v1}, Landroid/widget/ImageView$ScaleType;->ordinal()I
+    invoke-virtual {v6}, Landroid/widget/ImageView$ScaleType;->ordinal()I
 
-    move-result v1
+    move-result v6
 
-    invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    invoke-static {v6}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object v7
-
-    const-string v2, "ScaleAspectFit"
-
-    const-string v4, "ScaleAspectFill"
-
-    const-string v6, "ScaleAspectCenter"
+    move-result-object v6
 
     .line 102
-    invoke-static/range {v2 .. v7}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+    invoke-static/range {v1 .. v6}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
 
     move-result-object v1
 
+    .line 100
     const-string v2, "ContentMode"
 
-    .line 100
     invoke-static {v2, v1}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
 
     move-result-object v1
 
+    .line 98
     const-string v2, "UIView"
 
-    .line 98
     invoke-interface {v0, v2, v1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
     .line 110
+    const-string v3, "none"
+
     sget-object v1, Lcom/facebook/react/uimanager/PointerEvents;->NONE:Lcom/facebook/react/uimanager/PointerEvents;
 
     .line 116
@@ -271,7 +275,9 @@
 
     invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object v3
+    move-result-object v4
+
+    const-string v5, "boxNone"
 
     sget-object v1, Lcom/facebook/react/uimanager/PointerEvents;->BOX_NONE:Lcom/facebook/react/uimanager/PointerEvents;
 
@@ -282,7 +288,9 @@
 
     invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object v5
+    move-result-object v6
+
+    const-string v7, "boxOnly"
 
     sget-object v1, Lcom/facebook/react/uimanager/PointerEvents;->BOX_ONLY:Lcom/facebook/react/uimanager/PointerEvents;
 
@@ -293,7 +301,9 @@
 
     invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object v7
+    move-result-object v8
+
+    const-string v9, "unspecified"
 
     sget-object v1, Lcom/facebook/react/uimanager/PointerEvents;->AUTO:Lcom/facebook/react/uimanager/PointerEvents;
 
@@ -304,257 +314,259 @@
 
     invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    move-result-object v9
-
-    const-string v2, "none"
-
-    const-string v4, "boxNone"
-
-    const-string v6, "boxOnly"
-
-    const-string v8, "unspecified"
+    move-result-object v10
 
     .line 114
-    invoke-static/range {v2 .. v9}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+    invoke-static/range {v3 .. v10}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
 
     move-result-object v1
 
+    .line 112
     const-string v2, "PointerEventsValues"
 
-    .line 112
     invoke-static {v2, v1}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
 
     move-result-object v1
 
+    .line 110
     const-string v2, "StyleConstants"
 
-    .line 110
     invoke-interface {v0, v2, v1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
-
-    const-string v1, "itemSelected"
-
-    const-string v2, "dismissed"
-
-    .line 126
-    invoke-static {v2, v2, v1, v1}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
-
-    move-result-object v1
-
-    const-string v2, "PopupMenu"
 
     .line 124
-    invoke-interface {v0, v2, v1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    nop
 
-    const/16 v1, 0x20
+    .line 126
+    const-string v1, "dismissed"
 
-    .line 136
-    invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    const-string v2, "itemSelected"
 
-    move-result-object v3
-
-    const/16 v1, 0x8
-
-    .line 138
-    invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
-
-    move-result-object v5
-
-    const/4 v1, 0x1
-
-    .line 140
-    invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
-
-    move-result-object v7
-
-    const-string v2, "typeWindowStateChanged"
-
-    const-string v4, "typeViewFocused"
-
-    const-string v6, "typeViewClicked"
-
-    .line 134
-    invoke-static/range {v2 .. v7}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+    invoke-static {v1, v1, v2, v2}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
 
     move-result-object v1
 
-    const-string v2, "AccessibilityEventTypes"
+    .line 124
+    const-string v2, "PopupMenu"
 
-    .line 132
     invoke-interface {v0, v2, v1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
+    .line 132
+    const-string v3, "typeWindowStateChanged"
+
+    .line 136
+    const/16 v1, 0x20
+
+    invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+
+    move-result-object v4
+
+    const-string v5, "typeViewFocused"
+
+    .line 138
+    const/16 v1, 0x8
+
+    invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+
+    move-result-object v6
+
+    const-string v7, "typeViewClicked"
+
+    .line 140
+    const/4 v1, 0x1
+
+    invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+
+    move-result-object v8
+
+    .line 134
+    invoke-static/range {v3 .. v8}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+
+    move-result-object v1
+
+    .line 132
+    const-string v2, "AccessibilityEventTypes"
+
+    invoke-interface {v0, v2, v1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+
+    .line 142
     return-object v0
 .end method
 
 .method static getDirectEventTypeConstants()Ljava/util/Map;
-    .locals 4
+    .locals 5
+
+    .line 77
+    const-string v0, "registrationName"
 
     .line 78
+    .local v0, "rn":Ljava/lang/String;
     invoke-static {}, Lcom/facebook/react/common/MapBuilder;->builder()Lcom/facebook/react/common/MapBuilder$Builder;
-
-    move-result-object v0
-
-    const-string v1, "registrationName"
-
-    const-string v2, "onContentSizeChange"
-
-    .line 79
-    invoke-static {v1, v2}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
-
-    move-result-object v2
-
-    const-string v3, "topContentSizeChange"
-
-    invoke-virtual {v0, v3, v2}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
-
-    move-result-object v0
-
-    const-string v2, "onLayout"
-
-    .line 80
-    invoke-static {v1, v2}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
-
-    move-result-object v2
-
-    const-string v3, "topLayout"
-
-    invoke-virtual {v0, v3, v2}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
-
-    move-result-object v0
-
-    const-string v2, "onLoadingError"
-
-    .line 81
-    invoke-static {v1, v2}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
-
-    move-result-object v2
-
-    const-string v3, "topLoadingError"
-
-    invoke-virtual {v0, v3, v2}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
-
-    move-result-object v0
-
-    const-string v2, "onLoadingFinish"
-
-    .line 82
-    invoke-static {v1, v2}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
-
-    move-result-object v2
-
-    const-string v3, "topLoadingFinish"
-
-    invoke-virtual {v0, v3, v2}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
-
-    move-result-object v0
-
-    const-string v2, "onLoadingStart"
-
-    .line 83
-    invoke-static {v1, v2}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
-
-    move-result-object v2
-
-    const-string v3, "topLoadingStart"
-
-    invoke-virtual {v0, v3, v2}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
-
-    move-result-object v0
-
-    const-string v2, "onSelectionChange"
-
-    .line 84
-    invoke-static {v1, v2}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
-
-    move-result-object v2
-
-    const-string v3, "topSelectionChange"
-
-    invoke-virtual {v0, v3, v2}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
-
-    move-result-object v0
-
-    const-string v2, "onMessage"
-
-    .line 85
-    invoke-static {v1, v2}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
-
-    move-result-object v2
-
-    const-string v3, "topMessage"
-
-    invoke-virtual {v0, v3, v2}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
-
-    move-result-object v0
-
-    const-string v2, "onScrollBeginDrag"
-
-    .line 88
-    invoke-static {v1, v2}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
-
-    move-result-object v2
-
-    const-string v3, "topScrollBeginDrag"
-
-    invoke-virtual {v0, v3, v2}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
-
-    move-result-object v0
-
-    const-string v2, "onScrollEndDrag"
-
-    .line 89
-    invoke-static {v1, v2}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
-
-    move-result-object v2
-
-    const-string v3, "topScrollEndDrag"
-
-    invoke-virtual {v0, v3, v2}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
-
-    move-result-object v0
-
-    const-string v2, "onScroll"
-
-    .line 90
-    invoke-static {v1, v2}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
-
-    move-result-object v2
-
-    const-string v3, "topScroll"
-
-    invoke-virtual {v0, v3, v2}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
-
-    move-result-object v0
-
-    const-string v2, "onMomentumScrollBegin"
-
-    .line 91
-    invoke-static {v1, v2}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
-
-    move-result-object v2
-
-    const-string v3, "topMomentumScrollBegin"
-
-    invoke-virtual {v0, v3, v2}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
-
-    move-result-object v0
-
-    const-string v2, "onMomentumScrollEnd"
-
-    .line 92
-    invoke-static {v1, v2}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
 
     move-result-object v1
 
-    const-string v2, "topMomentumScrollEnd"
+    .line 79
+    const-string v2, "registrationName"
 
-    invoke-virtual {v0, v2, v1}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
+    const-string v3, "onContentSizeChange"
 
-    move-result-object v0
+    invoke-static {v2, v3}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+
+    move-result-object v3
+
+    const-string v4, "topContentSizeChange"
+
+    invoke-virtual {v1, v4, v3}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
+
+    move-result-object v1
+
+    .line 80
+    const-string v3, "onLayout"
+
+    invoke-static {v2, v3}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+
+    move-result-object v3
+
+    const-string v4, "topLayout"
+
+    invoke-virtual {v1, v4, v3}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
+
+    move-result-object v1
+
+    .line 81
+    const-string v3, "onLoadingError"
+
+    invoke-static {v2, v3}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+
+    move-result-object v3
+
+    const-string v4, "topLoadingError"
+
+    invoke-virtual {v1, v4, v3}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
+
+    move-result-object v1
+
+    .line 82
+    const-string v3, "onLoadingFinish"
+
+    invoke-static {v2, v3}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+
+    move-result-object v3
+
+    const-string v4, "topLoadingFinish"
+
+    invoke-virtual {v1, v4, v3}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
+
+    move-result-object v1
+
+    .line 83
+    const-string v3, "onLoadingStart"
+
+    invoke-static {v2, v3}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+
+    move-result-object v3
+
+    const-string v4, "topLoadingStart"
+
+    invoke-virtual {v1, v4, v3}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
+
+    move-result-object v1
+
+    .line 84
+    const-string v3, "onSelectionChange"
+
+    invoke-static {v2, v3}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+
+    move-result-object v3
+
+    const-string v4, "topSelectionChange"
+
+    invoke-virtual {v1, v4, v3}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
+
+    move-result-object v1
+
+    .line 85
+    const-string v3, "onMessage"
+
+    invoke-static {v2, v3}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+
+    move-result-object v3
+
+    const-string v4, "topMessage"
+
+    invoke-virtual {v1, v4, v3}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
+
+    move-result-object v1
+
+    .line 88
+    const-string v3, "onScrollBeginDrag"
+
+    invoke-static {v2, v3}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+
+    move-result-object v3
+
+    const-string v4, "topScrollBeginDrag"
+
+    invoke-virtual {v1, v4, v3}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
+
+    move-result-object v1
+
+    .line 89
+    const-string v3, "onScrollEndDrag"
+
+    invoke-static {v2, v3}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+
+    move-result-object v3
+
+    const-string v4, "topScrollEndDrag"
+
+    invoke-virtual {v1, v4, v3}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
+
+    move-result-object v1
+
+    .line 90
+    const-string v3, "onScroll"
+
+    invoke-static {v2, v3}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+
+    move-result-object v3
+
+    const-string v4, "topScroll"
+
+    invoke-virtual {v1, v4, v3}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
+
+    move-result-object v1
+
+    .line 91
+    const-string v3, "onMomentumScrollBegin"
+
+    invoke-static {v2, v3}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+
+    move-result-object v3
+
+    const-string v4, "topMomentumScrollBegin"
+
+    invoke-virtual {v1, v4, v3}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
+
+    move-result-object v1
+
+    .line 92
+    const-string v3, "onMomentumScrollEnd"
+
+    invoke-static {v2, v3}, Lcom/facebook/react/common/MapBuilder;->of(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+
+    move-result-object v2
+
+    const-string v3, "topMomentumScrollEnd"
+
+    invoke-virtual {v1, v3, v2}, Lcom/facebook/react/common/MapBuilder$Builder;->put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/facebook/react/common/MapBuilder$Builder;
+
+    move-result-object v1
 
     .line 93
-    invoke-virtual {v0}, Lcom/facebook/react/common/MapBuilder$Builder;->build()Ljava/util/Map;
+    invoke-virtual {v1}, Lcom/facebook/react/common/MapBuilder$Builder;->build()Ljava/util/Map;
 
-    move-result-object v0
+    move-result-object v1
 
-    return-object v0
+    .line 78
+    return-object v1
 .end method

@@ -26,38 +26,32 @@
 .field final mReactTag:I
 
 .field final mView:Landroid/view/View;
-    .annotation build Landroid/support/annotation/Nullable;
-    .end annotation
-.end field
 
 .field final mViewManager:Lcom/facebook/react/uimanager/ViewManager;
-    .annotation build Landroid/support/annotation/Nullable;
-    .end annotation
-.end field
 
 
 # direct methods
 .method private constructor <init>(ILandroid/view/View;Lcom/facebook/react/uimanager/ViewManager;)V
     .locals 1
-    .param p2    # Landroid/view/View;
-        .annotation build Landroid/support/annotation/Nullable;
-        .end annotation
-    .end param
-    .param p3    # Lcom/facebook/react/uimanager/ViewManager;
-        .annotation build Landroid/support/annotation/Nullable;
-        .end annotation
-    .end param
-
-    const/4 v0, 0x0
+    .param p1, "reactTag"    # I
+    .param p2, "view"    # Landroid/view/View;
+    .param p3, "viewManager"    # Lcom/facebook/react/uimanager/ViewManager;
 
     .line 324
+    const/4 v0, 0x0
+
     invoke-direct {p0, p1, p2, p3, v0}, Lcom/facebook/react/fabric/mounting/MountingManager$ViewState;-><init>(ILandroid/view/View;Lcom/facebook/react/uimanager/ViewManager;Z)V
 
+    .line 325
     return-void
 .end method
 
 .method synthetic constructor <init>(ILandroid/view/View;Lcom/facebook/react/uimanager/ViewManager;Lcom/facebook/react/fabric/mounting/MountingManager$1;)V
     .locals 0
+    .param p1, "x0"    # I
+    .param p2, "x1"    # Landroid/view/View;
+    .param p3, "x2"    # Lcom/facebook/react/uimanager/ViewManager;
+    .param p4, "x3"    # Lcom/facebook/react/fabric/mounting/MountingManager$1;
 
     .line 314
     invoke-direct {p0, p1, p2, p3}, Lcom/facebook/react/fabric/mounting/MountingManager$ViewState;-><init>(ILandroid/view/View;Lcom/facebook/react/uimanager/ViewManager;)V
@@ -67,10 +61,10 @@
 
 .method private constructor <init>(ILandroid/view/View;Lcom/facebook/react/uimanager/ViewManager;Z)V
     .locals 0
-    .param p2    # Landroid/view/View;
-        .annotation build Landroid/support/annotation/Nullable;
-        .end annotation
-    .end param
+    .param p1, "reactTag"    # I
+    .param p2, "view"    # Landroid/view/View;
+    .param p3, "viewManager"    # Lcom/facebook/react/uimanager/ViewManager;
+    .param p4, "isRoot"    # Z
 
     .line 327
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -87,11 +81,17 @@
     .line 331
     iput-object p3, p0, Lcom/facebook/react/fabric/mounting/MountingManager$ViewState;->mViewManager:Lcom/facebook/react/uimanager/ViewManager;
 
+    .line 332
     return-void
 .end method
 
 .method synthetic constructor <init>(ILandroid/view/View;Lcom/facebook/react/uimanager/ViewManager;ZLcom/facebook/react/fabric/mounting/MountingManager$1;)V
     .locals 0
+    .param p1, "x0"    # I
+    .param p2, "x1"    # Landroid/view/View;
+    .param p3, "x2"    # Lcom/facebook/react/uimanager/ViewManager;
+    .param p4, "x3"    # Z
+    .param p5, "x4"    # Lcom/facebook/react/fabric/mounting/MountingManager$1;
 
     .line 314
     invoke-direct {p0, p1, p2, p3, p4}, Lcom/facebook/react/fabric/mounting/MountingManager$ViewState;-><init>(ILandroid/view/View;Lcom/facebook/react/uimanager/ViewManager;Z)V

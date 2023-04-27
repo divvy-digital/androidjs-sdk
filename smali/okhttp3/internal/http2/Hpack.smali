@@ -39,9 +39,9 @@
 .method static constructor <clinit>()V
     .locals 5
 
+    .line 47
     const/16 v0, 0x3d
 
-    .line 47
     new-array v0, v0, [Lokhttp3/internal/http2/Header;
 
     new-instance v1, Lokhttp3/internal/http2/Header;
@@ -702,11 +702,13 @@
     .line 111
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
+    .line 112
     return-void
 .end method
 
 .method static checkLowercase(Lokio/ByteString;)Lokio/ByteString;
-    .locals 4
+    .locals 6
+    .param p0, "name"    # Lokio/ByteString;
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -714,20 +716,24 @@
     .end annotation
 
     .line 596
+    const/4 v0, 0x0
+
+    .local v0, "i":I
     invoke-virtual {p0}, Lokio/ByteString;->size()I
 
-    move-result v0
+    move-result v1
 
-    const/4 v1, 0x0
-
+    .local v1, "length":I
     :goto_0
-    if-ge v1, v0, :cond_2
+    if-ge v0, v1, :cond_2
 
     .line 597
-    invoke-virtual {p0, v1}, Lokio/ByteString;->getByte(I)B
+    invoke-virtual {p0, v0}, Lokio/ByteString;->getByte(I)B
 
     move-result v2
 
+    .line 598
+    .local v2, "c":B
     const/16 v3, 0x41
 
     if-lt v2, v3, :cond_1
@@ -740,36 +746,45 @@
 
     .line 599
     :cond_0
-    new-instance v0, Ljava/io/IOException;
+    new-instance v3, Ljava/io/IOException;
 
-    new-instance v1, Ljava/lang/StringBuilder;
+    new-instance v4, Ljava/lang/StringBuilder;
 
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v2, "PROTOCOL_ERROR response malformed: mixed case name: "
+    const-string v5, "PROTOCOL_ERROR response malformed: mixed case name: "
 
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v4
 
     invoke-virtual {p0}, Lokio/ByteString;->utf8()Ljava/lang/String;
 
-    move-result-object p0
+    move-result-object v5
 
-    invoke-virtual {v1, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    move-result-object v4
 
-    move-result-object p0
+    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    invoke-direct {v0, p0}, Ljava/io/IOException;-><init>(Ljava/lang/String;)V
+    move-result-object v4
 
-    throw v0
+    invoke-direct {v3, v4}, Ljava/io/IOException;-><init>(Ljava/lang/String;)V
 
+    throw v3
+
+    .line 596
+    .end local v2    # "c":B
     :cond_1
     :goto_1
-    add-int/lit8 v1, v1, 0x1
+    add-int/lit8 v0, v0, 0x1
 
     goto :goto_0
 
+    .line 602
+    .end local v0    # "i":I
+    .end local v1    # "length":I
     :cond_2
     return-object p0
 .end method
@@ -795,9 +810,11 @@
 
     invoke-direct {v0, v1}, Ljava/util/LinkedHashMap;-><init>(I)V
 
+    .line 358
+    .local v0, "result":Ljava/util/Map;, "Ljava/util/Map<Lokio/ByteString;Ljava/lang/Integer;>;"
     const/4 v1, 0x0
 
-    .line 358
+    .local v1, "i":I
     :goto_0
     sget-object v2, Lokhttp3/internal/http2/Hpack;->STATIC_HEADER_TABLE:[Lokhttp3/internal/http2/Header;
 
@@ -806,19 +823,17 @@
     if-ge v1, v3, :cond_1
 
     .line 359
-    aget-object v2, v2, v1
+    aget-object v3, v2, v1
 
-    iget-object v2, v2, Lokhttp3/internal/http2/Header;->name:Lokio/ByteString;
+    iget-object v3, v3, Lokhttp3/internal/http2/Header;->name:Lokio/ByteString;
 
-    invoke-interface {v0, v2}, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z
+    invoke-interface {v0, v3}, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z
 
-    move-result v2
+    move-result v3
 
-    if-nez v2, :cond_0
+    if-nez v3, :cond_0
 
     .line 360
-    sget-object v2, Lokhttp3/internal/http2/Hpack;->STATIC_HEADER_TABLE:[Lokhttp3/internal/http2/Header;
-
     aget-object v2, v2, v1
 
     iget-object v2, v2, Lokhttp3/internal/http2/Header;->name:Lokio/ByteString;
@@ -829,16 +844,18 @@
 
     invoke-interface {v0, v2, v3}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
+    .line 358
     :cond_0
     add-int/lit8 v1, v1, 0x1
 
     goto :goto_0
 
     .line 363
+    .end local v1    # "i":I
     :cond_1
     invoke-static {v0}, Ljava/util/Collections;->unmodifiableMap(Ljava/util/Map;)Ljava/util/Map;
 
-    move-result-object v0
+    move-result-object v1
 
-    return-object v0
+    return-object v1
 .end method

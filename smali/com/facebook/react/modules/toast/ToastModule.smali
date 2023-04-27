@@ -26,44 +26,49 @@
 # direct methods
 .method public constructor <init>(Lcom/facebook/react/bridge/ReactApplicationContext;)V
     .locals 0
+    .param p1, "reactContext"    # Lcom/facebook/react/bridge/ReactApplicationContext;
 
     .line 36
     invoke-direct {p0, p1}, Lcom/facebook/react/bridge/ReactContextBaseJavaModule;-><init>(Lcom/facebook/react/bridge/ReactApplicationContext;)V
 
+    .line 37
     return-void
 .end method
 
 .method static synthetic access$000(Lcom/facebook/react/modules/toast/ToastModule;)Lcom/facebook/react/bridge/ReactApplicationContext;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/modules/toast/ToastModule;
 
     .line 25
     invoke-virtual {p0}, Lcom/facebook/react/modules/toast/ToastModule;->getReactApplicationContext()Lcom/facebook/react/bridge/ReactApplicationContext;
 
-    move-result-object p0
+    move-result-object v0
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$100(Lcom/facebook/react/modules/toast/ToastModule;)Lcom/facebook/react/bridge/ReactApplicationContext;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/modules/toast/ToastModule;
 
     .line 25
     invoke-virtual {p0}, Lcom/facebook/react/modules/toast/ToastModule;->getReactApplicationContext()Lcom/facebook/react/bridge/ReactApplicationContext;
 
-    move-result-object p0
+    move-result-object v0
 
-    return-object p0
+    return-object v0
 .end method
 
 .method static synthetic access$200(Lcom/facebook/react/modules/toast/ToastModule;)Lcom/facebook/react/bridge/ReactApplicationContext;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/modules/toast/ToastModule;
 
     .line 25
     invoke-virtual {p0}, Lcom/facebook/react/modules/toast/ToastModule;->getReactApplicationContext()Lcom/facebook/react/bridge/ReactApplicationContext;
 
-    move-result-object p0
+    move-result-object v0
 
-    return-object p0
+    return-object v0
 .end method
 
 
@@ -85,9 +90,10 @@
 
     move-result-object v0
 
+    .line 47
+    .local v0, "constants":Ljava/util/Map;, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;"
     const/4 v1, 0x0
 
-    .line 47
     invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
     move-result-object v1
@@ -96,9 +102,9 @@
 
     invoke-interface {v0, v2, v1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
+    .line 48
     const/4 v1, 0x1
 
-    .line 48
     invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
     move-result-object v1
@@ -107,9 +113,9 @@
 
     invoke-interface {v0, v2, v1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
+    .line 49
     const/16 v1, 0x31
 
-    .line 49
     invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
     move-result-object v1
@@ -118,9 +124,9 @@
 
     invoke-interface {v0, v2, v1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
+    .line 50
     const/16 v1, 0x51
 
-    .line 50
     invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
     move-result-object v1
@@ -129,9 +135,9 @@
 
     invoke-interface {v0, v2, v1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
+    .line 51
     const/16 v1, 0x11
 
-    .line 51
     invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
     move-result-object v1
@@ -140,12 +146,14 @@
 
     invoke-interface {v0, v2, v1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
+    .line 52
     return-object v0
 .end method
 
 .method public getName()Ljava/lang/String;
     .locals 1
 
+    .line 41
     const-string v0, "ToastAndroid"
 
     return-object v0
@@ -153,6 +161,8 @@
 
 .method public show(Ljava/lang/String;I)V
     .locals 1
+    .param p1, "message"    # Ljava/lang/String;
+    .param p2, "duration"    # I
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -163,11 +173,15 @@
 
     invoke-static {v0}, Lcom/facebook/react/bridge/UiThreadUtil;->runOnUiThread(Ljava/lang/Runnable;)V
 
+    .line 63
     return-void
 .end method
 
 .method public showWithGravity(Ljava/lang/String;II)V
     .locals 1
+    .param p1, "message"    # Ljava/lang/String;
+    .param p2, "duration"    # I
+    .param p3, "gravity"    # I
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -178,11 +192,17 @@
 
     invoke-static {v0}, Lcom/facebook/react/bridge/UiThreadUtil;->runOnUiThread(Ljava/lang/Runnable;)V
 
+    .line 75
     return-void
 .end method
 
 .method public showWithGravityAndOffset(Ljava/lang/String;IIII)V
     .locals 8
+    .param p1, "message"    # Ljava/lang/String;
+    .param p2, "duration"    # I
+    .param p3, "gravity"    # I
+    .param p4, "xOffset"    # I
+    .param p5, "yOffset"    # I
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -207,5 +227,6 @@
 
     invoke-static {v7}, Lcom/facebook/react/bridge/UiThreadUtil;->runOnUiThread(Ljava/lang/Runnable;)V
 
+    .line 93
     return-void
 .end method

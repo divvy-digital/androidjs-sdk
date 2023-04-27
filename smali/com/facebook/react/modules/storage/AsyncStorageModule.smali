@@ -35,26 +35,28 @@
 # direct methods
 .method public constructor <init>(Lcom/facebook/react/bridge/ReactApplicationContext;)V
     .locals 1
+    .param p1, "reactContext"    # Lcom/facebook/react/bridge/ReactApplicationContext;
 
     .line 84
     sget-object v0, Landroid/os/AsyncTask;->THREAD_POOL_EXECUTOR:Ljava/util/concurrent/Executor;
 
     invoke-direct {p0, p1, v0}, Lcom/facebook/react/modules/storage/AsyncStorageModule;-><init>(Lcom/facebook/react/bridge/ReactApplicationContext;Ljava/util/concurrent/Executor;)V
 
+    .line 85
     return-void
 .end method
 
 .method constructor <init>(Lcom/facebook/react/bridge/ReactApplicationContext;Ljava/util/concurrent/Executor;)V
     .locals 1
-    .annotation build Lcom/facebook/react/common/annotations/VisibleForTesting;
-    .end annotation
+    .param p1, "reactContext"    # Lcom/facebook/react/bridge/ReactApplicationContext;
+    .param p2, "executor"    # Ljava/util/concurrent/Executor;
 
     .line 89
     invoke-direct {p0, p1}, Lcom/facebook/react/bridge/ReactContextBaseJavaModule;-><init>(Lcom/facebook/react/bridge/ReactApplicationContext;)V
 
+    .line 48
     const/4 v0, 0x0
 
-    .line 48
     iput-boolean v0, p0, Lcom/facebook/react/modules/storage/AsyncStorageModule;->mShuttingDown:Z
 
     .line 90
@@ -67,31 +69,34 @@
     .line 91
     invoke-static {p1}, Lcom/facebook/react/modules/storage/ReactDatabaseSupplier;->getInstance(Landroid/content/Context;)Lcom/facebook/react/modules/storage/ReactDatabaseSupplier;
 
-    move-result-object p1
+    move-result-object v0
 
-    iput-object p1, p0, Lcom/facebook/react/modules/storage/AsyncStorageModule;->mReactDatabaseSupplier:Lcom/facebook/react/modules/storage/ReactDatabaseSupplier;
+    iput-object v0, p0, Lcom/facebook/react/modules/storage/AsyncStorageModule;->mReactDatabaseSupplier:Lcom/facebook/react/modules/storage/ReactDatabaseSupplier;
 
+    .line 92
     return-void
 .end method
 
 .method static synthetic access$000(Lcom/facebook/react/modules/storage/AsyncStorageModule;)Z
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/modules/storage/AsyncStorageModule;
 
     .line 38
     invoke-direct {p0}, Lcom/facebook/react/modules/storage/AsyncStorageModule;->ensureDatabase()Z
 
-    move-result p0
+    move-result v0
 
-    return p0
+    return v0
 .end method
 
 .method static synthetic access$100(Lcom/facebook/react/modules/storage/AsyncStorageModule;)Lcom/facebook/react/modules/storage/ReactDatabaseSupplier;
-    .locals 0
+    .locals 1
+    .param p0, "x0"    # Lcom/facebook/react/modules/storage/AsyncStorageModule;
 
     .line 38
-    iget-object p0, p0, Lcom/facebook/react/modules/storage/AsyncStorageModule;->mReactDatabaseSupplier:Lcom/facebook/react/modules/storage/ReactDatabaseSupplier;
+    iget-object v0, p0, Lcom/facebook/react/modules/storage/AsyncStorageModule;->mReactDatabaseSupplier:Lcom/facebook/react/modules/storage/ReactDatabaseSupplier;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method private ensureDatabase()Z
@@ -124,7 +129,8 @@
 
 # virtual methods
 .method public clear(Lcom/facebook/react/bridge/Callback;)V
-    .locals 2
+    .locals 3
+    .param p1, "callback"    # Lcom/facebook/react/bridge/Callback;
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -137,15 +143,16 @@
 
     invoke-direct {v0, p0, v1, p1}, Lcom/facebook/react/modules/storage/AsyncStorageModule$5;-><init>(Lcom/facebook/react/modules/storage/AsyncStorageModule;Lcom/facebook/react/bridge/ReactContext;Lcom/facebook/react/bridge/Callback;)V
 
-    iget-object p1, p0, Lcom/facebook/react/modules/storage/AsyncStorageModule;->executor:Lcom/facebook/react/modules/storage/AsyncStorageModule$SerialExecutor;
+    iget-object v1, p0, Lcom/facebook/react/modules/storage/AsyncStorageModule;->executor:Lcom/facebook/react/modules/storage/AsyncStorageModule$SerialExecutor;
 
-    const/4 v1, 0x0
+    const/4 v2, 0x0
 
-    new-array v1, v1, [Ljava/lang/Void;
+    new-array v2, v2, [Ljava/lang/Void;
 
     .line 391
-    invoke-virtual {v0, p1, v1}, Lcom/facebook/react/modules/storage/AsyncStorageModule$5;->executeOnExecutor(Ljava/util/concurrent/Executor;[Ljava/lang/Object;)Landroid/os/AsyncTask;
+    invoke-virtual {v0, v1, v2}, Lcom/facebook/react/modules/storage/AsyncStorageModule$5;->executeOnExecutor(Ljava/util/concurrent/Executor;[Ljava/lang/Object;)Landroid/os/AsyncTask;
 
+    .line 392
     return-void
 .end method
 
@@ -157,11 +164,13 @@
 
     invoke-virtual {v0}, Lcom/facebook/react/modules/storage/ReactDatabaseSupplier;->clearAndCloseDatabase()V
 
+    .line 116
     return-void
 .end method
 
 .method public getAllKeys(Lcom/facebook/react/bridge/Callback;)V
-    .locals 2
+    .locals 3
+    .param p1, "callback"    # Lcom/facebook/react/bridge/Callback;
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -174,21 +183,23 @@
 
     invoke-direct {v0, p0, v1, p1}, Lcom/facebook/react/modules/storage/AsyncStorageModule$6;-><init>(Lcom/facebook/react/modules/storage/AsyncStorageModule;Lcom/facebook/react/bridge/ReactContext;Lcom/facebook/react/bridge/Callback;)V
 
-    iget-object p1, p0, Lcom/facebook/react/modules/storage/AsyncStorageModule;->executor:Lcom/facebook/react/modules/storage/AsyncStorageModule$SerialExecutor;
+    iget-object v1, p0, Lcom/facebook/react/modules/storage/AsyncStorageModule;->executor:Lcom/facebook/react/modules/storage/AsyncStorageModule$SerialExecutor;
 
-    const/4 v1, 0x0
+    const/4 v2, 0x0
 
-    new-array v1, v1, [Ljava/lang/Void;
+    new-array v2, v2, [Ljava/lang/Void;
 
     .line 425
-    invoke-virtual {v0, p1, v1}, Lcom/facebook/react/modules/storage/AsyncStorageModule$6;->executeOnExecutor(Ljava/util/concurrent/Executor;[Ljava/lang/Object;)Landroid/os/AsyncTask;
+    invoke-virtual {v0, v1, v2}, Lcom/facebook/react/modules/storage/AsyncStorageModule$6;->executeOnExecutor(Ljava/util/concurrent/Executor;[Ljava/lang/Object;)Landroid/os/AsyncTask;
 
+    .line 426
     return-void
 .end method
 
 .method public getName()Ljava/lang/String;
     .locals 1
 
+    .line 96
     const-string v0, "AsyncSQLiteDBStorage"
 
     return-object v0
@@ -200,42 +211,47 @@
     .line 101
     invoke-super {p0}, Lcom/facebook/react/bridge/ReactContextBaseJavaModule;->initialize()V
 
+    .line 102
     const/4 v0, 0x0
 
-    .line 102
     iput-boolean v0, p0, Lcom/facebook/react/modules/storage/AsyncStorageModule;->mShuttingDown:Z
 
+    .line 103
     return-void
 .end method
 
 .method public multiGet(Lcom/facebook/react/bridge/ReadableArray;Lcom/facebook/react/bridge/Callback;)V
-    .locals 3
+    .locals 4
+    .param p1, "keys"    # Lcom/facebook/react/bridge/ReadableArray;
+    .param p2, "callback"    # Lcom/facebook/react/bridge/Callback;
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
+    .line 124
     const/4 v0, 0x0
 
     if-nez p1, :cond_0
 
-    const/4 p1, 0x2
-
     .line 125
-    new-array p1, p1, [Ljava/lang/Object;
+    const/4 v1, 0x2
 
-    const/4 v1, 0x0
+    new-array v1, v1, [Ljava/lang/Object;
 
-    invoke-static {v1}, Lcom/facebook/react/modules/storage/AsyncStorageErrorUtil;->getInvalidKeyError(Ljava/lang/String;)Lcom/facebook/react/bridge/WritableMap;
+    const/4 v2, 0x0
 
-    move-result-object v2
+    invoke-static {v2}, Lcom/facebook/react/modules/storage/AsyncStorageErrorUtil;->getInvalidKeyError(Ljava/lang/String;)Lcom/facebook/react/bridge/WritableMap;
 
-    aput-object v2, p1, v0
+    move-result-object v3
+
+    aput-object v3, v1, v0
 
     const/4 v0, 0x1
 
-    aput-object v1, p1, v0
+    aput-object v2, v1, v0
 
-    invoke-interface {p2, p1}, Lcom/facebook/react/bridge/Callback;->invoke([Ljava/lang/Object;)V
+    invoke-interface {p2, v1}, Lcom/facebook/react/bridge/Callback;->invoke([Ljava/lang/Object;)V
 
+    .line 126
     return-void
 
     .line 129
@@ -248,18 +264,21 @@
 
     invoke-direct {v1, p0, v2, p2, p1}, Lcom/facebook/react/modules/storage/AsyncStorageModule$1;-><init>(Lcom/facebook/react/modules/storage/AsyncStorageModule;Lcom/facebook/react/bridge/ReactContext;Lcom/facebook/react/bridge/Callback;Lcom/facebook/react/bridge/ReadableArray;)V
 
-    iget-object p1, p0, Lcom/facebook/react/modules/storage/AsyncStorageModule;->executor:Lcom/facebook/react/modules/storage/AsyncStorageModule$SerialExecutor;
+    iget-object v2, p0, Lcom/facebook/react/modules/storage/AsyncStorageModule;->executor:Lcom/facebook/react/modules/storage/AsyncStorageModule$SerialExecutor;
 
-    new-array p2, v0, [Ljava/lang/Void;
+    new-array v0, v0, [Ljava/lang/Void;
 
     .line 187
-    invoke-virtual {v1, p1, p2}, Lcom/facebook/react/modules/storage/AsyncStorageModule$1;->executeOnExecutor(Ljava/util/concurrent/Executor;[Ljava/lang/Object;)Landroid/os/AsyncTask;
+    invoke-virtual {v1, v2, v0}, Lcom/facebook/react/modules/storage/AsyncStorageModule$1;->executeOnExecutor(Ljava/util/concurrent/Executor;[Ljava/lang/Object;)Landroid/os/AsyncTask;
 
+    .line 188
     return-void
 .end method
 
 .method public multiMerge(Lcom/facebook/react/bridge/ReadableArray;Lcom/facebook/react/bridge/Callback;)V
-    .locals 2
+    .locals 3
+    .param p1, "keyValueArray"    # Lcom/facebook/react/bridge/ReadableArray;
+    .param p2, "callback"    # Lcom/facebook/react/bridge/Callback;
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -272,20 +291,23 @@
 
     invoke-direct {v0, p0, v1, p2, p1}, Lcom/facebook/react/modules/storage/AsyncStorageModule$4;-><init>(Lcom/facebook/react/modules/storage/AsyncStorageModule;Lcom/facebook/react/bridge/ReactContext;Lcom/facebook/react/bridge/Callback;Lcom/facebook/react/bridge/ReadableArray;)V
 
-    iget-object p1, p0, Lcom/facebook/react/modules/storage/AsyncStorageModule;->executor:Lcom/facebook/react/modules/storage/AsyncStorageModule$SerialExecutor;
+    iget-object v1, p0, Lcom/facebook/react/modules/storage/AsyncStorageModule;->executor:Lcom/facebook/react/modules/storage/AsyncStorageModule$SerialExecutor;
 
-    const/4 p2, 0x0
+    const/4 v2, 0x0
 
-    new-array p2, p2, [Ljava/lang/Void;
+    new-array v2, v2, [Ljava/lang/Void;
 
     .line 368
-    invoke-virtual {v0, p1, p2}, Lcom/facebook/react/modules/storage/AsyncStorageModule$4;->executeOnExecutor(Ljava/util/concurrent/Executor;[Ljava/lang/Object;)Landroid/os/AsyncTask;
+    invoke-virtual {v0, v1, v2}, Lcom/facebook/react/modules/storage/AsyncStorageModule$4;->executeOnExecutor(Ljava/util/concurrent/Executor;[Ljava/lang/Object;)Landroid/os/AsyncTask;
 
+    .line 369
     return-void
 .end method
 
 .method public multiRemove(Lcom/facebook/react/bridge/ReadableArray;Lcom/facebook/react/bridge/Callback;)V
     .locals 3
+    .param p1, "keys"    # Lcom/facebook/react/bridge/ReadableArray;
+    .param p2, "callback"    # Lcom/facebook/react/bridge/Callback;
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -298,21 +320,22 @@
 
     if-nez v0, :cond_0
 
-    const/4 p1, 0x1
-
     .line 263
-    new-array p1, p1, [Ljava/lang/Object;
+    const/4 v0, 0x1
 
-    const/4 v0, 0x0
+    new-array v0, v0, [Ljava/lang/Object;
 
-    invoke-static {v0}, Lcom/facebook/react/modules/storage/AsyncStorageErrorUtil;->getInvalidKeyError(Ljava/lang/String;)Lcom/facebook/react/bridge/WritableMap;
+    const/4 v2, 0x0
 
-    move-result-object v0
+    invoke-static {v2}, Lcom/facebook/react/modules/storage/AsyncStorageErrorUtil;->getInvalidKeyError(Ljava/lang/String;)Lcom/facebook/react/bridge/WritableMap;
 
-    aput-object v0, p1, v1
+    move-result-object v2
 
-    invoke-interface {p2, p1}, Lcom/facebook/react/bridge/Callback;->invoke([Ljava/lang/Object;)V
+    aput-object v2, v0, v1
 
+    invoke-interface {p2, v0}, Lcom/facebook/react/bridge/Callback;->invoke([Ljava/lang/Object;)V
+
+    .line 264
     return-void
 
     .line 267
@@ -325,18 +348,21 @@
 
     invoke-direct {v0, p0, v2, p2, p1}, Lcom/facebook/react/modules/storage/AsyncStorageModule$3;-><init>(Lcom/facebook/react/modules/storage/AsyncStorageModule;Lcom/facebook/react/bridge/ReactContext;Lcom/facebook/react/bridge/Callback;Lcom/facebook/react/bridge/ReadableArray;)V
 
-    iget-object p1, p0, Lcom/facebook/react/modules/storage/AsyncStorageModule;->executor:Lcom/facebook/react/modules/storage/AsyncStorageModule$SerialExecutor;
+    iget-object v2, p0, Lcom/facebook/react/modules/storage/AsyncStorageModule;->executor:Lcom/facebook/react/modules/storage/AsyncStorageModule$SerialExecutor;
 
-    new-array p2, v1, [Ljava/lang/Void;
+    new-array v1, v1, [Ljava/lang/Void;
 
     .line 305
-    invoke-virtual {v0, p1, p2}, Lcom/facebook/react/modules/storage/AsyncStorageModule$3;->executeOnExecutor(Ljava/util/concurrent/Executor;[Ljava/lang/Object;)Landroid/os/AsyncTask;
+    invoke-virtual {v0, v2, v1}, Lcom/facebook/react/modules/storage/AsyncStorageModule$3;->executeOnExecutor(Ljava/util/concurrent/Executor;[Ljava/lang/Object;)Landroid/os/AsyncTask;
 
+    .line 306
     return-void
 .end method
 
 .method public multiSet(Lcom/facebook/react/bridge/ReadableArray;Lcom/facebook/react/bridge/Callback;)V
     .locals 3
+    .param p1, "keyValueArray"    # Lcom/facebook/react/bridge/ReadableArray;
+    .param p2, "callback"    # Lcom/facebook/react/bridge/Callback;
     .annotation runtime Lcom/facebook/react/bridge/ReactMethod;
     .end annotation
 
@@ -349,21 +375,22 @@
 
     if-nez v0, :cond_0
 
-    const/4 p1, 0x1
-
     .line 198
-    new-array p1, p1, [Ljava/lang/Object;
+    const/4 v0, 0x1
 
-    const/4 v0, 0x0
+    new-array v0, v0, [Ljava/lang/Object;
 
-    invoke-static {v0}, Lcom/facebook/react/modules/storage/AsyncStorageErrorUtil;->getInvalidKeyError(Ljava/lang/String;)Lcom/facebook/react/bridge/WritableMap;
+    const/4 v2, 0x0
 
-    move-result-object v0
+    invoke-static {v2}, Lcom/facebook/react/modules/storage/AsyncStorageErrorUtil;->getInvalidKeyError(Ljava/lang/String;)Lcom/facebook/react/bridge/WritableMap;
 
-    aput-object v0, p1, v1
+    move-result-object v2
 
-    invoke-interface {p2, p1}, Lcom/facebook/react/bridge/Callback;->invoke([Ljava/lang/Object;)V
+    aput-object v2, v0, v1
 
+    invoke-interface {p2, v0}, Lcom/facebook/react/bridge/Callback;->invoke([Ljava/lang/Object;)V
+
+    .line 199
     return-void
 
     .line 202
@@ -376,23 +403,25 @@
 
     invoke-direct {v0, p0, v2, p2, p1}, Lcom/facebook/react/modules/storage/AsyncStorageModule$2;-><init>(Lcom/facebook/react/modules/storage/AsyncStorageModule;Lcom/facebook/react/bridge/ReactContext;Lcom/facebook/react/bridge/Callback;Lcom/facebook/react/bridge/ReadableArray;)V
 
-    iget-object p1, p0, Lcom/facebook/react/modules/storage/AsyncStorageModule;->executor:Lcom/facebook/react/modules/storage/AsyncStorageModule$SerialExecutor;
+    iget-object v2, p0, Lcom/facebook/react/modules/storage/AsyncStorageModule;->executor:Lcom/facebook/react/modules/storage/AsyncStorageModule$SerialExecutor;
 
-    new-array p2, v1, [Ljava/lang/Void;
+    new-array v1, v1, [Ljava/lang/Void;
 
     .line 254
-    invoke-virtual {v0, p1, p2}, Lcom/facebook/react/modules/storage/AsyncStorageModule$2;->executeOnExecutor(Ljava/util/concurrent/Executor;[Ljava/lang/Object;)Landroid/os/AsyncTask;
+    invoke-virtual {v0, v2, v1}, Lcom/facebook/react/modules/storage/AsyncStorageModule$2;->executeOnExecutor(Ljava/util/concurrent/Executor;[Ljava/lang/Object;)Landroid/os/AsyncTask;
 
+    .line 255
     return-void
 .end method
 
 .method public onCatalystInstanceDestroy()V
     .locals 1
 
+    .line 107
     const/4 v0, 0x1
 
-    .line 107
     iput-boolean v0, p0, Lcom/facebook/react/modules/storage/AsyncStorageModule;->mShuttingDown:Z
 
+    .line 108
     return-void
 .end method

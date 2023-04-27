@@ -32,44 +32,40 @@
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 4
+    .locals 5
 
     .line 22
     new-instance v0, Lcom/facebook/react/bridge/queue/MessageQueueThreadSpec$ThreadType;
 
-    const/4 v1, 0x0
+    const-string v1, "MAIN_UI"
 
-    const-string v2, "MAIN_UI"
+    const/4 v2, 0x0
 
-    invoke-direct {v0, v2, v1}, Lcom/facebook/react/bridge/queue/MessageQueueThreadSpec$ThreadType;-><init>(Ljava/lang/String;I)V
+    invoke-direct {v0, v1, v2}, Lcom/facebook/react/bridge/queue/MessageQueueThreadSpec$ThreadType;-><init>(Ljava/lang/String;I)V
 
     sput-object v0, Lcom/facebook/react/bridge/queue/MessageQueueThreadSpec$ThreadType;->MAIN_UI:Lcom/facebook/react/bridge/queue/MessageQueueThreadSpec$ThreadType;
 
     .line 23
-    new-instance v0, Lcom/facebook/react/bridge/queue/MessageQueueThreadSpec$ThreadType;
-
-    const/4 v2, 0x1
+    new-instance v1, Lcom/facebook/react/bridge/queue/MessageQueueThreadSpec$ThreadType;
 
     const-string v3, "NEW_BACKGROUND"
 
-    invoke-direct {v0, v3, v2}, Lcom/facebook/react/bridge/queue/MessageQueueThreadSpec$ThreadType;-><init>(Ljava/lang/String;I)V
+    const/4 v4, 0x1
 
-    sput-object v0, Lcom/facebook/react/bridge/queue/MessageQueueThreadSpec$ThreadType;->NEW_BACKGROUND:Lcom/facebook/react/bridge/queue/MessageQueueThreadSpec$ThreadType;
+    invoke-direct {v1, v3, v4}, Lcom/facebook/react/bridge/queue/MessageQueueThreadSpec$ThreadType;-><init>(Ljava/lang/String;I)V
 
-    const/4 v0, 0x2
+    sput-object v1, Lcom/facebook/react/bridge/queue/MessageQueueThreadSpec$ThreadType;->NEW_BACKGROUND:Lcom/facebook/react/bridge/queue/MessageQueueThreadSpec$ThreadType;
 
     .line 21
-    new-array v0, v0, [Lcom/facebook/react/bridge/queue/MessageQueueThreadSpec$ThreadType;
+    const/4 v3, 0x2
 
-    sget-object v3, Lcom/facebook/react/bridge/queue/MessageQueueThreadSpec$ThreadType;->MAIN_UI:Lcom/facebook/react/bridge/queue/MessageQueueThreadSpec$ThreadType;
+    new-array v3, v3, [Lcom/facebook/react/bridge/queue/MessageQueueThreadSpec$ThreadType;
 
-    aput-object v3, v0, v1
+    aput-object v0, v3, v2
 
-    sget-object v1, Lcom/facebook/react/bridge/queue/MessageQueueThreadSpec$ThreadType;->NEW_BACKGROUND:Lcom/facebook/react/bridge/queue/MessageQueueThreadSpec$ThreadType;
+    aput-object v1, v3, v4
 
-    aput-object v1, v0, v2
-
-    sput-object v0, Lcom/facebook/react/bridge/queue/MessageQueueThreadSpec$ThreadType;->$VALUES:[Lcom/facebook/react/bridge/queue/MessageQueueThreadSpec$ThreadType;
+    sput-object v3, Lcom/facebook/react/bridge/queue/MessageQueueThreadSpec$ThreadType;->$VALUES:[Lcom/facebook/react/bridge/queue/MessageQueueThreadSpec$ThreadType;
 
     return-void
 .end method
@@ -90,17 +86,18 @@
 
 .method public static valueOf(Ljava/lang/String;)Lcom/facebook/react/bridge/queue/MessageQueueThreadSpec$ThreadType;
     .locals 1
+    .param p0, "name"    # Ljava/lang/String;
 
     .line 21
     const-class v0, Lcom/facebook/react/bridge/queue/MessageQueueThreadSpec$ThreadType;
 
     invoke-static {v0, p0}, Ljava/lang/Enum;->valueOf(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
 
-    move-result-object p0
+    move-result-object v0
 
-    check-cast p0, Lcom/facebook/react/bridge/queue/MessageQueueThreadSpec$ThreadType;
+    check-cast v0, Lcom/facebook/react/bridge/queue/MessageQueueThreadSpec$ThreadType;
 
-    return-object p0
+    return-object v0
 .end method
 
 .method public static values()[Lcom/facebook/react/bridge/queue/MessageQueueThreadSpec$ThreadType;

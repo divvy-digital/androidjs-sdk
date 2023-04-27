@@ -26,6 +26,7 @@
 # direct methods
 .method public constructor <init>(Lcom/facebook/react/uimanager/UIViewOperationQueue;Lcom/facebook/react/uimanager/UIBlock;)V
     .locals 0
+    .param p2, "block"    # Lcom/facebook/react/uimanager/UIBlock;
 
     .line 577
     iput-object p1, p0, Lcom/facebook/react/uimanager/UIViewOperationQueue$UIBlockOperation;->this$0:Lcom/facebook/react/uimanager/UIViewOperationQueue;
@@ -35,6 +36,7 @@
     .line 578
     iput-object p2, p0, Lcom/facebook/react/uimanager/UIViewOperationQueue$UIBlockOperation;->mBlock:Lcom/facebook/react/uimanager/UIBlock;
 
+    .line 579
     return-void
 .end method
 
@@ -54,5 +56,6 @@
 
     invoke-interface {v0, v1}, Lcom/facebook/react/uimanager/UIBlock;->execute(Lcom/facebook/react/uimanager/NativeViewHierarchyManager;)V
 
+    .line 584
     return-void
 .end method

@@ -3,11 +3,6 @@
 .source "AnimatedFactory.java"
 
 
-# annotations
-.annotation build Ljavax/annotation/concurrent/NotThreadSafe;
-.end annotation
-
-
 # virtual methods
 .method public abstract getAnimatedDrawableFactory(Landroid/content/Context;)Lcom/facebook/imagepipeline/drawable/DrawableFactory;
     .annotation runtime Ljavax/annotation/Nullable;

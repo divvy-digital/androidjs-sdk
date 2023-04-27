@@ -26,6 +26,7 @@
 # direct methods
 .method constructor <init>(Lcom/facebook/react/devsupport/InspectorPackagerConnection;Ljava/lang/String;)V
     .locals 0
+    .param p1, "this$0"    # Lcom/facebook/react/devsupport/InspectorPackagerConnection;
 
     .line 104
     iput-object p1, p0, Lcom/facebook/react/devsupport/InspectorPackagerConnection$1;->this$0:Lcom/facebook/react/devsupport/InspectorPackagerConnection;
@@ -40,7 +41,7 @@
 
 # virtual methods
 .method public onDisconnect()V
-    .locals 4
+    .locals 3
 
     .line 117
     :try_start_0
@@ -59,11 +60,9 @@
 
     const-string v1, "disconnect"
 
-    iget-object v2, p0, Lcom/facebook/react/devsupport/InspectorPackagerConnection$1;->this$0:Lcom/facebook/react/devsupport/InspectorPackagerConnection;
+    iget-object v2, p0, Lcom/facebook/react/devsupport/InspectorPackagerConnection$1;->val$pageId:Ljava/lang/String;
 
-    iget-object v3, p0, Lcom/facebook/react/devsupport/InspectorPackagerConnection$1;->val$pageId:Ljava/lang/String;
-
-    invoke-static {v2, v3}, Lcom/facebook/react/devsupport/InspectorPackagerConnection;->access$200(Lcom/facebook/react/devsupport/InspectorPackagerConnection;Ljava/lang/String;)Lorg/json/JSONObject;
+    invoke-static {v0, v2}, Lcom/facebook/react/devsupport/InspectorPackagerConnection;->access$200(Lcom/facebook/react/devsupport/InspectorPackagerConnection;Ljava/lang/String;)Lorg/json/JSONObject;
 
     move-result-object v2
 
@@ -71,24 +70,30 @@
     :try_end_0
     .catch Lorg/json/JSONException; {:try_start_0 .. :try_end_0} :catch_0
 
+    .line 121
     goto :goto_0
 
+    .line 119
     :catch_0
     move-exception v0
 
+    .line 120
+    .local v0, "e":Lorg/json/JSONException;
     const-string v1, "InspectorPackagerConnection"
 
     const-string v2, "Couldn\'t send event to packager"
 
-    .line 120
     invoke-static {v1, v2, v0}, Lcom/facebook/common/logging/FLog;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V
 
+    .line 122
+    .end local v0    # "e":Lorg/json/JSONException;
     :goto_0
     return-void
 .end method
 
 .method public onMessage(Ljava/lang/String;)V
-    .locals 2
+    .locals 3
+    .param p1, "message"    # Ljava/lang/String;
 
     .line 108
     :try_start_0
@@ -100,18 +105,23 @@
     :try_end_0
     .catch Lorg/json/JSONException; {:try_start_0 .. :try_end_0} :catch_0
 
+    .line 111
     goto :goto_0
 
+    .line 109
     :catch_0
-    move-exception p1
-
-    const-string v0, "InspectorPackagerConnection"
-
-    const-string v1, "Couldn\'t send event to packager"
+    move-exception v0
 
     .line 110
-    invoke-static {v0, v1, p1}, Lcom/facebook/common/logging/FLog;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V
+    .local v0, "e":Lorg/json/JSONException;
+    const-string v1, "InspectorPackagerConnection"
 
+    const-string v2, "Couldn\'t send event to packager"
+
+    invoke-static {v1, v2, v0}, Lcom/facebook/common/logging/FLog;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V
+
+    .line 112
+    .end local v0    # "e":Lorg/json/JSONException;
     :goto_0
     return-void
 .end method
